@@ -1,4 +1,4 @@
-/* CS2 Edge v5 — mercados condicionados à sequência de mapas informada pelo usuário. */
+/* CS2 Edge v6 — contexto de mapa + histórico geral, sem confundir inferência e certeza. */
 (function () {
   'use strict';
   const $ = id => document.getElementById(id);
@@ -87,10 +87,42 @@
     const [low,high]=wilson(hits,len);
     return {n:len,hits,p:(hits+1)/(len+2),low,high,valid:len>=minN,mean:vs.reduce((a,b)=>a+b,0)/len};
   }
+  // A janela gratuita contém poucos jogos em cada arena. Recuar para a taxa
+  // histórica geral evita tabelas vazias, mas é uma PROJEÇÃO exploratória.
+  // O pseudo-histórico é limitado a oito observações; nunca é tratado como
+  // partidas reais adicionais para habilitar um sinal forte de aposta.
+  function contextualEstimate(mapValues,allValues,line,direction,{minTotal=12,minMap=2}={}){
+    const specific=mapValues.map(num).filter(v=>v!==null);
+    const general=allValues.map(num).filter(v=>v!==null);
+    const mapN=specific.length,totalN=general.length;
+    const hit=v=>direction==='over'?v>line:v<line;
+    if(mapN>=10){
+      const exact=estimate(specific,line,direction,10);
+      return {...exact,mapN,totalN,method:'empirical',notCalibrated:false};
+    }
+    // allValues inclui os mapas específicos. Retirar essas observações antes
+    // de construir a base geral evita contá-las duas vezes.
+    const frequency=new Map();for(const v of specific)frequency.set(v,(frequency.get(v)||0)+1);
+    const other=[];for(const v of general){const count=frequency.get(v)||0;if(count)frequency.set(v,count-1);else other.push(v);}
+    if(mapN<minMap||totalN<minTotal||other.length<6){
+      return {n:mapN,p:null,low:null,high:null,valid:false,hits:null,mean:null,mapN,totalN,method:'insufficient',notCalibrated:true};
+    }
+    const priorN=Math.min(8,other.length);
+    const background=(other.filter(hit).length+1)/(other.length+2);
+    const successes=specific.filter(hit).length;
+    const effectiveN=mapN+priorN;
+    const effectiveHits=successes+priorN*background;
+    const [low,high]=wilson(effectiveHits,effectiveN,1.645);
+    return {n:mapN,p:(effectiveHits+1)/(effectiveN+2),low,high,valid:true,hits:successes,
+      mean:(specific.reduce((a,b)=>a+b,0)+priorN*other.reduce((a,b)=>a+b,0)/other.length)/effectiveN,
+      mapN,totalN,method:'contextual',notCalibrated:true};
+  }
   function selection(match,target,map,market,subject,playerId,direction,line,values,options={}){
-    const st=estimate(values,line,direction,options.minN||10);
+    const st=options.allValues ? contextualEstimate(values,options.allValues,line,direction,{
+      minTotal:options.minTotal||12,minMap:options.minMap||2}) : estimate(values,line,direction,options.minN||10);
     return {...st,matchId:match.id,target,mapName:map||'',market,marketLabel:MARKET_NAMES[market]||market,subject,playerId:playerId||null,direction,line,
-      team:options.team||'',note:options.note||'',sampleA:options.sampleA??null,sampleB:options.sampleB??null,method:'empirical',kind:'market',valid:st.valid&&options.valid!==false};
+      team:options.team||'',note:options.note||'',sampleA:options.sampleA??null,sampleB:options.sampleB??null,
+      method:st.method||'empirical',notCalibrated:!!st.notCalibrated,kind:'market',valid:st.valid&&options.valid!==false};
   }
   function playerRoster(teamId){
     const rosters=(db.rosters||[]).find(x=>x.teamId===teamId)?.players;
@@ -118,39 +150,40 @@
         const history=p.rows.filter(x=>x.teamId===id&&normMap(x.mapName)===normMap(map));
         for(const metric of ['kills','headshots','assists','firstKills']){
           const values=history.map(r=>num(r[metric])).filter(v=>v!==null);
-          if(values.length<3)continue;
-          for(const line of chooseLineCards(values,PLAYER_LINES[metric],2))for(const dir of ['over','under']){
-            const s=selection(match,target,map,metric,p.name,p.playerId,dir,line,values,{team:p.team,minN:10,
-              note:`${values.length} mapas ${map} do atleta na equipe observada. Uso histórico do mapa, não pressupõe adversário igual nem escalação confirmada.`});
-            // Não mostrar quase certezas triviais com odd justa artificial.
-            if(s.p>=.15&&s.p<=.9)out.push(s);
+          const allValues=p.rows.filter(x=>x.teamId===id).map(r=>num(r[metric])).filter(v=>v!==null);
+          if(values.length<2 || !allValues.length)continue;
+          const metricMeans=values.length>=5?values:allValues;
+          for(const line of chooseLineCards(metricMeans,PLAYER_LINES[metric],2))for(const dir of ['over','under']){
+            const s=selection(match,target,map,metric,p.name,p.playerId,dir,line,values,{team:p.team,allValues,minTotal:12,minMap:2,
+              note:`${values.length} mapa(s) ${map} e ${allValues.length} mapas totais recentes do jogador. ${values.length<10?'Estimativa combinada com a forma geral, não calibrada.':'Frequência observada somente neste mapa.'} Escalação e adversário ainda precisam ser confirmados.`});
+            if(s.p===null || s.p>=.12&&s.p<=.93)out.push(s);
           }
         }
       }
     }
     return out;
   }
-  function teamKillRecords(teamId,map){return [...(indexed.teamKills.get(teamId)?.values()||[])].filter(x=>normMap(x.mapName)===normMap(map));}
+  function teamKillRecords(teamId,map){return [...(indexed.teamKills.get(teamId)?.values()||[])].filter(x=>!map||normMap(x.mapName)===normMap(map));}
   function teamKillMarkets(match,sequence){
     const out=[];
     for(let i=0;i<3;i++){
       const map=sequence[i];if(!map)continue;
       const target='map'+(i+1);
       for(const [tid,tname,opp] of [[match.team1Id,match.team1,match.team2Id],[match.team2Id,match.team2,match.team1Id]]){
-        const own=teamKillRecords(tid,map),other=teamKillRecords(opp,map);
-        const values=own.map(x=>x.kills),oppDeaths=other.map(x=>x.deaths);
-        if(values.length<3){
+        const own=teamKillRecords(tid,map),other=teamKillRecords(opp,map),allOwn=teamKillRecords(tid,null);
+        const values=own.map(x=>x.kills),oppDeaths=other.map(x=>x.deaths),allValues=allOwn.map(x=>x.kills);
+        if(values.length<2 || allValues.length<10){
           out.push({matchId:match.id,target,mapName:map,market:'team_kills',marketLabel:MARKET_NAMES.team_kills,
             subject:tname,team:tname,direction:'over',line:null,n:values.length,p:null,low:null,high:null,valid:false,
-            kind:'placeholder',note:`Somente ${values.length} mapa(s) completos no ${map}. É preciso registrar as kills dos cinco jogadores da equipe em cada mapa antes de calcular um total.`});
+            kind:'placeholder',note:`${values.length} mapa(s) completos em ${map}, ${allValues.length} no total. O cálculo exige cinco jogadores em cada mapa e pelo menos 2 observações nessa arena, além de 10 no histórico geral.`});
           continue;
         }
         const mid=values.reduce((a,b)=>a+b,0)/values.length;
         const candidates=[-12,-6,0,6,12].map(v=>Math.max(20,Math.min(145,Math.round(mid+v)+.5)));
         const lines=[...new Set(candidates)].sort((a,b)=>Math.abs(mid-a)-Math.abs(mid-b)).slice(0,3);
         for(const line of lines)for(const dir of ['over','under']){
-          const s=selection(match,target,map,'team_kills',tname,null,dir,line,values,{team:tname,minN:10,
-            note:`${own.length} mapas ${map} com os cinco jogadores registrados. ${other.length} mapas completos de ${match.team1Id===opp?match.team1:match.team2} para contraste defensivo. Totais incompletos foram excluídos.`});
+          const s=selection(match,target,map,'team_kills',tname,null,dir,line,values,{team:tname,allValues,minTotal:10,minMap:2,
+            note:`${own.length} mapas ${map} e ${allOwn.length} totais com cinco jogadores completos. ${other.length} mapa(s) completos do adversário para comparação; totais incompletos excluídos. Projeção geral não calibrada quando há menos de 10 na arena.`});
           s.opponentDefensiveN=oppDeaths.length;s.opponentDefensiveMean=oppDeaths.length?oppDeaths.reduce((a,b)=>a+b,0)/oppDeaths.length:null;
           if(s.p>=.12&&s.p<=.93)out.push(s);
         }
@@ -158,12 +191,13 @@
     }
     return out;
   }
-  function teamMapResults(teamId,map){return [...indexed.mapResults.values()].filter(x=>normMap(x.mapName)===normMap(map)&&[x.team1Id,x.team2Id].includes(teamId)&&x.score1!==null&&x.score2!==null&&x.team1Id&&x.team2Id);}
+  function teamMapResults(teamId,map){return [...indexed.mapResults.values()].filter(x=>(!map||normMap(x.mapName)===normMap(map))&&[x.team1Id,x.team2Id].includes(teamId)&&x.score1!==null&&x.score2!==null&&x.team1Id&&x.team2Id);}
   function teamRounds(teamId,map){
     const indexedMap = indexed.teamMaps.get(teamId) || new Map();
-    const mapIds=new Set([...indexedMap.values()].filter(x=>normMap(x.mapName)===normMap(map)).map(x=>x.mapId));
+    const matching=x=>!map||normMap(x.mapName)===normMap(map);
+    const mapIds=new Set([...indexedMap.values()].filter(matching).map(x=>x.mapId));
     for(const x of teamMapResults(teamId,map))mapIds.add(x.mapId);
-    return [...mapIds].map(id=>indexed.mapResults.get(id)).filter(x=>x&&normMap(x.mapName)===normMap(map)&&num(x.rounds)!==null).map(x=>({id:x.mapId,rounds:x.rounds}));
+    return [...mapIds].map(id=>indexed.mapResults.get(id)).filter(x=>x&&matching(x)&&num(x.rounds)!==null).map(x=>({id:x.mapId,rounds:x.rounds}));
   }
   function roundMarkets(match,sequence){
     const out=[];
@@ -171,13 +205,17 @@
       const map=sequence[i];if(!map)continue;
       const a=teamRounds(match.team1Id,map),b=teamRounds(match.team2Id,map);
       const union=new Map([...a,...b].map(x=>[x.id,x.rounds])),values=[...union.values()];
+      const allA=teamRounds(match.team1Id,null),allB=teamRounds(match.team2Id,null);
+      const allUnion=new Map([...allA,...allB].map(x=>[x.id,x.rounds]));
+      const allValues=[...allUnion.values()];
       if(!values.length)continue;
-      const mid=values.reduce((x,y)=>x+y,0)/values.length;
+      const basis=values.length>=8?values:allValues;
+      const mid=basis.reduce((x,y)=>x+y,0)/basis.length;
       const lines=ROUNDS_LINES.map(line=>({line,d:Math.abs(mid-line)})).sort((x,y)=>x.d-y.d).slice(0,4).map(x=>x.line);
       for(const line of lines)for(const direction of ['over','under']){
-        const s=selection(match,'map'+(i+1),map,'rounds_total',`${match.team1} × ${match.team2}`,null,direction,line,values,{minN:18,
-          valid:a.length>=8&&b.length>=8,sampleA:a.length,sampleB:b.length,
-          note:`${a.length} mapas ${map} da ${match.team1}, ${b.length} da ${match.team2}; ${union.size} mapas distintos, sem duplicar confrontos diretos. Inclui prorrogações.`});
+        const s=selection(match,'map'+(i+1),map,'rounds_total',`${match.team1} × ${match.team2}`,null,direction,line,values,{allValues,minTotal:12,minMap:3,
+          valid:allA.length>=8&&allB.length>=8 && a.length>=1&&b.length>=1,sampleA:a.length,sampleB:b.length,
+          note:`${a.length}/${b.length} mapas ${map} das equipes; ${allA.length}/${allB.length} nos históricos gerais. Mapas duplicados entre equipes contam apenas uma vez. ${values.length<10?'Combinação geral/específica exploratória.':'Histórico específico do mapa.'} Inclui prorrogações.`});
         if(s.p>=.12&&s.p<=.93)out.push(s);
       }
     }
@@ -187,13 +225,22 @@
     const a=teamMapResults(match.team1Id,map),b=teamMapResults(match.team2Id,map);
     const wins=(rows,tid)=>rows.filter(r=>r.team1Id===tid?r.score1>r.score2:r.score2>r.score1).length;
     const wa=wins(a,match.team1Id),wb=wins(b,match.team2Id),nA=a.length,nB=b.length;
-    if(nA<8||nB<8)return {valid:false,nA,nB};
-    // Diferença de log-odds suavizadas, estimativa heurística — NÃO modelo calibrado.
-    const smooth=(w,n)=>(w+2)/(n+4);
-    const odds=v=>v/(1-v);const convert=(pa,pb)=>{const ratio=odds(pa)/odds(pb);return ratio/(1+ratio)};
-    const pa=smooth(wa,nA),pb=smooth(wb,nB),ciA=wilson(wa,nA),ciB=wilson(wb,nB);
+    const allA=teamMapResults(match.team1Id,null),allB=teamMapResults(match.team2Id,null);
+    if(allA.length<10||allB.length<10||nA<1||nB<1)return {valid:false,nA,nB,totalA:allA.length,totalB:allB.length};
+    // Taxa no mapa, com suavização pela forma geral recente. Heurística exploratória;
+    // não é probabilidade calibrada, mesmo quando existe bastante histórico.
+    const prior=(allRows,mapRows,tid)=>{
+      const excluded=new Set(mapRows.map(x=>x.mapId));const remaining=allRows.filter(x=>!excluded.has(x.mapId));
+      const k=Math.min(8,remaining.length);
+      const overall=remaining.length? (wins(remaining,tid)+1)/(remaining.length+2):.5;
+      return {k,overall};
+    };
+    const priorA=prior(allA,a,match.team1Id),priorB=prior(allB,b,match.team2Id);
+    const pa=(wa+priorA.k*priorA.overall+2)/(nA+priorA.k+4),pb=(wb+priorB.k*priorB.overall+2)/(nB+priorB.k+4);
+    const odds=v=>v/(1-v);const convert=(a,b)=>{const ratio=odds(a)/odds(b);return ratio/(1+ratio)};
     const clamp=x=>Math.max(.025,Math.min(.975,x));
-    return {valid:true,nA,nB,wa,wb,p:convert(pa,pb),
+    const ciA=wilson(wa+priorA.k*priorA.overall,nA+priorA.k),ciB=wilson(wb+priorB.k*priorB.overall,nB+priorB.k);
+    return {valid:true,nA,nB,totalA:allA.length,totalB:allB.length,wa,wb,p:convert(pa,pb),
       low:convert(clamp(ciA[0]),clamp(ciB[1])),high:convert(clamp(ciA[1]),clamp(ciB[0]))};
   }
   function mapTotalMarkets(match,sequence){
@@ -204,7 +251,7 @@
     const e1=winEstimate(match,m1),e2=winEstimate(match,m2);
     if(!e1.valid||!e2.valid){return ['over','under'].map(dir=>({matchId:match.id,target:'series',mapName:'',market:'maps_total',marketLabel:MARKET_NAMES.maps_total,
       subject:`${match.team1} × ${match.team2}`,direction:dir,line:2.5,n:Math.min(e1.nA||0,e1.nB||0,e2.nA||0,e2.nB||0),p:null,valid:false,kind:'placeholder',
-      note:`Para estimar 3 mapas: cada equipe precisa de ≥8 resultados em ${m1} e ${m2}. Amostras: ${e1.nA||0}/${e1.nB||0} e ${e2.nA||0}/${e2.nB||0}.` }));}
+      note:`Para uma projeção exploratória: cada equipe precisa de ≥10 mapas com placar no histórico geral e ≥1 no mapa escolhido. No ${m1}: ${e1.nA||0}/${e1.nB||0} (geral ${e1.totalA||0}/${e1.totalB||0}); no ${m2}: ${e2.nA||0}/${e2.nB||0} (geral ${e2.totalA||0}/${e2.totalB||0}).` }));}
     const split=(p1,p2)=>p1*(1-p2)+(1-p1)*p2;
     const combinations=[split(e1.low,e2.low),split(e1.low,e2.high),split(e1.high,e2.low),split(e1.high,e2.high)];
     const p=split(e1.p,e2.p),low=Math.max(0,Math.min(...combinations)),high=Math.min(1,Math.max(...combinations));
@@ -227,7 +274,7 @@
     }
     return [{matchId:match.id,target:'series',mapName:'',market:'series_winner',marketLabel:MARKET_NAMES.series_winner,
       subject:`${match.team1} × ${match.team2}`,direction:'sim',line:null,n:0,p:null,valid:false,kind:'placeholder',
-      note:'Informe os três mapas e acumule pelo menos 8 mapas de cada equipe em cada um para ter uma estimativa exploratória do vencedor.'}];
+      note:'Informe os três mapas. Para a estimativa exploratória de vencedor, cada equipe precisa ter 10 mapas gerais com placar e ao menos um jogo em cada mapa escolhido.'}];
   }
   function allMarketCards(match){
     const sequence=getSequence(match.id);
@@ -242,10 +289,10 @@
     return all.sort((a,b)=>b.odd-a.odd)[0]||null;
   }
   function status(s){
-    if(!s.valid||s.p===null)return {cls:'disabled',label:'Dados insuficientes'};
+    if(!s.valid||s.p===null)return {cls:'disabled',label:s.market==='maps_total'&&!s.n?'Defina os mapas':'Dados insuficientes neste mercado'};
     const odd=oddsFor(s);
-    if(!odd)return {cls:'await',label:'Aguardando odd'};
-    if(s.notCalibrated||s.low===null)return {cls:'caution',label:'Modelo não calibrado'};
+    if(!odd)return {cls:'await',label:s.notCalibrated?'Aguardando odd · projeção exploratória':'Aguardando odd'};
+    if(s.notCalibrated||s.low===null)return {cls:'caution',label:s.p*odd.odd>1?'Vantagem teórica · não calibrada':'Sem valor na estimativa'};
     if(s.n>=20 && s.low*odd.odd>1.02)return {cls:'value',label:'Possível valor · revisar'};
     if(s.p*odd.odd<=1)return {cls:'novalue',label:'Sem valor nesta odd'};
     return {cls:'caution',label:'Sinal fraco / incerto'};
@@ -273,13 +320,13 @@
     const odd=oddsFor(s),st=status(s),direction=s.direction==='over'?'Mais de':s.direction==='under'?'Menos de':'';
     const t=s.target==='series'?'Série MD3':s.target.replace('map','Mapa ')+' · '+s.mapName;
     const title=s.market==='series_winner'||s.line===null?s.marketLabel:`${s.marketLabel} · ${direction} ${fmt(s.line,1)}`;
-    const probability=s.p!==null?pct(s.p):'—',fair=s.valid&&s.p>0?fmt(1/s.p,2):'—';
-    const sample=s.n?`${s.n} ${s.method==='heuristic'?'mapas mín. por equipe':s.market==='rounds_total'?'mapas distintos':'observações'}`:'—';
+    const probability=s.valid&&s.p!==null?pct(s.p):'—',fair=s.valid&&s.p>0?fmt(1/s.p,2):'—';
+    const sample=s.method==='contextual'?`${s.mapN} neste mapa / ${s.totalN} gerais`:(s.n?`${s.n} ${s.method==='heuristic'?'mapas mín. por equipe':s.market==='rounds_total'?'mapas distintos':'observações'}`:'—');
     const band=s.low!==null&&s.low!==undefined?`Intervalo amostral/heurístico: ${pct(s.low)}–${pct(s.high)}.`:'';
-    const value=odd&&s.valid?`EV estimado ${fmt((s.p*odd.odd-1)*100,1)}%${s.low!==null?', limite conservador '+fmt((s.low*odd.odd-1)*100,1)+'%':''}.`:'';
+    const value=odd&&s.valid?`EV ${s.notCalibrated?'exploratório':'estimado'} ${fmt((s.p*odd.odd-1)*100,1)}%${s.low!==null&&!s.notCalibrated?', limite conservador '+fmt((s.low*odd.odd-1)*100,1)+'%':''}.`:'';
     return `<article class="edge-pick"><div class="edge-pick-top"><div><div class="edge-pick-title">${h(title)}</div><div class="fine">${h(s.subject)}${s.team&&s.subject!==s.team?' · '+h(s.team):''} · ${h(t)}</div></div><span class="edge-status ${st.cls}">${st.label}</span></div>
       <div class="edge-pick-stats"><div><span>Prob. preliminar</span><strong>${probability}</strong></div><div><span>Odd justa</span><strong>${fair}</strong></div><div><span>Amostra</span><strong>${h(sample)}</strong></div></div>
-      <div class="edge-explain">${h(s.note||'')}${band?' '+h(band):''} ${s.notCalibrated?'Não usar a estimativa como probabilidade calibrada.':''}</div>
+      <div class="edge-explain">${h(s.note||'')}${band?' '+h(band):''} ${s.notCalibrated?'Probabilidade exploratória não calibrada; não é recomendação de aposta.':''}</div>
       <div class="edge-odds"><div class="edge-existing">${odd?`Melhor odd: <strong>${fmt(odd.odd,2)}</strong> (${h(odd.book)}) · ${value}`:'Sem odd cadastrada — não é possível afirmar valor'}</div>
       ${s.kind==='placeholder'?'<span class="fine">Aguardando histórico/mapas suficientes para uma avaliação.</span>':`<div class="edge-form"><input placeholder="Casa" aria-label="Casa de apostas" maxlength="50" data-book="${i}"/><input placeholder="Odd decimal" aria-label="Odd decimal" type="number" min="1.01" max="500" step="0.01" data-odd="${i}"/><button type="button" class="edge-save" data-edge-save="${i}">Avaliar odd</button></div>`}</div></article>`;
   }
