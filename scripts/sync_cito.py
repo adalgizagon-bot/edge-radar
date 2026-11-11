@@ -214,6 +214,75 @@ def clean_player_map_rows(payload, player_id, rankings, cutoff=None):
     return result
 
 
+def backfill_matches_from_player_maps(payload, rankings, cutoff=None):
+    """Reconstrói placares reais de séries/mapas a partir do histórico individual.
+
+    Não inventa equipes, placares ou resultados: ignora séries sem dados completos.
+    Cada mapa é único pelo ID, mesmo quando há linhas de muitos jogadores.
+    """
+    cutoff = cutoff or datetime.now(timezone.utc)-timedelta(days=30)
+    matches = {}
+    for row in rows(payload.get("data")):
+        if not isinstance(row,dict):
+            continue
+        mp = row.get("map") or {}
+        match = mp.get("match") or {}
+        match_id = match.get("id") or row.get("matchId")
+        start = match.get("startsAt") or row.get("startsAt")
+        if not match_id or not start or safe_datetime(start)<cutoff or safe_datetime(start)>datetime.now(timezone.utc):
+            continue
+        if mp.get("status")!="completed" or mp.get("statsEligible") is False or mp.get("isForfeit") or match.get("isForfeit"):
+            continue
+        s1,s2 = num_or_none(mp.get("team1Score")),num_or_none(mp.get("team2Score"))
+        if s1 is None or s2 is None:
+            continue
+        m = matches.setdefault(match_id,dict(match))
+        m["id"] = match_id
+        m["startsAt"] = start
+        m.setdefault("team1Name",(match.get("team1") or {}).get("name"))
+        m.setdefault("team2Name",(match.get("team2") or {}).get("name"))
+        m.setdefault("team1Id",(match.get("team1") or {}).get("id"))
+        m.setdefault("team2Id",(match.get("team2") or {}).get("id"))
+        m.setdefault("eventName",(match.get("event") or {}).get("name"))
+        m.setdefault("status", "completed")
+        record = {"id":mp.get("id") or row.get("mapId"),"mapName":mp.get("mapName") or row.get("mapName"),
+                  "mapNumber":mp.get("mapNumber") or row.get("mapNumber"),"status":"completed",
+                  "team1Score":int(s1),"team2Score":int(s2),"isForfeit":False,"statsEligible":True}
+        if record["id"]:
+            m.setdefault("_maps",{})[record["id"]] = record
+    finalized=[]
+    for match in matches.values():
+        new_maps=list(match.pop("_maps",{}).values())
+        # Não chamar de vitória da série caso a API não forneça o placar final.
+        if not (match.get("team1Id") and match.get("team2Id") and match.get("team1Name") and match.get("team2Name")):
+            continue
+        match["maps"] = sorted(new_maps,key=lambda x:x.get("mapNumber") or 0)
+        candidate=clean_matches({"data":[match]},rankings)
+        if candidate:
+            candidate[0]["sourceEndpoint"]="/cs2/players/{playerId}/maps"
+            candidate[0]["seriesScoreVerified"]=num_or_none(match.get("team1Score")) is not None and num_or_none(match.get("team2Score")) is not None
+            finalized.append(candidate[0])
+    return finalized
+
+
+def merge_match_records(existing, incoming):
+    """Une mapas históricos sem apagar placares já conferidos."""
+    if not existing:
+        return incoming
+    joined={**existing}
+    for field in ("event","status","bestOf","team1Score","team2Score","winnerTeamId","team1","team2","team1Id","team2Id","rank1","rank2","tier"):
+        if joined.get(field) in (None,'',"A definir","Evento não informado") and incoming.get(field) is not None:
+            joined[field]=incoming[field]
+    maps={m.get('mapId'):m for m in joined.get('maps',[]) if m.get('mapId')}
+    for mp in incoming.get('maps',[]):
+        mid=mp.get('mapId')
+        if mid and (mid not in maps or maps[mid].get('status')!='completed'):
+            maps[mid]=mp
+    joined['maps']=sorted(maps.values(),key=lambda m:m.get('mapNumber') or 0)
+    joined['seriesScoreVerified']=bool(joined.get('seriesScoreVerified') or incoming.get('seriesScoreVerified'))
+    return joined
+
+
 def clean_roster(payload, team_id):
     """Descarta treinadores e entradas inativas."""
     data = payload.get("data") or {}
@@ -318,7 +387,7 @@ def main(argv=None):
         upcoming = clean_matches(client.get("/matches/upcoming", {"limit":100}), rankings)
         recent = clean_matches(client.get("/matches/past", {"days":7,"limit":200}), rankings)
         for m in recent:
-            old_results[m["id"]] = m
+            old_results[m["id"]] = merge_match_records(old_results.get(m["id"]),m)
         # Descobre elencos das próximas partidas elegíveis: um time novo por dia.
         priority_teams = list(dict.fromkeys(
             tid for m in upcoming if m["tier"] in ("Tier 1","Tier 2")
@@ -378,6 +447,9 @@ def main(argv=None):
             try:
                 payload = client.get(f"/players/{p['playerId']}/maps", {"days":30,"limit":100})
                 parsed = clean_player_map_rows(payload,p["playerId"],rankings,cutoff)
+                for historical_match in backfill_matches_from_player_maps(payload,rankings,cutoff):
+                    old_results[historical_match["id"]] = merge_match_records(
+                        old_results.get(historical_match["id"]),historical_match)
                 for row in parsed:
                     archive[(row["mapId"],row["playerId"])] = row
                 last_player_sync[p["playerId"]] = now_iso()

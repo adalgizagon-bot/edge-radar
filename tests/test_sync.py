@@ -79,4 +79,32 @@ class CitoNormalizerTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError,'Orçamento local'):
                 c.get('/matches/upcoming')
 
+
+    def test_backfill_matches_from_player_history(self):
+        from datetime import datetime, timezone
+        now=datetime.now(timezone.utc).isoformat()
+        ranks=[{'teamId':'a','name':'Alpha','rank':2},{'teamId':'b','name':'Bravo','rank':4}]
+        payload={'data':[{'mapId':'x-map-1','matchId':'x','playerId':'p1','kills':15,
+            'map':{'id':'x-map-1','status':'completed','statsEligible':True,'mapNumber':1,'mapName':'Nuke',
+            'team1Score':13,'team2Score':11,'match':{'id':'x','startsAt':now,'team1Id':'a','team2Id':'b',
+               'team1Name':'Alpha','team2Name':'Bravo','status':'completed','bestOf':3,'team1Score':2,'team2Score':0}}},
+            {'mapId':'x-map-1','matchId':'x','playerId':'p2','kills':16,
+            'map':{'id':'x-map-1','status':'completed','statsEligible':True,'mapNumber':1,'mapName':'Nuke',
+            'team1Score':13,'team2Score':11,'match':{'id':'x','startsAt':now,'team1Id':'a','team2Id':'b',
+               'team1Name':'Alpha','team2Name':'Bravo','status':'completed','bestOf':3,'team1Score':2,'team2Score':0}}}]}
+        result=mod.backfill_matches_from_player_maps(payload,ranks)
+        self.assertEqual(len(result),1)
+        self.assertEqual(len(result[0]['maps']),1)
+        self.assertEqual(result[0]['maps'][0]['name'],'Nuke')
+        self.assertEqual(result[0]['tier'],'Tier 1')
+
+    def test_merge_match_records_preserves_verified_result(self):
+        previous={'id':'m','team1Score':2,'team2Score':0,'maps':[{'mapId':'m1','status':'completed','team1Score':13}]}
+        incoming={'id':'m','team1Score':None,'maps':[{'mapId':'m1','status':'completed','team1Score':None},
+                                                   {'mapId':'m2','status':'completed','team1Score':13}]}
+        merged=mod.merge_match_records(previous,incoming)
+        self.assertEqual(merged['team1Score'],2)
+        self.assertEqual(len(merged['maps']),2)
+        self.assertEqual(merged['maps'][0]['team1Score'],13)
+
 if __name__=='__main__':unittest.main()

@@ -1,6 +1,11 @@
 name: Atualizar CS2 Edge (Cito API)
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/sync_cito.py
+      - .github/workflows/atualizar-cito.yml
   schedule:
     - cron: '37 10 * * *'  # uma vez ao dia, UTC; orçamento conservador (até 300 consultas/30 dias)
 permissions:
@@ -13,6 +18,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Testar normalização e radar
+        run: |
+          python -m unittest discover -s tests -v
+          node tests/test_edge_model.cjs
       - name: Validar presença da chave
         env:
           CITO_API_KEY: ${{ secrets.CITO_API_KEY }}
