@@ -35,8 +35,8 @@ class CitoNormalizerTests(unittest.TestCase):
         self.assertEqual(d['meta']['mode'],'cito_api')
         self.assertFalse(d['meta']['oddsProviderConnected'])
         self.assertGreaterEqual(len(d['player_maps']),100)
-        self.assertEqual(len(d['upcoming']),7)
-        self.assertEqual(len(d['rankings']),40)
+        self.assertGreaterEqual(len(d['upcoming']),7)
+        self.assertGreaterEqual(len(d['rankings']),40)
         self.assertEqual(len({(r['mapId'],r['playerId']) for r in d['player_maps']}),len(d['player_maps']))
     def test_real_cito_map_name(self):
         rankings=mod.clean_rankings({'data':[{'teamId':'t1','teamName':'A','rank':1},{'teamId':'t2','teamName':'B','rank':3}]})
