@@ -1,0 +1,33 @@
+name: Atualizar CS2 Edge (Cito API)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 10 * * *'  # uma vez ao dia, UTC; orçamento conservador (até 300 consultas/30 dias)
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validar presença da chave
+        env:
+          CITO_API_KEY: ${{ secrets.CITO_API_KEY }}
+        run: |
+          if [ -z "$CITO_API_KEY" ]; then echo 'Defina CITO_API_KEY em Settings > Secrets and variables > Actions'; exit 1; fi
+      - name: Sincronizar sem odds
+        env:
+          CITO_API_KEY: ${{ secrets.CITO_API_KEY }}
+        run: python scripts/sync_cito.py --max-requests 10 --max-details 7 --budget-30d 300
+      - name: Salvar snapshot (se mudou)
+        run: |
+          git config user.name 'cs2-edge-bot'
+          git config user.email 'cs2-edge-bot@users.noreply.github.com'
+          git add public/data/snapshot.json data/request_history.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Atualizar snapshot real de CS2 (Cito)'
+            git push
+          fi
