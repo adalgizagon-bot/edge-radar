@@ -352,10 +352,12 @@
     const valid=currentCards.filter(x=>x.valid).length,priced=currentCards.filter(x=>oddsFor(x)).length;
     $('edgeMain').innerHTML=`<div class="edge-match-heading"><div><div class="edge-meta">${h(m.event)} · ${h(m.tier)} · ${h(date)}</div><h2>${h(m.team1)} <span>×</span> ${h(m.team2)}</h2><p class="fine">${valid} seleções exploratórias com amostra mínima · ${priced} odds para as seleções exibidas · BO${m.bestOf||'?'} · posições #${m.rank1||'—'} / #${m.rank2||'—'}</p></div><div class="edge-explanation">Os mapas são hipóteses informadas por você. Odds continuam manuais. A indicação de valor só é liberada para frequências históricas com margem conservadora; modelos derivados de vitória seguem sem calibração.</div></div>
     ${optsForSequence(m)}
+    <div id="edgeMatchHighlights"></div>
     <div class="edge-pick-overview"><h3>Seleções por mercado</h3><span class="fine">Ordenadas por odds e evidência disponível — não por promessa de acerto.</span></div>
     <div class="edge-market-filters">${[['all','Todos'],['kills','Kills jogador'],['team_kills','Kills equipe'],['rounds_total','Rounds por mapa'],['maps_total','Mapas MD3'],['headshots','Headshots'],['assists','Assistências'],['firstKills','Primeiras kills'],['series_winner','Vencedor']].map(([v,l])=>`<button type="button" data-edge-market="${v}" class="${marketFilter===v?'active':''}">${l}</button>`).join('')}</div>
     <div class="edge-pick-grid">${currentCards.length?currentCards.map(displayCard).join(''):'<div class="edge-explanation">Escolha os mapas acima para ver as linhas específicas por confronto.</div>'}</div>${mapHistory(m)}`;
     $('edgeCount').textContent=`${indexed.mapCount} mapas · ${(db.player_maps||[]).length} registros jogador/mapa · ${indexed.seriesCount} séries`;
+    window.EdgePicks?.refresh();
     for(const control of $('edgeMain').querySelectorAll('[data-map-position]'))control.addEventListener('change',()=>{
       if(!setSequence(m.id,Number(control.dataset.mapPosition),control.value))alert('Um mapa não pode ocupar duas posições.');
       marketFilter='all';draw();
