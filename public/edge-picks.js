@@ -239,7 +239,16 @@
     const m=(db.upcoming||[]).find(x=>x.id===$('edgeMatchSelect')?.value);if(m)matchHighlights(m);
   }
   function init(snapshot){db=snapshot;autoSettle();
-    const date=$('pickDate');if(date){if(!date.value)date.value=chosenDate;chosenDate=date.value;date.onchange=()=>{chosenDate=date.value;refresh()}};
+    const date=$('pickDate');
+    if(date){
+      if(date.value)chosenDate=date.value;
+      else if(!activeMatches(chosenDate).length){
+        const next=(db.upcoming||[]).filter(m=>m.status==='upcoming'&&Date.parse(m.startsAt)>Date.now()&&['Tier 1','Tier 2'].includes(m.tier))
+          .sort((a,b)=>String(a.startsAt).localeCompare(String(b.startsAt)))[0];
+        if(next)chosenDate=localDay(next.startsAt);
+      }
+      date.value=chosenDate;date.onchange=()=>{chosenDate=date.value;refresh()};
+    }
     refresh();
   }
   function handleClick(ev){const target=ev.target.closest('button');if(!target)return;
