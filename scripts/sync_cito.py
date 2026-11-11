@@ -298,6 +298,55 @@ def clean_roster(payload, team_id):
     ]
 
 
+
+def aggregate_team_map_totals(player_rows):
+    """Total real de eliminações por equipe/mapa somente com cinco atletas.
+
+    Jamais soma quatro atletas ou preenche um quinto jogador com zero.
+    Os mapas podem conter substituições: mais de cinco jogadores também são
+    rejeitados até existir uma regra auditável para esse caso.
+    """
+    groups = {}
+    for row in player_rows:
+        if not (row.get("mapId") and row.get("teamId") and row.get("playerId")):
+            continue
+        key = (row["mapId"], row["teamId"])
+        groups.setdefault(key, {})[row["playerId"]] = row
+    result = []
+    for (_, team_id), players in groups.items():
+        observations = list(players.values())
+        if len(observations) != 5 or any(
+            num_or_none(r.get("kills")) is None or num_or_none(r.get("deaths")) is None
+            for r in observations
+        ):
+            continue
+        example = observations[0]
+        if any(r.get("mapName") != example.get("mapName") for r in observations):
+            continue
+        result.append({
+            "mapId": example["mapId"], "matchId": example.get("matchId"),
+            "mapNumber": example.get("mapNumber"), "mapName": example.get("mapName"),
+            "teamId": team_id, "team": example.get("team"),
+            "startsAt": example.get("startsAt"), "playersRecorded": 5,
+            "kills": int(sum(num_or_none(r["kills"]) for r in observations)),
+            "deaths": int(sum(num_or_none(r["deaths"]) for r in observations)),
+            "roundsPlayed": example.get("roundsPlayed"),
+            "source": "Cito API / jogadores por mapa",
+        })
+    return sorted(result, key=lambda row: (row.get("startsAt") or "", row["mapId"]), reverse=True)
+
+
+def coverage_stats(player_rows, team_totals, past):
+    return {
+        "playerMapRows": len(player_rows),
+        "uniquePlayerIds": len({r.get("playerId") for r in player_rows if r.get("playerId")}),
+        "uniqueMapIds": len({r.get("mapId") for r in player_rows if r.get("mapId")}),
+        "completeTeamKillMaps": len(team_totals),
+        "completedSeries": len([m for m in past if m.get("status") == "completed"]),
+        "partialTeamKillMapsExcluded": max(0, len({(r.get("mapId"), r.get("teamId")) for r in player_rows if r.get("mapId") and r.get("teamId")}) - len(team_totals)),
+    }
+
+
 class Client:
     def __init__(self, key, log_path, per_run=14, budget=450):
         self.key = key
@@ -463,6 +512,9 @@ def main(argv=None):
         return 1
     archive = {k:v for k,v in archive.items() if safe_datetime(v.get("startsAt")) >= cutoff}
     result_matches = sorted(old_results.values(),key=lambda m:m.get("startsAt") or "", reverse=True)
+    player_rows = sorted(archive.values(),key=lambda r:(r.get("startsAt") or "",r.get("mapId") or ""),reverse=True)
+    team_totals = aggregate_team_map_totals(player_rows)
+    coverage = coverage_stats(player_rows, team_totals, result_matches)
     snapshot = {
         "meta": {"mode":"cito_api", "source":"Cito API", "collectedAt":now_iso(),
                  "tierPolicy":"Tier 1: ambas top 16; Tier 2: ambas top 40; caso contrário, não classificada",
@@ -471,7 +523,9 @@ def main(argv=None):
                  "playerLastFetched":last_player_sync,
                  "warnings":warnings},
         "upcoming":upcoming, "past":result_matches, "rankings":rankings,
-        "player_maps":sorted(archive.values(),key=lambda r:(r.get("startsAt") or "",r.get("mapId") or ""),reverse=True),
+        "player_maps":player_rows,
+        "team_map_totals":team_totals,
+        "coverage":coverage,
         "rosters":sorted(roster_cache.values(),key=lambda r:r.get("teamId") or ""),
         "historical_event":[], "map_form":[],
     }

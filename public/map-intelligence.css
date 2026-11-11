@@ -1,0 +1,21 @@
+/* v5: mapa 1/2/3 como contexto do radar, sem alterar abas legadas */
+.map-order{border:1px solid #376b6d;background:linear-gradient(125deg,#112e38,#111f32);padding:20px;border-radius:16px;margin:20px 0 23px}
+.map-order-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.map-order-top h3{font-size:17px;color:#eafdf9;margin-bottom:5px}
+.map-order-top p{font-size:13px;color:#b7d2dd;max-width:770px;margin:0 0 15px;line-height:1.65}
+.map-order-top button{white-space:nowrap;font-size:12px;padding:8px 13px}
+.map-order-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.map-choice{background:#091924;border:1px solid #2e5262;border-radius:12px;padding:14px;min-width:0;margin:0}
+.map-choice>span{display:block;font-weight:700;font-size:13px;color:#b9f4e7;margin:0 0 9px}
+.map-choice select{width:100%;min-width:0;border:1px solid #436a78;font-size:15px;font-weight:650;background:#122937;color:#f3fcff}
+.map-choice small{display:block;font-size:11px;color:#90b1bd;margin-top:8px;min-height:32px}
+.map-order-footer{font-size:12px;color:#c8e4df;padding-top:12px;margin-top:12px;border-top:1px solid #27434f}
+.map-coverage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:13px}
+.map-coverage>div{background:#091a27;border:1px solid #284150;padding:12px;border-radius:10px;display:flex;flex-direction:column;gap:6px}
+.map-coverage strong{font-size:13px;color:#d5f4ee}
+.map-coverage span{font-size:12px;color:#aac4d2}
+.edge-pick-overview{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.edge-pick-overview h3{font-size:18px}
+.edge-pick{min-width:0}.edge-pick .edge-explain{min-height:0}.edge-pick .edge-status{white-space:normal;max-width:155px;text-align:center}
+.edge-match-heading{margin-top:10px}
+@media(max-width:800px){.map-order-grid,.map-coverage{grid-template-columns:1fr}.map-order-top{flex-direction:column;gap:8px}.map-choice small{min-height:0}}

@@ -71,6 +71,22 @@ class CitoNormalizerTests(unittest.TestCase):
               {"teamId":"T","playerId":"p3","playerNickname":"Benched","isActive":False,"role":"entry"}]
         self.assertEqual([r["playerId"] for r in mod.clean_roster({"data":{"roster":rows}},"T")],["p1"])
 
+    def test_team_total_kills_requires_five_complete_players(self):
+        valid=[{'mapId':'m1','matchId':'s1','mapName':'Nuke','teamId':'T1','team':'Alpha',
+                'playerId':f'p{i}','kills':10+i,'deaths':8+i,'roundsPlayed':22} for i in range(5)]
+        incomplete=[{'mapId':'m2','matchId':'s2','mapName':'Mirage','teamId':'T1','team':'Alpha',
+                     'playerId':f'p{i}','kills':10+i,'deaths':9+i} for i in range(4)]
+        null_stat=[{'mapId':'m3','matchId':'s3','mapName':'Inferno','teamId':'T1','team':'Alpha',
+                    'playerId':f'p{i}','kills':None if i==1 else 10+i,'deaths':10+i} for i in range(5)]
+        duplicate=[valid[0].copy()]
+        aggregated=mod.aggregate_team_map_totals(valid+duplicate+incomplete+null_stat)
+        self.assertEqual(len(aggregated),1)
+        self.assertEqual(aggregated[0]['kills'],60)
+        self.assertEqual(aggregated[0]['deaths'],50)
+        self.assertEqual(aggregated[0]['playersRecorded'],5)
+        cov=mod.coverage_stats(valid+incomplete+null_stat,aggregated,[])
+        self.assertEqual(cov['partialTeamKillMapsExcluded'],2)
+
     def test_usage_budget(self):
         with tempfile.TemporaryDirectory() as t:
             log=Path(t)/'usage.json'
