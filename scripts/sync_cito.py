@@ -169,6 +169,66 @@ def clean_player_stats(payload, match):
     return out
 
 
+def clean_player_map_rows(payload, player_id, rankings, cutoff=None):
+    """Normaliza /cs2/players/{id}/maps — muitos mapas por consulta.
+
+    `days` pode não ser aplicado pela API; a janela gratuita é imposta aqui.
+    """
+    cutoff = cutoff or datetime.now(timezone.utc) - timedelta(days=30)
+    rank_by_id, _ = index_rankings(rankings)
+    result = []
+    for entry in rows(payload.get("data")):
+        if not isinstance(entry, dict):
+            continue
+        mp = entry.get("map") or {}
+        match = mp.get("match") or {}
+        started = match.get("startsAt") or entry.get("startsAt")
+        if not started or safe_datetime(started) < cutoff:
+            continue
+        if mp.get("status") != "completed" or mp.get("statsEligible") is False or mp.get("isForfeit") or match.get("isForfeit"):
+            continue
+        if not entry.get("mapId") or not entry.get("playerId") or entry.get("kills") is None:
+            continue
+        t1 = rank_by_id.get(match.get("team1Id"), {}).get("rank")
+        t2 = rank_by_id.get(match.get("team2Id"), {}).get("rank")
+        s1 = num_or_none(mp.get("team1Score"))
+        s2 = num_or_none(mp.get("team2Score"))
+        result.append({
+            "matchId": entry.get("matchId"), "mapId":entry.get("mapId"),
+            "mapNumber":mp.get("mapNumber") or entry.get("mapNumber"),
+            "mapName":mp.get("mapName") or entry.get("mapName"),
+            "startsAt":started, "event": match.get("eventName"),
+            "matchTier":match_tier(t1,t2),
+            "playerId":entry.get("playerId"),
+            "player":entry.get("playerName") or player_id,
+            "teamId":entry.get("teamId"), "team":entry.get("teamName"),
+            "kills":entry.get("kills"), "deaths":entry.get("deaths"),
+            "assists":entry.get("assists"), "headshots":entry.get("headshots"),
+            "adr":entry.get("adr"), "kast":entry.get("kast"),
+            "rating":entry.get("rating"), "firstKills":entry.get("firstKills"),
+            "firstDeaths":entry.get("firstDeaths"),
+            "roundsPlayed":s1+s2 if s1 is not None and s2 is not None else None,
+            "source":"Cito API", "lastSyncedAt": now_iso(),
+            "dataQuality":entry.get("dataQuality"),
+        })
+    return result
+
+
+def clean_roster(payload, team_id):
+    """Descarta treinadores e entradas inativas."""
+    data = payload.get("data") or {}
+    if not isinstance(data, dict):
+        return []
+    return [
+        {"playerId":p.get("playerId"), "name":p.get("playerNickname"),
+         "teamId":team_id, "team":p.get("teamName")}
+        for p in data.get("roster", [])
+        if isinstance(p, dict) and p.get("playerId")
+        and p.get("isActive") is not False
+        and str(p.get("role", "")).lower() not in ("coach", "analyst", "manager")
+    ]
+
+
 class Client:
     def __init__(self, key, log_path, per_run=14, budget=450):
         self.key = key
@@ -206,6 +266,8 @@ class Client:
                     self.remaining_reported = int(rem)
                 obj = json.load(response)
         except HTTPError as exc:
+            if exc.code == 401:
+                raise RuntimeError("HTTP 401: a chave REST em CITO_API_KEY não foi aceita. Use a API Key pessoal do painel Cito (não o link MCP nem o código de setup); não divulgue a chave.") from exc
             raise RuntimeError(f"HTTP {exc.code} em {endpoint}; verifique a chave/plano/limites") from exc
         except (URLError, OSError, json.JSONDecodeError) as exc:
             raise RuntimeError(f"Falha consultando {endpoint}: {exc}") from exc
@@ -225,72 +287,126 @@ def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--log", type=Path, default=DEFAULT_LOG)
-    parser.add_argument("--max-requests", type=int, default=14)
-    parser.add_argument("--max-details", type=int, default=10)
-    parser.add_argument("--budget-30d", type=int, default=450)
+    parser.add_argument("--max-requests", type=int, default=10)
+    parser.add_argument("--max-details", type=int, default=1,
+                        help="Novos confrontos para descobrir jogadores")
+    parser.add_argument("--max-rosters", type=int, default=1)
+    parser.add_argument("--max-player-pages", type=int, default=5)
+    parser.add_argument("--budget-30d", type=int, default=300)
     args = parser.parse_args(argv)
-    key = os.getenv("CITO_API_KEY")
+    key = (os.getenv("CITO_API_KEY") or "").strip()
     if not key:
-        print("Falta CITO_API_KEY. Crie uma chave grátis em https://dashboard.citoapi.com/", file=sys.stderr)
+        print("Falta CITO_API_KEY. Cadastre uma chave REST do painel Cito em GitHub Actions Secrets.", file=sys.stderr)
+        return 2
+    if not key.startswith("cito_") or key.startswith("cito_setup_"):
+        print("CITO_API_KEY deve ser a API Key REST da conta Cito, não link MCP nem código de setup.", file=sys.stderr)
         return 2
     client = Client(key, args.log, max(3,args.max_requests), min(450,args.budget_30d))
     prev = read_json(args.out, {})
+    cutoff = datetime.now(timezone.utc)-timedelta(days=30)
     archive = {(r.get("mapId"),r.get("playerId")):r
-               for r in prev.get("player_maps",[]) if r.get("mapId") and r.get("playerId")}
+               for r in prev.get("player_maps",[]) if r.get("mapId") and r.get("playerId")
+               and safe_datetime(r.get("startsAt")) >= cutoff}
+    old_results = {m["id"]:m for m in prev.get("past",[])
+                   if isinstance(m,dict) and m.get("id") and safe_datetime(m.get("startsAt")) >= cutoff}
+    roster_cache = {r["teamId"]:r for r in prev.get("rosters",[])
+                    if isinstance(r,dict) and r.get("teamId")}
+    last_player_sync = (prev.get("meta") or {}).get("playerLastFetched") or {}
+    warnings = []
     try:
         rankings = clean_rankings(client.get("/rankings/world", {"limit":100}))
         upcoming = clean_matches(client.get("/matches/upcoming", {"limit":100}), rankings)
-        # 7 dias recentes, consulta diária — não baixa odds.
-        past = clean_matches(client.get("/matches/past", {"days":7,"limit":200}), rankings)
-        # Coletar prioritariamente partidas elegíveis mais recentes ainda sem estatísticas.
-        # Recusa W.O. e mapas não disputados para análises por jogador.
-        candidates = [m for m in past if m["tier"] in ("Tier 1","Tier 2") and not m["isForfeit"]]
-        candidates.sort(key=lambda m: m.get("startsAt") or "", reverse=True)
-        stored_match_ids = {v["matchId"] for v in archive.values()}
-        detail_errors=[]
-        details_this_run = 0
-        for match in candidates:
-            if len(stored_match_ids) >= 5000:
-                break
-            if match["id"] in stored_match_ids:
+        recent = clean_matches(client.get("/matches/past", {"days":7,"limit":200}), rankings)
+        for m in recent:
+            old_results[m["id"]] = m
+        # Descobre elencos das próximas partidas elegíveis: um time novo por dia.
+        priority_teams = list(dict.fromkeys(
+            tid for m in upcoming if m["tier"] in ("Tier 1","Tier 2")
+            for tid in (m.get("team1Id"),m.get("team2Id")) if tid))
+        roster_queries = 0
+        for tid in priority_teams:
+            if tid in roster_cache or roster_queries >= args.max_rosters or client.in_run >= client.max_run:
                 continue
-            if client.in_run >= client.max_run or client.remaining_reported is not None and client.remaining_reported <= MIN_QUOTA_RESERVE:
-                break
-            if details_this_run >= args.max_details:
+            try:
+                roster = clean_roster(client.get(f"/teams/{tid}"),tid)
+                roster_queries += 1
+                if roster:
+                    roster_cache[tid] = {"teamId":tid,"checkedAt":now_iso(),"players":roster}
+                else:
+                    warnings.append(f"Sem elenco ativo para {tid}")
+            except RuntimeError as ex:
+                warnings.append(str(ex))
+                if "HTTP 401" in str(ex) or "HTTP 429" in str(ex):
+                    break
+        # Uma partida nova pode revelar atletas não cadastrados no arquivo.
+        stored_matches = {v.get("matchId") for v in archive.values()}
+        candidates = [m for m in recent if m["tier"] in ("Tier 1","Tier 2")
+                      and not m.get("isForfeit") and m["id"] not in stored_matches]
+        candidates.sort(key=lambda x:x.get("startsAt") or "",reverse=True)
+        for m in candidates[:args.max_details]:
+            if client.in_run >= client.max_run:
                 break
             try:
-                details = client.get(f"/matches/{match['id']}/player-stats")
-                details_this_run += 1
-                parsed = clean_player_stats(details, match)
-                for r in parsed:
-                    archive[(r["mapId"],r["playerId"])] = r
-                if parsed:
-                    stored_match_ids.add(match["id"])
-                else:
-                    detail_errors.append(match["id"]+": sem estatísticas")
+                parsed = clean_player_stats(client.get(f"/matches/{m['id']}/player-stats"),m)
+                for row in parsed:
+                    archive[(row["mapId"],row["playerId"])] = row
             except RuntimeError as ex:
-                detail_errors.append(str(ex))
-                if 'HTTP 429' in str(ex) or 'HTTP 403' in str(ex) or 'HTTP 401' in str(ex):
+                warnings.append(str(ex))
+                if "HTTP 401" in str(ex) or "HTTP 429" in str(ex):
+                    break
+        # Em vez de uma consulta por partida, cada consulta de jogador retorna
+        # até 100 mapas. Filtramos localmente a janela contratual de 30 dias.
+        players = {}
+        for row in archive.values():
+            if row.get("playerId") and row.get("teamId"):
+                players[row["playerId"]] = {"playerId":row["playerId"],"teamId":row["teamId"]}
+        for roster in roster_cache.values():
+            for p in roster.get("players",[]):
+                players[p["playerId"]] = p
+        active = set(priority_teams)
+        def priority(p):
+            fetched = safe_datetime(last_player_sync.get(p["playerId"]))
+            return (0 if p.get("teamId") in active else 1, fetched, p["playerId"])
+        pending = sorted(players.values(),key=priority)
+        updated = 0
+        for p in pending:
+            if updated >= args.max_player_pages or client.in_run >= client.max_run:
+                break
+            # Evita buscar novamente uma página sincronizada nas últimas 24 horas.
+            if safe_datetime(last_player_sync.get(p["playerId"])) >= datetime.now(timezone.utc)-timedelta(hours=24):
+                continue
+            try:
+                payload = client.get(f"/players/{p['playerId']}/maps", {"days":30,"limit":100})
+                parsed = clean_player_map_rows(payload,p["playerId"],rankings,cutoff)
+                for row in parsed:
+                    archive[(row["mapId"],row["playerId"])] = row
+                last_player_sync[p["playerId"]] = now_iso()
+                updated += 1
+            except RuntimeError as ex:
+                warnings.append(str(ex))
+                if "HTTP 401" in str(ex) or "HTTP 429" in str(ex):
                     break
     except RuntimeError as ex:
         print(f"Sincronização interrompida sem sobrescrever o snapshot anterior: {ex}", file=sys.stderr)
         return 1
-    # Mantém somente dados detalhados em janela do plano gratuito.
-    cutoff = datetime.now(timezone.utc)-timedelta(days=30)
     archive = {k:v for k,v in archive.items() if safe_datetime(v.get("startsAt")) >= cutoff}
+    result_matches = sorted(old_results.values(),key=lambda m:m.get("startsAt") or "", reverse=True)
     snapshot = {
         "meta": {"mode":"cito_api", "source":"Cito API", "collectedAt":now_iso(),
                  "tierPolicy":"Tier 1: ambas top 16; Tier 2: ambas top 40; caso contrário, não classificada",
                  "historyWindowDays":30, "oddsProviderConnected":False,
                  "requestsThisRun":client.in_run, "remainingMonthlyAPI":client.remaining_reported,
-                 "warnings":detail_errors},
-        "upcoming":upcoming, "past":past, "rankings":rankings,
+                 "playerLastFetched":last_player_sync,
+                 "warnings":warnings},
+        "upcoming":upcoming, "past":result_matches, "rankings":rankings,
         "player_maps":sorted(archive.values(),key=lambda r:(r.get("startsAt") or "",r.get("mapId") or ""),reverse=True),
+        "rosters":sorted(roster_cache.values(),key=lambda r:r.get("teamId") or ""),
         "historical_event":[], "map_form":[],
     }
     write_json(args.out,snapshot)
-    print(f"Snapshot salvo em {args.out}: {len(upcoming)} agenda; {len(past)} resultados; "
-          f"{len(archive)} estatísticas por jogador/mapa; {client.in_run} requisições.")
+    print(f"Snapshot: {len(upcoming)} partidas futuras, {len(result_matches)} resultados, "
+          f"{len(archive)} registros jogador/mapa; {client.in_run} consultas Cito; "
+          f"{updated} jogadores atualizados.")
     return 0
 
 if __name__ == "__main__":

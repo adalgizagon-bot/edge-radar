@@ -100,3 +100,11 @@ Os testes verificam tiers, normalização de rankings e partidas, conversão de 
 - **Atualização:** o workflow salva JSON e faz commit quando houver mudanças; integração Git com Vercel publica a versão atualizada. Conferir permissões `Actions` para gravação no repositório privado se o push do bot falhar.
 - **Atenção:** partidas e estatísticas publicadas via Vercel são visíveis para quem possuir o URL, apesar do código estar em repositório privado. Não usar como produto comercial sem verificar contratos e licenças dos fornecedores.
 - **Diagnóstico:** execute `python -m unittest discover -s tests -v` (8 testes) antes do primeiro deploy.
+
+## Atualização: histórico ampliado por jogador (11/11/2026)
+
+A coleta de detalhes foi remodelada: `/cs2/players/{playerId}/maps?limit=100` fornece até 100 mapas por consulta. O importador faz filtro local estrito de **30 dias**, pois alguns endpoints podem ignorar `days`. A rotina diária (10 consultas) inclui ranking, agenda, últimos resultados, atualização de um elenco, um jogo ainda não indexado e até 5 jogadores. A rotina conserva dados já importados e os deduplica por ID de mapa e jogador. Resultados anteriores também são preservados por 30 dias. O objetivo é aumentar amostras sem consumir a franquia de 500 consultas/mês; o orçamento local continua em 300/30 dias.
+
+Se o GitHub Actions acusar **HTTP 401**, o segredo foi configurado, porém o servidor recusou seu conteúdo. A chave MCP, o link MCP e os códigos `cito_setup_...` não são necessariamente uma chave REST. No [dashboard da Cito](https://dashboard.citoapi.com/) crie/copiei uma **API Key pessoal de dados**, geralmente iniciada por `cito_` (ou `cito_live_`), e substitua o segredo `CITO_API_KEY` no GitHub. Não envie a chave pelo chat.
+
+**Não existe certeza de lucro:** frequências históricas são descrições, não probabilidades calibradas; mudanças de elenco, adversário e seleção de mapa exigem validação.

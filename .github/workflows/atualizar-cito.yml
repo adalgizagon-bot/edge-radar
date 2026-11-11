@@ -21,7 +21,7 @@ jobs:
       - name: Sincronizar sem odds
         env:
           CITO_API_KEY: ${{ secrets.CITO_API_KEY }}
-        run: python scripts/sync_cito.py --max-requests 10 --max-details 7 --budget-30d 300
+        run: python scripts/sync_cito.py --max-requests 10 --max-details 1 --max-rosters 1 --max-player-pages 5 --budget-30d 300
       - name: Salvar snapshot (se mudou)
         run: |
           git config user.name 'cs2-edge-bot'

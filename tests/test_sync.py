@@ -34,10 +34,10 @@ class CitoNormalizerTests(unittest.TestCase):
         d=json.loads((SCRIPT.parent.parent/'public/data/snapshot.json').read_text())
         self.assertEqual(d['meta']['mode'],'cito_api')
         self.assertFalse(d['meta']['oddsProviderConnected'])
-        self.assertEqual(len(d['player_maps']),100)
+        self.assertGreaterEqual(len(d['player_maps']),100)
         self.assertEqual(len(d['upcoming']),7)
         self.assertEqual(len(d['rankings']),40)
-        self.assertEqual(len({(r['mapId'],r['playerId']) for r in d['player_maps']}),100)
+        self.assertEqual(len({(r['mapId'],r['playerId']) for r in d['player_maps']}),len(d['player_maps']))
     def test_real_cito_map_name(self):
         rankings=mod.clean_rankings({'data':[{'teamId':'t1','teamName':'A','rank':1},{'teamId':'t2','teamName':'B','rank':3}]})
         matches=mod.clean_matches({'data':[{'id':'match-1','team1Id':'t1','team2Id':'t2','team1Name':'A','team2Name':'B',
@@ -49,6 +49,28 @@ class CitoNormalizerTests(unittest.TestCase):
                                                  {'mapId':'m-2','playerId':'p1','playerName':'Ace','kills':0}]},matches[0])
         self.assertEqual(len(rows),1)
         self.assertEqual(rows[0]['roundsPlayed'],22)
+    def test_player_maps_30day_window_and_map_quality(self):
+        from datetime import datetime, timedelta, timezone
+        recent=(datetime.now(timezone.utc)-timedelta(days=2)).isoformat()
+        old=(datetime.now(timezone.utc)-timedelta(days=45)).isoformat()
+        def row(id, when, status="completed", eligible=True):
+            return {"mapId":"map-"+id, "playerId":"p1", "playerName":"Ace", "kills":17,
+                    "map":{"mapNumber":1,"mapName":"Mirage","team1Score":13,"team2Score":11,
+                           "status":status,"statsEligible":eligible,"match":{"startsAt":when,"team1Id":"a","team2Id":"b"}}}
+        payload={"data":[row("new",recent),row("old",old),row("no",recent,"map_not_played",False)]}
+        rankings=[{"teamId":"a","name":"A","rank":2},{"teamId":"b","name":"B","rank":4}]
+        results=mod.clean_player_map_rows(payload,"p1",rankings)
+        self.assertEqual(len(results),1)
+        self.assertEqual(results[0]["kills"],17)
+        self.assertEqual(results[0]["roundsPlayed"],24)
+        self.assertEqual(results[0]["matchTier"],"Tier 1")
+
+    def test_roster_excludes_coaches_and_inactive(self):
+        rows=[{"teamId":"T","playerId":"p1","playerNickname":"First","isActive":True,"role":"rifler"},
+              {"teamId":"T","playerId":"p2","playerNickname":"Coach","isActive":True,"role":"coach"},
+              {"teamId":"T","playerId":"p3","playerNickname":"Benched","isActive":False,"role":"entry"}]
+        self.assertEqual([r["playerId"] for r in mod.clean_roster({"data":{"roster":rows}},"T")],["p1"])
+
     def test_usage_budget(self):
         with tempfile.TemporaryDirectory() as t:
             log=Path(t)/'usage.json'
