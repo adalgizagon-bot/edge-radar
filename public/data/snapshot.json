@@ -2,12 +2,12 @@
   "meta": {
     "mode": "cito_api",
     "source": "Cito API",
-    "collectedAt": "2026-11-11T22:58:35Z",
+    "collectedAt": "2026-11-11T23:09:40Z",
     "tierPolicy": "Tier 1: ambas top 16; Tier 2: ambas top 40; caso contrário, não classificada",
     "historyWindowDays": 30,
     "oddsProviderConnected": false,
-    "requestsThisRun": 12,
-    "remainingMonthlyAPI": 386,
+    "requestsThisRun": 22,
+    "remainingMonthlyAPI": 364,
     "playerLastFetched": {
       "cs2-player-11816": "2026-11-11T22:10:06Z",
       "cs2-player-11893": "2026-11-11T22:10:13Z",
@@ -20,7 +20,23 @@
       "cs2-player-15698": "2026-11-11T22:58:14Z",
       "cs2-player-16693": "2026-11-11T22:58:21Z",
       "cs2-player-16920": "2026-11-11T22:58:28Z",
-      "cs2-player-17011": "2026-11-11T22:58:35Z"
+      "cs2-player-17011": "2026-11-11T22:58:35Z",
+      "cs2-player-17145": "2026-11-11T23:07:57Z",
+      "cs2-player-18072": "2026-11-11T23:08:04Z",
+      "cs2-player-18221": "2026-11-11T23:08:11Z",
+      "cs2-player-18317": "2026-11-11T23:08:18Z",
+      "cs2-player-18462": "2026-11-11T23:08:25Z",
+      "cs2-player-19045": "2026-11-11T23:08:32Z",
+      "cs2-player-19164": "2026-11-11T23:08:38Z",
+      "cs2-player-19187": "2026-11-11T23:08:45Z",
+      "cs2-player-19230": "2026-11-11T23:08:52Z",
+      "cs2-player-19808": "2026-11-11T23:08:59Z",
+      "cs2-player-19869": "2026-11-11T23:09:06Z",
+      "cs2-player-19926": "2026-11-11T23:09:12Z",
+      "cs2-player-2023": "2026-11-11T23:09:19Z",
+      "cs2-player-20301": "2026-11-11T23:09:26Z",
+      "cs2-player-20312": "2026-11-11T23:09:33Z",
+      "cs2-player-20423": "2026-11-11T23:09:40Z"
     },
     "warnings": []
   },
@@ -3397,7 +3413,7 @@
       "team1Score": 1,
       "team2Score": 2,
       "winnerTeamId": "cs2-team-5995",
-      "seriesScoreVerified": false
+      "seriesScoreVerified": true
     },
     {
       "id": "cs2-match-2400331",
@@ -7775,7 +7791,7 @@
       "sourceUrl": "https://cito.gg/matches/cs2-match-2400011",
       "sourceEndpoint": "/cs2/matches",
       "lastVerified": "2026-11-11T22:09:40.726Z",
-      "seriesScoreVerified": false
+      "seriesScoreVerified": true
     },
     {
       "id": "cs2-match-2400010",
@@ -9730,7 +9746,7 @@
       "sourceUrl": "https://cito.gg/matches/cs2-match-2400009",
       "sourceEndpoint": "/cs2/matches",
       "lastVerified": "2026-11-11T21:45:16.388Z",
-      "seriesScoreVerified": false
+      "seriesScoreVerified": true
     },
     {
       "id": "cs2-match-2400223",
@@ -12477,6 +12493,53 @@
       "seriesScoreVerified": true
     },
     {
+      "id": "cs2-match-2400003",
+      "team1": "PARIVISION",
+      "team2": "MOUZ",
+      "team1Id": "cs2-team-12467",
+      "team2Id": "cs2-team-4494",
+      "rank1": 13,
+      "rank2": 1,
+      "tier": "Tier 1",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-11-04T07:00:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-4494",
+      "team1Score": 0,
+      "team2Score": 2,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2400003-map-1",
+          "mapNumber": 1,
+          "name": "Ancient",
+          "team1Score": 2,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2400003-map-2",
+          "mapNumber": 2,
+          "name": "Mirage",
+          "team1Score": 9,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2400003",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
       "id": "cs2-match-2400000",
       "team1": "Falcons",
       "team2": "HEROIC",
@@ -12695,6 +12758,53 @@
       "seriesScoreVerified": true
     },
     {
+      "id": "cs2-match-2399993",
+      "team1": "MOUZ",
+      "team2": "BETBOOM",
+      "team1Id": "cs2-team-4494",
+      "team2Id": "cs2-team-12394",
+      "rank1": 1,
+      "rank2": 7,
+      "tier": "Tier 1",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-11-03T06:00:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-4494",
+      "team1Score": 2,
+      "team2Score": 0,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399993-map-1",
+          "mapNumber": 1,
+          "name": "Ancient",
+          "team1Score": 13,
+          "team2Score": 6,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399993-map-2",
+          "mapNumber": 2,
+          "name": "Mirage",
+          "team1Score": 16,
+          "team2Score": 14,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399993",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
       "id": "cs2-match-2399858",
       "team1": "Natus Vincere",
       "team2": "Falcons",
@@ -12737,6 +12847,53 @@
       ],
       "source": "Cito API",
       "sourceUrl": "https://cito.gg/matches/cs2-match-2399858",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
+      "id": "cs2-match-2399859",
+      "team1": "MOUZ",
+      "team2": "TYLOO",
+      "team1Id": "cs2-team-4494",
+      "team2Id": "cs2-team-4863",
+      "rank1": 1,
+      "rank2": 30,
+      "tier": "Tier 2",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-11-02T10:15:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-4494",
+      "team1Score": 2,
+      "team2Score": 0,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399859-map-1",
+          "mapNumber": 1,
+          "name": "Inferno",
+          "team1Score": 13,
+          "team2Score": 6,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399859-map-2",
+          "mapNumber": 2,
+          "name": "Nuke",
+          "team1Score": 13,
+          "team2Score": 7,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399859",
       "sourceEndpoint": "/cs2/players/{playerId}/maps",
       "lastVerified": null,
       "seriesScoreVerified": true
@@ -13178,6 +13335,53 @@
       "seriesScoreVerified": true
     },
     {
+      "id": "cs2-match-2399754",
+      "team1": "Aurora",
+      "team2": "MOUZ",
+      "team1Id": "cs2-team-11861",
+      "team2Id": "cs2-team-4494",
+      "rank1": 5,
+      "rank2": 1,
+      "tier": "Tier 1",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-29T13:25:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-4494",
+      "team1Score": 0,
+      "team2Score": 2,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399754-map-1",
+          "mapNumber": 1,
+          "name": "Mirage",
+          "team1Score": 6,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399754-map-2",
+          "mapNumber": 2,
+          "name": "Cache",
+          "team1Score": 2,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399754",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
       "id": "cs2-match-2399877",
       "team1": "FaZe",
       "team2": "GamerLegion",
@@ -13292,6 +13496,53 @@
       "seriesScoreVerified": true
     },
     {
+      "id": "cs2-match-2399752",
+      "team1": "FUT",
+      "team2": "Nemiga",
+      "team1Id": "cs2-team-13286",
+      "team2Id": "cs2-team-7969",
+      "rank1": 9,
+      "rank2": 11,
+      "tier": "Tier 1",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-29T08:00:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-7969",
+      "team1Score": 0,
+      "team2Score": 2,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399752-map-1",
+          "mapNumber": 1,
+          "name": "Nuke",
+          "team1Score": 11,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399752-map-2",
+          "mapNumber": 2,
+          "name": "Dust2",
+          "team1Score": 9,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399752",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
       "id": "cs2-match-2399875",
       "team1": "GamerLegion",
       "team2": "Envy",
@@ -13334,6 +13585,63 @@
       ],
       "source": "Cito API",
       "sourceUrl": "https://cito.gg/matches/cs2-match-2399875",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
+      "id": "cs2-match-2399874",
+      "team1": "Luminosity",
+      "team2": "Envy",
+      "team1Id": "cs2-team-6290",
+      "team2Id": "cs2-team-5991",
+      "rank1": 34,
+      "rank2": 28,
+      "tier": "Tier 2",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-28T16:40:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-5991",
+      "team1Score": 1,
+      "team2Score": 2,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399874-map-1",
+          "mapNumber": 1,
+          "name": "Inferno",
+          "team1Score": 11,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399874-map-2",
+          "mapNumber": 2,
+          "name": "Dust2",
+          "team1Score": 13,
+          "team2Score": 8,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399874-map-3",
+          "mapNumber": 3,
+          "name": "Ancient",
+          "team1Score": 10,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399874",
       "sourceEndpoint": "/cs2/players/{playerId}/maps",
       "lastVerified": null,
       "seriesScoreVerified": true
@@ -13641,6 +13949,53 @@
       "seriesScoreVerified": true
     },
     {
+      "id": "cs2-match-2399869",
+      "team1": "Luminosity",
+      "team2": "HOTU",
+      "team1Id": "cs2-team-6290",
+      "team2Id": "cs2-team-11581",
+      "rank1": 34,
+      "rank2": 31,
+      "tier": "Tier 2",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-27T15:20:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-11581",
+      "team1Score": 0,
+      "team2Score": 2,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399869-map-1",
+          "mapNumber": 1,
+          "name": "Mirage",
+          "team1Score": 11,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399869-map-2",
+          "mapNumber": 2,
+          "name": "Ancient",
+          "team1Score": 4,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399869",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
       "id": "cs2-match-2399745",
       "team1": "Spirit",
       "team2": "MOUZ",
@@ -13906,6 +14261,53 @@
       "seriesScoreVerified": true
     },
     {
+      "id": "cs2-match-2399735",
+      "team1": "The MongolZ",
+      "team2": "MOUZ",
+      "team1Id": "cs2-team-6248",
+      "team2Id": "cs2-team-4494",
+      "rank1": 10,
+      "rank2": 1,
+      "tier": "Tier 1",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-26T08:00:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-4494",
+      "team1Score": 0,
+      "team2Score": 2,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399735-map-1",
+          "mapNumber": 1,
+          "name": "Nuke",
+          "team1Score": 11,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399735-map-2",
+          "mapNumber": 2,
+          "name": "Mirage",
+          "team1Score": 9,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399735",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
       "id": "cs2-match-2399733",
       "team1": "FURIA",
       "team2": "Natus Vincere",
@@ -14000,6 +14402,53 @@
       "seriesScoreVerified": true
     },
     {
+      "id": "cs2-match-2399732",
+      "team1": "MOUZ",
+      "team2": "9z",
+      "team1Id": "cs2-team-4494",
+      "team2Id": "cs2-team-9996",
+      "rank1": 1,
+      "rank2": 19,
+      "tier": "Tier 2",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-25T13:00:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-4494",
+      "team1Score": 2,
+      "team2Score": 0,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399732-map-1",
+          "mapNumber": 1,
+          "name": "Dust2",
+          "team1Score": 13,
+          "team2Score": 5,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399732-map-2",
+          "mapNumber": 2,
+          "name": "Nuke",
+          "team1Score": 13,
+          "team2Score": 3,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399732",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
       "id": "cs2-match-2399729",
       "team1": "Vitality",
       "team2": "The MongolZ",
@@ -14089,6 +14538,53 @@
       ],
       "source": "Cito API",
       "sourceUrl": "https://cito.gg/matches/cs2-match-2399727",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
+      "id": "cs2-match-2399728",
+      "team1": "FUT",
+      "team2": "Liquid",
+      "team1Id": "cs2-team-13286",
+      "team2Id": "cs2-team-5973",
+      "rank1": 9,
+      "rank2": 17,
+      "tier": "Tier 2",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-25T08:00:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-13286",
+      "team1Score": 2,
+      "team2Score": 0,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399728-map-1",
+          "mapNumber": 1,
+          "name": "Cache",
+          "team1Score": 13,
+          "team2Score": 5,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399728-map-2",
+          "mapNumber": 2,
+          "name": "Dust2",
+          "team1Score": 13,
+          "team2Score": 9,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399728",
       "sourceEndpoint": "/cs2/players/{playerId}/maps",
       "lastVerified": null,
       "seriesScoreVerified": true
@@ -14287,6 +14783,214 @@
       ],
       "source": "Cito API",
       "sourceUrl": "https://cito.gg/matches/cs2-match-2399721",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
+      "id": "cs2-match-2399722",
+      "team1": "MOUZ",
+      "team2": "Liquid",
+      "team1Id": "cs2-team-4494",
+      "team2Id": "cs2-team-5973",
+      "rank1": 1,
+      "rank2": 17,
+      "tier": "Tier 2",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-24T09:15:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-5973",
+      "team1Score": 1,
+      "team2Score": 2,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399722-map-1",
+          "mapNumber": 1,
+          "name": "Ancient",
+          "team1Score": 16,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399722-map-2",
+          "mapNumber": 2,
+          "name": "Inferno",
+          "team1Score": 12,
+          "team2Score": 16,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399722-map-3",
+          "mapNumber": 3,
+          "name": "Mirage",
+          "team1Score": 11,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399722",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
+      "id": "cs2-match-2399720",
+      "team1": "FUT",
+      "team2": "TYLOO",
+      "team1Id": "cs2-team-13286",
+      "team2Id": "cs2-team-4863",
+      "rank1": 9,
+      "rank2": 30,
+      "tier": "Tier 2",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-24T07:00:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-13286",
+      "team1Score": 2,
+      "team2Score": 0,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399720-map-1",
+          "mapNumber": 1,
+          "name": "Nuke",
+          "team1Score": 13,
+          "team2Score": 9,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399720-map-2",
+          "mapNumber": 2,
+          "name": "Ancient",
+          "team1Score": 13,
+          "team2Score": 6,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399720",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
+      "id": "cs2-match-2399621",
+      "team1": "BBL",
+      "team2": "Luminosity",
+      "team1Id": "cs2-team-13996",
+      "team2Id": "cs2-team-6290",
+      "rank1": 50,
+      "rank2": 34,
+      "tier": "Não classificada",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-20T18:50:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-13996",
+      "team1Score": 2,
+      "team2Score": 0,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399621-map-1",
+          "mapNumber": 1,
+          "name": "Nuke",
+          "team1Score": 13,
+          "team2Score": 6,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399621-map-2",
+          "mapNumber": 2,
+          "name": "Mirage",
+          "team1Score": 13,
+          "team2Score": 3,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399621",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
+      "id": "cs2-match-2399617",
+      "team1": "Luminosity",
+      "team2": "Nexus",
+      "team1Id": "cs2-team-6290",
+      "team2Id": "cs2-team-7187",
+      "rank1": 34,
+      "rank2": 52,
+      "tier": "Não classificada",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-20T14:25:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-7187",
+      "team1Score": 1,
+      "team2Score": 2,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399617-map-1",
+          "mapNumber": 1,
+          "name": "Ancient",
+          "team1Score": 13,
+          "team2Score": 10,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399617-map-2",
+          "mapNumber": 2,
+          "name": "Inferno",
+          "team1Score": 10,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399617-map-3",
+          "mapNumber": 3,
+          "name": "Dust2",
+          "team1Score": 9,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399617",
       "sourceEndpoint": "/cs2/players/{playerId}/maps",
       "lastVerified": null,
       "seriesScoreVerified": true
@@ -14723,6 +15427,63 @@
       ],
       "source": "Cito API",
       "sourceUrl": "https://cito.gg/matches/cs2-match-2399414",
+      "sourceEndpoint": "/cs2/players/{playerId}/maps",
+      "lastVerified": null,
+      "seriesScoreVerified": true
+    },
+    {
+      "id": "cs2-match-2399659",
+      "team1": "EYEBALLERS",
+      "team2": "GamerLegion",
+      "team1Id": "cs2-team-11737",
+      "team2Id": "cs2-team-9928",
+      "rank1": 59,
+      "rank2": 26,
+      "tier": "Não classificada",
+      "event": "Evento não informado",
+      "eventTier": null,
+      "startsAt": "2026-10-17T11:00:00.000Z",
+      "status": "completed",
+      "bestOf": null,
+      "winnerTeamId": "cs2-team-11737",
+      "team1Score": 2,
+      "team2Score": 1,
+      "isForfeit": false,
+      "resultType": "played",
+      "maps": [
+        {
+          "mapId": "cs2-match-2399659-map-1",
+          "mapNumber": 1,
+          "name": "Mirage",
+          "team1Score": 10,
+          "team2Score": 13,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399659-map-2",
+          "mapNumber": 2,
+          "name": "Nuke",
+          "team1Score": 13,
+          "team2Score": 8,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        },
+        {
+          "mapId": "cs2-match-2399659-map-3",
+          "mapNumber": 3,
+          "name": "Inferno",
+          "team1Score": 13,
+          "team2Score": 4,
+          "status": "completed",
+          "isForfeit": false,
+          "statsEligible": true
+        }
+      ],
+      "source": "Cito API",
+      "sourceUrl": "https://cito.gg/matches/cs2-match-2399659",
       "sourceEndpoint": "/cs2/players/{playerId}/maps",
       "lastVerified": null,
       "seriesScoreVerified": true
@@ -16098,9 +16859,9 @@
       "rating": 0.99,
       "firstKills": 2,
       "firstDeaths": 3,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -16176,9 +16937,9 @@
       "rating": 0.84,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -16306,9 +17067,9 @@
       "rating": 0.94,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -16358,9 +17119,9 @@
       "rating": 0.83,
       "firstKills": 2,
       "firstDeaths": 6,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -16436,9 +17197,9 @@
       "rating": 0.81,
       "firstKills": 5,
       "firstDeaths": 0,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -16566,9 +17327,9 @@
       "rating": 1.09,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -16618,9 +17379,9 @@
       "rating": 1.28,
       "firstKills": 4,
       "firstDeaths": 5,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -16696,9 +17457,9 @@
       "rating": 1.16,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -16826,9 +17587,9 @@
       "rating": 1.4,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -16852,9 +17613,9 @@
       "rating": 0.84,
       "firstKills": 3,
       "firstDeaths": 7,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -16878,9 +17639,9 @@
       "rating": 1.4,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -16982,9 +17743,9 @@
       "rating": 1.69,
       "firstKills": 4,
       "firstDeaths": 1,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -17008,9 +17769,9 @@
       "rating": 0.64,
       "firstKills": 0,
       "firstDeaths": 3,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -17086,9 +17847,9 @@
       "rating": 0.9,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -17112,9 +17873,9 @@
       "rating": 1.37,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 13,
+      "roundsPlayed": 13.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -17138,9 +17899,9 @@
       "rating": 0.35,
       "firstKills": 0,
       "firstDeaths": 4,
-      "roundsPlayed": 13,
+      "roundsPlayed": 13.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -17242,9 +18003,9 @@
       "rating": 0.41,
       "firstKills": 0,
       "firstDeaths": 1,
-      "roundsPlayed": 13,
+      "roundsPlayed": 13.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -17268,9 +18029,9 @@
       "rating": 2.02,
       "firstKills": 3,
       "firstDeaths": 0,
-      "roundsPlayed": 13,
+      "roundsPlayed": 13.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -17346,9 +18107,9 @@
       "rating": 0.35,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 13,
+      "roundsPlayed": 13.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -17372,9 +18133,9 @@
       "rating": 0.82,
       "firstKills": 4,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -17398,9 +18159,9 @@
       "rating": 1.04,
       "firstKills": 0,
       "firstDeaths": 4,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -17502,9 +18263,9 @@
       "rating": 0.97,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -17528,9 +18289,9 @@
       "rating": 1.12,
       "firstKills": 6,
       "firstDeaths": 0,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -17606,9 +18367,9 @@
       "rating": 0.98,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -17658,9 +18419,9 @@
       "rating": 0.81,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -17684,9 +18445,9 @@
       "rating": 1.03,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -17918,9 +18679,9 @@
       "rating": 1.44,
       "firstKills": 7,
       "firstDeaths": 0,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -17944,9 +18705,9 @@
       "rating": 1.14,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -18204,9 +18965,9 @@
       "rating": 0.97,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -18230,9 +18991,9 @@
       "rating": 0.95,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -18360,9 +19121,9 @@
       "rating": 1.28,
       "firstKills": 2,
       "firstDeaths": 3,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -18464,9 +19225,9 @@
       "rating": 1.05,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -18490,9 +19251,9 @@
       "rating": 1.23,
       "firstKills": 4,
       "firstDeaths": 1,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -18620,9 +19381,9 @@
       "rating": 0.76,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -18698,9 +19459,9 @@
       "rating": 1.11,
       "firstKills": 3,
       "firstDeaths": 0,
-      "roundsPlayed": 17,
+      "roundsPlayed": 17.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -18724,9 +19485,9 @@
       "rating": 0.85,
       "firstKills": 0,
       "firstDeaths": 1,
-      "roundsPlayed": 17,
+      "roundsPlayed": 17.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -18776,9 +19537,9 @@
       "rating": 1.16,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 17,
+      "roundsPlayed": 17.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -18828,9 +19589,9 @@
       "rating": 1.54,
       "firstKills": 4,
       "firstDeaths": 1,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -18854,9 +19615,9 @@
       "rating": 1.32,
       "firstKills": 5,
       "firstDeaths": 3,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -18906,9 +19667,9 @@
       "rating": 1.21,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -18958,9 +19719,9 @@
       "rating": 1.08,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -18984,9 +19745,9 @@
       "rating": 1.39,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -19036,9 +19797,9 @@
       "rating": 1.61,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -19608,9 +20369,9 @@
       "rating": 0.94,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -19634,9 +20395,9 @@
       "rating": 1.27,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -19686,9 +20447,9 @@
       "rating": 1.38,
       "firstKills": 5,
       "firstDeaths": 2,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -19738,9 +20499,9 @@
       "rating": 1.2,
       "firstKills": 4,
       "firstDeaths": 2,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -19764,9 +20525,9 @@
       "rating": 1.15,
       "firstKills": 0,
       "firstDeaths": 0,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -19816,9 +20577,9 @@
       "rating": 1.47,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -19842,9 +20603,9 @@
       "rating": 0.65,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -19972,9 +20733,9 @@
       "rating": 0.92,
       "firstKills": 1,
       "firstDeaths": 5,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -20102,9 +20863,9 @@
       "rating": 0.72,
       "firstKills": 0,
       "firstDeaths": 3,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -20336,9 +21097,9 @@
       "rating": 0.85,
       "firstKills": 3,
       "firstDeaths": 0,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -20466,9 +21227,9 @@
       "rating": 0.91,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 17,
+      "roundsPlayed": 17.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -20596,9 +21357,9 @@
       "rating": 0.92,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -20622,9 +21383,9 @@
       "rating": 0.77,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -20752,9 +21513,9 @@
       "rating": 0.71,
       "firstKills": 1,
       "firstDeaths": 4,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -20882,9 +21643,9 @@
       "rating": 0.92,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -21038,9 +21799,9 @@
       "rating": 0.95,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -21064,9 +21825,9 @@
       "rating": 1.08,
       "firstKills": 4,
       "firstDeaths": 0,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -21116,9 +21877,9 @@
       "rating": 1.11,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -21168,9 +21929,9 @@
       "rating": 1.74,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -21194,9 +21955,9 @@
       "rating": 1.62,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -21246,9 +22007,9 @@
       "rating": 1.16,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -21376,9 +22137,9 @@
       "rating": 1.37,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -21506,9 +22267,9 @@
       "rating": 1.11,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -21610,9 +22371,9 @@
       "rating": 1.04,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -21636,9 +22397,9 @@
       "rating": 1.32,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -21740,9 +22501,9 @@
       "rating": 1.6,
       "firstKills": 0,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -21766,9 +22527,9 @@
       "rating": 1.16,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -21870,9 +22631,9 @@
       "rating": 0.86,
       "firstKills": 4,
       "firstDeaths": 3,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -21896,9 +22657,9 @@
       "rating": 1.6,
       "firstKills": 6,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -21922,9 +22683,9 @@
       "rating": 1.06,
       "firstKills": 3,
       "firstDeaths": 3,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -22052,9 +22813,9 @@
       "rating": 1.04,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 28,
+      "roundsPlayed": 28.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -22182,9 +22943,9 @@
       "rating": 0.71,
       "firstKills": 1,
       "firstDeaths": 5,
-      "roundsPlayed": 28,
+      "roundsPlayed": 28.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -22416,9 +23177,9 @@
       "rating": 1.2,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -22546,9 +23307,9 @@
       "rating": 1.21,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -22676,9 +23437,9 @@
       "rating": 1.48,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -22728,9 +23489,9 @@
       "rating": 1.08,
       "firstKills": 3,
       "firstDeaths": 3,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -22754,9 +23515,9 @@
       "rating": 1.25,
       "firstKills": 4,
       "firstDeaths": 0,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -22806,9 +23567,9 @@
       "rating": 1.11,
       "firstKills": 5,
       "firstDeaths": 7,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -22858,9 +23619,9 @@
       "rating": 1.33,
       "firstKills": 0,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -22884,9 +23645,9 @@
       "rating": 1.44,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -22936,9 +23697,9 @@
       "rating": 1.04,
       "firstKills": 0,
       "firstDeaths": 7,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -23456,9 +24217,9 @@
       "rating": 0.88,
       "firstKills": 3,
       "firstDeaths": 0,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -23586,9 +24347,9 @@
       "rating": 0.85,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -23638,9 +24399,9 @@
       "rating": 1.36,
       "firstKills": 2,
       "firstDeaths": 3,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -23664,9 +24425,9 @@
       "rating": 1.17,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -23716,9 +24477,9 @@
       "rating": 1.09,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -23768,9 +24529,9 @@
       "rating": 1.49,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -23794,9 +24555,9 @@
       "rating": 1.41,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -23846,9 +24607,9 @@
       "rating": 1.36,
       "firstKills": 5,
       "firstDeaths": 4,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -23872,9 +24633,9 @@
       "rating": 1.1,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 17,
+      "roundsPlayed": 17.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -24002,9 +24763,9 @@
       "rating": 1.29,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -24132,9 +24893,9 @@
       "rating": 0.97,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -24730,9 +25491,9 @@
       "rating": 1.1,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -24756,9 +25517,9 @@
       "rating": 1.28,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -24860,9 +25621,9 @@
       "rating": 1.02,
       "firstKills": 0,
       "firstDeaths": 4,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -24886,9 +25647,9 @@
       "rating": 0.62,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -24990,9 +25751,9 @@
       "rating": 1.17,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 29,
+      "roundsPlayed": 29.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -25016,9 +25777,9 @@
       "rating": 1.36,
       "firstKills": 0,
       "firstDeaths": 1,
-      "roundsPlayed": 29,
+      "roundsPlayed": 29.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -25042,9 +25803,9 @@
       "rating": 1.11,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -25172,9 +25933,9 @@
       "rating": 0.92,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -25302,9 +26063,9 @@
       "rating": 1.6,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -25432,9 +26193,9 @@
       "rating": 1.14,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -25562,9 +26323,9 @@
       "rating": 0.58,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -25744,9 +26505,9 @@
       "rating": 1.08,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -25770,9 +26531,9 @@
       "rating": 1.19,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -25848,9 +26609,9 @@
       "rating": 0.59,
       "firstKills": 1,
       "firstDeaths": 4,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -25874,9 +26635,9 @@
       "rating": 0.88,
       "firstKills": 1,
       "firstDeaths": 6,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -25978,9 +26739,9 @@
       "rating": 1.19,
       "firstKills": 2,
       "firstDeaths": 3,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -26004,9 +26765,9 @@
       "rating": 0.97,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -26082,9 +26843,9 @@
       "rating": 0.94,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -26108,9 +26869,9 @@
       "rating": 1.02,
       "firstKills": 2,
       "firstDeaths": 3,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -26186,9 +26947,9 @@
       "rating": 1.03,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -26212,9 +26973,9 @@
       "rating": 0.77,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -26264,9 +27025,9 @@
       "rating": 1.28,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -26368,9 +27129,9 @@
       "rating": 1.06,
       "firstKills": 4,
       "firstDeaths": 2,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -26446,9 +27207,9 @@
       "rating": 0.77,
       "firstKills": 0,
       "firstDeaths": 0,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -26472,9 +27233,9 @@
       "rating": 1.3,
       "firstKills": 4,
       "firstDeaths": 2,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -26524,9 +27285,9 @@
       "rating": 1.04,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -26628,9 +27389,9 @@
       "rating": 0.82,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -26706,9 +27467,9 @@
       "rating": 0.89,
       "firstKills": 0,
       "firstDeaths": 3,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -26732,9 +27493,9 @@
       "rating": 0.7,
       "firstKills": 0,
       "firstDeaths": 1,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -26784,9 +27545,9 @@
       "rating": 0.82,
       "firstKills": 5,
       "firstDeaths": 2,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -26888,9 +27649,9 @@
       "rating": 0.98,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -26992,9 +27753,9 @@
       "rating": 1.22,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -27096,9 +27857,9 @@
       "rating": 0.58,
       "firstKills": 0,
       "firstDeaths": 4,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -27252,9 +28013,9 @@
       "rating": 0.92,
       "firstKills": 4,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -27382,9 +28143,9 @@
       "rating": 1.12,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -27408,9 +28169,9 @@
       "rating": 1.07,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -27538,9 +28299,9 @@
       "rating": 0.81,
       "firstKills": 5,
       "firstDeaths": 4,
-      "roundsPlayed": 28,
+      "roundsPlayed": 28.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -27694,9 +28455,9 @@
       "rating": 1.53,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -27720,9 +28481,9 @@
       "rating": 1.46,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -27772,9 +28533,9 @@
       "rating": 1.11,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -27824,9 +28585,9 @@
       "rating": 1.51,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -27850,9 +28611,9 @@
       "rating": 0.95,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -27902,9 +28663,9 @@
       "rating": 1.21,
       "firstKills": 4,
       "firstDeaths": 4,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -28032,9 +28793,9 @@
       "rating": 0.86,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -28162,9 +28923,9 @@
       "rating": 0.92,
       "firstKills": 0,
       "firstDeaths": 4,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -28292,9 +29053,9 @@
       "rating": 1.03,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -28370,9 +29131,9 @@
       "rating": 1.26,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -28474,9 +29235,9 @@
       "rating": 1.14,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -28578,9 +29339,9 @@
       "rating": 0.85,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -28630,9 +29391,9 @@
       "rating": 1.27,
       "firstKills": 5,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -28708,9 +29469,9 @@
       "rating": 0.89,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -28734,9 +29495,9 @@
       "rating": 0.83,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -28812,9 +29573,9 @@
       "rating": 1.1,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -28942,9 +29703,9 @@
       "rating": 1.08,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -29072,9 +29833,9 @@
       "rating": 1.13,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -29098,9 +29859,9 @@
       "rating": 1.11,
       "firstKills": 3,
       "firstDeaths": 3,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:12Z",
       "dataQuality": "partial"
     },
     {
@@ -29176,9 +29937,9 @@
       "rating": 0.95,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:07:57Z",
       "dataQuality": "partial"
     },
     {
@@ -29228,9 +29989,9 @@
       "rating": 1.24,
       "firstKills": 8,
       "firstDeaths": 0,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:12Z",
       "dataQuality": "partial"
     },
     {
@@ -29306,9 +30067,9 @@
       "rating": 0.94,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:07:57Z",
       "dataQuality": "partial"
     },
     {
@@ -29358,9 +30119,9 @@
       "rating": 0.84,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:12Z",
       "dataQuality": "partial"
     },
     {
@@ -29436,9 +30197,9 @@
       "rating": 1.13,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:07:57Z",
       "dataQuality": "partial"
     },
     {
@@ -29514,9 +30275,9 @@
       "rating": 0.78,
       "firstKills": 4,
       "firstDeaths": 1,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -29566,9 +30327,9 @@
       "rating": 0.58,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -29592,9 +30353,9 @@
       "rating": 0.77,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -29644,9 +30405,9 @@
       "rating": 0.94,
       "firstKills": 4,
       "firstDeaths": 3,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -29696,9 +30457,9 @@
       "rating": 1.17,
       "firstKills": 4,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -29722,9 +30483,9 @@
       "rating": 1.03,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -29774,9 +30535,9 @@
       "rating": 0.77,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -29826,9 +30587,9 @@
       "rating": 0.7,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -29852,9 +30613,9 @@
       "rating": 0.49,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -29982,9 +30743,9 @@
       "rating": 1.14,
       "firstKills": 2,
       "firstDeaths": 3,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -30112,9 +30873,9 @@
       "rating": 0.91,
       "firstKills": 3,
       "firstDeaths": 3,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -30138,9 +30899,9 @@
       "rating": 0.9,
       "firstKills": 0,
       "firstDeaths": 1,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -30268,9 +31029,9 @@
       "rating": 0.81,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -30450,9 +31211,9 @@
       "rating": 0.99,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -30554,9 +31315,9 @@
       "rating": 1.62,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -30684,9 +31445,9 @@
       "rating": 1.07,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -30788,9 +31549,9 @@
       "rating": 0.63,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -30892,9 +31653,9 @@
       "rating": 1.34,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -30918,9 +31679,9 @@
       "rating": 1.27,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -31048,9 +31809,9 @@
       "rating": 1.42,
       "firstKills": 3,
       "firstDeaths": 0,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -31178,9 +31939,9 @@
       "rating": 0.69,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 17,
+      "roundsPlayed": 17.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:12Z",
       "dataQuality": "partial"
     },
     {
@@ -31256,9 +32017,9 @@
       "rating": 1.04,
       "firstKills": 0,
       "firstDeaths": 0,
-      "roundsPlayed": 17,
+      "roundsPlayed": 17.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:07:57Z",
       "dataQuality": "partial"
     },
     {
@@ -31308,9 +32069,9 @@
       "rating": 0.85,
       "firstKills": 3,
       "firstDeaths": 0,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:12Z",
       "dataQuality": "partial"
     },
     {
@@ -31386,9 +32147,9 @@
       "rating": 1,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:07:57Z",
       "dataQuality": "partial"
     },
     {
@@ -31490,9 +32251,9 @@
       "rating": 0.83,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -31516,9 +32277,9 @@
       "rating": 0.85,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -31542,9 +32303,9 @@
       "rating": 1.18,
       "firstKills": 0,
       "firstDeaths": 1,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -31620,9 +32381,9 @@
       "rating": 0.93,
       "firstKills": 4,
       "firstDeaths": 3,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -31646,9 +32407,9 @@
       "rating": 0.74,
       "firstKills": 5,
       "firstDeaths": 8,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -31672,9 +32433,9 @@
       "rating": 0.91,
       "firstKills": 1,
       "firstDeaths": 5,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -31750,9 +32511,9 @@
       "rating": 1.15,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -31776,9 +32537,9 @@
       "rating": 0.53,
       "firstKills": 1,
       "firstDeaths": 4,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -31802,9 +32563,9 @@
       "rating": 1.36,
       "firstKills": 0,
       "firstDeaths": 0,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -31880,9 +32641,9 @@
       "rating": 0.74,
       "firstKills": 1,
       "firstDeaths": 4,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -31906,9 +32667,9 @@
       "rating": 1.56,
       "firstKills": 5,
       "firstDeaths": 3,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -31932,9 +32693,9 @@
       "rating": 1.11,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -32010,9 +32771,9 @@
       "rating": 0.79,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -32036,9 +32797,9 @@
       "rating": 1.45,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -32062,9 +32823,9 @@
       "rating": 0.29,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -32140,9 +32901,9 @@
       "rating": 1.05,
       "firstKills": 0,
       "firstDeaths": 1,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -32166,9 +32927,9 @@
       "rating": 0.64,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -32192,9 +32953,9 @@
       "rating": 1.41,
       "firstKills": 3,
       "firstDeaths": 0,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -32270,9 +33031,9 @@
       "rating": 1.14,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -32296,9 +33057,9 @@
       "rating": 1,
       "firstKills": 5,
       "firstDeaths": 1,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -32374,9 +33135,9 @@
       "rating": 0.95,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -32400,9 +33161,9 @@
       "rating": 0.73,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -32868,9 +33629,9 @@
       "rating": 1.21,
       "firstKills": 0,
       "firstDeaths": 0,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -32894,9 +33655,9 @@
       "rating": 0.9,
       "firstKills": 4,
       "firstDeaths": 3,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -32972,9 +33733,9 @@
       "rating": 1.38,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -32998,9 +33759,9 @@
       "rating": 0.63,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -33050,9 +33811,9 @@
       "rating": 0.92,
       "firstKills": 4,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -33076,9 +33837,9 @@
       "rating": 1.06,
       "firstKills": 6,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -33180,9 +33941,9 @@
       "rating": 0.89,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -33232,9 +33993,9 @@
       "rating": 0.83,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -33310,9 +34071,9 @@
       "rating": 1.07,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -33336,9 +34097,9 @@
       "rating": 0.75,
       "firstKills": 0,
       "firstDeaths": 1,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -33440,9 +34201,9 @@
       "rating": 1.01,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -33492,9 +34253,9 @@
       "rating": 0.87,
       "firstKills": 0,
       "firstDeaths": 1,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -33570,9 +34331,9 @@
       "rating": 0.8,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -33596,9 +34357,9 @@
       "rating": 0.96,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -33700,9 +34461,9 @@
       "rating": 0.99,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -33752,9 +34513,9 @@
       "rating": 1.15,
       "firstKills": 3,
       "firstDeaths": 4,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -33804,9 +34565,9 @@
       "rating": 1,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -33934,9 +34695,9 @@
       "rating": 0.74,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -33960,9 +34721,9 @@
       "rating": 1.2,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -34012,9 +34773,9 @@
       "rating": 1.22,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -34142,9 +34903,9 @@
       "rating": 0.85,
       "firstKills": 2,
       "firstDeaths": 5,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -34168,9 +34929,9 @@
       "rating": 1.21,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -34220,9 +34981,9 @@
       "rating": 1.22,
       "firstKills": 4,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -34350,9 +35111,9 @@
       "rating": 1.01,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -34376,9 +35137,9 @@
       "rating": 0.99,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -34454,9 +35215,9 @@
       "rating": 1.27,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -34480,9 +35241,9 @@
       "rating": 1.02,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -34532,9 +35293,9 @@
       "rating": 1.36,
       "firstKills": 5,
       "firstDeaths": 4,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -34584,9 +35345,9 @@
       "rating": 1.15,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -34610,9 +35371,9 @@
       "rating": 1.02,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -34662,9 +35423,9 @@
       "rating": 0.79,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -34688,9 +35449,9 @@
       "rating": 0.8,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -34818,9 +35579,9 @@
       "rating": 0.6,
       "firstKills": 0,
       "firstDeaths": 5,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -35000,9 +35761,9 @@
       "rating": 1.07,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 36,
+      "roundsPlayed": 36.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -35026,9 +35787,9 @@
       "rating": 1.17,
       "firstKills": 5,
       "firstDeaths": 5,
-      "roundsPlayed": 36,
+      "roundsPlayed": 36.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -35104,9 +35865,9 @@
       "rating": 0.8,
       "firstKills": 3,
       "firstDeaths": 5,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -35130,9 +35891,9 @@
       "rating": 1.5,
       "firstKills": 3,
       "firstDeaths": 0,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -35182,9 +35943,9 @@
       "rating": 1.36,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -35208,9 +35969,9 @@
       "rating": 1.65,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -35260,9 +36021,9 @@
       "rating": 1,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -35312,9 +36073,9 @@
       "rating": 1.33,
       "firstKills": 3,
       "firstDeaths": 3,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -35338,9 +36099,9 @@
       "rating": 1.38,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -35390,9 +36151,9 @@
       "rating": 1.33,
       "firstKills": 5,
       "firstDeaths": 1,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -35728,9 +36489,9 @@
       "rating": 1.01,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -35832,9 +36593,9 @@
       "rating": 1.39,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -35884,9 +36645,9 @@
       "rating": 1.18,
       "firstKills": 4,
       "firstDeaths": 2,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -35962,9 +36723,9 @@
       "rating": 0.92,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -35988,9 +36749,9 @@
       "rating": 1.42,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -36066,9 +36827,9 @@
       "rating": 1.17,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -36118,9 +36879,9 @@
       "rating": 1.46,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -36170,9 +36931,9 @@
       "rating": 1.41,
       "firstKills": 4,
       "firstDeaths": 0,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -36196,9 +36957,9 @@
       "rating": 1.46,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -36248,9 +37009,9 @@
       "rating": 1.32,
       "firstKills": 2,
       "firstDeaths": 1,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -36300,9 +37061,9 @@
       "rating": 0.96,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -36326,9 +37087,9 @@
       "rating": 1.18,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -36612,9 +37373,9 @@
       "rating": 0.97,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -36742,9 +37503,9 @@
       "rating": 1.14,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -36924,9 +37685,9 @@
       "rating": 0.98,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -37028,9 +37789,9 @@
       "rating": 1.04,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:25Z",
       "dataQuality": "partial"
     },
     {
@@ -37132,9 +37893,9 @@
       "rating": 1.08,
       "firstKills": 4,
       "firstDeaths": 0,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -37158,9 +37919,9 @@
       "rating": 1.27,
       "firstKills": 2,
       "firstDeaths": 3,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -37236,9 +37997,9 @@
       "rating": 1.18,
       "firstKills": 4,
       "firstDeaths": 3,
-      "roundsPlayed": 48,
+      "roundsPlayed": 48.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -37262,9 +38023,9 @@
       "rating": 1.05,
       "firstKills": 6,
       "firstDeaths": 3,
-      "roundsPlayed": 48,
+      "roundsPlayed": 48.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -37314,9 +38075,9 @@
       "rating": 0.85,
       "firstKills": 3,
       "firstDeaths": 3,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -37366,9 +38127,9 @@
       "rating": 0.98,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -37392,9 +38153,9 @@
       "rating": 1.14,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -37444,9 +38205,9 @@
       "rating": 0.69,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -37496,9 +38257,9 @@
       "rating": 0.63,
       "firstKills": 1,
       "firstDeaths": 4,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -37522,9 +38283,9 @@
       "rating": 0.48,
       "firstKills": 0,
       "firstDeaths": 4,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -37574,9 +38335,9 @@
       "rating": 0.97,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:18Z",
       "dataQuality": "partial"
     },
     {
@@ -37626,9 +38387,9 @@
       "rating": 1.13,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.081Z",
+      "lastSyncedAt": "2026-11-11T23:08:59Z",
       "dataQuality": "partial"
     },
     {
@@ -37652,9 +38413,9 @@
       "rating": 1.09,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:40Z",
       "dataQuality": "partial"
     },
     {
@@ -37704,9 +38465,9 @@
       "rating": 1.12,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -37730,9 +38491,9 @@
       "rating": 0.82,
       "firstKills": 2,
       "firstDeaths": 3,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -37782,9 +38543,9 @@
       "rating": 1.17,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -37834,9 +38595,9 @@
       "rating": 0.84,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 28,
+      "roundsPlayed": 28.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -37860,9 +38621,9 @@
       "rating": 1.2,
       "firstKills": 5,
       "firstDeaths": 1,
-      "roundsPlayed": 28,
+      "roundsPlayed": 28.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -37912,9 +38673,9 @@
       "rating": 0.94,
       "firstKills": 3,
       "firstDeaths": 4,
-      "roundsPlayed": 28,
+      "roundsPlayed": 28.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -37964,9 +38725,9 @@
       "rating": 1.13,
       "firstKills": 3,
       "firstDeaths": 0,
-      "roundsPlayed": 29,
+      "roundsPlayed": 29.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:08:11Z",
       "dataQuality": "partial"
     },
     {
@@ -37990,9 +38751,9 @@
       "rating": 1.16,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 29,
+      "roundsPlayed": 29.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:31:54.079Z",
+      "lastSyncedAt": "2026-11-11T23:08:04Z",
       "dataQuality": "partial"
     },
     {
@@ -38042,9 +38803,9 @@
       "rating": 1.06,
       "firstKills": 4,
       "firstDeaths": 5,
-      "roundsPlayed": 29,
+      "roundsPlayed": 29.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:09:33Z",
       "dataQuality": "partial"
     },
     {
@@ -38068,9 +38829,9 @@
       "rating": 1.3,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -38146,9 +38907,9 @@
       "rating": 0.93,
       "firstKills": 5,
       "firstDeaths": 4,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -38172,9 +38933,9 @@
       "rating": 1.36,
       "firstKills": 3,
       "firstDeaths": 0,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.085Z",
+      "lastSyncedAt": "2026-11-11T23:08:38Z",
       "dataQuality": "partial"
     },
     {
@@ -38250,9 +39011,9 @@
       "rating": 0.83,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:45Z",
       "dataQuality": "partial"
     },
     {
@@ -38276,9 +39037,9 @@
       "rating": 0.63,
       "firstKills": 3,
       "firstDeaths": 1,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:12Z",
       "dataQuality": "partial"
     },
     {
@@ -38354,9 +39115,9 @@
       "rating": 0.39,
       "firstKills": 0,
       "firstDeaths": 3,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:07:57Z",
       "dataQuality": "partial"
     },
     {
@@ -38406,9 +39167,9 @@
       "rating": 0.69,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:12Z",
       "dataQuality": "partial"
     },
     {
@@ -38484,9 +39245,9 @@
       "rating": 1.19,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:07:57Z",
       "dataQuality": "partial"
     },
     {
@@ -38536,9 +39297,9 @@
       "rating": 1.08,
       "firstKills": 2,
       "firstDeaths": 3,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:12Z",
       "dataQuality": "partial"
     },
     {
@@ -38614,9 +39375,9 @@
       "rating": 0.83,
       "firstKills": 1,
       "firstDeaths": 0,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:07:57Z",
       "dataQuality": "partial"
     },
     {
@@ -38666,9 +39427,9 @@
       "rating": 0.93,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:12Z",
       "dataQuality": "partial"
     },
     {
@@ -38744,9 +39505,9 @@
       "rating": 1.04,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:07:57Z",
       "dataQuality": "partial"
     },
     {
@@ -38796,9 +39557,9 @@
       "rating": 1.12,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:12Z",
       "dataQuality": "partial"
     },
     {
@@ -38874,9 +39635,9 @@
       "rating": 1.19,
       "firstKills": 1,
       "firstDeaths": 3,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:07:57Z",
       "dataQuality": "partial"
     },
     {
@@ -38978,9 +39739,9 @@
       "rating": 1.09,
       "firstKills": 0,
       "firstDeaths": 3,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -39108,9 +39869,9 @@
       "rating": 1.15,
       "firstKills": 2,
       "firstDeaths": 5,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -39238,9 +39999,9 @@
       "rating": 0.83,
       "firstKills": 1,
       "firstDeaths": 4,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -39368,9 +40129,9 @@
       "rating": 0.95,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 35,
+      "roundsPlayed": 35.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -39498,9 +40259,9 @@
       "rating": 1.21,
       "firstKills": 2,
       "firstDeaths": 5,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -39732,9 +40493,9 @@
       "rating": 0.9,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -39862,9 +40623,9 @@
       "rating": 1.05,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 36,
+      "roundsPlayed": 36.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -39992,9 +40753,9 @@
       "rating": 1.41,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -40304,9 +41065,9 @@
       "rating": 0.95,
       "firstKills": 3,
       "firstDeaths": 3,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -40434,9 +41195,9 @@
       "rating": 1,
       "firstKills": 4,
       "firstDeaths": 3,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -40564,9 +41325,9 @@
       "rating": 1.36,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -40590,9 +41351,9 @@
       "rating": 0.98,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -40720,9 +41481,9 @@
       "rating": 0.87,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -40928,9 +41689,9 @@
       "rating": 0.96,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 17,
+      "roundsPlayed": 17.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -41032,9 +41793,9 @@
       "rating": 1.15,
       "firstKills": 6,
       "firstDeaths": 3,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -41136,9 +41897,9 @@
       "rating": 1.18,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -41266,9 +42027,9 @@
       "rating": 0.96,
       "firstKills": 1,
       "firstDeaths": 4,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -41396,9 +42157,9 @@
       "rating": 0.96,
       "firstKills": 1,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:40:30.630Z",
+      "lastSyncedAt": "2026-11-11T23:09:26Z",
       "dataQuality": "partial"
     },
     {
@@ -41474,9 +42235,9 @@
       "rating": 1.07,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -41500,9 +42261,9 @@
       "rating": 0.75,
       "firstKills": 5,
       "firstDeaths": 3,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -41578,9 +42339,9 @@
       "rating": 1.03,
       "firstKills": 2,
       "firstDeaths": 0,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -41604,9 +42365,9 @@
       "rating": 1.22,
       "firstKills": 6,
       "firstDeaths": 2,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -41682,9 +42443,9 @@
       "rating": 1.13,
       "firstKills": 5,
       "firstDeaths": 2,
-      "roundsPlayed": 29,
+      "roundsPlayed": 29.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -41708,9 +42469,9 @@
       "rating": 1.27,
       "firstKills": 3,
       "firstDeaths": 0,
-      "roundsPlayed": 29,
+      "roundsPlayed": 29.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -41812,9 +42573,9 @@
       "rating": 1.05,
       "firstKills": 0,
       "firstDeaths": 1,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -41968,9 +42729,9 @@
       "rating": 1.01,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -42020,9 +42781,9 @@
       "rating": 1.07,
       "firstKills": 4,
       "firstDeaths": 0,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -42046,9 +42807,9 @@
       "rating": 1.4,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -42202,9 +42963,9 @@
       "rating": 0.89,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -42254,9 +43015,9 @@
       "rating": 0.55,
       "firstKills": 2,
       "firstDeaths": 4,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -42280,9 +43041,9 @@
       "rating": 0.91,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -42436,9 +43197,9 @@
       "rating": 1.08,
       "firstKills": 4,
       "firstDeaths": 1,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -42488,9 +43249,9 @@
       "rating": 1.18,
       "firstKills": 4,
       "firstDeaths": 2,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -42618,9 +43379,9 @@
       "rating": 1.08,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -42748,9 +43509,9 @@
       "rating": 1.12,
       "firstKills": 1,
       "firstDeaths": 2,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -42878,9 +43639,9 @@
       "rating": 1.04,
       "firstKills": 4,
       "firstDeaths": 2,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -42904,9 +43665,9 @@
       "rating": 1,
       "firstKills": 0,
       "firstDeaths": 2,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -43034,9 +43795,9 @@
       "rating": 0.69,
       "firstKills": 2,
       "firstDeaths": 3,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:30:14.086Z",
+      "lastSyncedAt": "2026-11-11T23:09:19Z",
       "dataQuality": "partial"
     },
     {
@@ -43268,9 +44029,9 @@
       "rating": 1.03,
       "firstKills": 2,
       "firstDeaths": 2,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -43294,9 +44055,9 @@
       "rating": 1.16,
       "firstKills": 3,
       "firstDeaths": 3,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -43372,9 +44133,9 @@
       "rating": 1.08,
       "firstKills": 3,
       "firstDeaths": 5,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:32Z",
       "dataQuality": "partial"
     },
     {
@@ -43398,9 +44159,9 @@
       "rating": 1.28,
       "firstKills": 6,
       "firstDeaths": 1,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.370Z",
+      "lastSyncedAt": "2026-11-11T23:09:06Z",
       "dataQuality": "partial"
     },
     {
@@ -43528,9 +44289,9 @@
       "rating": 1.29,
       "firstKills": 3,
       "firstDeaths": 2,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -43658,9 +44419,9 @@
       "rating": 1.3,
       "firstKills": 2,
       "firstDeaths": 3,
-      "roundsPlayed": 29,
+      "roundsPlayed": 29.0,
       "source": "Cito API",
-      "lastSyncedAt": "2026-11-11T21:36:56.369Z",
+      "lastSyncedAt": "2026-11-11T23:08:52Z",
       "dataQuality": "partial"
     },
     {
@@ -43768,7 +44529,7 @@
       "playersRecorded": 5,
       "kills": 57,
       "deaths": 67,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -43796,7 +44557,7 @@
       "playersRecorded": 5,
       "kills": 94,
       "deaths": 108,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -43824,7 +44585,7 @@
       "playersRecorded": 5,
       "kills": 74,
       "deaths": 49,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -43838,7 +44599,7 @@
       "playersRecorded": 5,
       "kills": 44,
       "deaths": 76,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -43852,7 +44613,7 @@
       "playersRecorded": 5,
       "kills": 76,
       "deaths": 44,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -43866,7 +44627,7 @@
       "playersRecorded": 5,
       "kills": 64,
       "deaths": 22,
-      "roundsPlayed": 13,
+      "roundsPlayed": 13.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -43880,7 +44641,7 @@
       "playersRecorded": 5,
       "kills": 22,
       "deaths": 64,
-      "roundsPlayed": 13,
+      "roundsPlayed": 13.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -43894,7 +44655,7 @@
       "playersRecorded": 5,
       "kills": 66,
       "deaths": 84,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -43908,7 +44669,7 @@
       "playersRecorded": 5,
       "kills": 84,
       "deaths": 67,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -43936,7 +44697,7 @@
       "playersRecorded": 5,
       "kills": 80,
       "deaths": 67,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -43964,7 +44725,7 @@
       "playersRecorded": 5,
       "kills": 81,
       "deaths": 82,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -43992,7 +44753,7 @@
       "playersRecorded": 5,
       "kills": 61,
       "deaths": 79,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44020,7 +44781,7 @@
       "playersRecorded": 5,
       "kills": 61,
       "deaths": 65,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44160,7 +44921,7 @@
       "playersRecorded": 5,
       "kills": 99,
       "deaths": 97,
-      "roundsPlayed": 30,
+      "roundsPlayed": 30.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44174,7 +44935,7 @@
       "playersRecorded": 5,
       "kills": 72,
       "deaths": 73,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44188,7 +44949,7 @@
       "playersRecorded": 5,
       "kills": 49,
       "deaths": 77,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44244,7 +45005,7 @@
       "playersRecorded": 5,
       "kills": 63,
       "deaths": 81,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44258,7 +45019,7 @@
       "playersRecorded": 5,
       "kills": 63,
       "deaths": 82,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44272,7 +45033,7 @@
       "playersRecorded": 5,
       "kills": 86,
       "deaths": 78,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44384,7 +45145,7 @@
       "playersRecorded": 5,
       "kills": 81,
       "deaths": 81,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44398,7 +45159,7 @@
       "playersRecorded": 5,
       "kills": 95,
       "deaths": 86,
-      "roundsPlayed": 28,
+      "roundsPlayed": 28.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44412,7 +45173,7 @@
       "playersRecorded": 5,
       "kills": 91,
       "deaths": 93,
-      "roundsPlayed": 28,
+      "roundsPlayed": 28.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44594,7 +45355,7 @@
       "playersRecorded": 5,
       "kills": 68,
       "deaths": 41,
-      "roundsPlayed": 17,
+      "roundsPlayed": 17.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44608,7 +45369,7 @@
       "playersRecorded": 5,
       "kills": 68,
       "deaths": 46,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44622,7 +45383,7 @@
       "playersRecorded": 5,
       "kills": 75,
       "deaths": 77,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44720,7 +45481,7 @@
       "playersRecorded": 5,
       "kills": 75,
       "deaths": 55,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44734,7 +45495,7 @@
       "playersRecorded": 5,
       "kills": 72,
       "deaths": 73,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44748,7 +45509,7 @@
       "playersRecorded": 5,
       "kills": 68,
       "deaths": 33,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44762,7 +45523,7 @@
       "playersRecorded": 5,
       "kills": 69,
       "deaths": 50,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44776,7 +45537,7 @@
       "playersRecorded": 5,
       "kills": 38,
       "deaths": 60,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44832,7 +45593,7 @@
       "playersRecorded": 5,
       "kills": 76,
       "deaths": 69,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44860,7 +45621,7 @@
       "playersRecorded": 5,
       "kills": 72,
       "deaths": 73,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44888,7 +45649,7 @@
       "playersRecorded": 5,
       "kills": 74,
       "deaths": 50,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44930,7 +45691,7 @@
       "playersRecorded": 5,
       "kills": 72,
       "deaths": 49,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -44944,7 +45705,7 @@
       "playersRecorded": 5,
       "kills": 92,
       "deaths": 95,
-      "roundsPlayed": 28,
+      "roundsPlayed": 28.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45056,7 +45817,7 @@
       "playersRecorded": 5,
       "kills": 68,
       "deaths": 75,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45070,7 +45831,7 @@
       "playersRecorded": 5,
       "kills": 77,
       "deaths": 56,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45084,7 +45845,7 @@
       "playersRecorded": 5,
       "kills": 81,
       "deaths": 85,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45168,7 +45929,7 @@
       "playersRecorded": 5,
       "kills": 67,
       "deaths": 40,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45182,7 +45943,7 @@
       "playersRecorded": 5,
       "kills": 83,
       "deaths": 74,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45196,7 +45957,7 @@
       "playersRecorded": 5,
       "kills": 66,
       "deaths": 27,
-      "roundsPlayed": 15,
+      "roundsPlayed": 15.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45210,7 +45971,7 @@
       "playersRecorded": 5,
       "kills": 64,
       "deaths": 37,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45224,7 +45985,7 @@
       "playersRecorded": 5,
       "kills": 50,
       "deaths": 74,
-      "roundsPlayed": 17,
+      "roundsPlayed": 17.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45238,7 +45999,7 @@
       "playersRecorded": 5,
       "kills": 67,
       "deaths": 77,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45392,7 +46153,7 @@
       "playersRecorded": 5,
       "kills": 70,
       "deaths": 80,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45420,7 +46181,7 @@
       "playersRecorded": 5,
       "kills": 75,
       "deaths": 60,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45448,7 +46209,7 @@
       "playersRecorded": 5,
       "kills": 55,
       "deaths": 76,
-      "roundsPlayed": 20,
+      "roundsPlayed": 20.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45490,7 +46251,7 @@
       "playersRecorded": 5,
       "kills": 42,
       "deaths": 65,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45504,7 +46265,7 @@
       "playersRecorded": 5,
       "kills": 66,
       "deaths": 76,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45630,7 +46391,7 @@
       "playersRecorded": 5,
       "kills": 85,
       "deaths": 76,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45644,7 +46405,7 @@
       "playersRecorded": 5,
       "kills": 76,
       "deaths": 63,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45742,7 +46503,7 @@
       "playersRecorded": 5,
       "kills": 32,
       "deaths": 70,
-      "roundsPlayed": 16,
+      "roundsPlayed": 16.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45756,7 +46517,7 @@
       "playersRecorded": 5,
       "kills": 54,
       "deaths": 76,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45770,7 +46531,7 @@
       "playersRecorded": 5,
       "kills": 61,
       "deaths": 81,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45784,7 +46545,7 @@
       "playersRecorded": 5,
       "kills": 66,
       "deaths": 78,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45798,7 +46559,7 @@
       "playersRecorded": 5,
       "kills": 76,
       "deaths": 68,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45812,7 +46573,7 @@
       "playersRecorded": 5,
       "kills": 74,
       "deaths": 63,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45826,7 +46587,7 @@
       "playersRecorded": 5,
       "kills": 84,
       "deaths": 76,
-      "roundsPlayed": 24,
+      "roundsPlayed": 24.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45840,7 +46601,7 @@
       "playersRecorded": 5,
       "kills": 57,
       "deaths": 78,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45854,7 +46615,7 @@
       "playersRecorded": 5,
       "kills": 110,
       "deaths": 117,
-      "roundsPlayed": 35,
+      "roundsPlayed": 35.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45868,7 +46629,7 @@
       "playersRecorded": 5,
       "kills": 73,
       "deaths": 44,
-      "roundsPlayed": 19,
+      "roundsPlayed": 19.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45966,7 +46727,7 @@
       "playersRecorded": 5,
       "kills": 73,
       "deaths": 73,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45980,7 +46741,7 @@
       "playersRecorded": 5,
       "kills": 77,
       "deaths": 54,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -45994,7 +46755,7 @@
       "playersRecorded": 5,
       "kills": 64,
       "deaths": 58,
-      "roundsPlayed": 21,
+      "roundsPlayed": 21.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -46008,7 +46769,7 @@
       "playersRecorded": 5,
       "kills": 73,
       "deaths": 42,
-      "roundsPlayed": 18,
+      "roundsPlayed": 18.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -46022,7 +46783,7 @@
       "playersRecorded": 5,
       "kills": 67,
       "deaths": 79,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -46078,7 +46839,7 @@
       "playersRecorded": 5,
       "kills": 77,
       "deaths": 67,
-      "roundsPlayed": 22,
+      "roundsPlayed": 22.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -46092,7 +46853,7 @@
       "playersRecorded": 5,
       "kills": 74,
       "deaths": 70,
-      "roundsPlayed": 23,
+      "roundsPlayed": 23.0,
       "source": "Cito API / jogadores por mapa"
     },
     {
@@ -46129,7 +46890,7 @@
     "uniquePlayerIds": 60,
     "uniqueMapIds": 207,
     "completeTeamKillMaps": 170,
-    "completedSeries": 240,
+    "completedSeries": 255,
     "partialTeamKillMapsExcluded": 68
   },
   "rosters": [
@@ -46206,6 +46967,78 @@
       ]
     },
     {
+      "teamId": "cs2-team-13286",
+      "checkedAt": "2026-11-11T23:07:43Z",
+      "players": [
+        {
+          "playerId": "cs2-player-19164",
+          "name": "SunPayus",
+          "teamId": "cs2-team-13286",
+          "team": "FUT"
+        },
+        {
+          "playerId": "cs2-player-22203",
+          "name": "Krabeni",
+          "teamId": "cs2-team-13286",
+          "team": "FUT"
+        },
+        {
+          "playerId": "cs2-player-19187",
+          "name": "xfl0ud",
+          "teamId": "cs2-team-13286",
+          "team": "FUT"
+        },
+        {
+          "playerId": "cs2-player-23553",
+          "name": "dziugss",
+          "teamId": "cs2-team-13286",
+          "team": "FUT"
+        },
+        {
+          "playerId": "cs2-player-20584",
+          "name": "dem0n",
+          "teamId": "cs2-team-13286",
+          "team": "FUT"
+        }
+      ]
+    },
+    {
+      "teamId": "cs2-team-4494",
+      "checkedAt": "2026-11-11T23:07:50Z",
+      "players": [
+        {
+          "playerId": "cs2-player-18072",
+          "name": "torzsi",
+          "teamId": "cs2-team-4494",
+          "team": "MOUZ"
+        },
+        {
+          "playerId": "cs2-player-20312",
+          "name": "xertioN",
+          "teamId": "cs2-team-4494",
+          "team": "MOUZ"
+        },
+        {
+          "playerId": "cs2-player-22279",
+          "name": "PR",
+          "teamId": "cs2-team-4494",
+          "team": "MOUZ"
+        },
+        {
+          "playerId": "cs2-player-24457",
+          "name": "xelex",
+          "teamId": "cs2-team-4494",
+          "team": "MOUZ"
+        },
+        {
+          "playerId": "cs2-player-18221",
+          "name": "Spinx",
+          "teamId": "cs2-team-4494",
+          "team": "MOUZ"
+        }
+      ]
+    },
+    {
       "teamId": "cs2-team-6290",
       "checkedAt": "2026-11-11T21:40:30.631Z",
       "players": [
@@ -46274,6 +47107,42 @@
           "name": "FalleN",
           "teamId": "cs2-team-8297",
           "team": "FURIA"
+        }
+      ]
+    },
+    {
+      "teamId": "cs2-team-9565",
+      "checkedAt": "2026-11-11T23:07:36Z",
+      "players": [
+        {
+          "playerId": "cs2-player-11893",
+          "name": "ZywOo",
+          "teamId": "cs2-team-9565",
+          "team": "Vitality"
+        },
+        {
+          "playerId": "cs2-player-16693",
+          "name": "flameZ",
+          "teamId": "cs2-team-9565",
+          "team": "Vitality"
+        },
+        {
+          "playerId": "cs2-player-11816",
+          "name": "ropz",
+          "teamId": "cs2-team-9565",
+          "team": "Vitality"
+        },
+        {
+          "playerId": "cs2-player-18462",
+          "name": "mezii",
+          "teamId": "cs2-team-9565",
+          "team": "Vitality"
+        },
+        {
+          "playerId": "cs2-player-7322",
+          "name": "apEX",
+          "teamId": "cs2-team-9565",
+          "team": "Vitality"
         }
       ]
     },
