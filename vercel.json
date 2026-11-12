@@ -1,5 +1,5 @@
 {
   "framework": null,
-  "buildCommand": "echo 'Static snapshot build complete'",
+  "buildCommand": "echo 'Edge Radar Crypto static build'",
   "outputDirectory": "public"
 }
