@@ -59,7 +59,7 @@ function bestPair(rows,mint){
 function evaluate(token,filters={liquidity:5000,volume:1500},nowMs=stamp()){
  const p=token?.pair;
  const fresh=Number.isFinite(token?.pairFetchedAt)&&nowMs-token.pairFetchedAt<=CFG.priceMaxAgeMs;
- if(!p||!fresh)return {stage:'waiting',score:0,valid:false,notes:[p?'Preço desatualizado; atualizar':'Aguardando preço e liquidez indexados'],ageMinutes:null};
+ if(!p||!fresh)return {stage:'waiting',score:0,valid:false,notes:[p?'Preço desatualizado; atualizar':'Aguardando preço e liquidez indexados'],ageMinutes:null,entryAllowed:false,safetyChecked:false,sellRouteChecked:false};
  const l=num(p.liquidity?.usd),v=num(p.volume?.m5),c=num(p.priceChange?.m5),b=num(p.txns?.m5?.buys),s=num(p.txns?.m5?.sells);
  const n=(b===null||s===null)?null:b+s;
  const ratio=b===null||s===null?null:b/(s||1);
@@ -77,7 +77,7 @@ function evaluate(token,filters={liquidity:5000,volume:1500},nowMs=stamp()){
  const meets=l!==null&&l>=filters.liquidity&&v!==null&&v>=filters.volume&&n!==null&&n>=18&&b>=8&&s!==null&&b/(s||1)>=1.25&&c!==null&&c>=2&&c<=45;
  const extreme=(l!==null&&l<3000)||(c!==null&&(c>100||c<-25));
  const stage=meets&&score>=67&&!extreme?'priority':extreme?'risk':'watch';
- return {stage,score,valid:true,notes:risk.length?risk:signals.length?signals:['Atividade recente em análise'],liquidity:l,volume:v,change:c,buys:b,sells:s,ratio,ageMinutes};
+ return {stage,score,valid:true,notes:risk.length?risk:signals.length?signals:['Atividade recente em análise'],liquidity:l,volume:v,change:c,buys:b,sells:s,ratio,ageMinutes,entryAllowed:false,safetyChecked:false,sellRouteChecked:false,entryBlockers:['Permissões e concentração de carteiras não auditadas','Liquidez pode ser retirada','Cotação real de venda e slippage não verificados']};
 }
 const data=new Map();const favorites=new Set();
 let view='opportunities',running=false,socket=null,wsConnected=false,retryTimer=null,pricesTimer=null,poolsTimer=null,paintTimer=null,persistTimer=null,lastMarketAt=0,lastGeckoAt=0,wsSeen=0,marketError='',geckoError='',initialized=false,sound=false,wsRetry=0,activeRequest=false,fetchingPools=false;
@@ -176,16 +176,17 @@ function socialUrl(t,site){const q=`"${t.mint}"`;return site==='x'?`https://x.co
 const pumpUrl=t=>`https://pump.fun/coin/${encodeURIComponent(t.mint)}`;
 const dexUrl=t=>`https://dexscreener.com/solana/${encodeURIComponent(t.mint)}`;
 function renderCard(t,a){const p=t.pair||{},pairFresh=a.valid;const reason=a.notes.slice(0,2).join(' · ');
- const labels={priority:'Análise prioritária',watch:'Em observação',risk:'Risco elevado',waiting:'Sem cotação recente'};
+ const labels={priority:'Atividade forte · não auditada',watch:'Em observação · não auditada',risk:'Risco elevado',waiting:'Sem cotação recente'};
  const on=favorites.has(t.mint);
  const price=num(p.priceUsd);const change=a.change;
  return `<article class="token-card ${a.stage}"><div class="token-head"><div style="min-width:0"><div class="token-name">${safe(t.name||p.baseToken?.name||t.symbol||'Token sem nome')}</div><div class="token-symbol">${safe(t.symbol||p.baseToken?.symbol||'—')} · ${safe(t.mint.slice(0,6)+'…'+t.mint.slice(-5))}</div></div><button class="favorite ${on?'on':''}" data-favorite="${safe(t.mint)}" title="${on?'Remover dos favoritos':'Adicionar aos favoritos'}" aria-label="Favorito">${on?'★':'☆'}</button></div>
  <div class="token-meta"><span class="signal ${a.stage}">${labels[a.stage]}</span> · ${t.source==='pumpportal'?'Evento Pump.fun':'Pool PumpSwap'} · ${age(stamp()-t.firstSeen)} </div>
  <div class="token-metrics"><div><span>Variação 5 min</span><b class="${change!==null?(change>=0?'up':'down'):'neutral'}">${pairFresh?pct(change):'—'}</b></div><div><span>Volume 5 min</span><b>${pairFresh?usd(a.volume):'—'}</b></div><div><span>Liquidez</span><b>${pairFresh?usd(a.liquidity):'—'}</b></div><div><span>Compras / vendas</span><b>${pairFresh&&a.buys!==null?fmt(a.buys)+' / '+fmt(a.sells):'—'}</b></div><div><span>Valor de mercado</span><b>${pairFresh?usd(num(p.marketCap)??num(p.fdv)):'—'}</b></div><div><span>Preço (US$)</span><b>${pairFresh&&price!==null?price<0.001?price.toPrecision(4):fmt(price,5):'—'}</b></div></div>
  ${(()=>{const h=signalHistory()?.recent(t.mint);if(!h)return '';return `<div class="historical-capture"><strong>${a.stage==='priority'?'● Sinal registrado':'◷ Sinal que perdeu força / aguardando dados'}</strong><span>Detectado ${new Date(h.triggeredAt).toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit'})} · acompanhar em Histórico</span></div>`;})()}
- <div class="scorebar" title="Pontuação heurística ${a.score}/100"><i style="width:${Math.min(100,Math.max(0,a.score))}%"></i></div><div class="notes">Pontuação: <strong>${a.score}/100</strong> · ${safe(reason)}${pairFresh?'':' · não ranqueado sem dados atuais'}</div>
+ <div class="scorebar" title="Força de atividade ${a.score}/100 — NÃO mede segurança nem probabilidade de valorização"><i style="width:${Math.min(100,Math.max(0,a.score))}%"></i></div><div class="notes">Força de mercado: <strong>${a.score}/100</strong> (NÃO é nota de segurança) · ${safe(reason)}${pairFresh?'':' · não ranqueado sem dados atuais'}</div>
+ <div class="risk-gate"><strong>⛔ ENTRADA NÃO VALIDADA</strong><span>Mesmo nota 100 não verifica concentração de carteiras, permissões do token, retirada de liquidez ou possibilidade de venda. Consulte a auditoria e a cotação de saída para seu valor antes de operar. Perda total continua possível.</span></div>
  <div class="social-presence">Redes: pesquisa manual; popularidade não verificada.</div>
- <div class="cardlinks"><a href="${pumpUrl(t)}" target="_blank" rel="noopener noreferrer">Pump.fun</a><a href="${dexUrl(t)}" target="_blank" rel="noopener noreferrer">Gráfico</a><a href="${socialUrl(t,'x')}" target="_blank" rel="noopener noreferrer">Pesquisar no X</a><a href="${socialUrl(t,'news')}" target="_blank" rel="noopener noreferrer">Notícias</a><button data-paper-buy="${safe(t.mint)}" ${!pairFresh||price===null||price<=0?'disabled':''}>Simular compra</button></div></article>`;
+ <div class="cardlinks"><a href="${pumpUrl(t)}" target="_blank" rel="noopener noreferrer">Pump.fun</a><a href="${dexUrl(t)}" target="_blank" rel="noopener noreferrer">Gráfico</a><a href="https://rugcheck.xyz/tokens/${encodeURIComponent(t.mint)}" target="_blank" rel="noopener noreferrer">Auditoria RugCheck ↗</a><a href="${socialUrl(t,'x')}" target="_blank" rel="noopener noreferrer">Pesquisar no X</a><a href="${socialUrl(t,'news')}" target="_blank" rel="noopener noreferrer">Notícias</a><button data-paper-buy="${safe(t.mint)}" ${!pairFresh||price===null||price<=0?'disabled':''}>Simular compra</button></div></article>`;
 }
 function draw(){if(typeof document==='undefined')return;
  const meta=metadata(),visibleItems=(view==='cloud'?[]:visible()),isPaper=view==='paper',isHistory=view==='history',isCloud=view==='cloud';
