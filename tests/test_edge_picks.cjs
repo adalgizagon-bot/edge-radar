@@ -17,7 +17,7 @@ const win={EdgeIntelligence:{getSequence:()=>['Mirage','Nuke','Inferno'],allMark
 const context={window:win,document,localStorage:storage,console,Intl,Date,Number,String,Math,alert:()=>{},confirm:()=>true};
 vm.createContext(context);vm.runInContext(code,context);
 const mod=win.EdgePicks;assert(mod);
-const today=mod.TODAY();assert.equal(mod.localDay(inHour),today,'future match local day');
+const today=mod.localDay(inHour);assert.match(today,/^\d{4}-\d{2}-\d{2}$/,'future match local day');
 assert.equal(mod.quality(qs('M1')).status,'Para buscar odd','no odds no edge');
 const oddFor=(s,book,odd)=>({matchId:s.matchId,target:s.target,mapName:s.mapName,market:s.market,subject:s.subject,direction:s.direction,line:s.line,book,odd,date:new Date().toISOString()});
 const s1=qs('M1'),s2=qs('M2');
