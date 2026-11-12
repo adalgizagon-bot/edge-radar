@@ -43,3 +43,16 @@ CREATE TABLE IF NOT EXISTS daily_metrics (
   positive5 INTEGER NOT NULL DEFAULT 0,
   sum5 REAL NOT NULL DEFAULT 0
 );
+
+-- Escudo de risco: ultimo snapshot por moeda. Sem trades ou carteiras.
+CREATE TABLE IF NOT EXISTS risk_watch (
+ mint TEXT PRIMARY KEY,name TEXT NOT NULL DEFAULT '',symbol TEXT NOT NULL DEFAULT '',
+ assessed_at INTEGER NOT NULL,level TEXT NOT NULL DEFAULT 'unverified',
+ market_score INTEGER NOT NULL DEFAULT 0,organic_score REAL,is_verified INTEGER NOT NULL DEFAULT 0,
+ top_holders REAL,buy_usd REAL,sell_usd REAL,flow_ratio REAL,
+ pool_price REAL,pool_liquidity REAL,jupiter_liquidity REAL,
+ change_price REAL,change_liquidity REAL,reasons TEXT NOT NULL DEFAULT '[]',
+ exit_quote_verified INTEGER NOT NULL DEFAULT 0,entry_allowed INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS idx_risk_watch_time ON risk_watch(assessed_at DESC);
+CREATE INDEX IF NOT EXISTS idx_risk_watch_level ON risk_watch(level,assessed_at DESC);
