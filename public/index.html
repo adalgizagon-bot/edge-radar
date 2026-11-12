@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="./edge-picks.css" />
 <link rel="stylesheet" href="./edge-strategy.css" />
 <link rel="stylesheet" href="./edge-bankroll.css" />
+<link rel="stylesheet" href="./edge-crypto.css" />
 </head>
 <body>
 <header><div class="shell"><div class="logo"><i>✦</i> CS2 EDGE <span class="muted" style="font-weight:400;font-size:12px">/ REAL DATA</span></div><div class="topright"><span class="tag">● DADOS VERIFICÁVEIS</span> <span>Pré-jogo • Tier 1 e Tier 2</span></div></div></header>
@@ -22,7 +23,8 @@
 <div class="bar"><span class="badge" id="sourceTag">Fonte</span><span class="badge" id="dateTag">Carregando</span><span class="badge">Tier 1 + Tier 2</span><span class="badge">Odds manuais</span></div>
 <div class="note warning" id="dataNotice">Carregando a amostra real...</div>
 <div class="cards"><div class="metric"><strong id="cMatches">—</strong><span>Próximas partidas</span></div><div class="metric"><strong id="cResults">—</strong><span>Partidas concluídas</span></div><div class="metric"><strong id="cPlayers">—</strong><span>Registros jogador × mapa</span></div><div class="metric"><strong id="cOdds">0</strong><span>Odds cadastradas manualmente</span></div></div>
-<div class="toolbar"><div class="tabs" role="tablist"><button class="tab active" data-tab="strategies">Estratégias e valor</button><button class="tab" data-tab="bankroll">Minha banca</button><button class="tab" data-tab="daily">Destaques do dia</button><button class="tab" data-tab="opportunities">Análises por partida</button><button class="tab" data-tab="parlays">Múltiplas + resultados</button><button class="tab" data-tab="agenda">Agenda</button><button class="tab" data-tab="radar">Radar de mercados</button><button class="tab" data-tab="jogadores">Jogadores</button><button class="tab" data-tab="ranking">Ranking</button><button class="tab" data-tab="laboratorio">Mercados + odds</button></div><div class="filters"><select id="tierFilter" aria-label="Filtrar tier"><option value="all">Tier 1 + Tier 2</option><option value="Tier 1">Somente Tier 1</option><option value="Tier 2">Somente Tier 2</option><option value="Não classificada">Sem classificação</option></select><input id="search" type="search" placeholder="Buscar equipe ou jogador..." aria-label="Buscar"/><button id="uploadBtn">Importar JSON</button><input type="file" id="fileUpload" accept=".json,application/json"/></div></div>
+<div class="toolbar"><div class="tabs" role="tablist"><button class="tab active" data-tab="strategies">Estratégias e valor</button><button class="tab" data-tab="bankroll">Minha banca</button><button class="tab" data-tab="crypto">Crypto · Pump.fun</button><button class="tab" data-tab="daily">Destaques do dia</button><button class="tab" data-tab="opportunities">Análises por partida</button><button class="tab" data-tab="parlays">Múltiplas + resultados</button><button class="tab" data-tab="agenda">Agenda</button><button class="tab" data-tab="radar">Radar de mercados</button><button class="tab" data-tab="jogadores">Jogadores</button><button class="tab" data-tab="ranking">Ranking</button><button class="tab" data-tab="laboratorio">Mercados + odds</button></div><div class="filters"><select id="tierFilter" aria-label="Filtrar tier"><option value="all">Tier 1 + Tier 2</option><option value="Tier 1">Somente Tier 1</option><option value="Tier 2">Somente Tier 2</option><option value="Não classificada">Sem classificação</option></select><input id="search" type="search" placeholder="Buscar equipe ou jogador..." aria-label="Buscar"/><button id="uploadBtn">Importar JSON</button><input type="file" id="fileUpload" accept=".json,application/json"/></div></div>
+<section id="crypto" class="section" hidden><div class="panel"><div id="cryptoApp"></div></div></section>
 <section id="strategies" class="section">
   <div class="panel">
     <div class="strategy-header"><div><h2>Radar de valor — escolhas da data</h2><p class="fine">Prioriza mercados com odds informadas, margem teórica e histórico disponível. Não existe lucro garantido nem aposta obrigatória todos os dias.</p></div><span class="pill">Modelo ainda não calibrado</span></div>
@@ -106,9 +108,10 @@
 <script src="./edge-picks.js"></script>
 <script src="./edge-strategy.js"></script>
 <script src="./edge-bankroll.js"></script>
+<script src="./edge-crypto.js"></script>
 <script>
 'use strict';
-let db=null, currentTab='strategies'; let inMemoryOdds=[]; let radarPageSize=160;
+let db=null, currentTab='strategies'; let inMemoryOdds=[]; let radarPageSize=160; let cryptoTabStarted=false;
 const $=id=>document.getElementById(id);
 const escapeHtml=(v)=>String(v??'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num=(x)=>Number.isFinite(Number(x))&&x!==null&&x!==''?Number(x):null;
@@ -150,7 +153,7 @@ function render(){if(!db)return;const tier=$('tierFilter').value;const q=$('sear
  const all=[...new Set([...db.player_maps.map(v=>v.player),...db.past.flatMap(m=>[m.team1,m.team2]),...db.upcoming.flatMap(m=>[m.team1,m.team2]),...db.historical_event?.map(v=>v.player)||[]])];$('subjects').innerHTML=all.filter(Boolean).map(s=>`<option value="${escapeHtml(s)}"></option>`).join('');
  drawOdds(); drawRadar(); drawMapOptions(); if(window.EdgeIntelligence)EdgeIntelligence.init(db);if(window.EdgePicks)EdgePicks.init(db);if(window.EdgeStrategy)EdgeStrategy.init(db);if(window.EdgeBankroll)EdgeBankroll.init();
 }
-function activate(t){if(t==='bankroll'&&window.EdgeBankroll)EdgeBankroll.render();currentTab=t;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));document.querySelectorAll('.section').forEach(e=>e.hidden=e.id!==t);}
+function activate(t){if(t==='bankroll'&&window.EdgeBankroll)EdgeBankroll.render();currentTab=t;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));document.querySelectorAll('.section').forEach(e=>e.hidden=e.id!==t);if(t==='crypto'&&window.EdgeCrypto){EdgeCrypto.init();if(!cryptoTabStarted){cryptoTabStarted=true;EdgeCrypto.start();}}}
 function chosenMatch(){return db?.upcoming.find(x=>x.id===$('matchContext').value)||null;}
 function mapFilter(){return $('mapContext').value.toLowerCase();}
 function historicalRows(market, subject, explicitMap=''){
