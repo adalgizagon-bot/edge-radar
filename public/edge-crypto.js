@@ -83,6 +83,13 @@ const data=new Map();const favorites=new Set();
 let view='opportunities',running=false,socket=null,wsConnected=false,retryTimer=null,pricesTimer=null,poolsTimer=null,paintTimer=null,persistTimer=null,lastMarketAt=0,lastGeckoAt=0,wsSeen=0,marketError='',geckoError='',initialized=false,sound=false,wsRetry=0,activeRequest=false,fetchingPools=false;
 let settings={liquidity:5000,volume:1500,sort:'score',search:''};
 const journalKey='edgeradar.crypto.watch.v2',favorKey='edgeradar.crypto.favorites.v2',paperKey='edgeradar.crypto.paper.v1';
+function signalHistory(){return root.EdgeSignalHistory||null;}
+function trackSignal(t){
+ const h=signalHistory();if(!h||!t?.pair||!Number.isFinite(t.pairFetchedAt)||num(t.pair.priceUsd)===null)return;
+ const a=evaluate(t,settings,t.pairFetchedAt);h.observe({mint:t.mint,name:t.name,symbol:t.symbol,at:t.pairFetchedAt,price:num(t.pair.priceUsd),stage:a.stage,score:a.score,
+  liquidity:a.liquidity,volume:a.volume,change:a.change,buys:a.buys,sells:a.sells,minLiquidity:settings.liquidity,minVolume:settings.volume});
+}
+
 let paper={initial:1000,cash:1000,positions:[],history:[]};
 function initializeCache(){
  const saved=getJson(journalKey,[]);for(const t of Array.isArray(saved)?saved.slice(0,CFG.maxTokens):[]){if(!mintOk(t.mint)||!Number.isFinite(t.firstSeen))continue;if(stamp()-t.firstSeen>CFG.seenMaxHours*3600000)continue;data.set(t.mint,{...t,pair:null,pairFetchedAt:0});}
@@ -99,7 +106,8 @@ function addToken(token){if(!token||!mintOk(token.mint))return false;
  if(old.pair&&(!token.pair||Number(token.pairFetchedAt)<Number(old.pairFetchedAt))) {combined.pair=old.pair;combined.pairFetchedAt=old.pairFetchedAt;}
  data.set(token.mint,combined);
  }else data.set(token.mint,token);
- if(data.size>CFG.maxTokens){const removable=[...data.values()].filter(x=>!favorites.has(x.mint)&&!paper.positions.some(p=>p.mint===x.mint));removable.sort((a,b)=>(a.lastEvent||0)-(b.lastEvent||0));for(const t of removable.slice(0,Math.max(0,data.size-CFG.maxTokens)))data.delete(t.mint);}
+ if(token.pair)trackSignal(data.get(token.mint));
+ if(data.size>CFG.maxTokens){const removable=[...data.values()].filter(x=>!favorites.has(x.mint)&&!paper.positions.some(p=>p.mint===x.mint)&&!signalHistory()?.pinnedMints().includes(x.mint));removable.sort((a,b)=>(a.lastEvent||0)-(b.lastEvent||0));for(const t of removable.slice(0,Math.max(0,data.size-CFG.maxTokens)))data.delete(t.mint);}
  schedule();persist();return true;
 }
 function ingestMessage(raw){let payload;try{payload=typeof raw==='string'?JSON.parse(raw):raw}catch{return false}
@@ -111,7 +119,12 @@ function updatePairs(rows){let changed=0;const group=new Map();for(const p of ro
  addToken({mint,firstSeen:old.firstSeen,lastEvent:old.lastEvent||stamp(),source:old.source,type:old.type,name:old.name||best.baseToken.name||'',symbol:old.symbol||best.baseToken.symbol||'',pair:best,pairFetchedAt:stamp()});changed++;
  }if(changed)lastMarketAt=stamp();return changed;
 }
-function marketCandidates(){const items=[...data.values()].filter(t=>mintOk(t.mint)).sort((a,b)=>Number(favorites.has(b.mint))-Number(favorites.has(a.mint))||(b.lastEvent||0)-(a.lastEvent||0));return items.slice(0,90).map(t=>t.mint)}
+function marketCandidates(){
+ const pinned=new Set(signalHistory()?.pinnedMints()||[]);
+ const items=[...data.values()].filter(t=>mintOk(t.mint)).sort((a,b)=>
+  Number(pinned.has(b.mint))-Number(pinned.has(a.mint))||Number(favorites.has(b.mint))-Number(favorites.has(a.mint))||(b.lastEvent||0)-(a.lastEvent||0));
+ return items.slice(0,90).map(t=>t.mint);
+}
 async function refreshPrices(){if(!running||activeRequest)return;const mints=marketCandidates();if(!mints.length)return;activeRequest=true;
  try{const lists=[];for(let i=0;i<mints.length;i+=30)lists.push(mints.slice(i,i+30));
  const responses=await Promise.all(lists.map(async list=>{const resp=await fetch(CFG.dex+list.join(','),{headers:{accept:'application/json'},cache:'no-store'});if(!resp.ok)throw Error('HTTP '+resp.status);return resp.json()}));
@@ -140,7 +153,7 @@ function stop(){running=false;wsConnected=false;if(retryTimer)clearTimeout(retry
 function visible(nowMs=stamp()){
  const arr=[...data.values()].map(t=>({t,a:evaluate(t,settings,nowMs)}));
  let list=arr.filter(({t,a})=>{
-  if(view==='opportunities'&&a.stage!=='priority')return false;
+  if(view==='opportunities'&&a.stage!=='priority'&&!signalHistory()?.recent(t.mint,nowMs))return false;
   if(view==='watch'&&!(a.stage==='watch'||a.stage==='risk'))return false;
   if(view==='new'&&t.source!=='pumpportal'&&t.type!=='new_pool')return false;
   if(view==='favorites'&&!favorites.has(t.mint))return false;
@@ -149,13 +162,16 @@ function visible(nowMs=stamp()){
  });
  list.sort((x,y)=>{
   if(view==='new')return(y.t.firstSeen||0)-(x.t.firstSeen||0);
+  if(view==='opportunities'){const h=signalHistory();const rx=h?.recent(x.t.mint,nowMs),ry=h?.recent(y.t.mint,nowMs);
+    return Number(y.a.stage==='priority')-Number(x.a.stage==='priority')||(ry?.triggeredAt||0)-(rx?.triggeredAt||0)||y.a.score-x.a.score;}
+
   if(settings.sort==='volume')return(y.a.volume||0)-(x.a.volume||0);
   if(settings.sort==='change')return(y.a.change||0)-(x.a.change||0);
   if(settings.sort==='recent')return(y.t.lastEvent||0)-(x.t.lastEvent||0);
   return y.a.score-x.a.score||(y.t.lastEvent||0)-(x.t.lastEvent||0);
  });return list;
 }
-function metadata(){const a=[...data.values()].map(t=>evaluate(t,settings));return {priority:a.filter(x=>x.stage==='priority').length,watch:a.filter(x=>['watch','risk'].includes(x.stage)).length,newItems:[...data.values()].filter(x=>x.source==='pumpportal'||x.type==='new_pool').length,total:data.size,favorites:favorites.size}}
+function metadata(){const a=[...data.values()].map(t=>evaluate(t,settings));return {priority:a.filter(x=>x.stage==='priority').length,watch:a.filter(x=>['watch','risk'].includes(x.stage)).length,newItems:[...data.values()].filter(x=>x.source==='pumpportal'||x.type==='new_pool').length,total:data.size,favorites:favorites.size,signals:signalHistory()?.all().length||0}}
 function socialUrl(t,site){const q=`"${t.mint}"`;return site==='x'?`https://x.com/search?q=${encodeURIComponent(q)}&f=live`:site==='news'?`https://www.google.com/search?tbm=nws&q=${encodeURIComponent(q)}`:`https://www.reddit.com/search/?q=${encodeURIComponent(q)}`}
 const pumpUrl=t=>`https://pump.fun/coin/${encodeURIComponent(t.mint)}`;
 const dexUrl=t=>`https://dexscreener.com/solana/${encodeURIComponent(t.mint)}`;
@@ -166,12 +182,14 @@ function renderCard(t,a){const p=t.pair||{},pairFresh=a.valid;const reason=a.not
  return `<article class="token-card ${a.stage}"><div class="token-head"><div style="min-width:0"><div class="token-name">${safe(t.name||p.baseToken?.name||t.symbol||'Token sem nome')}</div><div class="token-symbol">${safe(t.symbol||p.baseToken?.symbol||'—')} · ${safe(t.mint.slice(0,6)+'…'+t.mint.slice(-5))}</div></div><button class="favorite ${on?'on':''}" data-favorite="${safe(t.mint)}" title="${on?'Remover dos favoritos':'Adicionar aos favoritos'}" aria-label="Favorito">${on?'★':'☆'}</button></div>
  <div class="token-meta"><span class="signal ${a.stage}">${labels[a.stage]}</span> · ${t.source==='pumpportal'?'Evento Pump.fun':'Pool PumpSwap'} · ${age(stamp()-t.firstSeen)} </div>
  <div class="token-metrics"><div><span>Variação 5 min</span><b class="${change!==null?(change>=0?'up':'down'):'neutral'}">${pairFresh?pct(change):'—'}</b></div><div><span>Volume 5 min</span><b>${pairFresh?usd(a.volume):'—'}</b></div><div><span>Liquidez</span><b>${pairFresh?usd(a.liquidity):'—'}</b></div><div><span>Compras / vendas</span><b>${pairFresh&&a.buys!==null?fmt(a.buys)+' / '+fmt(a.sells):'—'}</b></div><div><span>Valor de mercado</span><b>${pairFresh?usd(num(p.marketCap)??num(p.fdv)):'—'}</b></div><div><span>Preço (US$)</span><b>${pairFresh&&price!==null?price<0.001?price.toPrecision(4):fmt(price,5):'—'}</b></div></div>
+ ${(()=>{const h=signalHistory()?.recent(t.mint);if(!h)return '';return `<div class="historical-capture"><strong>${a.stage==='priority'?'● Sinal registrado':'◷ Sinal que perdeu força / aguardando dados'}</strong><span>Detectado ${new Date(h.triggeredAt).toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit'})} · acompanhar em Histórico</span></div>`;})()}
  <div class="scorebar" title="Pontuação heurística ${a.score}/100"><i style="width:${Math.min(100,Math.max(0,a.score))}%"></i></div><div class="notes">Pontuação: <strong>${a.score}/100</strong> · ${safe(reason)}${pairFresh?'':' · não ranqueado sem dados atuais'}</div>
  <div class="social-presence">Redes: pesquisa manual; popularidade não verificada.</div>
  <div class="cardlinks"><a href="${pumpUrl(t)}" target="_blank" rel="noopener noreferrer">Pump.fun</a><a href="${dexUrl(t)}" target="_blank" rel="noopener noreferrer">Gráfico</a><a href="${socialUrl(t,'x')}" target="_blank" rel="noopener noreferrer">Pesquisar no X</a><a href="${socialUrl(t,'news')}" target="_blank" rel="noopener noreferrer">Notícias</a><button data-paper-buy="${safe(t.mint)}" ${!pairFresh||price===null||price<=0?'disabled':''}>Simular compra</button></div></article>`;
 }
 function draw(){if(typeof document==='undefined')return;
- const meta=metadata(),visibleItems=visible(),isPaper=view==='paper';
+ const meta=metadata(),visibleItems=visible(),isPaper=view==='paper',isHistory=view==='history';
+ signalHistory()?.tick();
  const elem=$('tokenGrid');if(!elem)return;
  for(const [id,v] of Object.entries({kPriority:meta.priority,kWatch:meta.watch,kNew:meta.newItems,kTotal:meta.total,nOpportunities:meta.priority,nWatch:meta.watch,nNew:meta.newItems,nFav:meta.favorites}))if($(id))$(id).textContent=String(v);
  const status=$('connectionStatus'),dot=$('connectionDot');
@@ -181,12 +199,14 @@ function draw(){if(typeof document==='undefined')return;
  const errors=[marketError,geckoError].filter(Boolean).join(' · ');
  $('sourceSummary').textContent=(wsSeen+' eventos WebSocket · '+(lastGeckoAt?'pools consultados':'pools aguardando')+(errors?' · '+errors:''));
  $('btnStart').disabled=running;$('btnStop').disabled=!running;
- $('marketSection').hidden=isPaper;$('paperSection').hidden=!isPaper;
+ $('marketSection').hidden=isPaper||isHistory;$('paperSection').hidden=!isPaper;
+ $('historySection').hidden=!isHistory;
  document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));
+ if(isHistory){signalHistory()?.render();return;}
  if(isPaper){renderPaper();return;}
- const desc={opportunities:['Oportunidades em análise','Somente sinais que passaram em volume, liquidez, negócios, pressão de compra e variação. Não equivale a indicação de compra.'],watch:['Em observação','Mercados com atividade parcial, preço corrigindo ou avisos de risco.'],new:['Novos lançamentos','Eventos Pump.fun e pools novos da PumpSwap, mesmo antes de existir cotação.'],all:['Todos os tokens','Tokens de fontes Pump.fun/PumpSwap, independentemente da classificação.'],favorites:['Favoritos','Moedas que você marcou para continuar acompanhando.']}[view];
+ const desc={opportunities:['Oportunidades capturadas','Sinais ao vivo e moedas que passaram nos filtros na última hora. Não desaparecem quando o preço oscila: confira também o Histórico.'],watch:['Em observação','Mercados com atividade parcial, preço corrigindo ou avisos de risco.'],new:['Novos lançamentos','Eventos Pump.fun e pools novos da PumpSwap, mesmo antes de existir cotação.'],all:['Todos os tokens','Tokens de fontes Pump.fun/PumpSwap, independentemente da classificação.'],favorites:['Favoritos','Moedas que você marcou para continuar acompanhando.']}[view];
  $('sectionTitle').textContent=desc[0];$('sectionDescription').textContent=desc[1];
- $('resultCount').textContent=visibleItems.length+' moeda(s) nesta lista · '+meta.total+' acompanhada(s) · '+(wsConnected?'fluxo em tempo real':'sem conexão ao vivo');
+ $('resultCount').textContent=visibleItems.length+' moeda(s) nesta lista · '+meta.signals+' sinal(is) registrado(s) · '+meta.total+' token(s) acompanhados · '+(wsConnected?'fluxo em tempo real':'sem conexão ao vivo');
  $('tokenGrid').innerHTML=visibleItems.slice(0,100).map(({t,a})=>renderCard(t,a)).join('');$('emptyState').hidden=visibleItems.length!==0;
 }
 function paperValue(){let invested=0,market=0,havePrice=0;for(const p of paper.positions){invested+=p.invested;const t=data.get(p.mint),pr=num(t?.pair?.priceUsd);if(pr!==null&&stamp()-(t?.pairFetchedAt||0)<=CFG.priceMaxAgeMs){market+=p.quantity*pr*(1-CFG.feeEstimate);havePrice++;}}
@@ -210,18 +230,23 @@ function sellPaper(mint){const p=paper.positions.find(x=>x.mint===mint),t=data.g
  const payout=p.quantity*price*(1-CFG.feeEstimate);paper.cash+=payout;paper.positions=paper.positions.filter(x=>x.mint!==mint);paper.history.unshift({mint,symbol:p.symbol,action:'sell',amount:payout,at:stamp()});storePaper();schedule();return {ok:true,payout};
 }
 function resetPaper(capital){if(!Number.isFinite(capital)||capital<1||capital>1e8)return false;paper={initial:capital,cash:capital,positions:[],history:[]};storePaper();schedule();return true;}
-function bind(){if(initialized||typeof document==='undefined')return;initialized=true;initializeCache();
+function bind(){if(initialized||typeof document==='undefined')return;initialized=true;signalHistory()?.load();initializeCache();
  $('btnStart').onclick=start;$('btnStop').onclick=stop;$('btnRefresh').onclick=()=>{refreshPools();refreshPrices()};
  $('soundAlert').onchange=e=>sound=e.target.checked;
  $('liquidityFilter').onchange=e=>{settings.liquidity=Number(e.target.value);schedule()};$('volumeFilter').onchange=e=>{settings.volume=Number(e.target.value);schedule()};$('sortFilter').onchange=e=>{settings.sort=e.target.value;schedule()};$('searchFilter').oninput=e=>{settings.search=e.target.value.trim();schedule()};
+ $('historyFilter').onchange=()=>signalHistory()?.render();
+ $('exportSignalsJson').onclick=()=>signalHistory()?.exportData('json');
+ $('exportSignalsCsv').onclick=()=>signalHistory()?.exportData('csv');
+ $('clearSignals').onclick=()=>{if(confirm('Apagar todo o histórico de sinais deste navegador? Faça um backup antes se quiser preservar os dados.')){signalHistory()?.reset();draw();}};
+
  document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{view=b.dataset.view;draw()}));
  document.addEventListener('click',e=>{const fav=e.target.closest('[data-favorite]');if(fav){const m=fav.dataset.favorite;if(!mintOk(m))return;if(favorites.has(m))favorites.delete(m);else favorites.add(m);putJson(favorKey,[...favorites]);schedule();return;}
  const buy=e.target.closest('[data-paper-buy]');if(buy){const m=buy.dataset.paperBuy;const raw=prompt('Simular compra: quanto investir em US$? (sem dinheiro real)','20');if(raw===null)return;const amt=Number(String(raw).replace(',','.'));const out=buyPaper(m,amt);if(!out.ok)alert(out.message);else{view='paper';draw()}return;}
  const sell=e.target.closest('[data-paper-sell]');if(sell){const m=sell.dataset.paperSell;if(!confirm('Simular a venda de toda esta posição?'))return;const out=sellPaper(m);if(!out.ok)alert(out.message);else draw();}
  });
  $('paperReset').onclick=()=>{const value=Number($('paperCapital').value);if(!confirm('Reiniciar toda a simulação e apagar seu histórico simulado neste navegador?'))return;if(!resetPaper(value))alert('Capital inicial inválido.');else draw();};
- draw();start();setInterval(()=>{if(initialized)draw()},30000);
+ draw();start();setInterval(()=>{if(initialized){signalHistory()?.tick();draw()}},30000);
 }
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind()}
-root.EdgeCrypto={start,stop,normalizeEvent,parseGecko,bestPair,evaluate,ingestMessage,addToken,updatePairs,visible,metadata,buyPaper,sellPaper,resetPaper,getState:()=>({running,wsConnected,marketError,geckoError,tokens:data.size,wsSeen}),_debug:()=>({data,paper,favorites,settings}),_setView:v=>{view=v;draw()}};
+root.EdgeCrypto={start,stop,normalizeEvent,parseGecko,bestPair,evaluate,ingestMessage,addToken,updatePairs,visible,metadata,buyPaper,sellPaper,resetPaper,getState:()=>({running,wsConnected,marketError,geckoError,tokens:data.size,wsSeen,recordedSignals:signalHistory()?.all().length||0}),_debug:()=>({data,paper,favorites,settings}),_setView:v=>{view=v;draw()}};
 })(typeof window!=='undefined'?window:globalThis);

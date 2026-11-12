@@ -32,3 +32,13 @@ Site estático: abrir `public/index.html` por um servidor HTTP local, ou publica
 
 ## Migração da antiga versão
 Este repositório foi convertido inteiramente para cripto a pedido do proprietário. As rotinas de CS2, arquivos de histórico esportivo, testes antigos e workflows esportivos foram retirados da branch principal. O histórico do Git continua guardando commits anteriores, sem executá-los no site atual.
+
+## Sinais registrados (v3)
+
+- Oportunidades continuam visíveis por até 60 minutos depois do primeiro sinal, mesmo que o score caia (status de sinal histórico).
+- A aba **Histórico de sinais** preserva o preço na detecção e checkpoints observados em 1, 5, 15 e 30 minutos, com tolerâncias de 30, 90, 150 e 240 segundos.
+- Quando não houver cotação observada no prazo, o checkpoint fica como **sem amostra**, e não recebe preço retroativo nem estimativa.
+- O sistema dá prioridade na coleta de preços a tokens com checkpoints pendentes, para reduzir buracos no acompanhamento.
+- Dados salvos em `localStorage` do navegador (`edgeradar.crypto.signals.v1`) por até 30 dias, máximo 600 sinais; exporte CSV/JSON periodicamente.
+- **Limite atual:** isso NÃO é um serviço de monitoramento 24/7. Ao fechar a aba ou suspender o dispositivo, o coletor para; o histórico persiste, mas intervalos não observados continuam em branco. Futuro coletor hospedado contínuo requer infraestrutura/implantação própria.
+- Os retornos são variações observadas de mercado, **não ROI de trades** nem ganhos executáveis.
