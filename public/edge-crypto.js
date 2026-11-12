@@ -188,7 +188,7 @@ function renderCard(t,a){const p=t.pair||{},pairFresh=a.valid;const reason=a.not
  <div class="cardlinks"><a href="${pumpUrl(t)}" target="_blank" rel="noopener noreferrer">Pump.fun</a><a href="${dexUrl(t)}" target="_blank" rel="noopener noreferrer">Gráfico</a><a href="${socialUrl(t,'x')}" target="_blank" rel="noopener noreferrer">Pesquisar no X</a><a href="${socialUrl(t,'news')}" target="_blank" rel="noopener noreferrer">Notícias</a><button data-paper-buy="${safe(t.mint)}" ${!pairFresh||price===null||price<=0?'disabled':''}>Simular compra</button></div></article>`;
 }
 function draw(){if(typeof document==='undefined')return;
- const meta=metadata(),visibleItems=visible(),isPaper=view==='paper',isHistory=view==='history';
+ const meta=metadata(),visibleItems=(view==='cloud'?[]:visible()),isPaper=view==='paper',isHistory=view==='history',isCloud=view==='cloud';
  signalHistory()?.tick();
  const elem=$('tokenGrid');if(!elem)return;
  for(const [id,v] of Object.entries({kPriority:meta.priority,kWatch:meta.watch,kNew:meta.newItems,kTotal:meta.total,nOpportunities:meta.priority,nWatch:meta.watch,nNew:meta.newItems,nFav:meta.favorites}))if($(id))$(id).textContent=String(v);
@@ -199,10 +199,12 @@ function draw(){if(typeof document==='undefined')return;
  const errors=[marketError,geckoError].filter(Boolean).join(' · ');
  $('sourceSummary').textContent=(wsSeen+' eventos WebSocket · '+(lastGeckoAt?'pools consultados':'pools aguardando')+(errors?' · '+errors:''));
  $('btnStart').disabled=running;$('btnStop').disabled=!running;
- $('marketSection').hidden=isPaper||isHistory;$('paperSection').hidden=!isPaper;
+ $('marketSection').hidden=isPaper||isHistory||isCloud;$('paperSection').hidden=!isPaper;
+ if($('cloudSection'))$('cloudSection').hidden=!isCloud;
  $('historySection').hidden=!isHistory;
  document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));
  if(isHistory){signalHistory()?.render();return;}
+ if(isCloud){root.EdgeCloud?.redraw();return;}
  if(isPaper){renderPaper();return;}
  const desc={opportunities:['Oportunidades capturadas','Sinais ao vivo e moedas que passaram nos filtros na última hora. Não desaparecem quando o preço oscila: confira também o Histórico.'],watch:['Em observação','Mercados com atividade parcial, preço corrigindo ou avisos de risco.'],new:['Novos lançamentos','Eventos Pump.fun e pools novos da PumpSwap, mesmo antes de existir cotação.'],all:['Todos os tokens','Tokens de fontes Pump.fun/PumpSwap, independentemente da classificação.'],favorites:['Favoritos','Moedas que você marcou para continuar acompanhando.']}[view];
  $('sectionTitle').textContent=desc[0];$('sectionDescription').textContent=desc[1];

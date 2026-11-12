@@ -1,44 +1,72 @@
-# Edge Radar Crypto — somente Pump.fun / PumpSwap
+# EDGE RADAR CRYPTO — monitoramento por navegador + nuvem
 
-Monitor de descoberta e filtragem de tokens em Solana, sem carteira, chaves privadas ou execução de trades reais.
+Aplicativo **100% cripto**, sem carteira conectada nem operações reais.
 
-## Funcionalidades
-- Evento de novos lançamentos e migrações Pump.fun por um único WebSocket da PumpPortal.
-- Pools recentes e em tendência da PumpSwap via GeckoTerminal, com filtro de DEX antes de exibir tokens.
-- Enriquecimento com preço, liquidez, volume, preço 5 min e quantidade de compras/vendas via DEX Screener.
-- Separação entre **Oportunidades em análise**, **Observação**, **Novos**, **Todos** e **Favoritos**. Sem preço fresco, token só aparece nas listas de descoberta/observação, nunca como oportunidade.
-- Links de investigação manual em X, Google Notícias e Pump.fun. **Não há análise automática de sentimento social** nesta versão.
-- Simulador local de compra e venda com custos estimados, sem operações reais e sem custódia.
+## O que a atualização faz
 
-## Executar
-Site estático: abrir `public/index.html` por um servidor HTTP local, ou publicar pasta `public/` na Vercel. Em alguns navegadores, chamadas de APIs externas podem falhar por CORS, rate limit ou bloqueadores. A interface exibe esses erros em vez de fabricar dados.
+- Preserva o monitoramento rápido **enquanto o navegador estiver aberto** (PumpPortal WebSocket e consultas DEX Screener).
+- Acrescenta um **coletor independente do navegador**: Cloudflare Worker agendado aproximadamente **a cada 1 minuto**.
+- Descobre pools PumpSwap da GeckoTerminal e consulta cotações/atividade no DEX Screener.
+- Identifica sinais quando existem preço, liquidez, volume de 5 minutos, compras/vendas e variação adequados aos filtros.
+- Salva os sinais **no banco Cloudflare D1**, não apenas no `localStorage` do computador.
+- Registra o preço realmente observado no sinal e tenta medir as mudanças após 1, 5, 15 e 30 minutos. Se perder a janela, marca `missing`/"Sem amostra". **Não inventa preços retroativos**.
+- Permite ler os registros no site na aba **Nuvem 24h**, com paginação para históricos mais antigos e estado real do coletor.
+- Mantém separado o histórico que já estava salvo localmente no navegador.
 
-## Rodar testes
-`node --test tests/test_edge_crypto.cjs`
+**Limite importante:** verificações de 1 minuto **não são uma stream segundo a segundo**. Movimentos que nascem e terminam em poucos segundos podem escapar. A GeckoTerminal informa que seus endpoints públicos podem ter cache de aproximadamente 1 minuto. Para execução subsegundo e WebSocket 24/7 será necessário um processo persistente, com custos e requisitos diferentes. O código **não realiza trades reais**.
 
-## Arquitetura e limites
-- O browser precisa permanecer aberto para eventos ao vivo; não existe serviço 24/7.
-- Apenas `subscribeNewToken` e `subscribeMigration` gratuitos. Trades individuais em streaming são pagos e **não ativados**. Uma única conexão WebSocket.
-- Pools GeckoTerminal são consultados a cada 45 segundos (2 requisições por consulta, no máximo). Quotes DEX Screener em lotes de 30 tokens a cada 8 segundos, limite de 90 endereços por ciclo.
-- Fontes públicas podem ter atraso, liquidez ou volume faltantes; filtros não estimam lucro nem chance real de valorização.
-- **Não** armazenar chave de carteira ou API privada no frontend, repositório ou no navegador.
-- Dados favoritos, eventos recentes e simulação ficam no `localStorage` deste navegador; se limpar os dados, perderá esses registros.
+## Publicar na Cloudflare (uma vez)
 
-## Fontes
-- https://pumpportal.fun/data-api/real-time/
-- https://pumpportal.fun/fees/
-- https://api.geckoterminal.com/docs/index.html
-- https://docs.dexscreener.com/api/reference
+É necessário uma conta Cloudflare com Workers + D1 habilitados. Não há acesso automatizado à sua conta Cloudflare neste chat; os arquivos estão prontos, mas **a coleta 24/7 não começa antes do deploy**.
 
-## Migração da antiga versão
-Este repositório foi convertido inteiramente para cripto a pedido do proprietário. As rotinas de CS2, arquivos de histórico esportivo, testes antigos e workflows esportivos foram retirados da branch principal. O histórico do Git continua guardando commits anteriores, sem executá-los no site atual.
+### Caminho pelo GitHub Actions (sem terminal local)
 
-## Sinais registrados (v3)
+1. No painel Cloudflare, abra **Workers & Pages → D1 SQL Database**, crie uma base chamada **`edge-radar-crypto`** e copie o **Database ID (UUID)**.
+2. Na Cloudflare, crie um token da API com permissão de editar Workers Scripts e D1 nesse projeto; copie também o **Account ID**.
+3. No repositório GitHub `adalgizagon-bot/edge-radar`, abra **Settings → Secrets and variables → Actions** e crie estes três segredos: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` e `EDGE_D1_DATABASE_ID`. **Não envie valores secretos no chat.**
+4. Em **Actions**, selecione **Publicar coletor Crypto na Cloudflare → Run workflow**. Esse fluxo aplica o `cloud/schema.sql` e implanta `cloud/worker.mjs` com a agenda de um minuto.
+5. No resultado da publicação, copie o URL `https://edge-radar-cloud.<seu-subdomínio>.workers.dev`.
+6. Abra o Edge Radar na Vercel → **Nuvem 24h** → cole esse endereço → **Conectar**.
+7. Confira `https://SEU-URL/api/status`. A resposta só informa `online: true` quando houve uma execução agendada recente **bem-sucedida**. Em seguida confira `/api/signals`.
 
-- Oportunidades continuam visíveis por até 60 minutos depois do primeiro sinal, mesmo que o score caia (status de sinal histórico).
-- A aba **Histórico de sinais** preserva o preço na detecção e checkpoints observados em 1, 5, 15 e 30 minutos, com tolerâncias de 30, 90, 150 e 240 segundos.
-- Quando não houver cotação observada no prazo, o checkpoint fica como **sem amostra**, e não recebe preço retroativo nem estimativa.
-- O sistema dá prioridade na coleta de preços a tokens com checkpoints pendentes, para reduzir buracos no acompanhamento.
-- Dados salvos em `localStorage` do navegador (`edgeradar.crypto.signals.v1`) por até 30 dias, máximo 600 sinais; exporte CSV/JSON periodicamente.
-- **Limite atual:** isso NÃO é um serviço de monitoramento 24/7. Ao fechar a aba ou suspender o dispositivo, o coletor para; o histórico persiste, mas intervalos não observados continuam em branco. Futuro coletor hospedado contínuo requer infraestrutura/implantação própria.
-- Os retornos são variações observadas de mercado, **não ROI de trades** nem ganhos executáveis.
+> Alguns tokens da Cloudflare possuem escopos mais restritos. Caso receba erro de permissão na criação de tabelas ou no deploy, confira as permissões do token, sem colocar credenciais no repositório.
+
+### Alternativa pelo terminal (Wrangler)
+
+Na pasta `cloud/`, após autenticar no Cloudflare:
+
+```bash
+npx wrangler login
+npx wrangler d1 create edge-radar-crypto
+# Substitua REPLACE_WITH_D1_DATABASE_ID no wrangler.toml pelo UUID retornado.
+npx wrangler d1 execute edge-radar-crypto --remote --file=./schema.sql --yes
+npx wrangler deploy
+```
+
+Edite `[vars].FRONTEND_ORIGIN` em `cloud/wrangler.toml` se mudar o domínio oficial da Vercel. O endpoint de consulta tem CORS restrito ao domínio configurado; para usos públicos de alto volume, acrescente proteção de acesso/WAF da Cloudflare.
+
+## Limites, dados e custos
+
+- O cron consulta novos e trending pools, mais cotações em lote para até 90 tokens por rodada.
+- No máximo 4 sinais novos por minuto, para controlar os custos de gravação D1 no plano gratuito.
+- As estatísticas de longo prazo são guardadas em agregações diárias para reduzir leituras de D1.
+- A interface pesquisa o servidor a cada 45 segundos quando configurada.
+- O plano gratuito da Cloudflare está sujeito a limites de invocações, tempo de CPU, leituras/gravações e armazenamento. O agendamento também pode ter atraso.
+- As APIs de mercado são fontes terceirizadas, com disponibilidade e limites próprios. Se estiverem fora do ar, o coletor reporta o erro, sem fabricar dados.
+- O uso do painel e do coletor não oferece garantia de valorização nem de lucro.
+
+## Verificação
+
+```bash
+node --test tests/*.cjs tests/*.mjs
+```
+
+O site é estático (`public/` para Vercel). O Worker fica em `cloud/`, com banco D1 separado.
+
+### Rotas do coletor
+
+- `GET /api/status` — último batimento, saúde e modo de atualização.
+- `GET /api/signals?limit=60&before=<timestamp_em_ms>` — histórico centralizado paginado.
+- `GET /api/stats` — totais e métricas observadas nos últimos 90 dias, pré-agregados diariamente.
+
+Todas as rotas são somente leitura; **não existe endpoint público que dispare a coleta**. Apenas o evento agendado do Cloudflare executa consultas externas.

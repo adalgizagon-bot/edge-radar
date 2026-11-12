@@ -1,0 +1,17 @@
+name = "edge-radar-cloud"
+main = "worker.mjs"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+# Free tier scheduled check. Timing not guaranteed to be second-precise.
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+FRONTEND_ORIGIN = "https://edge-radar-gamma.vercel.app"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "edge-radar-crypto"
+# Replace with actual ID printed by: npx wrangler d1 create edge-radar-crypto
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
