@@ -56,3 +56,11 @@ CREATE TABLE IF NOT EXISTS risk_watch (
 );
 CREATE INDEX IF NOT EXISTS idx_risk_watch_time ON risk_watch(assessed_at DESC);
 CREATE INDEX IF NOT EXISTS idx_risk_watch_level ON risk_watch(level,assessed_at DESC);
+
+-- Estimativas de rota (Jupiter): uma amostra por rodada, nao ordens executaveis.
+CREATE TABLE IF NOT EXISTS exit_quotes (
+ mint TEXT PRIMARY KEY,checked_at INTEGER NOT NULL,stake_usd REAL NOT NULL,
+ status TEXT NOT NULL,estimated_sol REAL,estimated_usd REAL,recovery_pct REAL,
+ router TEXT NOT NULL DEFAULT '',error TEXT NOT NULL DEFAULT ''
+);
+CREATE INDEX IF NOT EXISTS idx_exit_quotes_time ON exit_quotes(checked_at DESC);
