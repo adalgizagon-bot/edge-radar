@@ -36,3 +36,19 @@ main.shell>.tabs{grid-column:1;grid-row:1/span 12;position:sticky;top:92px;align
 @media(max-width:1240px){main.shell{grid-template-columns:188px minmax(0,1fr);gap:0 16px}.hero{grid-template-columns:1fr}.hero-side{display:none}.filter-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){main.shell{display:block;width:calc(100% - 24px);padding-top:14px}.topbar-inner{width:calc(100% - 24px)}main.shell>.tabs{position:static;max-height:none;display:flex;flex-direction:row;overflow-x:auto;overflow-y:hidden;border:0;background:transparent;padding:3px 0 10px;margin-bottom:14px;border-radius:0}main.shell>.tabs .tab{min-width:max-content;width:auto;white-space:nowrap;padding:10px 12px}.nav-heading{display:none}.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:690px){.topbar{height:65px}.top-status{background:none;border:0;padding:0}.hero{padding:20px 17px}.hero h1{font-size:26px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.token-grid,.risk-grid{grid-template-columns:1fr}.risk-summary{gap:10px;align-items:start}.risk-summary .btn{padding:8px;font-size:10px}.filter-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.risk-panel{padding:13px}.cloud-settings button{width:100%}}
+
+/* Signal evaluation studies */
+.evaluation-panel{margin-top:18px;padding-top:15px;border-top:1px solid #294158}
+.evaluation-title{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.evaluation-title h4{font-size:16px;color:#e7f1fa;margin:5px 0}
+.evaluation-title p{margin:0;color:#9eafc1;font-size:11px;line-height:1.55;max-width:720px}
+.evaluation-title>span{font-size:10px;color:#aac6d3;letter-spacing:.1em;white-space:nowrap}
+.evaluation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0}
+.evaluation-card{background:#101f30;border:1px solid #30495f;border-radius:11px;padding:13px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.evaluation-card>strong{grid-column:1/-1;font-size:12px;letter-spacing:.05em}
+.evaluation-card>div{display:flex;flex-direction:column;gap:3px}
+.evaluation-card b{font-size:18px;color:#e7f5ff}
+.evaluation-card span{font-size:10px;color:#91acbc;line-height:1.35}
+.evaluation-card small{grid-column:1/-1;border-top:1px solid #2a4055;padding-top:9px;font-size:10px;color:#dcbf91}
+@media(max-width:1200px){.evaluation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.evaluation-grid{grid-template-columns:1fr}.evaluation-title{flex-direction:column}.risk-mini{gap:10px}}
