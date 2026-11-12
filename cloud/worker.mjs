@@ -171,9 +171,11 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  let inserted=0;
  const qualified=[];
  let blocked=0,unverified=0;
+ const riskAtSignal=new Map(),quoteThisCycle=new Map();
  for(const c of candidates){
   const pair=prices.get(c.mint);
   const check=assessRisk({mint:c.mint,pair:pair||null,token:jupiter.get(c.mint)||null,previous:prevRisk.get(c.mint),now:at});
+  riskAtSignal.set(c.mint,check);
   if(check.level==='blocked')blocked++;
   if(check.level==='unverified')unverified++;
   const row=riskRow(check,{name:c.name,symbol:c.symbol,score:quality(pair,at).score});
@@ -193,6 +195,7 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
    const data=await fetchJSON(request.url,fetcher);
    result=parseExitQuote(data,jupiter.get(SOL_MINT)?.usdPrice,request.stakeUsd);
   }catch(e){result.error=String(e?.message||e).slice(0,140);}
+  quoteThisCycle.set(chosen.mint,result.status);
   await env.DB.prepare(`INSERT INTO exit_quotes
   (mint,checked_at,stake_usd,status,estimated_sol,estimated_usd,recovery_pct,router,error)
   VALUES (?,?,?,?,?,?,?,?,?) ON CONFLICT(mint) DO UPDATE SET
@@ -217,6 +220,12 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
    (id,mint,name,symbol,triggered_at,entry_price,last_price,last_quote_at,score,liquidity,volume,change5,buys,sells,source,completed)
    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)`)
    .bind(id,c.mint,c.name||x.pair.baseToken?.name||'',c.symbol||x.pair.baseToken?.symbol||'',at,pr,pr,at,q.score,q.liquidity,q.volume,q.change,q.buys,q.sells,'geckoterminal+dexscreener').run();
+   const risk=riskAtSignal.get(c.mint);
+   await env.DB.prepare(`INSERT OR IGNORE INTO signal_evidence
+   (signal_id,mint,captured_at,risk_level,organic_score,buy_usd,sell_usd,liquidity,reasons,quote_status)
+   VALUES (?,?,?,?,?,?,?,?,?,?)`)
+   .bind(id,c.mint,at,risk?.level||'unverified',risk?.organic??null,risk?.buyUsd??null,risk?.sellUsd??null,risk?.liq??null,
+    JSON.stringify([...(risk?.alerts||[]),...(risk?.reasons||[])]).slice(0,1150),quoteThisCycle.get(c.mint)||'not_checked').run();
   await env.DB.prepare(`INSERT INTO daily_metrics (day,signals,measured5,positive5,sum5) VALUES (?,1,0,0,0)
    ON CONFLICT(day) DO UPDATE SET signals=signals+1`).bind(localDay(at)).run();
   duplicates.add(c.mint);inserted++;
@@ -261,6 +270,18 @@ async function handle(request,env){
    await env.DB.prepare('SELECT * FROM exit_quotes WHERE mint=? LIMIT 1').bind(mint).all():
    await env.DB.prepare('SELECT * FROM exit_quotes ORDER BY checked_at DESC LIMIT ?').bind(limit).all();
   return json({quotes:rows.results||[],checkedAt:Date.now(),note:'Estimativas para US$ 15 sem garantia de execucao, sem carteira e sem ordens'},200,request,env);
+ }
+ if(path==='/api/evaluation'){
+  const records=await env.DB.prepare(`SELECT e.risk_level AS level,
+   COUNT(*) AS signals,
+   SUM(CASE WHEN s.m5_status='measured' THEN 1 ELSE 0 END) AS measured5,
+   SUM(CASE WHEN s.m5_status='missing' THEN 1 ELSE 0 END) AS missing5,
+   SUM(CASE WHEN s.m5_status='measured' AND s.m5_return>0 THEN 1 ELSE 0 END) AS positive5,
+   ROUND(AVG(CASE WHEN s.m5_status='measured' THEN s.m5_return ELSE NULL END),2) AS mean_change5
+   FROM signal_evidence e JOIN signals s ON e.signal_id=s.id
+   WHERE e.captured_at>? GROUP BY e.risk_level ORDER BY signals DESC`).bind(Date.now()-90*24*60*60*1000).all();
+  return json({groups:records.results||[],checkedAt:Date.now(),
+   note:'Variações de preco de 5 minutos, NAO resultado de trades. Sem slippage, taxas ou teste de venda. Amostras pequenas nao validam uma estrategia.'},200,request,env);
  }
  if(path==='/api/signals'){
   const limit=finiteInt(u.searchParams.get('limit'),50,100);
