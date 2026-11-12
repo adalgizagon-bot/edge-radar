@@ -10,7 +10,7 @@ const usd=n=>num(n)===null?'—':'US$ '+Number(n).toLocaleString('pt-BR',{maximu
 const reasons=r=>{try{return JSON.parse(r.reasons||'[]').filter(x=>typeof x==='string').slice(0,5)}catch{return ['Avisos indisponiveis']}};
 const label=l=>l==='blocked'?'BLOQUEADA':l==='watch'?'EM OBSERVACAO':'NAO VERIFICADA';
 const fresh=r=>r&&Number(r.assessed_at)>0&&Date.now()-Number(r.assessed_at)<180000&&Date.now()>=Number(r.assessed_at);
-let items=[],quotes=[],error='';
+let items=[],quotes=[],evalGroups=[],error='';
 const quoteFor=mint=>quotes.find(q=>q.mint===mint&&Number(q.checked_at)>0&&Date.now()-Number(q.checked_at)<180000)||null;
 const quoteText=q=>!q?'SAIDA NAO COTADA':q.status==='quoted'?'ROTA ESTIMADA: '+Number(q.estimated_sol).toFixed(5)+' SOL':q.status==='large_impact'?'ALERTA: IMPACTO NA SAIDA':q.status==='unavailable'?'SEM ROTA CONFIRMADA':'COTACAO INCONCLUSIVA';
 const status=()=>({items:items.length,error});
@@ -38,6 +38,14 @@ function redraw(){
  const head=$('riskSummary');if(head)head.innerHTML='<div class="risk-summary-icon">◈</div><div><strong>Escudo de risco · '+(current.length?'triagem ativa':'aguardando dados')+'</strong><p>'+(current.length?blocked+' bloqueadas · '+unverified+' nao verificadas · '+watch+' em observacao. Nenhuma entrada esta liberada.':'Nota 100 indica movimento, nao seguranca. Sem auditoria e cotacao de venda, entrada bloqueada.')+'</p></div><button class="btn ghost" data-risk-open="1">Abrir Escudo →</button>';
  const st=$('cloudRiskStats');if(st)st.innerHTML='<span><strong>'+current.length+'</strong> analisadas</span><span class="risk-count-critical"><strong>'+blocked+'</strong> bloqueadas</span><span><strong>'+unverified+'</strong> sem verificacao</span><span><strong>'+watch+'</strong> observacao</span>';
  const grid=$('cloudRiskGrid');if(grid)grid.innerHTML=current.length?current.slice(0,18).map(card).join(''):'<p class="cloud-empty">'+safe(error||'Aguardando a primeira analise. Nenhuma entrada esta validada.')+'</p>';
+ const result=$('cloudEvaluation');
+ if(result)result.innerHTML=evalGroups.length?evalGroups.map(g=>{
+   const measured=Number(g.measured5)||0,positive=Number(g.positive5)||0,n=Number(g.signals)||0;
+   const average=num(g.mean_change5);
+   const avg=average===null?'—':(average>0?'+':'')+average.toFixed(1)+'%';
+   const labelName=label(g.level);
+   return '<article class="evaluation-card"><strong>'+safe(labelName)+'</strong><div><b>'+n+'</b><span>sinais observados</span></div><div><b>'+measured+'</b><span>medicoes apos 5 min</span></div><div><b>'+(measured?((positive/measured)*100).toFixed(0)+'%':'—')+'</b><span>subiram (somente preco)</span></div><div><b>'+safe(avg)+'</b><span>variacao media do preco</span></div><small>'+(measured<30?'Amostra insuficiente para avaliar desempenho':'Sem custos de operacao; ainda requer validacao')+'</small></article>';
+ }).join(''):'<p class="cloud-empty">Ainda nao ha sinais com a triagem nova e precos observados. Historico nao sera inventado.</p>';
  annotate();
 }
 async function refresh(){
@@ -50,7 +58,11 @@ async function refresh(){
    if(q.ok){const body=await q.json();quotes=Array.isArray(body.quotes)?body.quotes.filter(x=>validMint(x.mint)):[];}
    else quotes=[];
   }catch{quotes=[];}
- }catch(e){error='Triagem de risco indisponivel: '+String(e?.message||e).slice(0,75);items=[];quotes=[];}
+  try{const e=await fetch(url()+'/api/evaluation',{signal:abort.signal,cache:'no-store'});
+   if(e.ok){const body=await e.json();evalGroups=Array.isArray(body.groups)?body.groups:[];}
+   else evalGroups=[];
+  }catch{evalGroups=[];}
+ }catch(e){error='Triagem de risco indisponivel: '+String(e?.message||e).slice(0,75);items=[];quotes=[];evalGroups=[];}
  finally{clearTimeout(timeout);redraw();}
 }
 function init(){
