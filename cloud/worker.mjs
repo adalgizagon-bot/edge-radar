@@ -3,6 +3,7 @@
  * Source data: GeckoTerminal public API + DEX Screener token batch API.
  */
 import {assessRisk,riskRow} from './risk.mjs';
+import {SOL_MINT,quoteRequest,parseExitQuote} from './exit-quote.mjs';
 const SETTINGS=Object.freeze({
   gecko:'https://api.geckoterminal.com/api/v2/networks/solana/',
   dex:'https://api.dexscreener.com/tokens/v1/solana/',
@@ -139,17 +140,17 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  m30_status=COALESCE(m30_status,'missing')
  WHERE completed=0 AND triggered_at<?`).bind(at-42*60_000).run();
  const active=await recentSignals(env.DB,at,SETTINGS.maxActive);
- let pools=[],errors=[];
+ let pools=[],errors=[],warnings=[];
  try{({pools,errors}=await fetchData(fetcher));}catch(e){errors.push(String(e?.message||e));}
  const candidates=dedupePools(pools).slice(0,SETTINGS.maxCandidates);
  // Lote Jupiter (uma requisicao por ciclo). Falha de API nao libera entradas.
  let jupiter=new Map();
  if(candidates.length){try{
-  const uri='https://api.jup.ag/tokens/v2/search?query='+candidates.map(c=>c.mint).join(',');
+  const uri='https://api.jup.ag/tokens/v2/search?query='+[...candidates.map(c=>c.mint),SOL_MINT].join(',');
   const response=await fetchJSON(uri,fetcher);
   if(!Array.isArray(response))throw Error('resposta invalida');
   jupiter=new Map(response.filter(t=>validMint(t?.id)).map(t=>[t.id,t]));
- }catch(e){errors.push('Jupiter risco: '+String(e?.message||e).slice(0,120));}}
+ }catch(e){warnings.push('Jupiter risco: '+String(e?.message||e).slice(0,120));}}
  const prevRisk=new Map();
  if(candidates.length){
   const query=`SELECT mint,pool_price,pool_liquidity FROM risk_watch WHERE mint IN (${candidates.map(()=>'?').join(',')})`;
@@ -182,6 +183,24 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
   ON CONFLICT(mint) DO UPDATE SET name=excluded.name,symbol=excluded.symbol,assessed_at=excluded.assessed_at,level=excluded.level,market_score=excluded.market_score,organic_score=excluded.organic_score,is_verified=excluded.is_verified,top_holders=excluded.top_holders,buy_usd=excluded.buy_usd,sell_usd=excluded.sell_usd,flow_ratio=excluded.flow_ratio,pool_price=excluded.pool_price,pool_liquidity=excluded.pool_liquidity,jupiter_liquidity=excluded.jupiter_liquidity,change_price=excluded.change_price,change_liquidity=excluded.change_liquidity,reasons=excluded.reasons,exit_quote_verified=0,entry_allowed=0`)
   .bind(...Object.values(row)).run();
  }
+ // Apenas UMA cotacao hipotetica por ciclo, sem carteira nem transacao.
+ const quoteOptions=candidates.filter(c=>jupiter.has(c.mint)&&quoteRequest(jupiter.get(c.mint)));
+ if(quoteOptions.length){
+  const chosen=quoteOptions[Math.floor(at/60000)%quoteOptions.length];
+  const request=quoteRequest(jupiter.get(chosen.mint));
+  let result={status:'unavailable',error:'Sem rota de venda comprovada'};
+  try{
+   const data=await fetchJSON(request.url,fetcher);
+   result=parseExitQuote(data,jupiter.get(SOL_MINT)?.usdPrice,request.stakeUsd);
+  }catch(e){result.error=String(e?.message||e).slice(0,140);}
+  await env.DB.prepare(`INSERT INTO exit_quotes
+  (mint,checked_at,stake_usd,status,estimated_sol,estimated_usd,recovery_pct,router,error)
+  VALUES (?,?,?,?,?,?,?,?,?) ON CONFLICT(mint) DO UPDATE SET
+  checked_at=excluded.checked_at,stake_usd=excluded.stake_usd,status=excluded.status,
+  estimated_sol=excluded.estimated_sol,estimated_usd=excluded.estimated_usd,
+  recovery_pct=excluded.recovery_pct,router=excluded.router,error=excluded.error`)
+  .bind(chosen.mint,at,request.stakeUsd,result.status,result.estimatedSol??null,result.estimatedUsd??null,result.recoveryPct??null,result.router||'',String(result.error||'').slice(0,140)).run();
+ }
  for(const c of candidates){
   const pair=prices.get(c.mint);if(!pair)continue;
   const pr=value(pair.priceUsd),q=quality(pair,at);
@@ -202,12 +221,12 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
    ON CONFLICT(day) DO UPDATE SET signals=signals+1`).bind(localDay(at)).run();
   duplicates.add(c.mint);inserted++;
  }
- const errorText=errors.join(' | ').slice(0,500);
+ const errorText=[...errors,...warnings].join(' | ').slice(0,500);
  await env.DB.prepare(`INSERT INTO collector_state (name,last_run,last_ok,scanned,added,checkpoints,error)
  VALUES ('cloud',?,?,?,?,?,?) ON CONFLICT(name) DO UPDATE SET
  last_run=excluded.last_run,last_ok=excluded.last_ok,scanned=excluded.scanned,added=excluded.added,checkpoints=excluded.checkpoints,error=excluded.error`)
  .bind(at,errors.length?0:1,mints.length,inserted,checkpoints,errorText).run();
- return {at,scanned:mints.length,added:inserted,checkpoints,blocked,unverified,errors};
+ return {at,scanned:mints.length,added:inserted,checkpoints,blocked,unverified,errors,warnings};
 }
 const cors=(req,env)=>{
  const origin=req.headers.get('Origin')||'',allow=String(env.FRONTEND_ORIGIN||'https://edge-radar-gamma.vercel.app').replace(/\/$/,'');
@@ -233,6 +252,15 @@ async function handle(request,env){
    await env.DB.prepare('SELECT * FROM risk_watch WHERE mint=? LIMIT 1').bind(mint).all():
    await env.DB.prepare('SELECT * FROM risk_watch ORDER BY assessed_at DESC LIMIT ?').bind(limit).all();
   return json({risk:rows.results||[],checkedAt:Date.now(),precision:'triagem conservadora; sem cotacao executavel de venda'},200,request,env);
+ }
+ if(path==='/api/exit-quotes'){
+  const limit=finiteInt(u.searchParams.get('limit'),30,100);
+  const mint=u.searchParams.get('mint');
+  if(mint!==null&&!validMint(mint))return json({error:'Mint invalido'},400,request,env);
+  const rows=mint?
+   await env.DB.prepare('SELECT * FROM exit_quotes WHERE mint=? LIMIT 1').bind(mint).all():
+   await env.DB.prepare('SELECT * FROM exit_quotes ORDER BY checked_at DESC LIMIT ?').bind(limit).all();
+  return json({quotes:rows.results||[],checkedAt:Date.now(),note:'Estimativas para US$ 15 sem garantia de execucao, sem carteira e sem ordens'},200,request,env);
  }
  if(path==='/api/signals'){
   const limit=finiteInt(u.searchParams.get('limit'),50,100);
