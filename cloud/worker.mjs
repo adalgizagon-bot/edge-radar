@@ -186,7 +186,9 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
   .bind(...Object.values(row)).run();
  }
  // Apenas UMA cotacao hipotetica por ciclo, sem carteira nem transacao.
- const quoteOptions=candidates.filter(c=>jupiter.has(c.mint)&&quoteRequest(jupiter.get(c.mint)));
+ const quotable=candidates.filter(c=>jupiter.has(c.mint)&&quoteRequest(jupiter.get(c.mint)));
+ const strongest=quotable.filter(c=>quality(prices.get(c.mint),at).stage==='priority');
+ const quoteOptions=(strongest.length?strongest:quotable).slice(0,3);
  if(quoteOptions.length){
   const chosen=quoteOptions[Math.floor(at/60000)%quoteOptions.length];
   const request=quoteRequest(jupiter.get(chosen.mint));
