@@ -13,7 +13,7 @@ const gecko=()=>({
 const goodPair=(price='0.01')=>({chainId:'solana',dexId:'pumpswap',baseToken:{address:mint,name:'Test Token',symbol:'TEST'},priceUsd:price,
  liquidity:{usd:25000},volume:{m5:20000},txns:{m5:{buys:60,sells:20}},priceChange:{m5:12},pairCreatedAt:t0-60000});
 class FakeDB {
- constructor(){this.rows=[];this.state=null;this.daily=new Map();this.risks=new Map();this.quotes=new Map()}
+ constructor(){this.rows=[];this.state=null;this.daily=new Map();this.risks=new Map();this.quotes=new Map();this.evidence=[]}
  prepare(sql){return {bind:(...args)=>({
   all:async()=>{
    if(sql.includes('WHERE completed=0'))return {results:this.rows.filter(r=>!r.completed&&r.triggered_at>args[0]).sort((a,b)=>b.triggered_at-a.triggered_at).slice(0,args[1])};
@@ -21,12 +21,14 @@ class FakeDB {
    if(sql.startsWith('SELECT * FROM signals WHERE triggered_at<'))return {results:this.rows.filter(r=>r.triggered_at<args[0]).sort((a,b)=>b.triggered_at-a.triggered_at).slice(0,args[1])};
    if(sql.startsWith('SELECT mint,pool_price,pool_liquidity FROM risk_watch'))return {results:args.map(m=>this.risks.get(m)).filter(Boolean)};
    if(sql.startsWith('SELECT * FROM risk_watch'))return {results:[...this.risks.values()]};
+   if(sql.startsWith('SELECT e.risk_level')){const groups=new Map();for(const ev of this.evidence){const signal=this.rows.find(x=>x.id===ev.signal_id);if(!signal)continue;const g=groups.get(ev.risk_level)||{level:ev.risk_level,signals:0,measured5:0,missing5:0,positive5:0,mean_change5:null,_sum:0};g.signals++;if(signal.m5_status==='measured'){g.measured5++;g.positive5+=signal.m5_return>0?1:0;g._sum+=signal.m5_return;g.mean_change5=g._sum/g.measured5;}if(signal.m5_status==='missing')g.missing5++;groups.set(ev.risk_level,g);}return {results:[...groups.values()]};}
    if(sql.startsWith('SELECT * FROM exit_quotes'))return {results:sql.includes('WHERE mint=?')?[this.quotes.get(args[0])].filter(Boolean):[...this.quotes.values()]};
    if(sql.startsWith('SELECT day,signals,measured5'))return {results:[...this.daily.entries()].map(([day,x])=>({day,...x}))};
    throw Error('Unknown all '+sql);
   },
   run:async()=>{
    if(sql.startsWith('UPDATE signals SET completed=1,')){for(const r of this.rows.filter(x=>!x.completed&&x.triggered_at<args[0])){r.completed=1;for(const key of ['m1','m5','m15','m30'])r[key+'_status'] ||= 'missing';}return {success:true};}
+   if(sql.includes('INSERT OR IGNORE INTO signal_evidence')){const [signal_id,mint,captured_at,risk_level,organic_score,buy_usd,sell_usd,liquidity,reasons,quote_status]=args;this.evidence.push({signal_id,mint,captured_at,risk_level,organic_score,buy_usd,sell_usd,liquidity,reasons,quote_status});return {success:true};}
    if(sql.includes('INSERT INTO exit_quotes')){const cols=['mint','checked_at','stake_usd','status','estimated_sol','estimated_usd','recovery_pct','router','error'];const row=Object.fromEntries(cols.map((c,i)=>[c,args[i]]));this.quotes.set(row.mint,row);return {success:true};}
    if(sql.includes('INSERT INTO risk_watch')){const cols=['mint','name','symbol','assessed_at','level','market_score','organic_score','is_verified','top_holders','buy_usd','sell_usd','flow_ratio','pool_price','pool_liquidity','jupiter_liquidity','change_price','change_liquidity','reasons','exit_quote_verified','entry_allowed'];const row=Object.fromEntries(cols.map((c,i)=>[c,args[i]]));this.risks.set(row.mint,row);return {success:true};}
    if(sql.includes('INSERT OR IGNORE INTO signals')){
@@ -75,11 +77,15 @@ test('Checkpoints require observation strictly after target and before deadline'
 test('Collector creates a signal, observes actual checkpoints and blocks duplicate re-entry',async()=>{
  const db=new FakeDB(),env={DB:db,FRONTEND_ORIGIN:'https://edge-radar-gamma.vercel.app'};
  mockFetch.price='0.01';let r=await collect(env,{clock:()=>t0,fetcher:mockFetch});
- assert.equal(r.added,1);assert.equal(db.rows.length,1);assert.equal(db.risks.get(mint).entry_allowed,0);assert.equal(db.rows[0].score,100);assert.equal(db.quotes.get(mint).status,'quoted');assert.equal(db.quotes.get(mint).estimated_usd,15);
+ assert.equal(r.added,1);assert.equal(db.rows.length,1);assert.equal(db.risks.get(mint).entry_allowed,0);assert.equal(db.rows[0].score,100);assert.equal(db.evidence[0].risk_level,'watch');assert.equal(db.evidence[0].quote_status,'quoted');assert.equal(db.quotes.get(mint).status,'quoted');assert.equal(db.quotes.get(mint).estimated_usd,15);
  mockFetch.price='0.015';r=await collect(env,{clock:()=>t0+60_000,fetcher:mockFetch});
  assert.equal(r.added,0);assert.equal(db.rows[0].m1_status,'measured');assert.ok(Math.abs(db.rows[0].m1_return-50)<0.001);
  r=await collect(env,{clock:()=>t0+310_000,fetcher:mockFetch});
  assert.equal(db.rows[0].m5_status,'measured');
+ const evaluation=await handle(new Request('https://worker.example/api/evaluation'),env);
+ assert.equal(evaluation.status,200);const metrics=await evaluation.json();
+ assert.equal(metrics.groups[0].level,'watch');assert.equal(metrics.groups[0].measured5,1);
+ assert.equal(metrics.groups[0].positive5,1);
  r=await collect(env,{clock:()=>t0+1_200_000,fetcher:mockFetch});
  assert.equal(db.rows[0].m15_status,'missing','no invented 15-minute price');
  r=await collect(env,{clock:()=>t0+1_850_000,fetcher:mockFetch});
