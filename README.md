@@ -74,3 +74,20 @@ Todas as rotas são somente leitura; **não existe endpoint público que dispare
 ## Alerta de risco — pontuação não representa segurança
 
 A escala 0–100 é uma pontuação de **atividade de mercado**, não uma avaliação de golpe, liquidez executável nem probabilidade de retorno. Todos os cards mostram **ENTRADA NÃO VALIDADA**. O atalho para RugCheck abre auditoria externa, mas não constitui certificação de segurança. Ainda faltam verificações automáticas de concentração de carteiras, permissões de mint/freeze, retirada de liquidez e cotação de venda para o valor negociado. Ordens stop loss não impedem perda total quando a liquidez desaparece. O radar não executa trades reais.
+
+## Escudo v7 — simulação de saída e avaliação de sinais
+
+A camada de risco consulta a API pública da Jupiter Tokens V2 por lote. Na nuvem, no máximo **uma moeda por ciclo agendado** recebe uma consulta de cotação de saída pela API Jupiter Swap V2 `GET /swap/v2/order`, **sem parâmetro taker**. A consulta é só leitura, não conecta carteira e não cria, assina nem envia uma transação.
+
+O valor hipotético é **US$ 15 por posição**. A conversão da quantidade de token para unidades atômicas usa os decimais da API. O escudo mantém entrada bloqueada mesmo quando a cotação é favorável: um preço estimado não garante saída futura, e taxas de rede, novas mudanças de preço e falhas de execução podem alterar o resultado. Cotações com menos de 85% de recuperação versus valor teórico são sinalizadas; o limite ainda precisa de calibração.
+
+Novas rotas de leitura:
+- `GET /api/risk?limit=40` — triagem e motivos de risco para os tokens acompanhados
+- `GET /api/exit-quotes?limit=30` — amostras de rota de saída, com data e condição, não ordens
+- `GET /api/evaluation` — médias e contagens de variações de preço após 5 minutos, agrupadas pelo risco registrado no instante do sinal
+
+Novas tabelas no D1: `exit_quotes` e `signal_evidence`. O snapshot de risco por sinal é imutável para evitar viés retrospectivo. Os sinais antigos não são reclassificados artificialmente. A avaliação NÃO representa retorno líquido nem comprova estratégia lucrativa.
+
+Para publicar: o workflow GitHub Actions `Publicar coletor Crypto na Cloudflare` aplica as tabelas remotas, publica o Worker, e consulta os endpoints públicos como teste. Não requer chaves privadas, conexão de carteira nem compra automática. Se a Jupiter estiver indisponível, a avaliação ficará não verificada; nenhuma entrada é liberada.
+
+Os limites e algoritmos são experimentais e devem ser avaliados com uma amostra suficiente e diferentes regimes de mercado. Evite operar dinheiro real com base somente nesses sinais.
