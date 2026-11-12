@@ -167,7 +167,7 @@
   function setGrade(ticketId,index,grade){
     if(!['won','lost','void','pending'].includes(grade))return;
     const entries=journal(),ticket=entries.find(x=>x.id===ticketId);if(!ticket||!ticket.legs[index])return;
-    ticket.legs[index].grade=grade;ticket.legs[index].gradedBy=grade==='pending'?null:'manual';if(storeList(journalKey,entries))drawJournal();
+    ticket.legs[index].grade=grade;ticket.legs[index].gradedBy=grade==='pending'?null:'manual';ticket.legs[index].gradedAt=grade==='pending'?null:new Date().toISOString();if(storeList(journalKey,entries))drawJournal();
   }
   function normMap(v){return String(v||'').toLowerCase().replace(/[^a-z0-9]/g,'');}
   // Resultado histórico apenas quando a base confirma o jogo e, para mercados de mapa,
@@ -211,7 +211,7 @@
         if(value===null||line===null||!['over','under'].includes(leg.direction))continue;
         const won=leg.direction==='over'?value>line:value<line;
         if(value===line)continue; // linhas inteiras podem ter push: precisa conferir regras da casa
-        leg.grade=won?'won':'lost';leg.gradedBy='cito';leg.actual=value;changes++;
+        leg.grade=won?'won':'lost';leg.gradedBy='cito';leg.gradedAt=new Date().toISOString();leg.actual=value;changes++;
       }
     }
     if(changes)storeList(journalKey,entries);

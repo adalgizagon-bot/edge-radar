@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="./map-intelligence.css" />
 <link rel="stylesheet" href="./edge-picks.css" />
 <link rel="stylesheet" href="./edge-strategy.css" />
+<link rel="stylesheet" href="./edge-bankroll.css" />
 </head>
 <body>
 <header><div class="shell"><div class="logo"><i>✦</i> CS2 EDGE <span class="muted" style="font-weight:400;font-size:12px">/ REAL DATA</span></div><div class="topright"><span class="tag">● DADOS VERIFICÁVEIS</span> <span>Pré-jogo • Tier 1 e Tier 2</span></div></div></header>
@@ -21,7 +22,7 @@
 <div class="bar"><span class="badge" id="sourceTag">Fonte</span><span class="badge" id="dateTag">Carregando</span><span class="badge">Tier 1 + Tier 2</span><span class="badge">Odds manuais</span></div>
 <div class="note warning" id="dataNotice">Carregando a amostra real...</div>
 <div class="cards"><div class="metric"><strong id="cMatches">—</strong><span>Próximas partidas</span></div><div class="metric"><strong id="cResults">—</strong><span>Partidas concluídas</span></div><div class="metric"><strong id="cPlayers">—</strong><span>Registros jogador × mapa</span></div><div class="metric"><strong id="cOdds">0</strong><span>Odds cadastradas manualmente</span></div></div>
-<div class="toolbar"><div class="tabs" role="tablist"><button class="tab active" data-tab="strategies">Estratégias e valor</button><button class="tab" data-tab="daily">Destaques do dia</button><button class="tab" data-tab="opportunities">Análises por partida</button><button class="tab" data-tab="parlays">Múltiplas + resultados</button><button class="tab" data-tab="agenda">Agenda</button><button class="tab" data-tab="radar">Radar de mercados</button><button class="tab" data-tab="jogadores">Jogadores</button><button class="tab" data-tab="ranking">Ranking</button><button class="tab" data-tab="laboratorio">Mercados + odds</button></div><div class="filters"><select id="tierFilter" aria-label="Filtrar tier"><option value="all">Tier 1 + Tier 2</option><option value="Tier 1">Somente Tier 1</option><option value="Tier 2">Somente Tier 2</option><option value="Não classificada">Sem classificação</option></select><input id="search" type="search" placeholder="Buscar equipe ou jogador..." aria-label="Buscar"/><button id="uploadBtn">Importar JSON</button><input type="file" id="fileUpload" accept=".json,application/json"/></div></div>
+<div class="toolbar"><div class="tabs" role="tablist"><button class="tab active" data-tab="strategies">Estratégias e valor</button><button class="tab" data-tab="bankroll">Minha banca</button><button class="tab" data-tab="daily">Destaques do dia</button><button class="tab" data-tab="opportunities">Análises por partida</button><button class="tab" data-tab="parlays">Múltiplas + resultados</button><button class="tab" data-tab="agenda">Agenda</button><button class="tab" data-tab="radar">Radar de mercados</button><button class="tab" data-tab="jogadores">Jogadores</button><button class="tab" data-tab="ranking">Ranking</button><button class="tab" data-tab="laboratorio">Mercados + odds</button></div><div class="filters"><select id="tierFilter" aria-label="Filtrar tier"><option value="all">Tier 1 + Tier 2</option><option value="Tier 1">Somente Tier 1</option><option value="Tier 2">Somente Tier 2</option><option value="Não classificada">Sem classificação</option></select><input id="search" type="search" placeholder="Buscar equipe ou jogador..." aria-label="Buscar"/><button id="uploadBtn">Importar JSON</button><input type="file" id="fileUpload" accept=".json,application/json"/></div></div>
 <section id="strategies" class="section">
   <div class="panel">
     <div class="strategy-header"><div><h2>Radar de valor — escolhas da data</h2><p class="fine">Prioriza mercados com odds informadas, margem teórica e histórico disponível. Não existe lucro garantido nem aposta obrigatória todos os dias.</p></div><span class="pill">Modelo ainda não calibrado</span></div>
@@ -43,6 +44,41 @@
   </div>
   <div class="panel"><h2>Auditoria cronológica das probabilidades</h2><p class="fine">Sem preços históricos: podemos examinar previsão vs. resultado, mas não afirmar ROI passado de uma estratégia.</p><div id="strategyBacktest"></div></div>
   <div class="panel"><h2>Desempenho das escolhas registradas</h2><p class="fine">Retorno simulado, acertos, queda máxima e CLV manual. Registre escolhas <strong>antes</strong> dos jogos na aba Múltiplas + resultados.</p><div id="strategyPerformance"></div></div>
+</section>
+<section id="bankroll" class="section" hidden>
+  <div class="panel bank-padded" id="bankContent">
+    <h2>Minha banca — capital e evolução</h2>
+    <p class="bank-intro" id="bankBanner">Configure seu capital inicial e acompanhe entradas, retiradas e resultados.</p>
+    <div class="bank-config"><label for="bankInitial">Capital inicial (R$)<input id="bankInitial" type="number" min="0" max="1000000000" step="0.01" placeholder="Ex.: 1000,00" /></label><label for="bankStartDate">Data inicial<input id="bankStartDate" type="date" /></label><button type="button" id="bankInitialSave">Definir capital inicial</button></div>
+    <div id="bankSummary" class="bank-kpis" aria-live="polite"></div>
+    <h3>Evolução da banca</h3><div id="bankChart"></div><div id="bankStats" class="bank-stats"></div>
+    <p id="bankRisk" class="bank-note"></p>
+    <div class="bank-section"><h3>Depósitos e retiradas</h3><form id="bankCashForm" class="bank-form">
+      <label>Movimentação<select id="bankCashType"><option value="deposit">Depósito</option><option value="withdrawal">Retirada</option></select></label>
+      <label>Valor (R$)<input id="bankCashAmount" type="number" step="0.01" min="0.01" required /></label>
+      <label>Data<input id="bankCashDate" type="date" required /></label>
+      <label>Observação<input id="bankCashNote" maxlength="130" placeholder="Ex.: aporte mensal" /></label>
+      <button type="submit">Registrar movimentação</button></form>
+      <div class="bank-table-wrap"><table class="bank-table"><thead><tr><th>Data</th><th>Tipo</th><th>Valor</th><th>Descrição</th><th></th></tr></thead><tbody id="bankTransactions"></tbody></table></div>
+    </div>
+    <div class="bank-section"><h3>Registrar aposta real</h3><p class="fine">Não adicione aqui um bilhete já vinculado do diário. Cada aposta é descontada da banca quando fica pendente e tem o resultado apurado pela odd que você registrar.</p>
+      <form id="bankBetForm" class="bank-form">
+      <label>Descrição<input id="bankBetTitle" maxlength="150" required placeholder="Ex.: FURIA × Vitality, +17,5 kills" /></label>
+      <label>Casa<input id="bankBetBook" maxlength="90" placeholder="Opcional" /></label>
+      <label>Estratégia<select id="bankBetStrategy"><option value="simples">Simples</option><option value="odd150">Odd 1,50</option><option value="dupla">Múltipla de 2</option><option value="other">Outra</option></select></label>
+      <label>Valor apostado (R$)<input id="bankBetStake" type="number" min="0.01" step="0.01" required /></label>
+      <label>Odd decimal<input id="bankBetOdd" type="number" min="1.01" max="500" step="0.01" required /></label>
+      <label>Data da aposta<input id="bankBetDate" type="date" required /></label>
+      <label>Situação<select id="bankBetStatus"><option value="pending">Pendente</option><option value="won">Ganhou</option><option value="lost">Perdeu</option><option value="void">Anulada</option></select></label>
+      <label>Data do resultado (se encerrada)<input id="bankBetSettled" type="date" /></label>
+      <button type="submit">Adicionar à banca</button></form>
+      <div class="bank-table-wrap"><table class="bank-table"><thead><tr><th>Bilhete</th><th>Stake</th><th>Odd</th><th>Resultado</th><th>Lucro/prejuízo</th><th></th></tr></thead><tbody id="bankBets"></tbody></table></div>
+    </div>
+    <div class="bank-section"><h3>Vincular bilhetes já registrados no Edge Radar</h3><p class="fine">O diário de múltiplas usa simulações. Marque <strong>somente</strong> os bilhetes que realmente apostou para incluí-los no capital. Resultados do diário atualizam o cálculo quando você voltar a esta aba.</p><div id="bankJournal" class="bank-journal"></div></div>
+    <div class="bank-section"><h3>Backup e privacidade</h3><div class="bank-actions"><button type="button" id="bankExport">Exportar backup JSON</button><button type="button" id="bankCsv">Exportar CSV</button><button type="button" id="bankImportBtn">Importar backup</button><input id="bankImportFile" type="file" accept=".json,application/json" hidden /></div>
+      <p class="bank-privacy">*Capital atual = inicial + depósitos − retiradas + lucro/prejuízo realizado. Disponível = capital atual − stakes pendentes. Dados ficam no armazenamento deste navegador, sem nuvem. O backup JSON inclui somente esta aba; o diário de múltiplas continua separado. Nenhuma cotação ou valor financeiro é verificado junto a uma casa de apostas.</p>
+    </div>
+  </div>
 </section>
 <section id="daily" class="section" hidden>
   <div class="panel"><div class="pick-toolbar"><div><h2>Destaques por partida — mercados para conferir</h2><p class="fine">O sistema prioriza linhas com histórico e compara as odds que você informar. Sem preço não existe vantagem comprovada; não é previsão de lucro.</p></div><div><label for="pickDate">Data das partidas (Brasília)</label><input id="pickDate" type="date" /></div></div><div id="dailySummary" class="pick-summary"></div><div id="dailyPicks"></div><p class="pick-legend">As estimativas ainda não são calibradas. Confira mapas, elencos e preços antes de considerar qualquer seleção.</p></div>
@@ -69,6 +105,7 @@
 <script src="./map-intelligence.js"></script>
 <script src="./edge-picks.js"></script>
 <script src="./edge-strategy.js"></script>
+<script src="./edge-bankroll.js"></script>
 <script>
 'use strict';
 let db=null, currentTab='strategies'; let inMemoryOdds=[]; let radarPageSize=160;
@@ -111,9 +148,9 @@ function render(){if(!db)return;const tier=$('tierFilter').value;const q=$('sear
  $('eventRows').innerHTML=ev.map(m=>`<tr><td>${escapeHtml(m.player)}</td><td>${escapeHtml(m.team)}</td><td>${fmt(m.maps,0)}</td><td class="stat">${fmt(m.kills,0)}</td><td>${fmt(m.deaths,0)}</td><td>${fmt(m.adr)}</td><td>${link(m.sourceUrl)}</td></tr>`).join('')||empty(7,'Sem resumo de séries neste snapshot — as estatísticas por mapa ficam na tabela acima.');
  $('rankRows').innerHTML=db.rankings.filter(r=>(tier==='all'||r.tier===tier)&&JSON.stringify(r.name).toLowerCase().includes(q)).map(r=>`<tr><td>#${escapeHtml(r.rank)}</td><td><strong>${escapeHtml(r.name)}</strong></td><td>${labelTier(r.tier)}</td><td>${fmt(r.points,0)}</td><td>${escapeHtml(r.region||'—')}</td></tr>`).join('')||empty(5,'Ranking não disponível.');
  const all=[...new Set([...db.player_maps.map(v=>v.player),...db.past.flatMap(m=>[m.team1,m.team2]),...db.upcoming.flatMap(m=>[m.team1,m.team2]),...db.historical_event?.map(v=>v.player)||[]])];$('subjects').innerHTML=all.filter(Boolean).map(s=>`<option value="${escapeHtml(s)}"></option>`).join('');
- drawOdds(); drawRadar(); drawMapOptions(); if(window.EdgeIntelligence)EdgeIntelligence.init(db);if(window.EdgePicks)EdgePicks.init(db);if(window.EdgeStrategy)EdgeStrategy.init(db);
+ drawOdds(); drawRadar(); drawMapOptions(); if(window.EdgeIntelligence)EdgeIntelligence.init(db);if(window.EdgePicks)EdgePicks.init(db);if(window.EdgeStrategy)EdgeStrategy.init(db);if(window.EdgeBankroll)EdgeBankroll.init();
 }
-function activate(t){currentTab=t;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));document.querySelectorAll('.section').forEach(e=>e.hidden=e.id!==t);}
+function activate(t){if(t==='bankroll'&&window.EdgeBankroll)EdgeBankroll.render();currentTab=t;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));document.querySelectorAll('.section').forEach(e=>e.hidden=e.id!==t);}
 function chosenMatch(){return db?.upcoming.find(x=>x.id===$('matchContext').value)||null;}
 function mapFilter(){return $('mapContext').value.toLowerCase();}
 function historicalRows(market, subject, explicitMap=''){
