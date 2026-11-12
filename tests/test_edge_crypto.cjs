@@ -1,0 +1,28 @@
+'use strict';
+const assert=require('node:assert/strict');const vm=require('node:vm');const fs=require('node:fs');
+const source=fs.readFileSync(__dirname+'/../public/edge-crypto.js','utf8');
+const m1='So11111111111111111111111111111111111111112';const m2='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
+const el=new Map();for(const id of ['cryptoApp','cryptoStatus','cryptoStart','cryptoStop','cryptoRefresh','cryptoSound','cryptoLiquidity','cryptoSort','cryptoOnlyPriced','cryptoOnlyWatch','cryptoSeen','cryptoLaunches','cryptoMigrated','cryptoLast','cryptoDexTime','cryptoTable'])el.set(id,{id,innerHTML:'',textContent:'',value:'0',dataset:{},disabled:false,addEventListener(){},onclick:null,onchange:null,checked:false});
+const store=new Map(),frames=[];class Socket{constructor(){this.readyState=0;this.events=[];frames.push(this);}send(v){this.events.push(JSON.parse(v));}close(){this.readyState=3;this.onclose?.();}}
+const localStorage={getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)};
+const document={getElementById:id=>el.get(id)||null};
+const window={WebSocket:Socket};
+const ctx={window,document,localStorage,WebSocket:Socket,Date,JSON,Math,Intl,String,Number,setTimeout,clearTimeout,setInterval:()=>99,clearInterval:()=>{},fetch:async()=>({ok:true,json:async()=>[]})};vm.createContext(ctx);vm.runInContext(source,ctx);
+const C=window.EdgeCrypto;assert(C);C.init();assert.match(el.get('cryptoApp').innerHTML,/Radar Crypto/);
+assert.equal(C.normalizeEvent({txType:'create',mint:m1,symbol:'SOL'}).type,'launch');
+assert.equal(C.normalizeEvent({txType:'migrate',mint:m1}).type,'migration');
+assert.equal(C.normalizeEvent({txType:'create',mint:'<script>'}),null);
+assert.equal(C.normalizeEvent({txType:'buy',mint:m1}),null);
+const validPair={chainId:'solana',baseToken:{address:m1},liquidity:{usd:33000},volume:{m5:22000},txns:{m5:{buys:44,sells:16}},priceUsd:'0.000123',priceChange:{m5:12},marketCap:160000};
+assert.equal(C.pairForMint([{...validPair,chainId:'ethereum'},validPair],m1).chainId,'solana');
+assert.equal(C.evaluate({pair:validPair}).kind,'screen');
+assert.equal(C.evaluate({pair:{...validPair,liquidity:{usd:300}}}).kind,'risk');
+assert.equal(C.evaluate({pair:null}).kind,'waiting');
+assert.match(C.socialSearch({symbol:'B',mint:m1},'x'),/x.com\/search/);
+C.start();assert.equal(frames.length,1);frames[0].readyState=1;frames[0].onopen();assert.deepEqual(JSON.parse(JSON.stringify(frames[0].events)),[{method:'subscribeNewToken'},{method:'subscribeMigration'}]);
+frames[0].onmessage({data:JSON.stringify({txType:'create',mint:m1,symbol:'START'})});assert.equal(C.getStatus().events,1);
+frames[0].onmessage({data:JSON.stringify({txType:'migrate',mint:m2,symbol:'MIGRATE'})});assert.equal(C.getStatus().events,2);
+frames[0].onmessage({data:'invalid!'});assert.equal(C.getStatus().failed,1);
+frames[0].onmessage({data:JSON.stringify({txType:'migrate',mint:m1,symbol:'START'})});assert.equal(C.getStatus().displayed,2);
+C.stop();assert.equal(C.getStatus().running,false);assert.equal(el.get('cryptoStop').disabled,true);
+console.log('OK: 14 grupos de verificações: validação, avaliação, indexação, redes, WebSocket, pausa, deduplicação e segurança básica.');
