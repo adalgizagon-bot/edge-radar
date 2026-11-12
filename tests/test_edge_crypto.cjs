@@ -51,3 +51,12 @@ test('only crypto files are published in the new static page',()=>{
  assert.doesNotMatch(html,/CS2|CS:GO|CS GO|Cito API|baralho|parlays/i);
  assert.doesNotMatch(source,/signTransaction|sendTransaction|privateKey/i);
 });
+
+test('score 100 is not a safety pass; sell route and on-chain risk remain unverified',()=>{
+ const x=C.evaluate(token(T,{pair:pair(T,{priceChange:{m5:16},txns:{m5:{buys:55,sells:20}}})}));
+ assert.equal(x.score,100);
+ assert.equal(x.entryAllowed,false);
+ assert.equal(x.safetyChecked,false);
+ assert.equal(x.sellRouteChecked,false);
+ assert.ok(x.entryBlockers.some(x=>x.includes('venda')));
+});
