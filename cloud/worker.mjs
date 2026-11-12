@@ -2,10 +2,11 @@
  * Cloudflare Workers Cron + D1. Missing checkpoints remain missing, never backfilled.
  * Source data: GeckoTerminal public API + DEX Screener token batch API.
  */
+import {assessRisk,riskRow} from './risk.mjs';
 const SETTINGS=Object.freeze({
   gecko:'https://api.geckoterminal.com/api/v2/networks/solana/',
   dex:'https://api.dexscreener.com/tokens/v1/solana/',
-  maxMintsPerScan:90,maxNewSignals:4,maxActive:230,maxCandidates:35,
+  maxMintsPerScan:90,maxNewSignals:4,maxActive:230,maxCandidates:25,
   quoteTimeout:8500,reentryMs:60*60*1000,
   horizons:[['m1',60_000,90_000],['m5',300_000,120_000],['m15',900_000,180_000],['m30',1_800_000,240_000]],
 });
@@ -141,6 +142,20 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  let pools=[],errors=[];
  try{({pools,errors}=await fetchData(fetcher));}catch(e){errors.push(String(e?.message||e));}
  const candidates=dedupePools(pools).slice(0,SETTINGS.maxCandidates);
+ // Lote Jupiter (uma requisicao por ciclo). Falha de API nao libera entradas.
+ let jupiter=new Map();
+ if(candidates.length){try{
+  const uri='https://api.jup.ag/tokens/v2/search?query='+candidates.map(c=>c.mint).join(',');
+  const response=await fetchJSON(uri,fetcher);
+  if(!Array.isArray(response))throw Error('resposta invalida');
+  jupiter=new Map(response.filter(t=>validMint(t?.id)).map(t=>[t.id,t]));
+ }catch(e){errors.push('Jupiter risco: '+String(e?.message||e).slice(0,120));}}
+ const prevRisk=new Map();
+ if(candidates.length){
+  const query=`SELECT mint,pool_price,pool_liquidity FROM risk_watch WHERE mint IN (${candidates.map(()=>'?').join(',')})`;
+  const old=await env.DB.prepare(query).bind(...candidates.map(c=>c.mint)).all();
+  for(const p of old.results||[])prevRisk.set(p.mint,p);
+ }
  // Only reprice signals that have a checkpoint due or approaching; all overdue records
  // are still processed for missing checkpoints even without a quote.
  const due=active.filter(s=>SETTINGS.horizons.some(h=>!s[h[0]+'_status']&&at>=s.triggered_at+h[1]-90_000&&at<=s.triggered_at+h[1]+h[2]));
@@ -154,6 +169,19 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  }
  let inserted=0;
  const qualified=[];
+ let blocked=0,unverified=0;
+ for(const c of candidates){
+  const pair=prices.get(c.mint);
+  const check=assessRisk({mint:c.mint,pair:pair||null,token:jupiter.get(c.mint)||null,previous:prevRisk.get(c.mint),now:at});
+  if(check.level==='blocked')blocked++;
+  if(check.level==='unverified')unverified++;
+  const row=riskRow(check,{name:c.name,symbol:c.symbol,score:quality(pair,at).score});
+  await env.DB.prepare(`INSERT INTO risk_watch
+  (mint,name,symbol,assessed_at,level,market_score,organic_score,is_verified,top_holders,buy_usd,sell_usd,flow_ratio,pool_price,pool_liquidity,jupiter_liquidity,change_price,change_liquidity,reasons,exit_quote_verified,entry_allowed)
+  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+  ON CONFLICT(mint) DO UPDATE SET name=excluded.name,symbol=excluded.symbol,assessed_at=excluded.assessed_at,level=excluded.level,market_score=excluded.market_score,organic_score=excluded.organic_score,is_verified=excluded.is_verified,top_holders=excluded.top_holders,buy_usd=excluded.buy_usd,sell_usd=excluded.sell_usd,flow_ratio=excluded.flow_ratio,pool_price=excluded.pool_price,pool_liquidity=excluded.pool_liquidity,jupiter_liquidity=excluded.jupiter_liquidity,change_price=excluded.change_price,change_liquidity=excluded.change_liquidity,reasons=excluded.reasons,exit_quote_verified=0,entry_allowed=0`)
+  .bind(...Object.values(row)).run();
+ }
  for(const c of candidates){
   const pair=prices.get(c.mint);if(!pair)continue;
   const pr=value(pair.priceUsd),q=quality(pair,at);
@@ -179,7 +207,7 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  VALUES ('cloud',?,?,?,?,?,?) ON CONFLICT(name) DO UPDATE SET
  last_run=excluded.last_run,last_ok=excluded.last_ok,scanned=excluded.scanned,added=excluded.added,checkpoints=excluded.checkpoints,error=excluded.error`)
  .bind(at,errors.length?0:1,mints.length,inserted,checkpoints,errorText).run();
- return {at,scanned:mints.length,added:inserted,checkpoints,errors};
+ return {at,scanned:mints.length,added:inserted,checkpoints,blocked,unverified,errors};
 }
 const cors=(req,env)=>{
  const origin=req.headers.get('Origin')||'',allow=String(env.FRONTEND_ORIGIN||'https://edge-radar-gamma.vercel.app').replace(/\/$/,'');
@@ -196,6 +224,15 @@ async function handle(request,env){
   const r=await env.DB.prepare("SELECT * FROM collector_state WHERE name='cloud'").first();
   const fresh=!!r&&Date.now()-r.last_run<3*60_000;
   return json({online:fresh&&!!r.last_ok,running:fresh,mode:'cron_1m',latest:r||null,checkedAt:Date.now(),precision:'polling de aproximadamente 1 minuto; fonte GeckoTerminal tem cache de até 1 minuto; não é fluxo por segundo'},200,request,env);
+ }
+ if(path==='/api/risk'){
+  const limit=finiteInt(u.searchParams.get('limit'),40,100);
+  const mint=u.searchParams.get('mint');
+  if(mint!==null&&!validMint(mint))return json({error:'Mint invalido'},400,request,env);
+  const rows=mint?
+   await env.DB.prepare('SELECT * FROM risk_watch WHERE mint=? LIMIT 1').bind(mint).all():
+   await env.DB.prepare('SELECT * FROM risk_watch ORDER BY assessed_at DESC LIMIT ?').bind(limit).all();
+  return json({risk:rows.results||[],checkedAt:Date.now(),precision:'triagem conservadora; sem cotacao executavel de venda'},200,request,env);
  }
  if(path==='/api/signals'){
   const limit=finiteInt(u.searchParams.get('limit'),50,100);
