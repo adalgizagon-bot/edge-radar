@@ -70,3 +70,7 @@ O site é estático (`public/` para Vercel). O Worker fica em `cloud/`, com banc
 - `GET /api/stats` — totais e métricas observadas nos últimos 90 dias, pré-agregados diariamente.
 
 Todas as rotas são somente leitura; **não existe endpoint público que dispare a coleta**. Apenas o evento agendado do Cloudflare executa consultas externas.
+
+## Alerta de risco — pontuação não representa segurança
+
+A escala 0–100 é uma pontuação de **atividade de mercado**, não uma avaliação de golpe, liquidez executável nem probabilidade de retorno. Todos os cards mostram **ENTRADA NÃO VALIDADA**. O atalho para RugCheck abre auditoria externa, mas não constitui certificação de segurança. Ainda faltam verificações automáticas de concentração de carteiras, permissões de mint/freeze, retirada de liquidez e cotação de venda para o valor negociado. Ordens stop loss não impedem perda total quando a liquidez desaparece. O radar não executa trades reais.
