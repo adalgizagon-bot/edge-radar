@@ -64,3 +64,11 @@ CREATE TABLE IF NOT EXISTS exit_quotes (
  router TEXT NOT NULL DEFAULT '',error TEXT NOT NULL DEFAULT ''
 );
 CREATE INDEX IF NOT EXISTS idx_exit_quotes_time ON exit_quotes(checked_at DESC);
+
+-- Registro imutavel da triagem no instante do sinal (evita viés retrospectivo).
+CREATE TABLE IF NOT EXISTS signal_evidence (
+ signal_id TEXT PRIMARY KEY,mint TEXT NOT NULL,captured_at INTEGER NOT NULL,
+ risk_level TEXT NOT NULL,organic_score REAL,buy_usd REAL,sell_usd REAL,
+ liquidity REAL,reasons TEXT NOT NULL DEFAULT '[]',quote_status TEXT NOT NULL DEFAULT 'not_checked'
+);
+CREATE INDEX IF NOT EXISTS idx_signal_evidence_time ON signal_evidence(captured_at DESC);
