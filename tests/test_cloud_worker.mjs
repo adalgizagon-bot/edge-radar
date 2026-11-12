@@ -13,17 +13,20 @@ const gecko=()=>({
 const goodPair=(price='0.01')=>({chainId:'solana',dexId:'pumpswap',baseToken:{address:mint,name:'Test Token',symbol:'TEST'},priceUsd:price,
  liquidity:{usd:25000},volume:{m5:20000},txns:{m5:{buys:60,sells:20}},priceChange:{m5:12},pairCreatedAt:t0-60000});
 class FakeDB {
- constructor(){this.rows=[];this.state=null;this.daily=new Map()}
+ constructor(){this.rows=[];this.state=null;this.daily=new Map();this.risks=new Map()}
  prepare(sql){return {bind:(...args)=>({
   all:async()=>{
    if(sql.includes('WHERE completed=0'))return {results:this.rows.filter(r=>!r.completed&&r.triggered_at>args[0]).sort((a,b)=>b.triggered_at-a.triggered_at).slice(0,args[1])};
    if(sql.startsWith('SELECT mint FROM'))return {results:this.rows.filter(r=>r.triggered_at>args[0]&&args.slice(1).includes(r.mint)).map(r=>({mint:r.mint}))};
    if(sql.startsWith('SELECT * FROM signals WHERE triggered_at<'))return {results:this.rows.filter(r=>r.triggered_at<args[0]).sort((a,b)=>b.triggered_at-a.triggered_at).slice(0,args[1])};
+   if(sql.startsWith('SELECT mint,pool_price,pool_liquidity FROM risk_watch'))return {results:args.map(m=>this.risks.get(m)).filter(Boolean)};
+   if(sql.startsWith('SELECT * FROM risk_watch'))return {results:[...this.risks.values()]};
    if(sql.startsWith('SELECT day,signals,measured5'))return {results:[...this.daily.entries()].map(([day,x])=>({day,...x}))};
    throw Error('Unknown all '+sql);
   },
   run:async()=>{
    if(sql.startsWith('UPDATE signals SET completed=1,')){for(const r of this.rows.filter(x=>!x.completed&&x.triggered_at<args[0])){r.completed=1;for(const key of ['m1','m5','m15','m30'])r[key+'_status'] ||= 'missing';}return {success:true};}
+   if(sql.includes('INSERT INTO risk_watch')){const cols=['mint','name','symbol','assessed_at','level','market_score','organic_score','is_verified','top_holders','buy_usd','sell_usd','flow_ratio','pool_price','pool_liquidity','jupiter_liquidity','change_price','change_liquidity','reasons','exit_quote_verified','entry_allowed'];const row=Object.fromEntries(cols.map((c,i)=>[c,args[i]]));this.risks.set(row.mint,row);return {success:true};}
    if(sql.includes('INSERT OR IGNORE INTO signals')){
     const [id,mint,name,symbol,triggered_at,entry_price,last_price,last_quote_at,score,liquidity,volume,change5,buys,sells,source]=args;
     this.rows.push({id,mint,name,symbol,triggered_at,entry_price,last_price,last_quote_at,score,liquidity,volume,change5,buys,sells,source,completed:0});return {success:true};
@@ -46,6 +49,7 @@ class FakeDB {
 }
 const mockFetch=(url)=>{
  if(url.includes('geckoterminal'))return Promise.resolve({ok:true,json:async()=>gecko()});
+ if(url.includes('api.jup.ag/tokens/v2/search'))return Promise.resolve({ok:true,json:async()=>[{id:mint,name:'Test Token',symbol:'TEST',isVerified:true,organicScore:85,liquidity:25000,audit:{mintAuthorityDisabled:true,freezeAuthorityDisabled:true,topHoldersPercentage:8},stats5m:{buyVolume:30000,sellVolume:14000,numBuys:60,numSells:20},firstPool:{createdAt:new Date(t0-3600000).toISOString()}}]});
  if(url.includes('dexscreener'))return Promise.resolve({ok:true,json:async()=>[goodPair(mockFetch.price||'0.01')]});
  throw Error('Unexpected external request '+url);
 };
@@ -68,7 +72,7 @@ test('Checkpoints require observation strictly after target and before deadline'
 test('Collector creates a signal, observes actual checkpoints and blocks duplicate re-entry',async()=>{
  const db=new FakeDB(),env={DB:db,FRONTEND_ORIGIN:'https://edge-radar-gamma.vercel.app'};
  mockFetch.price='0.01';let r=await collect(env,{clock:()=>t0,fetcher:mockFetch});
- assert.equal(r.added,1);assert.equal(db.rows.length,1);assert.equal(db.rows[0].score,100);
+ assert.equal(r.added,1);assert.equal(db.rows.length,1);assert.equal(db.risks.get(mint).entry_allowed,0);assert.equal(db.rows[0].score,100);
  mockFetch.price='0.015';r=await collect(env,{clock:()=>t0+60_000,fetcher:mockFetch});
  assert.equal(r.added,0);assert.equal(db.rows[0].m1_status,'measured');assert.ok(Math.abs(db.rows[0].m1_return-50)<0.001);
  r=await collect(env,{clock:()=>t0+310_000,fetcher:mockFetch});
@@ -82,4 +86,12 @@ test('Collector creates a signal, observes actual checkpoints and blocks duplica
  assert.equal(reply.headers.get('access-control-allow-origin'),'https://edge-radar-gamma.vercel.app');
  const bad=await handle(new Request('https://worker.example/api/signals',{headers:{origin:'https://not-authorized.example'}}),env);
  assert.equal(bad.headers.get('access-control-allow-origin'),null);
+});
+
+test('Risk API shows reasons and never releases auto-entry',async()=>{
+ const db=new FakeDB(),env={DB:db};await collect(env,{clock:()=>t0,fetcher:mockFetch});
+ const reply=await handle(new Request('https://worker.example/api/risk'),env);
+ assert.equal(reply.status,200);const data=await reply.json();assert.equal(data.risk.length,1);
+ assert.equal(data.risk[0].level,'watch');assert.equal(data.risk[0].entry_allowed,0);
+ const bad=await handle(new Request('https://worker.example/api/risk?mint=abc'),env);assert.equal(bad.status,400);
 });
