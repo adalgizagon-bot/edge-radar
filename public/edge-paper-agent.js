@@ -29,34 +29,52 @@ function cards(){
    '<div><label>Taxa de acerto*</label><strong>'+(sold?pct(100*wins/sold):'—')+'</strong></div></div></article>';
  }).join('');
 }
+function classFor(trade){
+ const evidence=payload?.evidence||[];
+ const match=trade.action==='buy'?evidence.find(e=>e.buy_id===trade.id):
+  evidence.find(e=>e.strategy===trade.strategy&&e.mint===trade.mint&&Number(e.created_at)<=Number(trade.created_at));
+ return match?.tier==='exploratory'?'Exploratória (não validada)':match?.tier==='audited'?'Auditada p/ estudo':'Sem classificação';
+}
+function diagnosticsHTML(){
+ const d=payload?.diagnostics;
+ if(!d)return '<p class="cloud-empty">Aguardando primeira varredura de diagnóstico no coletor.</p>';
+ const cells=[['Avaliadas',d.candidates],['Aptas p/ simulação',d.eligible],['Exploratórias',d.exploratory],
+  ['Auditadas p/ estudo',d.audited],['Sem preço',d.without_price],['Risco crítico',d.critical],
+  ['Pouca liquidez',d.low_liquidity],['Atividade fraca',d.weak_activity],
+  ['Pool muito novo',d.too_new],['Saída desfavorável',d.bad_exit]];
+ return '<div class="agent-diagnostics-heading"><strong>Última triagem automática</strong><span>'+date(d.checked_at)+'</span></div>'+
+ '<div class="agent-diagnostic-grid">'+cells.map(([k,v])=>'<div><span>'+safe(k)+'</span><strong>'+Number(v||0)+'</strong></div>').join('')+'</div>'+
+ '<p>Contagem por rodada, não de moedas únicas. O laboratório pode testar oportunidades não validadas, mas nunca autoriza compras reais.</p>';
+}
 function tradesHTML(){
  const rows=(payload?.trades||[]).slice(0,35);
  if(!rows.length)return '<p class="cloud-empty">Nenhuma negociação simulada registrada. O sistema não inventa operações.</p>';
- return '<div class="agent-tablewrap"><table class="paper-table"><thead><tr><th>Horário</th><th>Estratégia</th><th>Moeda</th><th>Movimento</th><th>Valor líquido</th><th>Resultado</th><th>Motivo</th></tr></thead><tbody>'+rows.map(t=>
-  '<tr><td>'+date(t.created_at)+'</td><td>'+strategy(t.strategy)+'</td><td>'+safe(t.symbol||String(t.mint).slice(0,8))+'</td><td>'+(t.action==='buy'?'Compra':'Venda')+'</td><td>'+usd(Math.abs(Number(t.cash_usd)||0))+'</td>'+
+ return '<div class="agent-tablewrap"><table class="paper-table"><thead><tr><th>Horário</th><th>Estratégia</th><th>Moeda</th><th>Movimento</th><th>Classe</th><th>Valor líquido</th><th>Resultado</th><th>Motivo</th></tr></thead><tbody>'+rows.map(t=>
+  '<tr><td>'+date(t.created_at)+'</td><td>'+strategy(t.strategy)+'</td><td>'+safe(t.symbol||String(t.mint).slice(0,8))+'</td><td>'+(t.action==='buy'?'Compra':'Venda')+'</td><td>'+safe(classFor(t))+'</td><td>'+usd(Math.abs(Number(t.cash_usd)||0))+'</td>'+
   '<td class="'+(Number(t.pnl_usd)>=0?'positive':'negative')+'">'+(t.action==='sell'?usd(t.pnl_usd):'—')+'</td><td>'+safe(t.reason)+'</td></tr>').join('')+'</tbody></table></div>';
 }
 function decisionsHTML(){
  const rows=(payload?.decisions||[]).slice(0,30);
- if(!rows.length)return '<p class="cloud-empty">Aguardando sinais elegíveis ou decisões da IA.</p>';
+ if(!rows.length)return '<p class="cloud-empty">Aguardando sinais elegíveis para a simulação.</p>';
  return '<div class="agent-tablewrap"><table class="paper-table"><thead><tr><th>Horário</th><th>Estratégia</th><th>Token</th><th>Decisão</th><th>Justificativa</th></tr></thead><tbody>'+rows.map(d=>
   '<tr><td>'+date(d.created_at)+'</td><td>'+strategy(d.strategy)+'</td><td>'+safe(String(d.mint).slice(0,8))+'…</td><td>'+safe(d.decision)+'</td><td>'+safe(d.reason)+'</td></tr>').join('')+'</tbody></table></div>';
 }
 function redraw(){
- const status=$('agentStatus'),metrics=$('agentAccounts'),open=$('agentPositions'),history=$('agentTrades'),decisions=$('agentDecisions'),usage=$('agentUsage');
+ const status=$('agentStatus'),metrics=$('agentAccounts'),open=$('agentPositions'),history=$('agentTrades'),decisions=$('agentDecisions'),usage=$('agentUsage'),diag=$('agentDiagnostics');
  if(!status)return;
  if(error){status.textContent='Falha ao consultar a simulação: '+error;return;}
  if(!payload){status.textContent=loading?'Consultando o Worker…':'Abra a aba para carregar o estado da simulação.';return;}
  if(!payload.enabled){
   status.textContent='Teste ainda não habilitado no servidor. Configure PAPER_EXPERIMENT_ENABLED=true na Cloudflare e publique a migração D1.';
-  if(metrics)metrics.innerHTML='';if(open)open.innerHTML='';if(history)history.innerHTML='';if(decisions)decisions.innerHTML='';
+  if(metrics)metrics.innerHTML='';if(open)open.innerHTML='';if(history)history.innerHTML='';if(decisions)decisions.innerHTML='';if(diag)diag.innerHTML='';
   if(usage)usage.textContent='Nenhuma chamada de IA.';
   return;
  }
  status.textContent='Simulação fictícia ativa · '+(payload.aiConfigured?'IA ativada':'modo gratuito: apenas regras, sem IA')+' · Consulta '+date(payload.checkedAt);
  if(metrics)metrics.innerHTML=cards();
- if(open)open.innerHTML=(payload.positions||[]).length?'<div class="agent-tablewrap"><table class="paper-table"><thead><tr><th>Estratégia</th><th>Moeda</th><th>Investido</th><th>Preço de entrada</th><th>Aberta em</th></tr></thead><tbody>'+payload.positions.map(p=>
-  '<tr><td>'+strategy(p.strategy)+'</td><td>'+safe(p.symbol||String(p.mint).slice(0,8))+'</td><td>'+usd(p.invested_usd)+'</td><td>'+Number(p.entry_price).toPrecision(5)+'</td><td>'+date(p.opened_at)+'</td></tr>').join('')+'</tbody></table></div>':'<p class="cloud-empty">Nenhuma posição aberta.</p>';
+ if(diag)diag.innerHTML=diagnosticsHTML();
+ if(open)open.innerHTML=(payload.positions||[]).length?'<div class="agent-tablewrap"><table class="paper-table"><thead><tr><th>Estratégia</th><th>Moeda</th><th>Classificação</th><th>Investido</th><th>Preço de entrada</th><th>Aberta em</th></tr></thead><tbody>'+payload.positions.map(p=>
+  '<tr><td>'+strategy(p.strategy)+'</td><td>'+safe(p.symbol||String(p.mint).slice(0,8))+'</td><td>'+safe(classFor({strategy:p.strategy,mint:p.mint,action:'sell',created_at:p.opened_at}))+'</td><td>'+usd(p.invested_usd)+'</td><td>'+Number(p.entry_price).toPrecision(5)+'</td><td>'+date(p.opened_at)+'</td></tr>').join('')+'</tbody></table></div>':'<p class="cloud-empty">Nenhuma posição aberta.</p>';
  if(history)history.innerHTML=tradesHTML();
  if(decisions)decisions.innerHTML=decisionsHTML();
  if(usage){const u=payload.usage;usage.textContent=u?

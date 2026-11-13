@@ -12,13 +12,33 @@ const localDay=ms=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo'
 const dayStart=ms=>{const d=localDay(ms);return Date.parse(d+'T00:00:00-03:00');};
 const short=s=>String(s??'').slice(0,180);
 export const aiDailyLimit=env=>{const x=Number(env?.PAPER_AI_DAILY_LIMIT);return Number.isInteger(x)&&x>=1?Math.min(PAPER.maxAiCallsPerDay,x):PAPER.maxAiCallsPerDay;};
-export function isPaperCandidate(c){
- const p=c?.pair,r=c?.risk,q=c?.quote,price=num(p?.priceUsd),liquidity=num(p?.liquidity?.usd);
- return !!(mintOK(c?.mint)&&price>0&&liquidity>=20000&&c?.stage==='priority'&&
-   r?.level==='watch'&&r?.verified===true&&r.organic>=60&&r.top!==null&&r.top<25&&
-   (r.ageMinutes===null||r.ageMinutes>=15)&&r.alerts?.length===0&&
-   q==='quoted');
+/* Eligibility is NOT permission to trade real funds. Tier is a quality label for fictional observations.
+ * A missing Jupiter quote is not proof of a viable exit; bad quotes DO block.
+ */
+export function assessPaperCandidate(c,at=Date.now()){
+ const p=c?.pair,r=c?.risk,price=num(p?.priceUsd),liquidity=num(p?.liquidity?.usd);
+ const volume=num(p?.volume?.m5),change=num(p?.priceChange?.m5);
+ const buys=num(p?.txns?.m5?.buys),sells=num(p?.txns?.m5?.sells);
+ const score=num(c?.score),quote=c?.quote||'not_checked';
+ const rejected=reason=>({eligible:false,tier:'rejected',reason});
+ if(!mintOK(c?.mint)||!(price>0))return rejected('sem_preco');
+ if(!r||r.level==='blocked'||(Array.isArray(r.alerts)&&r.alerts.length>0)||
+    (num(r.organic)!==null&&num(r.organic)<35)||(num(r.top)!==null&&num(r.top)>=40)||
+    (num(r.dropP)!==null&&num(r.dropP)<=-20)||(num(r.dropL)!==null&&num(r.dropL)<=-30))return rejected('risco_critico');
+ if(!(liquidity>=8000))return rejected('liquidez_insuficiente');
+ if(!['priority','watch'].includes(c?.stage)||!(score>=60)||
+    !(volume>=1500)||!(buys>=8)||!(sells>=1)||!(buys/sells>=1.2)||
+    change===null||change<1||change>45)return rejected('atividade_insuficiente');
+ const created=num(p?.pairCreatedAt);
+ if(created!==null&&(created>at||at-created<3*60_000))return rejected('pool_recente');
+ if(quote==='large_impact'||quote==='unavailable')return rejected('saida_ruim_comprovada');
+ const audited=r.level==='watch'&&r.verified===true&&r.organic>=60&&
+  r.top!==null&&r.top<25&&(r.ageMinutes===null||r.ageMinutes>=15)&&
+  quote==='quoted';
+ return {eligible:true,tier:audited?'audited':'exploratory',
+  reason:audited?'auditado_para_estudo':'entrada_nao_validada'};
 }
+export function isPaperCandidate(c,at){return assessPaperCandidate(c,at).eligible;}
 export function exitRule(strategy,position,price,at){
  if(!position||!(price>0))return null;
  const entry=num(position.entry_price),opened=num(position.opened_at);
@@ -56,7 +76,9 @@ async function buy(db,accountRow,strategy,c,at,reason){
   db.prepare('UPDATE paper_accounts SET cash_usd=cash_usd-?,updated_at=? WHERE strategy=? AND cash_usd>=?')
    .bind(PAPER.stake,at,strategy,PAPER.stake),
   db.prepare('INSERT INTO paper_trades(id,strategy,mint,symbol,action,quantity,price_usd,fee_usd,cash_usd,pnl_usd,reason,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')
-   .bind(id,strategy,c.mint,String(c.symbol||'').slice(0,25),'buy',qty,price,fee,-PAPER.stake,null,short(reason),at)
+   .bind(id,strategy,c.mint,String(c.symbol||'').slice(0,25),'buy',qty,price,fee,-PAPER.stake,null,short(reason),at),
+  db.prepare('INSERT INTO paper_entry_evidence(buy_id,strategy,mint,created_at,tier,risk_level,quote_status,score,liquidity) VALUES(?,?,?,?,?,?,?,?,?)')
+   .bind(id,strategy,c.mint,at,c.tier,c.risk?.level||'unverified',c.quote||'not_checked',c.score||0,num(c.pair?.liquidity?.usd))
  ]);
  accountRow.cash_usd-=PAPER.stake;
  return true;
@@ -132,10 +154,21 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
  if(gate?.meta?.changes===0)return {enabled:true,skipped:'already_processed'};
  const accounts={},open={};
  for(const name of ['baseline','ai']){accounts[name]=await account(db,name,at);open[name]=await positions(db,name);}
- const eligible=(candidates||[]).map(c=>{const pair=prices.get(c.mint);
-  return {mint:c.mint,name:c.name,symbol:c.symbol,pair,risk:riskAtSignal.get(c.mint),
-    stage:pair?c.stage:null,score:c.score||0,quote:quoteThisCycle.get(c.mint)};})
-  .filter(isPaperCandidate).sort((a,b)=>b.score-a.score).slice(0,2);
+ const analyzed=(candidates||[]).map(c=>{const pair=prices.get(c.mint);
+  const token={mint:c.mint,name:c.name,symbol:c.symbol,pair,risk:riskAtSignal.get(c.mint),
+    stage:pair?c.stage:null,score:c.score||0,quote:quoteThisCycle.get(c.mint)||'not_checked'};
+  return {...token,assessment:assessPaperCandidate(token,at)};
+ });
+ const counters={sem_preco:0,risco_critico:0,liquidez_insuficiente:0,atividade_insuficiente:0,pool_recente:0,saida_ruim_comprovada:0};
+ for(const c of analyzed)if(!c.assessment.eligible)counters[c.assessment.reason]++;
+ const eligibleAll=analyzed.filter(c=>c.assessment.eligible)
+  .map(c=>({...c,tier:c.assessment.tier}))
+  .sort((a,b)=>b.score-a.score);
+ const eligible=eligibleAll.slice(0,3);
+ await db.prepare('INSERT INTO paper_diagnostics(id,checked_at,candidates,eligible,exploratory,audited,without_price,critical,low_liquidity,weak_activity,too_new,bad_exit) VALUES(1,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET checked_at=excluded.checked_at,candidates=excluded.candidates,eligible=excluded.eligible,exploratory=excluded.exploratory,audited=excluded.audited,without_price=excluded.without_price,critical=excluded.critical,low_liquidity=excluded.low_liquidity,weak_activity=excluded.weak_activity,too_new=excluded.too_new,bad_exit=excluded.bad_exit')
+  .bind(at,analyzed.length,eligibleAll.length,eligibleAll.filter(x=>x.tier==='exploratory').length,
+   eligibleAll.filter(x=>x.tier==='audited').length,counters.sem_preco,counters.risco_critico,
+   counters.liquidez_insuficiente,counters.atividade_insuficiente,counters.pool_recente,counters.saida_ruim_comprovada).run();
  const aiOpen=open.ai.map(p=>({...p,current_price:markPrice(prices,p.mint)}));
  const ai=await askAgent(env,at,eligible,aiOpen,accounts.ai.cash_usd,fetcher);
  const count={baseline:0,ai:0};let closed=0;
@@ -160,7 +193,10 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
   for(const c of eligible){
    if(count[strategy]||open[strategy].some(p=>p.mint===c.mint)||await historyHasBuy(db,strategy,c.mint,at))continue;
    const model=ai.choices.get(c.mint),choice=strategy==='baseline'?'buy':model?.action||'hold';
-   const reason=strategy==='baseline'?'Filtro fixo: risco, liquidez e saida verificados':model?.reason||('IA '+ai.status+'; sem autorizacao de entrada');
+   const category=c.tier==='exploratory'
+    ?'EXPLORATORIO: entrada nao validada, execucao e saida nao comprovadas'
+    :'AUDITADO PARA ESTUDO: sem garantia de execucao';
+   const reason=strategy==='baseline'?category+'; filtro de atividade e risco':category+'; '+(model?.reason||('IA '+ai.status+'; sem autorizacao de entrada'));
    await recordDecision(db,strategy,c.mint,choice,reason,at,strategy==='baseline'?'rules':'model');
    if(choice==='buy'){if(await buy(db,a,strategy,c,at,reason))count[strategy]++;}
   }
@@ -170,13 +206,15 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
 export async function paperSnapshot(env,at=Date.now()){
  if(!paperEnabled(env))return {enabled:false,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),accounts:[],positions:[],trades:[],decisions:[],usage:null,note:'Teste ainda nao habilitado no servidor'};
  const db=env.DB;
- const [ac,po,tr,de,us,pf]=await Promise.all([
+ const [ac,po,tr,de,us,pf,ev,diag]=await Promise.all([
   db.prepare('SELECT * FROM paper_accounts ORDER BY strategy').all(),
   db.prepare('SELECT * FROM paper_positions ORDER BY opened_at DESC').all(),
   db.prepare('SELECT * FROM paper_trades ORDER BY created_at DESC LIMIT 80').all(),
   db.prepare('SELECT * FROM paper_decisions ORDER BY created_at DESC LIMIT 80').all(),
   db.prepare('SELECT * FROM paper_ai_usage WHERE day=?').bind(localDay(at)).first(),
-  db.prepare("SELECT strategy,COUNT(*) AS sells,SUM(CASE WHEN pnl_usd>0 THEN 1 ELSE 0 END) AS wins,COALESCE(SUM(pnl_usd),0) AS realized_pnl FROM paper_trades WHERE action='sell' GROUP BY strategy").all()
+  db.prepare("SELECT strategy,COUNT(*) AS sells,SUM(CASE WHEN pnl_usd>0 THEN 1 ELSE 0 END) AS wins,COALESCE(SUM(pnl_usd),0) AS realized_pnl FROM paper_trades WHERE action='sell' GROUP BY strategy").all(),
+  db.prepare('SELECT * FROM paper_entry_evidence ORDER BY created_at DESC LIMIT 100').all(),
+  db.prepare('SELECT * FROM paper_diagnostics WHERE id=1').first()
  ]);
  const rows=po.results||[],accounts=(ac.results||[]).map(a=>{
   const mine=rows.filter(p=>p.strategy===a.strategy);
@@ -187,6 +225,7 @@ export async function paperSnapshot(env,at=Date.now()){
    unrealized_pnl:fresh?netOpen-invested:null,prices_fresh:fresh};
  });
  return {enabled:true,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),accounts,
-  performance:pf.results||[],positions:rows,trades:tr.results||[],decisions:de.results||[],usage:us||null,
+  performance:pf.results||[],positions:rows,trades:tr.results||[],decisions:de.results||[],
+  evidence:ev.results||[],diagnostics:diag||null,usage:us||null,
   checkedAt:at,note:'Compras/vendas ficticias com cotacoes observadas e custos supostos. Sem garantia de execucao real.'};
 }

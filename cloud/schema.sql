@@ -109,3 +109,18 @@ CREATE TABLE IF NOT EXISTS paper_ai_usage(
  output_tokens INTEGER NOT NULL DEFAULT 0,last_status TEXT NOT NULL DEFAULT '',updated_at INTEGER NOT NULL
 );
 CREATE TABLE IF NOT EXISTS paper_cycle_runs(minute_at INTEGER PRIMARY KEY);
+
+-- Observational risk evidence is separate from trade execution and is never treated as authorization.
+CREATE TABLE IF NOT EXISTS paper_entry_evidence(
+ buy_id TEXT PRIMARY KEY,strategy TEXT NOT NULL,mint TEXT NOT NULL,created_at INTEGER NOT NULL,
+ tier TEXT NOT NULL,risk_level TEXT NOT NULL,quote_status TEXT NOT NULL,
+ score INTEGER NOT NULL DEFAULT 0,liquidity REAL
+);
+CREATE INDEX IF NOT EXISTS idx_paper_evidence_time ON paper_entry_evidence(created_at DESC);
+CREATE TABLE IF NOT EXISTS paper_diagnostics(
+ id INTEGER PRIMARY KEY CHECK(id=1),checked_at INTEGER NOT NULL,candidates INTEGER NOT NULL DEFAULT 0,
+ eligible INTEGER NOT NULL DEFAULT 0,exploratory INTEGER NOT NULL DEFAULT 0,audited INTEGER NOT NULL DEFAULT 0,
+ without_price INTEGER NOT NULL DEFAULT 0,critical INTEGER NOT NULL DEFAULT 0,
+ low_liquidity INTEGER NOT NULL DEFAULT 0,weak_activity INTEGER NOT NULL DEFAULT 0,
+ too_new INTEGER NOT NULL DEFAULT 0,bad_exit INTEGER NOT NULL DEFAULT 0
+);
