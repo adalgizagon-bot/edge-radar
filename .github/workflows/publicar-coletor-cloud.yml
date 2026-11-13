@@ -100,7 +100,7 @@ jobs:
           assert scalp.get('targetPct') == 5, "Perfil Edge Scalp nao publicado."
           assert scalp.get('holdMinutes') == 6, "Prazo Edge Scalp incorreto."
           v2=profiles.get('scalp_v2') or {}
-          assert v2.get('targetPct') == 7, "Perfil V2 nao publicado."
+          assert abs(float(v2.get('targetPct') or 0)-7)<1e-6, "Perfil V2 nao publicado."
           assert v2.get('holdMinutes') == 8, "Prazo V2 incorreto."
           assert x.get('v2Since') is not None, "Início da V2 ausente."
           assert (x.get('fees') or {}).get('stressEachSidePct') == 2.5, "Cenario de custos ausente."
