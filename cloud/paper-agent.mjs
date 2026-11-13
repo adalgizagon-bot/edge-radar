@@ -159,7 +159,7 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
  const gate=await db.prepare('INSERT OR IGNORE INTO paper_cycle_runs(minute_at) VALUES(?)').bind(bucket).run();
  if(gate?.meta?.changes===0)return {enabled:true,skipped:'already_processed'};
  const accounts={},open={};
- for(const name of ['baseline','ai']){accounts[name]=await account(db,name,at);open[name]=await positions(db,name);}
+ for(const name of ['baseline','scalp','ai']){accounts[name]=await account(db,name,at);open[name]=await positions(db,name);}
  const analyzed=(candidates||[]).map(c=>{const pair=prices.get(c.mint);
   const token={mint:c.mint,name:c.name,symbol:c.symbol,pair,risk:riskAtSignal.get(c.mint),
     stage:pair?c.stage:null,score:c.score||0,quote:quoteThisCycle.get(c.mint)||'not_checked'};
@@ -171,43 +171,64 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
   .map(c=>({...c,tier:c.assessment.tier}))
   .sort((a,b)=>b.score-a.score);
  const eligible=eligibleAll.slice(0,3);
+ const scalpExam=eligibleAll.map(c=>({...c,scalpAssessment:scalpCandidate(c,at)}));
+ const scalpAll=scalpExam.filter(c=>c.scalpAssessment.eligible);
+ const scalpEligible=scalpAll.slice(0,3);
+ const scalpReject={scalp_volume_ou_score:0,scalp_pressao_compradora:0,scalp_preco_esticado_ou_fraco:0,
+   scalp_pool_novo:0,scalp_perda_de_forca:0};
+ for(const c of scalpExam)if(!c.scalpAssessment.eligible)scalpReject[c.scalpAssessment.reason]=(scalpReject[c.scalpAssessment.reason]||0)+1;
+ await db.prepare('INSERT INTO paper_scalp_diagnostics(id,checked_at,candidates,eligible,volume_score,pressure,stretched,too_new,weakening) VALUES(1,?,?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET checked_at=excluded.checked_at,candidates=excluded.candidates,eligible=excluded.eligible,volume_score=excluded.volume_score,pressure=excluded.pressure,stretched=excluded.stretched,too_new=excluded.too_new,weakening=excluded.weakening')
+  .bind(at,eligibleAll.length,scalpAll.length,scalpReject.scalp_volume_ou_score,
+   scalpReject.scalp_pressao_compradora,scalpReject.scalp_preco_esticado_ou_fraco,
+   scalpReject.scalp_pool_novo,scalpReject.scalp_perda_de_forca).run();
  await db.prepare('INSERT INTO paper_diagnostics(id,checked_at,candidates,eligible,exploratory,audited,without_price,critical,low_liquidity,weak_activity,too_new,bad_exit) VALUES(1,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET checked_at=excluded.checked_at,candidates=excluded.candidates,eligible=excluded.eligible,exploratory=excluded.exploratory,audited=excluded.audited,without_price=excluded.without_price,critical=excluded.critical,low_liquidity=excluded.low_liquidity,weak_activity=excluded.weak_activity,too_new=excluded.too_new,bad_exit=excluded.bad_exit')
   .bind(at,analyzed.length,eligibleAll.length,eligibleAll.filter(x=>x.tier==='exploratory').length,
    eligibleAll.filter(x=>x.tier==='audited').length,counters.sem_preco,counters.risco_critico,
    counters.liquidez_insuficiente,counters.atividade_insuficiente,counters.pool_recente,counters.saida_ruim_comprovada).run();
  const aiOpen=open.ai.map(p=>({...p,current_price:markPrice(prices,p.mint)}));
  const ai=await askAgent(env,at,eligible,aiOpen,accounts.ai.cash_usd,fetcher);
- const count={baseline:0,ai:0};let closed=0;
- for(const strategy of ['baseline','ai']){
+ const count={baseline:0,scalp:0,ai:0};let closed=0;
+ for(const strategy of ['baseline','scalp','ai']){
   const a=accounts[strategy],positionsNow=open[strategy];
+  const closedMints=new Set();
   for(const p of positionsNow){
    const price=markPrice(prices,p.mint);if(!price)continue;
    await db.prepare('UPDATE paper_positions SET last_price=?,last_quote_at=?,updated_at=? WHERE strategy=? AND mint=?')
     .bind(price,at,at,strategy,p.mint).run();
-   const safety=exitRule(strategy,p,price,at);
+   let tracking=null;
+   if(strategy==='scalp'){
+    const old=await db.prepare('SELECT * FROM paper_scalp_tracking WHERE strategy=? AND mint=?')
+      .bind(strategy,p.mint).first();
+    tracking=nextScalpTracking(old||{peak_price:p.entry_price,last_price:p.entry_price,
+     weak_ticks:0,sample_at:p.opened_at},price,at);
+    await db.prepare('INSERT INTO paper_scalp_tracking(strategy,mint,peak_price,last_price,weak_ticks,sample_at) VALUES(?,?,?,?,?,?) ON CONFLICT(strategy,mint) DO UPDATE SET peak_price=excluded.peak_price,last_price=excluded.last_price,weak_ticks=excluded.weak_ticks,sample_at=excluded.sample_at')
+     .bind(strategy,p.mint,tracking.peak_price,tracking.last_price,tracking.weak_ticks,tracking.sample_at).run();
+   }
+   const safety=strategy==='scalp'?scalpExit(p,price,at,tracking):exitRule(strategy,p,price,at);
    const model=ai.choices.get(p.mint),opt=strategy==='ai'&&model?.action==='sell'&&at-p.opened_at>=120000;
    if(safety||opt){
-    if(await sell(db,a,strategy,p,price,at,safety||'IA: '+model.reason)){closed++;}
+    if(await sell(db,a,strategy,p,price,at,safety||'IA: '+model.reason)){closed++;closedMints.add(p.mint);}
     await recordDecision(db,strategy,p.mint,'sell',safety||'IA: '+model.reason,at,safety?'safety':strategy);
    }else if(strategy==='ai'&&model){await recordDecision(db,strategy,p.mint,'hold',model.reason,at,'model');}
   }
-  const alreadyOpen=positionsNow.filter(p=>!exitRule(strategy,p,markPrice(prices,p.mint),at)).length;
-  if(alreadyOpen>=PAPER.maxPositions||a.cash_usd<PAPER.stake)continue;
+  const maxPositions=strategy==='scalp'?SCALP.maxPositions:PAPER.maxPositions;
+  if(positionsNow.length-closedMints.size>=maxPositions||a.cash_usd<PAPER.stake)continue;
   const daily=await db.prepare("SELECT COALESCE(SUM(pnl_usd),0) AS pnl FROM paper_trades WHERE strategy=? AND action='sell' AND created_at>=?")
    .bind(strategy,dayStart(at)).first();
-  if((num(daily?.pnl)||0)<=-50)continue;
-  for(const c of eligible){
-   if(count[strategy]||open[strategy].some(p=>p.mint===c.mint)||await historyHasBuy(db,strategy,c.mint,at))continue;
-   const model=ai.choices.get(c.mint),choice=strategy==='baseline'?'buy':model?.action||'hold';
+  if((num(daily?.pnl)||0)<=(strategy==='scalp'?-SCALP.dailyLossLimitUsd:-50))continue;
+  for(const c of strategy==='scalp'?scalpEligible:eligible){
+   if(count[strategy]||positionsNow.some(p=>p.mint===c.mint)||await historyHasBuy(db,strategy,c.mint,at))continue;
+   const model=ai.choices.get(c.mint),choice=strategy==='ai'?model?.action||'hold':'buy';
    const category=c.tier==='exploratory'
     ?'EXPLORATORIO: entrada nao validada, execucao e saida nao comprovadas'
     :'AUDITADO PARA ESTUDO: sem garantia de execucao';
-   const reason=strategy==='baseline'?category+'; filtro de atividade e risco':category+'; '+(model?.reason||('IA '+ai.status+'; sem autorizacao de entrada'));
-   await recordDecision(db,strategy,c.mint,choice,reason,at,strategy==='baseline'?'rules':'model');
+   const reason=strategy==='scalp'?category+'; Edge Scalp: alvo 5%, stop 3%, max 6 min':
+    strategy==='baseline'?category+'; filtro de atividade e risco':category+'; '+(model?.reason||('IA '+ai.status+'; sem autorizacao de entrada'));
+   await recordDecision(db,strategy,c.mint,choice,reason,at,strategy==='ai'?'model':'rules');
    if(choice==='buy'){if(await buy(db,a,strategy,c,at,reason))count[strategy]++;}
   }
  }
- return {enabled:true,eligible:eligible.length,buys:count,sells:closed,aiStatus:ai.status};
+ return {enabled:true,eligible:eligibleAll.length,scalpEligible:scalpAll.length,buys:count,sells:closed,aiStatus:ai.status};
 }
 export async function paperSnapshot(env,at=Date.now()){
  if(!paperEnabled(env))return {enabled:false,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),accounts:[],positions:[],trades:[],decisions:[],usage:null,note:'Teste ainda nao habilitado no servidor'};
