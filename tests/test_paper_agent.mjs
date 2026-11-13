@@ -30,7 +30,7 @@ test('Emergency stop and max duration take precedence, no invented exits without
  assert.match(exitRule('baseline',p,1.12,1000+60000),/alvo/);
  assert.equal(exitRule('baseline',p,1.1,1000+60000),null);
  assert.match(exitRule('ai',p,1.1,1000+20*60000),/limite/);
- assert.equal(PAPER.maxAiCallsPerDay,100);
+ assert.equal(PAPER.maxAiCallsPerDay,480);
 });
 test('AI request uses structured output, only sends market data, and stores usage',async()=>{
  let calls=0,updates=[];
