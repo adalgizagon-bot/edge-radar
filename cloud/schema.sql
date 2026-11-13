@@ -72,3 +72,13 @@ CREATE TABLE IF NOT EXISTS signal_evidence (
  liquidity REAL,reasons TEXT NOT NULL DEFAULT '[]',quote_status TEXT NOT NULL DEFAULT 'not_checked'
 );
 CREATE INDEX IF NOT EXISTS idx_signal_evidence_time ON signal_evidence(captured_at DESC);
+
+-- Backoff entre ciclos, evitando 429 repetidos da mesma API.
+CREATE TABLE IF NOT EXISTS source_health (
+ source TEXT PRIMARY KEY,
+ next_attempt INTEGER NOT NULL DEFAULT 0,
+ failures INTEGER NOT NULL DEFAULT 0,
+ last_status INTEGER,
+ last_success INTEGER,
+ last_error TEXT NOT NULL DEFAULT ''
+);
