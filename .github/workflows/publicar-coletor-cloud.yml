@@ -9,6 +9,7 @@ on:
       - 'tests/test_cloud_worker.mjs'
       - 'tests/test_paper_agent.mjs'
       - 'tests/test_scalp.mjs'
+      - 'tests/test_scalp_integration.mjs'
       - 'tests/test_risk.mjs'
       - 'tests/test_exit_quote.mjs'
       - 'tests/test_discovery.mjs'
@@ -29,7 +30,7 @@ jobs:
         with:
           node-version: '22'
       - name: Testar regras de risco e coleta
-        run: node --test tests/test_scalp.mjs tests/test_paper_agent.mjs tests/test_cloud_worker.mjs tests/test_discovery.mjs tests/test_risk.mjs tests/test_exit_quote.mjs tests/test_edge_crypto.cjs tests/test_cloud_frontend.cjs tests/test_edge_signals.cjs
+        run: node --test tests/test_scalp_integration.mjs tests/test_scalp.mjs tests/test_paper_agent.mjs tests/test_cloud_worker.mjs tests/test_discovery.mjs tests/test_risk.mjs tests/test_exit_quote.mjs tests/test_edge_crypto.cjs tests/test_cloud_frontend.cjs tests/test_edge_signals.cjs
       - name: Validar configuração
         env:
           API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
