@@ -153,3 +153,50 @@ O diagnóstico da última rodada explica quando os candidatos foram descartados
 por preço, risco, liquidez, atividade, idade do pool ou rota desfavorável.
 A simulação pode superestimar resultados (slippage, taxas e dificuldade de
 vender), portanto serve para testar filtros, não demonstrar lucro realizável.
+
+## Edge Scalp Rápido — estudo fictício de até 6 minutos
+
+A aba Laboratório de testes compara duas estratégias AUTOMÁTICAS e SEM DINHEIRO:
+a referência já existente (alvo de preço +12%, stop observado -7%, tempo limite 20 min,
+3 posições simultâneas) e o novo Edge Scalp (alvo observado +5%, stop -3%,
+limite 6 minutos, no máximo 2 posições). Ambas simulam posições de
+US$ 20, com contas independentes de US$ 1.000. O histórico anterior não é apagado.
+
+### Entradas e saídas
+
+O Edge Scalp parte da mesma seleção exploratória do radar, mas exige adicionalmente:
+pontuação >= 70, liquidez >= US$ 12 mil, volume de 5 min >= US$ 2.500, ao menos
+10 compras, proporção compras/vendas >= 1,35, variação de 5 min entre +1,5% e +16%,
+pool com pelo menos 5 minutos quando a origem informa a data e nenhuma queda
+de preço >= 2% observada entre as duas últimas verificações. Sinais críticos
+conhecidos e cotação de saída comprovadamente ruim bloqueiam a simulação.
+
+O coletor observa cada posição e pode registrar saída teórica por alvo/stop,
+por devolução de 1,8% após pico de +3%, por duas observações seguidas de perda
+de força após 2 min, por movimento insuficiente após 3 min, ou pelo prazo de 6 min.
+O stop tem precedência, mas não é uma ordem executável. Se não houver preço,
+não é registrada venda; a posição aparece com cotação desatualizada. O limite
+de perda diária realizada para novas entradas do Scalp é US$ 25 fictícios.
+
+### Comparação confiável
+
+O banco D1 grava o instante comum de início da comparação sem modificar os
+resultados anteriores da estratégia de referência. O painel mostra, para as
+operações ENCERRADAS desde esse instante: número, vitórias, lucro teórico
+após 1% de custo por lado, teste de estresse com 2,5% por lado, fator de lucro
+e maior recuo de saldo ao longo dos fechamentos. O saldo atual de cada conta
+pode incluir histórico anterior; por isso, avalie o lucro da janela comum.
+Posições abertas são marcadas a mercado apenas se houver cotação recebida
+recentemente. A simulação de custo usa multiplicadores hipotéticos e não
+representa cotação executável de compra/venda.
+
+O cron gratuito da Cloudflare continua rodando aproximadamente 1 vez por
+minuto. Foi melhorada a tolerância a falhas de lotes da DEX Screener,
+priorizando o monitoramento das posições abertas antes de novos candidatos.
+Isso não fornece preço por segundo nem garante stops, liquidez, taxas ou
+saída reais. Não utilizar resultados de poucos trades para inferir vantagem.
+Antes de pensar em capital real, coletar amostra significativa e verificar
+liquidez e custos de execução num ambiente autorizado.
+
+Sem PAPER_AI_ENABLED=true, nenhuma chamada à API paga de IA é feita.
+Não existem carteiras, assinaturas de ordens ou envios de transações.

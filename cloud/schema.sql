@@ -124,3 +124,32 @@ CREATE TABLE IF NOT EXISTS paper_diagnostics(
  low_liquidity INTEGER NOT NULL DEFAULT 0,weak_activity INTEGER NOT NULL DEFAULT 0,
  too_new INTEGER NOT NULL DEFAULT 0,bad_exit INTEGER NOT NULL DEFAULT 0
 );
+
+-- Edge Scalp transient monitoring; separate from existing baseline and AI histories.
+-- Explicit snapshot timestamps are collector receipt times, not exchange execution times.
+CREATE TABLE IF NOT EXISTS paper_scalp_tracking (
+  strategy TEXT NOT NULL DEFAULT 'scalp',
+  mint TEXT NOT NULL,
+  peak_price REAL NOT NULL,
+  last_price REAL NOT NULL,
+  weak_ticks INTEGER NOT NULL DEFAULT 0,
+  sample_at INTEGER NOT NULL,
+  PRIMARY KEY(strategy,mint)
+);
+CREATE INDEX IF NOT EXISTS idx_scalp_tracking_time ON paper_scalp_tracking(sample_at DESC);
+
+-- Read-only latest scalp filter summary; never alters prior collected signals.
+CREATE TABLE IF NOT EXISTS paper_scalp_diagnostics (
+ id INTEGER PRIMARY KEY CHECK(id=1),checked_at INTEGER NOT NULL,
+ candidates INTEGER NOT NULL DEFAULT 0, eligible INTEGER NOT NULL DEFAULT 0,
+ volume_score INTEGER NOT NULL DEFAULT 0, pressure INTEGER NOT NULL DEFAULT 0,
+ stretched INTEGER NOT NULL DEFAULT 0, too_new INTEGER NOT NULL DEFAULT 0,
+ weakening INTEGER NOT NULL DEFAULT 0
+);
+
+-- Common launch instant for apples-to-apples completed-trade comparisons.
+-- Existing baseline history is preserved; reported comparison metrics start here.
+CREATE TABLE IF NOT EXISTS paper_comparison_start (
+ id INTEGER PRIMARY KEY CHECK(id=1),
+ started_at INTEGER NOT NULL
+);

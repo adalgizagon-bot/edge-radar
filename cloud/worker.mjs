@@ -157,14 +157,19 @@ function dedupePools(pools){
  const by=new Map();for(const p of pools){const o=by.get(p.mint);if(!o||(p.liquidity??0)>(o.liquidity??0))by.set(p.mint,p)}
  return [...by.values()].sort((a,b)=>(b.volume??0)-(a.volume??0));
 }
+/* Prioritize open paper positions, then return partial successes. A single failed batch
+ * must not make valid prices from other batches disappear.
+ */
 async function fetchPrices(mints,fetcher){
- const out=[];
+ const out=[],errors=[];
  for(let i=0;i<mints.length;i+=30){
-  const rows=await fetchJSON(SETTINGS.dex+mints.slice(i,i+30).join(','),fetcher);
-  if(!Array.isArray(rows))throw new Error('Formato inválido do DEX Screener');
-  out.push(...rows);
+  try{
+   const rows=await fetchJSON(SETTINGS.dex+mints.slice(i,i+30).join(','),fetcher);
+   if(!Array.isArray(rows))throw new Error('Formato inválido do DEX Screener');
+   out.push(...rows);
+  }catch(e){errors.push('lote '+(Math.floor(i/30)+1)+': '+String(e?.message||e).slice(0,95));}
  }
- return selectDexPairs(out);
+ return {prices:selectDexPairs(out),errors};
 }
 async function makeCheckpoints(db,signal,now,price){
  let changed=0;
@@ -224,7 +229,11 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  }
  const mints=[...new Set([...paperOpenMints,...due.map(x=>x.mint),...candidates.map(x=>x.mint)])].slice(0,SETTINGS.maxMintsPerScan);
  let prices=new Map();
- if(mints.length){try{prices=await fetchPrices(mints,fetcher);}catch(e){errors.push('DEX Screener: '+String(e?.message||e));}}
+ if(mints.length){
+  const outcome=await fetchPrices(mints,fetcher);
+  prices=outcome.prices;
+  if(outcome.errors.length)errors.push('DEX Screener parcial: '+outcome.errors.join('; '));
+ }
  let checkpoints=0;
  for(const signal of active){
   const p=prices.get(signal.mint),price=value(p?.priceUsd);

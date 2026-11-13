@@ -7,6 +7,9 @@ on:
     paths:
       - 'cloud/**'
       - 'tests/test_cloud_worker.mjs'
+      - 'tests/test_paper_agent.mjs'
+      - 'tests/test_scalp.mjs'
+      - 'tests/test_scalp_integration.mjs'
       - 'tests/test_risk.mjs'
       - 'tests/test_exit_quote.mjs'
       - 'tests/test_discovery.mjs'
@@ -27,7 +30,7 @@ jobs:
         with:
           node-version: '22'
       - name: Testar regras de risco e coleta
-        run: node --test tests/test_cloud_worker.mjs tests/test_discovery.mjs tests/test_risk.mjs tests/test_exit_quote.mjs tests/test_edge_crypto.cjs tests/test_cloud_frontend.cjs tests/test_edge_signals.cjs
+        run: node --test tests/test_scalp_integration.mjs tests/test_scalp.mjs tests/test_paper_agent.mjs tests/test_cloud_worker.mjs tests/test_discovery.mjs tests/test_risk.mjs tests/test_exit_quote.mjs tests/test_edge_crypto.cjs tests/test_cloud_frontend.cjs tests/test_edge_signals.cjs
       - name: Validar configuração
         env:
           API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -79,7 +82,12 @@ jobs:
           assert x.get('aiConfigured') is False, "IA precisa estar desligada."
           assert isinstance(x.get('accounts'), list), "Contas simuladas inválidas."
           assert isinstance(x.get('trades'), list), "Movimentações simuladas inválidas."
-          print("Teste gratuito validado; IA desligada; contas simuladas:",len(x['accounts']),"movimentações:",len(x['trades']))
+          profiles=x.get('profiles') or {}
+          scalp=profiles.get('scalp') or {}
+          assert scalp.get('targetPct') == 5, "Perfil Edge Scalp nao publicado."
+          assert scalp.get('holdMinutes') == 6, "Prazo Edge Scalp incorreto."
+          assert (x.get('fees') or {}).get('stressEachSidePct') == 2.5, "Cenario de custos ausente."
+          print("Teste gratuito validado; IA desligada; Edge Scalp disponivel; movimentos:",len(x['trades']))
           PY
       - name: Próximos passos
         run: |
