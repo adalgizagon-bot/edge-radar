@@ -241,3 +241,35 @@ perfeitamente pareado. Primeiro avaliar amostras independentes de pelo menos
 
 Nenhuma chave de IA é necessária. `PAPER_AI_ENABLED=false` permanece
 explicitamente configurado, sem cobranças por chamadas de modelos.
+
+## Busca de moedas por idade e força observada — prioridade do radar
+
+**Novo acesso gratuito:** `/radar` no mesmo Worker da Cloudflare. A consulta
+`/api/discover?group=strong|new|established|watch|all` usa o universo de moedas
+persistido no D1. A nova busca separa lançamentos, tendências de 5 minutos,
+tendências de 1 hora e tendências de 24 horas; mantém amostras de moedas
+observadas por até 14 dias (não significa que todas terão preço recente).
+
+A busca consulta pools GeckoTerminal novos e uma janela de tendência rotativa
+a cada ~3 minutos, além de reconsultar alguns pools antigos por endereço.
+Reserva espaço para moedas maduras mesmo quando o feed de lançamentos está
+lotado. Dados de entrada no gráfico e de segurança continuam observacionais;
+classificação de atividade não libera compra. A coleta guarda preço, liquidez,
+volume, variação 5m/1h/24h, volume diário e capitalização **somente quando a
+fonte fornece esses campos**. Dados não disponíveis aparecem como desconhecidos.
+
+Quando DEX Screener responde HTTP 429, o coletor aplica pausa progressiva
+por provedor (em vez de insistir a cada minuto), e usa **cotações novas** do
+GeckoTerminal quando houver. Preços antigos ficam identificados como
+desatualizados; jamais são convertidos em operações simuladas. Histórico
+pré-existente no D1 é importado com o horário original registrado e sem
+inventar idade, volume ou mudanças de preço.
+
+A lista pessoal ★ conserva as informações observadas no navegador mesmo que
+uma moeda deixe o ranking ou expire dos 14 dias de coleta. Ela **não** abre
+posições reais, não garante refresh de preço após a expiração e não revela
+dados do usuário a terceiros. Continua sendo necessário conferir pool, rota
+de venda, taxas e volume antes de considerar risco financeiro.
+
+O laboratório `/lab`, a auditoria `/audit`, as estratégias de paper trading
+e seus dados anteriores permanecem intactos. IA paga segue desativada.

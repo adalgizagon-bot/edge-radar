@@ -3,7 +3,7 @@
  */
 (function (root) {
 'use strict';
-const CFG=Object.freeze({ws:'wss://pumpportal.fun/api/data',gecko:'https://api.geckoterminal.com/api/v2/networks/solana/',dex:'https://api.dexscreener.com/tokens/v1/solana/',maxTokens:280,priceMs:8000,poolsMs:45000,debounceMs:280,priceMaxAgeMs:90000,seenMaxHours:8,feeEstimate:0.01});
+const CFG=Object.freeze({ws:'wss://pumpportal.fun/api/data',gecko:'https://api.geckoterminal.com/api/v2/networks/solana/',dex:'https://api.dexscreener.com/tokens/v1/solana/',maxTokens:800,priceMs:25000,poolsMs:90000,debounceMs:280,priceMaxAgeMs:90000,seenMaxHours:336,feeEstimate:0.01});
 const $=id=>typeof document==='undefined'?null:document.getElementById(id);
 const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num=v=>v===null||v===undefined||v===''||!Number.isFinite(Number(v))?null:Number(v);
@@ -12,7 +12,7 @@ const fmt=(v,d=0)=>v===null||!Number.isFinite(Number(v))?'—':Number(v).toLocal
 const usd=(v,d=0)=>v===null||!Number.isFinite(Number(v))?'—':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:d}).format(v);
 const pct=v=>v===null||!Number.isFinite(Number(v))?'—':(v>0?'+':'')+fmt(v,1)+'%';
 const stamp=()=>Date.now();
-const age=ms=>!Number.isFinite(ms)?'—':ms<60000?`${Math.max(0,Math.floor(ms/1000))}s`:ms<3600000?`${Math.max(0,Math.floor(ms/60000))}min`:`${Math.floor(ms/3600000)}h`;
+const age=ms=>!Number.isFinite(ms)?'—':ms<60000?`${Math.max(0,Math.floor(ms/1000))}s`:ms<3600000?`${Math.max(0,Math.floor(ms/60000))}min`:ms<86400000?`${Math.floor(ms/3600000)}h`:`${Math.floor(ms/86400000)}d`;
 const getJson=(key,fallback)=>{try{const raw=JSON.parse(localStorage.getItem(key));return raw??fallback}catch{return fallback}};
 const putJson=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}};
 const pairGood=p=>p&&p.chainId==='solana'&&mintOk(p.baseToken?.address);
@@ -80,7 +80,7 @@ function evaluate(token,filters={liquidity:5000,volume:1500},nowMs=stamp()){
  return {stage,score,valid:true,notes:risk.length?risk:signals.length?signals:['Atividade recente em análise'],liquidity:l,volume:v,change:c,buys:b,sells:s,ratio,ageMinutes,entryAllowed:false,safetyChecked:false,sellRouteChecked:false,entryBlockers:['Permissões e concentração de carteiras não auditadas','Liquidez pode ser retirada','Cotação real de venda e slippage não verificados']};
 }
 const data=new Map();const favorites=new Set();
-let view='opportunities',running=false,socket=null,wsConnected=false,retryTimer=null,pricesTimer=null,poolsTimer=null,paintTimer=null,persistTimer=null,lastMarketAt=0,lastGeckoAt=0,wsSeen=0,marketError='',geckoError='',initialized=false,sound=false,wsRetry=0,activeRequest=false,fetchingPools=false;
+let view='opportunities',running=false,socket=null,wsConnected=false,retryTimer=null,pricesTimer=null,poolsTimer=null,paintTimer=null,persistTimer=null,lastMarketAt=0,lastGeckoAt=0,wsSeen=0,marketError='',geckoError='',initialized=false,sound=false,wsRetry=0,activeRequest=false,fetchingPools=false,dexPauseUntil=0;
 let settings={liquidity:5000,volume:1500,sort:'score',search:''};
 const journalKey='edgeradar.crypto.watch.v2',favorKey='edgeradar.crypto.favorites.v2',paperKey='edgeradar.crypto.paper.v1';
 function signalHistory(){return root.EdgeSignalHistory||null;}
@@ -92,11 +92,11 @@ function trackSignal(t){
 
 let paper={initial:1000,cash:1000,positions:[],history:[]};
 function initializeCache(){
- const saved=getJson(journalKey,[]);for(const t of Array.isArray(saved)?saved.slice(0,CFG.maxTokens):[]){if(!mintOk(t.mint)||!Number.isFinite(t.firstSeen))continue;if(stamp()-t.firstSeen>CFG.seenMaxHours*3600000)continue;data.set(t.mint,{...t,pair:null,pairFetchedAt:0});}
+ const saved=getJson(journalKey,[]);for(const t of Array.isArray(saved)?saved.slice(0,CFG.maxTokens):[]){if(!mintOk(t.mint)||!Number.isFinite(t.firstSeen))continue;if(stamp()-t.firstSeen>CFG.seenMaxHours*3600000)continue;data.set(t.mint,{...t,pair:null,pairFetchedAt:0,lastQualifiedAt:num(t.lastQualifiedAt)||null});}
  for(const m of getJson(favorKey,[])){if(mintOk(m))favorites.add(m);}
  const x=getJson(paperKey,null);if(x&&num(x.initial)>0&&Array.isArray(x.positions)&&Array.isArray(x.history))paper={initial:x.initial,cash:Math.max(0,num(x.cash)||0),positions:x.positions.filter(p=>mintOk(p.mint)&&num(p.quantity)>0),history:x.history};
 }
-function saveCache(){putJson(journalKey,[...data.values()].sort((a,b)=>b.lastEvent-a.lastEvent).slice(0,CFG.maxTokens).map(t=>({mint:t.mint,firstSeen:t.firstSeen,lastEvent:t.lastEvent,source:t.source,type:t.type,name:t.name,symbol:t.symbol})));}
+function saveCache(){putJson(journalKey,[...data.values()].sort((a,b)=>b.lastEvent-a.lastEvent).slice(0,CFG.maxTokens).map(t=>({mint:t.mint,firstSeen:t.firstSeen,lastEvent:t.lastEvent,source:t.source,type:t.type,name:t.name,symbol:t.symbol,lastQualifiedAt:t.lastQualifiedAt||null})));}
 function storePaper(){putJson(paperKey,paper);}
 function schedule(){if(paintTimer)return;paintTimer=setTimeout(()=>{paintTimer=null;draw();},CFG.debounceMs);}
 function persist(){if(persistTimer)return;persistTimer=setTimeout(()=>{persistTimer=null;saveCache()},3500);}
@@ -106,7 +106,11 @@ function addToken(token){if(!token||!mintOk(token.mint))return false;
  if(old.pair&&(!token.pair||Number(token.pairFetchedAt)<Number(old.pairFetchedAt))) {combined.pair=old.pair;combined.pairFetchedAt=old.pairFetchedAt;}
  data.set(token.mint,combined);
  }else data.set(token.mint,token);
- if(token.pair)trackSignal(data.get(token.mint));
+ if(token.pair){
+  const current=data.get(token.mint),result=evaluate(current,settings,current.pairFetchedAt);
+  if(result.stage==='priority')current.lastQualifiedAt=stamp();
+  trackSignal(current);
+ }
  if(data.size>CFG.maxTokens){const removable=[...data.values()].filter(x=>!favorites.has(x.mint)&&!paper.positions.some(p=>p.mint===x.mint)&&!signalHistory()?.pinnedMints().includes(x.mint));removable.sort((a,b)=>(a.lastEvent||0)-(b.lastEvent||0));for(const t of removable.slice(0,Math.max(0,data.size-CFG.maxTokens)))data.delete(t.mint);}
  schedule();persist();return true;
 }
@@ -121,20 +125,37 @@ function updatePairs(rows){let changed=0;const group=new Map();for(const p of ro
 }
 function marketCandidates(){
  const pinned=new Set(signalHistory()?.pinnedMints()||[]);
- const items=[...data.values()].filter(t=>mintOk(t.mint)).sort((a,b)=>
-  Number(pinned.has(b.mint))-Number(pinned.has(a.mint))||Number(favorites.has(b.mint))-Number(favorites.has(a.mint))||(b.lastEvent||0)-(a.lastEvent||0));
- return items.slice(0,90).map(t=>t.mint);
+ const values=[...data.values()].filter(t=>mintOk(t.mint));
+ const byPin=values.filter(t=>pinned.has(t.mint)||favorites.has(t.mint))
+  .sort((a,b)=>(b.lastQualifiedAt||b.lastEvent||0)-(a.lastQualifiedAt||a.lastEvent||0));
+ const byMomentum=values.filter(t=>t.lastQualifiedAt&&stamp()-t.lastQualifiedAt<24*3600000)
+  .sort((a,b)=>(b.lastQualifiedAt||0)-(a.lastQualifiedAt||0));
+ const byRecent=[...values].sort((a,b)=>(b.lastEvent||0)-(a.lastEvent||0));
+ const buckets=[byPin.slice(0,30),byMomentum.slice(0,30),byRecent.slice(0,30),byPin,byMomentum,byRecent];
+ const found=[],seen=new Set();for(const group of buckets)for(const t of group){
+  if(found.length>=90)break;if(!seen.has(t.mint)){found.push(t.mint);seen.add(t.mint)}
+ }
+ return found;
 }
-async function refreshPrices(){if(!running||activeRequest)return;const mints=marketCandidates();if(!mints.length)return;activeRequest=true;
+async function refreshPrices(){if(!running||activeRequest||stamp()<dexPauseUntil)return;const mints=marketCandidates();if(!mints.length)return;activeRequest=true;
  try{const lists=[];for(let i=0;i<mints.length;i+=30)lists.push(mints.slice(i,i+30));
- const responses=await Promise.all(lists.map(async list=>{const resp=await fetch(CFG.dex+list.join(','),{headers:{accept:'application/json'},cache:'no-store'});if(!resp.ok)throw Error('HTTP '+resp.status);return resp.json()}));
- updatePairs(responses.flatMap(v=>Array.isArray(v)?v:[]));marketError='';
+ const responses=await Promise.allSettled(lists.map(async list=>{
+  const resp=await fetch(CFG.dex+list.join(','),{headers:{accept:'application/json'},cache:'no-store'});
+  if(!resp.ok){const e=new Error('HTTP '+resp.status);e.status=resp.status;throw e}
+  const data=await resp.json();if(!Array.isArray(data))throw Error('Formato inválido');
+  return data;
+ }));
+ const valid=responses.filter(x=>x.status==='fulfilled').flatMap(x=>x.value),failures=responses.filter(x=>x.status==='rejected');
+ if(valid.length)updatePairs(valid);
+ if(failures.some(x=>x.reason?.status===429)){dexPauseUntil=stamp()+5*60000;marketError='DEX Screener limitada (429): mantendo moedas e usando GeckoTerminal'}
+ else marketError=failures.length?'DEX Screener: alguns lotes falharam':'';
  }catch(err){marketError='DEX Screener: '+String(err?.message||err).slice(0,90)}finally{activeRequest=false;schedule()}
 }
 function refreshMarketSoon(){if(!running)return;setTimeout(()=>refreshPrices(),2000)}
 async function refreshPools(){if(!running||fetchingPools)return;fetchingPools=true;
  try{
-  const urls=['new_pools?include=base_token,dex','trending_pools?include=base_token,dex&duration=5m'];
+  const trend=['5m','1h','24h'][Math.floor(stamp()/CFG.poolsMs)%3];
+  const urls=['new_pools?include=base_token,dex','trending_pools?include=base_token,dex&duration='+trend];
   const results=await Promise.allSettled(urls.map(async path=>{const r=await fetch(CFG.gecko+path,{headers:{accept:'application/json'},cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);return r.json()}));
   let loaded=0;for(let i=0;i<results.length;i++){if(results[i].status!=='fulfilled')continue;for(const t of parseGecko(results[i].value,i===0?'new_pool':'trending_pool')){if(addToken(t))loaded++;}}
   if(results.some(r=>r.status==='fulfilled')){geckoError='';lastGeckoAt=stamp();if(loaded)refreshPrices();}
@@ -153,7 +174,7 @@ function stop(){running=false;wsConnected=false;if(retryTimer)clearTimeout(retry
 function visible(nowMs=stamp()){
  const arr=[...data.values()].map(t=>({t,a:evaluate(t,settings,nowMs)}));
  let list=arr.filter(({t,a})=>{
-  if(view==='opportunities'&&a.stage!=='priority'&&!signalHistory()?.recent(t.mint,nowMs))return false;
+  if(view==='opportunities'&&a.stage!=='priority'&&!signalHistory()?.recent(t.mint,nowMs)&&!(t.lastQualifiedAt&&nowMs-t.lastQualifiedAt<=24*3600000))return false;
   if(view==='watch'&&!(a.stage==='watch'||a.stage==='risk'))return false;
   if(view==='new'&&t.source!=='pumpportal'&&t.type!=='new_pool')return false;
   if(view==='favorites'&&!favorites.has(t.mint))return false;

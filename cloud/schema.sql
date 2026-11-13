@@ -189,3 +189,71 @@ CREATE TABLE IF NOT EXISTS paper_v2_diagnostics (
  alerta_de_auditoria INTEGER NOT NULL DEFAULT 0,
  perda_de_forca INTEGER NOT NULL DEFAULT 0
 );
+
+-- Pool address directory only, never an assumed live price.
+CREATE TABLE IF NOT EXISTS gecko_pool_watch (
+ mint TEXT PRIMARY KEY,
+ pool TEXT NOT NULL,
+ seen_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_gecko_pool_watch_seen ON gecko_pool_watch(seen_at DESC);
+-- Provider monitoring for the free simulated radar.
+CREATE TABLE IF NOT EXISTS price_source_state(
+ id INTEGER PRIMARY KEY CHECK(id=1),
+ checked_at INTEGER NOT NULL,
+ dex_count INTEGER NOT NULL DEFAULT 0,
+ gecko_count INTEGER NOT NULL DEFAULT 0,
+ missing_count INTEGER NOT NULL DEFAULT 0,
+ watched_pools INTEGER NOT NULL DEFAULT 0,
+ dex_next_attempt INTEGER NOT NULL DEFAULT 0
+);
+
+-- Persistent discovery universe. List visibility is independent of transient entry eligibility.
+-- Quotes are observations only; stale prices never become simulated fills.
+CREATE TABLE IF NOT EXISTS token_universe (
+ mint TEXT PRIMARY KEY,
+ name TEXT NOT NULL DEFAULT '',
+ symbol TEXT NOT NULL DEFAULT '',
+ source TEXT NOT NULL DEFAULT '',
+ first_seen INTEGER NOT NULL,
+ first_pool_at INTEGER,
+ last_observed_at INTEGER,
+ last_seen INTEGER NOT NULL,
+ pool_address TEXT,
+ dex TEXT NOT NULL DEFAULT '',
+ price_usd REAL,
+ liquidity_usd REAL,
+ volume5m_usd REAL,
+ volume24h_usd REAL,
+ change5m_pct REAL,
+ change1h_pct REAL,
+ change24h_pct REAL,
+ market_cap_usd REAL,
+ buys5m INTEGER,
+ sells5m INTEGER,
+ score INTEGER NOT NULL DEFAULT 0,
+ best_score INTEGER NOT NULL DEFAULT 0,
+ stage TEXT NOT NULL DEFAULT 'waiting',
+ risk_level TEXT NOT NULL DEFAULT 'unverified',
+ price_source TEXT NOT NULL DEFAULT '',
+ observations INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS idx_token_universe_recent ON token_universe(last_seen DESC);
+CREATE INDEX IF NOT EXISTS idx_token_universe_score ON token_universe(score DESC,last_observed_at DESC);
+CREATE INDEX IF NOT EXISTS idx_token_universe_pool_age ON token_universe(first_pool_at);
+
+-- One-time import of authentic already-recorded risk snapshots. No fabricated pool age,
+-- volume, or recent price; older records keep their actual assessed_at timestamp.
+-- INSERT OR IGNORE preserves better data acquired by the new discovery engine.
+INSERT OR IGNORE INTO token_universe
+(mint,name,symbol,source,first_seen,first_pool_at,last_observed_at,last_seen,
+ pool_address,dex,price_usd,liquidity_usd,volume5m_usd,change5m_pct,
+ buys5m,sells5m,score,best_score,stage,risk_level,price_source,observations)
+SELECT mint,name,symbol,'historico_real',assessed_at,NULL,assessed_at,assessed_at,
+ NULL,'',pool_price,pool_liquidity,NULL,NULL,NULL,NULL,
+ market_score,market_score,
+ CASE WHEN market_score>=70 THEN 'priority' ELSE 'watch' END,
+ level,'risk_watch_legacy',1
+FROM risk_watch WHERE pool_price>0
+ AND assessed_at>unixepoch('now')*1000-14*24*60*60*1000
+ ORDER BY assessed_at DESC LIMIT 400;
