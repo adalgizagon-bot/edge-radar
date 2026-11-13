@@ -56,15 +56,19 @@ function classFor(trade){
  return match?.tier==='exploratory'?'Exploratória (não validada)':match?.tier==='audited'?'Auditada p/ estudo':'Sem classificação';
 }
 function diagnosticsHTML(){
- const d=payload?.diagnostics;
- if(!d)return '<p class="cloud-empty">Aguardando primeira varredura de diagnóstico no coletor.</p>';
- const cells=[['Avaliadas',d.candidates],['Aptas p/ simulação',d.eligible],['Exploratórias',d.exploratory],
+ const d=payload?.diagnostics,sd=payload?.scalpDiagnostics;
+ if(!d)return '<p class="cloud-empty">Aguardando primeira rodada de filtros.</p>';
+ const cells=[['Analisadas',d.candidates],['Aptas para referência',d.eligible],['Exploratórias',d.exploratory],
   ['Auditadas p/ estudo',d.audited],['Sem preço',d.without_price],['Risco crítico',d.critical],
-  ['Pouca liquidez',d.low_liquidity],['Atividade fraca',d.weak_activity],
+  ['Pouca liquidez',d.low_liquidity],['Atividade insuficiente',d.weak_activity],
   ['Pool muito novo',d.too_new],['Saída desfavorável',d.bad_exit]];
- return '<div class="agent-diagnostics-heading"><strong>Última triagem automática</strong><span>'+date(d.checked_at)+'</span></div>'+
- '<div class="agent-diagnostic-grid">'+cells.map(([k,v])=>'<div><span>'+safe(k)+'</span><strong>'+Number(v||0)+'</strong></div>').join('')+'</div>'+
- '<p>Contagem por rodada, não de moedas únicas. O laboratório pode testar oportunidades não validadas, mas nunca autoriza compras reais.</p>';
+ const scalpCells=sd?[['Aptas para Scalp',sd.eligible],['Score/volume',sd.volume_score],
+  ['Pressão de compra',sd.pressure],['Alta exagerada ou fraca',sd.stretched],
+  ['Pool muito novo',sd.too_new],['Perda de força',sd.weakening]]:[];
+ const grid=items=>'<div class="agent-diagnostic-grid">'+items.map(([k,v])=>'<div><span>'+safe(k)+'</span><strong>'+Number(v||0)+'</strong></div>').join('')+'</div>';
+ return '<div class="agent-diagnostics-heading"><strong>Última triagem · universo de mercado</strong><span>'+date(d.checked_at)+'</span></div>'+
+ grid(cells)+(sd?'<div class="agent-diagnostics-heading"><strong>Critérios extras do Edge Scalp</strong><span>'+date(sd.checked_at)+'</span></div>'+grid(scalpCells):'')+
+ '<p>Contagens por rodada. Nenhum filtro equivale a aprovação para negociações reais.</p>';
 }
 function tradesHTML(){
  const rows=(payload?.trades||[]).slice(0,35);
