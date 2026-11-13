@@ -132,3 +132,24 @@ A estratégia de IA nunca consegue contornar estas condições.
 
 O experimento usa cron Cloudflare, não precisa manter o computador ligado.
 Ative a chave de IA somente depois de validar o deploy de D1 e o painel.
+
+## Modo exploratório do laboratório (amostras fictícias)
+
+A indicação **ENTRADA NÃO VALIDADA** permanece obrigatória nos cards do radar: não
+há permissão para compras reais. Contudo, a simulação gratuita pode registrar
+oportunidades mesmo quando Jupiter não confirmou auditoria ou rota de saída.
+O estudo usa apenas o preço observado em DEX, que **não é um preço executável**.
+
+O laboratório exige preço, pool PumpSwap, liquidez >= US$ 8 mil, volume recente,
+atividade compradora, score >= 60, pool com mais de 3 minutos quando datado e
+ausência de sinais críticos conhecidos. Quote explicitamente indisponível ou
+com impacto alto também impede a entrada do simulador. Dados de auditoria
+incompletos são identificados como **EXPLORATÓRIA (entrada não validada)**;
+auditoria completa e rota positiva são identificadas como **AUDITADA PARA
+ESTUDO**, sem transformar isso em autorização de negociação.
+
+A tabela de evidência vincula cada compra fictícia às condições observadas.
+O diagnóstico da última rodada explica quando os candidatos foram descartados
+por preço, risco, liquidez, atividade, idade do pool ou rota desfavorável.
+A simulação pode superestimar resultados (slippage, taxas e dificuldade de
+vender), portanto serve para testar filtros, não demonstrar lucro realizável.
