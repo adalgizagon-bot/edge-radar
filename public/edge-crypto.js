@@ -12,7 +12,7 @@ const fmt=(v,d=0)=>v===null||!Number.isFinite(Number(v))?'—':Number(v).toLocal
 const usd=(v,d=0)=>v===null||!Number.isFinite(Number(v))?'—':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:d}).format(v);
 const pct=v=>v===null||!Number.isFinite(Number(v))?'—':(v>0?'+':'')+fmt(v,1)+'%';
 const stamp=()=>Date.now();
-const age=ms=>!Number.isFinite(ms)?'—':ms<60000?`${Math.max(0,Math.floor(ms/1000))}s`:ms<3600000?`${Math.max(0,Math.floor(ms/60000))}min`:`${Math.floor(ms/3600000)}h`;
+const age=ms=>!Number.isFinite(ms)?'—':ms<60000?`${Math.max(0,Math.floor(ms/1000))}s`:ms<3600000?`${Math.max(0,Math.floor(ms/60000))}min`:ms<86400000?`${Math.floor(ms/3600000)}h`:`${Math.floor(ms/86400000)}d`;
 const getJson=(key,fallback)=>{try{const raw=JSON.parse(localStorage.getItem(key));return raw??fallback}catch{return fallback}};
 const putJson=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}};
 const pairGood=p=>p&&p.chainId==='solana'&&mintOk(p.baseToken?.address);
