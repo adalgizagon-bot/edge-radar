@@ -184,7 +184,10 @@ test('Live Gecko pool observations keep paper discovery alive during DEX HTTP 42
   assert.ok(snap.positions.some(x=>x.strategy==='scalp_v2'),'V2 is able to study a candidate with complete fresh Gecko observations');
   const next=await collect(env,{clock:()=>t0+60000,fetcher:source.fetcher});
   assert.ok(next.warnings.some(x=>x.includes('DEX Screener em pausa')));
-  assert.equal(next.errors.length,0,'Price source pause does not invalidate already stored history');
+  assert.ok(next.errors.some(x=>x.includes('Nenhuma cotacao')),
+   'No fresh quotes: report unavailable, never invent current prices');
+  assert.ok((await paperSnapshot(env,t0+60000)).positions.some(x=>x.strategy==='scalp_v2'),
+   'Existing simulated positions are retained without a manufactured sale');
   assert.equal((await paperSnapshot(env,t0+60000)).v2Since,t0);
  }finally{db.close();}
 });
