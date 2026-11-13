@@ -60,3 +60,14 @@ test('score 100 is not a safety pass; sell route and on-chain risk remain unveri
  assert.equal(x.sellRouteChecked,false);
  assert.ok(x.entryBlockers.some(x=>x.includes('venda')));
 });
+
+test('Qualified token remains visible after a short-lived quote or momentum drop',()=>{
+ const sticky='D'.repeat(32),now=Date.now();
+ C._setView('opportunities');
+ C.addToken(token(sticky,{lastEvent:now,pairFetchedAt:now}));
+ assert.ok(C.visible().some(x=>x.t.mint===sticky),'first qualifying observation');
+ C.addToken(token(sticky,{lastEvent:now+1000,pairFetchedAt:now+1000,
+  pair:pair(sticky,{volume:{m5:200},priceChange:{m5:-5}})}));
+ assert.ok(C.visible().some(x=>x.t.mint===sticky),
+  'previous strong activity cannot disappear after one failed 5-minute signal');
+});
