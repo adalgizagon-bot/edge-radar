@@ -15,7 +15,8 @@ export function assessRisk({mint,pair,token,previous,now=Date.now()}={}){
  const flow=buyUsd!==null&&sellUsd!==null&&sellUsd>0?buyUsd/sellUsd:null;
  const oldest=Date.parse(token?.firstPool?.createdAt||'');const ageMinutes=Number.isFinite(oldest)?Math.max(0,(now-oldest)/60000):null;
  const critical=m=>alerts.push(txt(m)),warning=m=>reasons.push(txt(m));
- if(liq===null||liq<5000)critical('Liquidez do pool abaixo de US$ 5 mil ou indisponivel');
+ if(liq===null)warning('Liquidez do pool sem cotacao atual; entrada nao verificada');
+ else if(liq<5000)critical('Liquidez do pool abaixo de US$ 5 mil');
  else if(liq<20000)warning('Liquidez do pool abaixo de US$ 20 mil');
  if(jliq!==null&&jliq<5000)critical('Liquidez da Jupiter abaixo de US$ 5 mil');
  if(dropP!==null&&dropP<=-20)critical('Preco caiu '+Math.abs(dropP).toFixed(0)+'% entre verificacoes');
@@ -35,7 +36,7 @@ export function assessRisk({mint,pair,token,previous,now=Date.now()}={}){
   if(ageMinutes!==null&&ageMinutes<15)warning('Pool listado ha menos de 15 minutos');
   if(audit.mintAuthorityDisabled!==true||audit.freezeAuthorityDisabled!==true||top===null||organic===null)warning('Dados de seguranca incompletos');
  }
- const unverified=!token||organic===null||audit.mintAuthorityDisabled!==true||audit.freezeAuthorityDisabled!==true||top===null;
+ const unverified=!token||organic===null||audit.mintAuthorityDisabled!==true||audit.freezeAuthorityDisabled!==true||top===null||liq===null||price===null;
  const level=alerts.length?'blocked':unverified?'unverified':'watch';
  return {mint,level,alerts,reasons,organic,verified:token?.isVerified===true,top,flow,buyUsd,sellUsd,liq,price,jliq,dropP,dropL,ageMinutes,assessedAt:now,exitQuoteVerified:false,entryAllowed:false};
 }
