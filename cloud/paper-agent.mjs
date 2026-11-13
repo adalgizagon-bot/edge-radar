@@ -286,7 +286,7 @@ export async function paperSnapshot(env,at=Date.now()){
   "FROM paper_trades WHERE action='sell' AND created_at>=?), "+
   "peaks AS (SELECT strategy,balance,MAX(balance) OVER(PARTITION BY strategy ORDER BY created_at,id ROWS UNBOUNDED PRECEDING) AS peak FROM balances) "+
   "SELECT strategy,MAX((CASE WHEN peak>1000 THEN peak ELSE 1000 END)-balance) AS max_drawdown_usd FROM peaks GROUP BY strategy";
- const [ac,po,tr,de,us,pf,ev,diag,scalpDiag,drawdowns]=await Promise.all([
+ const [ac,po,tr,de,us,pf,ev,diag,scalpDiag,drawdowns,v2Diag,v2Start]=await Promise.all([
   db.prepare('SELECT * FROM paper_accounts ORDER BY strategy').all(),
   db.prepare('SELECT * FROM paper_positions ORDER BY opened_at DESC').all(),
   db.prepare('SELECT * FROM paper_trades ORDER BY created_at DESC LIMIT 100').all(),
@@ -296,11 +296,13 @@ export async function paperSnapshot(env,at=Date.now()){
   db.prepare('SELECT * FROM paper_entry_evidence ORDER BY created_at DESC LIMIT 120').all(),
   db.prepare('SELECT * FROM paper_diagnostics WHERE id=1').first(),
   db.prepare('SELECT * FROM paper_scalp_diagnostics WHERE id=1').first(),
-  db.prepare(drawdownSql).bind(since).all()
+  db.prepare(drawdownSql).bind(since).all(),
+  db.prepare('SELECT * FROM paper_v2_diagnostics WHERE id=1').first(),
+  db.prepare("SELECT started_at FROM paper_strategy_inception WHERE strategy='scalp_v2'").first()
  ]);
  const rows=po.results||[],accounts=(ac.results||[]).map(a=>{
   const mine=rows.filter(p=>p.strategy===a.strategy);
-  const freshLimit=a.strategy==='scalp'?100000:180000;
+  const freshLimit=(a.strategy==='scalp'||a.strategy==='scalp_v2')?100000:180000;
   const fresh=mine.every(p=>num(p.last_price)>0&&num(p.last_quote_at)>0&&at-p.last_quote_at<=freshLimit&&at>=p.last_quote_at);
   const openValue=fresh?mine.reduce((sum,p)=>sum+p.quantity*p.last_price*(1-PAPER.fee),0):null;
   const invested=mine.reduce((sum,p)=>sum+p.invested_usd,0);
@@ -312,10 +314,13 @@ export async function paperSnapshot(env,at=Date.now()){
  return {enabled:true,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),
   accounts,performance,positions:rows,trades:tr.results||[],decisions:de.results||[],
   evidence:ev.results||[],diagnostics:diag||null,scalpDiagnostics:scalpDiag||null,
+  v2Diagnostics:v2Diag||null,v2Since:num(v2Start?.started_at),
   comparisonSince:since,fees:{baseEachSidePct:PAPER.fee*100,stressEachSidePct:PAPER.stressFee*100},
   profiles:{baseline:{targetPct:PAPER.baselineTake*100,stopPct:PAPER.stop*100,holdMinutes:PAPER.maxHoldMs/60000,
                       maxPositions:PAPER.maxPositions},
     scalp:{targetPct:SCALP.target*100,stopPct:SCALP.stop*100,holdMinutes:SCALP.maxHoldMs/60000,
-           maxPositions:SCALP.maxPositions}},usage:us||null,
+           maxPositions:SCALP.maxPositions},
+    scalp_v2:{targetPct:V2.target*100,stopPct:V2.stop*100,holdMinutes:V2.maxHoldMs/60000,
+           maxPositions:V2.maxPositions}},usage:us||null,
   checkedAt:at,note:'Retornos teoricos com preco observado ~1/min, sem garantia de compra ou venda. Dados de preco ausentes nao sao substituidos.'};
 }
