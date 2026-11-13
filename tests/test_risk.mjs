@@ -8,3 +8,9 @@ test('JensenHao-like activity: many small buys versus large sell value',()=>{con
 test('Fast price/liquidity collapse blocks',()=>{const r=assessRisk({mint,pair:pair(0.001,6500),previous:{pool_price:.01,pool_liquidity:20000},token:t});assert.equal(r.level,'blocked');assert.ok(r.alerts.length>=2)});
 test('Missing audit fails closed',()=>{const r=assessRisk({mint,pair:pair(),token:null});assert.equal(r.level,'unverified');assert.equal(r.entryAllowed,false)});
 test('Good market still requires external exit quote verification',()=>{const r=assessRisk({mint,pair:pair(),token:t});assert.equal(r.level,'watch');assert.equal(r.exitQuoteVerified,false);assert.equal(r.entryAllowed,false);assert.equal(riskRow(r).entry_allowed,0)});
+
+test('Missing price or liquidity is unverified, not false proof of a small pool',()=>{
+ const r=assessRisk({mint,pair:null,token:t});
+ assert.equal(r.level,'unverified');assert.equal(r.entryAllowed,false);
+ assert.ok(r.reasons.some(x=>x.includes('sem cotacao')));
+});
