@@ -24,14 +24,14 @@ function localD1(){
  },close(){sql.close();}};
 }
 function market(t0){
- let currentPrice=.01,failDexBatch=false;
+ let currentPrice=.01,failDexBatch=false,failGecko=false;
  const json=data=>({ok:true,headers:{get:()=>null},json:async()=>data});
  const token={id:MINT,name:'Example',symbol:'EX',usdPrice:.01,decimals:6,isVerified:true,
   organicScore:85,liquidity:35000,
   audit:{mintAuthorityDisabled:true,freezeAuthorityDisabled:true,topHoldersPercentage:9},
   stats5m:{buyVolume:30000,sellVolume:10000,numBuys:60,numSells:14},
   firstPool:{createdAt:new Date(t0-20*60000).toISOString()}};
- const gecko={data:[{attributes:{address:'pool',name:'Example / SOL',reserve_in_usd:'30000',
+ const gecko={data:[{attributes:{address:'pool',name:'Example / SOL',pool_created_at:new Date(t0-20*60000).toISOString(),reserve_in_usd:'30000',
    volume_usd:{m5:'9000'},transactions:{m5:{buys:60,sells:14}},
    price_change_percentage:{m5:'8'},base_token_price_usd:String(currentPrice)},
    relationships:{base_token:{data:{id:'solana_'+MINT}},dex:{data:{id:'solana_pump_swap'}}}}],
@@ -41,7 +41,7 @@ function market(t0){
   priceUsd:String(currentPrice),liquidity:{usd:30000},volume:{m5:9000},
   txns:{m5:{buys:60,sells:14}},priceChange:{m5:8},pairCreatedAt:t0-20*60000});
  const fetcher=async url=>{
-  if(url.includes('geckoterminal'))return json(gecko);
+  if(url.includes('geckoterminal'))return failGecko?{ok:false,status:429,headers:{get:()=>null}}:json(gecko);
   if(url.includes('tokens/v2/recent')||url.includes('tokens/v2/search'))return json([token,{id:SOL,usdPrice:100,decimals:9}]);
   if(url.includes('token-profiles/latest'))return json([]);
   if(url.includes('api.dexscreener.com/tokens/v1/solana/')){
@@ -51,7 +51,7 @@ function market(t0){
   if(url.includes('/swap/v2/order'))return json({outAmount:'150000000',router:'test-no-execution'});
   throw Error('Unexpected URL '+url);
  };
- return {fetcher,setPrice:v=>{currentPrice=v},failDex:v=>{failDexBatch=v}};
+ return {fetcher,setPrice:v=>{currentPrice=v},failDex:v=>{failDexBatch=v},failGecko:v=>{failGecko=v}};
 }
 test('D1 integration: scalp closes after observed +6%, baseline still open, both remain fictional',async()=>{
  const db=localD1();const t0=Date.now();const source=market(t0);
@@ -87,9 +87,9 @@ test('D1 integration: missing prices do not invent scalp exits or a positive equ
  const env={DB:db,PAPER_EXPERIMENT_ENABLED:'true',PAPER_AI_ENABLED:'false'};
  try{
   await collect(env,{clock:()=>t0,fetcher:source.fetcher});
-  source.failDex(true);
+  source.failDex(true);source.failGecko(true);
   const result=await collect(env,{clock:()=>t0+7*60000,fetcher:source.fetcher});
-  assert.ok(result.errors.some(x=>x.includes('DEX Screener parcial')));
+  assert.ok([...result.errors,...result.warnings].some(x=>x.includes('DEX Screener')));
   const snap=await paperSnapshot(env,t0+7*60000);
   assert.ok(snap.positions.some(x=>x.strategy==='scalp'),'no fake time exit without real price');
   assert.equal(snap.accounts.find(x=>x.strategy==='scalp').equity_usd,null);
@@ -162,12 +162,29 @@ test('No price means no V2 fill and no invented audited results',async()=>{
  const env={DB:db,PAPER_EXPERIMENT_ENABLED:'true',PAPER_AI_ENABLED:'false'};
  try{
   await collect(env,{clock:()=>t0,fetcher:source.fetcher});
-  source.failDex(true);
+  source.failDex(true);source.failGecko(true);
   await collect(env,{clock:()=>t0+9*60000,fetcher:source.fetcher});
   const snap=await paperSnapshot(env,t0+9*60000);
   assert.ok(snap.positions.some(x=>x.strategy==='scalp_v2'));
   assert.equal(snap.accounts.find(x=>x.strategy==='scalp_v2').equity_usd,null);
   const a=await auditSnapshot(env,t0+9*60000,100);
   assert.ok(!a.rows.some(x=>x.strategy==='scalp_v2'));
+ }finally{db.close();}
+});
+
+test('Live Gecko pool observations keep paper discovery alive during DEX HTTP 429',async()=>{
+ const db=localD1(),t0=Date.now(),source=market(t0);
+ const env={DB:db,PAPER_EXPERIMENT_ENABLED:'true',PAPER_AI_ENABLED:'false'};
+ try{
+  source.failDex(true);
+  const out=await collect(env,{clock:()=>t0,fetcher:source.fetcher});
+  assert.ok(out.warnings.some(x=>x.includes('DEX Screener')));
+  assert.equal(out.errors.length,0,'Fresh Gecko price should avoid false platform outage');
+  const snap=await paperSnapshot(env,t0);
+  assert.ok(snap.positions.some(x=>x.strategy==='scalp_v2'),'V2 is able to study a candidate with complete fresh Gecko observations');
+  const next=await collect(env,{clock:()=>t0+60000,fetcher:source.fetcher});
+  assert.ok(next.warnings.some(x=>x.includes('DEX Screener em pausa')));
+  assert.equal(next.errors.length,0,'Price source pause does not invalidate already stored history');
+  assert.equal((await paperSnapshot(env,t0+60000)).v2Since,t0);
  }finally{db.close();}
 });
