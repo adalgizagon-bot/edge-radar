@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS paper_accounts(
 CREATE TABLE IF NOT EXISTS paper_positions(
  strategy TEXT NOT NULL,mint TEXT NOT NULL,symbol TEXT NOT NULL DEFAULT '',
  quantity REAL NOT NULL,invested_usd REAL NOT NULL,entry_price REAL NOT NULL,
- opened_at INTEGER NOT NULL,updated_at INTEGER NOT NULL,PRIMARY KEY(strategy,mint)
+ opened_at INTEGER NOT NULL,updated_at INTEGER NOT NULL,last_price REAL,last_quote_at INTEGER,PRIMARY KEY(strategy,mint)
 );
 CREATE TABLE IF NOT EXISTS paper_trades(
  id TEXT PRIMARY KEY,strategy TEXT NOT NULL,mint TEXT NOT NULL,symbol TEXT NOT NULL DEFAULT '',
