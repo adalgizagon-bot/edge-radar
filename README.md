@@ -91,3 +91,44 @@ Novas tabelas no D1: `exit_quotes` e `signal_evidence`. O snapshot de risco por 
 Para publicar: o workflow GitHub Actions `Publicar coletor Crypto na Cloudflare` aplica as tabelas remotas, publica o Worker, e consulta os endpoints públicos como teste. Não requer chaves privadas, conexão de carteira nem compra automática. Se a Jupiter estiver indisponível, a avaliação ficará não verificada; nenhuma entrada é liberada.
 
 Os limites e algoritmos são experimentais e devem ser avaliados com uma amostra suficiente e diferentes regimes de mercado. Evite operar dinheiro real com base somente nesses sinais.
+
+
+## Experimento noturno A/B — Agente IA × Regras (somente fictício)
+
+Nova aba **Teste IA × Regras**, alimentada por `GET /api/paper`, independente do navegador.
+Duas contas virtuais separadas, US$ 1.000 cada, posições de US$ 20, no máximo 3 abertas;
+custos simulados de 1% na entrada e 1% na saída, stop por variação de preço em -7%,
+limite máximo de 20 minutos e alvo fixo de +12% (regras) ou +20% (IA).
+A IA também pode optar por vender antes do alvo, após dois minutos. O stop e o tempo
+máximo de permanência prevalecem sobre a decisão da IA.
+
+**As operações NÃO são reais.** Não há carteiras, assinaturas, ordens ou endpoints de
+execução. Preços do DEX Screener e estimativas Jupiter não são cotações garantidas;
+slippage, liquidez e gaps podem fazer o retorno real ser muito diferente.
+Não confundir lucro realizado simulado com patrimônio total: posições abertas não são
+marcadas a mercado no painel até haver nova cotação. Sem dados = sem negociação.
+
+Ativação deliberada no painel **Cloudflare → Workers → edge-radar-cloud → Settings → Variables and Secrets**,
+após publicar as tabelas D1 com o pipeline:
+
+- `PAPER_EXPERIMENT_ENABLED=true` (texto) — ativa as duas contas e as operações fictícias;
+- `PAPER_AI_ENABLED=true` (texto) — habilita chamadas à IA;
+- `OPENAI_API_KEY` — salvar como **Secret** no Worker, jamais em frontend, GitHub ou mensagens;
+- `PAPER_AI_MODEL=gpt-5-mini` (opcional) — modelo usado nas respostas estruturadas.
+
+Na falta da chave ou da flag, a estratégia de IA permanece inativa; a estratégia de regras
+pode continuar sozinha. A chamada é feita pelo Worker via API Responses com
+`store:false`, apenas para tokens elegíveis e posições abertas, com até 100 chamadas
+por dia (horário de Brasília). A tabela `paper_ai_usage` armazena contagem real de
+chamadas e tokens; na falta de resposta válida, a IA não abre novas posições.
+Nenhuma informação da chave é exposta por `/api/paper`.
+
+Segurança: uma possível compra fictícia requer auditoria Jupiter completa,
+liquidez de pelo menos US$ 20 mil, atividade orgânica, verificação do token e uma
+estimativa de venda Jupiter da **mesma rodada** com impacto aceitável. Uma oportunidade
+com sinais insuficientes não recebe entrada, ainda que a pontuação de atividade seja 100.
+A proteção de saída tenta observar preço atual; sem preço não é inventada venda.
+A estratégia de IA nunca consegue contornar estas condições.
+
+O experimento usa cron Cloudflare, não precisa manter o computador ligado.
+Ative a chave de IA somente depois de validar o deploy de D1 e o painel.
