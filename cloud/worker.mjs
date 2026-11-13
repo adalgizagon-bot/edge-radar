@@ -36,7 +36,9 @@ function parsePools(payload,source){
     out.push({mint,name:clean(token?.attributes?.name||attr.name?.split('/')?.[0]),symbol:clean(token?.attributes?.symbol,25),
       pool:attr.address||null,source,liquidity:value(attr.reserve_in_usd),volume:value(attr.volume_usd?.m5),
       change:value(attr.price_change_percentage?.m5),buys:value(attr.transactions?.m5?.buys),sells:value(attr.transactions?.m5?.sells),
-      price:value(attr.base_token_price_usd),dex,createdAt:poolAgeMillis(attr.pool_created_at)});
+      price:value(attr.base_token_price_usd),dex,createdAt:poolAgeMillis(attr.pool_created_at),
+       change1h:value(attr.price_change_percentage?.h1),change24h:value(attr.price_change_percentage?.h24),
+       volume24h:value(attr.volume_usd?.h24),marketCap:value(attr.market_cap_usd)});
   }
   return out;
 }
@@ -55,6 +57,7 @@ function quality(p,now=Date.now()){
   const b=value(p.txns?.m5?.buys),s=value(p.txns?.m5?.sells),n=b===null||s===null?null:b+s;
   const ratio=b===null||s===null?null:b/(s||1);
   const poolAge=value(p.pairCreatedAt),ageMin=poolAge?Math.max(0,(now-poolAge)/60000):null;
+   const c1=value(p.priceChange?.h1),c24=value(p.priceChange?.h24),v24=value(p.volume?.h24);
   let score=0;
   if(l!==null)score+=l>=20000?21:l>=10000?18:l>=5000?14:l>=3000?8:0;
   if(v!==null)score+=v>=10000?20:v>=5000?17:v>=1500?13:v>=500?6:0;
@@ -62,9 +65,14 @@ function quality(p,now=Date.now()){
   if(ratio!==null)score+=b>=8&&ratio>=1.5?21:b>=8&&ratio>=1.2?16:b>=5&&ratio>=1?7:0;
   if(c!==null)score+=c>=3&&c<=35?16:c>0&&c<60?9:0;
   if(ageMin!==null&&ageMin<240)score+=4;
+  const matureTrend=ageMin!==null&&ageMin>=1440&&l>=20000&&v>=1000&&
+   v24>=60000&&c1!==null&&c1>=2&&c1<=30&&c24!==null&&c24>=-12&&c24<=250&&
+   b>=8&&s>=1&&ratio>=1.2;
+  if(matureTrend)score=Math.min(100,score+7);
   const meets=l!==null&&l>=5000&&v!==null&&v>=1500&&n!==null&&n>=18&&b>=8&&s!==null&&ratio>=1.25&&c!==null&&c>=2&&c<=45;
   const extreme=(l!==null&&l<3000)||(c!==null&&(c>100||c<-25));
-  return {valid:true,score,stage:meets&&score>=67&&!extreme?'priority':extreme?'risk':'watch',liquidity:l,volume:v,change:c,buys:b,sells:s};
+  return {valid:true,score,stage:!extreme&&((meets&&score>=67)||(matureTrend&&score>=70))?'priority':extreme?'risk':'watch',
+   liquidity:l,volume:v,volume24h:v24,change:c,change1h:c1,change24h:c24,buys:b,sells:s,matureTrend};
 }
 function checkpointDecision(signal,horizon,at,price){
   const [key,after,grace]=horizon,target=signal.triggered_at+after;
