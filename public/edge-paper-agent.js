@@ -12,7 +12,7 @@ let payload=null,last=0,loading=false,error='';
 function api(){try{const stored=localStorage.getItem('edgeradar.cloud.api.v1')||API_DEFAULT;const u=new URL(stored);return u.protocol==='https:'?u.origin:API_DEFAULT}catch{return API_DEFAULT}}
 function cards(){
  const accounts=payload?.accounts||[],positions=payload?.positions||[],performance=payload?.performance||[];
- return ['baseline','ai'].map(s=>{
+ return (payload?.aiConfigured?['baseline','ai']:['baseline']).map(s=>{
   const a=accounts.find(x=>x.strategy===s),open=positions.filter(x=>x.strategy===s);
   const pf=performance.find(x=>x.strategy===s)||{},sold=Number(pf.sells)||0,wins=Number(pf.wins)||0;
   const realized=Number(pf.realized_pnl)||0;
@@ -53,7 +53,7 @@ function redraw(){
   if(usage)usage.textContent='Nenhuma chamada de IA.';
   return;
  }
- status.textContent='Experimento fictício ativo · IA '+(payload.aiConfigured?'configurada':'não configurada')+' · Consulta '+date(payload.checkedAt);
+ status.textContent='Simulação fictícia ativa · '+(payload.aiConfigured?'IA ativada':'modo gratuito: apenas regras, sem IA')+' · Consulta '+date(payload.checkedAt);
  if(metrics)metrics.innerHTML=cards();
  if(open)open.innerHTML=(payload.positions||[]).length?'<div class="agent-tablewrap"><table class="paper-table"><thead><tr><th>Estratégia</th><th>Moeda</th><th>Investido</th><th>Preço de entrada</th><th>Aberta em</th></tr></thead><tbody>'+payload.positions.map(p=>
   '<tr><td>'+strategy(p.strategy)+'</td><td>'+safe(p.symbol||String(p.mint).slice(0,8))+'</td><td>'+usd(p.invested_usd)+'</td><td>'+Number(p.entry_price).toPrecision(5)+'</td><td>'+date(p.opened_at)+'</td></tr>').join('')+'</tbody></table></div>':'<p class="cloud-empty">Nenhuma posição aberta.</p>';
