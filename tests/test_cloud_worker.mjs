@@ -145,6 +145,6 @@ test('429 GeckoTerminal enters cooldown but risk is populated from Jupiter recen
   assert.ok(db.risks.has(mint),'Triagem should not remain empty on HTTP 429');
   assert.equal(db.state.last_ok,1,'Alternative discovery does not make whole collector offline');
   await collect(env,{clock:()=>t0+60000,fetcher:mockFetch});
-  assert.equal(mockFetch.geckoCalls,1,'Do not hammer Gecko every minute during cooldown');
+  assert.equal(mockFetch.geckoCalls,2,'Two Gecko cohorts on initial attempt, then no retries during cooldown');
  }finally{mockFetch.geckoRateLimited=false;}
 });
