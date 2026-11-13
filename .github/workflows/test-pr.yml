@@ -22,6 +22,8 @@ jobs:
         run: |
           node --check cloud/paper-agent.mjs
           node --check cloud/worker.mjs
+          node --check cloud/discovery-page.mjs
+          node --check cloud/gecko-prices.mjs
           node --check cloud/audit.mjs
           node --check cloud/scalp-v2.mjs
           node --check cloud/audit-page.mjs
@@ -29,6 +31,6 @@ jobs:
           node --check public/edge-crypto.js
       - name: Testes de segurança e coleta
         run: |
-          node --test tests/test_audit_page.mjs tests/test_audit.mjs tests/test_scalp_v2.mjs tests/test_scalp_integration.mjs tests/test_scalp.mjs tests/test_paper_agent.mjs tests/test_cloud_worker.mjs \
+          node --test tests/test_audit_page.mjs tests/test_audit.mjs tests/test_scalp_v2.mjs tests/test_discovery_radar.mjs tests/test_scalp_integration.mjs tests/test_scalp.mjs tests/test_paper_agent.mjs tests/test_cloud_worker.mjs \
             tests/test_discovery.mjs tests/test_risk.mjs tests/test_exit_quote.mjs \
             tests/test_edge_crypto.cjs tests/test_cloud_frontend.cjs tests/test_edge_signals.cjs
