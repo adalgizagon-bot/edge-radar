@@ -1,6 +1,10 @@
+node_modules/
+dist/
+.runtime/
+__pycache__/
+*.pyc
 .env
 .env.*
 !.env.example
-node_modules/
-.DS_Store
-__pycache__/
+test-results/
+playwright-report/

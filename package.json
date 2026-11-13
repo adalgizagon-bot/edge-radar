@@ -1,0 +1,24 @@
+{
+  "name": "edge-radar-memecoin-intelligence",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc && node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint web scripts tests/ui playwright.config.mjs eslint.config.js && .runtime/venv/bin/ruff check server tests scripts && .runtime/venv/bin/ruff format --check server tests scripts",
+    "test": "python3 -m unittest discover -s tests -v",
+    "test:ui": "playwright test",
+    "dev": "python3 -m server.app",
+    "collect": "python3 -m server.collector --once",
+    "format": "prettier --write web scripts/*.mjs tests/ui/*.mjs *.json *.mjs eslint.config.js && .runtime/venv/bin/ruff format server tests scripts"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.1",
+    "@playwright/test": "1.65.1",
+    "eslint": "9.39.1",
+    "prettier": "3.6.2",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.48.0"
+  }
+}
