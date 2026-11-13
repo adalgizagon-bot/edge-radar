@@ -237,9 +237,10 @@ async function saveUniverse(db,at,candidates,prices,riskAtSignal){
  const statement=db.prepare(
   "INSERT INTO token_universe "+
   "(mint,name,symbol,source,first_seen,first_pool_at,last_observed_at,last_seen,pool_address,dex,"+
-  "price_usd,liquidity_usd,volume5m_usd,change5m_pct,buys5m,sells5m,score,best_score,"+
+  "price_usd,liquidity_usd,volume5m_usd,volume24h_usd,change5m_pct,change1h_pct,change24h_pct,"+
+  "market_cap_usd,buys5m,sells5m,score,best_score,"+
   "stage,risk_level,price_source,observations) "+
-  "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1) "+
+  "VALUES("+Array(25).fill('?').join(',')+",1) "+
   "ON CONFLICT(mint) DO UPDATE SET "+
   "name=CASE WHEN excluded.name<>'' THEN excluded.name ELSE token_universe.name END,"+
   "symbol=CASE WHEN excluded.symbol<>'' THEN excluded.symbol ELSE token_universe.symbol END,"+
@@ -250,7 +251,9 @@ async function saveUniverse(db,at,candidates,prices,riskAtSignal){
   "last_observed_at=excluded.last_observed_at,last_seen=excluded.last_seen,"+
   "pool_address=COALESCE(excluded.pool_address,token_universe.pool_address),"+
   "dex=excluded.dex,price_usd=excluded.price_usd,liquidity_usd=excluded.liquidity_usd,"+
-  "volume5m_usd=excluded.volume5m_usd,change5m_pct=excluded.change5m_pct,"+
+  "volume5m_usd=excluded.volume5m_usd,volume24h_usd=excluded.volume24h_usd,"+
+  "change5m_pct=excluded.change5m_pct,change1h_pct=excluded.change1h_pct,"+
+  "change24h_pct=excluded.change24h_pct,market_cap_usd=excluded.market_cap_usd,"+
   "buys5m=excluded.buys5m,sells5m=excluded.sells5m,"+
   "score=excluded.score,best_score=MAX(token_universe.best_score,excluded.score),"+
   "stage=excluded.stage,risk_level=excluded.risk_level,price_source=excluded.price_source,"+
@@ -263,7 +266,8 @@ async function saveUniverse(db,at,candidates,prices,riskAtSignal){
   await statement.bind(c.mint,clean(c.name||p?.baseToken?.name),clean(c.symbol||p?.baseToken?.symbol,25),
    clean(c.source||'observed',40),at,value(p.pairCreatedAt),at,at,
    validMint(p.pairAddress)?p.pairAddress:null,clean(p.dexId,40),
-   price,value(p.liquidity?.usd),value(p.volume?.m5),value(p.priceChange?.m5),
+   price,value(p.liquidity?.usd),value(p.volume?.m5),value(p.volume?.h24),
+   value(p.priceChange?.m5),value(p.priceChange?.h1),value(p.priceChange?.h24),value(p.marketCap),
    value(p.txns?.m5?.buys),value(p.txns?.m5?.sells),score.score,score.score,score.stage,
    risk?.level||'unverified',clean(p.priceSource||'dex',15)).run();
   recorded++;
@@ -511,7 +515,7 @@ async function handle(request,env){
   const chosen=String(u.searchParams.get('group')||'strong');
   const group=['strong','new','established','watch','all'].includes(chosen)?chosen:'strong';
   const limit=finiteInt(u.searchParams.get('limit'),80,150),at=Date.now();
-  const filter=group==='strong'?"score>=70 AND risk_level<>'blocked'":
+  const filter=group==='strong'?"score>=70 AND stage='priority' AND risk_level<>'blocked' AND liquidity_usd>=10000 AND volume5m_usd>=1500 AND change5m_pct BETWEEN -10 AND 45":
    group==='new'?"first_pool_at IS NOT NULL AND first_pool_at>=?":
    group==='established'?"first_pool_at IS NOT NULL AND first_pool_at<?":
    group==='watch'?"(score<70 OR stage='watch' OR risk_level='blocked')":"1=1";
@@ -519,8 +523,9 @@ async function handle(request,env){
   if(group==='new'||group==='established')args.push(at-24*60*60_000);
   args.push(at-10*60_000,limit);
   const rows=await env.DB.prepare("SELECT mint,name,symbol,source,first_seen,first_pool_at,"+
-   "last_observed_at,last_seen,pool_address,dex,price_usd,liquidity_usd,volume5m_usd,"+
-   "change5m_pct,buys5m,sells5m,score,best_score,stage,risk_level,price_source,observations "+
+   "last_observed_at,last_seen,pool_address,dex,price_usd,liquidity_usd,volume5m_usd,volume24h_usd,"+
+   "change5m_pct,change1h_pct,change24h_pct,market_cap_usd,buys5m,sells5m,"+
+   "score,best_score,stage,risk_level,price_source,observations "+
    "FROM token_universe WHERE last_seen>? AND "+filter+" "+
    "ORDER BY CASE WHEN last_observed_at>=? THEN 1 ELSE 0 END DESC,"+
    "CASE WHEN risk_level='blocked' THEN 1 ELSE 0 END ASC,score DESC,last_observed_at DESC LIMIT ?")
