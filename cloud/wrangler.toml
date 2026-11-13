@@ -11,6 +11,8 @@ crons = ["* * * * *"]
 FRONTEND_ORIGIN = "https://edge-radar-gamma.vercel.app"
 # Paper simulation only, no wallet access. AI requires separate explicit secret and flag.
 PAPER_EXPERIMENT_ENABLED = "true"
+# No paid model requests while running the free overnight baseline.
+PAPER_AI_ENABLED = "false"
 
 [[d1_databases]]
 binding = "DB"
