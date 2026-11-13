@@ -145,7 +145,11 @@ async function discoverMarket(env,fetcher,at,active=[]){
   .bind(at-3*60*60_000).all();
  for(const x of previous.results||[])if(validMint(x.mint))cache.push({mint:x.mint,name:x.name,symbol:x.symbol,source:'historico_d1'});
  const tracked=active.slice(0,12).filter(x=>validMint(x.mint)).map(x=>({mint:x.mint,name:x.name,symbol:x.symbol,source:'sinal_ativo'}));
- const candidates=combineCandidates([pools,tracked,recent,cache,profiles],SETTINGS.maxCandidates);
+ // Sinais antigos tambem permanecem monitoraveis quando a descoberta externa falha.
+ const oldSignals=await env.DB.prepare(`SELECT mint,MAX(name) AS name,MAX(symbol) AS symbol,MAX(triggered_at) AS seen
+  FROM signals WHERE triggered_at>? GROUP BY mint ORDER BY seen DESC LIMIT 12`).bind(at-6*60*60_000).all();
+ const historical=(oldSignals.results||[]).filter(x=>validMint(x.mint)).map(x=>({mint:x.mint,name:x.name,symbol:x.symbol,source:'sinal_historico'}));
+ const candidates=combineCandidates([pools,tracked,historical,recent,cache,profiles],SETTINGS.maxCandidates);
  return {candidates,warnings,sources,jupiterRecent,didJupiterRecent,geckoOk:sources.includes('GeckoTerminal')};
 }
 function dedupePools(pools){
