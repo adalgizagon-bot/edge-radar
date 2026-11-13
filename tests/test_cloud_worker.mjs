@@ -13,13 +13,15 @@ const gecko=()=>({
 const goodPair=(price='0.01')=>({chainId:'solana',dexId:'pumpswap',baseToken:{address:mint,name:'Test Token',symbol:'TEST'},priceUsd:price,
  liquidity:{usd:25000},volume:{m5:20000},txns:{m5:{buys:60,sells:20}},priceChange:{m5:12},pairCreatedAt:t0-60000});
 class FakeDB {
- constructor(){this.rows=[];this.state=null;this.daily=new Map();this.risks=new Map();this.quotes=new Map();this.evidence=[];this.sourceHealth=null}
- prepare(sql){return {first:async()=>{if(sql.includes('FROM source_health'))return this.sourceHealth;if(sql.includes('FROM collector_state'))return this.state;throw Error('Unknown unbound first '+sql)},bind:(...args)=>({
+ constructor(){this.rows=[];this.state=null;this.daily=new Map();this.risks=new Map();this.quotes=new Map();this.evidence=[];this.sourceHealth=null;this.sourceStates=new Map();this.universe=new Map();this.priceState=null}
+ prepare(sql){return {first:async()=>{if(sql.includes('FROM source_health'))return this.sourceStates.get(sql.includes('dex_pairs')?'dex_pairs':sql.includes('gecko_watch')?'gecko_watch':'gecko')||null;if(sql.includes('FROM collector_state'))return this.state;throw Error('Unknown unbound first '+sql)},bind:(...args)=>({
   all:async()=>{
    if(sql.includes('WHERE completed=0'))return {results:this.rows.filter(r=>!r.completed&&r.triggered_at>args[0]).sort((a,b)=>b.triggered_at-a.triggered_at).slice(0,args[1])};
    if(sql.startsWith('SELECT mint FROM'))return {results:this.rows.filter(r=>r.triggered_at>args[0]&&args.slice(1).includes(r.mint)).map(r=>({mint:r.mint}))};
    if(sql.startsWith('SELECT * FROM signals WHERE triggered_at<'))return {results:this.rows.filter(r=>r.triggered_at<args[0]).sort((a,b)=>b.triggered_at-a.triggered_at).slice(0,args[1])};
    if(sql.startsWith('SELECT mint,MAX(name) AS name')){const by=new Map();for(const x of this.rows.filter(x=>x.triggered_at>args[0])){const old=by.get(x.mint);if(!old||old.seen<x.triggered_at)by.set(x.mint,{mint:x.mint,name:x.name,symbol:x.symbol,seen:x.triggered_at});}return {results:[...by.values()].sort((a,b)=>b.seen-a.seen).slice(0,12)};}
+   if(sql.includes('FROM token_universe')&&sql.includes('pool_address'))return {results:[...this.universe.values()].filter(r=>r.pool_address&&r.score>=65).slice(0,24)};
+   if(sql.includes('FROM token_universe'))return {results:[...this.universe.values()].filter(r=>r.last_seen>args[0]).sort((a,b)=>b.score-a.score).slice(0,60)};
    if(sql.startsWith('SELECT mint,name,symbol FROM risk_watch'))return {results:[...this.risks.values()].filter(x=>x.assessed_at>args[0]).slice(0,22)};
    if(sql.startsWith('SELECT mint,pool_price,pool_liquidity FROM risk_watch'))return {results:args.map(m=>this.risks.get(m)).filter(Boolean)};
    if(sql.startsWith('SELECT * FROM risk_watch'))return {results:[...this.risks.values()]};
@@ -30,7 +32,27 @@ class FakeDB {
   },
   run:async()=>{
    if(sql.startsWith('UPDATE signals SET completed=1,')){for(const r of this.rows.filter(x=>!x.completed&&x.triggered_at<args[0])){r.completed=1;for(const key of ['m1','m5','m15','m30'])r[key+'_status'] ||= 'missing';}return {success:true};}
-   if(sql.startsWith('INSERT INTO source_health')){if(sql.includes("0,200")){this.sourceHealth={source:'gecko',next_attempt:args[0],failures:0,last_status:200,last_success:args[1],last_error:''};}else{this.sourceHealth={source:'gecko',next_attempt:args[0],failures:args[1],last_status:args[2],last_success:args[3]||null,last_error:args[4]};}return {success:true};}
+   if(sql.startsWith('INSERT INTO source_health')||sql.startsWith('INSERT INTO source_health(')){
+    const source=sql.includes('dex_pairs')?'dex_pairs':sql.includes('gecko_watch')?'gecko_watch':'gecko';
+    const success=sql.includes("0,200"),state=success?
+     {source,next_attempt:args[0],failures:0,last_status:200,last_success:args[1],last_error:''}:
+     {source,next_attempt:args[0],failures:args[1],last_status:args[2]||200,
+      last_success:args[3]||null,last_error:args[4]||''};
+    if(source==='gecko_watch'){
+     state.last_status=args[2]||200;state.last_success=args[3]||null;
+    }
+    this.sourceStates.set(source,state);if(source==='gecko')this.sourceHealth=state;
+    return {success:true};}
+   if(sql.startsWith('INSERT INTO token_universe')){
+    const keys=['mint','name','symbol','source','first_seen','first_pool_at','last_observed_at','last_seen',
+     'pool_address','dex','price_usd','liquidity_usd','volume5m_usd','change5m_pct','buys5m','sells5m',
+     'score','best_score','stage','risk_level','price_source'];
+    const row=Object.fromEntries(keys.map((k,i)=>[k,args[i]]));
+    const old=this.universe.get(row.mint);this.universe.set(row.mint,{...old,...row,
+      first_seen:old?.first_seen??row.first_seen,best_score:Math.max(old?.best_score||0,row.score),
+      observations:(old?.observations||0)+1});return {success:true};
+   }
+   if(sql.startsWith('INSERT INTO price_source_state')){this.priceState={checked_at:args[0],dex_count:args[1],gecko_count:args[2],missing_count:args[3],watched_pools:args[4],dex_next_attempt:args[5]};return {success:true};}
    if(sql.includes('INSERT OR IGNORE INTO signal_evidence')){const [signal_id,mint,captured_at,risk_level,organic_score,buy_usd,sell_usd,liquidity,reasons,quote_status]=args;this.evidence.push({signal_id,mint,captured_at,risk_level,organic_score,buy_usd,sell_usd,liquidity,reasons,quote_status});return {success:true};}
    if(sql.includes('INSERT INTO exit_quotes')){const cols=['mint','checked_at','stake_usd','status','estimated_sol','estimated_usd','recovery_pct','router','error'];const row=Object.fromEntries(cols.map((c,i)=>[c,args[i]]));this.quotes.set(row.mint,row);return {success:true};}
    if(sql.includes('INSERT INTO risk_watch')){const cols=['mint','name','symbol','assessed_at','level','market_score','organic_score','is_verified','top_holders','buy_usd','sell_usd','flow_ratio','pool_price','pool_liquidity','jupiter_liquidity','change_price','change_liquidity','reasons','exit_quote_verified','entry_allowed'];const row=Object.fromEntries(cols.map((c,i)=>[c,args[i]]));this.risks.set(row.mint,row);return {success:true};}
@@ -49,7 +71,8 @@ class FakeDB {
   },
   first:async()=>{
    if(sql.includes('FROM collector_state'))return this.state;
-   if(sql.includes('FROM source_health'))return this.sourceHealth;
+   if(sql.includes('FROM source_health'))return this.sourceStates.get(sql.includes('dex_pairs')?'dex_pairs':sql.includes('gecko_watch')?'gecko_watch':'gecko')||null;
+   if(sql.includes('FROM price_source_state'))return this.priceState;
    if(sql.includes('COUNT(*)')){const measured=this.rows.filter(x=>x.m5_status==='measured');return {total:this.rows.length,day:this.rows.length,m5measured:measured.length,m5positive:measured.filter(x=>x.m5_return>0).length,m5avg:measured.reduce((sum,x)=>sum+x.m5_return,0)/(measured.length||1)};}
    throw Error('Unknown first '+sql);
   }
