@@ -82,3 +82,30 @@ CREATE TABLE IF NOT EXISTS source_health (
  last_success INTEGER,
  last_error TEXT NOT NULL DEFAULT ''
 );
+
+-- Isolated paper experiment; no wallets or live orders.
+CREATE TABLE IF NOT EXISTS paper_accounts(
+ strategy TEXT PRIMARY KEY,initial_usd REAL NOT NULL,cash_usd REAL NOT NULL,updated_at INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS paper_positions(
+ strategy TEXT NOT NULL,mint TEXT NOT NULL,symbol TEXT NOT NULL DEFAULT '',
+ quantity REAL NOT NULL,invested_usd REAL NOT NULL,entry_price REAL NOT NULL,
+ opened_at INTEGER NOT NULL,updated_at INTEGER NOT NULL,last_price REAL,last_quote_at INTEGER,PRIMARY KEY(strategy,mint)
+);
+CREATE TABLE IF NOT EXISTS paper_trades(
+ id TEXT PRIMARY KEY,strategy TEXT NOT NULL,mint TEXT NOT NULL,symbol TEXT NOT NULL DEFAULT '',
+ action TEXT NOT NULL,quantity REAL NOT NULL,price_usd REAL NOT NULL,fee_usd REAL NOT NULL,
+ cash_usd REAL NOT NULL,pnl_usd REAL,reason TEXT NOT NULL,created_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_paper_trades_time ON paper_trades(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_paper_trades_strategy_time ON paper_trades(strategy,created_at DESC);
+CREATE TABLE IF NOT EXISTS paper_decisions(
+ id TEXT PRIMARY KEY,strategy TEXT NOT NULL,mint TEXT NOT NULL,decision TEXT NOT NULL,
+ reason TEXT NOT NULL,source TEXT NOT NULL,created_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_paper_decisions_time ON paper_decisions(created_at DESC);
+CREATE TABLE IF NOT EXISTS paper_ai_usage(
+ day TEXT PRIMARY KEY,calls INTEGER NOT NULL DEFAULT 0,input_tokens INTEGER NOT NULL DEFAULT 0,
+ output_tokens INTEGER NOT NULL DEFAULT 0,last_status TEXT NOT NULL DEFAULT '',updated_at INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS paper_cycle_runs(minute_at INTEGER PRIMARY KEY);

@@ -52,3 +52,29 @@ main.shell>.tabs{grid-column:1;grid-row:1/span 12;position:sticky;top:92px;align
 .evaluation-card small{grid-column:1/-1;border-top:1px solid #2a4055;padding-top:9px;font-size:10px;color:#dcbf91}
 @media(max-width:1200px){.evaluation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.evaluation-grid{grid-template-columns:1fr}.evaluation-title{flex-direction:column}.risk-mini{gap:10px}}
+
+/* Experiment A/B */
+.agent-heading{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;flex-wrap:wrap}
+.agent-heading h2{margin:8px 0;font-size:22px}
+.agent-heading p{font-size:12px;color:#aec4d0;max-width:770px;line-height:1.7}
+.agent-status{padding:12px 14px;background:#112b36;border:1px solid #285363;border-radius:10px;font-size:12px;color:#c1ebea}
+.agent-accounts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:16px 0}
+.agent-card{border:1px solid #284758;background:#102337;border-radius:13px;padding:16px;min-width:0}
+.agent-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.agent-card-header small{font-size:10px;letter-spacing:.12em;color:#8aacbb;font-weight:800}
+.agent-card-header h3{margin:5px 0 15px;font-size:19px}
+.agent-card-header span{font-size:10px;color:#b8cedb;text-align:right}
+.agent-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 9px}
+.agent-metrics div{min-width:0}
+.agent-metrics label{display:block;color:#8dacc0;font-size:10px;margin-bottom:5px}
+.agent-metrics strong{font-size:17px;word-break:break-word}
+.agent-tablewrap{overflow-x:auto;width:100%;margin-bottom:24px}
+.agent-tablewrap .paper-table{min-width:740px}
+.agent-tablewrap .paper-table th,.agent-tablewrap .paper-table td{font-size:11px;text-align:left;vertical-align:top}
+.agent-tablewrap .paper-table td:last-child{min-width:190px;max-width:420px;overflow-wrap:anywhere}
+.agent-usage{padding:12px 0;border-top:1px solid #2a455b;color:#91afbd;font-size:11px}
+.agent-card .positive,.agent-tablewrap .positive{color:#79dfb5}
+.agent-card .negative,.agent-tablewrap .negative{color:#ef93a7}
+#agentSection h3{margin-top:20px;font-size:15px}
+@media(max-width:1000px){.agent-accounts{grid-template-columns:1fr}}
+@media(max-width:490px){.agent-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
