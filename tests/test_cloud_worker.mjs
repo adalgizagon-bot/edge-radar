@@ -14,7 +14,7 @@ const goodPair=(price='0.01')=>({chainId:'solana',dexId:'pumpswap',baseToken:{ad
  liquidity:{usd:25000},volume:{m5:20000},txns:{m5:{buys:60,sells:20}},priceChange:{m5:12},pairCreatedAt:t0-60000});
 class FakeDB {
  constructor(){this.rows=[];this.state=null;this.daily=new Map();this.risks=new Map();this.quotes=new Map();this.evidence=[];this.sourceHealth=null}
- prepare(sql){return {bind:(...args)=>({
+ prepare(sql){return {first:async()=>{if(sql.includes('FROM source_health'))return this.sourceHealth;if(sql.includes('FROM collector_state'))return this.state;throw Error('Unknown unbound first '+sql)},bind:(...args)=>({
   all:async()=>{
    if(sql.includes('WHERE completed=0'))return {results:this.rows.filter(r=>!r.completed&&r.triggered_at>args[0]).sort((a,b)=>b.triggered_at-a.triggered_at).slice(0,args[1])};
    if(sql.startsWith('SELECT mint FROM'))return {results:this.rows.filter(r=>r.triggered_at>args[0]&&args.slice(1).includes(r.mint)).map(r=>({mint:r.mint}))};
