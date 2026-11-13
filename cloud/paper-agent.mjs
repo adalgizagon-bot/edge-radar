@@ -3,7 +3,7 @@
  */
 export const PAPER={initial:1000,stake:20,fee:0.01,maxPositions:3,stop:-0.07,
   baselineTake:0.12,aiTake:0.20,maxHoldMs:20*60_000,reentryMs:60*60_000,
-  maxAiCallsPerDay:100};
+  maxAiCallsPerDay:480};
 const num=v=>v===null||v===undefined||v===''||!Number.isFinite(Number(v))?null:Number(v);
 const mintOK=s=>typeof s==='string'&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(s);
 export function paperEnabled(env){return env?.PAPER_EXPERIMENT_ENABLED==='true';}
@@ -11,6 +11,7 @@ export function agentEnabled(env){return paperEnabled(env)&&env?.PAPER_AI_ENABLE
 const localDay=ms=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(ms));
 const dayStart=ms=>{const d=localDay(ms);return Date.parse(d+'T00:00:00-03:00');};
 const short=s=>String(s??'').slice(0,180);
+export const aiDailyLimit=env=>{const x=Number(env?.PAPER_AI_DAILY_LIMIT);return Number.isInteger(x)&&x>=1?Math.min(PAPER.maxAiCallsPerDay,x):PAPER.maxAiCallsPerDay;};
 export function isPaperCandidate(c){
  const p=c?.pair,r=c?.risk,q=c?.quote,price=num(p?.priceUsd),liquidity=num(p?.liquidity?.usd);
  return !!(mintOK(c?.mint)&&price>0&&liquidity>=20000&&c?.stage==='priority'&&
@@ -87,7 +88,7 @@ export async function askAgent(env,at,candidates,open,cash,fetcher=fetch){
  await db.prepare('INSERT OR IGNORE INTO paper_ai_usage(day,calls,input_tokens,output_tokens,last_status,updated_at) VALUES(?,0,0,0,?,?)')
   .bind(day,'ready',at).run();
  const quota=await db.prepare('UPDATE paper_ai_usage SET calls=calls+1,updated_at=? WHERE day=? AND calls<?')
-  .bind(at,day,PAPER.maxAiCallsPerDay).run();
+  .bind(at,day,aiDailyLimit(env)).run();
  if(quota?.meta?.changes===0)return {choices:new Map(),status:'daily_limit'};
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),11000);
  try{
@@ -167,7 +168,7 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
  return {enabled:true,eligible:eligible.length,buys:count,sells:closed,aiStatus:ai.status};
 }
 export async function paperSnapshot(env,at=Date.now()){
- if(!paperEnabled(env))return {enabled:false,aiConfigured:agentEnabled(env),accounts:[],positions:[],trades:[],decisions:[],usage:null,note:'Teste ainda nao habilitado no servidor'};
+ if(!paperEnabled(env))return {enabled:false,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),accounts:[],positions:[],trades:[],decisions:[],usage:null,note:'Teste ainda nao habilitado no servidor'};
  const db=env.DB;
  const [ac,po,tr,de,us,pf]=await Promise.all([
   db.prepare('SELECT * FROM paper_accounts ORDER BY strategy').all(),
@@ -185,7 +186,7 @@ export async function paperSnapshot(env,at=Date.now()){
   return {...a,open_value_usd:netOpen,equity_usd:fresh?a.cash_usd+netOpen:null,
    unrealized_pnl:fresh?netOpen-invested:null,prices_fresh:fresh};
  });
- return {enabled:true,aiConfigured:agentEnabled(env),accounts,
+ return {enabled:true,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),accounts,
   performance:pf.results||[],positions:rows,trades:tr.results||[],decisions:de.results||[],usage:us||null,
   checkedAt:at,note:'Compras/vendas ficticias com cotacoes observadas e custos supostos. Sem garantia de execucao real.'};
 }
