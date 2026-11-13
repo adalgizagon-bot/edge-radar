@@ -118,8 +118,8 @@ após publicar as tabelas D1 com o pipeline:
 
 Na falta da chave ou da flag, a estratégia de IA permanece inativa; a estratégia de regras
 pode continuar sozinha. A chamada é feita pelo Worker via API Responses com
-`store:false`, apenas para tokens elegíveis e posições abertas, com até 100 chamadas
-por dia (horário de Brasília). A tabela `paper_ai_usage` armazena contagem real de
+`store:false`, apenas para tokens elegíveis e posições abertas, com até 480 chamadas
+por dia (reduzível com `PAPER_AI_DAILY_LIMIT`) (horário de Brasília). A tabela `paper_ai_usage` armazena contagem real de
 chamadas e tokens; na falta de resposta válida, a IA não abre novas posições.
 Nenhuma informação da chave é exposta por `/api/paper`.
 
