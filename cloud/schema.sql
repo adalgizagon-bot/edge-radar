@@ -137,3 +137,12 @@ CREATE TABLE IF NOT EXISTS paper_scalp_tracking (
   PRIMARY KEY(strategy,mint)
 );
 CREATE INDEX IF NOT EXISTS idx_scalp_tracking_time ON paper_scalp_tracking(sample_at DESC);
+
+-- Read-only latest scalp filter summary; never alters prior collected signals.
+CREATE TABLE IF NOT EXISTS paper_scalp_diagnostics (
+ id INTEGER PRIMARY KEY CHECK(id=1),checked_at INTEGER NOT NULL,
+ candidates INTEGER NOT NULL DEFAULT 0, eligible INTEGER NOT NULL DEFAULT 0,
+ volume_score INTEGER NOT NULL DEFAULT 0, pressure INTEGER NOT NULL DEFAULT 0,
+ stretched INTEGER NOT NULL DEFAULT 0, too_new INTEGER NOT NULL DEFAULT 0,
+ weakening INTEGER NOT NULL DEFAULT 0
+);
