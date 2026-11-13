@@ -27,6 +27,48 @@ jobs:
             print("SCHEDULES",json.dumps({"success":obj.get("success"),"result":obj.get("result"),"errors":[x.get("code") for x in (obj.get("errors") or [])]}))
           except urllib.error.HTTPError as e:print("SCHEDULES_HTTP",e.code)
           PY
+      - name: Consultar invocacoes e erros do Worker em analise read-only
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          python3 - <<'PY'
+          import os,json,datetime,urllib.request,urllib.error
+          now=datetime.datetime.now(datetime.timezone.utc)
+          start=now-datetime.timedelta(hours=2)
+          query='''query($accountTag: string, $start: Time, $end: Time, $script: string) {
+            viewer {
+              accounts(filter: {accountTag:$accountTag}) {
+                workersInvocationsAdaptive(limit:50,
+                  filter:{scriptName:$script,datetime_geq:$start,datetime_leq:$end}) {
+                  dimensions{datetime scriptName status}
+                  sum{requests errors}
+                }
+              }
+            }
+          }'''
+          payload=json.dumps({"query":query,"variables":{"accountTag":os.environ["CF_ACCOUNT"],
+            "start":start.isoformat(timespec="seconds").replace("+00:00","Z"),
+            "end":now.isoformat(timespec="seconds").replace("+00:00","Z"),
+            "script":"edge-radar-cloud"}}).encode()
+          req=urllib.request.Request("https://api.cloudflare.com/client/v4/graphql",
+              data=payload,headers={"Authorization":"Bearer "+os.environ["CF_TOKEN"],
+              "Content-Type":"application/json","User-Agent":"EdgeRadarDiagnostics/1.0"})
+          try:
+            with urllib.request.urlopen(req,timeout=20) as res:
+              obj=json.load(res)
+            if obj.get('errors'):
+              print('GRAPHQL_QUERY_ERRORS',[str(e.get('message'))[:220] for e in obj.get('errors',[])])
+            else:
+              accounts=(obj.get('data') or {}).get('viewer',{}).get('accounts',[])
+              for account in accounts:
+                rows=account.get('workersInvocationsAdaptive',[])
+                print('INVOKE_TOTAL',len(rows))
+                for row in rows[-30:]:
+                  print('INVOKE',json.dumps(row))
+          except urllib.error.HTTPError as e:
+            print('GRAPHQL_HTTP',e.code)
+          PY
       - name: Escutar erros de execucao por um ciclo (sem modificar Worker)
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -34,7 +76,7 @@ jobs:
         run: |
           npx --yes wrangler@latest tail edge-radar-cloud --format json > /tmp/radar-tail.out 2>/tmp/radar-tail.err &
           PID=$!
-          sleep 78
+          sleep 40
           kill "$PID" 2>/dev/null || true
           wait "$PID" 2>/dev/null || true
           python3 - <<'PY'
@@ -60,7 +102,9 @@ jobs:
         run: |
           python3 - <<'PY'
           import urllib.request,json,datetime as d
-          with urllib.request.urlopen("https://edge-radar-cloud.adalgizagon.workers.dev/api/status",timeout=15) as response:
+          req=urllib.request.Request("https://edge-radar-cloud.adalgizagon.workers.dev/api/status",
+            headers={"User-Agent":"Edge-Radar-Audit/1.0","Accept":"application/json"})
+          with urllib.request.urlopen(req,timeout=15) as response:
             x=json.load(response)
           c=x.get("checkedAt") or 0;r=x.get("latest") or {}
           last=r.get("last_run") or 0
