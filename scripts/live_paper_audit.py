@@ -68,6 +68,28 @@ report={
  "strategies":{s:analysis([x for x in rows if x.get("strategy")==s]) for s in strategies},
  "forward":{s:analysis([x for x in rows if x.get("strategy")==s and forwardStart is not None and (number(x.get("closed_at")) or 0)>=forwardStart]) for s in strategies},
 }
+def read_public(path):
+    req=urllib.request.Request("https://edge-radar-cloud.adalgizagon.workers.dev"+path,
+        headers={"User-Agent":"Edge-Radar-Audit/1.0","Accept":"application/json","Cache-Control":"no-cache"})
+    with urllib.request.urlopen(req,timeout=25) as response:
+        return json.load(response)
+paper=read_public("/api/paper")
+status=read_public("/api/status")
+from collections import Counter
+tracked=Counter(x.get("strategy") for x in paper.get("trades",[]))
+active=Counter(x.get("strategy") for x in paper.get("positions",[]))
+closed=Counter(x.get("strategy") for x in paper.get("trades",[]) if x.get("action")=="sell")
+print("=== EDGE_RUNTIME_JSON_START ===")
+print(json.dumps({"paperEnabled":paper.get("enabled"),"aiConfigured":paper.get("aiConfigured"),
+  "checkedAt":paper.get("checkedAt"),"v2Since":paper.get("v2Since"),
+  "v2Diagnostics":paper.get("v2Diagnostics"),"baseDiagnostics":paper.get("diagnostics"),
+  "scalpDiagnostics":paper.get("scalpDiagnostics"),"profiles":paper.get("profiles"),
+  "accounts":paper.get("accounts"),"active":dict(active),"tradesShown":dict(tracked),
+  "closedShown":dict(closed),"performance":paper.get("performance"),
+  "recentDecisions":paper.get("decisions",[])[:9],
+  "workerStatus":status},ensure_ascii=False,indent=2))
+print("=== EDGE_RUNTIME_JSON_END ===")
+
 print("=== EDGE_AUDIT_JSON_START ===")
 print(json.dumps(report,ensure_ascii=False,indent=2))
 print("=== EDGE_AUDIT_JSON_END ===")
