@@ -94,3 +94,18 @@ test('D1 integration: missing prices do not invent scalp exits or a positive equ
   assert.equal(snap.accounts.find(x=>x.strategy==='scalp').equity_usd,null);
  }finally{db.close();}
 });
+
+test('Cloudflare provides a secure same-origin standalone read-only laboratory',async()=>{
+ const db=localD1(),env={DB:db,PAPER_EXPERIMENT_ENABLED:'true',PAPER_AI_ENABLED:'false'};
+ try{
+  const {handle}=await import('../cloud/worker.mjs');
+  const response=await handle(new Request('https://worker.example/lab'),env);
+  const text=await response.text();
+  assert.equal(response.status,200);
+  assert.match(response.headers.get('content-type'),/text\/html/);
+  assert.match(response.headers.get('content-security-policy'),/frame-ancestors 'none'/);
+  assert.ok(text.includes('Edge Scalp Rápido'));
+  assert.ok(text.includes("fetch('/api/paper'"));
+  assert.ok(!text.includes('OPENAI_API_KEY'));
+ }finally{db.close();}
+});
