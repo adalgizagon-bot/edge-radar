@@ -8,7 +8,8 @@ import {auditSnapshot} from './audit.mjs';
 import {auditHtml} from './audit-page.mjs';
 import {paperEnabled,runPaperCycle,paperSnapshot} from './paper-agent.mjs';
 import {SOL_MINT,quoteRequest,parseExitQuote} from './exit-quote.mjs';
-import {GECKO_COOLDOWN_MS,geckoDelay,parseJupiterRecent,parseDexProfiles,combineCandidates} from './discovery.mjs';
+import {GECKO_COOLDOWN_MS,geckoDelay,parseJupiterRecent,parseDexProfiles,selectBalancedCandidates} from './discovery.mjs';
+import {selectGeckoPairs,mergeFreshPairs,poolAgeMillis} from './gecko-prices.mjs';
 const SETTINGS=Object.freeze({
   gecko:'https://api.geckoterminal.com/api/v2/networks/solana/',
   dex:'https://api.dexscreener.com/tokens/v1/solana/',
@@ -34,7 +35,7 @@ function parsePools(payload,source){
     out.push({mint,name:clean(token?.attributes?.name||attr.name?.split('/')?.[0]),symbol:clean(token?.attributes?.symbol,25),
       pool:attr.address||null,source,liquidity:value(attr.reserve_in_usd),volume:value(attr.volume_usd?.m5),
       change:value(attr.price_change_percentage?.m5),buys:value(attr.transactions?.m5?.buys),sells:value(attr.transactions?.m5?.sells),
-      price:value(attr.base_token_price_usd),dex});
+      price:value(attr.base_token_price_usd),dex,createdAt:poolAgeMillis(attr.pool_created_at)});
   }
   return out;
 }
@@ -102,59 +103,73 @@ async function recentMints(db,mints,at){
 async function discoverMarket(env,fetcher,at,active=[]){
  const warnings=[],sources=[],cache=[];
  const state=await env.DB.prepare("SELECT * FROM source_health WHERE source='gecko'").first();
- let pools=[],recent=[],profiles=[],jupiterRecent=[],didJupiterRecent=false;
+ const poolsByGroup={new:[],['5m']:[],['1h']:[],['24h']:[]};
+ let recent=[],jupiterRecent=[],didJupiterRecent=false;
+ const freshPools=[];
  const canTry=!state||at>=Number(state.next_attempt||0);
  if(canTry){
-  const endpoint=Math.floor(at/GECKO_COOLDOWN_MS)%2===0?'new_pools?include=base_token,dex':'trending_pools?include=base_token,dex&duration=5m';
-  try{
-   const payload=await fetchJSON(SETTINGS.gecko+endpoint,fetcher);
-   pools=parsePools(payload,endpoint.startsWith('new')?'new':'trending');
-   sources.push('GeckoTerminal');
-   await env.DB.prepare(`INSERT INTO source_health (source,next_attempt,failures,last_status,last_success,last_error)
-    VALUES ('gecko',?,0,200,?,'') ON CONFLICT(source) DO UPDATE SET
-    next_attempt=excluded.next_attempt,failures=0,last_status=200,last_success=excluded.last_success,last_error=''`)
-    .bind(at+GECKO_COOLDOWN_MS,at).run();
-  }catch(e){
-   const failures=Math.min(30,Number(state?.failures||0)+1),status=e?.status||0;
-   const next=at+geckoDelay(status,failures,e?.retryAfterMs||0);
-   const reason=String(e?.message||e).slice(0,160);
-   await env.DB.prepare(`INSERT INTO source_health (source,next_attempt,failures,last_status,last_success,last_error)
-    VALUES ('gecko',?,?,?,? ,?) ON CONFLICT(source) DO UPDATE SET
-    next_attempt=excluded.next_attempt,failures=excluded.failures,
-    last_status=excluded.last_status,last_error=excluded.last_error`)
-    .bind(next,failures,status,Number(state?.last_success||0)||null,reason).run();
-   warnings.push('GeckoTerminal limitado ('+reason+'); nova tentativa em '+Math.ceil((next-at)/60000)+' min');
+  const period=['5m','1h','24h'][Math.floor(at/GECKO_COOLDOWN_MS)%3];
+  const endpoints=[['new','new_pools?include=base_token,dex'],
+   [period,'trending_pools?include=base_token,dex&duration='+period]];
+  let succeeded=0,lastError=null;
+  for(const [kind,path] of endpoints){
+   try{
+    const payload=await fetchJSON(SETTINGS.gecko+path,fetcher);
+    const found=parsePools(payload,kind==='new'?'new':'trending_'+kind);
+    poolsByGroup[kind].push(...found);freshPools.push(...found);succeeded++;
+   }catch(e){lastError=e;warnings.push('GeckoTerminal '+kind+': '+String(e?.message||e).slice(0,85));}
   }
- }else if(Number(state?.last_status)===429){
-  warnings.push('GeckoTerminal em pausa por limite de API; usando fontes alternativas');
+  if(succeeded){
+   sources.push('GeckoTerminal ('+succeeded+'/2)');
+   await env.DB.prepare("INSERT INTO source_health (source,next_attempt,failures,last_status,last_success,last_error) "+
+    "VALUES ('gecko',?,0,200,?,'') ON CONFLICT(source) DO UPDATE SET "+
+    "next_attempt=excluded.next_attempt,failures=0,last_status=200,last_success=excluded.last_success,last_error=''")
+    .bind(at+GECKO_COOLDOWN_MS,at).run();
+  }else{
+   const failures=Math.min(30,Number(state?.failures||0)+1),status=lastError?.status||0;
+   const next=at+geckoDelay(status,failures,lastError?.retryAfterMs||0);
+   await env.DB.prepare("INSERT INTO source_health (source,next_attempt,failures,last_status,last_success,last_error) "+
+    "VALUES ('gecko',?,?,?,? ,?) ON CONFLICT(source) DO UPDATE SET "+
+    "next_attempt=excluded.next_attempt,failures=excluded.failures,last_status=excluded.last_status,last_error=excluded.last_error")
+    .bind(next,failures,status,Number(state?.last_success||0)||null,String(lastError?.message||'sem fonte').slice(0,160)).run();
+  }
  }
- // Se a fonte principal nao forneceu tokens suficientes, mantemos descoberta por fontes alternativas.
- if(pools.length<12){
+ if(!canTry&&Number(state?.last_status)===429)warnings.push('GeckoTerminal em pausa por limite; aguardando nova tentativa');
+ if(freshPools.length<12){
   didJupiterRecent=true;
   try{
    const payload=await fetchJSON('https://api.jup.ag/tokens/v2/recent',fetcher);
    if(!Array.isArray(payload))throw Error('resposta invalida');
    jupiterRecent=payload.filter(t=>validMint(t?.id));
-   recent=parseJupiterRecent(jupiterRecent);
-   sources.push('Jupiter recentes');
+   recent=parseJupiterRecent(jupiterRecent);sources.push('Jupiter recentes');
   }catch(e){warnings.push('Jupiter recentes: '+String(e?.message||e).slice(0,85));}
-  try{
-   const payload=await fetchJSON('https://api.dexscreener.com/token-profiles/latest/v1',fetcher);
-   if(!Array.isArray(payload))throw Error('resposta invalida');
-   profiles=parseDexProfiles(payload);
-   sources.push('DEX Screener perfis (parcial/promocional)');
-  }catch(e){warnings.push('DEX Screener perfis: '+String(e?.message||e).slice(0,85));}
  }
- const previous=await env.DB.prepare('SELECT mint,name,symbol FROM risk_watch WHERE assessed_at>? ORDER BY assessed_at DESC LIMIT 22')
-  .bind(at-3*60*60_000).all();
+ const stored=await env.DB.prepare("SELECT mint,name,symbol,source,first_pool_at,score,last_seen FROM token_universe "+
+  "WHERE last_seen>? ORDER BY score DESC,last_seen DESC LIMIT 60").bind(at-14*24*60*60_000).all();
+ const mature=[],persistedNew=[];
+ for(const row of stored.results||[]){
+  if(!validMint(row.mint))continue;
+  const item={mint:row.mint,name:row.name,symbol:row.symbol,source:'universe_history'};
+  if(row.first_pool_at&&at-row.first_pool_at>=24*60*60_000)mature.push(item);
+  else persistedNew.push(item);
+ }
+ const previous=await env.DB.prepare("SELECT mint,name,symbol FROM risk_watch WHERE assessed_at>? ORDER BY assessed_at DESC LIMIT 18")
+  .bind(at-6*60*60_000).all();
  for(const x of previous.results||[])if(validMint(x.mint))cache.push({mint:x.mint,name:x.name,symbol:x.symbol,source:'historico_d1'});
  const tracked=active.slice(0,12).filter(x=>validMint(x.mint)).map(x=>({mint:x.mint,name:x.name,symbol:x.symbol,source:'sinal_ativo'}));
- // Sinais antigos tambem permanecem monitoraveis quando a descoberta externa falha.
- const oldSignals=await env.DB.prepare(`SELECT mint,MAX(name) AS name,MAX(symbol) AS symbol,MAX(triggered_at) AS seen
-  FROM signals WHERE triggered_at>? GROUP BY mint ORDER BY seen DESC LIMIT 12`).bind(at-6*60*60_000).all();
- const historical=(oldSignals.results||[]).filter(x=>validMint(x.mint)).map(x=>({mint:x.mint,name:x.name,symbol:x.symbol,source:'sinal_historico'}));
- const candidates=combineCandidates([pools,tracked,historical,recent,cache,profiles],SETTINGS.maxCandidates);
- return {candidates,warnings,sources,jupiterRecent,didJupiterRecent,geckoOk:sources.includes('GeckoTerminal')};
+ const oldSignals=await env.DB.prepare("SELECT mint,MAX(name) AS name,MAX(symbol) AS symbol,MAX(triggered_at) AS seen "+
+  "FROM signals WHERE triggered_at>? GROUP BY mint ORDER BY seen DESC LIMIT 12")
+  .bind(at-48*60*60_000).all();
+ const historical=(oldSignals.results||[]).filter(x=>validMint(x.mint))
+  .map(x=>({mint:x.mint,name:x.name,symbol:x.symbol,source:'sinal_historico'}));
+ const candidates=selectBalancedCandidates([
+    poolsByGroup.new,poolsByGroup['5m'],poolsByGroup['1h'],poolsByGroup['24h'],
+    mature,tracked,historical,persistedNew,recent,cache
+ ],SETTINGS.maxCandidates,[5,6,5,5,4,0,0,0,0,0]);
+ return {candidates,warnings,sources,jupiterRecent,didJupiterRecent,
+  geckoOk:sources.some(x=>x.startsWith('GeckoTerminal')),freshPools,
+  groups:{new:poolsByGroup.new.length,short:poolsByGroup['5m'].length,
+   medium:poolsByGroup['1h'].length,older:poolsByGroup['24h'].length,watch:mature.length}};
 }
 function dedupePools(pools){
  const by=new Map();for(const p of pools){const o=by.get(p.mint);if(!o||(p.liquidity??0)>(o.liquidity??0))by.set(p.mint,p)}
