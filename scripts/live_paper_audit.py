@@ -93,3 +93,20 @@ print("=== EDGE_RUNTIME_JSON_END ===")
 print("=== EDGE_AUDIT_JSON_START ===")
 print(json.dumps(report,ensure_ascii=False,indent=2))
 print("=== EDGE_AUDIT_JSON_END ===")
+
+print("=== EDGE_DISCOVERY_CHECK_START ===")
+groups={}
+for category in ["strong","new","established","watch","all"]:
+    response=read_public("/api/discover?group="+category+"&limit=150")
+    records=response.get("rows") or []
+    groups[category]={
+       "count":len(records),
+       "fresh":sum(0 <= (response["checkedAt"]-(x.get("last_observed_at") or 0)) <= 600000 for x in records),
+       "older_than_day":sum((x.get("first_pool_at") or 0) > 0 and response["checkedAt"]-(x.get("first_pool_at") or 0) >= 86400000 for x in records),
+       "min_score":min((x.get("score") or 0 for x in records),default=0),
+       "max_score":max((x.get("score") or 0 for x in records),default=0),
+       "sample_sources":sorted(set(x.get("price_source") for x in records if x.get("price_source")))[:5],
+       "health":response.get("health")
+    }
+print(json.dumps(groups,ensure_ascii=False))
+print("=== EDGE_DISCOVERY_CHECK_END ===")
