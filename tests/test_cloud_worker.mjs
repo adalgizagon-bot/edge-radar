@@ -19,6 +19,7 @@ class FakeDB {
    if(sql.includes('WHERE completed=0'))return {results:this.rows.filter(r=>!r.completed&&r.triggered_at>args[0]).sort((a,b)=>b.triggered_at-a.triggered_at).slice(0,args[1])};
    if(sql.startsWith('SELECT mint FROM'))return {results:this.rows.filter(r=>r.triggered_at>args[0]&&args.slice(1).includes(r.mint)).map(r=>({mint:r.mint}))};
    if(sql.startsWith('SELECT * FROM signals WHERE triggered_at<'))return {results:this.rows.filter(r=>r.triggered_at<args[0]).sort((a,b)=>b.triggered_at-a.triggered_at).slice(0,args[1])};
+   if(sql.startsWith('SELECT mint,MAX(name) AS name')){const by=new Map();for(const x of this.rows.filter(x=>x.triggered_at>args[0])){const old=by.get(x.mint);if(!old||old.seen<x.triggered_at)by.set(x.mint,{mint:x.mint,name:x.name,symbol:x.symbol,seen:x.triggered_at});}return {results:[...by.values()].sort((a,b)=>b.seen-a.seen).slice(0,12)};}
    if(sql.startsWith('SELECT mint,name,symbol FROM risk_watch'))return {results:[...this.risks.values()].filter(x=>x.assessed_at>args[0]).slice(0,22)};
    if(sql.startsWith('SELECT mint,pool_price,pool_liquidity FROM risk_watch'))return {results:args.map(m=>this.risks.get(m)).filter(Boolean)};
    if(sql.startsWith('SELECT * FROM risk_watch'))return {results:[...this.risks.values()]};
