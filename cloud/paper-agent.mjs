@@ -1,7 +1,8 @@
 /* Edge Radar — persistent A/B PAPER trading. No wallet, signing, or execution routes.
  * Prices are observed DEX quotes, not executable fills. Fail closed on missing data.
  */
-export const PAPER={initial:1000,stake:20,fee:0.01,maxPositions:3,stop:-0.07,
+import {SCALP,scalpCandidate,nextScalpTracking,scalpExit} from './scalp.mjs';
+export const PAPER={initial:1000,stake:20,fee:0.01,stressFee:0.025,maxPositions:3,stop:-0.07,
   baselineTake:0.12,aiTake:0.20,maxHoldMs:20*60_000,reentryMs:60*60_000,
   maxAiCallsPerDay:480};
 const num=v=>v===null||v===undefined||v===''||!Number.isFinite(Number(v))?null:Number(v);
@@ -70,7 +71,7 @@ async function buy(db,accountRow,strategy,c,at,reason){
  if(!price)return false;
  const qty=PAPER.stake/(price*(1+PAPER.fee)),fee=PAPER.stake-qty*price;
  const id=strategy+':buy:'+c.mint+':'+at;
- await db.batch([
+ const requests=[
   db.prepare('INSERT INTO paper_positions(strategy,mint,symbol,quantity,invested_usd,entry_price,opened_at,updated_at,last_price,last_quote_at) VALUES(?,?,?,?,?,?,?,?,?,?)')
    .bind(strategy,c.mint,String(c.symbol||'').slice(0,25),qty,PAPER.stake,price,at,at,price,at),
   db.prepare('UPDATE paper_accounts SET cash_usd=cash_usd-?,updated_at=? WHERE strategy=? AND cash_usd>=?')
@@ -79,19 +80,24 @@ async function buy(db,accountRow,strategy,c,at,reason){
    .bind(id,strategy,c.mint,String(c.symbol||'').slice(0,25),'buy',qty,price,fee,-PAPER.stake,null,short(reason),at),
   db.prepare('INSERT INTO paper_entry_evidence(buy_id,strategy,mint,created_at,tier,risk_level,quote_status,score,liquidity) VALUES(?,?,?,?,?,?,?,?,?)')
    .bind(id,strategy,c.mint,at,c.tier,c.risk?.level||'unverified',c.quote||'not_checked',c.score||0,num(c.pair?.liquidity?.usd))
- ]);
+ ];
+ if(strategy==='scalp')requests.push(db.prepare('INSERT INTO paper_scalp_tracking(strategy,mint,peak_price,last_price,weak_ticks,sample_at) VALUES(?,?,?,?,0,?)')
+  .bind(strategy,c.mint,price,price,at));
+ await db.batch(requests);
  accountRow.cash_usd-=PAPER.stake;
  return true;
 }
 async function sell(db,accountRow,strategy,p,price,at,reason){
  if(!(price>0))return false;
  const gross=p.quantity*price,fee=gross*PAPER.fee,payout=gross-fee,pnl=payout-p.invested_usd;
- await db.batch([
+ const requests=[
   db.prepare('DELETE FROM paper_positions WHERE strategy=? AND mint=?').bind(strategy,p.mint),
   db.prepare('UPDATE paper_accounts SET cash_usd=cash_usd+?,updated_at=? WHERE strategy=?').bind(payout,at,strategy),
   db.prepare('INSERT INTO paper_trades(id,strategy,mint,symbol,action,quantity,price_usd,fee_usd,cash_usd,pnl_usd,reason,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')
    .bind(strategy+':sell:'+p.mint+':'+at,strategy,p.mint,p.symbol,'sell',p.quantity,price,fee,payout,pnl,short(reason),at)
- ]);
+ ];
+ if(strategy==='scalp')requests.push(db.prepare('DELETE FROM paper_scalp_tracking WHERE strategy=? AND mint=?').bind(strategy,p.mint));
+ await db.batch(requests);
  accountRow.cash_usd+=payout;return true;
 }
 function safeModelChoices(answer,candidates,open){
