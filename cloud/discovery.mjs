@@ -25,3 +25,30 @@ export function combineCandidates(groups,max=35){
  }
  return [...map.values()];
 }
+
+
+/* Balanced source discovery: a new-pools flood cannot erase mature opportunities. */
+export const DISCOVERY_TARGETS=Object.freeze([6,6,5,5,3]);
+export function selectBalancedCandidates(groups,max=25,targets=DISCOVERY_TARGETS){
+ const arrays=(groups||[]).map(g=>Array.isArray(g)?g:[]);
+ const out=[],seen=new Set(),indexes=arrays.map(()=>0);
+ const put=c=>{if(!c||typeof c.mint!=='string'||seen.has(c.mint))return false;seen.add(c.mint);out.push(c);return true;};
+ // Reserve slots for each type of discovery before filling remaining slots.
+ for(let i=0;i<arrays.length&&out.length<max;i++){
+  let n=0,quota=Math.max(0,Math.trunc(Number(targets[i]??0)));
+  while(indexes[i]<arrays[i].length&&out.length<max&&n<quota){
+   const c=arrays[i][indexes[i]++];if(put(c))n++;
+  }
+ }
+ let added=true;
+ while(added&&out.length<max){
+  added=false;
+  for(let i=0;i<arrays.length&&out.length<max;i++){
+   while(indexes[i]<arrays[i].length){
+    const c=arrays[i][indexes[i]++];
+    if(put(c)){added=true;break;}
+   }
+  }
+ }
+ return out;
+}
