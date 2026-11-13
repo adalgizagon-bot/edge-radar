@@ -65,6 +65,22 @@ jobs:
             python3 -c 'import json; json.load(open("/tmp/edge-health.json"))'
           done
           echo "As rotas respondem JSON valido no Worker publicado."
+      - name: Confirmar que o experimento gratuito nao chama IA
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://edge-radar-cloud.adalgizagon.workers.dev/api/paper"
+          curl --fail --silent --show-error --retry 4 --retry-all-errors --retry-delay 2 --max-time 20 "$URL" -o /tmp/edge-paper.json
+          python3 - <<'PY'
+          import json
+          with open('/tmp/edge-paper.json') as f:
+              x=json.load(f)
+          assert x.get('enabled') is True, "Teste de regras não ativado."
+          assert x.get('aiConfigured') is False, "IA precisa estar desligada."
+          assert isinstance(x.get('accounts'), list), "Contas simuladas inválidas."
+          assert isinstance(x.get('trades'), list), "Movimentações simuladas inválidas."
+          print("Teste gratuito validado; IA desligada; contas simuladas:",len(x['accounts']),"movimentações:",len(x['trades']))
+          PY
       - name: Próximos passos
         run: |
           echo 'Copie o URL workers.dev do deployment e cole na aba Nuvem 24h do Edge Radar.'
