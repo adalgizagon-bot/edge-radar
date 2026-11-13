@@ -9,7 +9,7 @@ export function geckoDelay(status,failures=1,retryAfterMs=0){
  return Math.max(exp,Number.isFinite(retryAfterMs)?Math.min(GECKO_MAX_COOLDOWN_MS,retryAfterMs):0);
 }
 export function parseJupiterRecent(rows){
- return (Array.isArray(rows)?rows:[]).filter(x=>typeof x?.id==='string'&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(x.id))
+ return (Array.isArray(rows)?rows:[]).filter(x=>typeof x?.id==='string'&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(x.id)&&x.id!=='So11111111111111111111111111111111111111112'&&x.id!=='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v')
   .map(x=>({mint:x.id,name:String(x.name||'').slice(0,80),symbol:String(x.symbol||'').slice(0,25),
     source:'jupiter_recent',liquidity:Number(x.liquidity)||0,volume:Number(x.stats5m?.buyVolume||0)+Number(x.stats5m?.sellVolume||0)}));
 }
