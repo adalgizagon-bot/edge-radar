@@ -1,0 +1,31 @@
+name: Validar Edge Radar (PR)
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [feature/ai-paper-agent-ab-test]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar sintaxe do coletor e dashboards
+        run: |
+          node --check cloud/paper-agent.mjs
+          node --check cloud/worker.mjs
+          node --check public/edge-paper-agent.js
+          node --check public/edge-crypto.js
+      - name: Testes de segurança e coleta
+        run: |
+          node --test tests/test_paper_agent.mjs tests/test_cloud_worker.mjs \
+            tests/test_discovery.mjs tests/test_risk.mjs tests/test_exit_quote.mjs \
+            tests/test_edge_crypto.cjs tests/test_cloud_frontend.cjs tests/test_edge_signals.cjs
