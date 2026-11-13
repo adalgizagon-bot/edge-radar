@@ -52,15 +52,19 @@
 <section id="paperSection" hidden><div class="panel"><h2>Simulador de operações · sem dinheiro real</h2><p>Registre compras e vendas hipotéticas, acompanhando o saldo e o resultado estimado. Consideramos 1% de custos simulados por lado (taxas e slippage), que podem ser diferentes na execução real.</p><div class="paper-controls"><label>Capital inicial (US$)<input id="paperCapital" type="number" min="1" max="100000000" step="1" value="1000"></label><button class="btn secondary" id="paperReset">Reiniciar simulação</button></div><div class="paper-kpis" id="paperKpis"></div><div id="paperPositions"></div><div id="paperHistory"></div></div></section>
 <section id="agentSection" hidden>
  <div class="panel">
- <div class="agent-heading"><div><span class="eyebrow">PAPER LAB · EXPERIMENTO A/B</span><h2>Operações simuladas · Estratégias</h2>
- <p>Teste gratuito de regras com US$ 1.000 fictícios e posições de US$ 20. Sem carteira conectada e sem compras reais.
- A comparação com IA permanece desativada enquanto não houver ativação explícita.</p></div>
+ <div class="agent-heading"><div><span class="eyebrow">PAPER LAB · COMPARAÇÃO EM CONDIÇÕES REAIS DE DADOS</span><h2>Regras tradicionais × Edge Scalp Rápido</h2>
+ <p>Dois métodos independentes no mesmo radar: referência com alvo de +12% em até 20 minutos, 
+ e Edge Scalp com alvo de +5% em até 6 minutos. Ambos usam posições hipotéticas de US$ 20.
+ Coletor aproximadamente a cada minuto, sem ordens reais nem IA paga.</p></div>
  <button class="btn secondary" id="agentRefresh">Atualizar resultados</button></div>
  <p class="agent-status" id="agentStatus">Aguardando dados do Worker…</p>
  <div class="agent-diagnostics" id="agentDiagnostics"></div>
+ <div class="agent-comparison-info" id="agentComparisonInfo"></div>
  <div class="agent-accounts" id="agentAccounts"></div>
- <p class="hist-disclaimer">* Entradas EXPLORATÓRIAS são apenas estudos: podem ter auditoria incompleta ou rota de venda não comprovada; a nota alta não significa segurança. Resultados calculados com cotações observadas e custo hipotético de 1% por lado; perdas podem ultrapassar o stop estimado. 
- Saldo disponível não inclui o valor das posições abertas. Taxa de acerto e lucro realizados não são patrimônio líquido nem garantia de execução.</p>
+ <p class="hist-disclaimer">* Entradas EXPLORATÓRIAS são estudos fictícios, com auditoria ou rota de venda possivelmente incompletas. 
+ O coletor verifica aproximadamente a cada 1 minuto: stops e alvos podem ser ultrapassados entre leituras.
+ Os dois cenários de custo (1% e 2,5% por lado) são hipóteses; não incluem garantia de liquidez, negociação ou retirada de capital.
+ Resultados realizados não incluem posições abertas, e patrimônio fica indisponível quando faltam preços recentes.</p>
  <h3>Posições abertas · estudos fictícios</h3><div id="agentPositions"></div>
  <h3>Operações simuladas</h3><div id="agentTrades"></div>
  <h3>Diário de decisões</h3><div id="agentDecisions"></div>
