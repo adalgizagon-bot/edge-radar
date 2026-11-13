@@ -68,7 +68,7 @@ jobs:
         run: |
           set -euo pipefail
           BASE="https://edge-radar-cloud.adalgizagon.workers.dev"
-          for PATHNAME in "api/status" "api/risk?limit=1" "api/exit-quotes?limit=1" "api/evaluation" "api/paper" "api/audit?limit=10"; do
+          for PATHNAME in "api/status" "api/risk?limit=1" "api/exit-quotes?limit=1" "api/evaluation" "api/paper" "api/audit?limit=10" "api/discover?group=established&limit=10"; do
             echo "Validando $PATHNAME ..."
             curl --fail --silent --show-error --retry 4 --retry-all-errors --retry-delay 2 --max-time 20 "$BASE/$PATHNAME" -o /tmp/edge-health.json
             python3 -c 'import json; json.load(open("/tmp/edge-health.json"))'
@@ -84,7 +84,10 @@ jobs:
           grep -q "Edge Scalp V2" /tmp/edge-lab.html
           curl --fail --silent --show-error --retry 4 --retry-all-errors --retry-delay 2 --max-time 20 "https://edge-radar-cloud.adalgizagon.workers.dev/audit" -o /tmp/edge-audit.html
           grep -q "Auditoria de operações fictícias" /tmp/edge-audit.html
-          echo "Laboratorio e auditoria gratuitos publicados."
+          curl --fail --silent --show-error --retry 4 --retry-all-errors --retry-delay 2 --max-time 20 "https://edge-radar-cloud.adalgizagon.workers.dev/radar" -o /tmp/edge-radar.html
+          grep -q "Antigos · 1 dia+" /tmp/edge-radar.html
+          grep -q "edge-radar.discovery.snapshots.v1" /tmp/edge-radar.html
+          echo "Laboratorio, auditoria e nova busca multiperiodo publicados."
       - name: Confirmar que o experimento gratuito nao chama IA
         shell: bash
         run: |
