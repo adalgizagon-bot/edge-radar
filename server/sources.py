@@ -116,8 +116,9 @@ class HTTP:
         ) as error:
             failures = (state["failures"] if state else 0) + 1
             status = getattr(error, "code", None)
-            if status is None and "Tunnel connection failed: 403" in str(error):
-                status = 403
+            proxy_denied = status is None and "Tunnel connection failed: 403" in str(
+                error
+            )
             delay = min(3600, 60 * 2 ** min(failures, 6))
             if status == 429:
                 try:
@@ -127,9 +128,12 @@ class HTTP:
                 except (ValueError, AttributeError):
                     pass
             # Never persist full exception/URL; it could include private provider details.
-            message = (
-                f"HTTP {status}" if status else "Rede, formato ou acesso indisponível"
-            )
+            if proxy_denied:
+                message = "Proxy CONNECT negado (HTTP 403); API não alcançada"
+            elif status:
+                message = f"Resposta HTTP {status} após CONNECT; origem a confirmar"
+            else:
+                message = "Rede, formato ou acesso indisponível"
             self.db.execute(
                 "UPDATE source_state SET status=?,failures=?,next_attempt=?,error=? WHERE name=?",
                 ("unavailable", failures, now() + delay, message, provider),

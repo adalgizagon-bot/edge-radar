@@ -1,5 +1,7 @@
 # Fontes e integração externa
 
+**Diagnóstico atualizado:** [continuação e evidências de rede](LIVE_VALIDATION.md). Os 403 foram confirmados no CONNECT do proxy; os dez hosts estão no rascunho, mas não na política aplicada. Não são respostas das APIs.
+
 Acesso real tentado em 13/11/2026. O proxy retornou `Tunnel connection failed: 403 Forbidden` para documentações e APIs. **Não foi possível confirmar nesta sessão os termos, cotas vigentes, autenticação atual ou formatos por respostas reais.** Os adaptadores estão isolados e testados com fixtures de contrato, não certificados em produção. Nenhuma fonte de dados foi contratada.
 
 | Fonte | Uso | Documentação oficial | Estado nesta entrega |
