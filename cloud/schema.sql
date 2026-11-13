@@ -189,3 +189,21 @@ CREATE TABLE IF NOT EXISTS paper_v2_diagnostics (
  alerta_de_auditoria INTEGER NOT NULL DEFAULT 0,
  perda_de_forca INTEGER NOT NULL DEFAULT 0
 );
+
+-- Pool address directory only, never an assumed live price.
+CREATE TABLE IF NOT EXISTS gecko_pool_watch (
+ mint TEXT PRIMARY KEY,
+ pool TEXT NOT NULL,
+ seen_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_gecko_pool_watch_seen ON gecko_pool_watch(seen_at DESC);
+-- Provider monitoring for the free simulated radar.
+CREATE TABLE IF NOT EXISTS price_source_state(
+ id INTEGER PRIMARY KEY CHECK(id=1),
+ checked_at INTEGER NOT NULL,
+ dex_count INTEGER NOT NULL DEFAULT 0,
+ gecko_count INTEGER NOT NULL DEFAULT 0,
+ missing_count INTEGER NOT NULL DEFAULT 0,
+ watched_pools INTEGER NOT NULL DEFAULT 0,
+ dex_next_attempt INTEGER NOT NULL DEFAULT 0
+);
