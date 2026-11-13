@@ -19,9 +19,9 @@ export function geckoPoolToPair(pool,now=Date.now()){
  if(created!==null&&created>now)return null;
  return {chainId:'solana',dexId:'pumpswap',priceUsd:String(price),
   baseToken:{address:pool.mint,name:pool.name||'',symbol:pool.symbol||''},
-  pairAddress:pool.pool||null,liquidity:{usd:liq},volume:{m5:volume},
-  txns:{m5:{buys:buy,sells:sell}},priceChange:{m5:change},
-  pairCreatedAt:created,priceSource:'gecko',observedAt:now};
+  pairAddress:pool.pool||null,liquidity:{usd:liq},volume:{m5:volume,h24:n(pool.volume24h)},
+  txns:{m5:{buys:buy,sells:sell}},priceChange:{m5:change,h1:n(pool.change1h),h24:n(pool.change24h)},
+  marketCap:n(pool.marketCap),pairCreatedAt:created,priceSource:'gecko',observedAt:now};
 }
 export function selectGeckoPairs(pools,at=Date.now()){
  const out=new Map();
