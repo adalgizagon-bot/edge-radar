@@ -207,3 +207,33 @@ CREATE TABLE IF NOT EXISTS price_source_state(
  watched_pools INTEGER NOT NULL DEFAULT 0,
  dex_next_attempt INTEGER NOT NULL DEFAULT 0
 );
+
+-- Persistent discovery universe. List visibility is independent of transient entry eligibility.
+-- Quotes are observations only; stale prices never become simulated fills.
+CREATE TABLE IF NOT EXISTS token_universe (
+ mint TEXT PRIMARY KEY,
+ name TEXT NOT NULL DEFAULT '',
+ symbol TEXT NOT NULL DEFAULT '',
+ source TEXT NOT NULL DEFAULT '',
+ first_seen INTEGER NOT NULL,
+ first_pool_at INTEGER,
+ last_observed_at INTEGER,
+ last_seen INTEGER NOT NULL,
+ pool_address TEXT,
+ dex TEXT NOT NULL DEFAULT '',
+ price_usd REAL,
+ liquidity_usd REAL,
+ volume5m_usd REAL,
+ change5m_pct REAL,
+ buys5m INTEGER,
+ sells5m INTEGER,
+ score INTEGER NOT NULL DEFAULT 0,
+ best_score INTEGER NOT NULL DEFAULT 0,
+ stage TEXT NOT NULL DEFAULT 'waiting',
+ risk_level TEXT NOT NULL DEFAULT 'unverified',
+ price_source TEXT NOT NULL DEFAULT '',
+ observations INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS idx_token_universe_recent ON token_universe(last_seen DESC);
+CREATE INDEX IF NOT EXISTS idx_token_universe_score ON token_universe(score DESC,last_observed_at DESC);
+CREATE INDEX IF NOT EXISTS idx_token_universe_pool_age ON token_universe(first_pool_at);
