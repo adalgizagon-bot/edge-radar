@@ -232,28 +232,56 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
  return {enabled:true,eligible:eligibleAll.length,scalpEligible:scalpAll.length,buys:count,sells:closed,aiStatus:ai.status};
 }
 export async function paperSnapshot(env,at=Date.now()){
- if(!paperEnabled(env))return {enabled:false,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),accounts:[],positions:[],trades:[],decisions:[],usage:null,note:'Teste ainda nao habilitado no servidor'};
+ if(!paperEnabled(env))return {enabled:false,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),
+  accounts:[],positions:[],trades:[],decisions:[],usage:null,note:'Teste ainda nao habilitado no servidor'};
  const db=env.DB;
- const [ac,po,tr,de,us,pf,ev,diag]=await Promise.all([
+ const cohort=await db.prepare('SELECT started_at FROM paper_comparison_start WHERE id=1').first();
+ const since=num(cohort?.started_at)||at;
+ // A second cost scenario lets the user see if small-target scalp gains survive heavier fees.
+ const stressMultiplier=(1+PAPER.fee)*(1-PAPER.stressFee)/((1+PAPER.stressFee)*(1-PAPER.fee));
+ const comparisonSql="SELECT strategy,COUNT(*) AS sells,"+
+  "SUM(CASE WHEN pnl_usd>0 THEN 1 ELSE 0 END) AS wins,"+
+  "COALESCE(SUM(pnl_usd),0) AS realized_pnl,"+
+  "COALESCE(SUM((pnl_usd+?)*?-?),0) AS stress_pnl,"+
+  "COALESCE(SUM(CASE WHEN pnl_usd>0 THEN pnl_usd ELSE 0 END),0) AS total_gains,"+
+  "COALESCE(SUM(CASE WHEN pnl_usd<0 THEN ABS(pnl_usd) ELSE 0 END),0) AS total_losses,"+
+  "MIN(pnl_usd) AS worst_trade,AVG(pnl_usd) AS avg_trade "+
+  "FROM paper_trades WHERE action='sell' AND created_at>=? GROUP BY strategy";
+ const drawdownSql="WITH balances AS ("+
+  "SELECT strategy,created_at,id,1000.0+SUM(pnl_usd) OVER(PARTITION BY strategy ORDER BY created_at,id ROWS UNBOUNDED PRECEDING) AS balance "+
+  "FROM paper_trades WHERE action='sell' AND created_at>=?), "+
+  "peaks AS (SELECT strategy,balance,MAX(balance) OVER(PARTITION BY strategy ORDER BY created_at,id ROWS UNBOUNDED PRECEDING) AS peak FROM balances) "+
+  "SELECT strategy,MAX((CASE WHEN peak>1000 THEN peak ELSE 1000 END)-balance) AS max_drawdown_usd FROM peaks GROUP BY strategy";
+ const [ac,po,tr,de,us,pf,ev,diag,scalpDiag,drawdowns]=await Promise.all([
   db.prepare('SELECT * FROM paper_accounts ORDER BY strategy').all(),
   db.prepare('SELECT * FROM paper_positions ORDER BY opened_at DESC').all(),
-  db.prepare('SELECT * FROM paper_trades ORDER BY created_at DESC LIMIT 80').all(),
+  db.prepare('SELECT * FROM paper_trades ORDER BY created_at DESC LIMIT 100').all(),
   db.prepare('SELECT * FROM paper_decisions ORDER BY created_at DESC LIMIT 80').all(),
   db.prepare('SELECT * FROM paper_ai_usage WHERE day=?').bind(localDay(at)).first(),
-  db.prepare("SELECT strategy,COUNT(*) AS sells,SUM(CASE WHEN pnl_usd>0 THEN 1 ELSE 0 END) AS wins,COALESCE(SUM(pnl_usd),0) AS realized_pnl FROM paper_trades WHERE action='sell' GROUP BY strategy").all(),
-  db.prepare('SELECT * FROM paper_entry_evidence ORDER BY created_at DESC LIMIT 100').all(),
-  db.prepare('SELECT * FROM paper_diagnostics WHERE id=1').first()
+  db.prepare(comparisonSql).bind(PAPER.stake,stressMultiplier,PAPER.stake,since).all(),
+  db.prepare('SELECT * FROM paper_entry_evidence ORDER BY created_at DESC LIMIT 120').all(),
+  db.prepare('SELECT * FROM paper_diagnostics WHERE id=1').first(),
+  db.prepare('SELECT * FROM paper_scalp_diagnostics WHERE id=1').first(),
+  db.prepare(drawdownSql).bind(since).all()
  ]);
  const rows=po.results||[],accounts=(ac.results||[]).map(a=>{
   const mine=rows.filter(p=>p.strategy===a.strategy);
-  const fresh=mine.every(p=>num(p.last_price)>0&&num(p.last_quote_at)>0&&at-p.last_quote_at<180000&&at>=p.last_quote_at);
-  const netOpen=fresh?mine.reduce((s,p)=>s+p.quantity*p.last_price*(1-PAPER.fee),0):null;
-  const invested=mine.reduce((s,p)=>s+p.invested_usd,0);
-  return {...a,open_value_usd:netOpen,equity_usd:fresh?a.cash_usd+netOpen:null,
-   unrealized_pnl:fresh?netOpen-invested:null,prices_fresh:fresh};
+  const freshLimit=a.strategy==='scalp'?100000:180000;
+  const fresh=mine.every(p=>num(p.last_price)>0&&num(p.last_quote_at)>0&&at-p.last_quote_at<=freshLimit&&at>=p.last_quote_at);
+  const openValue=fresh?mine.reduce((sum,p)=>sum+p.quantity*p.last_price*(1-PAPER.fee),0):null;
+  const invested=mine.reduce((sum,p)=>sum+p.invested_usd,0);
+  return {...a,open_value_usd:openValue,equity_usd:fresh?a.cash_usd+openValue:null,
+   unrealized_pnl:fresh?openValue-invested:null,prices_fresh:fresh};
  });
- return {enabled:true,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),accounts,
-  performance:pf.results||[],positions:rows,trades:tr.results||[],decisions:de.results||[],
-  evidence:ev.results||[],diagnostics:diag||null,usage:us||null,
-  checkedAt:at,note:'Compras/vendas ficticias com cotacoes observadas e custos supostos. Sem garantia de execucao real.'};
+ const byDrawdown=new Map((drawdowns.results||[]).map(x=>[x.strategy,x.max_drawdown_usd]));
+ const performance=(pf.results||[]).map(x=>({...x,max_drawdown_usd:byDrawdown.get(x.strategy)??null}));
+ return {enabled:true,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),
+  accounts,performance,positions:rows,trades:tr.results||[],decisions:de.results||[],
+  evidence:ev.results||[],diagnostics:diag||null,scalpDiagnostics:scalpDiag||null,
+  comparisonSince:since,fees:{baseEachSidePct:PAPER.fee*100,stressEachSidePct:PAPER.stressFee*100},
+  profiles:{baseline:{targetPct:PAPER.baselineTake*100,stopPct:PAPER.stop*100,holdMinutes:PAPER.maxHoldMs/60000,
+                      maxPositions:PAPER.maxPositions},
+    scalp:{targetPct:SCALP.target*100,stopPct:SCALP.stop*100,holdMinutes:SCALP.maxHoldMs/60000,
+           maxPositions:SCALP.maxPositions}},usage:us||null,
+  checkedAt:at,note:'Retornos teoricos com preco observado ~1/min, sem garantia de compra ou venda. Dados de preco ausentes nao sao substituidos.'};
 }
