@@ -78,3 +78,15 @@ main.shell>.tabs{grid-column:1;grid-row:1/span 12;position:sticky;top:92px;align
 #agentSection h3{margin-top:20px;font-size:15px}
 @media(max-width:1000px){.agent-accounts{grid-template-columns:1fr}}
 @media(max-width:490px){.agent-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Exploratórias são pesquisas fictícias, nunca entradas aprovadas. */
+.agent-diagnostics{margin:14px 0 17px;padding:14px;background:#0b202d;border:1px solid #2c4b59;border-radius:12px}
+.agent-diagnostics-heading{display:flex;justify-content:space-between;gap:9px;flex-wrap:wrap;align-items:center;font-size:12px;color:#d8eaf2}
+.agent-diagnostics-heading span{font-size:11px;color:#91b2c3}
+.agent-diagnostic-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:12px 0}
+.agent-diagnostic-grid>div{display:flex;flex-direction:column;gap:6px;padding:11px;background:#132d3b;border:1px solid #25465a;border-radius:9px}
+.agent-diagnostic-grid span{font-size:10px;color:#9cb6c4}
+.agent-diagnostic-grid strong{font-size:19px;color:#ecf5fc}
+.agent-diagnostics>p{font-size:11px;color:#a4bbc8;line-height:1.55;margin:4px 0 0}
+@media(max-width:1100px){.agent-diagnostic-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:620px){.agent-diagnostic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
