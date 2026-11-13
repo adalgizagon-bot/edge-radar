@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {PAPER,paperEnabled,agentEnabled,isPaperCandidate,exitRule,askAgent} from '../cloud/paper-agent.mjs';
+import {PAPER,paperEnabled,agentEnabled,isPaperCandidate,assessPaperCandidate,exitRule,askAgent} from '../cloud/paper-agent.mjs';
 const mint='11111111111111111111111111111111';
 const qualified=()=>({mint,stage:'priority',score:98,quote:'quoted',
- pair:{priceUsd:'0.01',liquidity:{usd:25000},volume:{m5:19000},priceChange:{m5:9}},
+ pair:{priceUsd:'0.01',liquidity:{usd:25000},volume:{m5:19000},priceChange:{m5:9},txns:{m5:{buys:30,sells:12}}},
  risk:{level:'watch',verified:true,organic:85,top:12,ageMinutes:40,alerts:[]}
 });
 test('Live trades remain disabled unless PAPER_EXPERIMENT_ENABLED is explicitly true',()=>{
@@ -12,16 +12,39 @@ test('Live trades remain disabled unless PAPER_EXPERIMENT_ENABLED is explicitly 
  assert.equal(paperEnabled({PAPER_EXPERIMENT_ENABLED:'true'}),true);
  assert.equal(agentEnabled({PAPER_EXPERIMENT_ENABLED:'true',PAPER_AI_ENABLED:'true'}),false);
 });
-test('Candidate requires recent same-cycle sell quote and complete safety screen',()=>{
- assert.equal(isPaperCandidate(qualified()),true);
+test('Audited simulated entries still require strong checks and same-cycle Jupiter quote',()=>{
+ const good=qualified();
+ assert.equal(isPaperCandidate(good),true);
+ assert.equal(assessPaperCandidate(good).tier,'audited');
+});
+test('Unverified, unquoted high-score tokens can be sampled as exploratory, never called safe',()=>{
+ const exploratory={...qualified(),quote:null,risk:{...qualified().risk,level:'unverified',verified:false,organic:null,top:null}};
+ const x=assessPaperCandidate(exploratory);
+ assert.equal(x.eligible,true);
+ assert.equal(x.tier,'exploratory');
+ assert.equal(x.reason,'entrada_nao_validada');
+ assert.equal(isPaperCandidate(exploratory),true);
+});
+test('Hard risk or insufficient market data still blocks simulated entry',()=>{
+ const c=qualified();
  for(const change of [
-  {quote:'unavailable'}, {quote:null}, {risk:{...qualified().risk,level:'blocked'}},
-  {risk:{...qualified().risk,organic:null}},
-  {risk:{...qualified().risk,verified:false}},
-  {risk:{...qualified().risk,top:50}},
-  {risk:{...qualified().risk,ageMinutes:5}},
-  {pair:{...qualified().pair,liquidity:{usd:9000}}}
- ])assert.equal(isPaperCandidate({...qualified(),...change}),false,JSON.stringify(change));
+  {quote:'unavailable'},{quote:'large_impact'},
+  {risk:{...c.risk,level:'blocked'}},
+  {risk:{...c.risk,organic:20}},
+  {risk:{...c.risk,top:50}},
+  {risk:{...c.risk,alerts:['Mint authority active']}},
+  {pair:{...c.pair,liquidity:{usd:6000}}},
+  {pair:{...c.pair,priceUsd:null}},
+  {pair:{...c.pair,volume:{m5:300}}},
+  {pair:{...c.pair,txns:{m5:{buys:20,sells:40}}}},
+  {pair:{...c.pair,pairCreatedAt:Date.now()-60_000}},
+  {score:35},{stage:'risk'}
+ ])assert.equal(isPaperCandidate({...c,...change}),false,JSON.stringify(change));
+});
+test('Watch stage with adequate activity can enter exploratory sample',()=>{
+ const x={...qualified(),stage:'watch',score:65,quote:'not_checked',
+  risk:{...qualified().risk,level:'unverified'}};
+ assert.equal(assessPaperCandidate(x).tier,'exploratory');
 });
 test('Emergency stop and max duration take precedence, no invented exits without quote',()=>{
  const p={entry_price:1,opened_at:1000};
