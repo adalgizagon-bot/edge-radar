@@ -160,6 +160,7 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
  if(gate?.meta?.changes===0)return {enabled:true,skipped:'already_processed'};
  const accounts={},open={};
  for(const name of ['baseline','scalp','ai']){accounts[name]=await account(db,name,at);open[name]=await positions(db,name);}
+ await db.prepare('INSERT OR IGNORE INTO paper_comparison_start(id,started_at) VALUES(1,?)').bind(at).run();
  const analyzed=(candidates||[]).map(c=>{const pair=prices.get(c.mint);
   const token={mint:c.mint,name:c.name,symbol:c.symbol,pair,risk:riskAtSignal.get(c.mint),
     stage:pair?c.stage:null,score:c.score||0,quote:quoteThisCycle.get(c.mint)||'not_checked'};
