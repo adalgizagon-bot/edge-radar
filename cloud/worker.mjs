@@ -214,6 +214,80 @@ async function fetchPrices(env,at,mints,fetcher){
  }
  return {prices:selectDexPairs(out),errors,warnings};
 }
+
+const ACTIVE_UNIVERSE_MS=14*24*60*60_000;
+/* Keep market observations for 14 days independently of score and entry conditions.
+ * A token doesn't vanish because its 5-minute score or external quote drops.
+ */
+async function saveUniverse(db,at,candidates,prices,riskAtSignal){
+ if(Math.floor(at/60000)%3!==0)return 0; // bound D1 free write usage
+ const statement=db.prepare(
+  "INSERT INTO token_universe "+
+  "(mint,name,symbol,source,first_seen,first_pool_at,last_observed_at,last_seen,pool_address,dex,"+
+  "price_usd,liquidity_usd,volume5m_usd,change5m_pct,buys5m,sells5m,score,best_score,"+
+  "stage,risk_level,price_source,observations) "+
+  "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1) "+
+  "ON CONFLICT(mint) DO UPDATE SET "+
+  "name=CASE WHEN excluded.name<>'' THEN excluded.name ELSE token_universe.name END,"+
+  "symbol=CASE WHEN excluded.symbol<>'' THEN excluded.symbol ELSE token_universe.symbol END,"+
+  "source=CASE WHEN excluded.source='universe_history' THEN token_universe.source ELSE excluded.source END,"+
+  "first_pool_at=CASE WHEN token_universe.first_pool_at IS NULL THEN excluded.first_pool_at "+
+  "WHEN excluded.first_pool_at IS NULL THEN token_universe.first_pool_at "+
+  "ELSE MIN(token_universe.first_pool_at,excluded.first_pool_at) END,"+
+  "last_observed_at=excluded.last_observed_at,last_seen=excluded.last_seen,"+
+  "pool_address=COALESCE(excluded.pool_address,token_universe.pool_address),"+
+  "dex=excluded.dex,price_usd=excluded.price_usd,liquidity_usd=excluded.liquidity_usd,"+
+  "volume5m_usd=excluded.volume5m_usd,change5m_pct=excluded.change5m_pct,"+
+  "buys5m=excluded.buys5m,sells5m=excluded.sells5m,"+
+  "score=excluded.score,best_score=MAX(token_universe.best_score,excluded.score),"+
+  "stage=excluded.stage,risk_level=excluded.risk_level,price_source=excluded.price_source,"+
+  "observations=token_universe.observations+1");
+ let recorded=0;
+ for(const c of candidates){
+  const p=prices.get(c.mint),price=value(p?.priceUsd);
+  if(!(price>0)||!validMint(c.mint))continue;
+  const score=quality(p,at),risk=riskAtSignal.get(c.mint);
+  await statement.bind(c.mint,clean(c.name||p?.baseToken?.name),clean(c.symbol||p?.baseToken?.symbol,25),
+   clean(c.source||'observed',40),at,value(p.pairCreatedAt),at,at,
+   validMint(p.pairAddress)?p.pairAddress:null,clean(p.dexId,40),
+   price,value(p.liquidity?.usd),value(p.volume?.m5),value(p.priceChange?.m5),
+   value(p.txns?.m5?.buys),value(p.txns?.m5?.sells),score.score,score.score,score.stage,
+   risk?.level||'unverified',clean(p.priceSource||'dex',15)).run();
+  recorded++;
+ }
+ return recorded;
+}
+async function fetchWatchedGecko(db,fetcher,at,alreadySeen){
+ const results=[],warnings=[];
+ const health=await db.prepare("SELECT * FROM source_health WHERE source='gecko_watch'").first();
+ if(health&&at<Number(health.next_attempt||0))return {pools:results,warnings};
+ const ids=new Set((alreadySeen||[]).map(p=>p.mint));
+ const rows=await db.prepare("SELECT mint,pool_address FROM token_universe "+
+  "WHERE last_seen>? AND first_pool_at<? AND pool_address IS NOT NULL AND score>=65 "+
+  "ORDER BY score DESC,last_observed_at ASC LIMIT 24")
+  .bind(at-ACTIVE_UNIVERSE_MS,at-60*60_000).all();
+ const poolAddresses=[];
+ for(const row of rows.results||[]){
+  if(!ids.has(row.mint)&&validMint(row.pool_address)&&!poolAddresses.includes(row.pool_address))
+   poolAddresses.push(row.pool_address);
+  if(poolAddresses.length>=10)break;
+ }
+ if(!poolAddresses.length)return {pools:results,warnings};
+ let error=null;
+ try{
+  const payload=await fetchJSON(SETTINGS.gecko+'pools/multi/'+poolAddresses.join(',')+'?include=base_token,dex',fetcher);
+  results.push(...parsePools(payload,'watchlist'));
+ }catch(e){error=e;warnings.push('GeckoTerminal monitorados: '+String(e?.message||e).slice(0,70));}
+ const failures=error?Math.min(30,Number(health?.failures||0)+1):0;
+ const next=error?at+geckoDelay(error?.status||0,failures,error?.retryAfterMs||0):at+GECKO_COOLDOWN_MS;
+ await db.prepare("INSERT INTO source_health(source,next_attempt,failures,last_status,last_success,last_error) "+
+  "VALUES('gecko_watch',?,?,?,?,?) ON CONFLICT(source) DO UPDATE SET "+
+  "next_attempt=excluded.next_attempt,failures=excluded.failures,last_status=excluded.last_status,"+
+  "last_success=excluded.last_success,last_error=excluded.last_error")
+  .bind(next,failures,error?.status||200,error?health?.last_success||null:at,String(error?.message||'').slice(0,120)).run();
+ return {pools:results,warnings};
+}
+
 async function makeCheckpoints(db,signal,now,price){
  let changed=0;
  for(const horizon of SETTINGS.horizons){
