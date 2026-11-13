@@ -5,6 +5,8 @@ import {readFileSync} from 'node:fs';
 import {poolAgeMillis,selectGeckoPairs,mergeFreshPairs} from '../cloud/gecko-prices.mjs';
 import {selectBalancedCandidates} from '../cloud/discovery.mjs';
 import {collect,handle,parsePools} from '../cloud/worker.mjs';
+import {discoveryHtml} from '../cloud/discovery-page.mjs';
+import vm from 'node:vm';
 const NEW='11111111111111111111111111111111',OLD='22222222222222222222222222222222';
 function d1(){
  const sql=new DatabaseSync(':memory:');
@@ -18,8 +20,9 @@ function d1(){
 }
 const body=(mint,at,days=0)=>({
  data:[{attributes:{address:mint,name:(days?'OLD':'NEW')+' / SOL',reserve_in_usd:'45000',
-    volume_usd:{m5:'15000'},transactions:{m5:{buys:90,sells:20}},
-    price_change_percentage:{m5:'7'},base_token_price_usd:'0.007',
+    volume_usd:{m5:'15000',h24:'550000'},transactions:{m5:{buys:90,sells:20}},
+    price_change_percentage:{m5:'7',h1:'12',h24:'85'},market_cap_usd:'2440000',
+    base_token_price_usd:'0.007',
     pool_created_at:new Date(at-(days?days*24*3600000:10*60000)).toISOString()},
    relationships:{base_token:{data:{id:'solana_'+mint}},dex:{data:{id:'solana_pump_swap'}}}}],
  included:[{id:'solana_'+mint,attributes:{name:days?'Two months old':'Fresh launch',symbol:days?'OLD':'NEW',address:mint}},
@@ -34,6 +37,9 @@ test('Pool creation time and fresh Gecko quotes include enough fields for risk s
  const quotes=selectGeckoPairs(p,at);
  assert.equal(quotes.get(OLD)?.volume.m5,15000);
  assert.equal(quotes.get(OLD)?.txns.m5.buys,90);
+ assert.equal(quotes.get(OLD)?.priceChange.h1,12);
+ assert.equal(quotes.get(OLD)?.priceChange.h24,85);
+ assert.equal(quotes.get(OLD)?.marketCap,2440000);
  assert.ok(quotes.get(OLD)?.pairCreatedAt>0);
  assert.equal(mergeFreshPairs(new Map(),quotes).get(OLD)?.priceSource,'gecko');
 });
@@ -72,7 +78,7 @@ test('DB retains two-month-old trending token after quote provider returns 429',
   const old=(await handle(new Request('https://worker.example/api/discover?group=established&limit=50'),env));
   assert.equal(old.status,200);
   const data=await old.json();
-  assert.ok(data.rows.some(x=>x.mint===OLD&&x.score>=70));
+  assert.ok(data.rows.some(x=>x.mint===OLD&&x.score>=70&&x.change1h_pct===12&&x.change24h_pct===85&&x.market_cap_usd===2440000));
   const recent=await(await handle(new Request('https://worker.example/api/discover?group=new'),env)).json();
   assert.ok(recent.rows.some(x=>x.mint===NEW));
   failBoth=true;
@@ -86,4 +92,14 @@ test('DB retains two-month-old trending token after quote provider returns 429',
   assert.ok(html.includes('Antigos · 1 dia+'));
   assert.ok(html.includes('Preço desatualizado'));
  }finally{db.close();}
+});
+
+test('Radar inline JS is valid and favorites retain snapshots after refresh',()=>{
+ const script=discoveryHtml.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+ assert.ok(script);
+ assert.doesNotThrow(()=>new vm.Script(script,{filename:'radar.js'}));
+ assert.ok(discoveryHtml.includes('favoriteCache'));
+ assert.ok(discoveryHtml.includes('localStorage.setItem(SNAP'));
+ assert.ok(!discoveryHtml.includes('OPENAI_API_KEY'));
+ assert.ok(!discoveryHtml.includes('sendTransaction'));
 });
