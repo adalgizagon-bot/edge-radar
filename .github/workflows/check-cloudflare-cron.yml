@@ -1,0 +1,70 @@
+name: Checar agendamento Cloudflare (somente diagnostico)
+on:
+  push:
+    branches: [diagnostics/cloudflare-cron-check]
+permissions:
+  contents: read
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Conferir agendamentos sem alterar configuracao
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          python3 - <<'PY'
+          import json,os,urllib.request,urllib.error
+          addr="https://api.cloudflare.com/client/v4/accounts/"+os.environ["CF_ACCOUNT"]+"/workers/scripts/edge-radar-cloud/schedules"
+          req=urllib.request.Request(addr,headers={"Authorization":"Bearer "+os.environ["CF_TOKEN"]})
+          try:
+            with urllib.request.urlopen(req,timeout=20) as resp: obj=json.load(resp)
+            print("SCHEDULES",json.dumps({"success":obj.get("success"),"result":obj.get("result"),"errors":[x.get("code") for x in (obj.get("errors") or [])]}))
+          except urllib.error.HTTPError as e:print("SCHEDULES_HTTP",e.code)
+          PY
+      - name: Escutar erros de execucao por um ciclo (sem modificar Worker)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx --yes wrangler@latest tail edge-radar-cloud --format json > /tmp/radar-tail.out 2>/tmp/radar-tail.err &
+          PID=$!
+          sleep 78
+          kill "$PID" 2>/dev/null || true
+          wait "$PID" 2>/dev/null || true
+          python3 - <<'PY'
+          import json
+          lines=open('/tmp/radar-tail.out',errors='replace').read().splitlines()
+          events=[]
+          for s in lines:
+            try:
+              x=json.loads(s)
+            except Exception:continue
+            if not isinstance(x,dict):continue
+            trigger=x.get("event",{})
+            details={"outcome":x.get("outcome"),"event_type":trigger.get("type") if isinstance(trigger,dict) else None}
+            details["exceptions"]=[str(z.get("message",""))[:210] for z in (x.get("exceptions") or []) if isinstance(z,dict)][:4]
+            details["errors"]=[str(z.get("message",""))[:210] for z in (x.get("logs") or []) if isinstance(z,dict) and z.get("level")=="error"][:4]
+            events.append(details)
+          print("TAIL_COUNT",len(events))
+          for e in events[-12:]: print("TAIL_EVENT",json.dumps(e))
+          err=open('/tmp/radar-tail.err',errors='replace').read()
+          print("TAIL_CLIENT_ERROR",err[-350:] if len(events)==0 else "None")
+          PY
+      - name: Confirmar horario da ultima execucao visivel na API
+        run: |
+          python3 - <<'PY'
+          import urllib.request,json,datetime as d
+          with urllib.request.urlopen("https://edge-radar-cloud.adalgizagon.workers.dev/api/status",timeout=15) as response:
+            x=json.load(response)
+          c=x.get("checkedAt") or 0;r=x.get("latest") or {}
+          last=r.get("last_run") or 0
+          print("STATUS",json.dumps({"running":x.get("running"),"online":x.get("online"),
+            "last_run_utc":d.datetime.fromtimestamp(last/1000,d.timezone.utc).isoformat(),
+            "age_seconds":round((c-last)/1000),"last_ok":r.get("last_ok"),"error":str(r.get("error") or "")[:300]}))
+          PY
