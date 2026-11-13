@@ -59,7 +59,7 @@ jobs:
         run: |
           set -euo pipefail
           BASE="https://edge-radar-cloud.adalgizagon.workers.dev"
-          for PATHNAME in "api/status" "api/risk?limit=1" "api/exit-quotes?limit=1" "api/evaluation"; do
+          for PATHNAME in "api/status" "api/risk?limit=1" "api/exit-quotes?limit=1" "api/evaluation" "api/paper"; do
             echo "Validando $PATHNAME ..."
             curl --fail --silent --show-error --retry 4 --retry-all-errors --retry-delay 2 --max-time 20 "$BASE/$PATHNAME" -o /tmp/edge-health.json
             python3 -c 'import json; json.load(open("/tmp/edge-health.json"))'
