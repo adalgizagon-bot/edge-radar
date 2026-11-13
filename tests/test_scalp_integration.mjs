@@ -120,7 +120,7 @@ test('V2 starts forward-only, logs entry features and closes only on observed ta
   const before=await paperSnapshot(env,t0);
   assert.equal(before.v2Since,t0);
   assert.ok(before.positions.some(x=>x.strategy==='scalp_v2'));
-  assert.equal(before.profiles.scalp_v2.targetPct,7);
+  assert.ok(Math.abs(before.profiles.scalp_v2.targetPct-7)<1e-9);
   assert.equal(before.profiles.scalp_v2.holdMinutes,8);
   source.setPrice(.0108);
   const second=await collect(env,{clock:()=>t0+60000,fetcher:source.fetcher});
