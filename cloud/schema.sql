@@ -146,3 +146,10 @@ CREATE TABLE IF NOT EXISTS paper_scalp_diagnostics (
  stretched INTEGER NOT NULL DEFAULT 0, too_new INTEGER NOT NULL DEFAULT 0,
  weakening INTEGER NOT NULL DEFAULT 0
 );
+
+-- Common launch instant for apples-to-apples completed-trade comparisons.
+-- Existing baseline history is preserved; reported comparison metrics start here.
+CREATE TABLE IF NOT EXISTS paper_comparison_start (
+ id INTEGER PRIMARY KEY CHECK(id=1),
+ started_at INTEGER NOT NULL
+);
