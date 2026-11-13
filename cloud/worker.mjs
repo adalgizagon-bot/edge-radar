@@ -4,6 +4,7 @@
  */
 import {assessRisk,riskRow} from './risk.mjs';
 import {SOL_MINT,quoteRequest,parseExitQuote} from './exit-quote.mjs';
+import {GECKO_COOLDOWN_MS,geckoDelay,parseJupiterRecent,parseDexProfiles,combineCandidates} from './discovery.mjs';
 const SETTINGS=Object.freeze({
   gecko:'https://api.geckoterminal.com/api/v2/networks/solana/',
   dex:'https://api.dexscreener.com/tokens/v1/solana/',
@@ -72,7 +73,14 @@ function checkpointDecision(signal,horizon,at,price){
 async function fetchJSON(url,fetcher=fetch){
   const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),SETTINGS.quoteTimeout);
   try{const resp=await fetcher(url,{headers:{accept:'application/json', 'user-agent':'EdgeRadarCryptoCollector/1.0'},signal:ctl.signal});
-    if(!resp.ok)throw new Error('HTTP '+resp.status+' em '+new URL(url).pathname);
+    if(!resp.ok){
+      const error=new Error('HTTP '+resp.status+' em '+new URL(url).pathname);
+      error.status=resp.status;
+      const retry=resp.headers?.get?.('retry-after');
+      const seconds=Number(retry);
+      error.retryAfterMs=Number.isFinite(seconds)&&seconds>=0?seconds*1000:0;
+      throw error;
+    }
     return await resp.json();
   }finally{clearTimeout(tm);}
 }
@@ -87,16 +95,58 @@ async function recentMints(db,mints,at){
  const r=await db.prepare(query).bind(at-SETTINGS.reentryMs,...mints).all();
  return new Set((r.results||[]).map(x=>x.mint));
 }
-async function fetchData(fetcher){
- const urls=['new_pools?include=base_token,dex','trending_pools?include=base_token,dex&duration=5m'];
- const results=await Promise.allSettled(urls.map(url=>fetchJSON(SETTINGS.gecko+url,fetcher)));
- const pools=[],errors=[];
- for(let i=0;i<results.length;i++){
-  if(results[i].status==='fulfilled')pools.push(...parsePools(results[i].value,i?'trending':'new'));
-  else errors.push(String(results[i].reason?.message||results[i].reason).slice(0,120));
+async function discoverMarket(env,fetcher,at,active=[]){
+ const warnings=[],sources=[],cache=[];
+ const state=await env.DB.prepare("SELECT * FROM source_health WHERE source='gecko'").first();
+ let pools=[],recent=[],profiles=[],jupiterRecent=[],didJupiterRecent=false;
+ const canTry=!state||at>=Number(state.next_attempt||0);
+ if(canTry){
+  const endpoint=Math.floor(at/GECKO_COOLDOWN_MS)%2===0?'new_pools?include=base_token,dex':'trending_pools?include=base_token,dex&duration=5m';
+  try{
+   const payload=await fetchJSON(SETTINGS.gecko+endpoint,fetcher);
+   pools=parsePools(payload,endpoint.startsWith('new')?'new':'trending');
+   sources.push('GeckoTerminal');
+   await env.DB.prepare(`INSERT INTO source_health (source,next_attempt,failures,last_status,last_success,last_error)
+    VALUES ('gecko',?,0,200,?,'') ON CONFLICT(source) DO UPDATE SET
+    next_attempt=excluded.next_attempt,failures=0,last_status=200,last_success=excluded.last_success,last_error=''`)
+    .bind(at+GECKO_COOLDOWN_MS,at).run();
+  }catch(e){
+   const failures=Math.min(30,Number(state?.failures||0)+1),status=e?.status||0;
+   const next=at+geckoDelay(status,failures,e?.retryAfterMs||0);
+   const reason=String(e?.message||e).slice(0,160);
+   await env.DB.prepare(`INSERT INTO source_health (source,next_attempt,failures,last_status,last_success,last_error)
+    VALUES ('gecko',?,?,?,? ,?) ON CONFLICT(source) DO UPDATE SET
+    next_attempt=excluded.next_attempt,failures=excluded.failures,
+    last_status=excluded.last_status,last_error=excluded.last_error`)
+    .bind(next,failures,status,Number(state?.last_success||0)||null,reason).run();
+   warnings.push('GeckoTerminal limitado ('+reason+'); nova tentativa em '+Math.ceil((next-at)/60000)+' min');
+  }
+ }else if(Number(state?.last_status)===429){
+  warnings.push('GeckoTerminal em pausa por limite de API; usando fontes alternativas');
  }
- if(!pools.length && results.every(x=>x.status==='rejected'))throw new Error('GeckoTerminal indisponível: '+errors.join('; '));
- return {pools,errors};
+ // Se a fonte principal nao forneceu tokens suficientes, mantemos descoberta por fontes alternativas.
+ if(pools.length<12){
+  didJupiterRecent=true;
+  try{
+   const payload=await fetchJSON('https://api.jup.ag/tokens/v2/recent',fetcher);
+   if(!Array.isArray(payload))throw Error('resposta invalida');
+   jupiterRecent=payload.filter(t=>validMint(t?.id));
+   recent=parseJupiterRecent(jupiterRecent);
+   sources.push('Jupiter recentes');
+  }catch(e){warnings.push('Jupiter recentes: '+String(e?.message||e).slice(0,85));}
+  try{
+   const payload=await fetchJSON('https://api.dexscreener.com/token-profiles/latest/v1',fetcher);
+   if(!Array.isArray(payload))throw Error('resposta invalida');
+   profiles=parseDexProfiles(payload);
+   sources.push('DEX Screener perfis (parcial/promocional)');
+  }catch(e){warnings.push('DEX Screener perfis: '+String(e?.message||e).slice(0,85));}
+ }
+ const previous=await env.DB.prepare('SELECT mint,name,symbol FROM risk_watch WHERE assessed_at>? ORDER BY assessed_at DESC LIMIT 22')
+  .bind(at-3*60*60_000).all();
+ for(const x of previous.results||[])if(validMint(x.mint))cache.push({mint:x.mint,name:x.name,symbol:x.symbol,source:'historico_d1'});
+ const tracked=active.slice(0,12).filter(x=>validMint(x.mint)).map(x=>({mint:x.mint,name:x.name,symbol:x.symbol,source:'sinal_ativo'}));
+ const candidates=combineCandidates([pools,tracked,recent,cache,profiles],SETTINGS.maxCandidates);
+ return {candidates,warnings,sources,jupiterRecent,didJupiterRecent,geckoOk:sources.includes('GeckoTerminal')};
 }
 function dedupePools(pools){
  const by=new Map();for(const p of pools){const o=by.get(p.mint);if(!o||(p.liquidity??0)>(o.liquidity??0))by.set(p.mint,p)}
@@ -140,12 +190,14 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  m30_status=COALESCE(m30_status,'missing')
  WHERE completed=0 AND triggered_at<?`).bind(at-42*60_000).run();
  const active=await recentSignals(env.DB,at,SETTINGS.maxActive);
- let pools=[],errors=[],warnings=[];
- try{({pools,errors}=await fetchData(fetcher));}catch(e){errors.push(String(e?.message||e));}
- const candidates=dedupePools(pools).slice(0,SETTINGS.maxCandidates);
+ let errors=[],warnings=[];
+ const discovered=await discoverMarket(env,fetcher,at,active);
+ const candidates=discovered.candidates;
+ warnings.push(...discovered.warnings);
+ if(!candidates.length&&discovered.sources.length===0)errors.push('Nenhuma fonte de descoberta disponivel');
  // Lote Jupiter (uma requisicao por ciclo). Falha de API nao libera entradas.
- let jupiter=new Map();
- if(candidates.length){try{
+ let jupiter=new Map(discovered.jupiterRecent.map(t=>[t.id,t]));
+ if(candidates.length&&!discovered.didJupiterRecent){try{
   const uri='https://api.jup.ag/tokens/v2/search?query='+[...candidates.map(c=>c.mint),SOL_MINT].join(',');
   const response=await fetchJSON(uri,fetcher);
   if(!Array.isArray(response))throw Error('resposta invalida');
@@ -237,7 +289,7 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  VALUES ('cloud',?,?,?,?,?,?) ON CONFLICT(name) DO UPDATE SET
  last_run=excluded.last_run,last_ok=excluded.last_ok,scanned=excluded.scanned,added=excluded.added,checkpoints=excluded.checkpoints,error=excluded.error`)
  .bind(at,errors.length?0:1,mints.length,inserted,checkpoints,errorText).run();
- return {at,scanned:mints.length,added:inserted,checkpoints,blocked,unverified,errors,warnings};
+ return {at,scanned:mints.length,added:inserted,checkpoints,blocked,unverified,sources:discovered.sources,errors,warnings};
 }
 const cors=(req,env)=>{
  const origin=req.headers.get('Origin')||'',allow=String(env.FRONTEND_ORIGIN||'https://edge-radar-gamma.vercel.app').replace(/\/$/,'');
@@ -253,7 +305,8 @@ async function handle(request,env){
  if(path==='/api/health'||path==='/api/status'){
   const r=await env.DB.prepare("SELECT * FROM collector_state WHERE name='cloud'").first();
   const fresh=!!r&&Date.now()-r.last_run<3*60_000;
-  return json({online:fresh&&!!r.last_ok,running:fresh,mode:'cron_1m',latest:r||null,checkedAt:Date.now(),precision:'polling de aproximadamente 1 minuto; fonte GeckoTerminal tem cache de até 1 minuto; não é fluxo por segundo'},200,request,env);
+  const source=await env.DB.prepare("SELECT * FROM source_health WHERE source='gecko'").first();
+   return json({online:fresh&&!!r.last_ok,running:fresh,mode:'cron_1m',latest:r||null,sourceHealth:{gecko:source||null},checkedAt:Date.now(),precision:'polling de aproximadamente 1 minuto; fonte GeckoTerminal tem cache de até 1 minuto; não é fluxo por segundo'},200,request,env);
  }
  if(path==='/api/risk'){
   const limit=finiteInt(u.searchParams.get('limit'),40,100);
