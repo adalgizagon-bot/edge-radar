@@ -2,6 +2,8 @@
  * Prices are observed DEX quotes, not executable fills. Fail closed on missing data.
  */
 import {SCALP,scalpCandidate,nextScalpTracking,scalpExit} from './scalp.mjs';
+import {V2,scalpV2Candidate,scalpV2Exit} from './scalp-v2.mjs';
+import {reasonGroup} from './audit.mjs';
 export const PAPER={initial:1000,stake:20,fee:0.01,stressFee:0.025,maxPositions:3,stop:-0.07,
   baselineTake:0.12,aiTake:0.20,maxHoldMs:20*60_000,reentryMs:60*60_000,
   maxAiCallsPerDay:480};
@@ -79,9 +81,16 @@ async function buy(db,accountRow,strategy,c,at,reason){
   db.prepare('INSERT INTO paper_trades(id,strategy,mint,symbol,action,quantity,price_usd,fee_usd,cash_usd,pnl_usd,reason,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')
    .bind(id,strategy,c.mint,String(c.symbol||'').slice(0,25),'buy',qty,price,fee,-PAPER.stake,null,short(reason),at),
   db.prepare('INSERT INTO paper_entry_evidence(buy_id,strategy,mint,created_at,tier,risk_level,quote_status,score,liquidity) VALUES(?,?,?,?,?,?,?,?,?)')
-   .bind(id,strategy,c.mint,at,c.tier,c.risk?.level||'unverified',c.quote||'not_checked',c.score||0,num(c.pair?.liquidity?.usd))
+   .bind(id,strategy,c.mint,at,c.tier,c.risk?.level||'unverified',c.quote||'not_checked',c.score||0,num(c.pair?.liquidity?.usd)),
+  db.prepare('INSERT INTO paper_entry_features(buy_id,strategy,mint,opened_at,score,liquidity,volume5m,change5m,buys5m,sells5m,age_minutes,organic,top_holders,quote_status,tier) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)')
+   .bind(id,strategy,c.mint,at,num(c.score),num(c.pair?.liquidity?.usd),
+    num(c.pair?.volume?.m5),num(c.pair?.priceChange?.m5),num(c.pair?.txns?.m5?.buys),
+    num(c.pair?.txns?.m5?.sells),num(c.pair?.pairCreatedAt)!==null?Math.max(0,(at-c.pair.pairCreatedAt)/60000):null,
+    num(c.risk?.organic),num(c.risk?.top),c.quote||'not_checked',c.tier||'exploratory'),
+  db.prepare('INSERT OR IGNORE INTO paper_quote_samples(strategy,mint,opened_at,observed_at,price_usd) VALUES(?,?,?,?,?)')
+   .bind(strategy,c.mint,at,at,price)
  ];
- if(strategy==='scalp')requests.push(db.prepare('INSERT INTO paper_scalp_tracking(strategy,mint,peak_price,last_price,weak_ticks,sample_at) VALUES(?,?,?,?,0,?)')
+ if(strategy==='scalp'||strategy==='scalp_v2')requests.push(db.prepare('INSERT INTO paper_scalp_tracking(strategy,mint,peak_price,last_price,weak_ticks,sample_at) VALUES(?,?,?,?,0,?)')
   .bind(strategy,c.mint,price,price,at));
  await db.batch(requests);
  accountRow.cash_usd-=PAPER.stake;
@@ -94,9 +103,15 @@ async function sell(db,accountRow,strategy,p,price,at,reason){
   db.prepare('DELETE FROM paper_positions WHERE strategy=? AND mint=?').bind(strategy,p.mint),
   db.prepare('UPDATE paper_accounts SET cash_usd=cash_usd+?,updated_at=? WHERE strategy=?').bind(payout,at,strategy),
   db.prepare('INSERT INTO paper_trades(id,strategy,mint,symbol,action,quantity,price_usd,fee_usd,cash_usd,pnl_usd,reason,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')
-   .bind(strategy+':sell:'+p.mint+':'+at,strategy,p.mint,p.symbol,'sell',p.quantity,price,fee,payout,pnl,short(reason),at)
+   .bind(strategy+':sell:'+p.mint+':'+at,strategy,p.mint,p.symbol,'sell',p.quantity,price,fee,payout,pnl,short(reason),at),
+  db.prepare('INSERT INTO paper_exit_observations(sell_id,strategy,mint,entry_at,closed_at,elapsed_ms,previous_quote_lag_ms,price_return_pct,stop_overshoot_pct,reason_group) VALUES(?,?,?,?,?,?,?,?,?,?)')
+   .bind(strategy+':sell:'+p.mint+':'+at,strategy,p.mint,p.opened_at,at,at-p.opened_at,
+     num(p.last_quote_at)!==null&&at>=p.last_quote_at?at-p.last_quote_at:null,
+     100*(price/p.entry_price-1),
+     reasonGroup(reason)==='stop'?Math.max(0,100*((strategy==='scalp'?SCALP.stop:strategy==='scalp_v2'?V2.stop:PAPER.stop)-(price/p.entry_price-1))):null,
+     reasonGroup(reason))
  ];
- if(strategy==='scalp')requests.push(db.prepare('DELETE FROM paper_scalp_tracking WHERE strategy=? AND mint=?').bind(strategy,p.mint));
+ if(strategy==='scalp'||strategy==='scalp_v2')requests.push(db.prepare('DELETE FROM paper_scalp_tracking WHERE strategy=? AND mint=?').bind(strategy,p.mint));
  await db.batch(requests);
  accountRow.cash_usd+=payout;return true;
 }
@@ -159,7 +174,8 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
  const gate=await db.prepare('INSERT OR IGNORE INTO paper_cycle_runs(minute_at) VALUES(?)').bind(bucket).run();
  if(gate?.meta?.changes===0)return {enabled:true,skipped:'already_processed'};
  const accounts={},open={};
- for(const name of ['baseline','scalp','ai']){accounts[name]=await account(db,name,at);open[name]=await positions(db,name);}
+ for(const name of ['baseline','scalp','scalp_v2','ai']){accounts[name]=await account(db,name,at);open[name]=await positions(db,name);}
+ await db.prepare("INSERT OR IGNORE INTO paper_strategy_inception(strategy,started_at) VALUES('scalp_v2',?)").bind(at).run();
  await db.prepare('INSERT OR IGNORE INTO paper_comparison_start(id,started_at) VALUES(1,?)').bind(at).run();
  const analyzed=(candidates||[]).map(c=>{const pair=prices.get(c.mint);
   const token={mint:c.mint,name:c.name,symbol:c.symbol,pair,risk:riskAtSignal.get(c.mint),
@@ -175,6 +191,18 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
  const scalpExam=eligibleAll.map(c=>({...c,scalpAssessment:scalpCandidate(c,at)}));
  const scalpAll=scalpExam.filter(c=>c.scalpAssessment.eligible);
  const scalpEligible=scalpAll.slice(0,3);
+ const v2Exam=eligibleAll.map(c=>({...c,v2Assessment:scalpV2Candidate(c,at)}));
+ const v2All=v2Exam.filter(c=>c.v2Assessment.eligible);
+ const v2Eligible=v2All.slice(0,3);
+ const v2Reject={score_liquidez_volume:0,pressao_compradora:0,
+  movimento_excessivo_ou_fraco:0,idade_do_pool_indisponivel_ou_nova:0,
+  alerta_de_auditoria:0,perda_de_forca:0};
+ for(const c of v2Exam)if(!c.v2Assessment.eligible&&Object.hasOwn(v2Reject,c.v2Assessment.reason))
+  v2Reject[c.v2Assessment.reason]++;
+ await db.prepare('INSERT INTO paper_v2_diagnostics(id,checked_at,base_candidates,eligible,score_liquidez_volume,pressao_compradora,movimento_excessivo_ou_fraco,idade_do_pool_indisponivel_ou_nova,alerta_de_auditoria,perda_de_forca) VALUES(1,?,?,?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET checked_at=excluded.checked_at,base_candidates=excluded.base_candidates,eligible=excluded.eligible,score_liquidez_volume=excluded.score_liquidez_volume,pressao_compradora=excluded.pressao_compradora,movimento_excessivo_ou_fraco=excluded.movimento_excessivo_ou_fraco,idade_do_pool_indisponivel_ou_nova=excluded.idade_do_pool_indisponivel_ou_nova,alerta_de_auditoria=excluded.alerta_de_auditoria,perda_de_forca=excluded.perda_de_forca')
+  .bind(at,eligibleAll.length,v2All.length,v2Reject.score_liquidez_volume,v2Reject.pressao_compradora,
+   v2Reject.movimento_excessivo_ou_fraco,v2Reject.idade_do_pool_indisponivel_ou_nova,
+   v2Reject.alerta_de_auditoria,v2Reject.perda_de_forca).run();
  const scalpReject={scalp_volume_ou_score:0,scalp_pressao_compradora:0,scalp_preco_esticado_ou_fraco:0,
    scalp_pool_novo:0,scalp_perda_de_forca:0};
  for(const c of scalpExam)if(!c.scalpAssessment.eligible)scalpReject[c.scalpAssessment.reason]=(scalpReject[c.scalpAssessment.reason]||0)+1;
@@ -188,16 +216,18 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
    counters.liquidez_insuficiente,counters.atividade_insuficiente,counters.pool_recente,counters.saida_ruim_comprovada).run();
  const aiOpen=open.ai.map(p=>({...p,current_price:markPrice(prices,p.mint)}));
  const ai=await askAgent(env,at,eligible,aiOpen,accounts.ai.cash_usd,fetcher);
- const count={baseline:0,scalp:0,ai:0};let closed=0;
- for(const strategy of ['baseline','scalp','ai']){
+ const count={baseline:0,scalp:0,scalp_v2:0,ai:0};let closed=0;
+ for(const strategy of ['baseline','scalp','scalp_v2','ai']){
   const a=accounts[strategy],positionsNow=open[strategy];
   const closedMints=new Set();
   for(const p of positionsNow){
    const price=markPrice(prices,p.mint);if(!price)continue;
    await db.prepare('UPDATE paper_positions SET last_price=?,last_quote_at=?,updated_at=? WHERE strategy=? AND mint=?')
     .bind(price,at,at,strategy,p.mint).run();
+   await db.prepare('INSERT OR IGNORE INTO paper_quote_samples(strategy,mint,opened_at,observed_at,price_usd) VALUES(?,?,?,?,?)')
+    .bind(strategy,p.mint,p.opened_at,at,price).run();
    let tracking=null;
-   if(strategy==='scalp'){
+   if(strategy==='scalp'||strategy==='scalp_v2'){
     const old=await db.prepare('SELECT * FROM paper_scalp_tracking WHERE strategy=? AND mint=?')
       .bind(strategy,p.mint).first();
     tracking=nextScalpTracking(old||{peak_price:p.entry_price,last_price:p.entry_price,
@@ -205,31 +235,35 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
     await db.prepare('INSERT INTO paper_scalp_tracking(strategy,mint,peak_price,last_price,weak_ticks,sample_at) VALUES(?,?,?,?,?,?) ON CONFLICT(strategy,mint) DO UPDATE SET peak_price=excluded.peak_price,last_price=excluded.last_price,weak_ticks=excluded.weak_ticks,sample_at=excluded.sample_at')
      .bind(strategy,p.mint,tracking.peak_price,tracking.last_price,tracking.weak_ticks,tracking.sample_at).run();
    }
-   const safety=strategy==='scalp'?scalpExit(p,price,at,tracking):exitRule(strategy,p,price,at);
+   const safety=strategy==='scalp'?scalpExit(p,price,at,tracking):
+    strategy==='scalp_v2'?scalpV2Exit(p,price,at,tracking):exitRule(strategy,p,price,at);
    const model=ai.choices.get(p.mint),opt=strategy==='ai'&&model?.action==='sell'&&at-p.opened_at>=120000;
    if(safety||opt){
     if(await sell(db,a,strategy,p,price,at,safety||'IA: '+model.reason)){closed++;closedMints.add(p.mint);}
     await recordDecision(db,strategy,p.mint,'sell',safety||'IA: '+model.reason,at,safety?'safety':strategy);
    }else if(strategy==='ai'&&model){await recordDecision(db,strategy,p.mint,'hold',model.reason,at,'model');}
   }
-  const maxPositions=strategy==='scalp'?SCALP.maxPositions:PAPER.maxPositions;
+  const maxPositions=strategy==='scalp'?SCALP.maxPositions:
+   strategy==='scalp_v2'?V2.maxPositions:PAPER.maxPositions;
   if(positionsNow.length-closedMints.size>=maxPositions||a.cash_usd<PAPER.stake)continue;
   const daily=await db.prepare("SELECT COALESCE(SUM(pnl_usd),0) AS pnl FROM paper_trades WHERE strategy=? AND action='sell' AND created_at>=?")
    .bind(strategy,dayStart(at)).first();
-  if((num(daily?.pnl)||0)<=(strategy==='scalp'?-SCALP.dailyLossLimitUsd:-50))continue;
-  for(const c of strategy==='scalp'?scalpEligible:eligible){
+  if((num(daily?.pnl)||0)<=(strategy==='scalp'?-SCALP.dailyLossLimitUsd:
+   strategy==='scalp_v2'?-V2.dailyLossLimitUsd:-50))continue;
+  for(const c of strategy==='scalp'?scalpEligible:strategy==='scalp_v2'?v2Eligible:eligible){
    if(count[strategy]||positionsNow.some(p=>p.mint===c.mint)||await historyHasBuy(db,strategy,c.mint,at))continue;
    const model=ai.choices.get(c.mint),choice=strategy==='ai'?model?.action||'hold':'buy';
    const category=c.tier==='exploratory'
     ?'EXPLORATORIO: entrada nao validada, execucao e saida nao comprovadas'
     :'AUDITADO PARA ESTUDO: sem garantia de execucao';
    const reason=strategy==='scalp'?category+'; Edge Scalp: alvo 5%, stop 3%, max 6 min':
+    strategy==='scalp_v2'?category+'; V2 experimental: alvo 7%, stop 3%, max 8 min':
     strategy==='baseline'?category+'; filtro de atividade e risco':category+'; '+(model?.reason||('IA '+ai.status+'; sem autorizacao de entrada'));
    await recordDecision(db,strategy,c.mint,choice,reason,at,strategy==='ai'?'model':'rules');
    if(choice==='buy'){if(await buy(db,a,strategy,c,at,reason))count[strategy]++;}
   }
  }
- return {enabled:true,eligible:eligibleAll.length,scalpEligible:scalpAll.length,buys:count,sells:closed,aiStatus:ai.status};
+ return {enabled:true,eligible:eligibleAll.length,scalpEligible:scalpAll.length,v2Eligible:v2All.length,buys:count,sells:closed,aiStatus:ai.status};
 }
 export async function paperSnapshot(env,at=Date.now()){
  if(!paperEnabled(env))return {enabled:false,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),
@@ -252,7 +286,7 @@ export async function paperSnapshot(env,at=Date.now()){
   "FROM paper_trades WHERE action='sell' AND created_at>=?), "+
   "peaks AS (SELECT strategy,balance,MAX(balance) OVER(PARTITION BY strategy ORDER BY created_at,id ROWS UNBOUNDED PRECEDING) AS peak FROM balances) "+
   "SELECT strategy,MAX((CASE WHEN peak>1000 THEN peak ELSE 1000 END)-balance) AS max_drawdown_usd FROM peaks GROUP BY strategy";
- const [ac,po,tr,de,us,pf,ev,diag,scalpDiag,drawdowns]=await Promise.all([
+ const [ac,po,tr,de,us,pf,ev,diag,scalpDiag,drawdowns,v2Diag,v2Start]=await Promise.all([
   db.prepare('SELECT * FROM paper_accounts ORDER BY strategy').all(),
   db.prepare('SELECT * FROM paper_positions ORDER BY opened_at DESC').all(),
   db.prepare('SELECT * FROM paper_trades ORDER BY created_at DESC LIMIT 100').all(),
@@ -262,11 +296,13 @@ export async function paperSnapshot(env,at=Date.now()){
   db.prepare('SELECT * FROM paper_entry_evidence ORDER BY created_at DESC LIMIT 120').all(),
   db.prepare('SELECT * FROM paper_diagnostics WHERE id=1').first(),
   db.prepare('SELECT * FROM paper_scalp_diagnostics WHERE id=1').first(),
-  db.prepare(drawdownSql).bind(since).all()
+  db.prepare(drawdownSql).bind(since).all(),
+  db.prepare('SELECT * FROM paper_v2_diagnostics WHERE id=1').first(),
+  db.prepare("SELECT started_at FROM paper_strategy_inception WHERE strategy='scalp_v2'").first()
  ]);
  const rows=po.results||[],accounts=(ac.results||[]).map(a=>{
   const mine=rows.filter(p=>p.strategy===a.strategy);
-  const freshLimit=a.strategy==='scalp'?100000:180000;
+  const freshLimit=(a.strategy==='scalp'||a.strategy==='scalp_v2')?100000:180000;
   const fresh=mine.every(p=>num(p.last_price)>0&&num(p.last_quote_at)>0&&at-p.last_quote_at<=freshLimit&&at>=p.last_quote_at);
   const openValue=fresh?mine.reduce((sum,p)=>sum+p.quantity*p.last_price*(1-PAPER.fee),0):null;
   const invested=mine.reduce((sum,p)=>sum+p.invested_usd,0);
@@ -278,10 +314,13 @@ export async function paperSnapshot(env,at=Date.now()){
  return {enabled:true,aiConfigured:agentEnabled(env),aiCallLimit:aiDailyLimit(env),
   accounts,performance,positions:rows,trades:tr.results||[],decisions:de.results||[],
   evidence:ev.results||[],diagnostics:diag||null,scalpDiagnostics:scalpDiag||null,
+  v2Diagnostics:v2Diag||null,v2Since:num(v2Start?.started_at),
   comparisonSince:since,fees:{baseEachSidePct:PAPER.fee*100,stressEachSidePct:PAPER.stressFee*100},
   profiles:{baseline:{targetPct:PAPER.baselineTake*100,stopPct:PAPER.stop*100,holdMinutes:PAPER.maxHoldMs/60000,
                       maxPositions:PAPER.maxPositions},
     scalp:{targetPct:SCALP.target*100,stopPct:SCALP.stop*100,holdMinutes:SCALP.maxHoldMs/60000,
-           maxPositions:SCALP.maxPositions}},usage:us||null,
+           maxPositions:SCALP.maxPositions},
+    scalp_v2:{targetPct:V2.target*100,stopPct:V2.stop*100,holdMinutes:V2.maxHoldMs/60000,
+           maxPositions:V2.maxPositions}},usage:us||null,
   checkedAt:at,note:'Retornos teoricos com preco observado ~1/min, sem garantia de compra ou venda. Dados de preco ausentes nao sao substituidos.'};
 }

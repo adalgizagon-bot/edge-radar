@@ -153,3 +153,39 @@ CREATE TABLE IF NOT EXISTS paper_comparison_start (
  id INTEGER PRIMARY KEY CHECK(id=1),
  started_at INTEGER NOT NULL
 );
+
+-- Add-only telemetry. Historical rows have unknown feature values, never backfilled from current quotes.
+CREATE TABLE IF NOT EXISTS paper_entry_features (
+ buy_id TEXT PRIMARY KEY, strategy TEXT NOT NULL, mint TEXT NOT NULL,
+ opened_at INTEGER NOT NULL, score REAL, liquidity REAL, volume5m REAL,
+ change5m REAL, buys5m INTEGER, sells5m INTEGER,
+ age_minutes REAL, organic REAL, top_holders REAL, quote_status TEXT,
+ tier TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_paper_features_strategy_time ON paper_entry_features(strategy,opened_at);
+CREATE TABLE IF NOT EXISTS paper_exit_observations (
+ sell_id TEXT PRIMARY KEY, strategy TEXT NOT NULL, mint TEXT NOT NULL,
+ entry_at INTEGER NOT NULL, closed_at INTEGER NOT NULL,
+ elapsed_ms INTEGER NOT NULL, previous_quote_lag_ms INTEGER,
+ price_return_pct REAL, stop_overshoot_pct REAL,
+ reason_group TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS paper_quote_samples (
+ strategy TEXT NOT NULL, mint TEXT NOT NULL, opened_at INTEGER NOT NULL,
+ observed_at INTEGER NOT NULL, price_usd REAL NOT NULL,
+ PRIMARY KEY(strategy,mint,opened_at,observed_at)
+);
+CREATE INDEX IF NOT EXISTS idx_paper_quote_samples_time ON paper_quote_samples(observed_at);
+CREATE TABLE IF NOT EXISTS paper_strategy_inception (
+ strategy TEXT PRIMARY KEY, started_at INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS paper_v2_diagnostics (
+ id INTEGER PRIMARY KEY CHECK(id=1),checked_at INTEGER NOT NULL,
+ base_candidates INTEGER NOT NULL DEFAULT 0, eligible INTEGER NOT NULL DEFAULT 0,
+ score_liquidez_volume INTEGER NOT NULL DEFAULT 0,
+ pressao_compradora INTEGER NOT NULL DEFAULT 0,
+ movimento_excessivo_ou_fraco INTEGER NOT NULL DEFAULT 0,
+ idade_do_pool_indisponivel_ou_nova INTEGER NOT NULL DEFAULT 0,
+ alerta_de_auditoria INTEGER NOT NULL DEFAULT 0,
+ perda_de_forca INTEGER NOT NULL DEFAULT 0
+);

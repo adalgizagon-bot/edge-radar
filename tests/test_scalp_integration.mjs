@@ -4,6 +4,7 @@ import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
 import {collect} from '../cloud/worker.mjs';
 import {paperSnapshot} from '../cloud/paper-agent.mjs';
+import {auditSnapshot} from '../cloud/audit.mjs';
 const MINT='11111111111111111111111111111111',SOL='So11111111111111111111111111111111111111112';
 
 function localD1(){
@@ -107,5 +108,66 @@ test('Cloudflare provides a secure same-origin standalone read-only laboratory',
   assert.ok(text.includes('Edge Scalp Rápido'));
   assert.ok(text.includes("fetch('/api/paper'"));
   assert.ok(!text.includes('OPENAI_API_KEY'));
+ }finally{db.close();}
+});
+
+test('V2 starts forward-only, logs entry features and closes only on observed target',async()=>{
+ const db=localD1(),t0=Date.now(),source=market(t0);
+ const env={DB:db,PAPER_EXPERIMENT_ENABLED:'true',PAPER_AI_ENABLED:'false'};
+ try{
+  const initial=await collect(env,{clock:()=>t0,fetcher:source.fetcher});
+  assert.equal(initial.errors.length,0);
+  const before=await paperSnapshot(env,t0);
+  assert.equal(before.v2Since,t0);
+  assert.ok(before.positions.some(x=>x.strategy==='scalp_v2'));
+  assert.ok(Math.abs(before.profiles.scalp_v2.targetPct-7)<1e-9);
+  assert.equal(before.profiles.scalp_v2.holdMinutes,8);
+  source.setPrice(.0108);
+  const second=await collect(env,{clock:()=>t0+60000,fetcher:source.fetcher});
+  assert.equal(second.errors.length,0);
+  const after=await paperSnapshot(env,t0+60000);
+  assert.ok(!after.positions.some(x=>x.strategy==='scalp_v2'));
+  assert.ok(after.trades.some(x=>x.strategy==='scalp_v2'&&x.action==='sell'));
+  assert.ok(after.positions.some(x=>x.strategy==='baseline'),'baseline preserved');
+  const audit=await auditSnapshot(env,t0+60000,100);
+  assert.equal(audit.complete,true);
+  assert.equal(audit.v2Since,t0);
+  const v2=audit.rows.find(x=>x.strategy==='scalp_v2');
+  assert.ok(v2);
+  assert.equal(v2.reason_group,'alvo');
+  assert.ok(v2.volume5m>0,'entry data captured at buy');
+  assert.ok(v2.sample_count>=2,'observed quote path');
+  assert.ok(v2.sampled_peak_return_pct>=7,'sampled, not interpolated');
+  assert.equal(v2.duration_minutes,1);
+  assert.ok(audit.forwardSummary.some(x=>x.strategy==='scalp_v2'&&x.closed===1));
+ }finally{db.close();}
+});
+test('Audit web routes serve own-origin read-only history, no artificial trades',async()=>{
+ const db=localD1(),env={DB:db,PAPER_EXPERIMENT_ENABLED:'true',PAPER_AI_ENABLED:'false'};
+ try{
+  const {handle}=await import('../cloud/worker.mjs');
+  const page=await handle(new Request('https://worker.example/audit'),env);
+  assert.equal(page.status,200);
+  assert.match(page.headers.get('content-security-policy'),/connect-src 'self'/);
+  const html=await page.text();assert.ok(html.includes('Auditoria de operações fictícias'));
+  assert.ok(html.includes("fetch('/api/audit?limit=1000'"));
+  const api=await handle(new Request('https://worker.example/api/audit?limit=100'),env);
+  assert.equal(api.status,200);
+  const json=await api.json();assert.equal(json.totalClosed,0);
+  assert.deepEqual(json.rows,[]);
+ }finally{db.close();}
+});
+test('No price means no V2 fill and no invented audited results',async()=>{
+ const db=localD1(),t0=Date.now(),source=market(t0);
+ const env={DB:db,PAPER_EXPERIMENT_ENABLED:'true',PAPER_AI_ENABLED:'false'};
+ try{
+  await collect(env,{clock:()=>t0,fetcher:source.fetcher});
+  source.failDex(true);
+  await collect(env,{clock:()=>t0+9*60000,fetcher:source.fetcher});
+  const snap=await paperSnapshot(env,t0+9*60000);
+  assert.ok(snap.positions.some(x=>x.strategy==='scalp_v2'));
+  assert.equal(snap.accounts.find(x=>x.strategy==='scalp_v2').equity_usd,null);
+  const a=await auditSnapshot(env,t0+9*60000,100);
+  assert.ok(!a.rows.some(x=>x.strategy==='scalp_v2'));
  }finally{db.close();}
 });

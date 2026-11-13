@@ -4,6 +4,8 @@
  */
 import {assessRisk,riskRow} from './risk.mjs';
 import {labHtml} from './lab.mjs';
+import {auditSnapshot} from './audit.mjs';
+import {auditHtml} from './audit-page.mjs';
 import {paperEnabled,runPaperCycle,paperSnapshot} from './paper-agent.mjs';
 import {SOL_MINT,quoteRequest,parseExitQuote} from './exit-quote.mjs';
 import {GECKO_COOLDOWN_MS,geckoDelay,parseJupiterRecent,parseDexProfiles,combineCandidates} from './discovery.mjs';
@@ -331,6 +333,14 @@ async function handle(request,env){
  if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{...cors(request,env),'access-control-allow-methods':'GET,OPTIONS','access-control-allow-headers':'content-type','access-control-max-age':'3600'}});
  if(!env?.DB)return json({error:'Coletor ainda sem banco D1 configurado'},503,request,env);
  const u=new URL(request.url),path=u.pathname;
+ if(path==='/audit'){
+  return new Response(auditHtml,{status:200,headers:{
+   'content-type':'text/html; charset=utf-8','cache-control':'no-store',
+   'x-content-type-options':'nosniff','x-frame-options':'DENY',
+   'content-security-policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+   'referrer-policy':'no-referrer'
+  }});
+ }
  if(path==='/lab'){
   return new Response(labHtml,{status:200,headers:{
    'content-type':'text/html; charset=utf-8','cache-control':'no-store',
@@ -356,6 +366,10 @@ async function handle(request,env){
   return json({risk:rows.results||[],checkedAt:Date.now(),precision:'triagem conservadora; sem cotacao executavel de venda'},200,request,env);
  }
  if(path==='/api/paper'){return json(await paperSnapshot(env),200,request,env);}
+ if(path==='/api/audit'){
+  const limit=finiteInt(u.searchParams.get('limit'),500,1000);
+  return json(await auditSnapshot(env,Date.now(),limit),200,request,env);
+ }
  if(path==='/api/exit-quotes'){
   const limit=finiteInt(u.searchParams.get('limit'),30,100);
   const mint=u.searchParams.get('mint');
