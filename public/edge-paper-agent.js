@@ -60,7 +60,7 @@ function redraw(){
  if(history)history.innerHTML=tradesHTML();
  if(decisions)decisions.innerHTML=decisionsHTML();
  if(usage){const u=payload.usage;usage.textContent=u?
-  'Hoje: '+u.calls+'/100 chamadas · '+u.input_tokens+' tokens de entrada · '+u.output_tokens+' tokens de saída · '+u.last_status:
+  'Hoje: '+u.calls+'/'+(payload.aiCallLimit||480)+' chamadas · '+u.input_tokens+' tokens de entrada · '+u.output_tokens+' tokens de saída · '+u.last_status:
   'Ainda não há consumo registrado hoje.';}
 }
 async function refresh(){
