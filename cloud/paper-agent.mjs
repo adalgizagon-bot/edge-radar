@@ -50,8 +50,8 @@ async function buy(db,accountRow,strategy,c,at,reason){
  const qty=PAPER.stake/(price*(1+PAPER.fee)),fee=PAPER.stake-qty*price;
  const id=strategy+':buy:'+c.mint+':'+at;
  await db.batch([
-  db.prepare('INSERT INTO paper_positions(strategy,mint,symbol,quantity,invested_usd,entry_price,opened_at,updated_at) VALUES(?,?,?,?,?,?,?,?)')
-   .bind(strategy,c.mint,String(c.symbol||'').slice(0,25),qty,PAPER.stake,price,at,at),
+  db.prepare('INSERT INTO paper_positions(strategy,mint,symbol,quantity,invested_usd,entry_price,opened_at,updated_at,last_price,last_quote_at) VALUES(?,?,?,?,?,?,?,?,?,?)')
+   .bind(strategy,c.mint,String(c.symbol||'').slice(0,25),qty,PAPER.stake,price,at,at,price,at),
   db.prepare('UPDATE paper_accounts SET cash_usd=cash_usd-?,updated_at=? WHERE strategy=? AND cash_usd>=?')
    .bind(PAPER.stake,at,strategy,PAPER.stake),
   db.prepare('INSERT INTO paper_trades(id,strategy,mint,symbol,action,quantity,price_usd,fee_usd,cash_usd,pnl_usd,reason,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')
@@ -142,6 +142,8 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
   const a=accounts[strategy],positionsNow=open[strategy];
   for(const p of positionsNow){
    const price=markPrice(prices,p.mint);if(!price)continue;
+   await db.prepare('UPDATE paper_positions SET last_price=?,last_quote_at=?,updated_at=? WHERE strategy=? AND mint=?')
+    .bind(price,at,at,strategy,p.mint).run();
    const safety=exitRule(strategy,p,price,at);
    const model=ai.choices.get(p.mint),opt=strategy==='ai'&&model?.action==='sell'&&at-p.opened_at>=120000;
    if(safety||opt){
@@ -167,14 +169,23 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
 export async function paperSnapshot(env,at=Date.now()){
  if(!paperEnabled(env))return {enabled:false,aiConfigured:agentEnabled(env),accounts:[],positions:[],trades:[],decisions:[],usage:null,note:'Teste ainda nao habilitado no servidor'};
  const db=env.DB;
- const [ac,po,tr,de,us]=await Promise.all([
+ const [ac,po,tr,de,us,pf]=await Promise.all([
   db.prepare('SELECT * FROM paper_accounts ORDER BY strategy').all(),
   db.prepare('SELECT * FROM paper_positions ORDER BY opened_at DESC').all(),
   db.prepare('SELECT * FROM paper_trades ORDER BY created_at DESC LIMIT 80').all(),
   db.prepare('SELECT * FROM paper_decisions ORDER BY created_at DESC LIMIT 80').all(),
-  db.prepare('SELECT * FROM paper_ai_usage WHERE day=?').bind(localDay(at)).first()
+  db.prepare('SELECT * FROM paper_ai_usage WHERE day=?').bind(localDay(at)).first(),
+  db.prepare("SELECT strategy,COUNT(*) AS sells,SUM(CASE WHEN pnl_usd>0 THEN 1 ELSE 0 END) AS wins,COALESCE(SUM(pnl_usd),0) AS realized_pnl FROM paper_trades WHERE action='sell' GROUP BY strategy").all()
  ]);
- return {enabled:true,aiConfigured:agentEnabled(env),accounts:ac.results||[],
-  positions:po.results||[],trades:tr.results||[],decisions:de.results||[],usage:us||null,
+ const rows=po.results||[],accounts=(ac.results||[]).map(a=>{
+  const mine=rows.filter(p=>p.strategy===a.strategy);
+  const fresh=mine.every(p=>num(p.last_price)>0&&num(p.last_quote_at)>0&&at-p.last_quote_at<180000&&at>=p.last_quote_at);
+  const netOpen=fresh?mine.reduce((s,p)=>s+p.quantity*p.last_price*(1-PAPER.fee),0):null;
+  const invested=mine.reduce((s,p)=>s+p.invested_usd,0);
+  return {...a,open_value_usd:netOpen,equity_usd:fresh?a.cash_usd+netOpen:null,
+   unrealized_pnl:fresh?netOpen-invested:null,prices_fresh:fresh};
+ });
+ return {enabled:true,aiConfigured:agentEnabled(env),accounts,
+  performance:pf.results||[],positions:rows,trades:tr.results||[],decisions:de.results||[],usage:us||null,
   checkedAt:at,note:'Compras/vendas ficticias com cotacoes observadas e custos supostos. Sem garantia de execucao real.'};
 }
