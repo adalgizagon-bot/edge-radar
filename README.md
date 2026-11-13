@@ -200,3 +200,44 @@ liquidez e custos de execução num ambiente autorizado.
 
 Sem PAPER_AI_ENABLED=true, nenhuma chamada à API paga de IA é feita.
 Não existem carteiras, assinaturas de ordens ou envios de transações.
+
+## Auditoria de desempenho e Edge Scalp V2 (somente paper trading)
+
+**Novo painel:** /audit no mesmo domínio do Cloudflare Worker (/lab continua disponível).
+A rota pública /api/audit?limit=500 expõe apenas registros de compra e venda
+**fictícias**, sem segredos. O painel permite filtrar estratégia e período,
+analisar saídas por motivo, nota, liquidez, classificação de risco, duração e
+mudança observada em 5 minutos; também exporta CSV localmente no navegador.
+
+Os resultados são agregados exclusivamente dos fechamentos guardados no D1.
+Para compras novas, persistimos um snapshot imutável de score, liquidez,
+volume, pressão compradora, idade do pool e dados de risco e o histórico
+**amostrado** de preços enquanto a posição está aberta. Para operações antigas,
+o painel mostra "sem registro" quando essas informações não existiam.
+Pico/mínimo de amostras não é máxima/mínima real entre leituras.
+
+**Scalp V2** é uma hipótese de pesquisa definida de antemão, não uma estratégia
+que foi ajustada retroativamente às últimas operações perdedoras. Não substitui
+a tradicional ou o Scalp V1. Cada uma tem conta fictícia independente.
+O V2 inicia com US$ 1.000 de saldo simulado, US$ 20 por entrada, no máximo duas
+posições, e limite diário de novos aportes ao perder US$ 15 já realizados.
+Usa filtros mais seletivos que o V1: score mínimo 80, liquidez mínima de
+US$ 25.000, volume 5min >= US$ 5.000, ao menos 16 compras, proporção
+compras/vendas >= 1,65, mudança 5min entre +2% e +12%, pool listado há ao
+menos 8 minutos, e rejeição de alertas de risco conhecidos. Dados de auditoria
+ausentes continuam identificados como entrada exploratória, não segura.
+
+Saídas simuladas: +7% no preço, stop observado de -3%, até 8 minutos, recuo
+após pico, perda de força ou ausência de impulso. Não há ordem real de stop,
+não há acompanhamento por segundo e não há garantia de saída a qualquer preço.
+
+A comparação principal no laboratório preserva históricos anteriores; a
+auditoria oferece a seleção **Mesmo período desde o V2**, permitindo que as
+três estratégias sejam comparadas em uma única janela de tempo. As diferentes
+seleções de moedas também impedem tratar os retornos como teste causal
+perfeitamente pareado. Primeiro avaliar amostras independentes de pelo menos
+100 fechamentos por estratégia e sensibilidade aos custos simulados de 1% e
+2,5% por lado antes de alterar parâmetros.
+
+Nenhuma chave de IA é necessária. `PAPER_AI_ENABLED=false` permanece
+explicitamente configurado, sem cobranças por chamadas de modelos.
