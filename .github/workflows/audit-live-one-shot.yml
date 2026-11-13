@@ -1,0 +1,20 @@
+name: Auditar Scalp V1 (somente leitura)
+on:
+  push:
+    branches: [analysis/scalp-v1-live-audit]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ler scripts sem nenhum secret
+        uses: actions/checkout@v4
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Consultar auditoria publica e resumir historico simulado
+        run: python scripts/live_paper_audit.py
