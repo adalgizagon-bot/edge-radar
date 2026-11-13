@@ -22,7 +22,9 @@ export function assessPaperCandidate(c,at=Date.now()){
  const score=num(c?.score),quote=c?.quote||'not_checked';
  const rejected=reason=>({eligible:false,tier:'rejected',reason});
  if(!mintOK(c?.mint)||!(price>0))return rejected('sem_preco');
- if(!r||r.level==='blocked'||(Array.isArray(r.alerts)&&r.alerts.length>0))return rejected('risco_critico');
+ if(!r||r.level==='blocked'||(Array.isArray(r.alerts)&&r.alerts.length>0)||
+    (num(r.organic)!==null&&num(r.organic)<35)||(num(r.top)!==null&&num(r.top)>=40)||
+    (num(r.dropP)!==null&&num(r.dropP)<=-20)||(num(r.dropL)!==null&&num(r.dropL)<=-30))return rejected('risco_critico');
  if(!(liquidity>=8000))return rejected('liquidez_insuficiente');
  if(!['priority','watch'].includes(c?.stage)||!(score>=60)||
     !(volume>=1500)||!(buys>=8)||!(sells>=1)||!(buys/sells>=1.2)||
@@ -159,12 +161,13 @@ export async function runPaperCycle(env,at,{prices,candidates,riskAtSignal,quote
  });
  const counters={sem_preco:0,risco_critico:0,liquidez_insuficiente:0,atividade_insuficiente:0,pool_recente:0,saida_ruim_comprovada:0};
  for(const c of analyzed)if(!c.assessment.eligible)counters[c.assessment.reason]++;
- const eligible=analyzed.filter(c=>c.assessment.eligible)
+ const eligibleAll=analyzed.filter(c=>c.assessment.eligible)
   .map(c=>({...c,tier:c.assessment.tier}))
-  .sort((a,b)=>b.score-a.score).slice(0,3);
+  .sort((a,b)=>b.score-a.score);
+ const eligible=eligibleAll.slice(0,3);
  await db.prepare('INSERT INTO paper_diagnostics(id,checked_at,candidates,eligible,exploratory,audited,without_price,critical,low_liquidity,weak_activity,too_new,bad_exit) VALUES(1,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET checked_at=excluded.checked_at,candidates=excluded.candidates,eligible=excluded.eligible,exploratory=excluded.exploratory,audited=excluded.audited,without_price=excluded.without_price,critical=excluded.critical,low_liquidity=excluded.low_liquidity,weak_activity=excluded.weak_activity,too_new=excluded.too_new,bad_exit=excluded.bad_exit')
-  .bind(at,analyzed.length,eligible.length,eligible.filter(x=>x.tier==='exploratory').length,
-   eligible.filter(x=>x.tier==='audited').length,counters.sem_preco,counters.risco_critico,
+  .bind(at,analyzed.length,eligibleAll.length,eligibleAll.filter(x=>x.tier==='exploratory').length,
+   eligibleAll.filter(x=>x.tier==='audited').length,counters.sem_preco,counters.risco_critico,
    counters.liquidez_insuficiente,counters.atividade_insuficiente,counters.pool_recente,counters.saida_ruim_comprovada).run();
  const aiOpen=open.ai.map(p=>({...p,current_price:markPrice(prices,p.mint)}));
  const ai=await askAgent(env,at,eligible,aiOpen,accounts.ai.cash_usd,fetcher);
