@@ -3,6 +3,7 @@
  * Source data: GeckoTerminal public API + DEX Screener token batch API.
  */
 import {assessRisk,riskRow} from './risk.mjs';
+import {paperEnabled,runPaperCycle,paperSnapshot} from './paper-agent.mjs';
 import {SOL_MINT,quoteRequest,parseExitQuote} from './exit-quote.mjs';
 import {GECKO_COOLDOWN_MS,geckoDelay,parseJupiterRecent,parseDexProfiles,combineCandidates} from './discovery.mjs';
 const SETTINGS=Object.freeze({
@@ -216,7 +217,12 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  // Only reprice signals that have a checkpoint due or approaching; all overdue records
  // are still processed for missing checkpoints even without a quote.
  const due=active.filter(s=>SETTINGS.horizons.some(h=>!s[h[0]+'_status']&&at>=s.triggered_at+h[1]-90_000&&at<=s.triggered_at+h[1]+h[2]));
- const mints=[...new Set([...due.map(x=>x.mint),...candidates.map(x=>x.mint)])].slice(0,SETTINGS.maxMintsPerScan);
+ let paperOpenMints=[];
+ if(paperEnabled(env)){
+  const open=await env.DB.prepare('SELECT DISTINCT mint FROM paper_positions LIMIT 12').all();
+  paperOpenMints=(open.results||[]).map(r=>r.mint).filter(validMint);
+ }
+ const mints=[...new Set([...paperOpenMints,...due.map(x=>x.mint),...candidates.map(x=>x.mint)])].slice(0,SETTINGS.maxMintsPerScan);
  let prices=new Map();
  if(mints.length){try{prices=await fetchPrices(mints,fetcher);}catch(e){errors.push('DEX Screener: '+String(e?.message||e));}}
  let checkpoints=0;
@@ -290,6 +296,13 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
    ON CONFLICT(day) DO UPDATE SET signals=signals+1`).bind(localDay(at)).run();
   duplicates.add(c.mint);inserted++;
  }
+ if(paperEnabled(env)){
+  try{
+   const ranked=candidates.map(c=>{const q=quality(prices.get(c.mint),at);return {...c,stage:q.stage,score:q.score};});
+   const result=await runPaperCycle(env,at,{prices,candidates:ranked,riskAtSignal,quoteThisCycle,fetcher});
+   if(result?.aiStatus==='error')warnings.push('IA indisponivel: verifique chave, modelo e limites');
+  }catch(e){warnings.push('Teste A/B suspenso neste ciclo: '+String(e?.message||e).slice(0,110));}
+ }
  const errorText=[...errors,...warnings].join(' | ').slice(0,500);
  await env.DB.prepare(`INSERT INTO collector_state (name,last_run,last_ok,scanned,added,checkpoints,error)
  VALUES ('cloud',?,?,?,?,?,?) ON CONFLICT(name) DO UPDATE SET
@@ -323,6 +336,7 @@ async function handle(request,env){
    await env.DB.prepare('SELECT * FROM risk_watch ORDER BY assessed_at DESC LIMIT ?').bind(limit).all();
   return json({risk:rows.results||[],checkedAt:Date.now(),precision:'triagem conservadora; sem cotacao executavel de venda'},200,request,env);
  }
+ if(path==='/api/paper'){return json(await paperSnapshot(env),200,request,env);}
  if(path==='/api/exit-quotes'){
   const limit=finiteInt(u.searchParams.get('limit'),30,100);
   const mint=u.searchParams.get('mint');
