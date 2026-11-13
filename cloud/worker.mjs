@@ -382,6 +382,10 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  let inserted=0;
  const qualified=[];
  let blocked=0,unverified=0;
+ // D1 Free: avoid repetitive writes for every token on every one-minute scan.
+ // Keep all risk decisions IN MEMORY on each scan; store only fresh snapshots every 10 min.
+ // This cuts risk_watch write volume by ~90% while preserving radar discovery every 3 min.
+ const persistRiskThisCycle=Math.floor(at/60000)%10===0;
  const riskAtSignal=new Map(),quoteThisCycle=new Map();
  for(const c of candidates){
   const pair=prices.get(c.mint);
@@ -391,12 +395,14 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
   riskAtSignal.set(c.mint,check);
   if(check.level==='blocked')blocked++;
   if(check.level==='unverified')unverified++;
-  const row=riskRow(check,{name:c.name,symbol:c.symbol,score:quality(pair,at).score});
+  if(persistRiskThisCycle&&pair&&value(pair.priceUsd)>0){
+   const row=riskRow(check,{name:c.name,symbol:c.symbol,score:quality(pair,at).score});
   await env.DB.prepare(`INSERT INTO risk_watch
   (mint,name,symbol,assessed_at,level,market_score,organic_score,is_verified,top_holders,buy_usd,sell_usd,flow_ratio,pool_price,pool_liquidity,jupiter_liquidity,change_price,change_liquidity,reasons,exit_quote_verified,entry_allowed)
   VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
   ON CONFLICT(mint) DO UPDATE SET name=excluded.name,symbol=excluded.symbol,assessed_at=excluded.assessed_at,level=excluded.level,market_score=excluded.market_score,organic_score=excluded.organic_score,is_verified=excluded.is_verified,top_holders=excluded.top_holders,buy_usd=excluded.buy_usd,sell_usd=excluded.sell_usd,flow_ratio=excluded.flow_ratio,pool_price=excluded.pool_price,pool_liquidity=excluded.pool_liquidity,jupiter_liquidity=excluded.jupiter_liquidity,change_price=excluded.change_price,change_liquidity=excluded.change_liquidity,reasons=excluded.reasons,exit_quote_verified=0,entry_allowed=0`)
   .bind(...Object.values(row)).run();
+  }
  }
  // Apenas UMA cotacao hipotetica por ciclo, sem carteira nem transacao.
  const quotable=candidates.filter(c=>jupiter.has(c.mint)&&quoteRequest(jupiter.get(c.mint)));

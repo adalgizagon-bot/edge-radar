@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import worker,{parsePools,quality,checkpointDecision,collect,handle,selectDexPairs} from '../cloud/worker.mjs';
 const mint='11111111111111111111111111111111';
 const other='22222222222222222222222222222222';
-const t0=Date.now();
+const t0=Math.floor(Date.now()/600000)*600000; // deterministic risk snapshot write window
 const gecko=()=>({
  data:[{attributes:{address:'pooladdr',name:'TEST / SOL',reserve_in_usd:'25000',volume_usd:{m5:'20000'},transactions:{m5:{buys:60,sells:20}},price_change_percentage:{m5:'12'},base_token_price_usd:'0.01'},
  relationships:{base_token:{data:{id:'solana_'+mint}},dex:{data:{id:'solana_pump_swap'}}}}],
@@ -148,4 +148,19 @@ test('429 GeckoTerminal enters cooldown but risk is populated from Jupiter recen
   await collect(env,{clock:()=>t0+60000,fetcher:mockFetch});
   assert.equal(mockFetch.geckoCalls,2,'Two Gecko cohorts on initial attempt, then no retries during cooldown');
  }finally{mockFetch.geckoRateLimited=false;}
+});
+
+test('Cloud D1 risk snapshots write only once per 10-minute window while risk evaluation continues',async()=>{
+ const db=new FakeDB(),env={DB:db};
+ mockFetch.geckoRateLimited=false;
+ mockFetch.price='0.01';
+ await collect(env,{clock:()=>t0,fetcher:mockFetch});
+ const risk=db.risks.get(mint);
+ assert.ok(risk,'Initial risk snapshot saved');
+ assert.equal(risk.assessed_at,t0);
+ mockFetch.price='0.009';
+ await collect(env,{clock:()=>t0+60000,fetcher:mockFetch});
+ assert.equal(db.risks.get(mint).assessed_at,t0,'Do not consume D1 rows every minute for unchanged watchlist');
+ await collect(env,{clock:()=>t0+10*60000,fetcher:mockFetch});
+ assert.equal(db.risks.get(mint).assessed_at,t0+10*60000,'New full snapshot on the next ten-minute boundary');
 });
