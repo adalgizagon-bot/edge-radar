@@ -55,7 +55,7 @@ function tradesHTML(){
 }
 function decisionsHTML(){
  const rows=(payload?.decisions||[]).slice(0,30);
- if(!rows.length)return '<p class="cloud-empty">Aguardando sinais elegíveis ou decisões da IA.</p>';
+ if(!rows.length)return '<p class="cloud-empty">Aguardando sinais elegíveis para a simulação.</p>';
  return '<div class="agent-tablewrap"><table class="paper-table"><thead><tr><th>Horário</th><th>Estratégia</th><th>Token</th><th>Decisão</th><th>Justificativa</th></tr></thead><tbody>'+rows.map(d=>
   '<tr><td>'+date(d.created_at)+'</td><td>'+strategy(d.strategy)+'</td><td>'+safe(String(d.mint).slice(0,8))+'…</td><td>'+safe(d.decision)+'</td><td>'+safe(d.reason)+'</td></tr>').join('')+'</tbody></table></div>';
 }
@@ -73,8 +73,8 @@ function redraw(){
  status.textContent='Simulação fictícia ativa · '+(payload.aiConfigured?'IA ativada':'modo gratuito: apenas regras, sem IA')+' · Consulta '+date(payload.checkedAt);
  if(metrics)metrics.innerHTML=cards();
  if(diag)diag.innerHTML=diagnosticsHTML();
- if(open)open.innerHTML=(payload.positions||[]).length?'<div class="agent-tablewrap"><table class="paper-table"><thead><tr><th>Estratégia</th><th>Moeda</th><th>Investido</th><th>Preço de entrada</th><th>Aberta em</th></tr></thead><tbody>'+payload.positions.map(p=>
-  '<tr><td>'+strategy(p.strategy)+'</td><td>'+safe(p.symbol||String(p.mint).slice(0,8))+'</td><td>'+usd(p.invested_usd)+'</td><td>'+Number(p.entry_price).toPrecision(5)+'</td><td>'+date(p.opened_at)+'</td></tr>').join('')+'</tbody></table></div>':'<p class="cloud-empty">Nenhuma posição aberta.</p>';
+ if(open)open.innerHTML=(payload.positions||[]).length?'<div class="agent-tablewrap"><table class="paper-table"><thead><tr><th>Estratégia</th><th>Moeda</th><th>Classificação</th><th>Investido</th><th>Preço de entrada</th><th>Aberta em</th></tr></thead><tbody>'+payload.positions.map(p=>
+  '<tr><td>'+strategy(p.strategy)+'</td><td>'+safe(p.symbol||String(p.mint).slice(0,8))+'</td><td>'+safe(classFor({strategy:p.strategy,mint:p.mint,action:'sell',created_at:p.opened_at}))+'</td><td>'+usd(p.invested_usd)+'</td><td>'+Number(p.entry_price).toPrecision(5)+'</td><td>'+date(p.opened_at)+'</td></tr>').join('')+'</tbody></table></div>':'<p class="cloud-empty">Nenhuma posição aberta.</p>';
  if(history)history.innerHTML=tradesHTML();
  if(decisions)decisions.innerHTML=decisionsHTML();
  if(usage){const u=payload.usage;usage.textContent=u?
