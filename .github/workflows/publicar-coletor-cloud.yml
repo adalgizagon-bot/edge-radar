@@ -82,7 +82,12 @@ jobs:
           assert x.get('aiConfigured') is False, "IA precisa estar desligada."
           assert isinstance(x.get('accounts'), list), "Contas simuladas inválidas."
           assert isinstance(x.get('trades'), list), "Movimentações simuladas inválidas."
-          print("Teste gratuito validado; IA desligada; contas simuladas:",len(x['accounts']),"movimentações:",len(x['trades']))
+          profiles=x.get('profiles') or {}
+          scalp=profiles.get('scalp') or {}
+          assert scalp.get('targetPct') == 5, "Perfil Edge Scalp nao publicado."
+          assert scalp.get('holdMinutes') == 6, "Prazo Edge Scalp incorreto."
+          assert (x.get('fees') or {}).get('stressEachSidePct') == 2.5, "Cenario de custos ausente."
+          print("Teste gratuito validado; IA desligada; Edge Scalp disponivel; movimentos:",len(x['trades']))
           PY
       - name: Próximos passos
         run: |
