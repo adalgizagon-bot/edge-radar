@@ -178,16 +178,41 @@ function dedupePools(pools){
 /* Prioritize open paper positions, then return partial successes. A single failed batch
  * must not make valid prices from other batches disappear.
  */
-async function fetchPrices(mints,fetcher){
- const out=[],errors=[];
+async function fetchPrices(env,at,mints,fetcher){
+ const out=[],errors=[],warnings=[];
+ const health=await env.DB.prepare("SELECT * FROM source_health WHERE source='dex_pairs'").first();
+ if(health&&at<Number(health.next_attempt||0)){
+  warnings.push('DEX Screener em pausa por limite; priorizando cotacoes recentes da GeckoTerminal');
+  return {prices:new Map(),errors,warnings};
+ }
+ let rateLimited=false,lastError=null,success=0;
  for(let i=0;i<mints.length;i+=30){
   try{
    const rows=await fetchJSON(SETTINGS.dex+mints.slice(i,i+30).join(','),fetcher);
-   if(!Array.isArray(rows))throw new Error('Formato inválido do DEX Screener');
-   out.push(...rows);
-  }catch(e){errors.push('lote '+(Math.floor(i/30)+1)+': '+String(e?.message||e).slice(0,95));}
+   if(!Array.isArray(rows))throw new Error('Formato invalido do DEX Screener');
+   out.push(...rows);success++;
+  }catch(e){
+   errors.push('lote '+(Math.floor(i/30)+1)+': '+String(e?.message||e).slice(0,95));
+   if(e?.status===429)rateLimited=true;
+   lastError=e;
+   if(rateLimited)break;
+  }
  }
- return {prices:selectDexPairs(out),errors};
+ if(rateLimited){
+  const failures=Math.min(30,Number(health?.failures||0)+1);
+  const next=at+geckoDelay(429,failures,lastError?.retryAfterMs||0);
+  await env.DB.prepare("INSERT INTO source_health (source,next_attempt,failures,last_status,last_success,last_error) "+
+   "VALUES ('dex_pairs',?,?,?,?,?) ON CONFLICT(source) DO UPDATE SET "+
+   "next_attempt=excluded.next_attempt,failures=excluded.failures,last_status=429,last_error=excluded.last_error")
+   .bind(next,failures,429,Number(health?.last_success||0)||null,'HTTP 429').run();
+  warnings.push('DEX Screener HTTP 429; aguardar '+Math.ceil((next-at)/60000)+' min');
+ }else if(success){
+  await env.DB.prepare("INSERT INTO source_health (source,next_attempt,failures,last_status,last_success,last_error) "+
+   "VALUES ('dex_pairs',?,0,200,?,'') ON CONFLICT(source) DO UPDATE SET "+
+   "next_attempt=excluded.next_attempt,failures=0,last_status=200,last_success=excluded.last_success,last_error=''")
+   .bind(at+60_000,at).run();
+ }
+ return {prices:selectDexPairs(out),errors,warnings};
 }
 async function makeCheckpoints(db,signal,now,price){
  let changed=0;
@@ -247,11 +272,17 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  }
  const mints=[...new Set([...paperOpenMints,...due.map(x=>x.mint),...candidates.map(x=>x.mint)])].slice(0,SETTINGS.maxMintsPerScan);
  let prices=new Map();
+ const geckoFresh=selectGeckoPairs(discovered.freshPools,at);
+ let dexPrices=new Map();
  if(mints.length){
-  const outcome=await fetchPrices(mints,fetcher);
-  prices=outcome.prices;
-  if(outcome.errors.length)errors.push('DEX Screener parcial: '+outcome.errors.join('; '));
+  const outcome=await fetchPrices(env,at,mints,fetcher);
+  dexPrices=outcome.prices;
+  warnings.push(...outcome.warnings);
+  if(outcome.errors.length)warnings.push('DEX Screener parcial: '+outcome.errors.join('; '));
  }
+ prices=mergeFreshPairs(dexPrices,geckoFresh);
+ if(mints.length&&!mints.some(m=>prices.has(m)))errors.push('Nenhuma cotacao atual disponivel nas fontes');
+
  let checkpoints=0;
  for(const signal of active){
   const p=prices.get(signal.mint),price=value(p?.priceUsd);
