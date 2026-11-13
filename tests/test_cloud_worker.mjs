@@ -13,12 +13,13 @@ const gecko=()=>({
 const goodPair=(price='0.01')=>({chainId:'solana',dexId:'pumpswap',baseToken:{address:mint,name:'Test Token',symbol:'TEST'},priceUsd:price,
  liquidity:{usd:25000},volume:{m5:20000},txns:{m5:{buys:60,sells:20}},priceChange:{m5:12},pairCreatedAt:t0-60000});
 class FakeDB {
- constructor(){this.rows=[];this.state=null;this.daily=new Map();this.risks=new Map();this.quotes=new Map();this.evidence=[]}
+ constructor(){this.rows=[];this.state=null;this.daily=new Map();this.risks=new Map();this.quotes=new Map();this.evidence=[];this.sourceHealth=null}
  prepare(sql){return {bind:(...args)=>({
   all:async()=>{
    if(sql.includes('WHERE completed=0'))return {results:this.rows.filter(r=>!r.completed&&r.triggered_at>args[0]).sort((a,b)=>b.triggered_at-a.triggered_at).slice(0,args[1])};
    if(sql.startsWith('SELECT mint FROM'))return {results:this.rows.filter(r=>r.triggered_at>args[0]&&args.slice(1).includes(r.mint)).map(r=>({mint:r.mint}))};
    if(sql.startsWith('SELECT * FROM signals WHERE triggered_at<'))return {results:this.rows.filter(r=>r.triggered_at<args[0]).sort((a,b)=>b.triggered_at-a.triggered_at).slice(0,args[1])};
+   if(sql.startsWith('SELECT mint,name,symbol FROM risk_watch'))return {results:[...this.risks.values()].filter(x=>x.assessed_at>args[0]).slice(0,22)};
    if(sql.startsWith('SELECT mint,pool_price,pool_liquidity FROM risk_watch'))return {results:args.map(m=>this.risks.get(m)).filter(Boolean)};
    if(sql.startsWith('SELECT * FROM risk_watch'))return {results:[...this.risks.values()]};
    if(sql.startsWith('SELECT e.risk_level')){const groups=new Map();for(const ev of this.evidence){const signal=this.rows.find(x=>x.id===ev.signal_id);if(!signal)continue;const g=groups.get(ev.risk_level)||{level:ev.risk_level,signals:0,measured5:0,missing5:0,positive5:0,mean_change5:null,_sum:0};g.signals++;if(signal.m5_status==='measured'){g.measured5++;g.positive5+=signal.m5_return>0?1:0;g._sum+=signal.m5_return;g.mean_change5=g._sum/g.measured5;}if(signal.m5_status==='missing')g.missing5++;groups.set(ev.risk_level,g);}return {results:[...groups.values()]};}
@@ -28,6 +29,7 @@ class FakeDB {
   },
   run:async()=>{
    if(sql.startsWith('UPDATE signals SET completed=1,')){for(const r of this.rows.filter(x=>!x.completed&&x.triggered_at<args[0])){r.completed=1;for(const key of ['m1','m5','m15','m30'])r[key+'_status'] ||= 'missing';}return {success:true};}
+   if(sql.startsWith('INSERT INTO source_health')){if(sql.includes("0,200")){this.sourceHealth={source:'gecko',next_attempt:args[0],failures:0,last_status:200,last_success:args[1],last_error:''};}else{this.sourceHealth={source:'gecko',next_attempt:args[0],failures:args[1],last_status:args[2],last_success:args[3]||null,last_error:args[4]};}return {success:true};}
    if(sql.includes('INSERT OR IGNORE INTO signal_evidence')){const [signal_id,mint,captured_at,risk_level,organic_score,buy_usd,sell_usd,liquidity,reasons,quote_status]=args;this.evidence.push({signal_id,mint,captured_at,risk_level,organic_score,buy_usd,sell_usd,liquidity,reasons,quote_status});return {success:true};}
    if(sql.includes('INSERT INTO exit_quotes')){const cols=['mint','checked_at','stake_usd','status','estimated_sol','estimated_usd','recovery_pct','router','error'];const row=Object.fromEntries(cols.map((c,i)=>[c,args[i]]));this.quotes.set(row.mint,row);return {success:true};}
    if(sql.includes('INSERT INTO risk_watch')){const cols=['mint','name','symbol','assessed_at','level','market_score','organic_score','is_verified','top_holders','buy_usd','sell_usd','flow_ratio','pool_price','pool_liquidity','jupiter_liquidity','change_price','change_liquidity','reasons','exit_quote_verified','entry_allowed'];const row=Object.fromEntries(cols.map((c,i)=>[c,args[i]]));this.risks.set(row.mint,row);return {success:true};}
@@ -46,13 +48,16 @@ class FakeDB {
   },
   first:async()=>{
    if(sql.includes('FROM collector_state'))return this.state;
+   if(sql.includes('FROM source_health'))return this.sourceHealth;
    if(sql.includes('COUNT(*)')){const measured=this.rows.filter(x=>x.m5_status==='measured');return {total:this.rows.length,day:this.rows.length,m5measured:measured.length,m5positive:measured.filter(x=>x.m5_return>0).length,m5avg:measured.reduce((sum,x)=>sum+x.m5_return,0)/(measured.length||1)};}
    throw Error('Unknown first '+sql);
   }
  })};}
 }
 const mockFetch=(url)=>{
- if(url.includes('geckoterminal'))return Promise.resolve({ok:true,json:async()=>gecko()});
+ if(url.includes('geckoterminal')){mockFetch.geckoCalls=(mockFetch.geckoCalls||0)+1;return Promise.resolve(mockFetch.geckoRateLimited?{ok:false,status:429,headers:{get:()=>null}}:{ok:true,json:async()=>gecko()});}
+ if(url.includes('api.jup.ag/tokens/v2/recent'))return Promise.resolve({ok:true,json:async()=>[{id:mint,name:'Test Token',symbol:'TEST',usdPrice:.01,decimals:6,organicScore:85,isVerified:true,liquidity:25000,audit:{mintAuthorityDisabled:true,freezeAuthorityDisabled:true,topHoldersPercentage:8},stats5m:{buyVolume:30000,sellVolume:14000,numBuys:60,numSells:20},firstPool:{createdAt:new Date(t0-3600000).toISOString()}},{id:'So11111111111111111111111111111111111111112',usdPrice:100,decimals:9}]});
+ if(url.includes('api.dexscreener.com/token-profiles/latest/v1'))return Promise.resolve({ok:true,json:async()=>[]});
  if(url.includes('api.jup.ag/tokens/v2/search'))return Promise.resolve({ok:true,json:async()=>[{id:'So11111111111111111111111111111111111111112',usdPrice:100,decimals:9},{id:mint,usdPrice:.01,decimals:6,name:'Test Token',symbol:'TEST',isVerified:true,organicScore:85,liquidity:25000,audit:{mintAuthorityDisabled:true,freezeAuthorityDisabled:true,topHoldersPercentage:8},stats5m:{buyVolume:30000,sellVolume:14000,numBuys:60,numSells:20},firstPool:{createdAt:new Date(t0-3600000).toISOString()}}]});
  if(url.includes('api.jup.ag/swap/v2/order'))return Promise.resolve({ok:true,json:async()=>({outAmount:'150000000',router:'metis',transaction:null})});
  if(url.includes('dexscreener'))return Promise.resolve({ok:true,json:async()=>[goodPair(mockFetch.price||'0.01')]});
@@ -104,4 +109,18 @@ test('Risk API shows reasons and never releases auto-entry',async()=>{
  assert.equal(data.risk[0].level,'watch');assert.equal(data.risk[0].entry_allowed,0);
  const bad=await handle(new Request('https://worker.example/api/risk?mint=abc'),env);assert.equal(bad.status,400);
  const q=await handle(new Request('https://worker.example/api/exit-quotes?mint='+mint),env);assert.equal(q.status,200);assert.equal((await q.json()).quotes[0].estimated_sol,.15);
+});
+
+test('429 GeckoTerminal enters cooldown but risk is populated from Jupiter recent and DEX',async()=>{
+ const db=new FakeDB(),env={DB:db};mockFetch.geckoRateLimited=true;mockFetch.geckoCalls=0;
+ try{
+  const first=await collect(env,{clock:()=>t0,fetcher:mockFetch});
+  assert.equal(db.sourceHealth.last_status,429);
+  assert.ok(db.sourceHealth.next_attempt>=t0+5*60000);
+  assert.ok(first.warnings.some(x=>x.includes('GeckoTerminal')));
+  assert.ok(db.risks.has(mint),'Triagem should not remain empty on HTTP 429');
+  assert.equal(db.state.last_ok,1,'Alternative discovery does not make whole collector offline');
+  await collect(env,{clock:()=>t0+60000,fetcher:mockFetch});
+  assert.equal(mockFetch.geckoCalls,1,'Do not hammer Gecko every minute during cooldown');
+ }finally{mockFetch.geckoRateLimited=false;}
 });
