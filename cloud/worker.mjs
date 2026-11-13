@@ -231,6 +231,8 @@ async function collect(env,{clock=Date.now,fetcher=fetch}={}){
  for(const c of candidates){
   const pair=prices.get(c.mint);
   const check=assessRisk({mint:c.mint,pair:pair||null,token:jupiter.get(c.mint)||null,previous:prevRisk.get(c.mint),now:at});
+  if(c.source==='dex_profile_promotional')check.reasons.push('Descoberta via perfil potencialmente promocional; nao comprova procura organica');
+  if(c.source==='sinal_historico')check.reasons.push('Reavaliacao de moeda do historico; nao e novo lancamento');
   riskAtSignal.set(c.mint,check);
   if(check.level==='blocked')blocked++;
   if(check.level==='unverified')unverified++;
