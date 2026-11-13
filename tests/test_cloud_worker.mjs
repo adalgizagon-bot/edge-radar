@@ -45,7 +45,8 @@ class FakeDB {
     return {success:true};}
    if(sql.startsWith('INSERT INTO token_universe')){
     const keys=['mint','name','symbol','source','first_seen','first_pool_at','last_observed_at','last_seen',
-     'pool_address','dex','price_usd','liquidity_usd','volume5m_usd','change5m_pct','buys5m','sells5m',
+     'pool_address','dex','price_usd','liquidity_usd','volume5m_usd','volume24h_usd',
+     'change5m_pct','change1h_pct','change24h_pct','market_cap_usd','buys5m','sells5m',
      'score','best_score','stage','risk_level','price_source'];
     const row=Object.fromEntries(keys.map((k,i)=>[k,args[i]]));
     const old=this.universe.get(row.mint);this.universe.set(row.mint,{...old,...row,
