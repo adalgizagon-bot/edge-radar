@@ -68,6 +68,14 @@ jobs:
             python3 -c 'import json; json.load(open("/tmp/edge-health.json"))'
           done
           echo "As rotas respondem JSON valido no Worker publicado."
+      - name: Conferir laboratorio independente da Vercel
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --retry 4 --retry-all-errors --retry-delay 2 --max-time 20 "https://edge-radar-cloud.adalgizagon.workers.dev/lab" -o /tmp/edge-lab.html
+          grep -q "Edge Scalp Rápido" /tmp/edge-lab.html
+          grep -q "fetch('/api/paper'" /tmp/edge-lab.html
+          echo "Laboratorio gratuito da Cloudflare publicado."
       - name: Confirmar que o experimento gratuito nao chama IA
         shell: bash
         run: |
