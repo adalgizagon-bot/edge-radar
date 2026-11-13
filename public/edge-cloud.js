@@ -28,7 +28,7 @@ function card(s){
 }
 function redraw(){
  const st=$('cloudStatus'),time=$('cloudLastUpdated'),list=$('cloudSignalGrid'),count=$('cloudSignalCount'),sum=$('cloudStats');
- if(st)st.textContent=!api?'Não configurado':error?'Erro: '+error:health?.online?'Coletor na nuvem ativo':health?.running?'Coletor com erro: '+String(health?.latest?.error||'verifique logs').slice(0,80):connected?'Coletor sem batimento recente':'Conectando…';
+ if(st)st.textContent=!api?'Não configurado':error?'Erro: '+error:health?.online?(health?.sourceHealth?.gecko?.last_status===429?'Coletor ativo · GeckoTerminal em pausa; fontes alternativas':'Coletor na nuvem ativo'):health?.running?'Coletor com erro: '+String(health?.latest?.error||'verifique logs').slice(0,80):connected?'Coletor sem batimento recente':'Conectando…';
  if(time)time.textContent=health?.latest?.last_run?'Última verificação '+date(health.latest.last_run):'—';
  if(count)count.textContent=rows.length+' registros carregados';
  const more=$('cloudLoadMore');if(more)more.disabled=!api||rows.length===0;
