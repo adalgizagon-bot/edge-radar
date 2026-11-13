@@ -11,20 +11,22 @@ const strategy=x=>x==='ai'?'Agente IA':'Regras fixas';
 let payload=null,last=0,loading=false,error='';
 function api(){try{const stored=localStorage.getItem('edgeradar.cloud.api.v1')||API_DEFAULT;const u=new URL(stored);return u.protocol==='https:'?u.origin:API_DEFAULT}catch{return API_DEFAULT}}
 function cards(){
- const ac=payload?.accounts||[],positions=payload?.positions||[],trades=payload?.trades||[];
+ const accounts=payload?.accounts||[],positions=payload?.positions||[],performance=payload?.performance||[];
  return ['baseline','ai'].map(s=>{
-  const a=ac.find(x=>x.strategy===s),open=positions.filter(x=>x.strategy===s);
-  const sold=trades.filter(x=>x.strategy===s&&x.action==='sell'),wins=sold.filter(x=>Number(x.pnl_usd)>0).length;
-  const realized=sold.reduce((v,x)=>v+(Number(x.pnl_usd)||0),0);
+  const a=accounts.find(x=>x.strategy===s),open=positions.filter(x=>x.strategy===s);
+  const pf=performance.find(x=>x.strategy===s)||{},sold=Number(pf.sells)||0,wins=Number(pf.wins)||0;
+  const realized=Number(pf.realized_pnl)||0;
   const invested=open.reduce((v,x)=>v+(Number(x.invested_usd)||0),0);
   const active=s==='ai'&&!payload.aiConfigured?'Inativo: configurar IA':s==='baseline'?'Regras automáticas':'Modelo conectado';
   return '<article class="agent-card"><div class="agent-card-header"><div><small>'+(s==='ai'?'MODELO DE IA':'REFERÊNCIA')+'</small><h3>'+strategy(s)+'</h3></div><span>'+safe(active)+'</span></div>'+
    '<div class="agent-metrics"><div><label>Saldo disponível</label><strong>'+usd(a?.cash_usd??null)+'</strong></div>'+
+   '<div><label>Patrimônio estimado*</label><strong>'+usd(a?.equity_usd??null)+'</strong></div>'+
    '<div><label>Lucro realizado*</label><strong class="'+(realized>=0?'positive':'negative')+'">'+(a?usd(realized):'—')+'</strong></div>'+
+   '<div><label>Lucro não realizado*</label><strong>'+usd(a?.unrealized_pnl??null)+'</strong></div>'+
    '<div><label>Posições abertas</label><strong>'+open.length+'</strong></div>'+
    '<div><label>Capital em aberto</label><strong>'+usd(invested)+'</strong></div>'+
-   '<div><label>Vendas simuladas</label><strong>'+sold.length+'</strong></div>'+
-   '<div><label>Taxa de acerto*</label><strong>'+(sold.length?pct(100*wins/sold.length):'—')+'</strong></div></div></article>';
+   '<div><label>Vendas simuladas</label><strong>'+sold+'</strong></div>'+
+   '<div><label>Taxa de acerto*</label><strong>'+(sold?pct(100*wins/sold):'—')+'</strong></div></div></article>';
  }).join('');
 }
 function tradesHTML(){
