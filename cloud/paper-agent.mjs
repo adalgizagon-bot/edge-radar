@@ -2,6 +2,8 @@
  * Prices are observed DEX quotes, not executable fills. Fail closed on missing data.
  */
 import {SCALP,scalpCandidate,nextScalpTracking,scalpExit} from './scalp.mjs';
+import {V2,scalpV2Candidate,scalpV2Exit} from './scalp-v2.mjs';
+import {reasonGroup} from './audit.mjs';
 export const PAPER={initial:1000,stake:20,fee:0.01,stressFee:0.025,maxPositions:3,stop:-0.07,
   baselineTake:0.12,aiTake:0.20,maxHoldMs:20*60_000,reentryMs:60*60_000,
   maxAiCallsPerDay:480};
@@ -79,9 +81,16 @@ async function buy(db,accountRow,strategy,c,at,reason){
   db.prepare('INSERT INTO paper_trades(id,strategy,mint,symbol,action,quantity,price_usd,fee_usd,cash_usd,pnl_usd,reason,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')
    .bind(id,strategy,c.mint,String(c.symbol||'').slice(0,25),'buy',qty,price,fee,-PAPER.stake,null,short(reason),at),
   db.prepare('INSERT INTO paper_entry_evidence(buy_id,strategy,mint,created_at,tier,risk_level,quote_status,score,liquidity) VALUES(?,?,?,?,?,?,?,?,?)')
-   .bind(id,strategy,c.mint,at,c.tier,c.risk?.level||'unverified',c.quote||'not_checked',c.score||0,num(c.pair?.liquidity?.usd))
+   .bind(id,strategy,c.mint,at,c.tier,c.risk?.level||'unverified',c.quote||'not_checked',c.score||0,num(c.pair?.liquidity?.usd)),
+  db.prepare('INSERT INTO paper_entry_features(buy_id,strategy,mint,opened_at,score,liquidity,volume5m,change5m,buys5m,sells5m,age_minutes,organic,top_holders,quote_status,tier) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)')
+   .bind(id,strategy,c.mint,at,num(c.score),num(c.pair?.liquidity?.usd),
+    num(c.pair?.volume?.m5),num(c.pair?.priceChange?.m5),num(c.pair?.txns?.m5?.buys),
+    num(c.pair?.txns?.m5?.sells),num(c.pair?.pairCreatedAt)!==null?Math.max(0,(at-c.pair.pairCreatedAt)/60000):null,
+    num(c.risk?.organic),num(c.risk?.top),c.quote||'not_checked',c.tier||'exploratory'),
+  db.prepare('INSERT OR IGNORE INTO paper_quote_samples(strategy,mint,opened_at,observed_at,price_usd) VALUES(?,?,?,?,?)')
+   .bind(strategy,c.mint,at,at,price)
  ];
- if(strategy==='scalp')requests.push(db.prepare('INSERT INTO paper_scalp_tracking(strategy,mint,peak_price,last_price,weak_ticks,sample_at) VALUES(?,?,?,?,0,?)')
+ if(strategy==='scalp'||strategy==='scalp_v2')requests.push(db.prepare('INSERT INTO paper_scalp_tracking(strategy,mint,peak_price,last_price,weak_ticks,sample_at) VALUES(?,?,?,?,0,?)')
   .bind(strategy,c.mint,price,price,at));
  await db.batch(requests);
  accountRow.cash_usd-=PAPER.stake;
@@ -94,9 +103,15 @@ async function sell(db,accountRow,strategy,p,price,at,reason){
   db.prepare('DELETE FROM paper_positions WHERE strategy=? AND mint=?').bind(strategy,p.mint),
   db.prepare('UPDATE paper_accounts SET cash_usd=cash_usd+?,updated_at=? WHERE strategy=?').bind(payout,at,strategy),
   db.prepare('INSERT INTO paper_trades(id,strategy,mint,symbol,action,quantity,price_usd,fee_usd,cash_usd,pnl_usd,reason,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')
-   .bind(strategy+':sell:'+p.mint+':'+at,strategy,p.mint,p.symbol,'sell',p.quantity,price,fee,payout,pnl,short(reason),at)
+   .bind(strategy+':sell:'+p.mint+':'+at,strategy,p.mint,p.symbol,'sell',p.quantity,price,fee,payout,pnl,short(reason),at),
+  db.prepare('INSERT INTO paper_exit_observations(sell_id,strategy,mint,entry_at,closed_at,elapsed_ms,previous_quote_lag_ms,price_return_pct,stop_overshoot_pct,reason_group) VALUES(?,?,?,?,?,?,?,?,?,?)')
+   .bind(strategy+':sell:'+p.mint+':'+at,strategy,p.mint,p.opened_at,at,at-p.opened_at,
+     num(p.last_quote_at)!==null&&at>=p.last_quote_at?at-p.last_quote_at:null,
+     100*(price/p.entry_price-1),
+     reasonGroup(reason)==='stop'?Math.max(0,100*((strategy==='scalp'?SCALP.stop:strategy==='scalp_v2'?V2.stop:PAPER.stop)-(price/p.entry_price-1))):null,
+     reasonGroup(reason))
  ];
- if(strategy==='scalp')requests.push(db.prepare('DELETE FROM paper_scalp_tracking WHERE strategy=? AND mint=?').bind(strategy,p.mint));
+ if(strategy==='scalp'||strategy==='scalp_v2')requests.push(db.prepare('DELETE FROM paper_scalp_tracking WHERE strategy=? AND mint=?').bind(strategy,p.mint));
  await db.batch(requests);
  accountRow.cash_usd+=payout;return true;
 }
