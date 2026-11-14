@@ -1,0 +1,6 @@
+{
+  "id": 3,
+  "started_at": 1794665700,
+  "status": "partial",
+  "data": "{\"discovery_attempted\":true,\"discovery_http_status\":429,\"discovery_received_pools\":0,\"discovery_received_contracts\":0,\"discovery_candidates\":[],\"dex_attempted\":false,\"dex_http_status\":null,\"dex_pairs_received\":0,\"observations\":0,\"planned\":[],\"attempted\":[],\"errors\":[{\"provider\":\"geckoterminal\",\"status\":429}],\"research_candidates\":0,\"research_admitted\":0,\"outcomes_finalized\":0,\"usage_before_commit\":{\"reads\":6,\"writes\":1,\"calls\":2,\"bytes\":102400,\"measured\":true},\"fast_limit\":6,\"burst_until\":0,\"burst_reserved_minutes\":0,\"between_samples\":\"unknown\"}"
+}

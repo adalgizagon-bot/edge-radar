@@ -6,9 +6,10 @@ workers_dev = false
 [vars]
 MONITOR_ENABLED = "false"
 # Explicit second session, initially closed; never roll over to another authorization.
-PILOT_AUTHORIZATION_ID = "d35d8e42-4d3d-4a4e-8240-de1f826aff2a"
+PILOT_AUTHORIZATION_ID = "f76a47ef-7d0d-45ae-89ef-3f736b112307"
 # A one-shot integration probe must be requested explicitly; never runs by default.
 SHUTDOWN_PROBE_ENABLED = "false"
+PILOT_MAX_SECONDS = "600"
 
 [triggers]
 crons = ["* * * * *"]

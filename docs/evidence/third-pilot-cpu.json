@@ -1,0 +1,57 @@
+{
+  "worker": "edge-radar-monitor-staging",
+  "from": "2026-11-14T14:14:50+00:00",
+  "to": "2026-11-14T14:16:24+00:00",
+  "available": true,
+  "cpu_unit": "microseconds",
+  "source": "workersInvocationsAdaptive (adaptive sampling; delayed analytics)",
+  "minutes": [
+    {
+      "dimensions": {
+        "datetimeMinute": "2026-11-14T14:15:00Z",
+        "scriptName": "edge-radar-monitor-staging",
+        "scriptVersion": "388fc444-358b-4f76-a320-98cc9dfad7d0",
+        "status": "success"
+      },
+      "max": {
+        "cpuTime": 10417,
+        "startupCpuTimeUs": 18436
+      },
+      "sum": {
+        "cpuTimeUs": 10417,
+        "errors": 0,
+        "requests": 1,
+        "startupCpuTimeUs": 18436,
+        "subrequests": 1
+      }
+    }
+  ],
+  "summary": [
+    {
+      "dimensions": {
+        "scriptName": "edge-radar-monitor-staging",
+        "scriptVersion": "388fc444-358b-4f76-a320-98cc9dfad7d0",
+        "status": "success"
+      },
+      "max": {
+        "cpuTime": 10417,
+        "startupCpuTimeUs": 18436
+      },
+      "quantiles": {
+        "cpuTimeP50": 10417,
+        "cpuTimeP95": 10417,
+        "cpuTimeP99": 10417,
+        "startupCpuTimeUsP50": 18436,
+        "startupCpuTimeUsP95": 18436,
+        "startupCpuTimeUsP99": 18436
+      },
+      "sum": {
+        "cpuTimeUs": 10417,
+        "errors": 0,
+        "requests": 1,
+        "startupCpuTimeUs": 18436,
+        "subrequests": 1
+      }
+    }
+  ]
+}

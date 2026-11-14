@@ -1,0 +1,1 @@
+{"ok":true,"runtime":"workerd","cases":[{"case":"200","pass":true},{"case":"3xx","pass":true,"status":302},{"case":"timeout","pass":true,"error_name":"TimeoutError","error_kind":"request_timeout","failure_phase":"gecko_transport"},{"case":"network","pass":true,"error_name":"Error","error_kind":"network_failure","failure_phase":"gecko_transport"}],"externalMarketRequests":0}

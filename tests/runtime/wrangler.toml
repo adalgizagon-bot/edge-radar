@@ -1,0 +1,4 @@
+name = "edge-radar-local-transport-fixture"
+main = "transport-fixture.mjs"
+compatibility_date = "2026-11-13"
+workers_dev = false

@@ -1,0 +1,176 @@
+{
+  "at": "2026-11-14T14:19:33.484815+00:00",
+  "bindings": [
+    {
+      "database_id": "9f2f5da7-fa94-4a66-afc8-664e958cd80e",
+      "id": "9f2f5da7-fa94-4a66-afc8-664e958cd80e",
+      "name": "MONITOR_DB",
+      "type": "d1"
+    },
+    {
+      "name": "MONITOR_ENABLED",
+      "text": "false",
+      "type": "plain_text"
+    },
+    {
+      "name": "PILOT_AUTHORIZATION_ID",
+      "text": "f76a47ef-7d0d-45ae-89ef-3f736b112307",
+      "type": "plain_text"
+    },
+    {
+      "name": "PILOT_MAX_SECONDS",
+      "text": "600",
+      "type": "plain_text"
+    },
+    {
+      "name": "SHUTDOWN_PROBE_ENABLED",
+      "text": "false",
+      "type": "plain_text"
+    }
+  ],
+  "third_authorization": {
+    "id": "f76a47ef-7d0d-45ae-89ef-3f736b112307",
+    "purpose": "edge-radar-staging",
+    "shutdown_test_id": "2c4a7d15-0e96-4d45-bd19-6ff209cdbace",
+    "kind": "pilot",
+    "started_at": 1794665690,
+    "expires_at": 1794666290,
+    "consumed": 1,
+    "activated_at": 1794665690,
+    "stopped_at": 1794665784,
+    "stop_reason": "pilot3_cpu_budget",
+    "probe_requested": 0,
+    "probe_completed": 0,
+    "probe_result": null,
+    "created_at": 1794665616
+  },
+  "counts_integrity": {
+    "result": [
+      {
+        "results": [
+          {
+            "contracts": 0
+          }
+        ],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.2523
+          },
+          "duration": 0.2523,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 0,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      },
+      {
+        "results": [
+          {
+            "observations": 0
+          }
+        ],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.2544
+          },
+          "duration": 0.2544,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 0,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      },
+      {
+        "results": [
+          {
+            "historical_runs": 3
+          }
+        ],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.0965
+          },
+          "duration": 0.0965,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 3,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      },
+      {
+        "results": [
+          {
+            "quick_check": "ok"
+          }
+        ],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.6531
+          },
+          "duration": 0.6531,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 45,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      },
+      {
+        "results": [],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.1001
+          },
+          "duration": 0.1001,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 5,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      }
+    ],
+    "errors": [],
+    "messages": [],
+    "success": true
+  },
+  "previous_authorizations_and_history_unchanged": true
+}

@@ -1340,3 +1340,38 @@ test("Workers-compatible manual redirects stop without following or recording ob
     }
   }
 });
+
+test("per-session 600-second ceiling fails closed and error diagnostics never store raw secrets", async () => {
+  const s = setup();
+  try {
+    assert.equal(
+      (
+        await run({ ...s.env, PILOT_MAX_SECONDS: "600" }, () => {
+          throw Error("overlong authorization");
+        })
+      ).status,
+      "pilot_not_authorized",
+    );
+    assert.equal(
+      (
+        await run({ ...s.env, PILOT_MAX_SECONDS: "invalid" }, () => {
+          throw Error("invalid ceiling");
+        })
+      ).status,
+      "pilot_not_authorized",
+    );
+    const { failureDetails } = await import("../cloud-monitor/transport.mjs");
+    const details = failureDetails(
+      new TypeError(
+        "fetch failed https://example.invalid/?token=SYNTHETIC_SECRET Authorization=SECRET",
+      ),
+      { dex_attempted: true, dex_http_status: null },
+    );
+    assert.equal(details.error_kind, "network_failure");
+    assert.equal(details.failure_phase, "dex_transport");
+    assert.ok(!JSON.stringify(details).includes("SECRET"));
+    assert.ok(!JSON.stringify(details).includes("https"));
+  } finally {
+    s.clean();
+  }
+});

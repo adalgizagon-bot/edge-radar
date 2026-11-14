@@ -1,3 +1,4 @@
+import { boundedRequestOptions, failureDetails } from "./transport.mjs";
 import { authorization } from "./authorization.mjs";
 import { DUE_COHORT } from "./schedule.mjs";
 // Staging sampler only. No production bindings, migrations, trades or public writes.
@@ -58,6 +59,8 @@ export async function run(
 ) {
   if (env.MONITOR_ENABLED !== "true") return { status: "disabled" };
   const auth = authorization(env);
+  const maxDuration =
+    env.PILOT_MAX_SECONDS === undefined ? 1800 : Number(env.PILOT_MAX_SECONDS);
   const db = env.MONITOR_DB,
     rotation = at % 180 === 0;
   const now = Math.floor(Date.now() / 1000),
@@ -121,7 +124,10 @@ export async function run(
     header.pilot_used === 1 &&
     header.pilot_start <= Math.floor(Date.now() / 1000) &&
     header.pilot_end > Math.floor(Date.now() / 1000) &&
-    header.pilot_end - header.pilot_start <= 1800;
+    Number.isInteger(maxDuration) &&
+    maxDuration > 0 &&
+    maxDuration <= 1800 &&
+    header.pilot_end - header.pilot_start <= maxDuration;
   if (header && header.pilot_end <= now) return { status: "pilot_expired" };
   if (!live()) return { status: "pilot_not_authorized" };
   const reserveSlots = rotation ? (at % 900 === 0 ? 10 : 8) : 2;
@@ -145,13 +151,7 @@ export async function run(
   const upstream = fetcher;
   fetcher = async (url, options = {}) => {
     if (!live()) throw Error("pilot_expired");
-    return upstream(url, {
-      ...options,
-      signal: AbortSignal.any([
-        ...(options.signal ? [options.signal] : []),
-        AbortSignal.timeout(Math.max(1, header.pilot_end * 1000 - Date.now())),
-      ]),
-    });
+    return upstream(url, boundedRequestOptions(options, header.pilot_end));
   };
   const owner = crypto.randomUUID();
   const lock = await meter(() =>
@@ -189,9 +189,12 @@ export async function run(
   const operations = {
     discovery_attempted: false,
     discovery_http_status: null,
+    discovery_received_pools: 0,
+    discovery_received_contracts: 0,
     discovery_candidates: [],
     dex_attempted: false,
     dex_http_status: null,
+    dex_pairs_received: 0,
   };
   let geckoAfter = at,
     dexAfter = at,
@@ -259,19 +262,26 @@ export async function run(
         const raw = await r.json();
         if (!Array.isArray(raw.data)) throw Error("invalid_gecko_schema");
         geckoFailures = 0;
+        operations.discovery_received_pools = raw.data.length;
         const candidates = [],
+          received = new Set(),
           seen = new Set(mints);
         for (const pool of raw.data) {
           const mint = pool.relationships?.base_token?.data?.id?.replace(
             /^solana_/,
             "",
           );
-          if (MINT.test(mint || "") && !seen.has(mint)) {
+          if (MINT.test(mint || "")) received.add(mint);
+          if (
+            MINT.test(mint || "") &&
+            !seen.has(mint) &&
+            candidates.length < CAPACITY.discovery
+          ) {
             seen.add(mint);
             candidates.push(mint);
-            if (candidates.length === CAPACITY.discovery) break;
           }
         }
+        operations.discovery_received_contracts = received.size;
         operations.discovery_candidates = candidates;
         if (candidates.length) {
           const known = await meter(() =>
@@ -335,6 +345,7 @@ export async function run(
         const raw = await r.json();
         if (!Array.isArray(raw)) throw Error("invalid_dex_schema");
         dexFailures = 0;
+        operations.dex_pairs_received = raw.length;
         const observedAt = Math.floor(Date.now() / 1000);
         const wanted = new Set(mints),
           winners = new Map();
@@ -592,7 +603,7 @@ export async function run(
       status: errors.length ? "partial" : "ok",
       observations: best.size,
     };
-  } catch {
+  } catch (error) {
     // Data batch is atomic. An expired owner cannot overwrite the next owner's state.
     await db.batch([
       db
@@ -603,6 +614,7 @@ export async function run(
           at,
           JSON.stringify({
             ...operations,
+            ...failureDetails(error, operations),
             error: "transport_schema_or_storage_failure",
             reads,
             writes,

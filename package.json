@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc && node scripts/build.mjs",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint web scripts tests/ui tests/helpers tests/monitor.test.mjs cloud-monitor playwright.config.mjs eslint.config.js && .runtime/venv/bin/ruff check server tests scripts && .runtime/venv/bin/ruff format --check server tests scripts",
+    "lint": "eslint web scripts tests/ui tests/helpers tests/runtime tests/monitor.test.mjs cloud-monitor playwright.config.mjs eslint.config.js && .runtime/venv/bin/ruff check server tests scripts && .runtime/venv/bin/ruff format --check server tests scripts",
     "test": "python3 -m unittest discover -s tests -v",
     "test:ui": "playwright test",
     "dev": "python3 -m server.app",
