@@ -26,6 +26,10 @@ type Check = {
   change: string;
 };
 type Assessment = {
+  short_window?: {
+    elapsed_seconds: Nullable;
+    changes_pct: Record<string, Nullable>;
+  };
   state: string;
   label: string;
   scores: Record<string, Nullable>;
@@ -152,7 +156,43 @@ type Source = {
   requests?: number;
   error: string | null;
 };
+type ResearchGroup = {
+  horizon: number;
+  detector_group: string;
+  cohorts: number;
+  matched: number;
+  paired_observed: number;
+  unavailable_pairs: number;
+  mean_excess_return_pct: Nullable;
+  mean_alert_return_pct: Nullable;
+  mean_control_return_pct: Nullable;
+  mean_alert_net_scenario_usd: Nullable;
+  mean_control_net_scenario_usd: Nullable;
+  contaminated_controls: number;
+};
 type Overview = {
+  research?: {
+    cohorts: number;
+    groups: ResearchGroup[];
+    recent: {
+      id: string;
+      alert_mint: string;
+      control_mint: string | null;
+      alert_at: number;
+      outcomes: {
+        role: string;
+        horizon: number;
+        status: string;
+        data: {
+          gross_return_pct: Nullable;
+          min_observed_liquidity: Nullable;
+          net_scenario_usd: Nullable;
+          executable_net_usd: Nullable;
+        };
+      }[];
+    }[];
+  };
+
   tracking?: {
     tracked: number;
     due: number;
@@ -451,8 +491,23 @@ function trackingPanel(): string {
       : '<p class="sub gap-top">Ainda sem alertas cronológicos de aceleração ou retomada. Nenhuma amostra é criada para completar janelas.</p>'
   }</div></section>`;
 }
+function researchPanel(): string {
+  const r = data!.research;
+  if (!r) return "";
+  return `<section class="panel gap-top"><div class="panel-head"><h2>Alertas e grupo de referência</h2><span class="tag">${r.cohorts} coortes prospectivas</span></div><div class="panel-body"><p class="sub">Referência escolhida no alerta, por idade do pool, liquidez, volume e cobertura de risco. Horizonte principal: 30 minutos. Sem seleção por resultados futuros.</p><p class="sub">Movimentos entre amostras são desconhecidos. Extremos amostrados não são preços executáveis; stops e saídas nesses extremos não são presumidos. Cenário líquido usa US$20, custos de 1% + slippage de 1% por lado e US$0,05 de rede por lado. Sem rotas, execução e resultado executável permanecem não verificados.</p>${r.groups.length ? `<div class="table-scroll"><table><thead><tr><th>Motor / horizonte</th><th>Pares observados / coortes</th><th>Valorização alerta / referência</th><th>Diferença observada</th><th>Líquido em cenário, alerta / referência</th><th>Pares indisponíveis</th></tr></thead><tbody>${r.groups.map((g) => `<tr><td>${esc(g.detector_group)} / ${g.horizon}m</td><td>${g.paired_observed} / ${g.cohorts}</td><td>${pct(g.mean_alert_return_pct)} / ${pct(g.mean_control_return_pct)}</td><td>${pct(g.mean_excess_return_pct)}</td><td>${usd(g.mean_alert_net_scenario_usd)} / ${usd(g.mean_control_net_scenario_usd)}</td><td>${g.unavailable_pairs}</td></tr>`).join("")}</tbody></table></div>` : '<p class="sub gap-top">Aguardando alertas reais e referências comparáveis. Sem evidência de vantagem estatística.</p>'}${
+    r.recent.length
+      ? `<h3 class="gap-top">Liquidez e observações recentes</h3>${r.recent
+          .slice(-5)
+          .map(
+            (c) =>
+              `<p class="sub">${date(c.alert_at)} · ${esc(c.alert_mint.slice(0, 8))} / ${c.control_mint ? esc(c.control_mint.slice(0, 8)) : "sem referência comparável"}<br>${c.outcomes.map((o) => `${esc(o.role)} ${o.horizon}m: ${o.status === "observed" ? pct(o.data.gross_return_pct) : esc(o.status)} · liquidez mín. amostrada ${usd(o.data.min_observed_liquidity)} · execução não verificada`).join("<br>")}</p>`,
+          )
+          .join("")}`
+      : ""
+  }</div></section>`;
+}
 function radarPage(): string {
-  return `${radarCards()}${trackingPanel()}<section class="panel"><div class="panel-head"><div><h2>Universo monitorado</h2><p class="sub">${data!.total_tokens} contratos preservados · inativos continuam no histórico</p></div><span class="tag">Solana / SPL</span></div><div class="filterbar"><label>Buscar moeda ou contrato<input id="search" type="search" value="${esc(filters.search)}" placeholder="Símbolo, nome, contrato"></label><label>Radar<select data-filter="radar">${options(
+  return `${radarCards()}${trackingPanel()}${researchPanel()}<section class="panel"><div class="panel-head"><div><h2>Universo monitorado</h2><p class="sub">${data!.total_tokens} contratos preservados · inativos continuam no histórico</p></div><span class="tag">Solana / SPL</span></div><div class="filterbar"><label>Buscar moeda ou contrato<input id="search" type="search" value="${esc(filters.search)}" placeholder="Símbolo, nome, contrato"></label><label>Radar<select data-filter="radar">${options(
     [
       ["all", "Todos os radares"],
       ["new", "A · Moedas novas"],
@@ -855,7 +910,7 @@ function renderDetail(t: Token): void {
       ["liquidity", "Liquidez (US$)"],
     ],
     "price",
-  )}</select></label></div><div id="detail-chart">${chart(h, "price")}</div></section><div class="panel-grid two"><section class="panel"><div class="panel-head"><h2>Condições para simulação</h2></div><div class="panel-body">${a.checks.map((c) => `<div class="check ${c.passed ? "pass" : ""}"><span class="symbol">${c.passed ? "✓" : c.passed === null ? "?" : "○"}</span><div><strong>${esc(c.label)}</strong><p>${c.passed ? "Condição atendida." : esc(c.change)}</p></div></div>`).join("")}<p class="validation-note">“Entrada validada” refere-se exclusivamente a uma estimativa de simulação. Não certifica segurança ou execução futura.</p><button class="primary" id="paper-open" ${!data!.paper.quote_available ? "disabled" : ""}>Avaliar rotas e simular ${usd(data!.config.paper_usd)}</button>${!data!.paper.quote_available ? '<p class="sub">Jupiter sem credencial opcional. Não há estimativa executável para abrir posição.</p>' : ""}</div></section><section class="panel"><div class="panel-head"><h2>Riscos e dados ausentes</h2></div><div class="panel-body">${a.flags.length ? `<ul class="details-list negative">${a.flags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : '<p class="sub">Nenhum alerta nas informações disponíveis. Isso não significa que o token seja seguro.</p>'}<h3 class="gap-top">Verificações pendentes</h3><ul class="details-list">${[...a.missing, ...a.limitations].map((x) => `<li>${esc(x)}</li>`).join("")}</ul>${t.security && t.security.token_program ? `<h3 class="gap-top">Observações on-chain</h3><p class="sub">Emissão: ${t.security.mint_authority ? "autoridade ativa" : "sem autoridade registrada"} · Freeze: ${t.security.freeze_authority ? "autoridade ativa" : "sem autoridade registrada"}</p><p class="sub">Maior conta: ${pct(t.security.largest_account_pct as Nullable)} do supply. Pode ser pool ou custódia; não equivale a concentração de holders.</p>` : ""}</div></section></div><section class="panel gap-top"><div class="panel-head"><h2>Identificação e sinais sociais</h2></div><div class="panel-body"><div class="row"><p class="sub">Menções: ${fmt(t.social.mentions)} · autores: ${fmt(t.social.authors)} · crescimento: ${pct(t.social.growth_pct)}</p><span class="tag">${esc(a.social_timing)}</span></div><p class="sub gap-top">${esc(t.social.limitations.join(" "))}</p><h3 class="gap-top">Histórico temporal</h3><p class="sub">Aceleração: ${esc(a.history_status?.acceleration ?? "insufficient")} · retomada: ${esc(a.history_status?.revival ?? "insufficient")} · ${a.history_status?.same_pool_spaced_samples ?? 0}/3 amostras espaçadas da mesma fonte/pool. Idade do token: não observada.</p><h3 class="gap-top">Radares</h3>${Object.entries(
+  )}</select></label></div><div id="detail-chart">${chart(h, "price")}</div></section><div class="panel-grid two"><section class="panel"><div class="panel-head"><h2>Condições para simulação</h2></div><div class="panel-body">${a.checks.map((c) => `<div class="check ${c.passed ? "pass" : ""}"><span class="symbol">${c.passed ? "✓" : c.passed === null ? "?" : "○"}</span><div><strong>${esc(c.label)}</strong><p>${c.passed ? "Condição atendida." : esc(c.change)}</p></div></div>`).join("")}<p class="validation-note">“Entrada validada” refere-se exclusivamente a uma estimativa de simulação. Não certifica segurança ou execução futura.</p><button class="primary" id="paper-open" ${!data!.paper.quote_available ? "disabled" : ""}>Avaliar rotas e simular ${usd(data!.config.paper_usd)}</button>${!data!.paper.quote_available ? '<p class="sub">Jupiter sem credencial opcional. Não há estimativa executável para abrir posição.</p>' : ""}</div></section><section class="panel"><div class="panel-head"><h2>Riscos e dados ausentes</h2></div><div class="panel-body">${a.flags.length ? `<ul class="details-list negative">${a.flags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : '<p class="sub">Nenhum alerta nas informações disponíveis. Isso não significa que o token seja seguro.</p>'}<h3 class="gap-top">Verificações pendentes</h3><ul class="details-list">${[...a.missing, ...a.limitations].map((x) => `<li>${esc(x)}</li>`).join("")}</ul>${t.security && t.security.token_program ? `<h3 class="gap-top">Observações on-chain</h3><p class="sub">Emissão: ${t.security.mint_authority ? "autoridade ativa" : "sem autoridade registrada"} · Freeze: ${t.security.freeze_authority ? "autoridade ativa" : "sem autoridade registrada"}</p><p class="sub">Maior conta: ${pct(t.security.largest_account_pct as Nullable)} do supply. Pode ser pool ou custódia; não equivale a concentração de holders.</p>` : ""}</div></section></div><section class="panel gap-top"><div class="panel-head"><h2>Identificação e sinais sociais</h2></div><div class="panel-body"><div class="row"><p class="sub">Menções: ${fmt(t.social.mentions)} · autores: ${fmt(t.social.authors)} · crescimento: ${pct(t.social.growth_pct)}</p><span class="tag">${esc(a.social_timing)}</span></div><p class="sub gap-top">${esc(t.social.limitations.join(" "))}</p><h3 class="gap-top">Movimento entre observações</h3><p class="sub">Intervalo observado: ${fmt(a.short_window?.elapsed_seconds ?? null)}s · preço ${pct(a.short_window?.changes_pct.price ?? null)} · volume móvel 5m ${pct(a.short_window?.changes_pct.volume5m ?? null)} · liquidez ${pct(a.short_window?.changes_pct.liquidity ?? null)}. Janelas móveis se sobrepõem; transações não são compradores únicos. O caminho entre pontos é desconhecido.</p><h3 class="gap-top">Histórico temporal</h3><p class="sub">Aceleração: ${esc(a.history_status?.acceleration ?? "insufficient")} · retomada: ${esc(a.history_status?.revival ?? "insufficient")} · ${a.history_status?.same_pool_spaced_samples ?? 0}/3 amostras espaçadas da mesma fonte/pool. Idade do token: não observada.</p><h3 class="gap-top">Radares</h3>${Object.entries(
     a.radars,
   )
     .map(

@@ -1,0 +1,9 @@
+{
+  "benchmark": "isolated synthetic pure logic; no D1, network or live market data",
+  "iterations": 2000,
+  "node": "v24.22.1",
+  "cpu_mean_ms": 0.4652595,
+  "wall_p50_ms": 0.35117300000001705,
+  "wall_p95_ms": 0.6067470000000412,
+  "cloudflare_cpu_validated": false
+}

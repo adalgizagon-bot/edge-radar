@@ -7,6 +7,7 @@ import sys
 payload = json.load(sys.stdin)
 db = sqlite3.connect(payload["path"])
 db.row_factory = sqlite3.Row
+db.execute("PRAGMA foreign_keys=ON")
 try:
     results = []
     for item in payload["statements"]:

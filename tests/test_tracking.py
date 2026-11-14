@@ -155,7 +155,7 @@ class TrackingTests(unittest.TestCase):
             ingest(self.db, [dict(sample(), mint=mint)], AT)
         initialize(self.db)
         self.db.execute(
-            "UPDATE tracking SET priority=100,last_attempt=? WHERE mint=?",
+            "UPDATE tracking SET priority=100,tier='fast',last_attempt=? WHERE mint=?",
             (AT - 600, MINT),
         )
         selected = due(self.db, AT, 60)

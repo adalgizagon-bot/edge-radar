@@ -13,7 +13,7 @@ from .db import connect, settings, save_settings, dump, load, now, history
 from .collector import collect, assessment
 from .sources import HTTP, Quotes, SourceError, MINT
 from .paper import roundtrip, open_position, report
-from . import tracking
+from . import tracking, research
 
 ROOT = Path(__file__).resolve().parent.parent
 log = logging.getLogger("edge.http")
@@ -55,6 +55,7 @@ def overview(db):
     running = db.execute("SELECT expires FROM jobs WHERE expires>?", (at,)).fetchone()
     return {
         "tracking": tracking.report(db, at),
+        "research": research.report(db, infer=False),
         "tokens": tokens,
         "total_tokens": db.execute("SELECT count(*) FROM tokens").fetchone()[0],
         "sources": source_rows,
@@ -123,6 +124,9 @@ class Handler(BaseHTTPRequestHandler):
             if path.startswith("/api/"):
                 db = connect()
                 config, revision = settings(db)
+                if method == "GET" and path == "/api/research":
+                    self.respond(200, research.report(db))
+                    return
                 if method == "GET" and path == "/api/tracking":
                     self.respond(200, tracking.report(db, now()))
                     return

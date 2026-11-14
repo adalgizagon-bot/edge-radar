@@ -18,6 +18,9 @@ def import_export(source, target):
     src = sqlite3.connect(f"file:{Path(source).resolve()}?mode=ro", uri=True)
     db = connect(target)
     total = 0
+    from server import research
+
+    research.initialize(db)
     try:
         for (data,) in src.execute(
             "SELECT data FROM observations ORDER BY observed_at,id"
@@ -28,6 +31,19 @@ def import_export(source, target):
             ingest(db, [x], x["observed_at"])
             total += 1
         initialize(db)
+        tables = {
+            r[0]
+            for r in src.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        }
+        if "research_cohorts" in tables:
+            for row in src.execute(
+                "SELECT id,alert_mint,control_mint,alert_at,protocol,data,completed FROM research_cohorts"
+            ):
+                if row[3] > now():
+                    raise ValueError("Future alert timestamp")
+                db.execute("INSERT INTO research_cohorts VALUES(?,?,?,?,?,?,?)", row)
+            for row in src.execute("SELECT * FROM research_outcomes"):
+                db.execute("INSERT INTO research_outcomes VALUES(?,?,?,?,?)", row)
     finally:
         db.close()
         src.close()

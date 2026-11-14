@@ -2,7 +2,7 @@
 
 Reconstrução independente para pesquisa de memecoins Solana: descoberta periódica, histórico persistente, classificação explicável e simulação conservadora. Sem wallet, assinatura de transações, swaps ou dinheiro real.
 
-**Estado atual:** descoberta real confirmada nas duas APIs; histórico e fila persistentes, alertas e avaliação futura implementados. Auditoria on-chain e cobertura social continuam parciais. Validação temporal de aceleração/retomada depende de amostras reais suficientes. Consulte [Etapa 2](docs/STAGE2.md) para arquitetura, limites gratuitos e evidências. Não há monitoramento 24/7 hospedado ou deploy de produção nesta entrega.
+**Estado atual:** descoberta real confirmada nas duas APIs; histórico e fila persistentes, alertas e avaliação futura implementados. Auditoria on-chain e cobertura social continuam parciais. Validação temporal de aceleração/retomada depende de amostras reais suficientes. Consulte [Etapa 3](docs/STAGE3.md) para o monitor em duas velocidades, estudo prospectivo, limites gratuitos e preparação de staging. A [Etapa 2](docs/STAGE2.md) mantém as evidências históricas. Não há monitoramento 24/7 hospedado ou deploy de produção nesta entrega.
 
 ## Execução local
 
@@ -29,7 +29,7 @@ O comando `npm run collect` executa uma rodada independente. Em execução únic
 - **SQLite/WAL**, migrações aditivas, snapshots por fonte/pool, avaliações versionadas, ledger e evidências por operação.
 - **Nenhum processo permanente na Vercel.** Next.js, Tailwind e Supabase eram sugestões, não requisitos: esta base reduz dependências, permite instalar sem conta externa e valida o núcleo antes de escolher hospedagem. O SQLite local é uma decisão de desenvolvimento, não um banco compartilhado para funções efêmeras.
 
-Para produção gratuita, o caminho recomendado é portar persistência para **Cloudflare D1** e orquestração para **Workers Cron**, preservando os contratos de domínio e a interface estática. O sampler separado de staging está em `cloud-monitor/`, desabilitado; a análise completa continua no Python e ainda não foi portada para Workers. Também é possível hospedar este serviço em uma máquina com disco persistente e scheduler. Nenhuma infraestrutura de produção anterior foi excluída ou modificada.
+Para produção gratuita, o caminho recomendado é portar persistência para **Cloudflare D1** e orquestração para **Workers Cron**, preservando os contratos de domínio e a interface estática. O componente de staging em `cloud-monitor/` continua desabilitado e agora inclui acompanhamento em duas velocidades, detectores e coortes prospectivas. Estatísticas mais pesadas, risco e interface permanecem no Python. Também é possível hospedar este serviço em uma máquina com disco persistente e scheduler. Nenhuma infraestrutura de produção anterior foi excluída ou modificada.
 
 ## Módulos
 
@@ -94,3 +94,8 @@ Os testes de UI usam banco temporário separado. O teste de interação com cont
 ## Continuidade do histórico
 
 Não execute em um banco vazio para simular continuidade. Mantenha `EDGE_DB` em volume persistente e faça backup com `scripts/backup_db.py`. O wrapper `python3 -m scripts.run_persistent --once` exige banco existente e recusa simulação automática habilitada. Consulte `docs/evidence/stage2-summary.json` para a coleta validada e `docs/STAGE2.md` para restauração e limitações. Testes adicionais: `npm run test:monitor`.
+
+
+## Preparação de staging e estudo prospectivo
+
+`python3 -m scripts.staging_preflight` revisa o plano sem criar recursos. O staging preparado acompanha até seis contratos a cada três minutos, com janelas limitadas de um minuto para dois deles. Há grupo de referência prospectivo e custos modelados separados de execução. A implantação e o perfil de CPU remoto ainda não foram autorizados/validados. Consulte `docs/STAGE3.md` antes de configurar qualquer recurso. `/api/research` apresenta o relatório local; movimentos entre observações são explicitamente desconhecidos.

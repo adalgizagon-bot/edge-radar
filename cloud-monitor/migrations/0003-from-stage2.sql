@@ -1,0 +1,28 @@
+-- Apply ONLY to a backed-up staging database using the c61e3fd schema. Not for production or fresh databases.
+ALTER TABLE monitor_state ADD COLUMN paused INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE monitor_state ADD COLUMN pause_reason TEXT;
+ALTER TABLE monitor_state ADD COLUMN purpose TEXT NOT NULL DEFAULT 'edge-radar-staging';
+ALTER TABLE monitor_state ADD COLUMN lease_owner TEXT;
+ALTER TABLE monitor_state ADD COLUMN rows_read INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE monitor_state ADD COLUMN rows_written INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE monitor_state ADD COLUMN db_bytes INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE monitor_state ADD COLUMN failure_streak INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE monitor_state ADD COLUMN gecko_failures INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE monitor_state ADD COLUMN dex_failures INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE monitor_state ADD COLUMN burst_until INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE monitor_state ADD COLUMN burst_next INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE monitor_state ADD COLUMN burst_minutes INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE catalog ADD COLUMN tier TEXT NOT NULL DEFAULT 'follow';
+ALTER TABLE catalog ADD COLUMN weak_streak INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE catalog ADD COLUMN pin_until INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE catalog ADD COLUMN last_alert INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE catalog ADD COLUMN recent TEXT NOT NULL DEFAULT '[]';
+ALTER TABLE catalog ADD COLUMN reason TEXT NOT NULL DEFAULT 'rotation';
+ALTER TABLE catalog ADD COLUMN study_pair TEXT;
+DROP INDEX catalog_fair;
+CREATE INDEX catalog_fair ON catalog(last_attempt,mint);
+CREATE INDEX IF NOT EXISTS catalog_tier ON catalog(tier,next_at);
+CREATE TABLE IF NOT EXISTS research_cohorts(id TEXT PRIMARY KEY,alert_mint TEXT NOT NULL,control_mint TEXT,alert_at INTEGER NOT NULL,protocol TEXT NOT NULL,data TEXT NOT NULL,completed INTEGER NOT NULL DEFAULT 0);
+CREATE INDEX IF NOT EXISTS research_time ON research_cohorts(alert_at);
+CREATE INDEX IF NOT EXISTS research_pending ON research_cohorts(completed,alert_at);
+CREATE TABLE IF NOT EXISTS research_outcomes(cohort_id TEXT NOT NULL REFERENCES research_cohorts(id),role TEXT NOT NULL,horizon INTEGER NOT NULL,status TEXT NOT NULL,data TEXT NOT NULL,PRIMARY KEY(cohort_id,role,horizon));

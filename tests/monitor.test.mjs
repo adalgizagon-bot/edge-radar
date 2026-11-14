@@ -95,7 +95,7 @@ test("scheduled sampling persists and excludes duplicate/overlap runs", async ()
       calls++;
       return Response.json(u.includes("geckoterminal") ? gecko : [pair, pair]);
     };
-    const at = Math.floor(Date.now() / 1000);
+    const at = Math.floor(Date.now() / 900000) * 900;
     assert.equal((await run(s.env, f, at)).observations, 1);
     assert.equal((await run(s.env, f, at)).status, "paused_or_busy");
     assert.equal(calls, 2);
@@ -114,7 +114,7 @@ test("scheduled sampling persists and excludes duplicate/overlap runs", async ()
 test("429 persists provider cooldown across invocations without repeated requests", async () => {
   const s = setup();
   try {
-    const at = Math.floor(Date.now() / 1000);
+    const at = Math.floor(Date.now() / 900000) * 900;
     let dexCalls = 0;
     const f = async (u) => {
       if (u.includes("geckoterminal")) return Response.json(gecko);
@@ -125,7 +125,7 @@ test("429 persists provider cooldown across invocations without repeated request
       });
     };
     assert.equal((await run(s.env, f, at)).status, "partial");
-    assert.equal((await run(s.env, f, at + 300)).status, "partial");
+    assert.equal((await run(s.env, f, at + 180)).status, "partial");
     assert.equal(dexCalls, 1);
     assert.equal(
       (await s.db.prepare("SELECT dex_after FROM monitor_state").first())
@@ -158,7 +158,13 @@ test("malformed upstream data records failure and releases lease", async () => {
   const s = setup();
   try {
     assert.equal(
-      (await run(s.env, async () => Response.json({ invalid: true }))).status,
+      (
+        await run(
+          s.env,
+          async () => Response.json({ invalid: true }),
+          Math.floor(Date.now() / 900000) * 900,
+        )
+      ).status,
       "failed",
     );
     assert.equal(
@@ -171,6 +177,465 @@ test("malformed upstream data records failure and releases lease", async () => {
       "failed",
     );
   } finally {
+    s.clean();
+  }
+});
+
+test("two-speed scheduler caps fast at six, preserves two rotations and loans unused slots", async () => {
+  const { choose, capacity } = await import("../cloud-monitor/policy.mjs");
+  const at = 1800000000;
+  const fast = Array.from({ length: 10 }, (_, i) => ({
+    mint: "hot" + i,
+    tier: "fast",
+    pin_until: 0,
+    last_seen: at,
+    next_at: at,
+    priority: 100 - i,
+    last_attempt: at,
+  }));
+  const slow = Array.from({ length: 20 }, (_, i) => ({
+    mint: "slow" + i,
+    last_attempt: i,
+    next_at: at,
+  }));
+  const chosen = choose(fast, slow, at);
+  assert.equal(chosen.length, 8);
+  assert.equal(chosen.filter((x) => x.mint.startsWith("hot")).length, 6);
+  assert.equal(chosen.filter((x) => x.mint.startsWith("slow")).length, 2);
+  assert.equal(choose([], slow, at).length, 8);
+  assert.equal(capacity(123, 6).follow_worst_rotation_minutes, 186);
+});
+test("two consecutive weak samples demote without discarding recent evidence", async () => {
+  const { transition } = await import("../cloud-monitor/policy.mjs");
+  const at = 1800000000;
+  const x = normalize({ ...pair, pairCreatedAt: (at - 3600) * 1000 }, at);
+  let state = { tier: "follow", recent: "[]", weak_streak: 0, pin_until: 0 };
+  let t = transition(x, state, 0, at);
+  assert.equal(t.tier, "fast");
+  const weak = {
+    ...x,
+    volume5m: 100,
+    buys: 1,
+    sells: 10,
+    observed_at: at + 300,
+  };
+  t = transition(weak, { ...state, ...t }, 1, at + 300);
+  assert.equal(t.tier, "fast");
+  t = transition(
+    { ...weak, observed_at: at + 600 },
+    { ...state, ...t },
+    1,
+    at + 600,
+  );
+  assert.equal(t.tier, "follow");
+  assert.equal(JSON.parse(t.recent).length, 3);
+});
+test("research protocol, detector, matching and outcomes agree with Python golden cases", async () => {
+  const { PROTOCOL, detect, match, outcome } = await import(
+    "../cloud-monitor/research.mjs"
+  );
+  const at = 1800000000;
+  const base = {
+    ...normalize({ ...pair, pairCreatedAt: (at - 3600) * 1000 }, at),
+    source: "test-fixture",
+    risk_class: "incomplete",
+  };
+  const history = [
+    { ...base, observed_at: at - 600, volume5m: 2000, buys: 25, price: 0.95 },
+    { ...base, observed_at: at - 300, volume5m: 4000, buys: 40, price: 0.97 },
+    { ...base, volume5m: 6000, buys: 50, price: 1 },
+  ];
+  const cases = [
+    history,
+    history.slice(1),
+    history.map((x) => ({ ...x, liquidity: null })),
+    history.map((x) => ({
+      ...x,
+      price: 1.1 - (x.observed_at - (at - 600)) / 3000,
+    })),
+    history.map((x) => ({ ...x, buys: 1, sells: 50 })),
+  ];
+  const alert = history.at(-1),
+    control = {
+      ...alert,
+      mint: "11111111111111111111111111111111",
+      volume5m: 5000,
+    };
+  const input = {
+    at,
+    cases,
+    alert,
+    control,
+    samples: [{ ...alert, observed_at: at + 300, price: 1.1 }],
+  };
+  const py = spawnSync(
+    "python3",
+    [
+      "-c",
+      `import json,sys
+from server.research import PROTOCOL,match,outcome
+from server.analysis import evaluate
+from server.config import DEFAULTS
+x=json.load(sys.stdin);at=x['at'];kinds=[]
+for h in x['cases']:
+ a=evaluate({'pool_created':at-3600,'active':1},h,None,{},DEFAULTS,at)
+ kinds.append(next((k for k in ['acceleration','revival'] if a['radars'][k]['detected']),None))
+status,data=outcome(x['alert'],x['samples'],at,5,at+400)
+print(json.dumps({'protocol':PROTOCOL,'kinds':kinds,'match':match(x['alert'],[x['control']],at),'outcome':{'status':status,'data':data}}))`,
+    ],
+    { input: JSON.stringify(input), encoding: "utf8" },
+  );
+  assert.equal(py.status, 0, py.stderr);
+  const expected = JSON.parse(py.stdout);
+  assert.deepEqual(PROTOCOL, expected.protocol);
+  assert.deepEqual(
+    cases.map((h) => detect(h.at(-1), h, [], at)),
+    expected.kinds,
+  );
+  assert.deepEqual(match(alert, [control], at), expected.match);
+  assert.deepEqual(
+    outcome(alert, input.samples, at, 5, at + 400),
+    expected.outcome,
+  );
+});
+test("native staging freezes a comparable control, pins both arms and finalizes real-time-shaped samples", async () => {
+  const s = setup();
+  try {
+    const at = Math.floor(Date.now() / 180000) * 180,
+      control = "11111111111111111111111111111111";
+    for (const m of [mint, control]) {
+      const x = normalize(
+        {
+          ...pair,
+          baseToken: { ...pair.baseToken, address: m },
+          pairCreatedAt: (at - 7 * 86400) * 1000,
+        },
+        at - 300,
+      );
+      const recent = [
+        {
+          ...x,
+          observed_at: at - 600,
+          volume5m: m === mint ? 2000 : 5000,
+          buys: m === mint ? 25 : 40,
+          price: 0.95,
+        },
+        { ...x, volume5m: m === mint ? 4000 : 5000, buys: 40, price: 0.97 },
+      ];
+      await s.db
+        .prepare(
+          "INSERT INTO catalog(mint,first_seen,last_seen,next_at,priority,last_attempt,tier,recent) VALUES(?,?,?,?,?,?,'fast',?)",
+        )
+        .bind(
+          m,
+          at - 600,
+          at - 300,
+          at - 1,
+          60,
+          at - 300,
+          JSON.stringify(recent),
+        )
+        .run();
+    }
+    const f = async (u) =>
+      Response.json(
+        u.includes("geckoterminal")
+          ? { data: [] }
+          : [
+              {
+                ...pair,
+                pairCreatedAt: (at - 7 * 86400) * 1000,
+                volume: { m5: 6000 },
+                txns: { m5: { buys: 50, sells: 10 } },
+              },
+              {
+                ...pair,
+                baseToken: { ...pair.baseToken, address: control },
+                pairCreatedAt: (at - 7 * 86400) * 1000,
+              },
+            ],
+      );
+    assert.equal((await run(s.env, f, at)).observations, 2);
+    const c = await s.db.prepare("SELECT * FROM research_cohorts").first();
+    assert.equal(c.control_mint, control);
+    assert.equal(JSON.parse(c.data).alert.risk_class, "unavailable_on_worker");
+    assert.equal(
+      (
+        await s.db
+          .prepare("SELECT count(*) n FROM catalog WHERE pin_until>?")
+          .bind(at)
+          .first()
+      ).n,
+      2,
+    );
+    for (const m of [mint, control])
+      for (const minutes of [5, 15, 30, 60]) {
+        const x = {
+          ...normalize(
+            { ...pair, baseToken: { ...pair.baseToken, address: m } },
+            c.alert_at + minutes * 60,
+          ),
+          price: m === mint ? 1.1 : 1.05,
+        };
+        await s.db
+          .prepare(
+            "INSERT INTO observations(mint,observed_at,source,data) VALUES(?,?,?,?)",
+          )
+          .bind(m, x.observed_at, x.source, JSON.stringify(x))
+          .run();
+      }
+    const { research } = await import("../cloud-monitor/research.mjs");
+    const r = await research(
+      s.db,
+      new Map(),
+      new Map(),
+      new Map(),
+      c.alert_at + 4000,
+      async (operation) => operation(),
+    );
+    await s.db.batch(r.writes);
+    assert.equal(
+      (await s.db.prepare("SELECT completed FROM research_cohorts").first())
+        .completed,
+      1,
+    );
+    const rows = await s.db.prepare("SELECT * FROM research_outcomes").all();
+    assert.equal(rows.results.length, 8);
+    assert.ok(
+      rows.results.every(
+        (x) =>
+          x.status === "observed" &&
+          JSON.parse(x.data).executable_net_usd === null,
+      ),
+    );
+  } finally {
+    s.clean();
+  }
+});
+test("stale lease owner cannot commit or clear another owner", async () => {
+  const s = setup();
+  try {
+    const at = Math.floor(Date.now() / 900000) * 900;
+    const f = async () => {
+      await s.db
+        .prepare("UPDATE monitor_state SET lease_owner='new-owner'")
+        .run();
+      return Response.json(gecko);
+    };
+    assert.equal((await run(s.env, f, at)).status, "failed");
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) n FROM observations").first()).n,
+      0,
+    );
+    assert.equal(
+      (await s.db.prepare("SELECT lease_owner FROM monitor_state").first())
+        .lease_owner,
+      "new-owner",
+    );
+  } finally {
+    s.clean();
+  }
+});
+test("manual pause and daily read ceiling prevent outbound calls", async () => {
+  const s = setup();
+  try {
+    const at = Math.floor(Date.now() / 1000);
+    await s.db.prepare("UPDATE monitor_state SET paused=1").run();
+    const denied = () => {
+      throw Error("network must not execute");
+    };
+    assert.equal((await run(s.env, denied, at)).status, "paused_or_busy");
+    await s.db
+      .prepare("UPDATE monitor_state SET paused=0,day=?,rows_read=2000000")
+      .bind(Math.floor(at / 86400))
+      .run();
+    assert.equal((await run(s.env, denied, at)).status, "paused_or_busy");
+  } finally {
+    s.clean();
+  }
+});
+test("burst refreshes only two candidates and keeps a matched pair on the same cadence", async () => {
+  const { choose } = await import("../cloud-monitor/policy.mjs");
+  const at = 1800000060;
+  const fast = Array.from({ length: 6 }, (_, i) => ({
+    mint: "test" + i,
+    pin_until: i < 2 ? at + 300 : 0,
+    study_pair: i < 2 ? "pair" : null,
+    next_at: at + 120,
+    priority: i < 2 ? 100 : 60,
+    last_seen: at - 60,
+    last_attempt: at - 60,
+    weak_streak: 0,
+  }));
+  const burst = choose(fast, [], at, { rotation: false, burst: true });
+  assert.equal(burst.length, 2);
+  assert.ok(burst.every((x) => x.study_pair === "pair"));
+  const singles = choose(
+    fast.map((x) => ({ ...x, pin_until: 0, study_pair: null })),
+    [],
+    at,
+    { rotation: false, burst: true },
+  );
+  assert.equal(singles.length, 2);
+  assert.equal(
+    choose(fast, [], at, { rotation: false, burst: false }).length,
+    0,
+  );
+});
+test("full-day capacity reserves quota for bounded bursts, warm tracking and discovery", async () => {
+  let samples = 0,
+    reserved = 0,
+    active = 0;
+  for (let m = 0; m < 1440; m++) {
+    const rotation = m % 3 === 0,
+      burst = m % 60 < 15;
+    if (!rotation && !burst) continue;
+    const slots = rotation ? (m % 15 === 0 ? 10 : 8) : 2;
+    samples += slots;
+    reserved += 40 + 8 * slots;
+    active++;
+  }
+  assert.equal(samples, 4512);
+  assert.equal(reserved, 64896);
+  assert.equal(active, 720);
+  assert.ok(reserved < 70000);
+});
+test("bursts cannot start beyond the daily reserved window and expire to rotation-only ticks", async () => {
+  const s = setup();
+  try {
+    const at = Math.floor(Date.now() / 900000) * 900;
+    await s.db
+      .prepare(
+        "INSERT INTO catalog(mint,first_seen,last_seen,next_at,priority,last_attempt,tier) VALUES(?,?,?,?,?,?,'fast')",
+      )
+      .bind(mint, at - 600, at - 60, at, 60, at - 60)
+      .run();
+    await s.db
+      .prepare("UPDATE monitor_state SET day=?,burst_minutes=360")
+      .bind(Math.floor(at / 86400))
+      .run();
+    const f = async (u) =>
+      Response.json(u.includes("geckoterminal") ? { data: [] } : [pair]);
+    assert.equal((await run(s.env, f, at)).status, "ok");
+    assert.equal(
+      (await s.db.prepare("SELECT burst_until FROM monitor_state").first())
+        .burst_until,
+      0,
+    );
+    assert.equal(
+      (
+        await run(
+          s.env,
+          () => {
+            throw Error("no network");
+          },
+          at + 60,
+        )
+      ).status,
+      "paused_or_busy",
+    );
+  } finally {
+    s.clean();
+  }
+});
+test("complete Worker dispatch collects every minute only within the authorized burst window", async () => {
+  const s = setup(),
+    originalNow = Date.now;
+  try {
+    const at = Math.floor(originalNow() / 900000) * 900;
+    let clock = at;
+    Date.now = () => clock * 1000;
+    await s.db
+      .prepare(
+        "INSERT INTO catalog(mint,first_seen,last_seen,next_at,priority,last_attempt,tier) VALUES(?,?,?,?,?,?,'fast')",
+      )
+      .bind(mint, at - 600, at - 60, at, 60, at - 60)
+      .run();
+    let dex = 0;
+    const f = async (u) => {
+      if (u.includes("geckoterminal")) return Response.json({ data: [] });
+      dex++;
+      return Response.json([pair]);
+    };
+    assert.equal((await run(s.env, f, clock)).observations, 1);
+    assert.equal(
+      (await s.db.prepare("SELECT burst_until FROM monitor_state").first())
+        .burst_until,
+      at + 900,
+    );
+    for (const seconds of [60, 120]) {
+      clock = at + seconds;
+      assert.equal((await run(s.env, f, clock)).observations, 1);
+    }
+    assert.equal(dex, 3);
+    const rows = (
+      await s.db
+        .prepare(
+          "SELECT observed_at,data FROM observations ORDER BY observed_at",
+        )
+        .all()
+    ).results;
+    assert.deepEqual(
+      rows.map((x) => x.observed_at),
+      [at, at + 60, at + 120],
+    );
+    assert.equal(JSON.parse(rows[2].data).watch.elapsed_seconds, 60);
+    clock = at + 960;
+    assert.equal(
+      (
+        await run(
+          s.env,
+          () => {
+            throw Error("burst expired");
+          },
+          clock,
+        )
+      ).status,
+      "paused_or_busy",
+    );
+  } finally {
+    Date.now = originalNow;
+    s.clean();
+  }
+});
+test("three recurring technical failures pause while retaining historical evidence", async () => {
+  const s = setup(),
+    originalNow = Date.now;
+  try {
+    const at = Math.floor(originalNow() / 900000) * 900;
+    let clock = at;
+    Date.now = () => clock * 1000;
+    await s.db
+      .prepare(
+        "INSERT INTO catalog(mint,first_seen,last_seen,next_at) VALUES(?,?,?,?)",
+      )
+      .bind(mint, at - 600, at - 600, 0)
+      .run();
+    await s.db
+      .prepare(
+        "INSERT INTO observations(mint,observed_at,source,data) VALUES(?,?,?,?)",
+      )
+      .bind(mint, at - 600, "fixture", '{"label":"UNIT TEST ONLY"}')
+      .run();
+    for (const offset of [0, 360, 720]) {
+      clock = at + offset;
+      assert.equal(
+        (await run(s.env, async () => Response.json({ invalid: true }), clock))
+          .status,
+        "failed",
+      );
+    }
+    const state = await s.db
+      .prepare("SELECT paused,pause_reason FROM monitor_state")
+      .first();
+    assert.equal(state.paused, 1);
+    assert.equal(state.pause_reason, "repeated_failure");
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) n FROM observations").first()).n,
+      1,
+    );
+  } finally {
+    Date.now = originalNow;
     s.clean();
   }
 });

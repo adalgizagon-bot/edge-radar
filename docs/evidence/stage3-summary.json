@@ -1,0 +1,104 @@
+{
+  "created_at_utc": "2026-11-14T02:05:42.292455+00:00",
+  "branch": "rebuild/memecoin-radar-v1",
+  "base_commit": "c61e3fddd1da74c995bdcd8e983f871d11902943",
+  "environment": {
+    "spec_revision": "1",
+    "observed_spec_revision": "1",
+    "network_state": "enforced",
+    "observations_current": true
+  },
+  "preserved_real_history": {
+    "contracts": 129,
+    "snapshots": 315,
+    "assessments": 201,
+    "partial_risk_audits": 2,
+    "archive_sha256": "562e9cd44c7a00c1add903a8bbe3b635cfacac53df799e5c396d75bf98ce43f2",
+    "archive_unchanged": true,
+    "all_original_rows_preserved_in_additive_copy": true,
+    "real_archive_seed_applied_twice_idempotently_in_sqlite": true,
+    "retrospective_cohorts_created": 0
+  },
+  "monitoring": {
+    "fast_contracts_total": 6,
+    "normal_interval_seconds": 180,
+    "burst_contracts_within_fast": 2,
+    "burst_interval_seconds": 60,
+    "burst_window_seconds": 900,
+    "burst_start_cooldown_seconds": 3600,
+    "burst_reserved_minutes_per_day_max": 360,
+    "follow_slots_per_normal_tick_min": 2,
+    "follow_cycle_123_contracts_minutes_without_failures": 186,
+    "discovery_admissions_per_15_minutes_max": 2,
+    "source_update_timestamp_known": false,
+    "between_samples": "unknown"
+  },
+  "daily_plan_upper_bounds": {
+    "cron_invocations": 1440,
+    "active_rounds": 720,
+    "normalized_samples": 4512,
+    "dex_requests": 720,
+    "gecko_requests": 96,
+    "write_reservations": 64896,
+    "write_reservation_ceiling": 70000,
+    "observed_write_pause": 45000,
+    "observed_read_pause": 2000000,
+    "storage_pause_bytes": 350000000,
+    "sample_reservation_ceiling": 140000
+  },
+  "tests": {
+    "python": 98,
+    "native_worker_sqlite_and_policy": 17,
+    "ui_desktop_mobile": 6,
+    "build": "passed",
+    "typecheck": "passed",
+    "lint": "passed",
+    "worker_bundle": "Wrangler 4.162.0 --dry-run passed; 29.71 KiB, gzip 8.62 KiB",
+    "real_archive_restore_and_seed": "passed",
+    "no_production_or_remote_database_tests": true
+  },
+  "statistical_protocol": {
+    "version": "prospective-v1",
+    "primary_horizon_minutes": 30,
+    "secondary_horizons": [
+      5,
+      15,
+      60
+    ],
+    "matching": "prospective by source, pool age class, risk coverage, liquidity and rolling volume",
+    "minimum_pairs_for_descriptive_interval": 100,
+    "minimum_days_for_day_block_interval": 20,
+    "cost_scenario": "USD20, fee 1% + slippage 1% per side, USD0.05 network per side",
+    "executable_net_without_quotes": null,
+    "unknown_between_samples": true,
+    "stops_or_extrema_execution_assumed": false,
+    "later_alerting_controls_retained": true
+  },
+  "deployment": {
+    "performed": false,
+    "resources_created": false,
+    "monitor_enabled": false,
+    "production_database_modified": false,
+    "financial_operations": 0,
+    "remote_worker_cpu_validated": false,
+    "remote_d1_usage_validated": false,
+    "database_uuid_configured": false
+  },
+  "limitations": [
+    "One-minute sampling is bounded to brief windows and does not prove a fresh source price every minute",
+    "Confirmed v1 acceleration still needs at least 10 minutes of comparable history; nominal 3-minute steps typically need 12",
+    "Slow rotation cannot cover fast moves of every discovered token",
+    "No live cohorts or future outcomes were fabricated",
+    "Cloud CPU and quota feasibility require a later authorized staging pilot",
+    "No statistically or executable profitable edge demonstrated"
+  ],
+  "local_benchmark": {
+    "benchmark": "isolated synthetic pure logic; no D1, network or live market data",
+    "iterations": 2000,
+    "node": "v24.22.1",
+    "cpu_mean_ms": 0.4652595,
+    "wall_p50_ms": 0.35117300000001705,
+    "wall_p95_ms": 0.6067470000000412,
+    "cloudflare_cpu_validated": false
+  }
+}

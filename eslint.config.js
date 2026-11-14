@@ -10,6 +10,7 @@ export default [
       globals: {
         document: "readonly",
         window: "readonly",
+        crypto: "readonly",
         fetch: "readonly",
         HTMLElement: "readonly",
         HTMLInputElement: "readonly",
@@ -31,6 +32,8 @@ export default [
     files: ["cloud-monitor/**/*.mjs", "tests/monitor.test.mjs"],
     languageOptions: {
       globals: {
+        crypto: "readonly",
+        console: "readonly",
         fetch: "readonly",
         Response: "readonly",
         AbortSignal: "readonly",

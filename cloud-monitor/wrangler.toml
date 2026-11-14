@@ -7,7 +7,7 @@ workers_dev = false
 MONITOR_ENABLED = "false"
 
 [triggers]
-crons = ["*/5 * * * *"]
+crons = ["* * * * *"]
 
 [[d1_databases]]
 binding = "MONITOR_DB"

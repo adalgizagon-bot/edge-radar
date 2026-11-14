@@ -210,7 +210,18 @@ def evaluate(token, history, security, social, config, at, quote_check=None):
         flags.append("Queda de liquidez superior a 20%")
     risk = clamp(len(flags) * 30) if not missing else None
     social_score = social.get("score")
-    scores = {"momentum": momentum, "flow": flow, "social": social_score, "risk": risk}
+    market_score = (
+        round(momentum * 0.5625 + flow * 0.4375, 1)
+        if momentum is not None and flow is not None
+        else None
+    )
+    scores = {
+        "market": market_score,
+        "momentum": momentum,
+        "flow": flow,
+        "social": social_score,
+        "risk": risk,
+    }
     weights = config["weights"]
     opportunity = (
         round(sum(scores[k] * w for k, w in weights.items() if w > 0), 1)
@@ -410,7 +421,28 @@ def evaluate(token, history, security, social, config, at, quote_check=None):
             if change > 20
             else "no_divergence"
         )
+    chronological = sorted(samples, key=lambda x: x["observed_at"])
+    previous = next(
+        (
+            x
+            for x in reversed(chronological)
+            if x["observed_at"] < latest.get("observed_at", 0)
+        ),
+        None,
+    )
+    short_window = {
+        "elapsed_seconds": latest["observed_at"] - previous["observed_at"]
+        if previous
+        else None,
+        "changes_pct": {
+            k: growth(latest.get(k), previous.get(k)) if previous else None
+            for k in ["price", "volume5m", "liquidity", "buys", "unique_buyers"]
+        },
+        "window_overlap": True,
+        "validated_entry": False,
+    }
     return {
+        "short_window": short_window,
         "freshness": {
             "status": "current"
             if latest

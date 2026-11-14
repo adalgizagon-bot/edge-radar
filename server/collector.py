@@ -6,7 +6,7 @@ from .db import connect, now, dump, load, settings, ingest, history, acquire
 from .sources import HTTP, Market, Security, Social, Quotes, SourceError
 from .analysis import evaluate, social_summary
 from .paper import monitor, roundtrip, open_position
-from . import tracking
+from . import tracking, research
 
 log = logging.getLogger("edge.collector")
 
@@ -203,9 +203,12 @@ def collect(db, http=None):
 
                 attempt("social", scan_social, None)
         paper_opened = False
+        decision_at = now()
+        cycle_results = {}
         for mint in dict.fromkeys(x["mint"] for x in rows):
-            result = assessment(db, mint)
-            tracking.record(db, mint, result, now())
+            result = assessment(db, mint, decision_at)
+            cycle_results[mint] = result
+            tracking.record(db, mint, result, decision_at)
             a = result["assessment"]
             recent = db.execute(
                 "SELECT id FROM trades WHERE mint=? AND (status!=? OR closed_at>?)",
@@ -231,6 +234,9 @@ def collect(db, http=None):
                 "INSERT INTO assessments(mint,observed_at,config_version,data) VALUES(?,?,?,?)",
                 (mint, now(), revision, dump(result["assessment"])),
             )
+        research.enroll(db, cycle_results, decision_at)
+        tracking.rebalance(db, decision_at)
+        research.evaluate(db, now())
         tracking.outcomes(db, now())
         summary = {
             "status": "partial" if failures else "ok",

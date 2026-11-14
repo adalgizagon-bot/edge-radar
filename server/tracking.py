@@ -16,6 +16,15 @@ CREATE TABLE IF NOT EXISTS signal_outcomes(signal_id INTEGER NOT NULL REFERENCES
 
 def initialize(db):
     db.executescript(SCHEMA)
+    columns = {r["name"] for r in db.execute("PRAGMA table_info(tracking)")}
+    for name, spec in {
+        "tier": "TEXT NOT NULL DEFAULT 'follow'",
+        "weak_streak": "INTEGER NOT NULL DEFAULT 0",
+        "pin_until": "INTEGER NOT NULL DEFAULT 0",
+        "classified_at": "INTEGER NOT NULL DEFAULT 0",
+    }.items():
+        if name not in columns:
+            db.execute(f"ALTER TABLE tracking ADD COLUMN {name} {spec}")
     db.execute(
         "INSERT OR IGNORE INTO security_attempts(mint,observed_at,data) SELECT mint,observed_at,data FROM security"
     )
@@ -26,17 +35,35 @@ def initialize(db):
 
 def due(db, at, limit=60):
     initialize(db)
-    # Fairness reservation: half the queue is oldest due, including inactive/archive tokens.
-    rows = db.execute(
-        "SELECT mint FROM tracking WHERE next_at<=? ORDER BY COALESCE(last_attempt,0),mint LIMIT ?",
-        (at, limit // 2),
-    ).fetchall()
-    first = [r["mint"] for r in rows]
-    ranked = db.execute(
-        "SELECT mint FROM tracking WHERE next_at<=? ORDER BY priority DESC,next_at,mint LIMIT ?",
-        (at, limit),
-    ).fetchall()
-    return list(dict.fromkeys(first + [r["mint"] for r in ranked]))[:limit]
+    db.execute(
+        "UPDATE tracking SET tier='follow',reason='stale' WHERE tier='fast' AND pin_until<=? AND COALESCE(last_success,0)<?",
+        (at, at - 600),
+    )
+    # Pinned study arms have first claim; at most 12 contracts are admitted to fast.
+    pinned = [
+        r["mint"]
+        for r in db.execute(
+            "SELECT mint FROM tracking WHERE pin_until>? ORDER BY next_at,mint LIMIT ?",
+            (at, min(12, limit)),
+        )
+    ]
+    fast = [
+        r["mint"]
+        for r in db.execute(
+            "SELECT mint FROM tracking WHERE tier='fast' AND next_at<=? ORDER BY priority DESC,next_at,mint LIMIT 12",
+            (at,),
+        )
+        if r["mint"] not in pinned
+    ]
+    selected = (pinned + fast)[: min(12, limit)]
+    follow = [
+        r["mint"]
+        for r in db.execute(
+            "SELECT mint FROM tracking WHERE next_at<=? ORDER BY COALESCE(last_attempt,0),mint LIMIT ?",
+            (at, limit),
+        )
+    ]
+    return list(dict.fromkeys(selected + follow))[:limit]
 
 
 def attempted(db, mints, rows, at, stale_seconds=600):
@@ -102,31 +129,74 @@ def record(db, mint, result, at):
         and pressure >= 0.6
         and not a["flags"]
     )
-    priority = (
-        100
-        if a["radars"]["acceleration"]["detected"]
-        else 80
-        if a["radars"]["revival"]["detected"]
-        else 60
-        if promising
-        else 10
+    previous = db.execute("SELECT * FROM tracking WHERE mint=?", (mint,)).fetchone()
+    prior = next(
+        (
+            v
+            for v in reversed(history(db, mint))
+            if v.get("source") == x.get("source")
+            and v.get("pool") == x.get("pool")
+            and v["observed_at"] < x.get("observed_at", 0)
+        ),
+        None,
     )
+    weakening = bool(
+        prior
+        and fresh
+        and (
+            not promising
+            or x.get("volume5m") is not None
+            and prior.get("volume5m")
+            and x["volume5m"] < prior["volume5m"] * 0.7
+            or pressure is not None
+            and pressure < 0.5
+            or x.get("liquidity") is not None
+            and prior.get("liquidity")
+            and x["liquidity"] < prior["liquidity"] * 0.9
+        )
+    )
+    new_sample = not previous or x.get("observed_at", 0) > previous["classified_at"]
+    weak = (
+        (previous["weak_streak"] + 1 if previous and weakening else 0)
+        if new_sample
+        else (previous["weak_streak"] if previous else 0)
+    )
+    detected = any(a["radars"][k]["detected"] for k in ["acceleration", "revival"])
+    priority = 100 if detected else 60 if promising else 10
     reason = (
-        "acceleration"
-        if priority == 100
-        else "revival"
-        if priority == 80
+        "signal"
+        if detected
         else "promising"
         if promising
+        else "weakening"
+        if weakening
         else "rotation"
     )
-    interval = (
-        300 if priority >= 60 else 900 if a["radars"]["revival"]["eligible"] else 1800
+    pinned = bool(previous and previous["pin_until"] > at)
+    stale = not fresh
+    was_fast = bool(previous and previous["tier"] == "fast")
+    tier = (
+        "fast"
+        if pinned
+        or fresh
+        and not a["flags"]
+        and weak < 2
+        and (detected or promising or was_fast and weak < 2)
+        else "follow"
     )
+    others = db.execute(
+        "SELECT count(*) FROM tracking WHERE tier='fast' AND mint!=?", (mint,)
+    ).fetchone()[0]
+    if tier == "fast" and not pinned and others >= 12:
+        tier = "follow"
+        reason = "fast_capacity_full"
+    if stale:
+        reason = "stale"
+    interval = 180 if tier == "fast" else 1800
     db.execute("INSERT OR IGNORE INTO tracking(mint) VALUES(?)", (mint,))
     db.execute(
-        "UPDATE tracking SET priority=?,reason=?,next_at=CASE WHEN misses=0 THEN ? ELSE next_at END WHERE mint=?",
-        (priority, reason, at + interval, mint),
+        "UPDATE tracking SET priority=?,reason=?,tier=?,weak_streak=?,classified_at=MAX(classified_at,?),next_at=CASE WHEN misses=0 THEN ? ELSE next_at END WHERE mint=?",
+        (priority, reason, tier, weak, x.get("observed_at", 0), at + interval, mint),
     )
     if not fresh or not x.get("pool") or x["price"] <= 0:
         return
@@ -207,6 +277,15 @@ def outcomes(db, at):
                 ),
                 "endpoint_liquidity": end.get("liquidity") if end else None,
                 "executable_return": False,
+                "between_samples": "unknown",
+                "continuous_extrema_known": False,
+                "stop_execution_assumed": False,
+                "unsampled_intervals_seconds": [b - a for a, b in zip(times, times[1:])]
+                + (
+                    [max(0, min(at, target) - times[-1])]
+                    if min(at, target) > times[-1]
+                    else []
+                ),
             }
             db.execute(
                 "INSERT OR REPLACE INTO signal_outcomes VALUES(?,?,?,?)",
@@ -257,3 +336,15 @@ def security_event(db, mint, result):
         "INSERT OR IGNORE INTO security_attempts(mint,observed_at,data) VALUES(?,?,?)",
         (mint, result["observed_at"], dump(result)),
     )
+
+
+def rebalance(db, at, cap=12):
+    ranked = db.execute(
+        "SELECT mint FROM tracking WHERE tier='fast' ORDER BY (pin_until>?) DESC,priority DESC,next_at,mint",
+        (at,),
+    ).fetchall()
+    for row in ranked[cap:]:
+        db.execute(
+            "UPDATE tracking SET tier='follow',reason='fast_capacity_full',next_at=MAX(next_at,?) WHERE mint=?",
+            (at + 1800, row["mint"]),
+        )
