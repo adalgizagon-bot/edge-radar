@@ -1,0 +1,95 @@
+{
+  "worker": "edge-radar-monitor-staging",
+  "from": "2026-11-14T12:16:00+00:00",
+  "to": "2026-11-14T12:19:58.818958+00:00",
+  "available": true,
+  "cpu_unit": "microseconds",
+  "source": "workersInvocationsAdaptive (adaptive sampling; delayed analytics)",
+  "minutes": [
+    {
+      "dimensions": {
+        "datetimeMinute": "2026-11-14T12:18:00Z",
+        "scriptName": "edge-radar-monitor-staging",
+        "scriptVersion": "c2f66fd5-dd31-4e58-a43b-4043fbaa309d",
+        "status": "success"
+      },
+      "max": {
+        "cpuTime": 840,
+        "startupCpuTimeUs": 6595
+      },
+      "sum": {
+        "cpuTimeUs": 840,
+        "errors": 0,
+        "requests": 1,
+        "startupCpuTimeUs": 6595,
+        "subrequests": 0
+      }
+    },
+    {
+      "dimensions": {
+        "datetimeMinute": "2026-11-14T12:17:00Z",
+        "scriptName": "edge-radar-monitor-staging",
+        "scriptVersion": "c2f66fd5-dd31-4e58-a43b-4043fbaa309d",
+        "status": "success"
+      },
+      "max": {
+        "cpuTime": 1714,
+        "startupCpuTimeUs": 11783
+      },
+      "sum": {
+        "cpuTimeUs": 1714,
+        "errors": 0,
+        "requests": 1,
+        "startupCpuTimeUs": 11783,
+        "subrequests": 0
+      }
+    },
+    {
+      "dimensions": {
+        "datetimeMinute": "2026-11-14T12:16:00Z",
+        "scriptName": "edge-radar-monitor-staging",
+        "scriptVersion": "c2f66fd5-dd31-4e58-a43b-4043fbaa309d",
+        "status": "success"
+      },
+      "max": {
+        "cpuTime": 1013,
+        "startupCpuTimeUs": 7913
+      },
+      "sum": {
+        "cpuTimeUs": 1013,
+        "errors": 0,
+        "requests": 1,
+        "startupCpuTimeUs": 7913,
+        "subrequests": 0
+      }
+    }
+  ],
+  "summary": [
+    {
+      "dimensions": {
+        "scriptName": "edge-radar-monitor-staging",
+        "scriptVersion": "c2f66fd5-dd31-4e58-a43b-4043fbaa309d",
+        "status": "success"
+      },
+      "max": {
+        "cpuTime": 1714,
+        "startupCpuTimeUs": 11783
+      },
+      "quantiles": {
+        "cpuTimeP50": 1013,
+        "cpuTimeP95": 1714,
+        "cpuTimeP99": 1714,
+        "startupCpuTimeUsP50": 7913,
+        "startupCpuTimeUsP95": 11783,
+        "startupCpuTimeUsP99": 11783
+      },
+      "sum": {
+        "cpuTimeUs": 3567,
+        "errors": 0,
+        "requests": 3,
+        "startupCpuTimeUs": 26291,
+        "subrequests": 0
+      }
+    }
+  ]
+}

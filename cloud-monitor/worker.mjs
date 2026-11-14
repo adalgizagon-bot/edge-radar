@@ -241,7 +241,7 @@ export async function run(
       operations.discovery_attempted = true;
       const r = await fetcher(
         "https://api.geckoterminal.com/api/v2/networks/solana/new_pools?page=1",
-        { signal: AbortSignal.timeout(12000), redirect: "error" },
+        { signal: AbortSignal.timeout(12000), redirect: "manual" },
       );
       operations.discovery_http_status = r.status;
       if (!r.ok) {
@@ -254,6 +254,7 @@ export async function run(
           );
         errors.push({ provider: "geckoterminal", status: r.status });
         if (r.status === 403) stopReason = "provider_denied";
+        if (r.status >= 300 && r.status < 400) stopReason = "provider_redirect";
       } else {
         const raw = await r.json();
         if (!Array.isArray(raw.data)) throw Error("invalid_gecko_schema");
@@ -316,7 +317,7 @@ export async function run(
       operations.dex_attempted = true;
       const r = await fetcher(
         "https://api.dexscreener.com/tokens/v1/solana/" + mints.join(","),
-        { signal: AbortSignal.timeout(12000), redirect: "error" },
+        { signal: AbortSignal.timeout(12000), redirect: "manual" },
       );
       operations.dex_http_status = r.status;
       if (!r.ok) {
@@ -329,6 +330,7 @@ export async function run(
           );
         errors.push({ provider: "dexscreener", status: r.status });
         if (r.status === 403) stopReason = "provider_denied";
+        if (r.status >= 300 && r.status < 400) stopReason = "provider_redirect";
       } else {
         const raw = await r.json();
         if (!Array.isArray(raw)) throw Error("invalid_dex_schema");

@@ -1,0 +1,224 @@
+{
+  "at": "2026-11-14T12:24:12.475854+00:00",
+  "bindings": [
+    {
+      "database_id": "9f2f5da7-fa94-4a66-afc8-664e958cd80e",
+      "id": "9f2f5da7-fa94-4a66-afc8-664e958cd80e",
+      "name": "MONITOR_DB",
+      "type": "d1"
+    },
+    {
+      "name": "MONITOR_ENABLED",
+      "text": "false",
+      "type": "plain_text"
+    },
+    {
+      "name": "PILOT_AUTHORIZATION_ID",
+      "text": "d35d8e42-4d3d-4a4e-8240-de1f826aff2a",
+      "type": "plain_text"
+    },
+    {
+      "name": "SHUTDOWN_PROBE_ENABLED",
+      "text": "false",
+      "type": "plain_text"
+    }
+  ],
+  "authorization": {
+    "result": [
+      {
+        "results": [
+          {
+            "id": "d35d8e42-4d3d-4a4e-8240-de1f826aff2a",
+            "purpose": "edge-radar-staging",
+            "shutdown_test_id": "c0a72058-f9e4-4f91-bf8f-6334683938f6",
+            "kind": "pilot",
+            "started_at": 1794658490,
+            "expires_at": 1794660290,
+            "consumed": 1,
+            "activated_at": 1794658490,
+            "stopped_at": 1794658552,
+            "stop_reason": "pilot2_critical_round_failure",
+            "probe_requested": 0,
+            "probe_completed": 0,
+            "probe_result": null,
+            "created_at": 1794658215
+          }
+        ],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.809
+          },
+          "duration": 0.809,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 1,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      }
+    ],
+    "errors": [],
+    "messages": [],
+    "success": true
+  },
+  "counts_and_integrity": {
+    "result": [
+      {
+        "results": [
+          {
+            "contracts": 0
+          }
+        ],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.5067
+          },
+          "duration": 0.5067,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 0,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      },
+      {
+        "results": [
+          {
+            "observations": 0
+          }
+        ],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.318
+          },
+          "duration": 0.318,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 0,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      },
+      {
+        "results": [
+          {
+            "historical_runs": 2
+          }
+        ],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.1464
+          },
+          "duration": 0.1464,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 2,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      },
+      {
+        "results": [
+          {
+            "cohorts": 0
+          }
+        ],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.1586
+          },
+          "duration": 0.1586,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 0,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      },
+      {
+        "results": [
+          {
+            "quick_check": "ok"
+          }
+        ],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.9706
+          },
+          "duration": 0.9706,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 42,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      },
+      {
+        "results": [],
+        "success": true,
+        "meta": {
+          "served_by": "v3-prod",
+          "served_by_region": "OC",
+          "served_by_colo": "BNE",
+          "served_by_primary": true,
+          "timings": {
+            "sql_duration_ms": 0.1008
+          },
+          "duration": 0.1008,
+          "changes": 0,
+          "last_row_id": 0,
+          "changed_db": false,
+          "size_after": 102400,
+          "rows_read": 3,
+          "rows_written": 0,
+          "total_attempts": 1
+        }
+      }
+    ],
+    "errors": [],
+    "messages": [],
+    "success": true
+  }
+}

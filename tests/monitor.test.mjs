@@ -1296,3 +1296,47 @@ test("independent real-pilot path persists observations only after its shutdown 
     s.clean();
   }
 });
+
+test("Workers-compatible manual redirects stop without following or recording observations", async () => {
+  for (const provider of ["gecko", "dex"]) {
+    const s = setup(),
+      base = Math.floor(Date.now() / 900000) * 900,
+      at = provider === "gecko" ? base : base + 180;
+    try {
+      if (provider === "dex")
+        await s.db
+          .prepare(
+            "INSERT INTO catalog(mint,first_seen,last_seen,next_at) VALUES(?,?,?,?)",
+          )
+          .bind(mint, at, at, at)
+          .run();
+      let calls = 0;
+      const r = await run(
+        s.env,
+        async (url, options) => {
+          calls++;
+          assert.equal(options.redirect, "manual");
+          return new Response("", {
+            status: 302,
+            headers: { Location: "https://redirected.invalid/never-follow" },
+          });
+        },
+        at,
+      );
+      assert.equal(r.status, "partial");
+      assert.equal(calls, 1);
+      const state = await s.db
+        .prepare("SELECT paused,pause_reason FROM monitor_state")
+        .first();
+      assert.equal(state.paused, 1);
+      assert.equal(state.pause_reason, "provider_redirect");
+      assert.equal(
+        (await s.db.prepare("SELECT count(*) AS n FROM observations").first())
+          .n,
+        0,
+      );
+    } finally {
+      s.clean();
+    }
+  }
+});
