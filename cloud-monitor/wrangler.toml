@@ -12,4 +12,4 @@ crons = ["* * * * *"]
 [[d1_databases]]
 binding = "MONITOR_DB"
 database_name = "edge-radar-monitor-staging"
-database_id = "REPLACE_WITH_NEW_STAGING_DATABASE_ID"
+database_id = "9f2f5da7-fa94-4a66-afc8-664e958cd80e"
