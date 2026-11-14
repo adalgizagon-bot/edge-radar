@@ -1,0 +1,164 @@
+{
+  "generated_at": "2026-11-14T00:39:31.796825+00:00",
+  "jupiter_key_present": false,
+  "results": [
+    {
+      "name": "dex_profiles",
+      "url": "https://api.dexscreener.com/token-profiles/latest/v1",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.435658+00:00",
+      "host": "api.dexscreener.com",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "dex_prices",
+      "url": "https://api.dexscreener.com/tokens/v1/solana/So11111111111111111111111111111111111111112",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.437064+00:00",
+      "host": "api.dexscreener.com",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "gecko_new",
+      "url": "https://api.geckoterminal.com/api/v2/networks/solana/new_pools?include=base_token&page=1",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.437819+00:00",
+      "host": "api.geckoterminal.com",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "gecko_trending",
+      "url": "https://api.geckoterminal.com/api/v2/networks/solana/trending_pools?include=base_token&page=1",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.438627+00:00",
+      "host": "api.geckoterminal.com",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "solana_mint",
+      "url": "https://api.mainnet-beta.solana.com",
+      "method": "POST",
+      "checked_at": "2026-11-14T00:39:31.469648+00:00",
+      "host": "api.mainnet-beta.solana.com",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "solana_largest_accounts",
+      "url": "https://api.mainnet-beta.solana.com",
+      "method": "POST",
+      "checked_at": "2026-11-14T00:39:31.486211+00:00",
+      "host": "api.mainnet-beta.solana.com",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "bluesky_search",
+      "url": "https://public.api.bsky.app/xrpc/app.bsky.feed.searchPosts?q=So11111111111111111111111111111111111111112&limit=1&sort=latest",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.495075+00:00",
+      "host": "public.api.bsky.app",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "jupiter_quote",
+      "url": "https://api.jup.ag/swap/v1/quote?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&outputMint=So11111111111111111111111111111111111111112&amount=1000000&slippageBps=100&restrictIntermediateTokens=true",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.503498+00:00",
+      "host": "api.jup.ag",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "dex_docs",
+      "url": "https://docs.dexscreener.com/api/reference",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.513904+00:00",
+      "host": "docs.dexscreener.com",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "gecko_docs",
+      "url": "https://apiguide.geckoterminal.com/",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.522302+00:00",
+      "host": "apiguide.geckoterminal.com",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "solana_docs",
+      "url": "https://solana.com/docs/references/clusters",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.529570+00:00",
+      "host": "solana.com",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "bluesky_docs",
+      "url": "https://docs.bsky.app/docs/api/app-bsky-feed-search-posts",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.536328+00:00",
+      "host": "docs.bsky.app",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "jupiter_docs",
+      "url": "https://dev.jup.ag/docs/api-setup",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.543592+00:00",
+      "host": "dev.jup.ag",
+      "api_http_status": null,
+      "proxy_http_status": 403,
+      "stage": "proxy_connect_denied",
+      "note": "CONNECT rejected before TLS to destination; API status unknown"
+    },
+    {
+      "name": "allowed_control",
+      "url": "https://registry.npmjs.org/typescript/latest",
+      "method": "GET",
+      "checked_at": "2026-11-14T00:39:31.551249+00:00",
+      "host": "registry.npmjs.org",
+      "api_http_status": 200,
+      "proxy_http_status": null,
+      "stage": "upstream_response",
+      "bytes": 4833,
+      "final_host": "registry.npmjs.org",
+      "json_valid": true,
+      "result_shape": "dict",
+      "api_error": false
+    }
+  ]
+}

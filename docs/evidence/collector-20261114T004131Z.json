@@ -1,0 +1,33 @@
+{
+  "exit_code": 2,
+  "summary": {
+    "status": "partial",
+    "observations": 0,
+    "tokens": 0,
+    "failures": [
+      {
+        "component": "new_pools",
+        "error": "geckoterminal: Proxy CONNECT negado (HTTP 403); API não alcançada"
+      },
+      {
+        "component": "trending_pools",
+        "error": "geckoterminal: em pausa/backoff"
+      },
+      {
+        "component": "profiles",
+        "error": "dexscreener: Proxy CONNECT negado (HTTP 403); API não alcançada"
+      }
+    ],
+    "requests_remaining": 22,
+    "observed_at": 1794616892
+  },
+  "counts": {
+    "tokens": 0,
+    "snapshots": 0,
+    "assessments": 0,
+    "security": 0,
+    "social": 0,
+    "trades": 0
+  },
+  "integrity": "ok"
+}

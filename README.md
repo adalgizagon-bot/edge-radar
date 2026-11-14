@@ -20,7 +20,7 @@ npm run dev
 
 `npm run dev` inicia o serviço **somente em loopback**, porta 8090, e o coletor periódico. Não publique esse servidor administrativo sem autenticação. Os dados ficam em `.runtime/edge.sqlite3`; exporte `EDGE_DB` para outro volume persistente. Sem `.env` automático: exporte variáveis no shell, sem gravar secrets no projeto. Novas tarefas precisam reiniciar processos.
 
-O comando `npm run collect` executa uma rodada independente. Há lock de processo por banco e intervalo mínimo persistido. O botão **Coletar agora** respeita ambos; não ignora rate limits. Para iniciar a interface sem tráfego externo: `python3 -m server.app --no-collector`.
+O comando `npm run collect` executa uma rodada independente. Em execução única, retorna código 2 se a rodada terminar com falhas e sem observações, e 1 para erro interno. Código 0 também pode representar `not_due` ou `busy`: confira o status JSON; ele não comprova coleta nova nem validação de mercado. Há lock de processo por banco e intervalo mínimo persistido. O botão **Coletar agora** respeita ambos; não ignora rate limits. Para iniciar a interface sem tráfego externo: `python3 -m server.app --no-collector`.
 
 ## Arquitetura e decisão de infraestrutura
 

@@ -234,16 +234,26 @@ def main():
         level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s"
     )
     db = connect()
-    while True:
-        try:
-            result = collect(db)
-            print(dump(result), flush=True)
-        except Exception:
-            log.exception("Collection failed")
-        if args.once:
-            break
-        time.sleep(15)
+    try:
+        while True:
+            try:
+                result = collect(db)
+                print(dump(result), flush=True)
+            except Exception:
+                log.exception("Collection failed")
+                if args.once:
+                    return 1
+            else:
+                if args.once:
+                    # A degraded round with real observations can remain useful.
+                    # A round blocked before receiving any data is not success.
+                    if result["status"] == "partial" and not result["observations"]:
+                        return 2
+                    return 0
+            time.sleep(15)
+    finally:
+        db.close()
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
