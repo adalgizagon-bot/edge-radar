@@ -21,3 +21,7 @@ The authorized read-only endpoint /accounts/{account}/workers/observability/tele
 At 2026-11-14 11:04:31 UTC / 08:04:31 America/Sao_Paulo, delayed daily analytics reported: 888 account-wide Worker invocations, zero errors; D1 account-wide 724,422 rows read and 9,952 written. Of those, the new staging D1 reported 82 rows read and 28 written (includes prior setup today, not collection). Query metadata and later analytics can differ due to propagation. All remain below the owner's confirmed Free quotas. This is preparation consumption, not a collection pilot result.
 
 Before/after comparisons confirmed identical metadata for both legacy Workers and both legacy D1 databases. No writes or deployments targeted any of those resources. No payment, trading, main deployment or billing changes occurred.
+
+## Subsequent investigation
+
+The telemetry permission blocker was resolved using exact Worker/version GraphQL metrics without expanding the token. See GRAPHQL_PILOT_RESULT.md for the subsequent single authorization and preventive CPU stop. The blocked-activation account above describes the earlier preparation, not the final state of that subsequent attempt.

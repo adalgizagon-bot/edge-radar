@@ -781,3 +781,34 @@ test("future authorization and exhausted write quota fail closed", async () => {
     full.clean();
   }
 });
+
+test("arming a fresh pilot preserves its prior expired shutdown proof atomically", async () => {
+  const now = Math.floor(Date.now() / 1000);
+  const s = setup({ used: 0, start: now - 120, end: now - 60 });
+  try {
+    await s.db
+      .prepare("UPDATE pilot_control SET probe_requested=1 WHERE id=1")
+      .run();
+    await probe({ ...s.env, MONITOR_ENABLED: "false" });
+    await s.db
+      .prepare(
+        "UPDATE pilot_control SET used=1,started_at=?,expires_at=? WHERE id=1",
+      )
+      .bind(now, now + 1800)
+      .run();
+    const log = await s.db
+      .prepare("SELECT * FROM pilot_authorization_log WHERE id=1")
+      .first();
+    assert.equal(log.expires_at - log.started_at, 1800);
+    const prior = JSON.parse(log.previous_control);
+    assert.equal(prior.expires_at, now - 60);
+    assert.equal(JSON.parse(prior.probe_result).status, "pilot_expired");
+    await assert.rejects(
+      s.db
+        .prepare("UPDATE pilot_control SET expires_at=expires_at+1 WHERE id=1")
+        .run(),
+    );
+  } finally {
+    s.clean();
+  }
+});

@@ -1,0 +1,50 @@
+{
+  "worker": "edge-radar-monitor-staging",
+  "from": "2026-11-14T11:25:50+00:00",
+  "to": "2026-11-14T11:27:55.330202+00:00",
+  "available": true,
+  "cpu_unit": "microseconds",
+  "source": "workersInvocationsAdaptive (adaptive sampling; delayed analytics)",
+  "minutes": [
+    {
+      "dimensions": {
+        "datetimeMinute": "2026-11-14T11:26:00Z",
+        "scriptName": "edge-radar-monitor-staging",
+        "scriptVersion": "83b3085d-f3c9-4e04-bc76-8bedc1b8fa21",
+        "status": "success"
+      },
+      "max": {
+        "cpuTime": 1737
+      },
+      "sum": {
+        "cpuTimeUs": 1737,
+        "errors": 0,
+        "requests": 1,
+        "subrequests": 0
+      }
+    }
+  ],
+  "summary": [
+    {
+      "dimensions": {
+        "scriptName": "edge-radar-monitor-staging",
+        "scriptVersion": "83b3085d-f3c9-4e04-bc76-8bedc1b8fa21",
+        "status": "success"
+      },
+      "max": {
+        "cpuTime": 1737
+      },
+      "quantiles": {
+        "cpuTimeP50": 1737,
+        "cpuTimeP95": 1737,
+        "cpuTimeP99": 1737
+      },
+      "sum": {
+        "cpuTimeUs": 1737,
+        "errors": 0,
+        "requests": 1,
+        "subrequests": 0
+      }
+    }
+  ]
+}
