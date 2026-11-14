@@ -8,3 +8,6 @@ __pycache__/
 !.env.example
 test-results/
 playwright-report/
+
+# Wrangler local runtime fixtures and cache databases.
+**/.wrangler/
