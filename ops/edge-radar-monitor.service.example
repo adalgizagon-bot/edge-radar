@@ -1,0 +1,13 @@
+# Template only. Not installed or enabled by this change.
+[Unit]
+Description=Edge Radar research sampler (persistent disk required)
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=REPLACE_WITH_USER
+WorkingDirectory=/REPLACE_WITH_CHECKOUT
+Environment=EDGE_DB=/REPLACE_WITH_PERSISTENT_VOLUME/edge.sqlite3
+ExecStart=/usr/bin/python3 -m scripts.run_persistent --once
+NoNewPrivileges=true
+PrivateTmp=true

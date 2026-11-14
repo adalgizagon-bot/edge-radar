@@ -1,0 +1,9 @@
+[Unit]
+Description=Edge Radar research collection every three minutes
+[Timer]
+OnBootSec=60
+OnUnitInactiveSec=180
+Persistent=true
+Unit=edge-radar-monitor.service
+[Install]
+WantedBy=timers.target

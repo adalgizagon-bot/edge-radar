@@ -6,6 +6,8 @@ import math
 import os
 import re
 import time
+import random
+from email.utils import parsedate_to_datetime
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -41,6 +43,12 @@ class HTTP:
         self.remaining = budget
         self.last_observed_at = 0
         db.execute(
+            "CREATE TABLE IF NOT EXISTS http_inflight(provider TEXT PRIMARY KEY,expires INTEGER NOT NULL)"
+        )
+        db.execute(
+            "CREATE TABLE IF NOT EXISTS request_events(id INTEGER PRIMARY KEY,provider TEXT NOT NULL,method TEXT NOT NULL,attempted_at INTEGER NOT NULL,http_status INTEGER,error_kind TEXT,retry_at INTEGER)"
+        )
+        db.execute(
             "CREATE TABLE IF NOT EXISTS http_cache(key TEXT PRIMARY KEY,expires INTEGER NOT NULL,data TEXT NOT NULL,observed_at INTEGER NOT NULL DEFAULT 0)"
         )
 
@@ -54,6 +62,7 @@ class HTTP:
 
     def request(self, provider, url, ttl=60, body=None, headers=None, gap=2):
         at = now()
+        gap = max(gap, 10) if provider == "solana_rpc" else gap
         key = hashlib.sha256((url + dump(body)).encode()).hexdigest()
         cached = self.db.execute(
             "SELECT * FROM http_cache WHERE key=?", (key,)
@@ -63,8 +72,19 @@ class HTTP:
             return load(cached["data"])
         if self.remaining <= 0:
             raise SourceError("Orçamento de requisições da rodada esgotado")
+        # A single shared budget per database/day complements per-round limits.
+        self.db.execute(
+            "CREATE TABLE IF NOT EXISTS request_budget(day INTEGER PRIMARY KEY,requests INTEGER NOT NULL)"
+        )
         # Reserve provider slots atomically across collector and manual quote requests.
         with transaction(self.db):
+            day = at // 86400
+            self.db.execute("INSERT OR IGNORE INTO request_budget VALUES(?,0)", (day,))
+            used = self.db.execute(
+                "SELECT requests FROM request_budget WHERE day=?", (day,)
+            ).fetchone()[0]
+            if used >= 6000:
+                raise SourceError("Orçamento global diário esgotado")
             state = self.db.execute(
                 "SELECT * FROM source_state WHERE name=?", (provider,)
             ).fetchone()
@@ -78,6 +98,9 @@ class HTTP:
                 (provider, "unknown"),
             )
             self.db.execute(
+                "UPDATE request_budget SET requests=requests+1 WHERE day=?", (day,)
+            )
+            self.db.execute(
                 "UPDATE source_state SET last_attempt=?,requests=requests+1 WHERE name=?",
                 (slot, provider),
             )
@@ -88,6 +111,15 @@ class HTTP:
         ).fetchone()
         if current["next_attempt"] > now():
             raise SourceError(provider + ": em pausa/backoff")
+        with transaction(self.db):
+            self.db.execute("DELETE FROM http_inflight WHERE expires<=?", (now(),))
+            if self.db.execute(
+                "SELECT 1 FROM http_inflight WHERE provider=?", (provider,)
+            ).fetchone():
+                raise SourceError(provider + ": requisição em andamento; adiada")
+            self.db.execute(
+                "INSERT INTO http_inflight VALUES(?,?)", (provider, now() + 30)
+            )
         self.remaining -= 1
         request = urllib.request.Request(
             url,
@@ -120,13 +152,18 @@ class HTTP:
                 error
             )
             delay = min(3600, 60 * 2 ** min(failures, 6))
+            delay += random.randint(0, 15)
             if status == 429:
+                value = error.headers.get("Retry-After", "0") if error.headers else "0"
                 try:
-                    delay = max(
-                        delay, min(3600, int(error.headers.get("Retry-After", "0")))
-                    )
-                except (ValueError, AttributeError):
-                    pass
+                    retry = float(value)
+                except (ValueError, TypeError):
+                    try:
+                        retry = parsedate_to_datetime(value).timestamp() - now()
+                    except (ValueError, TypeError, OverflowError):
+                        retry = 0
+                # Never shorten a provider's Retry-After, including values > 1 hour.
+                delay = max(delay, math.ceil(retry))
             # Never persist full exception/URL; it could include private provider details.
             if proxy_denied:
                 message = "Proxy CONNECT negado (HTTP 403); API não alcançada"
@@ -138,7 +175,32 @@ class HTTP:
                 "UPDATE source_state SET status=?,failures=?,next_attempt=?,error=? WHERE name=?",
                 ("unavailable", failures, now() + delay, message, provider),
             )
+            self.db.execute(
+                "INSERT INTO request_events(provider,method,attempted_at,http_status,error_kind,retry_at) VALUES(?,?,?,?,?,?)",
+                (
+                    provider,
+                    body.get("method", "GET") if isinstance(body, dict) else "GET",
+                    at,
+                    status,
+                    "connect_denied"
+                    if proxy_denied
+                    else "http"
+                    if status
+                    else "transport_or_schema",
+                    now() + delay,
+                ),
+            )
             raise SourceError(provider + ": " + message) from None
+        finally:
+            self.db.execute("DELETE FROM http_inflight WHERE provider=?", (provider,))
+        self.db.execute(
+            "INSERT INTO request_events(provider,method,attempted_at,http_status) VALUES(?,?,?,200)",
+            (
+                provider,
+                body.get("method", "GET") if isinstance(body, dict) else "GET",
+                at,
+            ),
+        )
         self.db.execute(
             "UPDATE source_state SET status=?,last_success=?,failures=0,next_attempt=0,error=NULL WHERE name=?",
             ("ok", now(), provider),
@@ -147,6 +209,7 @@ class HTTP:
             "INSERT OR REPLACE INTO http_cache(key,expires,data,observed_at) VALUES(?,?,?,?)",
             (key, now() + ttl, dump(result), now()),
         )
+        self.db.execute("DELETE FROM http_cache WHERE expires<?", (now() - 3600,))
         self.last_observed_at = now()
         return result
 
@@ -324,18 +387,23 @@ class Security:
         ):
             raise SourceError("Conta não é mint SPL analisável")
         supply = number(info.get("supply"))
-        raw2 = self.http.request(
-            "solana_rpc",
-            rpc,
-            ttl=600,
-            body={
-                "jsonrpc": "2.0",
-                "id": 2,
-                "method": "getTokenLargestAccounts",
-                "params": [mint, {"commitment": "confirmed"}],
-            },
-            gap=3,
-        )
+        concentration_error = None
+        try:
+            raw2 = self.http.request(
+                "solana_rpc",
+                rpc,
+                ttl=600,
+                body={
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "getTokenLargestAccounts",
+                    "params": [mint, {"commitment": "confirmed"}],
+                },
+                gap=3,
+            )
+        except SourceError as error:
+            raw2 = {}
+            concentration_error = str(error)
         largest = raw2.get("result", {}).get("value", [])
         amounts = [number(x.get("amount")) for x in largest]
         max_pct = (
@@ -344,6 +412,17 @@ class Security:
             else None
         )
         return {
+            "complete": max_pct is not None,
+            "checks": {
+                "mint_authority": {"status": "observed"},
+                "freeze_authority": {"status": "observed"},
+                "token_program": {"status": "observed"},
+                "supply_decimals": {"status": "observed"},
+                "largest_accounts": {
+                    "status": "missing" if max_pct is None else "observed",
+                    "error": concentration_error,
+                },
+            },
             "mint_authority": info.get("mintAuthority"),
             "freeze_authority": info.get("freezeAuthority"),
             "decimals": info.get("decimals"),

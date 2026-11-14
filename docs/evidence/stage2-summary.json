@@ -1,0 +1,275 @@
+{
+  "checked_at_utc": "2026-11-14T01:09:19.256051+00:00",
+  "branch": "rebuild/memecoin-radar-v1",
+  "base_commit": "5ba1cc67a11052cddc6943ce0c9d7a8511227238",
+  "network": {
+    "spec_revision": "1",
+    "observed_spec_revision": "1",
+    "state": "enforced",
+    "observations_current": true,
+    "source_config_version_id": "6a1167747df8b2ca9033f7dad23a75be95c243e3161a4b815e7234d8093db1b5~cecfgver_6af7a09c948881a0874260067814bbce"
+  },
+  "counts": {
+    "tokens": 129,
+    "snapshots": 315,
+    "assessments": 201,
+    "tracking": 129,
+    "signals": 0,
+    "signal_outcomes": 0,
+    "trades": 0,
+    "sampling_gaps": 0,
+    "security_attempts": 2
+  },
+  "baseline_contracts": 53,
+  "baseline_observations_preserved": 91,
+  "new_contracts_stage2": 76,
+  "acceleration_confirmed": 0,
+  "revival_confirmed": 0,
+  "sufficient_acceleration_history": 16,
+  "basic_risk_complete": 0,
+  "security": [
+    {
+      "mint": "E5Ww5LyBHaxPYwogS7eFGnJcysUsuEzFGmDt51Z1pump",
+      "observed_at": 1794618070,
+      "data": "{\"complete\":false,\"checks\":{\"mint_authority\":{\"status\":\"observed\"},\"freeze_authority\":{\"status\":\"observed\"},\"token_program\":{\"status\":\"observed\"},\"supply_decimals\":{\"status\":\"observed\"},\"largest_accounts\":{\"status\":\"missing\",\"error\":\"solana_rpc: Resposta HTTP 429 após CONNECT; origem a confirmar\"}},\"mint_authority\":null,\"freeze_authority\":null,\"decimals\":6,\"largest_account_pct\":null,\"supply\":\"2000000000000000\",\"token_program\":\"TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb\",\"source\":\"solana_rpc\",\"observed_at\":1794618070,\"limitations\":[\"Contas de token não equivalem a holders: pools e custódias podem concentrar saldo.\",\"Criador, carteiras relacionadas, extensão Token-2022 e lock de liquidez não verificados.\"]}"
+    },
+    {
+      "mint": "HuAXPyDWDaMYFKuwQHpqL1oPnj93zdzWmtvFGzCeCUa7",
+      "observed_at": 1794618438,
+      "data": "{\"complete\":false,\"checks\":{\"mint_authority\":{\"status\":\"observed\"},\"freeze_authority\":{\"status\":\"observed\"},\"token_program\":{\"status\":\"observed\"},\"supply_decimals\":{\"status\":\"observed\"},\"largest_accounts\":{\"status\":\"missing\",\"error\":\"solana_rpc: Resposta HTTP 429 após CONNECT; origem a confirmar\"}},\"mint_authority\":null,\"freeze_authority\":null,\"decimals\":6,\"largest_account_pct\":null,\"supply\":\"955608235521669\",\"token_program\":\"TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb\",\"source\":\"solana_rpc\",\"observed_at\":1794618438,\"limitations\":[\"Contas de token não equivalem a holders: pools e custódias podem concentrar saldo.\",\"Criador, carteiras relacionadas, extensão Token-2022 e lock de liquidez não verificados.\"]}"
+    }
+  ],
+  "sources": [
+    {
+      "name": "geckoterminal",
+      "status": "ok",
+      "last_attempt": 1794618432,
+      "last_success": 1794618433,
+      "next_attempt": 0,
+      "failures": 0,
+      "requests": 6,
+      "error": null
+    },
+    {
+      "name": "dexscreener",
+      "status": "ok",
+      "last_attempt": 1794618437,
+      "last_success": 1794618437,
+      "next_attempt": 0,
+      "failures": 0,
+      "requests": 10,
+      "error": null
+    },
+    {
+      "name": "solana_rpc",
+      "status": "unavailable",
+      "last_attempt": 1794618447,
+      "last_success": 1794618438,
+      "next_attempt": 1794618569,
+      "failures": 1,
+      "requests": 6,
+      "error": "Resposta HTTP 429 após CONNECT; origem a confirmar"
+    },
+    {
+      "name": "bluesky",
+      "status": "unavailable",
+      "last_attempt": 1794618447,
+      "last_success": null,
+      "next_attempt": 1794618929,
+      "failures": 3,
+      "requests": 3,
+      "error": "Resposta HTTP 403 após CONNECT; origem a confirmar"
+    }
+  ],
+  "request_events": [
+    {
+      "id": 1,
+      "provider": "geckoterminal",
+      "method": "GET",
+      "attempted_at": 1794618429,
+      "http_status": 200,
+      "error_kind": null,
+      "retry_at": null
+    },
+    {
+      "id": 2,
+      "provider": "geckoterminal",
+      "method": "GET",
+      "attempted_at": 1794618429,
+      "http_status": 200,
+      "error_kind": null,
+      "retry_at": null
+    },
+    {
+      "id": 3,
+      "provider": "dexscreener",
+      "method": "GET",
+      "attempted_at": 1794618433,
+      "http_status": 200,
+      "error_kind": null,
+      "retry_at": null
+    },
+    {
+      "id": 4,
+      "provider": "dexscreener",
+      "method": "GET",
+      "attempted_at": 1794618433,
+      "http_status": 200,
+      "error_kind": null,
+      "retry_at": null
+    },
+    {
+      "id": 5,
+      "provider": "dexscreener",
+      "method": "GET",
+      "attempted_at": 1794618435,
+      "http_status": 200,
+      "error_kind": null,
+      "retry_at": null
+    },
+    {
+      "id": 6,
+      "provider": "solana_rpc",
+      "method": "getAccountInfo",
+      "attempted_at": 1794618437,
+      "http_status": 200,
+      "error_kind": null,
+      "retry_at": null
+    },
+    {
+      "id": 7,
+      "provider": "solana_rpc",
+      "method": "getTokenLargestAccounts",
+      "attempted_at": 1794618438,
+      "http_status": 429,
+      "error_kind": "http",
+      "retry_at": 1794618569
+    },
+    {
+      "id": 8,
+      "provider": "bluesky",
+      "method": "GET",
+      "attempted_at": 1794618447,
+      "http_status": 403,
+      "error_kind": "http",
+      "retry_at": 1794618929
+    }
+  ],
+  "runs": [
+    {
+      "id": 1,
+      "started_at": 1794617564,
+      "finished_at": 1794617576,
+      "status": "partial",
+      "data": {
+        "status": "partial",
+        "observations": 91,
+        "tokens": 53,
+        "failures": [
+          {
+            "component": "security",
+            "error": "solana_rpc: Resposta HTTP 429 após CONNECT; origem a confirmar"
+          },
+          {
+            "component": "security",
+            "error": "solana_rpc: em pausa/backoff"
+          },
+          {
+            "component": "social",
+            "error": "bluesky: Resposta HTTP 403 após CONNECT; origem a confirmar"
+          },
+          {
+            "component": "social",
+            "error": "bluesky: em pausa/backoff"
+          }
+        ],
+        "requests_remaining": 16,
+        "observed_at": 1794617572
+      }
+    },
+    {
+      "id": 2,
+      "started_at": 1794618059,
+      "finished_at": 1794618081,
+      "status": "partial",
+      "data": {
+        "status": "partial",
+        "observations": 130,
+        "requeried": 53,
+        "refreshed": 53,
+        "discovered": 39,
+        "tokens": 92,
+        "failures": [
+          {
+            "component": "security",
+            "error": "Concentração não observada; auditoria parcial"
+          },
+          {
+            "component": "social",
+            "error": "bluesky: Resposta HTTP 403 após CONNECT; origem a confirmar"
+          },
+          {
+            "component": "social",
+            "error": "bluesky: em pausa/backoff"
+          }
+        ],
+        "requests_remaining": 15,
+        "observed_at": 1794618070
+      }
+    },
+    {
+      "id": 3,
+      "started_at": 1794618429,
+      "finished_at": 1794618447,
+      "status": "partial",
+      "data": {
+        "status": "partial",
+        "observations": 94,
+        "requeried": 19,
+        "refreshed": 19,
+        "discovered": 37,
+        "tokens": 56,
+        "failures": [
+          {
+            "component": "security",
+            "error": "Concentração não observada; auditoria parcial"
+          },
+          {
+            "component": "social",
+            "error": "bluesky: Resposta HTTP 403 após CONNECT; origem a confirmar"
+          },
+          {
+            "component": "social",
+            "error": "bluesky: em pausa/backoff"
+          }
+        ],
+        "requests_remaining": 16,
+        "observed_at": 1794618437
+      }
+    }
+  ],
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "archive": "docs/evidence/stage2-history.sqlite3.gz",
+  "archive_sha256": "562e9cd44c7a00c1add903a8bbe3b635cfacac53df799e5c396d75bf98ce43f2",
+  "sqlite_sha256": "f82e4771125a4e01a026b889019d409cac454126058abc27e1cacb12b80bba64",
+  "deployed": false,
+  "production_database_modified": false,
+  "limitations": [
+    "No proven acceleration or revival in observed sample",
+    "No complete basic risk audits; largest accounts returned 429",
+    "Future real signals and their 5/15/30/60 minute outcomes pending",
+    "Cloudflare staging sampler tested with SQLite adapter, not deployed or remotely CPU-profiled",
+    "Full temporal engine remains in Python; Worker samples only"
+  ],
+  "contracts_reobserved_same_source": 56,
+  "tests": {
+    "python": 85,
+    "worker_sqlite": 6,
+    "ui_desktop_mobile": 6,
+    "build": "passed",
+    "typecheck": "passed",
+    "lint": "passed",
+    "production_integration": "not_run"
+  }
+}

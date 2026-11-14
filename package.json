@@ -6,12 +6,13 @@
   "scripts": {
     "build": "tsc && node scripts/build.mjs",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint web scripts tests/ui playwright.config.mjs eslint.config.js && .runtime/venv/bin/ruff check server tests scripts && .runtime/venv/bin/ruff format --check server tests scripts",
+    "lint": "eslint web scripts tests/ui tests/monitor.test.mjs cloud-monitor playwright.config.mjs eslint.config.js && .runtime/venv/bin/ruff check server tests scripts && .runtime/venv/bin/ruff format --check server tests scripts",
     "test": "python3 -m unittest discover -s tests -v",
     "test:ui": "playwright test",
     "dev": "python3 -m server.app",
     "collect": "python3 -m server.collector --once",
-    "format": "prettier --write web scripts/*.mjs tests/ui/*.mjs *.json *.mjs eslint.config.js && .runtime/venv/bin/ruff format server tests scripts"
+    "format": "prettier --write web scripts/*.mjs tests/ui/*.mjs *.json *.mjs eslint.config.js && .runtime/venv/bin/ruff format server tests scripts",
+    "test:monitor": "node --test tests/monitor.test.mjs"
   },
   "devDependencies": {
     "@eslint/js": "9.39.1",

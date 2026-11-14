@@ -13,6 +13,7 @@ from .db import connect, settings, save_settings, dump, load, now, history
 from .collector import collect, assessment
 from .sources import HTTP, Quotes, SourceError, MINT
 from .paper import roundtrip, open_position, report
+from . import tracking
 
 ROOT = Path(__file__).resolve().parent.parent
 log = logging.getLogger("edge.http")
@@ -53,6 +54,7 @@ def overview(db):
     run = db.execute("SELECT * FROM job_runs ORDER BY id DESC LIMIT 1").fetchone()
     running = db.execute("SELECT expires FROM jobs WHERE expires>?", (at,)).fetchone()
     return {
+        "tracking": tracking.report(db, at),
         "tokens": tokens,
         "total_tokens": db.execute("SELECT count(*) FROM tokens").fetchone()[0],
         "sources": source_rows,
@@ -121,6 +123,9 @@ class Handler(BaseHTTPRequestHandler):
             if path.startswith("/api/"):
                 db = connect()
                 config, revision = settings(db)
+                if method == "GET" and path == "/api/tracking":
+                    self.respond(200, tracking.report(db, now()))
+                    return
                 if method == "GET" and path == "/api/overview":
                     self.respond(200, overview(db))
                     return
@@ -154,6 +159,14 @@ class Handler(BaseHTTPRequestHandler):
                         raise ValueError("Contrato inválido")
                     x = assessment(db, mint)
                     x["history"] = history(db, mint, 1000)
+                    tracking.initialize(db)
+                    x["security_history"] = [
+                        load(r["data"])
+                        for r in db.execute(
+                            "SELECT data FROM security_attempts WHERE mint=? ORDER BY observed_at DESC,id DESC LIMIT 30",
+                            (mint,),
+                        )
+                    ]
                     x["assessment_history"] = [
                         load(r["data"])
                         for r in db.execute(

@@ -6,6 +6,7 @@ from .db import connect, now, dump, load, settings, ingest, history, acquire
 from .sources import HTTP, Market, Security, Social, Quotes, SourceError
 from .analysis import evaluate, social_summary
 from .paper import monitor, roundtrip, open_position
+from . import tracking
 
 log = logging.getLogger("edge.collector")
 
@@ -34,6 +35,7 @@ def assessment(db, mint, at=None, quote=None):
 
 def collect(db, http=None):
     at = now()
+    tracking.initialize(db)
     config, revision = settings(db)
     owner = uuid.uuid4().hex
     if not acquire(db, owner, at, ttl=900):
@@ -71,11 +73,7 @@ def collect(db, http=None):
         rows += attempt("trending_pools", lambda: market.gecko("trending", page), [])
         profiles = attempt("profiles", market.profiles, [])
         # Persisted queue does not depend on current ranking membership. Old tokens rotate fairly.
-        watched = [
-            r["mint"]
-            for r in db.execute("""SELECT t.mint,MAX(s.observed_at) AS refreshed FROM tokens t LEFT JOIN snapshots s ON s.mint=t.mint
-          WHERE t.active=1 GROUP BY t.mint ORDER BY refreshed ASC,t.first_seen ASC LIMIT 45""")
-        ]
+        watched = tracking.due(db, at, 60)
         open_mints = [
             r["mint"]
             for r in db.execute(
@@ -83,7 +81,7 @@ def collect(db, http=None):
             )
         ]
         mints = list(
-            dict.fromkeys(open_mints + profiles + watched + [r["mint"] for r in rows])
+            dict.fromkeys(open_mints + watched + profiles + [r["mint"] for r in rows])
         )[:90]
         for i in range(0, len(mints), 30):
             rows += attempt(
@@ -95,7 +93,12 @@ def collect(db, http=None):
         for x in rows:
             unique[(x["mint"], x["source"])] = x
         observed = now()
+        previously_known = {r["mint"] for r in db.execute("SELECT mint FROM tokens")}
         ingest(db, list(unique.values()), observed)
+        tracking.initialize(db)
+        tracking.attempted(
+            db, mints, list(unique.values()), observed, config["stale_seconds"]
+        )
         db.execute(
             "UPDATE tokens SET active=0,inactive_reason='Sem observação por prazo de expiração configurado' WHERE last_seen<? AND mint NOT IN (SELECT mint FROM trades WHERE status IN ('open','exit_unavailable'))",
             (observed - config["active_days"] * 86400,),
@@ -103,14 +106,45 @@ def collect(db, http=None):
         priority = [
             r["mint"]
             for r in db.execute(
-                """SELECT t.mint,COALESCE(sec.observed_at,0) AS checked FROM tokens t LEFT JOIN security sec ON sec.mint=t.mint WHERE t.active=1 ORDER BY checked ASC,t.last_seen DESC LIMIT 2"""
+                """SELECT t.mint,COALESCE(sec.observed_at,0) AS checked FROM tokens t LEFT JOIN security sec ON sec.mint=t.mint WHERE t.active=1 AND COALESCE(sec.observed_at,0)<? ORDER BY checked ASC,t.last_seen DESC LIMIT 1""",
+                (observed - 1800,),
             )
         ]
         for mint in priority:
             if config["security_enabled"]:
 
                 def audit(mint=mint):
-                    result = Security(http).inspect(mint)
+                    try:
+                        result = Security(http).inspect(mint)
+                    except SourceError as error:
+                        result = {
+                            "complete": False,
+                            "observed_at": now(),
+                            "checks": {
+                                k: {"status": "missing", "error": str(error)}
+                                for k in [
+                                    "mint_authority",
+                                    "freeze_authority",
+                                    "token_program",
+                                    "supply_decimals",
+                                    "largest_accounts",
+                                ]
+                            },
+                        }
+                        tracking.security_event(db, mint, result)
+                        db.execute(
+                            "INSERT OR REPLACE INTO security VALUES(?,?,?)",
+                            (mint, result["observed_at"], dump(result)),
+                        )
+                        raise
+                    if not result.get("complete", True):
+                        failures.append(
+                            {
+                                "component": "security",
+                                "error": "Concentração não observada; auditoria parcial",
+                            }
+                        )
+                    tracking.security_event(db, mint, result)
                     db.execute(
                         "INSERT OR REPLACE INTO security VALUES(?,?,?)",
                         (mint, result["observed_at"], dump(result)),
@@ -171,6 +205,7 @@ def collect(db, http=None):
         paper_opened = False
         for mint in dict.fromkeys(x["mint"] for x in rows):
             result = assessment(db, mint)
+            tracking.record(db, mint, result, now())
             a = result["assessment"]
             recent = db.execute(
                 "SELECT id FROM trades WHERE mint=? AND (status!=? OR closed_at>?)",
@@ -196,9 +231,13 @@ def collect(db, http=None):
                 "INSERT INTO assessments(mint,observed_at,config_version,data) VALUES(?,?,?,?)",
                 (mint, now(), revision, dump(result["assessment"])),
             )
+        tracking.outcomes(db, now())
         summary = {
             "status": "partial" if failures else "ok",
             "observations": len(unique),
+            "requeried": len(previously_known.intersection(mints)),
+            "refreshed": len(previously_known.intersection(x["mint"] for x in rows)),
+            "discovered": len({x["mint"] for x in rows} - previously_known),
             "tokens": len({x["mint"] for x in rows}),
             "failures": failures,
             "requests_remaining": http.remaining,

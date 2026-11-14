@@ -125,11 +125,18 @@ def evaluate(token, history, security, social, config, at, quote_check=None):
             spaced.append(x)
         if len(spaced) == 3:
             break
-    consistent = len(spaced) >= 3 and at - spaced[-1]["observed_at"] <= 2400
+    consistent = (
+        len(spaced) >= 3
+        and at - spaced[-1]["observed_at"] <= 2400
+        and all(
+            a["observed_at"] - b["observed_at"] <= 900
+            for a, b in zip(spaced, spaced[1:])
+        )
+    )
     baseline = spaced[-1] if consistent else {}
     deltas = {
         key: growth(latest.get(key), baseline.get(key))
-        for key in ["volume5m", "buys", "liquidity", "price"]
+        for key in ["volume5m", "buys", "unique_buyers", "liquidity", "price"]
     }
     volumes = [x.get("volume5m") for x in spaced]
     sustained = (
@@ -171,7 +178,9 @@ def evaluate(token, history, security, social, config, at, quote_check=None):
         flags.append("Liquidez abaixo do limite configurado")
     fresh_security = (
         security
-        if security and 0 <= at - security.get("observed_at", 0) <= 1800
+        if security
+        and security.get("token_program")
+        and 0 <= at - security.get("observed_at", 0) <= 1800
         else None
     )
     if fresh_security:
@@ -189,6 +198,12 @@ def evaluate(token, history, security, social, config, at, quote_check=None):
             flags.append("Programa ou extensões de token sem suporte de execução")
     else:
         missing.append("Auditoria on-chain ausente ou desatualizada")
+    if security and security.get("checks"):
+        missing.extend(
+            "On-chain pendente: " + k
+            for k, v in security["checks"].items()
+            if v.get("status") != "observed"
+        )
     if pressure is not None and pressure > 0.95 and buys is not None and buys >= 30:
         flags.append("Fluxo unilateral extremo: investigar manipulação")
     if deltas["liquidity"] is not None and deltas["liquidity"] < -20:
@@ -226,6 +241,10 @@ def evaluate(token, history, security, social, config, at, quote_check=None):
         if old_volume and latest.get("volume5m") is not None
         else None
     )
+    current = (
+        bool(latest)
+        and 0 <= at - latest.get("observed_at", 0) <= config["stale_seconds"]
+    )
     radars = {
         "new": {
             "eligible": age is not None and 0 <= age <= config["new_hours"] * 3600,
@@ -235,19 +254,30 @@ def evaluate(token, history, security, social, config, at, quote_check=None):
         "acceleration": {
             "eligible": True,
             "detected": bool(
-                consistent
+                current
+                and consistent
                 and sustained
+                and liquidity is not None
+                and liquidity >= config["min_liquidity"]
+                and latest.get("volume5m") is not None
+                and latest["volume5m"] >= config["min_volume5m"]
+                and pressure is not None
+                and pressure >= 0.6
+                and deltas["price"] is not None
+                and deltas["price"] >= 0
                 and (deltas["volume5m"] or 0) >= 50
                 and (deltas["buys"] or 0) >= 25
                 and deltas["liquidity"] is not None
                 and deltas["liquidity"] >= 0
             ),
-            "reason": "3 amostras da mesma fonte/pool, separadas por ≥5 min; volume +50%, compras +25%, liquidez estável",
+            "reason": "3 amostras atuais da mesma fonte/pool, separadas por 5–15 min; volume +50%, compras (transações) +25%, liquidez estável acima do mínimo, pressão ≥60% e preço sem queda",
         },
         "revival": {
             "eligible": age is not None and age >= config["revival_days"] * 86400,
             "detected": bool(
-                age is not None
+                current
+                and consistent
+                and age is not None
                 and age >= config["revival_days"] * 86400
                 and revival_ratio is not None
                 and revival_ratio >= 3
@@ -381,6 +411,24 @@ def evaluate(token, history, security, social, config, at, quote_check=None):
             else "no_divergence"
         )
     return {
+        "freshness": {
+            "status": "current"
+            if latest
+            and 0 <= at - latest.get("observed_at", 0) <= config["stale_seconds"]
+            else "stale"
+            if latest
+            else "missing",
+            "observed_at": latest.get("observed_at"),
+        },
+        "history_status": {
+            "acceleration": "sufficient" if consistent else "insufficient",
+            "revival": "sufficient"
+            if old_volume is not None and consistent
+            else "insufficient",
+            "same_pool_spaced_samples": len(spaced),
+            "token_age": "unknown",
+            "pool_age_seconds": age,
+        },
         "state": state,
         "label": STATES[state],
         "scores": scores,

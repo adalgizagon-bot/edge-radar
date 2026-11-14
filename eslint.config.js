@@ -28,6 +28,17 @@ export default [
     languageOptions: { globals: { console: "readonly", process: "readonly" } },
   },
   {
+    files: ["cloud-monitor/**/*.mjs", "tests/monitor.test.mjs"],
+    languageOptions: {
+      globals: {
+        fetch: "readonly",
+        Response: "readonly",
+        AbortSignal: "readonly",
+        URL: "readonly",
+      },
+    },
+  },
+  {
     files: ["tests/ui/**/*.mjs"],
     languageOptions: { globals: { document: "readonly", window: "readonly" } },
   },

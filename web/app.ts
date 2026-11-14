@@ -39,6 +39,11 @@ type Assessment = {
   limitations: string[];
   deltas: Record<string, Nullable>;
   observed_at: number;
+  history_status?: {
+    acceleration: string;
+    revival: string;
+    same_pool_spaced_samples: number;
+  };
   selected_strategy: string | null;
   social_timing: string;
 };
@@ -148,6 +153,30 @@ type Source = {
   error: string | null;
 };
 type Overview = {
+  tracking?: {
+    tracked: number;
+    due: number;
+    gaps: {
+      mint: string;
+      started_at: number;
+      ended_at: Nullable;
+      reason: string;
+    }[];
+    signals: {
+      id: number;
+      mint: string;
+      kind: string;
+      observed_at: number;
+      price_observed_at: number;
+      price: number;
+    }[];
+    outcomes: {
+      signal_id: number;
+      horizon: number;
+      status: string;
+      data: string;
+    }[];
+  };
   tokens: Token[];
   total_tokens: number;
   sources: Source[];
@@ -400,8 +429,30 @@ const options = (values: [string, string][], selected: string): string =>
         `<option value="${esc(v)}" ${v === selected ? "selected" : ""}>${esc(l)}</option>`,
     )
     .join("");
+function trackingPanel(): string {
+  const t = data!.tracking;
+  if (!t) return "";
+  return `<section class="panel gap-top"><div class="panel-head"><h2>Continuidade e avaliação dos alertas</h2><span class="tag">${t.tracked} acompanhados · ${t.due} pendentes</span></div><div class="panel-body"><p class="sub">${t.gaps.filter((g) => g.ended_at === null).length} lacunas abertas nas últimas 100 registradas. Sair do ranking não remove o contrato da fila. Histórico insuficiente permanece identificado.</p><p class="sub">Horizontes de 5, 15, 30 e 60 min usam a mesma fonte e pool, com tolerância de 3 min. Máximas e mínimas são apenas das amostras; não representam retorno executável.</p>${
+    t.signals.length
+      ? `<div class="table-scroll"><table><thead><tr><th>Alerta</th><th>Contrato</th><th>Horário do alerta / preço</th><th>Preço observado</th><th>Acompanhamento</th></tr></thead><tbody>${t.signals
+          .map(
+            (s) =>
+              `<tr><td>${esc(s.kind)}</td><td><button class="link-button" data-detail="${esc(s.mint)}">${esc(s.mint.slice(0, 8))}…</button></td><td>${date(s.observed_at)}<div class="tiny">Preço: ${date(s.price_observed_at)}</div></td><td>${usd(s.price)}</td><td>${
+                t.outcomes
+                  .filter((o) => o.signal_id === s.id)
+                  .map((o) => {
+                    const x = JSON.parse(o.data);
+                    return `${o.horizon}m: ${o.status === "observed" ? pct(x.change_pct) : o.status === "missing" ? "sem amostra" : "pendente"} · máxima amostrada ${pct(x.sampled_max_gain_pct)} · mínima ${pct(x.sampled_max_drawdown_pct)} · liquidez mín. ${usd(x.min_observed_liquidity)}`;
+                  })
+                  .join("<br>") || "Aguardando dados futuros"
+              }</td></tr>`,
+          )
+          .join("")}</tbody></table></div>`
+      : '<p class="sub gap-top">Ainda sem alertas cronológicos de aceleração ou retomada. Nenhuma amostra é criada para completar janelas.</p>'
+  }</div></section>`;
+}
 function radarPage(): string {
-  return `${radarCards()}<section class="panel"><div class="panel-head"><div><h2>Universo monitorado</h2><p class="sub">${data!.total_tokens} contratos preservados · inativos continuam no histórico</p></div><span class="tag">Solana / SPL</span></div><div class="filterbar"><label>Buscar moeda ou contrato<input id="search" type="search" value="${esc(filters.search)}" placeholder="Símbolo, nome, contrato"></label><label>Radar<select data-filter="radar">${options(
+  return `${radarCards()}${trackingPanel()}<section class="panel"><div class="panel-head"><div><h2>Universo monitorado</h2><p class="sub">${data!.total_tokens} contratos preservados · inativos continuam no histórico</p></div><span class="tag">Solana / SPL</span></div><div class="filterbar"><label>Buscar moeda ou contrato<input id="search" type="search" value="${esc(filters.search)}" placeholder="Símbolo, nome, contrato"></label><label>Radar<select data-filter="radar">${options(
     [
       ["all", "Todos os radares"],
       ["new", "A · Moedas novas"],
@@ -804,7 +855,7 @@ function renderDetail(t: Token): void {
       ["liquidity", "Liquidez (US$)"],
     ],
     "price",
-  )}</select></label></div><div id="detail-chart">${chart(h, "price")}</div></section><div class="panel-grid two"><section class="panel"><div class="panel-head"><h2>Condições para simulação</h2></div><div class="panel-body">${a.checks.map((c) => `<div class="check ${c.passed ? "pass" : ""}"><span class="symbol">${c.passed ? "✓" : c.passed === null ? "?" : "○"}</span><div><strong>${esc(c.label)}</strong><p>${c.passed ? "Condição atendida." : esc(c.change)}</p></div></div>`).join("")}<p class="validation-note">“Entrada validada” refere-se exclusivamente a uma estimativa de simulação. Não certifica segurança ou execução futura.</p><button class="primary" id="paper-open" ${!data!.paper.quote_available ? "disabled" : ""}>Avaliar rotas e simular ${usd(data!.config.paper_usd)}</button>${!data!.paper.quote_available ? '<p class="sub">Jupiter sem credencial opcional. Não há estimativa executável para abrir posição.</p>' : ""}</div></section><section class="panel"><div class="panel-head"><h2>Riscos e dados ausentes</h2></div><div class="panel-body">${a.flags.length ? `<ul class="details-list negative">${a.flags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : '<p class="sub">Nenhum alerta nas informações disponíveis. Isso não significa que o token seja seguro.</p>'}<h3 class="gap-top">Verificações pendentes</h3><ul class="details-list">${[...a.missing, ...a.limitations].map((x) => `<li>${esc(x)}</li>`).join("")}</ul>${t.security ? `<h3 class="gap-top">Observações on-chain</h3><p class="sub">Emissão: ${t.security.mint_authority ? "autoridade ativa" : "sem autoridade registrada"} · Freeze: ${t.security.freeze_authority ? "autoridade ativa" : "sem autoridade registrada"}</p><p class="sub">Maior conta: ${pct(t.security.largest_account_pct as Nullable)} do supply. Pode ser pool ou custódia; não equivale a concentração de holders.</p>` : ""}</div></section></div><section class="panel gap-top"><div class="panel-head"><h2>Identificação e sinais sociais</h2></div><div class="panel-body"><div class="row"><p class="sub">Menções: ${fmt(t.social.mentions)} · autores: ${fmt(t.social.authors)} · crescimento: ${pct(t.social.growth_pct)}</p><span class="tag">${esc(a.social_timing)}</span></div><p class="sub gap-top">${esc(t.social.limitations.join(" "))}</p><h3 class="gap-top">Radares</h3>${Object.entries(
+  )}</select></label></div><div id="detail-chart">${chart(h, "price")}</div></section><div class="panel-grid two"><section class="panel"><div class="panel-head"><h2>Condições para simulação</h2></div><div class="panel-body">${a.checks.map((c) => `<div class="check ${c.passed ? "pass" : ""}"><span class="symbol">${c.passed ? "✓" : c.passed === null ? "?" : "○"}</span><div><strong>${esc(c.label)}</strong><p>${c.passed ? "Condição atendida." : esc(c.change)}</p></div></div>`).join("")}<p class="validation-note">“Entrada validada” refere-se exclusivamente a uma estimativa de simulação. Não certifica segurança ou execução futura.</p><button class="primary" id="paper-open" ${!data!.paper.quote_available ? "disabled" : ""}>Avaliar rotas e simular ${usd(data!.config.paper_usd)}</button>${!data!.paper.quote_available ? '<p class="sub">Jupiter sem credencial opcional. Não há estimativa executável para abrir posição.</p>' : ""}</div></section><section class="panel"><div class="panel-head"><h2>Riscos e dados ausentes</h2></div><div class="panel-body">${a.flags.length ? `<ul class="details-list negative">${a.flags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : '<p class="sub">Nenhum alerta nas informações disponíveis. Isso não significa que o token seja seguro.</p>'}<h3 class="gap-top">Verificações pendentes</h3><ul class="details-list">${[...a.missing, ...a.limitations].map((x) => `<li>${esc(x)}</li>`).join("")}</ul>${t.security && t.security.token_program ? `<h3 class="gap-top">Observações on-chain</h3><p class="sub">Emissão: ${t.security.mint_authority ? "autoridade ativa" : "sem autoridade registrada"} · Freeze: ${t.security.freeze_authority ? "autoridade ativa" : "sem autoridade registrada"}</p><p class="sub">Maior conta: ${pct(t.security.largest_account_pct as Nullable)} do supply. Pode ser pool ou custódia; não equivale a concentração de holders.</p>` : ""}</div></section></div><section class="panel gap-top"><div class="panel-head"><h2>Identificação e sinais sociais</h2></div><div class="panel-body"><div class="row"><p class="sub">Menções: ${fmt(t.social.mentions)} · autores: ${fmt(t.social.authors)} · crescimento: ${pct(t.social.growth_pct)}</p><span class="tag">${esc(a.social_timing)}</span></div><p class="sub gap-top">${esc(t.social.limitations.join(" "))}</p><h3 class="gap-top">Histórico temporal</h3><p class="sub">Aceleração: ${esc(a.history_status?.acceleration ?? "insufficient")} · retomada: ${esc(a.history_status?.revival ?? "insufficient")} · ${a.history_status?.same_pool_spaced_samples ?? 0}/3 amostras espaçadas da mesma fonte/pool. Idade do token: não observada.</p><h3 class="gap-top">Radares</h3>${Object.entries(
     a.radars,
   )
     .map(

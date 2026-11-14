@@ -19,7 +19,7 @@ jobs:
           python-version: '3.12'
       - run: npm ci --no-audit --no-fund
       - run: python3 -m venv .runtime/venv && .runtime/venv/bin/pip install -r requirements-dev.txt
-      - run: npm run build && npm run typecheck && npm run lint && npm test
+      - run: npm run build && npm run typecheck && npm run lint && npm test && npm run test:monitor
       - run: npx playwright install --with-deps chromium
       - name: Desktop and mobile browser tests
         run: |
