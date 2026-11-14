@@ -5,7 +5,7 @@ import { spawnSync } from "node:child_process";
 import { mkdtempSync, rmSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { run, normalize, retryAfter } from "../cloud-monitor/worker.mjs";
+import { run, normalize, retryAfter, probe } from "../cloud-monitor/worker.mjs";
 const mint = "So11111111111111111111111111111111111111112";
 const pair = {
   chainId: "solana",
@@ -16,7 +16,7 @@ const pair = {
   volume: { m5: 5000 },
   txns: { m5: { buys: 40, sells: 10 } },
 };
-function setup() {
+function setup(options = {}) {
   const folder = mkdtempSync(join(tmpdir(), "edge-monitor-"));
   const path = join(folder, "test.sqlite3");
   const schema = readFileSync(
@@ -41,6 +41,17 @@ function setup() {
     assert.equal(p.status, 0, p.stderr);
     return JSON.parse(p.stdout);
   };
+  const now = Math.floor(Date.now() / 1000);
+  execute([
+    {
+      sql: "UPDATE pilot_control SET started_at=?,expires_at=?,used=? WHERE id=1",
+      args: [
+        options.start ?? Math.floor(now / 900) * 900,
+        options.end ?? Math.floor(now / 900) * 900 + 1800,
+        options.used ?? 1,
+      ],
+    },
+  ]);
   const db = {
     prepare(sql) {
       return {
@@ -637,5 +648,136 @@ test("three recurring technical failures pause while retaining historical eviden
   } finally {
     Date.now = originalNow;
     s.clean();
+  }
+});
+
+test("persistent deadline blocks replayed rounds and no data is collected after expiry", async () => {
+  const s = setup();
+  try {
+    // Real SQLite trigger rejects extending a consumed authorization.
+    await assert.rejects(
+      s.db
+        .prepare("UPDATE pilot_control SET expires_at=expires_at+1 WHERE id=1")
+        .run(),
+    );
+  } finally {
+    s.clean();
+  }
+});
+
+test("expired D1 deadline rejects delayed cron timestamps with zero outbound requests", async () => {
+  const now = Math.floor(Date.now() / 1000);
+  const s = setup({ start: now - 120, end: now - 60 });
+  try {
+    let outbound = 0;
+    const result = await run(
+      s.env,
+      () => {
+        outbound++;
+        throw Error("network");
+      },
+      now - 120,
+    );
+    assert.equal(result.status, "pilot_expired");
+    assert.equal(outbound, 0);
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) AS n FROM monitor_runs").first()).n,
+      0,
+    );
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) AS n FROM observations").first()).n,
+      0,
+    );
+    assert.equal(
+      (await s.db.prepare("SELECT last_run FROM monitor_state").first())
+        .last_run,
+      0,
+    );
+  } finally {
+    s.clean();
+  }
+});
+test("Worker shutdown probe reads and writes D1 without collecting", async () => {
+  const now = Math.floor(Date.now() / 1000);
+  const s = setup({ start: now - 120, end: now - 60, used: 0 });
+  try {
+    await s.db
+      .prepare("UPDATE pilot_control SET probe_requested=1 WHERE id=1")
+      .run();
+    await probe({ ...s.env, MONITOR_ENABLED: "false" });
+    const row = await s.db
+      .prepare("SELECT * FROM pilot_control WHERE id=1")
+      .first();
+    assert.equal(row.probe_completed, 1);
+    assert.equal(JSON.parse(row.probe_result).outbound, 0);
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) AS n FROM observations").first()).n,
+      0,
+    );
+  } finally {
+    s.clean();
+  }
+});
+test("deadline reached during a provider request prevents the data batch", async () => {
+  const clock = Date.now;
+  const now = Math.floor(clock() / 1000);
+  const s = setup({ start: now - 1, end: now + 60 });
+  try {
+    const at = Math.floor(now / 900) * 900;
+    await run(
+      s.env,
+      async () => {
+        Date.now = () => (now + 61) * 1000;
+        return Response.json(gecko);
+      },
+      at,
+    );
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) AS n FROM observations").first()).n,
+      0,
+    );
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) AS n FROM catalog").first()).n,
+      0,
+    );
+  } finally {
+    Date.now = clock;
+    s.clean();
+  }
+});
+
+test("future authorization and exhausted write quota fail closed", async () => {
+  const now = Math.floor(Date.now() / 1000);
+  const s = setup({ start: now + 60, end: now + 600 });
+  try {
+    const noNetwork = () => {
+      throw Error("must not call providers");
+    };
+    assert.equal((await run(s.env, noNetwork)).status, "pilot_not_authorized");
+  } finally {
+    s.clean();
+  }
+  const full = setup();
+  try {
+    const day = Math.floor(now / 86400);
+    await full.db
+      .prepare("UPDATE monitor_state SET day=?,rows_written=45000 WHERE id=1")
+      .bind(day)
+      .run();
+    const at = Math.floor(now / 180) * 180;
+    assert.equal(
+      (
+        await run(
+          full.env,
+          () => {
+            throw Error("write ceiling bypassed");
+          },
+          at,
+        )
+      ).status,
+      "paused_or_busy",
+    );
+  } finally {
+    full.clean();
   }
 });

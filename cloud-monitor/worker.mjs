@@ -57,13 +57,38 @@ export async function run(
   at = Math.floor(Date.now() / 60000) * 60,
 ) {
   if (env.MONITOR_ENABLED !== "true") return { status: "disabled" };
+  // Wall clock, never the cron timestamp: delayed/replayed events cannot reopen a pilot.
+  const pilot = await env.MONITOR_DB.prepare(
+    "SELECT * FROM pilot_control WHERE id=1 AND purpose='edge-radar-staging'",
+  ).first();
+  const live = () =>
+    pilot &&
+    pilot.used === 1 &&
+    pilot.started_at <= Math.floor(Date.now() / 1000) &&
+    pilot.expires_at > Math.floor(Date.now() / 1000) &&
+    pilot.expires_at - pilot.started_at <= 1800;
+  if (pilot && pilot.expires_at <= Math.floor(Date.now() / 1000))
+    return { status: "pilot_expired" };
+  if (!live()) return { status: "pilot_not_authorized" };
+  const upstream = fetcher;
+  fetcher = async (url, options = {}) => {
+    if (!live()) throw Error("pilot_expired");
+    // Abort an in-flight request at the persisted deadline too.
+    return upstream(url, {
+      ...options,
+      signal: AbortSignal.any([
+        ...(options.signal ? [options.signal] : []),
+        AbortSignal.timeout(Math.max(1, pilot.expires_at * 1000 - Date.now())),
+      ]),
+    });
+  };
   const rotation = at % 180 === 0;
   const reserveSlots = rotation ? (at % 900 === 0 ? 10 : 8) : 2;
   const reserveWrites = 40 + reserveSlots * 8;
   const db = env.MONITOR_DB,
     owner = crypto.randomUUID(),
     day = Math.floor(at / 86400);
-  let reads = 0,
+  let reads = 1,
     writes = 0,
     bytes = 0,
     calls = 0,
@@ -431,6 +456,13 @@ export async function run(
           pause,
         ),
     );
+    // Abort the atomic batch if the deadline passed while providers were responding.
+    statements.unshift(
+      db.prepare(
+        "UPDATE monitor_state SET lease_until=CASE WHEN EXISTS(SELECT 1 FROM pilot_control WHERE id=1 AND used=1 AND started_at<=unixepoch() AND expires_at>unixepoch()) THEN lease_until ELSE NULL END WHERE id=1",
+      ),
+    );
+    if (!live()) throw Error("pilot_expired");
     await meter(() => db.batch(statements));
     // Reserving first survives crashes; measured totals include the data batch, with a small allowance for this update itself.
     await meter(() =>
@@ -498,6 +530,36 @@ export async function run(
     return { status: "failed" };
   }
 }
+export async function probe(env) {
+  const row = await env.MONITOR_DB.prepare(
+    "SELECT * FROM pilot_control WHERE id=1",
+  ).first();
+  if (!row || row.probe_requested <= row.probe_completed) return;
+  // The integration probe can only run against an expired, unused authorization.
+  if (row.used !== 0 || row.expires_at > Math.floor(Date.now() / 1000)) return;
+  let outbound = 0;
+  const result = await run({ ...env, MONITOR_ENABLED: "true" }, () => {
+    outbound++;
+    throw Error("probe must never contact a provider");
+  });
+  if (outbound || result.status !== "pilot_expired")
+    throw Error("shutdown_probe_failed");
+  const integrity = await env.MONITOR_DB.prepare("PRAGMA quick_check").all();
+  if (integrity.results.some((x) => x.quick_check !== "ok"))
+    throw Error("probe_integrity_failed");
+  const proof = JSON.stringify({
+    status: result.status,
+    outbound,
+    quick_check: "ok",
+    read_write: "ok",
+  });
+  await env.MONITOR_DB.prepare(
+    "UPDATE pilot_control SET probe_completed=probe_requested,probe_result=? WHERE id=1 AND used=0 AND expires_at<=unixepoch()",
+  )
+    .bind(proof)
+    .run();
+  console.log(JSON.stringify({ shutdown_probe: proof }));
+}
 export default {
   async scheduled(event, env, ctx) {
     if (Date.now() - event.scheduledTime > 30000) {
@@ -505,7 +567,15 @@ export default {
       return;
     }
     ctx.waitUntil(
-      run(env, fetch, Math.floor(event.scheduledTime / 60000) * 60),
+      (async () => {
+        await probe(env);
+        const result = await run(
+          env,
+          fetch,
+          Math.floor(event.scheduledTime / 60000) * 60,
+        );
+        console.log(JSON.stringify({ dispatch: result }));
+      })(),
     );
   },
   async fetch() {
