@@ -100,7 +100,9 @@ export function transition(x, state, fastCount, at) {
     previous && previous[key] > 0 && x[key] !== null
       ? (x[key] / previous[key] - 1) * 100
       : null;
+  const history = [...recent, x].slice(-14);
   return {
+    history,
     watch: {
       elapsed_seconds: previous ? x.observed_at - previous.observed_at : null,
       price_change_pct: delta("price"),
@@ -124,7 +126,7 @@ export function transition(x, state, fastCount, at) {
           ? "promising"
           : "rotation",
     next_at: at + (tier === "fast" ? 180 : 1800),
-    recent: JSON.stringify([...recent, x].slice(-14)),
+    recent: JSON.stringify(history),
   };
 }
 export function capacity(follow = 123, fast = 6) {

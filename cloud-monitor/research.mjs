@@ -1,5 +1,12 @@
+import { DUE_COHORT } from "./schedule.mjs";
 import { PROTOCOL } from "./protocol.mjs";
 export { PROTOCOL };
+const PROTOCOL_JSON = JSON.stringify(PROTOCOL);
+const BASELINE_SQL = Array.from(
+  { length: 6 },
+  () =>
+    "SELECT data FROM (SELECT data FROM observations WHERE mint=? AND observed_at>=? AND observed_at<? ORDER BY observed_at LIMIT 1)",
+).join(" UNION ALL ");
 function bucket(x, at) {
   const age = x.pool_created ? at - x.pool_created : null;
   return age === null || age < 0
@@ -126,9 +133,8 @@ export function match(alert, candidates, at) {
       })[0] || null
   );
 }
-export function outcome(baseline, samples, alertAt, horizon, at, p = PROTOCOL) {
-  const target = alertAt + horizon * 60;
-  const valid = samples
+function orderedSamples(baseline, samples, alertAt, at) {
+  return samples
     .filter(
       (x) =>
         x.observed_at > alertAt &&
@@ -138,6 +144,18 @@ export function outcome(baseline, samples, alertAt, horizon, at, p = PROTOCOL) {
         x.price > 0,
     )
     .sort((a, b) => a.observed_at - b.observed_at);
+}
+export function outcome(
+  baseline,
+  samples,
+  alertAt,
+  horizon,
+  at,
+  p = PROTOCOL,
+  prepared,
+) {
+  const target = alertAt + horizon * 60;
+  const valid = prepared ?? orderedSamples(baseline, samples, alertAt, at);
   const end = valid.find(
       (x) =>
         x.observed_at >= target &&
@@ -217,14 +235,12 @@ export async function research(db, states, transitions, best, at, read) {
     has_alert: false,
   }));
   for (const x of snapshot) {
-    const recent = JSON.parse(transitions.get(x.mint).recent);
+    const recent =
+      transitions.get(x.mint).history ??
+      JSON.parse(transitions.get(x.mint).recent);
     let baseline = [];
-    if (bucket(x, at) === "old" && recent.length >= 3) {
-      const sql = Array.from(
-        { length: 6 },
-        () =>
-          "SELECT data FROM (SELECT data FROM observations WHERE mint=? AND observed_at>=? AND observed_at<? ORDER BY observed_at LIMIT 1)",
-      ).join(" UNION ALL ");
+    x.kind = detect(x, recent, [], at);
+    if (!x.kind && bucket(x, at) === "old" && recent.length >= 3) {
       const args = Array.from({ length: 6 }, (_, i) => [
         x.mint,
         at - 172800 + i * 14400,
@@ -232,13 +248,13 @@ export async function research(db, states, transitions, best, at, read) {
       ]).flat();
       const r = await read(() =>
         db
-          .prepare(sql)
+          .prepare(BASELINE_SQL)
           .bind(...args)
           .all(),
       );
       baseline = r.results.map((v) => JSON.parse(v.data));
     }
-    x.kind = detect(x, recent, baseline, at);
+    if (!x.kind && baseline.length) x.kind = detect(x, recent, baseline, at);
     x.has_alert = !!x.kind || (states.get(x.mint)?.last_alert || 0) > at - 3600;
     if (x.kind && (states.get(x.mint)?.last_alert || 0) <= at - 3600)
       events.push(x);
@@ -286,7 +302,7 @@ export async function research(db, states, transitions, best, at, read) {
           alert.mint,
           control?.mint ?? null,
           at,
-          JSON.stringify(PROTOCOL),
+          PROTOCOL_JSON,
           JSON.stringify(data),
         ),
     );
@@ -309,8 +325,9 @@ export async function research(db, states, transitions, best, at, read) {
   const cohorts = await read(() =>
     db
       .prepare(
-        "SELECT * FROM research_cohorts WHERE completed=0 ORDER BY alert_at LIMIT 4",
+        `SELECT c.* FROM research_cohorts c WHERE ${DUE_COHORT} ORDER BY c.alert_at LIMIT 4`,
       )
+      .bind(at)
       .all(),
   );
   let finalized = 0;
@@ -328,6 +345,12 @@ export async function research(db, states, transitions, best, at, read) {
     for (const role of ["alert", "control"]) {
       if (finalized >= 8) break;
       const base = data[role];
+      const due = p.horizons.filter(
+        (h) =>
+          !existing.results.some((x) => x.role === role && x.horizon === h) &&
+          (!base || at >= c.alert_at + h * 60),
+      );
+      if (!due.length) continue;
       let samples = [];
       if (base && at >= c.alert_at + 300) {
         const rows = await read(() =>
@@ -342,12 +365,15 @@ export async function research(db, states, transitions, best, at, read) {
         const current = best.get(base.mint);
         if (current) samples.push(current);
       }
-      for (const h of p.horizons) {
+      const prepared = base
+        ? orderedSamples(base, samples, c.alert_at, at)
+        : null;
+      for (const h of due) {
         if (finalized >= 8) break;
         if (existing.results.some((x) => x.role === role && x.horizon === h))
           continue;
         const result = base
-          ? outcome(base, samples, c.alert_at, h, at, p)
+          ? outcome(base, samples, c.alert_at, h, at, p, prepared)
           : {
               status: "unmatched",
               data: {

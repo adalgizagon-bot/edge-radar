@@ -1,10 +1,9 @@
 // Synthetic fixtures are test-only. Real SQLite executes the exact D1 statements.
+import { setup } from "./helpers/monitor-db.mjs";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, rmSync, readFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
+
 import { run, normalize, retryAfter, probe } from "../cloud-monitor/worker.mjs";
 const mint = "So11111111111111111111111111111111111111112";
 const pair = {
@@ -16,72 +15,6 @@ const pair = {
   volume: { m5: 5000 },
   txns: { m5: { buys: 40, sells: 10 } },
 };
-function setup(options = {}) {
-  const folder = mkdtempSync(join(tmpdir(), "edge-monitor-"));
-  const path = join(folder, "test.sqlite3");
-  const schema = readFileSync(
-    new URL("../cloud-monitor/schema.sql", import.meta.url),
-    "utf8",
-  );
-  const init = spawnSync(
-    "python3",
-    [
-      "-c",
-      "import sqlite3,sys; d=sqlite3.connect(sys.argv[1]); d.executescript(sys.stdin.read()); d.close()",
-      path,
-    ],
-    { input: schema, encoding: "utf8" },
-  );
-  assert.equal(init.status, 0, init.stderr);
-  const execute = (statements) => {
-    const p = spawnSync("python3", ["tests/monitor_sqlite_bridge.py"], {
-      input: JSON.stringify({ path, statements }),
-      encoding: "utf8",
-    });
-    assert.equal(p.status, 0, p.stderr);
-    return JSON.parse(p.stdout);
-  };
-  const now = Math.floor(Date.now() / 1000);
-  execute([
-    {
-      sql: "UPDATE pilot_control SET started_at=?,expires_at=?,used=? WHERE id=1",
-      args: [
-        options.start ?? Math.floor(now / 900) * 900,
-        options.end ?? Math.floor(now / 900) * 900 + 1800,
-        options.used ?? 1,
-      ],
-    },
-  ]);
-  const db = {
-    prepare(sql) {
-      return {
-        sql,
-        args: [],
-        bind(...args) {
-          this.args = args;
-          return this;
-        },
-        async run() {
-          return execute([this])[0];
-        },
-        async first() {
-          return execute([this])[0].results[0] || null;
-        },
-        async all() {
-          return execute([this])[0];
-        },
-      };
-    },
-    async batch(s) {
-      return execute(s);
-    },
-  };
-  return {
-    db,
-    env: { MONITOR_ENABLED: "true", MONITOR_DB: db },
-    clean: () => rmSync(folder, { recursive: true, force: true }),
-  };
-}
 const gecko = {
   data: [{ relationships: { base_token: { data: { id: "solana_" + mint } } } }],
 };
@@ -136,7 +69,7 @@ test("429 persists provider cooldown across invocations without repeated request
       });
     };
     assert.equal((await run(s.env, f, at)).status, "partial");
-    assert.equal((await run(s.env, f, at + 180)).status, "partial");
+    assert.equal((await run(s.env, f, at + 180)).status, "idle");
     assert.equal(dexCalls, 1);
     assert.equal(
       (await s.db.prepare("SELECT dex_after FROM monitor_state").first())
@@ -807,6 +740,248 @@ test("arming a fresh pilot preserves its prior expired shutdown proof atomically
       s.db
         .prepare("UPDATE pilot_control SET expires_at=expires_at+1 WHERE id=1")
         .run(),
+    );
+  } finally {
+    s.clean();
+  }
+});
+
+test("disabled scheduled tick performs zero D1 queries without an explicit shutdown probe", async () => {
+  const { default: worker } = await import("../cloud-monitor/worker.mjs");
+  const waits = [];
+  await worker.scheduled(
+    { scheduledTime: Date.now() },
+    {
+      MONITOR_ENABLED: "false",
+      MONITOR_DB: {
+        prepare() {
+          throw Error("unnecessary D1");
+        },
+      },
+    },
+    { waitUntil: (p) => waits.push(p) },
+  );
+  await Promise.all(waits);
+});
+test("empty rotation is read-only and discovery still runs at the original quarter-hour", async () => {
+  const s = setup();
+  const clock = Date.now,
+    base = Math.floor(clock() / 900000) * 900;
+  try {
+    Date.now = () => (base + 180) * 1000;
+    s.resetStats();
+    assert.equal(
+      (
+        await run(
+          s.env,
+          () => {
+            throw Error("idle network");
+          },
+          base + 180,
+        )
+      ).status,
+      "idle",
+    );
+    assert.equal(s.stats.calls, 1);
+    assert.equal(s.stats.mutations, 0);
+    assert.ok(s.stats.bytes < 1000);
+    assert.equal(
+      (await s.db.prepare("SELECT last_run FROM monitor_state").first())
+        .last_run,
+      0,
+    );
+    let calls = 0;
+    Date.now = () => (base + 900) * 1000;
+    assert.equal(
+      (
+        await run(
+          s.env,
+          async (url) => {
+            calls++;
+            assert.ok(url.includes("geckoterminal"));
+            return Response.json({ data: [] });
+          },
+          base + 900,
+        )
+      ).status,
+      "ok",
+    );
+    assert.equal(calls, 1);
+  } finally {
+    Date.now = clock;
+    s.clean();
+  }
+});
+test("future cohort stays lightweight, then due missing outcomes are finalized on schedule", async () => {
+  const s = setup(),
+    clock = Date.now,
+    base = Math.floor(clock() / 900000) * 900;
+  const { PROTOCOL } = await import("../cloud-monitor/protocol.mjs");
+  const x = { ...normalize(pair, base), pool_created: base - 864000 };
+  try {
+    await s.db
+      .prepare(
+        "INSERT INTO research_cohorts(id,alert_mint,control_mint,alert_at,protocol,data) VALUES('scheduled',?,?,?,?,?)",
+      )
+      .bind(
+        mint,
+        mint,
+        base,
+        JSON.stringify(PROTOCOL),
+        JSON.stringify({ alert: x, control: x }),
+      )
+      .run();
+    Date.now = () => (base + 180) * 1000;
+    s.resetStats();
+    assert.equal(
+      (
+        await run(
+          s.env,
+          () => {
+            throw Error("no provider");
+          },
+          base + 180,
+        )
+      ).status,
+      "idle",
+    );
+    assert.equal(s.stats.calls, 1);
+    assert.equal(s.stats.mutations, 0);
+    Date.now = () => (base + 540) * 1000;
+    assert.equal(
+      (
+        await run(
+          s.env,
+          () => {
+            throw Error("research-only provider");
+          },
+          base + 540,
+        )
+      ).status,
+      "ok",
+    );
+    const rows = (
+      await s.db
+        .prepare(
+          "SELECT role,horizon,status FROM research_outcomes ORDER BY role",
+        )
+        .all()
+    ).results;
+    assert.equal(rows.length, 2);
+    assert.ok(rows.every((x) => x.horizon === 5 && x.status === "missing"));
+  } finally {
+    Date.now = clock;
+    s.clean();
+  }
+});
+test("unmatched statistical controls are finalized without waiting for alert horizons", async () => {
+  const s = setup(),
+    clock = Date.now,
+    base = Math.floor(clock() / 900000) * 900;
+  const { PROTOCOL } = await import("../cloud-monitor/protocol.mjs");
+  try {
+    const x = normalize(pair, base);
+    await s.db
+      .prepare(
+        "INSERT INTO research_cohorts(id,alert_mint,alert_at,protocol,data) VALUES('unmatched',?,?,?,?)",
+      )
+      .bind(
+        mint,
+        base,
+        JSON.stringify(PROTOCOL),
+        JSON.stringify({ alert: x, control: null }),
+      )
+      .run();
+    Date.now = () => (base + 180) * 1000;
+    await run(
+      s.env,
+      () => {
+        throw Error("no network");
+      },
+      base + 180,
+    );
+    const rows = (
+      await s.db.prepare("SELECT role,status FROM research_outcomes").all()
+    ).results;
+    assert.equal(rows.length, 4);
+    assert.ok(
+      rows.every((x) => x.role === "control" && x.status === "unmatched"),
+    );
+  } finally {
+    Date.now = clock;
+    s.clean();
+  }
+});
+test("future follow rows cannot hide a due contract beyond the old 64-row prefix", async () => {
+  const s = setup(),
+    clock = Date.now,
+    at = Math.floor(clock() / 900000) * 900 + 180;
+  try {
+    for (let i = 0; i < 70; i++)
+      await s.db
+        .prepare(
+          "INSERT INTO catalog(mint,first_seen,last_seen,next_at,last_attempt,recent) VALUES(?,?,?,?,?,?)",
+        )
+        .bind(
+          "future-" + i,
+          at,
+          at,
+          at + 1800,
+          0,
+          JSON.stringify([{ evidence: "x".repeat(5000) }]),
+        )
+        .run();
+    await s.db
+      .prepare(
+        "INSERT INTO catalog(mint,first_seen,last_seen,next_at,last_attempt) VALUES(?,?,?,?,?)",
+      )
+      .bind(mint, at, at, at, 1)
+      .run();
+    Date.now = () => at * 1000;
+    s.resetStats();
+    const result = await run(
+      s.env,
+      async (url) => {
+        assert.ok(url.includes(mint));
+        return Response.json([pair]);
+      },
+      at,
+    );
+    assert.equal(result.observations, 1);
+    assert.ok(
+      s.stats.bytes < 10000,
+      "future histories should not cross the SQLite adapter",
+    );
+  } finally {
+    Date.now = clock;
+    s.clean();
+  }
+});
+
+test("provider 403 pauses persistently without attempting DEX or recording observations", async () => {
+  const s = setup(),
+    at = Math.floor(Date.now() / 900000) * 900;
+  try {
+    let calls = 0;
+    const result = await run(
+      s.env,
+      async (url) => {
+        calls++;
+        assert.ok(url.includes("geckoterminal"));
+        return new Response("", { status: 403 });
+      },
+      at,
+    );
+    assert.equal(result.status, "partial");
+    assert.equal(calls, 1);
+    const state = await s.db
+      .prepare("SELECT paused,pause_reason FROM monitor_state")
+      .first();
+    assert.equal(state.paused, 1);
+    assert.equal(state.pause_reason, "provider_denied");
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) AS n FROM observations").first()).n,
+      0,
     );
   } finally {
     s.clean();

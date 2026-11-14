@@ -1,0 +1,51 @@
+{
+  "data": {
+    "viewer": {
+      "accounts": [
+        {
+          "workersInvocationsAdaptive": [
+            {
+              "dimensions": {
+                "datetimeMinute": "2026-11-14T11:25:00Z",
+                "scriptName": "edge-radar-monitor-staging",
+                "scriptVersion": "60c8612a-33c6-4be9-a2f3-a3b6d8d0485a",
+                "status": "success"
+              },
+              "max": {
+                "cpuTime": 3735,
+                "startupCpuTimeUs": 9450
+              },
+              "sum": {
+                "cpuTimeUs": 3735,
+                "errors": 0,
+                "requests": 1,
+                "startupCpuTimeUs": 9450,
+                "subrequests": 0
+              }
+            },
+            {
+              "dimensions": {
+                "datetimeMinute": "2026-11-14T11:24:00Z",
+                "scriptName": "edge-radar-monitor-staging",
+                "scriptVersion": "60c8612a-33c6-4be9-a2f3-a3b6d8d0485a",
+                "status": "success"
+              },
+              "max": {
+                "cpuTime": 10186,
+                "startupCpuTimeUs": 11104
+              },
+              "sum": {
+                "cpuTimeUs": 10186,
+                "errors": 0,
+                "requests": 1,
+                "startupCpuTimeUs": 11104,
+                "subrequests": 0
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "errors": null
+}

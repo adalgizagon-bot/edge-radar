@@ -231,11 +231,27 @@ class ResearchTests(unittest.TestCase):
     def test_offline_staging_preflight_never_authorizes_deployment(self):
         from scripts.staging_preflight import review
 
-        r = review()
-        self.assertTrue(r["safe_preparation"])
-        self.assertFalse(r["database_id_configured"])
-        self.assertFalse(r["deploy_authorized"])
-        self.assertFalse(r["remote_cpu_validated"])
+        import tempfile
+        from pathlib import Path
+        import re
+
+        source = Path("cloud-monitor/wrangler.toml").read_text()
+        with tempfile.TemporaryDirectory() as folder:
+            config = Path(folder) / "wrangler.toml"
+            for identity, configured in [
+                ("REPLACE_WITH_NEW_STAGING_DATABASE_ID", False),
+                ("11111111-1111-4111-8111-111111111111", True),
+            ]:
+                config.write_text(
+                    re.sub(
+                        r'database_id = "[^"]+"', f'database_id = "{identity}"', source
+                    )
+                )
+                r = review(config)
+                self.assertTrue(r["safe_preparation"])
+                self.assertEqual(r["database_id_configured"], configured)
+                self.assertFalse(r["deploy_authorized"])
+                self.assertFalse(r["remote_cpu_validated"])
 
     def test_staging_seed_keeps_history_and_is_idempotent_without_alerts(self):
         import tempfile

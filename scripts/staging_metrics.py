@@ -12,14 +12,14 @@ query StagingCPU($account: string, $filter: AccountWorkersInvocationsAdaptiveFil
   viewer { accounts(filter: {accountTag: $account}) {
     summary: workersInvocationsAdaptive(limit: 1000, filter: $filter) {
       dimensions { scriptName scriptVersion status }
-      sum { requests errors subrequests cpuTimeUs }
-      max { cpuTime }
-      quantiles { cpuTimeP50 cpuTimeP95 cpuTimeP99 }
+      sum { requests errors subrequests cpuTimeUs startupCpuTimeUs }
+      max { cpuTime startupCpuTimeUs }
+      quantiles { cpuTimeP50 cpuTimeP95 cpuTimeP99 startupCpuTimeUsP50 startupCpuTimeUsP95 startupCpuTimeUsP99 }
     }
     minutes: workersInvocationsAdaptive(limit: 10000, filter: $filter) {
       dimensions { datetimeMinute scriptName scriptVersion status }
-      sum { requests errors subrequests cpuTimeUs }
-      max { cpuTime }
+      sum { requests errors subrequests cpuTimeUs startupCpuTimeUs }
+      max { cpuTime startupCpuTimeUs }
     }
   } }
 }

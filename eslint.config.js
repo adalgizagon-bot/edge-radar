@@ -25,8 +25,20 @@ export default [
     },
   },
   {
-    files: ["scripts/**/*.mjs", "playwright.config.mjs"],
-    languageOptions: { globals: { console: "readonly", process: "readonly" } },
+    files: [
+      "scripts/**/*.mjs",
+      "tests/helpers/**/*.mjs",
+      "playwright.config.mjs",
+    ],
+    languageOptions: {
+      globals: {
+        console: "readonly",
+        process: "readonly",
+        Buffer: "readonly",
+        URL: "readonly",
+        Response: "readonly",
+      },
+    },
   },
   {
     files: ["cloud-monitor/**/*.mjs", "tests/monitor.test.mjs"],

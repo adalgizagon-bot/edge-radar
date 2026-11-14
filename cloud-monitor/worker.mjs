@@ -1,5 +1,4 @@
-import { choose, transition, CAPACITY } from "./policy.mjs";
-import { research } from "./research.mjs";
+import { DUE_COHORT } from "./schedule.mjs";
 // Staging sampler only. No production bindings, migrations, trades or public writes.
 const MINT = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
 const num = (x) =>
@@ -57,38 +56,11 @@ export async function run(
   at = Math.floor(Date.now() / 60000) * 60,
 ) {
   if (env.MONITOR_ENABLED !== "true") return { status: "disabled" };
-  // Wall clock, never the cron timestamp: delayed/replayed events cannot reopen a pilot.
-  const pilot = await env.MONITOR_DB.prepare(
-    "SELECT * FROM pilot_control WHERE id=1 AND purpose='edge-radar-staging'",
-  ).first();
-  const live = () =>
-    pilot &&
-    pilot.used === 1 &&
-    pilot.started_at <= Math.floor(Date.now() / 1000) &&
-    pilot.expires_at > Math.floor(Date.now() / 1000) &&
-    pilot.expires_at - pilot.started_at <= 1800;
-  if (pilot && pilot.expires_at <= Math.floor(Date.now() / 1000))
-    return { status: "pilot_expired" };
-  if (!live()) return { status: "pilot_not_authorized" };
-  const upstream = fetcher;
-  fetcher = async (url, options = {}) => {
-    if (!live()) throw Error("pilot_expired");
-    // Abort an in-flight request at the persisted deadline too.
-    return upstream(url, {
-      ...options,
-      signal: AbortSignal.any([
-        ...(options.signal ? [options.signal] : []),
-        AbortSignal.timeout(Math.max(1, pilot.expires_at * 1000 - Date.now())),
-      ]),
-    });
-  };
-  const rotation = at % 180 === 0;
-  const reserveSlots = rotation ? (at % 900 === 0 ? 10 : 8) : 2;
-  const reserveWrites = 40 + reserveSlots * 8;
   const db = env.MONITOR_DB,
-    owner = crypto.randomUUID(),
+    rotation = at % 180 === 0;
+  const now = Math.floor(Date.now() / 1000),
     day = Math.floor(at / 86400);
-  let reads = 1,
+  let reads = 0,
     writes = 0,
     bytes = 0,
     calls = 0,
@@ -96,8 +68,7 @@ export async function run(
   const meter = async (operation) => {
     if (++calls > 45) throw Error("query_budget");
     const r = await operation();
-    const items = Array.isArray(r) ? r : [r];
-    for (const x of items) {
+    for (const x of Array.isArray(r) ? r : [r]) {
       const m = x.meta || {};
       if (m.rows_read === undefined || m.rows_written === undefined)
         measured = false;
@@ -107,10 +78,72 @@ export async function run(
     }
     return r;
   };
+  // One small result, no probe JSON, catalog histories or cohort payloads.
+  // SQLite CASE prevents queue lookups outside dispatch slots and when paused.
+  const header = (
+    await meter(() =>
+      db
+        .prepare(
+          `
+    SELECT s.*,p.used AS pilot_used,p.started_at AS pilot_start,p.expires_at AS pilot_end,
+      CASE WHEN s.paused=0 AND s.db_bytes<350000000 AND s.samples_reserved<=140000
+        AND (s.day!=? OR (s.rows_read<2000000 AND s.rows_written<45000 AND s.writes_reserved<70000))
+        AND p.used=1 AND p.started_at<=? AND p.expires_at>? AND (?=1 OR s.burst_until>?) THEN (
+        (s.dex_after<=? AND (EXISTS(SELECT 1 FROM catalog WHERE next_at<=?)
+          OR EXISTS(SELECT 1 FROM catalog WHERE tier='fast')))
+        + 2*EXISTS(SELECT 1 FROM catalog WHERE tier='fast' AND pin_until<=? AND last_seen<?)
+        + 4*EXISTS(SELECT 1 FROM research_cohorts c WHERE ${DUE_COHORT})
+      ) ELSE 0 END AS work_due
+    FROM monitor_state s JOIN pilot_control p ON p.id=s.id
+    WHERE s.id=1 AND s.purpose='edge-radar-staging' AND p.purpose='edge-radar-staging'
+  `,
+        )
+        .bind(day, now, now, rotation ? 1 : 0, at, at, at, now, now - 600, now)
+        .all(),
+    )
+  ).results[0];
+  const live = () =>
+    header &&
+    header.pilot_used === 1 &&
+    header.pilot_start <= Math.floor(Date.now() / 1000) &&
+    header.pilot_end > Math.floor(Date.now() / 1000) &&
+    header.pilot_end - header.pilot_start <= 1800;
+  if (header && header.pilot_end <= now) return { status: "pilot_expired" };
+  if (!live()) return { status: "pilot_not_authorized" };
+  const reserveSlots = rotation ? (at % 900 === 0 ? 10 : 8) : 2;
+  const reserveWrites = 40 + reserveSlots * 8;
+  if (
+    header.paused ||
+    header.lease_until >= at ||
+    header.last_run > at - 50 ||
+    (!rotation && header.burst_until <= at) ||
+    header.db_bytes >= 350000000 ||
+    header.samples_reserved > 140000 - reserveSlots ||
+    (header.day === day &&
+      (header.writes_reserved > 70000 - reserveWrites ||
+        header.rows_read >= 2000000 ||
+        header.rows_written >= 45000))
+  )
+    return { status: "paused_or_busy" };
+  const discoveryDue = at % 900 === 0 && header.gecko_after <= at;
+  if (!discoveryDue && !header.work_due) return { status: "idle" };
+  const { choose, transition, CAPACITY } = await import("./policy.mjs");
+  const upstream = fetcher;
+  fetcher = async (url, options = {}) => {
+    if (!live()) throw Error("pilot_expired");
+    return upstream(url, {
+      ...options,
+      signal: AbortSignal.any([
+        ...(options.signal ? [options.signal] : []),
+        AbortSignal.timeout(Math.max(1, header.pilot_end * 1000 - Date.now())),
+      ]),
+    });
+  };
+  const owner = crypto.randomUUID();
   const lock = await meter(() =>
     db
       .prepare(
-        `UPDATE monitor_state SET lease_owner=?,lease_until=?,last_run=?,burst_minutes=CASE WHEN day!=? THEN MAX(0,CAST((MAX(0,burst_until-?)+59)/60 AS INTEGER)) ELSE burst_minutes END,day=?,writes_reserved=CASE WHEN day=? THEN writes_reserved+? ELSE ? END,rows_read=CASE WHEN day=? THEN rows_read ELSE 0 END,rows_written=CASE WHEN day=? THEN rows_written ELSE 0 END,samples_reserved=samples_reserved+? WHERE id=1 AND purpose='edge-radar-staging' AND paused=0 AND lease_until<? AND last_run<=? AND (?=1 OR burst_until>?) AND (day!=? OR writes_reserved<=?) AND (day!=? OR (rows_read<2000000 AND rows_written<45000)) AND db_bytes<350000000 AND samples_reserved<=?`,
+        `UPDATE monitor_state SET lease_owner=?,lease_until=?,last_run=?,burst_minutes=CASE WHEN day!=? THEN MAX(0,CAST((MAX(0,burst_until-?)+59)/60 AS INTEGER)) ELSE burst_minutes END,day=?,writes_reserved=CASE WHEN day=? THEN writes_reserved+? ELSE ? END,rows_read=CASE WHEN day=? THEN rows_read ELSE 0 END,rows_written=CASE WHEN day=? THEN rows_written ELSE 0 END,samples_reserved=samples_reserved+? WHERE id=1 AND purpose='edge-radar-staging' AND paused=0 AND lease_until<? AND last_run<=? AND (?=1 OR burst_until>?) AND (day!=? OR writes_reserved<=?) AND (day!=? OR (rows_read<2000000 AND rows_written<45000)) AND db_bytes<350000000 AND samples_reserved<=? AND EXISTS(SELECT 1 FROM pilot_control WHERE id=1 AND used=1 AND started_at<=unixepoch() AND expires_at>unixepoch()) RETURNING *`,
       )
       .bind(
         owner,
@@ -134,41 +167,44 @@ export async function run(
         day,
         140000 - reserveSlots,
       )
-      .run(),
+      .all(),
   );
-  if (!lock.meta.changes) return { status: "paused_or_busy" };
-  let state,
-    geckoAfter = at,
+  if (!lock.results.length) return { status: "paused_or_busy" };
+  const state = lock.results[0];
+  let geckoAfter = at,
     dexAfter = at,
     geckoFailures = 0,
     dexFailures = 0,
     stopReason = null;
   try {
-    state = (
-      await meter(() =>
-        db.prepare("SELECT * FROM monitor_state WHERE id=1").all(),
-      )
-    ).results[0];
     geckoAfter = state.gecko_after;
     dexAfter = state.dex_after;
     geckoFailures = state.gecko_failures;
     dexFailures = state.dex_failures;
-    const fast = (
-      await meter(() =>
-        db
-          .prepare(
-            "SELECT * FROM catalog WHERE tier='fast' ORDER BY next_at LIMIT 12",
+    const collectQueues = (header.work_due & 3) !== 0;
+    const fast = collectQueues
+      ? (
+          await meter(() =>
+            db
+              .prepare(
+                "SELECT mint,last_seen,next_at,priority,last_attempt,tier,weak_streak,pin_until,last_alert,study_pair FROM catalog WHERE tier='fast' ORDER BY next_at LIMIT 12",
+              )
+              .all(),
           )
-          .all(),
-      )
-    ).results;
-    const follow = (
-      await meter(() =>
-        db
-          .prepare("SELECT * FROM catalog ORDER BY last_attempt,mint LIMIT 64")
-          .all(),
-      )
-    ).results;
+        ).results
+      : [];
+    const follow = collectQueues
+      ? (
+          await meter(() =>
+            db
+              .prepare(
+                "SELECT mint,last_seen,next_at,priority,last_attempt,tier,weak_streak,pin_until,last_alert,study_pair FROM catalog INDEXED BY catalog_due WHERE next_at<=? ORDER BY last_attempt,mint LIMIT 64",
+              )
+              .bind(at)
+              .all(),
+          )
+        ).results
+      : [];
     const states = new Map([...fast, ...follow].map((x) => [x.mint, x]));
     const selected = choose(fast, follow, at, {
         rotation,
@@ -198,22 +234,24 @@ export async function run(
         const raw = await r.json();
         if (!Array.isArray(raw.data)) throw Error("invalid_gecko_schema");
         geckoFailures = 0;
-        const candidates = [
-          ...new Set(
-            raw.data
-              .map((x) =>
-                x.relationships?.base_token?.data?.id?.replace(/^solana_/, ""),
-              )
-              .filter((x) => MINT.test(x || "")),
-          ),
-        ]
-          .filter((x) => !mints.includes(x))
-          .slice(0, CAPACITY.discovery);
+        const candidates = [],
+          seen = new Set(mints);
+        for (const pool of raw.data) {
+          const mint = pool.relationships?.base_token?.data?.id?.replace(
+            /^solana_/,
+            "",
+          );
+          if (MINT.test(mint || "") && !seen.has(mint)) {
+            seen.add(mint);
+            candidates.push(mint);
+            if (candidates.length === CAPACITY.discovery) break;
+          }
+        }
         if (candidates.length) {
           const known = await meter(() =>
             db
               .prepare(
-                `SELECT * FROM catalog WHERE mint IN (${candidates.map(() => "?").join(",")})`,
+                `SELECT mint,last_seen,next_at,priority,last_attempt,tier,weak_streak,pin_until,last_alert,study_pair FROM catalog WHERE mint IN (${candidates.map(() => "?").join(",")})`,
               )
               .bind(...candidates)
               .all(),
@@ -269,22 +307,43 @@ export async function run(
         if (!Array.isArray(raw)) throw Error("invalid_dex_schema");
         dexFailures = 0;
         const observedAt = Math.floor(Date.now() / 1000);
+        const wanted = new Set(mints),
+          winners = new Map();
         for (const pair of raw) {
-          const x = normalize(pair, observedAt);
-          if (x) {
-            x.source_update_at = null;
-            x.source_response_date = r.headers.get("Date");
-            x.source_cache_age_seconds = num(r.headers.get("Age"));
-          }
+          const mint = pair.baseToken?.address;
           if (
-            x &&
-            mints.includes(x.mint) &&
-            x.price > 0 &&
-            x.pool &&
-            (!best.has(x.mint) ||
-              (x.liquidity || 0) > (best.get(x.mint).liquidity || 0))
+            pair.chainId !== "solana" ||
+            !wanted.has(mint) ||
+            !MINT.test(mint || "") ||
+            !(num(pair.priceUsd) > 0) ||
+            !String(pair.pairAddress || "").slice(0, 64)
           )
-            best.set(x.mint, x);
+            continue;
+          const liquidity = num(pair.liquidity?.usd) || 0;
+          if (!winners.has(mint) || liquidity > winners.get(mint).liquidity)
+            winners.set(mint, { pair, liquidity });
+        }
+        const responseDate = r.headers.get("Date"),
+          cacheAge = num(r.headers.get("Age"));
+        for (const { pair } of winners.values()) {
+          const x = normalize(pair, observedAt);
+          x.source_update_at = null;
+          x.source_response_date = responseDate;
+          x.source_cache_age_seconds = cacheAge;
+          best.set(x.mint, x);
+        }
+        // Histories are needed only for observations that actually survived selection.
+        if (best.size) {
+          const ids = [...best.keys()];
+          const details = await meter(() =>
+            db
+              .prepare(
+                `SELECT * FROM catalog WHERE mint IN (${ids.map(() => "?").join(",")})`,
+              )
+              .bind(...ids)
+              .all(),
+          );
+          for (const row of details.results) states.set(row.mint, row);
         }
         let fastCount = fast.filter(
           (x) => x.pin_until > at || at - x.last_seen <= 600,
@@ -335,14 +394,17 @@ export async function run(
     } else if (mints.length)
       errors.push({ provider: "dexscreener", reason: "backoff_or_pause" });
     const decisionAt = Math.floor(Date.now() / 1000);
-    const study = await research(
-      db,
-      states,
-      transitions,
-      best,
-      decisionAt,
-      meter,
-    );
+    let study = {
+      writes: [],
+      candidates: 0,
+      admitted: 0,
+      finalized: 0,
+      pins: [],
+    };
+    if (best.size || header.work_due & 4) {
+      const { research } = await import("./research.mjs");
+      study = await research(db, states, transitions, best, decisionAt, meter);
+    }
     statements.push(...study.writes);
     const pinnedNow = [
       ...new Set(
@@ -568,7 +630,7 @@ export default {
     }
     ctx.waitUntil(
       (async () => {
-        await probe(env);
+        if (env.SHUTDOWN_PROBE_ENABLED === "true") await probe(env);
         const result = await run(
           env,
           fetch,

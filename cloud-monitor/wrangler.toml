@@ -5,6 +5,8 @@ workers_dev = false
 
 [vars]
 MONITOR_ENABLED = "false"
+# A one-shot integration probe must be requested explicitly; never runs by default.
+SHUTDOWN_PROBE_ENABLED = "false"
 
 [triggers]
 crons = ["* * * * *"]
