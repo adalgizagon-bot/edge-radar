@@ -987,3 +987,312 @@ test("provider 403 pauses persistently without attempting DEX or recording obser
     s.clean();
   }
 });
+
+async function secondSession(
+  s,
+  {
+    id = "pilot-two-test",
+    start = Math.floor(Date.now() / 1000) - 1,
+    end = start + 1800,
+    kind = "pilot",
+    activate = true,
+  } = {},
+) {
+  const proofId = kind === "pilot" ? id + "-proof" : null;
+  if (proofId) {
+    const now = Math.floor(Date.now() / 1000);
+    await s.db
+      .prepare(
+        "INSERT INTO pilot_authorizations(id,kind,started_at,expires_at,probe_requested) VALUES(?,'shutdown-test',?,?,1)",
+      )
+      .bind(proofId, now - 120, now - 60)
+      .run();
+    await probe({
+      ...s.env,
+      PILOT_AUTHORIZATION_ID: proofId,
+      MONITOR_ENABLED: "false",
+    });
+  }
+  await s.db
+    .prepare(
+      "INSERT INTO pilot_authorizations(id,kind,started_at,expires_at,shutdown_test_id) VALUES(?,?,?,?,?)",
+    )
+    .bind(id, kind, start, end, proofId)
+    .run();
+  if (activate)
+    await s.db
+      .prepare(
+        "UPDATE pilot_authorizations SET consumed=1,activated_at=unixepoch() WHERE id=?",
+      )
+      .bind(id)
+      .run();
+  return { ...s.env, PILOT_AUTHORIZATION_ID: id };
+}
+test("independent authorization preserves legacy proof and cannot extend, rearm, delete or undo a stop", async () => {
+  const s = setup();
+  try {
+    const before = await s.db.prepare("SELECT * FROM pilot_control").first();
+    const env = await secondSession(s);
+    for (const sql of [
+      "UPDATE pilot_authorizations SET expires_at=expires_at+1",
+      "UPDATE pilot_authorizations SET started_at=started_at-1",
+      "UPDATE pilot_authorizations SET consumed=0,activated_at=0",
+      "DELETE FROM pilot_authorizations",
+    ])
+      await assert.rejects(
+        s.db
+          .prepare(sql + " WHERE id=?")
+          .bind(env.PILOT_AUTHORIZATION_ID)
+          .run(),
+      );
+    await s.db
+      .prepare(
+        "UPDATE pilot_authorizations SET stopped_at=unixepoch(),stop_reason='test-stop' WHERE id=?",
+      )
+      .bind(env.PILOT_AUTHORIZATION_ID)
+      .run();
+    await assert.rejects(
+      s.db
+        .prepare(
+          "UPDATE pilot_authorizations SET stopped_at=0,stop_reason=NULL WHERE id=?",
+        )
+        .bind(env.PILOT_AUTHORIZATION_ID)
+        .run(),
+    );
+    assert.equal(
+      (
+        await run(env, () => {
+          throw Error("stopped network");
+        })
+      ).status,
+      "pilot_not_authorized",
+    );
+    assert.deepEqual(
+      await s.db.prepare("SELECT * FROM pilot_control").first(),
+      before,
+    );
+  } finally {
+    s.clean();
+  }
+});
+test("new pending, missing and expired session identities never fall back to a live legacy authorization", async () => {
+  const s = setup(),
+    now = Math.floor(Date.now() / 1000);
+  try {
+    const env = await secondSession(s, {
+      start: now + 600,
+      end: now + 1800,
+      activate: false,
+    });
+    await assert.rejects(
+      s.db
+        .prepare(
+          "UPDATE pilot_authorizations SET consumed=1,activated_at=unixepoch() WHERE id=?",
+        )
+        .bind(env.PILOT_AUTHORIZATION_ID)
+        .run(),
+    );
+    await assert.rejects(
+      s.db
+        .prepare(
+          "INSERT INTO pilot_authorizations(id,kind,started_at,expires_at) VALUES('too-long','pilot',?,?)",
+        )
+        .bind(now, now + 1801)
+        .run(),
+    );
+    assert.equal(
+      (
+        await run(env, () => {
+          throw Error("pending network");
+        })
+      ).status,
+      "pilot_not_authorized",
+    );
+    assert.equal(
+      (
+        await run({ ...env, PILOT_AUTHORIZATION_ID: "does-not-exist" }, () => {
+          throw Error("fallback network");
+        })
+      ).status,
+      "pilot_not_authorized",
+    );
+    const expired = await secondSession(s, {
+      id: "expired-new",
+      start: now - 120,
+      end: now - 60,
+      activate: false,
+      kind: "shutdown-test",
+    });
+    assert.equal(
+      (
+        await run(expired, () => {
+          throw Error("expired network");
+        })
+      ).status,
+      "pilot_expired",
+    );
+    await s.db
+      .prepare(
+        "UPDATE pilot_authorizations SET probe_requested=1 WHERE id='expired-new'",
+      )
+      .run();
+    await probe({ ...expired, MONITOR_ENABLED: "false" });
+    const proof = await s.db
+      .prepare("SELECT * FROM pilot_authorizations WHERE id='expired-new'")
+      .first();
+    assert.equal(JSON.parse(proof.probe_result).outbound, 0);
+    assert.equal(proof.probe_completed, 1);
+    await assert.rejects(
+      s.db
+        .prepare(
+          "UPDATE pilot_authorizations SET consumed=1,activated_at=unixepoch() WHERE id='expired-new'",
+        )
+        .run(),
+    );
+  } finally {
+    s.clean();
+  }
+});
+test("independent authorization supports discovery and permanent stop rolls back an in-flight data batch", async () => {
+  const s = setup(),
+    at = Math.floor(Date.now() / 900000) * 900;
+  try {
+    const env = await secondSession(s);
+    const result = await run(
+      env,
+      async (url) => {
+        if (url.includes("geckoterminal")) return Response.json(gecko);
+        await s.db
+          .prepare(
+            "UPDATE pilot_authorizations SET stopped_at=unixepoch(),stop_reason='operator-stop' WHERE id=?",
+          )
+          .bind(env.PILOT_AUTHORIZATION_ID)
+          .run();
+        return Response.json([pair]);
+      },
+      at,
+    );
+    assert.equal(result.status, "failed");
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) AS n FROM observations").first()).n,
+      0,
+    );
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) AS n FROM catalog").first()).n,
+      0,
+    );
+    assert.equal(
+      (
+        await run(
+          env,
+          () => {
+            throw Error("must stay stopped");
+          },
+          at + 180,
+        )
+      ).status,
+      "pilot_not_authorized",
+    );
+  } finally {
+    s.clean();
+  }
+});
+test("independent authorization honours a persistent pause and expiration during real elapsed response time", async () => {
+  const s = setup(),
+    at = Math.floor(Date.now() / 900000) * 900;
+  const { setTimeout: delay } = await import("node:timers/promises");
+  try {
+    const now = Math.floor(Date.now() / 1000);
+    const env = await secondSession(s, { start: now - 1798, end: now + 2 });
+    await s.db
+      .prepare("UPDATE monitor_state SET paused=1,pause_reason='manual'")
+      .run();
+    assert.equal(
+      (
+        await run(
+          env,
+          () => {
+            throw Error("paused network");
+          },
+          at,
+        )
+      ).status,
+      "paused_or_busy",
+    );
+    await s.db
+      .prepare("UPDATE monitor_state SET paused=0,pause_reason=NULL")
+      .run();
+    await run(
+      env,
+      async () => {
+        await delay(2200);
+        return Response.json(gecko);
+      },
+      at,
+    );
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) AS n FROM observations").first()).n,
+      0,
+    );
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) AS n FROM catalog").first()).n,
+      0,
+    );
+    assert.equal(
+      (
+        await run(
+          env,
+          () => {
+            throw Error("expired round");
+          },
+          at + 180,
+        )
+      ).status,
+      "pilot_expired",
+    );
+  } finally {
+    s.clean();
+  }
+});
+
+test("independent real-pilot path persists observations only after its shutdown proof", async () => {
+  const s = setup(),
+    at = Math.floor(Date.now() / 900000) * 900;
+  try {
+    const env = await secondSession(s);
+    const result = await run(
+      env,
+      async (url) =>
+        Response.json(url.includes("geckoterminal") ? gecko : [pair]),
+      at,
+    );
+    assert.equal(result.observations, 1);
+    assert.equal(
+      (await s.db.prepare("SELECT count(*) AS n FROM observations").first()).n,
+      1,
+    );
+    await assert.rejects(
+      s.db
+        .prepare(
+          "UPDATE pilot_authorizations SET probe_result='{}' WHERE kind='shutdown-test'",
+        )
+        .run(),
+    );
+    const now = Math.floor(Date.now() / 1000);
+    await s.db
+      .prepare(
+        "INSERT INTO pilot_authorizations(id,kind,started_at,expires_at) VALUES('unproven','pilot',?,?)",
+      )
+      .bind(now - 1, now + 1799)
+      .run();
+    await assert.rejects(
+      s.db
+        .prepare(
+          "UPDATE pilot_authorizations SET consumed=1,activated_at=unixepoch() WHERE id='unproven'",
+        )
+        .run(),
+    );
+  } finally {
+    s.clean();
+  }
+});

@@ -1,3 +1,4 @@
+import { authorization } from "./authorization.mjs";
 import { DUE_COHORT } from "./schedule.mjs";
 // Staging sampler only. No production bindings, migrations, trades or public writes.
 const MINT = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
@@ -56,6 +57,7 @@ export async function run(
   at = Math.floor(Date.now() / 60000) * 60,
 ) {
   if (env.MONITOR_ENABLED !== "true") return { status: "disabled" };
+  const auth = authorization(env);
   const db = env.MONITOR_DB,
     rotation = at % 180 === 0;
   const now = Math.floor(Date.now() / 1000),
@@ -94,11 +96,23 @@ export async function run(
         + 2*EXISTS(SELECT 1 FROM catalog WHERE tier='fast' AND pin_until<=? AND last_seen<?)
         + 4*EXISTS(SELECT 1 FROM research_cohorts c WHERE ${DUE_COHORT})
       ) ELSE 0 END AS work_due
-    FROM monitor_state s JOIN pilot_control p ON p.id=s.id
+    FROM monitor_state s JOIN ${auth.source} p ON p.id=s.id
     WHERE s.id=1 AND s.purpose='edge-radar-staging' AND p.purpose='edge-radar-staging'
   `,
         )
-        .bind(day, now, now, rotation ? 1 : 0, at, at, at, now, now - 600, now)
+        .bind(
+          day,
+          now,
+          now,
+          rotation ? 1 : 0,
+          at,
+          at,
+          at,
+          now,
+          now - 600,
+          now,
+          ...auth.args,
+        )
         .all(),
     )
   ).results[0];
@@ -143,7 +157,7 @@ export async function run(
   const lock = await meter(() =>
     db
       .prepare(
-        `UPDATE monitor_state SET lease_owner=?,lease_until=?,last_run=?,burst_minutes=CASE WHEN day!=? THEN MAX(0,CAST((MAX(0,burst_until-?)+59)/60 AS INTEGER)) ELSE burst_minutes END,day=?,writes_reserved=CASE WHEN day=? THEN writes_reserved+? ELSE ? END,rows_read=CASE WHEN day=? THEN rows_read ELSE 0 END,rows_written=CASE WHEN day=? THEN rows_written ELSE 0 END,samples_reserved=samples_reserved+? WHERE id=1 AND purpose='edge-radar-staging' AND paused=0 AND lease_until<? AND last_run<=? AND (?=1 OR burst_until>?) AND (day!=? OR writes_reserved<=?) AND (day!=? OR (rows_read<2000000 AND rows_written<45000)) AND db_bytes<350000000 AND samples_reserved<=? AND EXISTS(SELECT 1 FROM pilot_control WHERE id=1 AND used=1 AND started_at<=unixepoch() AND expires_at>unixepoch()) RETURNING *`,
+        `UPDATE monitor_state SET lease_owner=?,lease_until=?,last_run=?,burst_minutes=CASE WHEN day!=? THEN MAX(0,CAST((MAX(0,burst_until-?)+59)/60 AS INTEGER)) ELSE burst_minutes END,day=?,writes_reserved=CASE WHEN day=? THEN writes_reserved+? ELSE ? END,rows_read=CASE WHEN day=? THEN rows_read ELSE 0 END,rows_written=CASE WHEN day=? THEN rows_written ELSE 0 END,samples_reserved=samples_reserved+? WHERE id=1 AND purpose='edge-radar-staging' AND paused=0 AND lease_until<? AND last_run<=? AND (?=1 OR burst_until>?) AND (day!=? OR writes_reserved<=?) AND (day!=? OR (rows_read<2000000 AND rows_written<45000)) AND db_bytes<350000000 AND samples_reserved<=? AND ${auth.guard} RETURNING *`,
       )
       .bind(
         owner,
@@ -166,11 +180,19 @@ export async function run(
         70000 - reserveWrites,
         day,
         140000 - reserveSlots,
+        ...auth.args,
       )
       .all(),
   );
   if (!lock.results.length) return { status: "paused_or_busy" };
   const state = lock.results[0];
+  const operations = {
+    discovery_attempted: false,
+    discovery_http_status: null,
+    discovery_candidates: [],
+    dex_attempted: false,
+    dex_http_status: null,
+  };
   let geckoAfter = at,
     dexAfter = at,
     geckoFailures = 0,
@@ -216,10 +238,12 @@ export async function run(
       requested = [];
     // Discovery every 15 min: one HTTPS call, at most two candidate admissions.
     if (geckoAfter <= at && at % 900 === 0) {
+      operations.discovery_attempted = true;
       const r = await fetcher(
         "https://api.geckoterminal.com/api/v2/networks/solana/new_pools?page=1",
         { signal: AbortSignal.timeout(12000), redirect: "error" },
       );
+      operations.discovery_http_status = r.status;
       if (!r.ok) {
         geckoFailures++;
         geckoAfter =
@@ -247,6 +271,7 @@ export async function run(
             if (candidates.length === CAPACITY.discovery) break;
           }
         }
+        operations.discovery_candidates = candidates;
         if (candidates.length) {
           const known = await meter(() =>
             db
@@ -288,10 +313,12 @@ export async function run(
       transitions = new Map();
     if (mints.length && dexAfter <= at && !stopReason) {
       requested = mints;
+      operations.dex_attempted = true;
       const r = await fetcher(
         "https://api.dexscreener.com/tokens/v1/solana/" + mints.join(","),
         { signal: AbortSignal.timeout(12000), redirect: "error" },
       );
+      operations.dex_http_status = r.status;
       if (!r.ok) {
         dexFailures++;
         dexAfter =
@@ -473,6 +500,7 @@ export async function run(
           ? "storage"
           : null);
     const details = {
+      ...operations,
       observations: best.size,
       planned: mints,
       attempted: requested,
@@ -520,9 +548,11 @@ export async function run(
     );
     // Abort the atomic batch if the deadline passed while providers were responding.
     statements.unshift(
-      db.prepare(
-        "UPDATE monitor_state SET lease_until=CASE WHEN EXISTS(SELECT 1 FROM pilot_control WHERE id=1 AND used=1 AND started_at<=unixepoch() AND expires_at>unixepoch()) THEN lease_until ELSE NULL END WHERE id=1",
-      ),
+      db
+        .prepare(
+          `UPDATE monitor_state SET lease_until=CASE WHEN ${auth.guard} AND paused=0 THEN lease_until ELSE NULL END WHERE id=1`,
+        )
+        .bind(...auth.args),
     );
     if (!live()) throw Error("pilot_expired");
     await meter(() => db.batch(statements));
@@ -570,6 +600,7 @@ export async function run(
         .bind(
           at,
           JSON.stringify({
+            ...operations,
             error: "transport_schema_or_storage_failure",
             reads,
             writes,
@@ -593,9 +624,10 @@ export async function run(
   }
 }
 export async function probe(env) {
-  const row = await env.MONITOR_DB.prepare(
-    "SELECT * FROM pilot_control WHERE id=1",
-  ).first();
+  const auth = authorization(env);
+  const row = await env.MONITOR_DB.prepare(auth.probeSelect)
+    .bind(...auth.args)
+    .first();
   if (!row || row.probe_requested <= row.probe_completed) return;
   // The integration probe can only run against an expired, unused authorization.
   if (row.used !== 0 || row.expires_at > Math.floor(Date.now() / 1000)) return;
@@ -615,10 +647,8 @@ export async function probe(env) {
     quick_check: "ok",
     read_write: "ok",
   });
-  await env.MONITOR_DB.prepare(
-    "UPDATE pilot_control SET probe_completed=probe_requested,probe_result=? WHERE id=1 AND used=0 AND expires_at<=unixepoch()",
-  )
-    .bind(proof)
+  await env.MONITOR_DB.prepare(auth.probeUpdate)
+    .bind(proof, ...auth.args)
     .run();
   console.log(JSON.stringify({ shutdown_probe: proof }));
 }
