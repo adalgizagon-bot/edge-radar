@@ -1,6 +1,6 @@
 {
   "source": "Cito API",
-  "fetchedAt": "2026-11-17T23:40:30.695Z",
+  "fetchedAt": "2026-11-17T23:40:41.676Z",
   "windowDays": 30,
   "teams": [
     {
@@ -2072,6 +2072,172 @@
           "rounds": 22,
           "adr": 84,
           "rating": 1.08
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-19899",
+      "nickname": "Krimbo",
+      "teamId": "cs2-team-4411",
+      "role": "rifler",
+      "fetchedAt": "2026-11-17T23:40:41.317Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Cache",
+          "count": 1,
+          "kpr": 0.73,
+          "kills": 16,
+          "rounds": 22,
+          "adr": 77,
+          "rating": 1.15
+        },
+        {
+          "name": "Dust2",
+          "count": 1,
+          "kpr": 0.67,
+          "kills": 12,
+          "rounds": 18,
+          "adr": 62,
+          "rating": 1.15
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-10994",
+      "nickname": "stavn",
+      "teamId": "cs2-team-4411",
+      "role": "AWPer",
+      "fetchedAt": "2026-11-17T23:40:41.464Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Cache",
+          "count": 1,
+          "kpr": 0.73,
+          "kills": 16,
+          "rounds": 22,
+          "adr": 72,
+          "rating": 1.11
+        },
+        {
+          "name": "Dust2",
+          "count": 1,
+          "kpr": 0.61,
+          "kills": 11,
+          "rounds": 18,
+          "adr": 69,
+          "rating": 1.19
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-21571",
+      "nickname": "leakz",
+      "teamId": "cs2-team-13996",
+      "role": "rifler",
+      "fetchedAt": "2026-11-17T23:40:41.288Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Mirage",
+          "count": 6,
+          "kpr": 0.85,
+          "kills": 114,
+          "rounds": 134,
+          "adr": 93,
+          "rating": 1.3
+        },
+        {
+          "name": "Nuke",
+          "count": 6,
+          "kpr": 0.75,
+          "kills": 93,
+          "rounds": 124,
+          "adr": 78,
+          "rating": 1.07
+        },
+        {
+          "name": "Ancient",
+          "count": 5,
+          "kpr": 0.74,
+          "kills": 67,
+          "rounds": 91,
+          "adr": 87,
+          "rating": 1.16
+        },
+        {
+          "name": "Cache",
+          "count": 4,
+          "kpr": 0.78,
+          "kills": 73,
+          "rounds": 93,
+          "adr": 91,
+          "rating": 1.2
+        },
+        {
+          "name": "Inferno",
+          "count": 4,
+          "kpr": 0.71,
+          "kills": 80,
+          "rounds": 112,
+          "adr": 81,
+          "rating": 1.07
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-21379",
+      "nickname": "salazar",
+      "teamId": "cs2-team-13996",
+      "role": "AWPer",
+      "fetchedAt": "2026-11-17T23:40:41.341Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Mirage",
+          "count": 6,
+          "kpr": 0.69,
+          "kills": 93,
+          "rounds": 134,
+          "adr": 74,
+          "rating": 1.14
+        },
+        {
+          "name": "Nuke",
+          "count": 6,
+          "kpr": 0.6,
+          "kills": 74,
+          "rounds": 124,
+          "adr": 64,
+          "rating": 0.97
+        },
+        {
+          "name": "Ancient",
+          "count": 5,
+          "kpr": 0.66,
+          "kills": 60,
+          "rounds": 91,
+          "adr": 63,
+          "rating": 1.07
+        },
+        {
+          "name": "Cache",
+          "count": 4,
+          "kpr": 0.58,
+          "kills": 54,
+          "rounds": 93,
+          "adr": 62,
+          "rating": 0.97
+        },
+        {
+          "name": "Inferno",
+          "count": 4,
+          "kpr": 0.66,
+          "kills": 74,
+          "rounds": 112,
+          "adr": 59,
+          "rating": 1.11
         }
       ]
     }
