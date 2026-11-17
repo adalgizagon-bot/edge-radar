@@ -1,7 +1,27 @@
 {
-  "computedAt": "2026-11-17T23:33:00Z",
+  "computedAt": "2026-11-17T23:36:00Z",
   "total": 108,
   "resolved": 0,
-  "byMarket": [],
-  "note": "Nenhuma das previsões dos jogos de 18/11 foi resolvida. Métricas serão produzidas após os jogos."
+  "byMarket": [
+    {
+      "kind": "map_a",
+      "observations": 0,
+      "brier": null,
+      "classificationAccuracy": null
+    },
+    {
+      "kind": "rounds_over_21_5",
+      "observations": 0,
+      "brier": null,
+      "classificationAccuracy": null
+    },
+    {
+      "kind": "handicap_a_minus_2_5",
+      "observations": 0,
+      "brier": null,
+      "classificationAccuracy": null
+    }
+  ],
+  "assessed": [],
+  "note": "Nenhuma partida de 18/11 resolvida; os 108 registros estão pendentes."
 }
