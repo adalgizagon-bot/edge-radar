@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const path=require('node:path'),src=fs.readFileSync(path.join(__dirname,'..','app.js'),'utf8');
+const path=require('node:path'),src=fs.readFileSync(path.join(__dirname,'..','public','app.js'),'utf8');
 const pure=src.slice(0,src.indexOf("document.querySelectorAll('[data-tab]')"))+';({simulate,playMap,seeded,parseHistory,roundProb,estimateKills,mapProbability})';
 const {simulate,playMap,seeded,parseHistory,roundProb,estimateKills,mapProbability}=vm.runInNewContext(pure,{setTimeout,clearTimeout,Math,Number,String,JSON,Date});
 const cfg={a:'A',b:'B',p:[.53,.50,.48],kpr:.72,side:'A',n:10000,roundLine:21.5,handicap:-2.5,killLine:15.5,seriesKillLine:32.5};
