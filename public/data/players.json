@@ -1,6 +1,6 @@
 {
   "source": "Cito API",
-  "fetchedAt": "2026-11-17T23:30:31.030Z",
+  "fetchedAt": "2026-11-17T23:30:42.361Z",
   "windowDays": 30,
   "teams": [
     {
@@ -506,9 +506,96 @@
           "rating": 1.06
         }
       ]
+    },
+    {
+      "id": "cs2-team-4411",
+      "name": "Ninjas in Pyjamas",
+      "rosterFetchedAt": "2026-11-17T23:30:42.047Z",
+      "players": [
+        {
+          "id": "cs2-player-10994",
+          "nickname": "stavn",
+          "role": "AWPer",
+          "teamId": "cs2-team-4411",
+          "rating": 1.08
+        },
+        {
+          "id": "cs2-player-19899",
+          "nickname": "Krimbo",
+          "role": "rifler",
+          "teamId": "cs2-team-4411",
+          "rating": 1.09
+        },
+        {
+          "id": "cs2-player-23372",
+          "nickname": "xKacpersky",
+          "role": "rifler",
+          "teamId": "cs2-team-4411",
+          "rating": 1.05
+        },
+        {
+          "id": "cs2-player-14148",
+          "nickname": "sjuush",
+          "role": "rifler",
+          "teamId": "cs2-team-4411",
+          "rating": 1.04
+        },
+        {
+          "id": "cs2-player-20878",
+          "nickname": "adamb",
+          "role": "support",
+          "teamId": "cs2-team-4411",
+          "rating": 1.06
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-13996",
+      "name": "BBL",
+      "rosterFetchedAt": "2026-11-17T23:30:42.218Z",
+      "players": [
+        {
+          "id": "cs2-player-21379",
+          "nickname": "salazar",
+          "role": "AWPer",
+          "teamId": "cs2-team-13996",
+          "rating": 1.02
+        },
+        {
+          "id": "cs2-player-21199",
+          "nickname": "MistR",
+          "role": "entry",
+          "teamId": "cs2-team-13996",
+          "rating": 1
+        },
+        {
+          "id": "cs2-player-24104",
+          "nickname": "NickyB",
+          "role": "rifler",
+          "teamId": "cs2-team-13996",
+          "rating": 1.02
+        },
+        {
+          "id": "cs2-player-21571",
+          "nickname": "leakz",
+          "role": "rifler",
+          "teamId": "cs2-team-13996",
+          "rating": 1.07
+        },
+        {
+          "id": "cs2-player-16731",
+          "nickname": "IceBerg",
+          "role": "rifler",
+          "teamId": "cs2-team-13996",
+          "rating": 0.9
+        }
+      ]
     }
   ],
   "players": [],
   "note": "Escalações e estatísticas reais; kills por mapa são registros históricos e não previsões calibradas.",
-  "warnings": []
+  "warnings": [
+    "roster Luminosity indisponível",
+    "roster Envy indisponível"
+  ]
 }
