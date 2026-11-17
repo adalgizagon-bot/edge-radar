@@ -1,6 +1,6 @@
 {
   "source": "Cito API",
-  "fetchedAt": "2026-11-17T23:31:06.528Z",
+  "fetchedAt": "2026-11-17T23:39:25.300Z",
   "windowDays": 30,
   "teams": [
     {
@@ -592,14 +592,267 @@
       ]
     }
   ],
-  "players": [],
+  "players": [
+    {
+      "id": "cs2-player-17117",
+      "nickname": "shield",
+      "teamId": "cs2-team-7187",
+      "role": "AWPer",
+      "fetchedAt": "2026-11-17T23:39:24.623Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Ancient",
+          "count": 11,
+          "kpr": 0.73,
+          "kills": 151,
+          "rounds": 206,
+          "adr": 76,
+          "rating": 1.11
+        },
+        {
+          "name": "Anubis",
+          "count": 9,
+          "kpr": 0.64,
+          "kills": 124,
+          "rounds": 193,
+          "adr": 65,
+          "rating": 1.05
+        },
+        {
+          "name": "Dust2",
+          "count": 9,
+          "kpr": 0.78,
+          "kills": 152,
+          "rounds": 195,
+          "adr": 77,
+          "rating": 1.15
+        },
+        {
+          "name": "Cache",
+          "count": 6,
+          "kpr": 0.72,
+          "kills": 99,
+          "rounds": 138,
+          "adr": 76,
+          "rating": 1.12
+        },
+        {
+          "name": "Inferno",
+          "count": 5,
+          "kpr": 0.49,
+          "kills": 53,
+          "rounds": 109,
+          "adr": 52,
+          "rating": 0.89
+        },
+        {
+          "name": "Mirage",
+          "count": 5,
+          "kpr": 0.87,
+          "kills": 102,
+          "rounds": 117,
+          "adr": 88,
+          "rating": 1.24
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-19817",
+      "nickname": "s0und",
+      "teamId": "cs2-team-7187",
+      "role": "rifler",
+      "fetchedAt": "2026-11-17T23:39:24.797Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Ancient",
+          "count": 11,
+          "kpr": 0.71,
+          "kills": 147,
+          "rounds": 206,
+          "adr": 81,
+          "rating": 1.05
+        },
+        {
+          "name": "Anubis",
+          "count": 9,
+          "kpr": 0.65,
+          "kills": 125,
+          "rounds": 193,
+          "adr": 70,
+          "rating": 1.02
+        },
+        {
+          "name": "Dust2",
+          "count": 9,
+          "kpr": 0.58,
+          "kills": 113,
+          "rounds": 195,
+          "adr": 69,
+          "rating": 0.9
+        },
+        {
+          "name": "Cache",
+          "count": 6,
+          "kpr": 0.64,
+          "kills": 88,
+          "rounds": 138,
+          "adr": 70,
+          "rating": 1
+        },
+        {
+          "name": "Inferno",
+          "count": 5,
+          "kpr": 0.64,
+          "kills": 70,
+          "rounds": 109,
+          "adr": 73,
+          "rating": 0.96
+        },
+        {
+          "name": "Mirage",
+          "count": 5,
+          "kpr": 0.84,
+          "kills": 98,
+          "rounds": 117,
+          "adr": 85,
+          "rating": 1.16
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-18749",
+      "nickname": "sausol",
+      "teamId": "cs2-team-13104",
+      "role": "rifler",
+      "fetchedAt": "2026-11-17T23:39:24.964Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Nuke",
+          "count": 8,
+          "kpr": 0.56,
+          "kills": 101,
+          "rounds": 180,
+          "adr": 56,
+          "rating": 0.9
+        },
+        {
+          "name": "Ancient",
+          "count": 6,
+          "kpr": 0.62,
+          "kills": 71,
+          "rounds": 115,
+          "adr": 70,
+          "rating": 1.02
+        },
+        {
+          "name": "Inferno",
+          "count": 5,
+          "kpr": 0.76,
+          "kills": 68,
+          "rounds": 89,
+          "adr": 86,
+          "rating": 1.16
+        },
+        {
+          "name": "Mirage",
+          "count": 5,
+          "kpr": 0.67,
+          "kills": 65,
+          "rounds": 97,
+          "adr": 77,
+          "rating": 0.91
+        },
+        {
+          "name": "Anubis",
+          "count": 3,
+          "kpr": 0.48,
+          "kills": 29,
+          "rounds": 60,
+          "adr": 64,
+          "rating": 0.79
+        },
+        {
+          "name": "Cache",
+          "count": 2,
+          "kpr": 0.58,
+          "kills": 25,
+          "rounds": 43,
+          "adr": 77,
+          "rating": 0.9
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-21014",
+      "nickname": "Ag1l",
+      "teamId": "cs2-team-13104",
+      "role": "player",
+      "fetchedAt": "2026-11-17T23:39:24.956Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Nuke",
+          "count": 8,
+          "kpr": 0.66,
+          "kills": 118,
+          "rounds": 180,
+          "adr": 75,
+          "rating": 0.98
+        },
+        {
+          "name": "Ancient",
+          "count": 6,
+          "kpr": 0.75,
+          "kills": 86,
+          "rounds": 115,
+          "adr": 78,
+          "rating": 1.14
+        },
+        {
+          "name": "Inferno",
+          "count": 5,
+          "kpr": 0.83,
+          "kills": 74,
+          "rounds": 89,
+          "adr": 86,
+          "rating": 1.23
+        },
+        {
+          "name": "Mirage",
+          "count": 5,
+          "kpr": 0.7,
+          "kills": 68,
+          "rounds": 97,
+          "adr": 79,
+          "rating": 1.02
+        },
+        {
+          "name": "Anubis",
+          "count": 3,
+          "kpr": 0.72,
+          "kills": 43,
+          "rounds": 60,
+          "adr": 71,
+          "rating": 1.01
+        },
+        {
+          "name": "Cache",
+          "count": 2,
+          "kpr": 0.77,
+          "kills": 33,
+          "rounds": 43,
+          "adr": 73,
+          "rating": 1.15
+        }
+      ]
+    }
+  ],
   "note": "Escalações e estatísticas reais; kills por mapa são registros históricos e não previsões calibradas.",
   "warnings": [
     "roster Luminosity indisponível",
-    "roster Envy indisponível",
-    "mapstats shield indisponíveis",
-    "mapstats s0und indisponíveis",
-    "mapstats sausol indisponíveis",
-    "mapstats Ag1l indisponíveis"
+    "roster Envy indisponível"
   ]
 }
