@@ -1,8 +1,177 @@
 {
   "source": "Cito API",
-  "fetchedAt": null,
+  "fetchedAt": "2026-11-17T23:30:08.258Z",
   "windowDays": 30,
-  "teams": [],
+  "teams": [
+    {
+      "id": "cs2-team-7187",
+      "name": "Nexus",
+      "players": [
+        {
+          "id": "cs2-player-17117",
+          "nickname": "shield",
+          "role": "AWPer",
+          "teamId": "cs2-team-7187",
+          "rating": 1.08
+        },
+        {
+          "id": "cs2-player-20872",
+          "nickname": "Nexius",
+          "role": "entry",
+          "teamId": "cs2-team-7187",
+          "rating": 0.97
+        },
+        {
+          "id": "cs2-player-25331",
+          "nickname": "HOLY",
+          "role": "entry",
+          "teamId": "cs2-team-7187",
+          "rating": 1
+        },
+        {
+          "id": "cs2-player-19817",
+          "nickname": "s0und",
+          "role": "rifler",
+          "teamId": "cs2-team-7187",
+          "rating": 1.01
+        },
+        {
+          "id": "cs2-player-19173",
+          "nickname": "fNk",
+          "role": "support",
+          "teamId": "cs2-team-7187",
+          "rating": 0.99
+        }
+      ],
+      "rosterFetchedAt": "2026-11-17T23:30:07.811Z"
+    },
+    {
+      "id": "cs2-team-13104",
+      "name": "Iberian Soul",
+      "players": [
+        {
+          "id": "cs2-player-21014",
+          "nickname": "Ag1l",
+          "role": "player",
+          "teamId": "cs2-team-13104",
+          "rating": 1.03
+        },
+        {
+          "id": "cs2-player-18749",
+          "nickname": "sausol",
+          "role": "rifler",
+          "teamId": "cs2-team-13104",
+          "rating": 1.04
+        },
+        {
+          "id": "cs2-player-9254",
+          "nickname": "mopoz",
+          "role": "rifler",
+          "teamId": "cs2-team-13104",
+          "rating": 1.01
+        },
+        {
+          "id": "cs2-player-19509",
+          "nickname": "dav1g",
+          "role": "rifler",
+          "teamId": "cs2-team-13104",
+          "rating": 1
+        },
+        {
+          "id": "cs2-player-8371",
+          "nickname": "alex",
+          "role": "support",
+          "teamId": "cs2-team-13104",
+          "rating": 1
+        }
+      ],
+      "rosterFetchedAt": "2026-11-17T23:30:07.877Z"
+    },
+    {
+      "id": "cs2-team-12916",
+      "name": "Betclic",
+      "players": [
+        {
+          "id": "cs2-player-21763",
+          "nickname": "ultimate",
+          "role": "AWPer",
+          "teamId": "cs2-team-12916",
+          "rating": 1.04
+        },
+        {
+          "id": "cs2-player-22473",
+          "nickname": "Qlocuu",
+          "role": "entry",
+          "teamId": "cs2-team-12916",
+          "rating": 1.01
+        },
+        {
+          "id": "cs2-player-18979",
+          "nickname": "Prism",
+          "role": "entry",
+          "teamId": "cs2-team-12916",
+          "rating": 0.98
+        },
+        {
+          "id": "cs2-player-20960",
+          "nickname": "ex1st",
+          "role": "rifler",
+          "teamId": "cs2-team-12916",
+          "rating": 1
+        },
+        {
+          "id": "cs2-player-18070",
+          "nickname": "Demho",
+          "role": "rifler",
+          "teamId": "cs2-team-12916",
+          "rating": 1.02
+        }
+      ],
+      "rosterFetchedAt": "2026-11-17T23:30:07.401Z"
+    },
+    {
+      "id": "cs2-team-7532",
+      "name": "BIG",
+      "players": [
+        {
+          "id": "cs2-player-22884",
+          "nickname": "gr1ks",
+          "role": "AWPer",
+          "teamId": "cs2-team-7532",
+          "rating": 1.13
+        },
+        {
+          "id": "cs2-player-14929",
+          "nickname": "JDC",
+          "role": "entry",
+          "teamId": "cs2-team-7532",
+          "rating": 1.06
+        },
+        {
+          "id": "cs2-player-5794",
+          "nickname": "tabseN",
+          "role": "entry",
+          "teamId": "cs2-team-7532",
+          "rating": 1.01
+        },
+        {
+          "id": "cs2-player-14932",
+          "nickname": "faveN",
+          "role": "rifler",
+          "teamId": "cs2-team-7532",
+          "rating": 1.06
+        },
+        {
+          "id": "cs2-player-15165",
+          "nickname": "blameF",
+          "role": "rifler",
+          "teamId": "cs2-team-7532",
+          "rating": 1.18
+        }
+      ],
+      "rosterFetchedAt": "2026-11-17T23:30:07.409Z"
+    }
+  ],
   "players": [],
   "note": "Escalações e estatísticas reais; kills por mapa são registros históricos e não previsões calibradas.",
   "warnings": []
