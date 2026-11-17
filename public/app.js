@@ -61,23 +61,43 @@ function showTab(tab){document.querySelectorAll('.view').forEach(x=>x.classList.
 function splitCsv(text){const first=text.replace(/^\ufeff/,'').split(/\r?\n/)[0]||'';const sep=(first.match(/;/g)||[]).length>(first.match(/,/g)||[]).length?';':',';const rows=[];let row=[],cell='',quoted=false;const src=text.replace(/^\ufeff/,'');
  for(let i=0;i<src.length;i++){const c=src[i];if(c==='"'){if(quoted&&src[i+1]==='"'){cell+='"';i++}else quoted=!quoted}else if(c===sep&&!quoted){row.push(cell.trim());cell=''}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&src[i+1]==='\n')i++;row.push(cell.trim());if(row.some(v=>v!==''))rows.push(row);row=[];cell=''}else cell+=c}
  if(quoted)throw Error('Arquivo CSV contém aspas não fechadas.');row.push(cell.trim());if(row.some(v=>v!==''))rows.push(row);return rows}
-function parseHistory(text){const parsed=splitCsv(text);if(parsed.length<2)throw Error('CSV sem registros.');const columns=parsed.shift().map(x=>x.toLowerCase().trim());const req=['date','match_id','team_a','team_b','map','rounds_a','rounds_b'];if(req.some(x=>!columns.includes(x)))throw Error('Colunas obrigatórias: '+req.join(', '));
- const out=[],seen=new Set();for(const values of parsed){const row=Object.fromEntries(columns.map((k,i)=>[k,values[i]||'']));const da=row.date.slice(0,10),ra=Number(row.rounds_a),rb=Number(row.rounds_b);
- if(!/^\d{4}-\d{2}-\d{2}$/.test(da)||isNaN(Date.parse(da+'T12:00:00Z'))||!(ra>=0&&rb>=0&&Number.isInteger(ra)&&Number.isInteger(rb))||ra===rb||ra+rb<13||ra+rb>96||!row.team_a||!row.team_b||row.team_a===row.team_b||!row.map||!row.match_id)continue;
- const id=row.match_id+'|'+row.map.toLowerCase();if(seen.has(id))continue;seen.add(id);
- const hasKills=row.player&&row.kills!==''&&Number.isInteger(Number(row.kills))&&Number(row.kills)>=0&&Number(row.kills)<=100;
- out.push({date:da,matchId:row.match_id,a:row.team_a,b:row.team_b,map:row.map,ra,rb,player:hasKills?row.player:'',playerTeam:row.player_team||row.team_a,kills:hasKills?Number(row.kills):null})}
- out.sort((a,b)=>a.date.localeCompare(b.date)||a.matchId.localeCompare(b.matchId));if(!out.length)throw Error('Nenhuma linha válida. Confira datas, placares e identificadores únicos.');if(out.length>10000)throw Error('Limite de 10.000 mapas por importação.');return out}
+function parseHistory(text){
+ const parsed=splitCsv(text);if(parsed.length<2)throw Error('CSV sem registros.');
+ const columns=parsed.shift().map(x=>x.toLowerCase().trim());
+ const required=['date','match_id','team_a','team_b','map','rounds_a','rounds_b'];
+ if(required.some(x=>!columns.includes(x)))throw Error('Colunas obrigatórias: '+required.join(', '));
+ const out=[],seen=new Map();
+ for(const values of parsed){
+  const row=Object.fromEntries(columns.map((k,i)=>[k,values[i]||'']));
+  const da=row.date.slice(0,10),ra=Number(row.rounds_a),rb=Number(row.rounds_b);
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(da)||!Number.isFinite(Date.parse(da+'T12:00:00Z'))||!Number.isInteger(ra)||!Number.isInteger(rb)||ra<0||rb<0||ra===rb||ra+rb<13||ra+rb>96||!row.team_a||!row.team_b||row.team_a.toLowerCase()===row.team_b.toLowerCase()||!row.map||!row.match_id)continue;
+  const id=row.match_id+'|'+row.map.toLowerCase(),hasKills=Boolean(row.player&&row.kills!==''&&Number.isInteger(Number(row.kills))&&Number(row.kills)>=0&&Number(row.kills)<=100);
+  let entry=seen.get(id);
+  if(entry){
+   if(entry.date!==da||entry.a!==row.team_a||entry.b!==row.team_b||entry.ra!==ra||entry.rb!==rb)continue;
+  }else{
+   entry={date:da,matchId:row.match_id,a:row.team_a,b:row.team_b,map:row.map,ra,rb,players:[]};
+   seen.set(id,entry);out.push(entry);
+  }
+  if(hasKills&&!entry.players.some(p=>p.name.toLowerCase()===row.player.toLowerCase())){
+   entry.players.push({name:row.player,team:row.player_team||row.team_a,kills:Number(row.kills)});
+  }
+ }
+ out.sort((a,b)=>a.date.localeCompare(b.date)||a.matchId.localeCompare(b.matchId));
+ if(!out.length)throw Error('Nenhuma linha válida. Confira datas, placares e identificadores únicos.');
+ if(out.length>10000)throw Error('Limite de 10.000 mapas por importação.');
+ return out
+}
 function saveHistory(){try{localStorage.setItem(DATA_STORE,JSON.stringify(dataset));return true}catch{toast('CSV muito grande para o navegador. Use um arquivo menor.');return false}}
 function importHistory(file){if(!file)return; if(file.size>4_000_000)return toast('Use CSV de até 4 MB.');const reader=new FileReader();reader.onload=()=>{try{const rows=parseHistory(String(reader.result));dataset=rows;if(saveHistory()){renderHistory();toast(rows.length+' mapas importados; origem informada pelo usuário.')}}catch(e){toast(e.message)}};reader.onerror=()=>toast('Falha na leitura do CSV.');reader.readAsText(file)}
 function renderHistory(){const el=$('data-summary');if(!el)return;el.textContent=dataset.length?dataset.length+' mapas • '+dataset[0].date+' a '+dataset[dataset.length-1].date+' • fonte: arquivo local importado':'Sem histórico carregado. O simulador continua manual.';
  const uniq=x=>[...new Set(dataset.map(r=>r[x]))];$('data-teams').textContent=dataset.length?uniq('a').concat(uniq('b')).filter((x,i,a)=>a.indexOf(x)===i).length+' equipes · '+uniq('map').length+' mapas':'—';
  $('data-status').textContent=dataset.length<40?'Amostra insuficiente para avaliar modelos.':'Base carregada; qualidade e cobertura dependem da origem.';
- $('data-preview').textContent='';dataset.slice(-10).reverse().forEach(r=>{const tr=document.createElement('tr');[r.date,r.a+' x '+r.b,r.map,r.ra+'–'+r.rb,r.player?r.player+' ('+r.kills+' kills)':'—'].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.append(td)});$('data-preview').append(tr)})}
+ $('data-preview').textContent='';dataset.slice(-10).reverse().forEach(r=>{const tr=document.createElement('tr');[r.date,r.a+' x '+r.b,r.map,r.ra+'–'+r.rb,(r.players&&r.players.length?r.players.map(p=>p.name+' ('+p.kills+' kills)').join(', '):r.player?r.player+' ('+r.kills+' kills)':'—')].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.append(td)});$('data-preview').append(tr)})}
 function smoothed(team,map,rows){let w=0,t=0;for(const r of rows){if(r.map.toLowerCase()!==map.toLowerCase())continue;if(r.a.toLowerCase()===team.toLowerCase()){w+=r.ra;t+=r.ra+r.rb}else if(r.b.toLowerCase()===team.toLowerCase()){w+=r.rb;t+=r.ra+r.rb}}
  return {rate:(w+120)/(t+240),rounds:t}}
 function roundProb(a,b,map,rows){const aa=smoothed(a,map,rows),bb=smoothed(b,map,rows);const logit=p=>Math.log(p/(1-p));return {p:1/(1+Math.exp(-(logit(aa.rate)-logit(bb.rate)))),a:aa.rounds,b:bb.rounds}}
-function estimateKills(player,rows){let kills=0,rounds=0;for(const r of rows){if(r.player&&r.player.toLowerCase()===player.toLowerCase()&&r.kills!==null){kills+=r.kills;rounds+=r.ra+r.rb}}return {rate:(kills+0.7*150)/(rounds+150),rounds}}
+function estimateKills(player,rows){let kills=0,rounds=0;for(const r of rows){const people=Array.isArray(r.players)?r.players:(r.player?[{name:r.player,kills:r.kills}]:[]);for(const p of people){if(p.name&&p.name.toLowerCase()===player.toLowerCase()&&Number.isFinite(p.kills)){kills+=p.kills;rounds+=r.ra+r.rb}}}return {rate:(kills+0.7*150)/(rounds+150),rounds}}
 function applyHistory(){if(!dataset.length)return toast('Importe primeiro a base histórica.');const a=$('team-a').value.trim(),b=$('team-b').value.trim(),player=$('player').value.trim(),cutoff=$('data-cutoff').value;const train=dataset.filter(r=>!cutoff||r.date<cutoff);
  if(!train.length)return toast('Não há dados anteriores à data de corte.');const msg=[];
  for(let i=1;i<=3;i++){const map=$('map-'+i).value,res=roundProb(a,b,map,train);$('prob-'+i).value=(res.p*100).toFixed(1);msg.push(map+': '+res.a+'/'+res.b+' rounds por equipe')}
