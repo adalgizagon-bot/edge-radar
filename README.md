@@ -13,7 +13,7 @@ Nova aplicação do repositório edge-radar. O código antigo está preservado e
 
 ## Como usar
 
-Acesse o site publicado ou abra `index.html` localmente. Na aba **Base histórica**, importe CSV com 1 linha por partida **e mapa** (não uma linha por jogador). Cabeçalho:
+Acesse o site publicado ou abra `public/index.html` localmente. Na aba **Base histórica**, importe CSV com 1 linha por partida **e mapa** (não uma linha por jogador). Cabeçalho:
 
 ```csv
 date,match_id,team_a,team_b,map,rounds_a,rounds_b,player,player_team,kills
