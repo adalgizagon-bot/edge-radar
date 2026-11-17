@@ -1,6 +1,6 @@
 {
   "source": "Cito API",
-  "fetchedAt": "2026-11-17T23:30:42.361Z",
+  "fetchedAt": "2026-11-17T23:31:06.528Z",
   "windowDays": 30,
   "teams": [
     {
@@ -596,6 +596,10 @@
   "note": "Escalações e estatísticas reais; kills por mapa são registros históricos e não previsões calibradas.",
   "warnings": [
     "roster Luminosity indisponível",
-    "roster Envy indisponível"
+    "roster Envy indisponível",
+    "mapstats shield indisponíveis",
+    "mapstats s0und indisponíveis",
+    "mapstats sausol indisponíveis",
+    "mapstats Ag1l indisponíveis"
   ]
 }
