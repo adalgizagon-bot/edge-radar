@@ -11,7 +11,7 @@ function seeded(seed){let s=seed||1;return()=>{s^=s<<13;s^=s>>>17;s^=s<<5;return
 function poisson(lambda,random){const L=Math.exp(-lambda);let p=1,k=0;do{k++;p*=random()}while(p>L&&k<20);return Math.min(5,k-1)}
 function playMap(p,kpr,side,random){let a=0,b=0,kills=0;
  const round=()=>{const aw=random()<p;a+=Number(aw);b+=Number(!aw);const playerWin=side==='A'?aw:!aw;kills+=poisson(kpr*(playerWin?1.12:.88),random)};
- while(a<13&&b<13)round();
+ while(a<13&&b<13&&a+b<24)round();
  if(a===12&&b===12){let blocks=0;do{const aa=a,bb=b;for(let i=0;i<6;i++){round();if(a-aa===4||b-bb===4)break}blocks++}while(a===b&&blocks<12);if(a===b)round()}
  return {a,b,rounds:a+b,kills,winner:a>b?'A':'B'};
 }
@@ -83,7 +83,7 @@ function applyHistory(){if(!dataset.length)return toast('Importe primeiro a base
  for(let i=1;i<=3;i++){const map=$('map-'+i).value,res=roundProb(a,b,map,train);$('prob-'+i).value=(res.p*100).toFixed(1);msg.push(map+': '+res.a+'/'+res.b+' rounds por equipe')}
  const k=estimateKills(player,train);$('kpr').value=k.rate.toFixed(2);$('model-report').textContent='Estimativas com suavização bayesiana. Cobertura: '+msg.join(' | ')+'; jogador: '+k.rounds+' rounds. Com pouca cobertura, as previsões tendem a 50% por round e 0,70 kills/round. Não há correção por força dos adversários ou veto.';
  showTab('simulator');toast('Parâmetros preenchidos com o histórico; confira a cobertura antes de simular.')}
-function mapProbability(p,n=900){const random=seeded(seedHash('backtest'+p));let hits=0;for(let i=0;i<n;i++){let a=0,b=0;while(a<13&&b<13){if(random()<p)a++;else b++}if(a===12&&b===12){let guard=0;do{const aa=a,bb=b;for(let j=0;j<6;j++){if(random()<p)a++;else b++;if(a-aa===4||b-bb===4)break}guard++}while(a===b&&guard<12);if(a===b){if(random()<p)a++;else b++}}hits+=Number(a>b)}return hits/n}
+function mapProbability(p,n=900){const random=seeded(seedHash('backtest'+p));let hits=0;for(let i=0;i<n;i++){let a=0,b=0;while(a<13&&b<13&&a+b<24){if(random()<p)a++;else b++}if(a===12&&b===12){let guard=0;do{const aa=a,bb=b;for(let j=0;j<6;j++){if(random()<p)a++;else b++;if(a-aa===4||b-bb===4)break}guard++}while(a===b&&guard<12);if(a===b){if(random()<p)a++;else b++}}hits+=Number(a>b)}return hits/n}
 function backtest(){if(dataset.length<40)return toast('Precisa de pelo menos 40 mapas para este teste inicial.');const cutoff=Math.floor(dataset.length*.75),train=dataset.slice(0,cutoff),test=dataset.slice(cutoff);let sum=0,base=0,acc=0,covered=0;
  const baseline=train.reduce((s,r)=>s+Number(r.ra>r.rb),0)/train.length;
  for(const r of test){const x=roundProb(r.a,r.b,r.map,train),p=mapProbability(x.p,350),out=Number(r.ra>r.rb);sum+=(p-out)**2;base+=(baseline-out)**2;acc+=Number((p>=.5)===Boolean(out));if(x.a>=100&&x.b>=100)covered++}
