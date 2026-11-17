@@ -16,23 +16,53 @@
       <div class="side-label">NAVEGAÇÃO</div>
       <nav aria-label="Menu principal">
         <button class="nav active" data-tab="dashboard"><span>▦</span> Visão geral</button>
+        <button class="nav" data-tab="tournaments"><span>◉</span> Torneios em teste</button>
         <button class="nav" data-tab="simulator"><span>◈</span> Simulador CS2</button>
         <button class="nav" data-tab="data"><span>◫</span> Base histórica</button>
         <button class="nav" data-tab="registry"><span>▤</span> Registro de previsões</button>
         <button class="nav" data-tab="method"><span>◎</span> Metodologia</button>
       </nav>
-      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito API não conectada</div><p>Sem dados ao vivo. Nenhuma informação externa é inventada.</p><div class="aside-tag">v0.2 • Pesquisa estatística</div></div>
+      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: histórico capturado</div><p>Dados reais dos torneios em fotografia datada. Sem atualização automática.</p><div class="aside-tag">v0.3 • Torneios CS2</div></div>
     </aside>
     <main class="main">
       <header class="topbar"><div><span class="breadcrumb">INTELIGÊNCIA ESTATÍSTICA / CS2</span></div><div class="top-right"><span class="pill">◌ Modo simulação</span><span class="avatar">A</span></div></header>
       <div class="content">
         <section class="view active" id="dashboard">
-          <div class="heading"><div><div class="eyebrow">PESQUISA QUANTITATIVA</div><h1>Visão geral <span>do laboratório</span></h1><p>Modelos verificáveis. Estatísticas antes de opiniões.</p></div><button class="primary" data-go="simulator">Abrir simulador <span>↗</span></button></div>
-          <div class="notice"><span class="notice-icon">ⓘ</span><div><strong>Versão inicial com entradas manuais</strong><p>O motor já calcula cenários de CS2. As probabilidades dependem dos parâmetros informados e ainda não são previsões validadas com histórico real. Nenhuma operação financeira é realizada.</p></div></div>
+          <div class="heading"><div><div class="eyebrow">PESQUISA QUANTITATIVA</div><h1>Visão geral <span>do laboratório</span></h1><p>Modelos verificáveis. Estatísticas antes de opiniões.</p></div><button class="primary" data-go="tournaments">Ver torneios reais <span>↗</span></button></div>
+          <div class="notice"><span class="notice-icon">ⓘ</span><div><strong>Dois torneios com estatísticas reais</strong><p>A Cito forneceu 8 jogos e 16 equipes para comparação estatística. O simulador permanece experimental: não foram medidos índices de acerto nem criadas recomendações financeiras.</p></div></div>
           <div class="metric-grid"><article class="metric"><label>Mercados de pesquisa</label><strong>10</strong><small>Derivados da mesma simulação</small></article><article class="metric"><label>Previsões registradas</label><strong id="count-total">0</strong><small>Salvas neste navegador</small></article><article class="metric"><label>Previsões resolvidas</label><strong id="count-resolved">0</strong><small>Resultado informado manualmente</small></article><article class="metric"><label>Brier Score</label><strong id="metric-brier">—</strong><small>Menor é melhor</small></article></div>
-          <div class="split"><div class="panel"><div class="panel-head"><div><span class="tiny-kicker">ARQUITETURA</span><h2>Um motor. Vários mercados.</h2></div><span class="mini-pill">CS2 MR12</span></div><div class="pipeline"><div><b>01</b><strong>Entradas por mapa</strong><p>Probabilidade de vencer um round e kills por round</p></div><i>↓</i><div><b>02</b><strong>Monte Carlo</strong><p>Simulações com prorrogação e série melhor de três</p></div><i>↓</i><div><b>03</b><strong>Mercados derivados</strong><p>Mapas, handicaps, rounds e kills</p></div></div></div><div class="panel"><div class="panel-head"><div><span class="tiny-kicker">VALIDAÇÃO</span><h2>O que vamos medir</h2></div></div><div class="checks"><div><span>✓</span><div><b>Probabilidade x resultado</b><p>Calibração e Brier Score das previsões resolvidas.</p></div></div><div><span>✓</span><div><b>Previsões registradas antes</b><p>Timestamp local para separar análise prospectiva de retrospectiva.</p></div></div><div><span>○</span><div><b>Backtest histórico real</b><p>Pendente de base auditável e acesso regularizado à API.</p></div></div><div><span>○</span><div><b>Resultados fora da amostra</b><p>Necessários antes de afirmar qualquer vantagem estatística.</p></div></div></div></div></div>
+          <div class="panel" id="home-tournaments"><div class="panel-head"><div><span class="tiny-kicker">BASE CITO • 18/11/2026</span><h2>Stake Ranked Episode 6 &amp; Tipsport RUSH Brno 2026</h2></div><button class="secondary" data-go="tournaments">Analisar confrontos →</button></div><p class="muted">8 partidas agendadas e 16 equipes com histórico por mapa nos últimos 90 dias. Consulta datada, sem atualização ao vivo.</p></div><div class="split"><div class="panel"><div class="panel-head"><div><span class="tiny-kicker">ARQUITETURA</span><h2>Um motor. Vários mercados.</h2></div><span class="mini-pill">CS2 MR12</span></div><div class="pipeline"><div><b>01</b><strong>Entradas por mapa</strong><p>Probabilidade de vencer um round e kills por round</p></div><i>↓</i><div><b>02</b><strong>Monte Carlo</strong><p>Simulações com prorrogação e série melhor de três</p></div><i>↓</i><div><b>03</b><strong>Mercados derivados</strong><p>Mapas, handicaps, rounds e kills</p></div></div></div><div class="panel"><div class="panel-head"><div><span class="tiny-kicker">VALIDAÇÃO</span><h2>O que vamos medir</h2></div></div><div class="checks"><div><span>✓</span><div><b>Probabilidade x resultado</b><p>Calibração e Brier Score das previsões resolvidas.</p></div></div><div><span>✓</span><div><b>Previsões registradas antes</b><p>Timestamp local para separar análise prospectiva de retrospectiva.</p></div></div><div><span>○</span><div><b>Backtest histórico real</b><p>Pendente de base auditável e acesso regularizado à API.</p></div></div><div><span>○</span><div><b>Resultados fora da amostra</b><p>Necessários antes de afirmar qualquer vantagem estatística.</p></div></div></div></div></div>
           <div class="panel low"><div class="panel-head"><div><span class="tiny-kicker">ESCOPO INICIAL</span><h2>Mercados contemplados</h2></div></div><div class="chip-row"><span>Vitória no mapa</span><span>Total de rounds</span><span>Handicap de rounds</span><span>Kills por mapa</span><span>Resultado 2–0</span><span>Resultado 2–1</span><span>Vitória na série</span><span>Kills na série</span></div></div>
         </section>
+        
+        <section class="view" id="tournaments">
+          <div class="heading"><div><div class="eyebrow">COMPETIÇÕES MONITORADAS</div><h1>Torneios <span>em teste</span></h1><p>Confrontos reais e estatísticas por mapa para estudar o comportamento das equipes.</p></div><span class="pill">Cito API • fotografia de dados</span></div>
+          <div class="notice"><span class="notice-icon">ⓘ</span><div><strong>Histórico real, modelo ainda experimental</strong><p>Os horários e estatísticas foram consultados em 17/11/2026. Não são dados ao vivo e não se atualizam automaticamente. As linhas de odds do print não foram importadas. O resultado de uma simulação não é um percentual calibrado de acerto.</p></div></div>
+          <div class="metric-grid three">
+            <article class="metric"><label>Partidas agendadas</label><strong id="tournament-match-count">—</strong><small>18 de novembro de 2026</small></article>
+            <article class="metric"><label>Equipes com dados</label><strong id="tournament-team-count">—</strong><small>Histórico Cito de 90 dias</small></article>
+            <article class="metric"><label>Última consulta à Cito</label><strong id="tournament-snapshot-age" class="snapshot-date">—</strong><small>Atualização manual, não ao vivo</small></article>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="tiny-kicker">01 / ESCOLHA UM CAMPEONATO</span><h2>Jogos para análise</h2></div><span class="mini-pill">Horário de Brasília</span></div>
+            <div class="chip-row tournament-filters" id="tournament-filters">
+              <button type="button" class="secondary" data-event-filter="all">Todos</button>
+              <button type="button" class="ghost" data-event-filter="cs2-event-9258">Stake Ranked</button>
+              <button type="button" class="ghost" data-event-filter="cs2-event-9273">RUSH Brno</button>
+            </div>
+            <p class="muted tournament-caption" id="tournament-source">Carregando dados Cito...</p>
+            <div id="tournament-matches" class="match-grid"></div>
+          </div>
+          <div class="panel" id="tournament-detail">
+            <div class="panel-head"><div><span class="tiny-kicker">02 / CONFRONTO SELECIONADO</span><h2 id="selected-match-heading">Selecione uma partida</h2></div><span class="mini-pill" id="selected-match-time">—</span></div>
+            <div id="team-comparison"></div>
+            <div class="analysis-footer">
+              <p class="muted" id="team-comparison-note">As vitórias por mapa são históricas e não representam probabilidades ajustadas ao adversário.</p>
+              <button class="primary" id="send-match-to-sim" disabled>Preencher simulador com histórico →</button>
+            </div>
+          </div>
+        </section>
+
         <section class="view" id="simulator">
           <div class="heading"><div><div class="eyebrow">MOTOR DE PROBABILIDADES</div><h1>Simulador <span>CS2</span></h1><p>Configure cenários. Compare os mercados a partir da mesma distribuição simulada.</p></div><button class="ghost" id="reset-form">Restaurar parâmetros</button></div>
           <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>Entradas manuais ou estimadas com CSV — ainda não são previsões validadas.</strong><p>A importação de histórico gera estimativas iniciais, não um modelo calibrado. Verifique cobertura e resultados fora da amostra.</p></div></div>
@@ -50,7 +80,7 @@
         
 <section class="view" id="data">
   <div class="heading"><div><div class="eyebrow">DADOS E VALIDAÇÃO</div><h1>Base <span>histórica CS2</span></h1><p>Importe mapas reais, calcule parâmetros com suavização e avalie previsões fora do período de treinamento.</p></div></div>
-  <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>A fonte externa ainda não está ativa.</strong><p>A Cito devolveu chave revogada para consultas de dados. Esta tela não apresenta partidas inventadas: os dados entram somente por CSV fornecido por você, com a fonte verificada por você. Arquivos ficam no seu navegador.</p></div></div>
+  <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>Estatísticas Cito disponíveis na aba Torneios.</strong><p>A fotografia da Cito foi consultada pelo ChatGPT. Aqui você também pode importar um CSV próprio, mantido somente neste navegador. A integração direta do site ainda não está ativa.</p></div></div>
   <div class="panel data-panel">
     <div class="panel-head"><div><span class="tiny-kicker">01 / CARREGAMENTO</span><h2>Importar resultados por mapa</h2></div><span class="mini-pill">CSV local</span></div>
     <p class="muted">Uma linha por jogador e mapa, ou só uma linha para mapa sem kills. Repita o mesmo match_id, mapa e placar para registrar vários jogadores sem duplicar o mapa. Colunas obrigatórias: <code>date,match_id,team_a,team_b,map,rounds_a,rounds_b</code>. Colunas opcionais: <code>player,player_team,kills</code>. Data no formato AAAA-MM-DD; os resultados precisam corresponder a partidas encerradas. Limite: 4 MB e 10.000 mapas. Vírgula e ponto-e-vírgula são aceitos.</p>
