@@ -21,7 +21,7 @@ date,match_id,team_a,team_b,map,rounds_a,rounds_b,player,player_team,kills
 2026-01-07,EXEMPLO-002,Equipe C,Equipe D,Inferno,11,13,Outro Jogador,Equipe D,22
 ```
 
-Os registros acima são FICTÍCIOS, apenas para documentar o formato. Não foram pré-carregados no app. Para testes sérios, importe dados históricos reais, obtidos licitamente, com identificadores únicos e fontes verificáveis. Campos obrigatórios: date, match_id, team_a, team_b, map, rounds_a, rounds_b. O dataset fica apenas no localStorage do dispositivo. Com várias linhas para jogadores de um mesmo mapa, a importação atual conserva somente uma linha por ID/mapa: esta limitação será corrigida em uma próxima versão com tabelas de mapas e jogadores separadas.
+Os registros acima são FICTÍCIOS, apenas para documentar o formato. Não foram pré-carregados no app. Para testes sérios, importe dados históricos reais, obtidos licitamente, com identificadores únicos e fontes verificáveis. Campos obrigatórios: date, match_id, team_a, team_b, map, rounds_a, rounds_b. O dataset fica apenas no localStorage do dispositivo. Para registrar vários jogadores no mesmo mapa, repita a identificação da partida, mapa e placar em linhas adicionais; a importação agora agrega todos os jogadores distintos em um único mapa, sem duplicar os resultados.
 
 **Data de corte**: use uma data ANTERIOR ao início da partida a ser prevista para evitar vazamento de dados futuros. O backtest avalia resultados de mapas, não mercados financeiros.
 
