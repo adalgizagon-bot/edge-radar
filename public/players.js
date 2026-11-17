@@ -65,12 +65,18 @@ function sendSelectedPlayer(){
  const item=atlasSelectedPlayer;if(!item)return toast('Escolha um jogador com dados suficientes.');
  if(typeof showMatch!=='function'||typeof sendTournamentToSimulator!=='function')return toast('Simulador não está disponível.');
  showMatch(item.match.id);sendTournamentToSimulator();
- const mapSel=document.getElementById('map-1');
- if(![...mapSel.options].some(x=>x.value===item.map)){const o=pEl('option','',item.map);o.value=item.map;mapSel.append(o)}
- mapSel.value=item.map;
  const ta=atlasFixtures.teams.find(t=>t.id===item.match.teamA.id),tb=atlasFixtures.teams.find(t=>t.id===item.match.teamB.id);
- const ma=ta?.maps.find(x=>x.name===item.map),mb=tb?.maps.find(x=>x.name===item.map);
- if(ma&&mb&&typeof estimatedRound==='function')document.getElementById('prob-1').value=(100*estimatedRound(ma,mb)).toFixed(1);
+ const common=ta.maps.map(x=>x.name).filter(name=>tb.maps.some(y=>y.name===name));
+ common.sort((x,y)=>(ta.maps.find(m=>m.name===y)?.played||0)+(tb.maps.find(m=>m.name===y)?.played||0)-
+                        (ta.maps.find(m=>m.name===x)?.played||0)-(tb.maps.find(m=>m.name===x)?.played||0));
+ const selectedMaps=[item.map,...common.filter(name=>name!==item.map)].slice(0,3);
+ for(let i=0;i<selectedMaps.length;i++){
+  const map=selectedMaps[i],sel=document.getElementById('map-'+(i+1));
+  if(![...sel.options].some(x=>x.value===map)){const option=pEl('option','',map);option.value=map;sel.append(option)}
+  sel.value=map;
+  const a=ta.maps.find(x=>x.name===map),b=tb.maps.find(x=>x.name===map);
+  if(a&&b&&typeof estimatedRound==='function')document.getElementById('prob-'+(i+1)).value=(100*estimatedRound(a,b)).toFixed(1);
+ }
  document.getElementById('player').value=item.player.nickname;
  document.getElementById('player-side').value=item.team.id===item.match.teamA.id?'A':'B';
  document.getElementById('kpr').value=item.stat.kpr.toFixed(3);
