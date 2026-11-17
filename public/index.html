@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
   <script src="tournaments.js" defer></script>
+  <script src="players.js" defer></script>
+  <script src="validation.js" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -20,6 +22,8 @@
         <button class="nav" data-tab="tournaments"><span>◉</span> Torneios em teste</button>
         <button class="nav" data-tab="simulator"><span>◈</span> Simulador CS2</button>
         <button class="nav" data-tab="data"><span>◫</span> Base histórica</button>
+        <button class="nav" data-tab="players"><span>◎</span> Kills dos jogadores</button>
+        <button class="nav" data-tab="validation"><span>▥</span> Validação Cito</button>
         <button class="nav" data-tab="registry"><span>▤</span> Registro de previsões</button>
         <button class="nav" data-tab="method"><span>◎</span> Metodologia</button>
       </nav>
@@ -100,6 +104,62 @@
   </div>
   <div class="panel prose"><h2>Como as estimativas funcionam</h2><p>O motor calcula a fração histórica de rounds vencidos por equipe e mapa, aplica uma regularização para evitar taxas extremas e compara os dois lados. Para kills, regulariza a taxa individual por round quando existem dados do jogador. A simulação continua simplificada: não ajusta o efeito do adversário, lados CT/TR, rosters ou veto.</p><p>O teste separa os últimos 25% dos mapas e mede Brier Score em relação a um referencial simples, usando somente os primeiros 75% para estimar os parâmetros. Isso ainda não equivale a validação prospectiva. Exija boa cobertura antes de interpretar os percentuais.</p></div>
 </section>
+
+<section class="view" id="players">
+ <div class="heading"><div><div class="eyebrow">CITO API / ESTATÍSTICAS INDIVIDUAIS</div><h1>Kills <span>por jogador</span></h1>
+  <p>Escalações reais, taxas históricas por mapa e cobertura de dados. A ausência de informação nunca é substituída por números fictícios.</p></div></div>
+ <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>Histórico individual não é previsão calibrada.</strong>
+ <p>A taxa KPR depende da amostra, da escalação e da duração do mapa. O cálculo futuro usa uma distribuição de Poisson simplificada e será avaliado depois dos jogos. Apenas atletas com histórico suficiente têm parâmetros preenchidos automaticamente.</p></div></div>
+ <div class="metric-grid three">
+  <article class="metric"><label>Equipes com escalação</label><strong id="roster-teams">—</strong><small>Fonte Cito API</small></article>
+  <article class="metric"><label>Atletas identificados</label><strong id="roster-players">—</strong><small>Sem treinadores</small></article>
+  <article class="metric"><label>Atletas com dados de kills</label><strong id="kills-coverage">—</strong><small>Taxas KPR por mapa</small></article>
+ </div>
+ <div class="panel">
+  <div class="panel-head"><div><span class="tiny-kicker">01 / EXPLORAR</span><h2>Jogadores por confronto e mapa</h2></div><span class="mini-pill">Histórico Cito</span></div>
+  <div class="input-pair">
+   <label>Confronto<select id="players-match-select" class="dark-select"><option>Carregando...</option></select></label>
+   <label>Mapa<select id="players-map-select" class="dark-select"><option>Carregando...</option></select></label>
+  </div>
+  <p class="muted" id="players-source-note">Aguardando dados...</p>
+  <div id="players-card-list" class="player-grid"></div>
+ </div>
+ <div class="panel">
+  <div class="panel-head"><div><span class="tiny-kicker">02 / ENVIAR PARA SIMULAÇÃO</span><h2>Selecionar atleta</h2></div></div>
+  <p class="muted" id="players-choice-help">Escolha um jogador com KPR registrado em pelo menos quatro mapas. Os mapas da simulação continuam selecionados por disponibilidade histórica, não por veto oficial.</p>
+  <button id="player-to-simulator" class="primary" disabled>Preencher simulador com jogador →</button>
+ </div>
+</section>
+<section class="view" id="validation">
+ <div class="heading"><div><div class="eyebrow">AVALIAÇÃO CONGELADA / SEM LOOK-AHEAD</div><h1>Validação <span>das previsões</span></h1>
+  <p>Probabilidades registradas antes das partidas, confrontadas com placares e kills oficiais após o encerramento.</p></div></div>
+ <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>O resultado só conta quando a Cito confirma o mapa disputado.</strong>
+  <p>Previsões criadas antes do horário do jogo não são substituídas após o resultado. Brier Score menor é melhor; este teste mede precisão estatística, não rentabilidade.</p></div></div>
+ <div class="metric-grid">
+  <article class="metric"><label>Previsões registradas</label><strong id="validation-total">—</strong><small>Mercados/mapas congelados</small></article>
+  <article class="metric"><label>Conferidas</label><strong id="validation-resolved">—</strong><small>Resultados verificados</small></article>
+  <article class="metric"><label>Erros por mercado</label><strong id="validation-market-count">—</strong><small>Classificação separada</small></article>
+  <article class="metric"><label>Último processamento</label><strong id="validation-last" class="snapshot-date">—</strong><small>Sem atualização ao vivo</small></article>
+ </div>
+ <div class="panel">
+  <div class="panel-head"><div><span class="tiny-kicker">MERCADOS COMPARADOS</span><h2>Desempenho histórico</h2></div></div>
+  <div id="validation-stats" class="validation-grid"></div>
+ </div>
+ <div class="panel">
+  <div class="panel-head"><div><span class="tiny-kicker">TRILHA DE PREVISÕES</span><h2>Pré-jogo × resultado real</h2></div><span class="mini-pill" id="validation-model">—</span></div>
+  <div class="input-pair"><label>Filtrar mercado
+   <select id="validation-filter" class="dark-select"><option value="all">Todos</option><option value="map_a">Vencedor de mapa</option><option value="rounds_over_21_5">Total de rounds</option><option value="handicap_a_minus_2_5">Handicap de rounds</option><option value="kills_over_15_5">Kills dos jogadores</option></select>
+  </label><label>Filtrar resultado<select id="validation-status" class="dark-select"><option value="all">Todos</option><option value="pending">Aguardando jogo</option><option value="resolved">Resultado confirmado</option></select></label></div>
+  <p id="validation-source-note" class="muted"></p>
+  <div class="table-wrap" id="validation-table"></div>
+ </div>
+ <div class="panel">
+  <div class="panel-head"><div><span class="tiny-kicker">ATUALIZAÇÃO AUTOMÁTICA</span><h2>Estado da sincronização</h2></div></div>
+  <p id="sync-status-detail" class="muted">Verificando configuração de atualização...</p>
+  <p class="muted">A coleta automatizada depende do segredo CITO_API_KEY no GitHub Actions. A credencial nunca fica no navegador. Limite programado: até sete solicitações Cito por execução diária.</p>
+ </div>
+</section>
+
 <section class="view" id="method"><div class="heading"><div><div class="eyebrow">TRANSPARÊNCIA</div><h1>Metodologia <span>e limitações</span></h1><p>O que este protótipo calcula e o que ainda não podemos afirmar.</p></div></div><div class="panel prose"><h2>O que o motor faz agora</h2><p>Simula séries BO3 de Counter-Strike 2 com até três mapas, usando uma probabilidade fixa por round para a Equipe A em cada mapa. O primeiro time a 13 rounds vence no tempo regulamentar; um empate em 12–12 aciona prorrogações de seis rounds até desempate. Uma série termina quando uma equipe vence dois mapas.</p><p>O modelo gera kills individuais por round com distribuição de Poisson simplificada e limite de cinco kills no round, ajustada de maneira heurística ao resultado do round. Os totais variam com a duração dos mapas e com a possibilidade de disputar o terceiro mapa.</p><h2>O que ainda falta</h2><ul><li>Estimar parâmetros automaticamente a partir de bases reais, considerando adversários, lado CT/TR, mapa, mudanças de elenco e calendário.</li><li>Calibrar a distribuição de kills e rounds com dados históricos e correlacioná-la com contexto de cada partida.</li><li>Separar treinamento, validação e teste por datas, sem vazamento de informações posteriores ao evento.</li><li>Comparar resultados com modelos simples de referência, medir erro de calibração, Brier Score e incerteza em amostras prospectivas.</li><li>Verificar cobertura, credenciais, limites, termos de uso e licenciamento da Cito API antes de usar dados em produção.</li></ul><h2>Como interpretar probabilidades</h2><p>Uma saída de 63% significa que o cenário aconteceu em aproximadamente 63% das simulações <em>dado o conjunto de suposições de entrada</em>. Não significa que a chance real do evento seja 63%. A incerteza estrutural pode ser muito maior que o erro de Monte Carlo.</p><h2>Segurança e privacidade</h2><p>Não há login, pagamentos, integração com casas, execução de apostas nem envio de credenciais. Dados de previsão ficam no armazenamento local do navegador. Não informe senhas ou chaves de API no formulário.</p></div></section>
       </div>
     </main>
