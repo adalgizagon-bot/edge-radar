@@ -1,0 +1,50 @@
+name: ATLAS - atualização econômica da Cito
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '7 7 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atlas-cito-daily
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9f # v4.2.2
+        with:
+          persist-credentials: true
+      - name: Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Teste matemático do modelo
+        run: node --test tests/model.test.mjs
+      - name: Sincronização Cito (somente se a chave estiver configurada)
+        env:
+          CITO_API_KEY: ${{ secrets.CITO_API_KEY }}
+          CITO_MAX_CALLS: '7'
+        run: |
+          if [ -z "$CITO_API_KEY" ]; then
+            echo "::notice::Configure o secret CITO_API_KEY em Settings > Secrets and variables > Actions para ativar a atualização."
+            exit 0
+          fi
+          node scripts/refresh.mjs
+      - name: Publicar dados atualizados no GitHub
+        run: |
+          git add public/data/*.json
+          if git diff --cached --quiet; then
+            echo "Nenhuma mudança de dados."
+            exit 0
+          fi
+          git config user.name "atlas-cs2-bot"
+          git config user.email "atlas-cs2-bot@users.noreply.github.com"
+          git commit -m "data: atualizar CS2 Cito e validar previsões [skip ci]"
+          git push origin HEAD:main
