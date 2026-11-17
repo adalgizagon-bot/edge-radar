@@ -1,6 +1,6 @@
 {
-  "computedAt": "2026-11-17T23:36:00Z",
-  "total": 108,
+  "computedAt": "2026-11-17T23:41:32.468Z",
+  "total": 172,
   "resolved": 0,
   "byMarket": [
     {
@@ -20,8 +20,14 @@
       "observations": 0,
       "brier": null,
       "classificationAccuracy": null
+    },
+    {
+      "kind": "kills_over_15_5",
+      "observations": 0,
+      "brier": null,
+      "classificationAccuracy": null
     }
   ],
   "assessed": [],
-  "note": "Nenhuma partida de 18/11 resolvida; os 108 registros estão pendentes."
+  "note": "Avaliação dos registros pré-jogo. Sem resultados oficiais de 18/11 ainda."
 }
