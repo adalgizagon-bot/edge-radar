@@ -1,6 +1,6 @@
 {
   "source": "Cito API",
-  "fetchedAt": "2026-11-17T23:40:53.357Z",
+  "fetchedAt": "2026-11-17T23:41:08.412Z",
   "windowDays": 30,
   "teams": [
     {
@@ -2322,6 +2322,262 @@
           "rounds": 112,
           "adr": 59,
           "rating": 1.11
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-19926",
+      "nickname": "afro",
+      "teamId": "cs2-team-6290",
+      "role": "AWPer",
+      "fetchedAt": "2026-11-17T23:41:07.810Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Ancient",
+          "count": 3,
+          "kpr": 0.62,
+          "kills": 39,
+          "rounds": 63,
+          "adr": 70,
+          "rating": 0.97
+        },
+        {
+          "name": "Mirage",
+          "count": 3,
+          "kpr": 0.56,
+          "kills": 39,
+          "rounds": 70,
+          "adr": 54,
+          "rating": 0.83
+        },
+        {
+          "name": "Dust2",
+          "count": 2,
+          "kpr": 0.72,
+          "kills": 31,
+          "rounds": 43,
+          "adr": 82,
+          "rating": 1.16
+        },
+        {
+          "name": "Inferno",
+          "count": 2,
+          "kpr": 0.45,
+          "kills": 21,
+          "rounds": 47,
+          "adr": 56,
+          "rating": 0.89
+        },
+        {
+          "name": "Nuke",
+          "count": 2,
+          "kpr": 0.51,
+          "kills": 20,
+          "rounds": 39,
+          "adr": 61,
+          "rating": 0.89
+        },
+        {
+          "name": "Cache",
+          "count": 1,
+          "kpr": 0.55,
+          "kills": 12,
+          "rounds": 22,
+          "adr": 59,
+          "rating": 1.11
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-20563",
+      "nickname": "lux",
+      "teamId": "cs2-team-6290",
+      "role": "rifler",
+      "fetchedAt": "2026-11-17T23:41:07.849Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Ancient",
+          "count": 3,
+          "kpr": 0.52,
+          "kills": 33,
+          "rounds": 63,
+          "adr": 65,
+          "rating": 0.85
+        },
+        {
+          "name": "Mirage",
+          "count": 3,
+          "kpr": 0.47,
+          "kills": 33,
+          "rounds": 70,
+          "adr": 61,
+          "rating": 0.78
+        },
+        {
+          "name": "Dust2",
+          "count": 2,
+          "kpr": 0.74,
+          "kills": 32,
+          "rounds": 43,
+          "adr": 90,
+          "rating": 1.14
+        },
+        {
+          "name": "Inferno",
+          "count": 2,
+          "kpr": 0.64,
+          "kills": 30,
+          "rounds": 47,
+          "adr": 77,
+          "rating": 1.04
+        },
+        {
+          "name": "Nuke",
+          "count": 2,
+          "kpr": 0.46,
+          "kills": 18,
+          "rounds": 39,
+          "adr": 67,
+          "rating": 0.75
+        },
+        {
+          "name": "Cache",
+          "count": 1,
+          "kpr": 0.86,
+          "kills": 19,
+          "rounds": 22,
+          "adr": 104,
+          "rating": 1.27
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-13138",
+      "nickname": "Maka",
+      "teamId": "cs2-team-5991",
+      "role": "AWPer",
+      "fetchedAt": "2026-11-17T23:41:07.924Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Ancient",
+          "count": 5,
+          "kpr": 0.65,
+          "kills": 66,
+          "rounds": 101,
+          "adr": 73,
+          "rating": 1.08
+        },
+        {
+          "name": "Dust2",
+          "count": 5,
+          "kpr": 0.73,
+          "kills": 66,
+          "rounds": 91,
+          "adr": 84,
+          "rating": 1.09
+        },
+        {
+          "name": "Nuke",
+          "count": 3,
+          "kpr": 0.71,
+          "kills": 46,
+          "rounds": 65,
+          "adr": 72,
+          "rating": 1
+        },
+        {
+          "name": "Anubis",
+          "count": 2,
+          "kpr": 0.8,
+          "kills": 40,
+          "rounds": 50,
+          "adr": 84,
+          "rating": 1.02
+        },
+        {
+          "name": "Cache",
+          "count": 2,
+          "kpr": 0.64,
+          "kills": 27,
+          "rounds": 42,
+          "adr": 68,
+          "rating": 1.06
+        },
+        {
+          "name": "Inferno",
+          "count": 1,
+          "kpr": 0.88,
+          "kills": 21,
+          "rounds": 24,
+          "adr": 96,
+          "rating": 1.28
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-13497",
+      "nickname": "Lucky",
+      "teamId": "cs2-team-5991",
+      "role": "entry",
+      "fetchedAt": "2026-11-17T23:41:07.888Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Ancient",
+          "count": 5,
+          "kpr": 0.54,
+          "kills": 55,
+          "rounds": 101,
+          "adr": 77,
+          "rating": 1.07
+        },
+        {
+          "name": "Dust2",
+          "count": 5,
+          "kpr": 0.75,
+          "kills": 68,
+          "rounds": 91,
+          "adr": 83,
+          "rating": 1.06
+        },
+        {
+          "name": "Nuke",
+          "count": 3,
+          "kpr": 0.49,
+          "kills": 32,
+          "rounds": 65,
+          "adr": 66,
+          "rating": 0.85
+        },
+        {
+          "name": "Anubis",
+          "count": 2,
+          "kpr": 0.46,
+          "kills": 23,
+          "rounds": 50,
+          "adr": 65,
+          "rating": 0.86
+        },
+        {
+          "name": "Cache",
+          "count": 2,
+          "kpr": 0.81,
+          "kills": 34,
+          "rounds": 42,
+          "adr": 87,
+          "rating": 1.21
+        },
+        {
+          "name": "Inferno",
+          "count": 1,
+          "kpr": 0.67,
+          "kills": 16,
+          "rounds": 24,
+          "adr": 83,
+          "rating": 1.05
         }
       ]
     }
