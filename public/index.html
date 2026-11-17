@@ -35,7 +35,7 @@
         </section>
         <section class="view" id="simulator">
           <div class="heading"><div><div class="eyebrow">MOTOR DE PROBABILIDADES</div><h1>Simulador <span>CS2</span></h1><p>Configure cenários. Compare os mercados a partir da mesma distribuição simulada.</p></div><button class="ghost" id="reset-form">Restaurar parâmetros</button></div>
-          <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>Entradas ilustrativas — não são dados de equipes reais.</strong><p>Os resultados não constituem uma estimativa confiável até calibrarmos os parâmetros com dados históricos.</p></div></div>
+          <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>Entradas manuais ou estimadas com CSV — ainda não são previsões validadas.</strong><p>A importação de histórico gera estimativas iniciais, não um modelo calibrado. Verifique cobertura e resultados fora da amostra.</p></div></div>
           <div class="sim-layout"><form class="panel config" id="sim-form"><div class="panel-head"><div><span class="tiny-kicker">01 / ENTRADAS</span><h2>Parâmetros do cenário</h2></div></div>
              <div class="input-pair"><label>Equipe A<input id="team-a" maxlength="40" value="Equipe A" required></label><label>Equipe B<input id="team-b" maxlength="40" value="Equipe B" required></label></div>
              <label class="field-label">Probabilidade estimada de a Equipe A vencer <b>cada round</b> <span>(não é a chance de vencer o mapa)</span></label>
@@ -53,7 +53,7 @@
   <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>A fonte externa ainda não está ativa.</strong><p>A Cito devolveu chave revogada para consultas de dados. Esta tela não apresenta partidas inventadas: os dados entram somente por CSV fornecido por você, com a fonte verificada por você. Arquivos ficam no seu navegador.</p></div></div>
   <div class="panel data-panel">
     <div class="panel-head"><div><span class="tiny-kicker">01 / CARREGAMENTO</span><h2>Importar resultados por mapa</h2></div><span class="mini-pill">CSV local</span></div>
-    <p class="muted">Uma linha por mapa disputado. Colunas obrigatórias: <code>date,match_id,team_a,team_b,map,rounds_a,rounds_b</code>. Colunas opcionais: <code>player,player_team,kills</code>. Data no formato AAAA-MM-DD; os resultados precisam corresponder a partidas encerradas. Limite: 4 MB e 10.000 mapas. Vírgula e ponto-e-vírgula são aceitos.</p>
+    <p class="muted">Uma linha por jogador e mapa, ou só uma linha para mapa sem kills. Repita o mesmo match_id, mapa e placar para registrar vários jogadores sem duplicar o mapa. Colunas obrigatórias: <code>date,match_id,team_a,team_b,map,rounds_a,rounds_b</code>. Colunas opcionais: <code>player,player_team,kills</code>. Data no formato AAAA-MM-DD; os resultados precisam corresponder a partidas encerradas. Limite: 4 MB e 10.000 mapas. Vírgula e ponto-e-vírgula são aceitos.</p>
     <div class="dataset-row"><label>Arquivo CSV<input id="history-file" type="file" accept=".csv,text/csv"></label><label>Data de corte para as estimativas<input id="data-cutoff" type="date"><small>Se a análise é para uma partida, selecione sua data para não usar informação posterior.</small></label></div>
     <div class="dataset-info" id="data-summary">Nenhum histórico importado.</div>
     <div class="dataset-info" style="margin-top:8px" id="data-teams">—</div>
