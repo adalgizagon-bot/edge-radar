@@ -1,0 +1,1702 @@
+{
+  "source": "Cito API (MCP)",
+  "fetchedAt": "2026-11-17T23:11:56.538Z",
+  "windowDays": 90,
+  "events": [
+    {
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "tag": "stake"
+    },
+    {
+      "eventId": "cs2-event-9273",
+      "event": "Tipsport RUSH Brno 2026",
+      "tag": "brno"
+    }
+  ],
+  "matches": [
+    {
+      "id": "cs2-match-2400522",
+      "eventId": "cs2-event-9273",
+      "event": "Tipsport RUSH Brno 2026",
+      "startTime": "2026-11-18T10:00:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-7187",
+        "name": "Nexus",
+        "slug": "nexus"
+      },
+      "teamB": {
+        "id": "cs2-team-13104",
+        "name": "Iberian Soul",
+        "slug": "iberian-soul"
+      }
+    },
+    {
+      "id": "cs2-match-2400440",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startTime": "2026-11-18T11:00:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-12916",
+        "name": "Betclic",
+        "slug": "betclic"
+      },
+      "teamB": {
+        "id": "cs2-team-7532",
+        "name": "BIG",
+        "slug": "big"
+      }
+    },
+    {
+      "id": "cs2-match-2400523",
+      "eventId": "cs2-event-9273",
+      "event": "Tipsport RUSH Brno 2026",
+      "startTime": "2026-11-18T13:00:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-13173",
+        "name": "Phantom",
+        "slug": "phantom"
+      },
+      "teamB": {
+        "id": "cs2-team-11641",
+        "name": "Metizport",
+        "slug": "metizport"
+      }
+    },
+    {
+      "id": "cs2-match-2400441",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startTime": "2026-11-18T13:30:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-12267",
+        "name": "UNiTY",
+        "slug": "unity"
+      },
+      "teamB": {
+        "id": "cs2-team-9928",
+        "name": "GamerLegion",
+        "slug": "gamerlegion"
+      }
+    },
+    {
+      "id": "cs2-match-2400524",
+      "eventId": "cs2-event-9273",
+      "event": "Tipsport RUSH Brno 2026",
+      "startTime": "2026-11-18T16:00:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-10577",
+        "name": "SINNERS",
+        "slug": "sinners"
+      },
+      "teamB": {
+        "id": "cs2-team-12474",
+        "name": "Alliance",
+        "slug": "alliance"
+      }
+    },
+    {
+      "id": "cs2-match-2400442",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startTime": "2026-11-18T16:00:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-13117",
+        "name": "Inner Circle",
+        "slug": "inner-circle"
+      },
+      "teamB": {
+        "id": "cs2-team-10333",
+        "name": "Sangal",
+        "slug": "sangal"
+      }
+    },
+    {
+      "id": "cs2-match-2400443",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startTime": "2026-11-18T18:30:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas",
+        "slug": "ninjas-in-pyjamas"
+      },
+      "teamB": {
+        "id": "cs2-team-6290",
+        "name": "Luminosity",
+        "slug": "luminosity"
+      }
+    },
+    {
+      "id": "cs2-match-2400525",
+      "eventId": "cs2-event-9273",
+      "event": "Tipsport RUSH Brno 2026",
+      "startTime": "2026-11-18T19:00:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-13996",
+        "name": "BBL",
+        "slug": "bbl"
+      },
+      "teamB": {
+        "id": "cs2-team-5991",
+        "name": "Envy",
+        "slug": "envy"
+      }
+    }
+  ],
+  "teams": [
+    {
+      "id": "cs2-team-7187",
+      "name": "Nexus",
+      "windowDays": 90,
+      "matchWindow": 37,
+      "totalMaps": 78,
+      "mapWins": 45,
+      "mapWinPercent": 57.7,
+      "sideEconomy": {
+        "ctWinPercent": 52.1,
+        "tWinPercent": 50.6,
+        "pistolWinPercent": 53
+      },
+      "maps": [
+        {
+          "name": "Dust2",
+          "played": 19,
+          "wins": 9,
+          "winPercent": 47.4,
+          "pickPercent": 24.4,
+          "roundsFor": 189,
+          "roundsAgainst": 201,
+          "ctWinPercent": 52.3,
+          "tWinPercent": 42.2,
+          "latestPlayedAt": "2026-11-15T18:34:28.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Anubis",
+          "played": 16,
+          "wins": 11,
+          "winPercent": 68.8,
+          "pickPercent": 20.5,
+          "roundsFor": 191,
+          "roundsAgainst": 170,
+          "ctWinPercent": 50,
+          "tWinPercent": 58.7,
+          "latestPlayedAt": "2026-11-17T18:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 14,
+          "wins": 9,
+          "winPercent": 64.3,
+          "pickPercent": 17.9,
+          "roundsFor": 151,
+          "roundsAgainst": 124,
+          "ctWinPercent": 52.1,
+          "tWinPercent": 52.6,
+          "latestPlayedAt": "2026-11-17T18:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 12,
+          "wins": 7,
+          "winPercent": 58.3,
+          "pickPercent": 15.4,
+          "roundsFor": 139,
+          "roundsAgainst": 117,
+          "ctWinPercent": 57.4,
+          "tWinPercent": 51,
+          "latestPlayedAt": "2026-11-15T18:34:28.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Mirage",
+          "played": 9,
+          "wins": 6,
+          "winPercent": 66.7,
+          "pickPercent": 11.5,
+          "roundsFor": 108,
+          "roundsAgainst": 93,
+          "ctWinPercent": 60.6,
+          "tWinPercent": 46.1,
+          "latestPlayedAt": "2026-11-17T10:20:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 8,
+          "wins": 3,
+          "winPercent": 37.5,
+          "pickPercent": 10.3,
+          "roundsFor": 73,
+          "roundsAgainst": 92,
+          "ctWinPercent": 42.3,
+          "tWinPercent": 54.2,
+          "latestPlayedAt": "2026-11-13T09:00:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-13104",
+      "name": "Iberian Soul",
+      "windowDays": 90,
+      "matchWindow": 33,
+      "totalMaps": 70,
+      "mapWins": 38,
+      "mapWinPercent": 54.3,
+      "sideEconomy": {
+        "ctWinPercent": 53,
+        "tWinPercent": 49.5,
+        "pistolWinPercent": 49.7
+      },
+      "maps": [
+        {
+          "name": "Nuke",
+          "played": 16,
+          "wins": 11,
+          "winPercent": 68.8,
+          "pickPercent": 22.9,
+          "roundsFor": 195,
+          "roundsAgainst": 173,
+          "ctWinPercent": 62.7,
+          "tWinPercent": 46.4,
+          "latestPlayedAt": "2026-11-17T12:50:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 15,
+          "wins": 9,
+          "winPercent": 60,
+          "pickPercent": 21.4,
+          "roundsFor": 170,
+          "roundsAgainst": 156,
+          "ctWinPercent": 51.8,
+          "tWinPercent": 50.3,
+          "latestPlayedAt": "2026-11-15T12:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Mirage",
+          "played": 13,
+          "wins": 6,
+          "winPercent": 46.2,
+          "pickPercent": 18.6,
+          "roundsFor": 127,
+          "roundsAgainst": 144,
+          "ctWinPercent": 46.9,
+          "tWinPercent": 47.8,
+          "latestPlayedAt": "2026-11-15T12:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 12,
+          "wins": 7,
+          "winPercent": 58.3,
+          "pickPercent": 17.1,
+          "roundsFor": 134,
+          "roundsAgainst": 102,
+          "ctWinPercent": 60,
+          "tWinPercent": 60.2,
+          "latestPlayedAt": "2026-11-01T16:55:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 9,
+          "wins": 4,
+          "winPercent": 44.4,
+          "pickPercent": 12.9,
+          "roundsFor": 81,
+          "roundsAgainst": 98,
+          "ctWinPercent": 46.6,
+          "tWinPercent": 39.8,
+          "latestPlayedAt": "2026-11-14T15:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Anubis",
+          "played": 5,
+          "wins": 1,
+          "winPercent": 20,
+          "pickPercent": 7.1,
+          "roundsFor": 45,
+          "roundsAgainst": 58,
+          "ctWinPercent": 45.8,
+          "tWinPercent": 41.8,
+          "latestPlayedAt": "2026-11-17T12:50:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-12916",
+      "name": "Betclic",
+      "windowDays": 90,
+      "matchWindow": 26,
+      "totalMaps": 58,
+      "mapWins": 30,
+      "mapWinPercent": 51.7,
+      "sideEconomy": {
+        "ctWinPercent": 53.7,
+        "tWinPercent": 48.2,
+        "pistolWinPercent": 52.1
+      },
+      "maps": [
+        {
+          "name": "Mirage",
+          "played": 12,
+          "wins": 6,
+          "winPercent": 50,
+          "pickPercent": 20.7,
+          "roundsFor": 126,
+          "roundsAgainst": 137,
+          "ctWinPercent": 53.5,
+          "tWinPercent": 44.8,
+          "latestPlayedAt": "2026-11-17T11:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Nuke",
+          "played": 11,
+          "wins": 5,
+          "winPercent": 45.5,
+          "pickPercent": 19,
+          "roundsFor": 120,
+          "roundsAgainst": 131,
+          "ctWinPercent": 55.9,
+          "tWinPercent": 48,
+          "latestPlayedAt": "2026-11-17T11:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 11,
+          "wins": 5,
+          "winPercent": 45.5,
+          "pickPercent": 19,
+          "roundsFor": 120,
+          "roundsAgainst": 127,
+          "ctWinPercent": 56.7,
+          "tWinPercent": 46.6,
+          "latestPlayedAt": "2026-11-16T12:27:09.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 9,
+          "wins": 7,
+          "winPercent": 77.8,
+          "pickPercent": 15.5,
+          "roundsFor": 100,
+          "roundsAgainst": 83,
+          "ctWinPercent": 54.2,
+          "tWinPercent": 52.8,
+          "latestPlayedAt": "2026-11-01T18:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Anubis",
+          "played": 9,
+          "wins": 2,
+          "winPercent": 22.2,
+          "pickPercent": 15.5,
+          "roundsFor": 110,
+          "roundsAgainst": 118,
+          "ctWinPercent": 52.6,
+          "tWinPercent": 57.6,
+          "latestPlayedAt": "2026-11-16T12:27:09.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 6,
+          "wins": 5,
+          "winPercent": 83.3,
+          "pickPercent": 10.3,
+          "roundsFor": 72,
+          "roundsAgainst": 62,
+          "ctWinPercent": 59.1,
+          "tWinPercent": 42.9,
+          "latestPlayedAt": "2026-11-15T21:08:01.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-7532",
+      "name": "BIG",
+      "windowDays": 90,
+      "matchWindow": 18,
+      "totalMaps": 39,
+      "mapWins": 15,
+      "mapWinPercent": 38.5,
+      "sideEconomy": {
+        "ctWinPercent": 54.6,
+        "tWinPercent": 48.9,
+        "pistolWinPercent": 44.6
+      },
+      "maps": [
+        {
+          "name": "Cache",
+          "played": 12,
+          "wins": 6,
+          "winPercent": 50,
+          "pickPercent": 30.8,
+          "roundsFor": 136,
+          "roundsAgainst": 129,
+          "ctWinPercent": 49.7,
+          "tWinPercent": 57.4,
+          "latestPlayedAt": "2026-11-17T13:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Mirage",
+          "played": 9,
+          "wins": 4,
+          "winPercent": 44.4,
+          "pickPercent": 23.1,
+          "roundsFor": 91,
+          "roundsAgainst": 102,
+          "ctWinPercent": 54.5,
+          "tWinPercent": 38.8,
+          "latestPlayedAt": "2026-10-27T11:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 7,
+          "wins": 0,
+          "winPercent": 0,
+          "pickPercent": 17.9,
+          "roundsFor": 64,
+          "roundsAgainst": 94,
+          "ctWinPercent": 51.3,
+          "tWinPercent": 49.2,
+          "latestPlayedAt": "2026-10-29T11:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 6,
+          "wins": 3,
+          "winPercent": 50,
+          "pickPercent": 15.4,
+          "roundsFor": 57,
+          "roundsAgainst": 70,
+          "ctWinPercent": 50,
+          "tWinPercent": 56.1,
+          "latestPlayedAt": "2026-10-29T11:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Nuke",
+          "played": 3,
+          "wins": 1,
+          "winPercent": 33.3,
+          "pickPercent": 7.7,
+          "roundsFor": 33,
+          "roundsAgainst": 37,
+          "ctWinPercent": 64.1,
+          "tWinPercent": 42.4,
+          "latestPlayedAt": "2026-11-17T13:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 2,
+          "wins": 1,
+          "winPercent": 50,
+          "pickPercent": 5.1,
+          "roundsFor": 20,
+          "roundsAgainst": 19,
+          "ctWinPercent": 55.6,
+          "tWinPercent": 32.9,
+          "latestPlayedAt": "2026-10-21T15:05:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-13173",
+      "name": "Phantom",
+      "windowDays": 90,
+      "matchWindow": 29,
+      "totalMaps": 62,
+      "mapWins": 34,
+      "mapWinPercent": 54.8,
+      "sideEconomy": {
+        "ctWinPercent": 53.6,
+        "tWinPercent": 48.1,
+        "pistolWinPercent": 54.1
+      },
+      "maps": [
+        {
+          "name": "Ancient",
+          "played": 14,
+          "wins": 9,
+          "winPercent": 64.3,
+          "pickPercent": 22.6,
+          "roundsFor": 159,
+          "roundsAgainst": 124,
+          "ctWinPercent": 50.5,
+          "tWinPercent": 51.6,
+          "latestPlayedAt": "2026-11-17T18:39:53.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 11,
+          "wins": 3,
+          "winPercent": 27.3,
+          "pickPercent": 17.7,
+          "roundsFor": 98,
+          "roundsAgainst": 134,
+          "ctWinPercent": 49.7,
+          "tWinPercent": 45.7,
+          "latestPlayedAt": "2026-11-17T18:39:53.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Mirage",
+          "played": 10,
+          "wins": 6,
+          "winPercent": 60,
+          "pickPercent": 16.1,
+          "roundsFor": 118,
+          "roundsAgainst": 110,
+          "ctWinPercent": 53.5,
+          "tWinPercent": 49.7,
+          "latestPlayedAt": "2026-11-17T18:39:53.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Nuke",
+          "played": 10,
+          "wins": 6,
+          "winPercent": 60,
+          "pickPercent": 16.1,
+          "roundsFor": 117,
+          "roundsAgainst": 112,
+          "ctWinPercent": 58.3,
+          "tWinPercent": 41.9,
+          "latestPlayedAt": "2026-11-14T12:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 9,
+          "wins": 6,
+          "winPercent": 66.7,
+          "pickPercent": 14.5,
+          "roundsFor": 104,
+          "roundsAgainst": 79,
+          "ctWinPercent": 55.8,
+          "tWinPercent": 51.5,
+          "latestPlayedAt": "2026-11-14T12:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Anubis",
+          "played": 7,
+          "wins": 4,
+          "winPercent": 57.1,
+          "pickPercent": 11.3,
+          "roundsFor": 67,
+          "roundsAgainst": 82,
+          "ctWinPercent": 45.1,
+          "tWinPercent": 50.8,
+          "latestPlayedAt": "2026-11-01T11:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 1,
+          "wins": 0,
+          "winPercent": 0,
+          "pickPercent": 1.6,
+          "roundsFor": 11,
+          "roundsAgainst": 13,
+          "ctWinPercent": 33.3,
+          "tWinPercent": 58.3,
+          "latestPlayedAt": "2026-08-29T17:00:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-11641",
+      "name": "Metizport",
+      "windowDays": 90,
+      "matchWindow": 38,
+      "totalMaps": 75,
+      "mapWins": 43,
+      "mapWinPercent": 57.3,
+      "sideEconomy": {
+        "ctWinPercent": 54.1,
+        "tWinPercent": 49.5,
+        "pistolWinPercent": 53.7
+      },
+      "maps": [
+        {
+          "name": "Nuke",
+          "played": 21,
+          "wins": 11,
+          "winPercent": 52.4,
+          "pickPercent": 28,
+          "roundsFor": 253,
+          "roundsAgainst": 247,
+          "ctWinPercent": 52.8,
+          "tWinPercent": 49.6,
+          "latestPlayedAt": "2026-11-17T19:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Mirage",
+          "played": 13,
+          "wins": 6,
+          "winPercent": 46.2,
+          "pickPercent": 17.3,
+          "roundsFor": 154,
+          "roundsAgainst": 152,
+          "ctWinPercent": 55.1,
+          "tWinPercent": 43.2,
+          "latestPlayedAt": "2026-11-15T15:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 12,
+          "wins": 9,
+          "winPercent": 75,
+          "pickPercent": 16,
+          "roundsFor": 150,
+          "roundsAgainst": 132,
+          "ctWinPercent": 53.5,
+          "tWinPercent": 51,
+          "latestPlayedAt": "2026-11-13T09:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 11,
+          "wins": 6,
+          "winPercent": 54.5,
+          "pickPercent": 14.7,
+          "roundsFor": 126,
+          "roundsAgainst": 113,
+          "ctWinPercent": 57.1,
+          "tWinPercent": 45.5,
+          "latestPlayedAt": "2026-11-17T19:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Anubis",
+          "played": 10,
+          "wins": 5,
+          "winPercent": 50,
+          "pickPercent": 13.3,
+          "roundsFor": 101,
+          "roundsAgainst": 104,
+          "ctWinPercent": 48.2,
+          "tWinPercent": 56.1,
+          "latestPlayedAt": "2026-11-17T19:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 8,
+          "wins": 6,
+          "winPercent": 75,
+          "pickPercent": 10.7,
+          "roundsFor": 100,
+          "roundsAgainst": 79,
+          "ctWinPercent": 57,
+          "tWinPercent": 55.1,
+          "latestPlayedAt": "2026-11-13T09:00:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-12267",
+      "name": "UNiTY",
+      "windowDays": 90,
+      "matchWindow": 33,
+      "totalMaps": 65,
+      "mapWins": 41,
+      "mapWinPercent": 63.1,
+      "sideEconomy": {
+        "ctWinPercent": 53.3,
+        "tWinPercent": 48.2,
+        "pistolWinPercent": 48
+      },
+      "maps": [
+        {
+          "name": "Dust2",
+          "played": 15,
+          "wins": 10,
+          "winPercent": 66.7,
+          "pickPercent": 23.1,
+          "roundsFor": 162,
+          "roundsAgainst": 136,
+          "ctWinPercent": 53.7,
+          "tWinPercent": 47.5,
+          "latestPlayedAt": "2026-11-17T15:20:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Mirage",
+          "played": 14,
+          "wins": 10,
+          "winPercent": 71.4,
+          "pickPercent": 21.5,
+          "roundsFor": 169,
+          "roundsAgainst": 133,
+          "ctWinPercent": 55.3,
+          "tWinPercent": 48.3,
+          "latestPlayedAt": "2026-10-25T09:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 13,
+          "wins": 8,
+          "winPercent": 61.5,
+          "pickPercent": 20,
+          "roundsFor": 157,
+          "roundsAgainst": 135,
+          "ctWinPercent": 51.4,
+          "tWinPercent": 51.8,
+          "latestPlayedAt": "2026-10-26T18:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 9,
+          "wins": 6,
+          "winPercent": 66.7,
+          "pickPercent": 13.8,
+          "roundsFor": 118,
+          "roundsAgainst": 112,
+          "ctWinPercent": 56.4,
+          "tWinPercent": 47.5,
+          "latestPlayedAt": "2026-10-26T18:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 9,
+          "wins": 5,
+          "winPercent": 55.6,
+          "pickPercent": 13.8,
+          "roundsFor": 90,
+          "roundsAgainst": 94,
+          "ctWinPercent": 46.5,
+          "tWinPercent": 47.5,
+          "latestPlayedAt": "2026-11-17T15:20:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Anubis",
+          "played": 4,
+          "wins": 2,
+          "winPercent": 50,
+          "pickPercent": 6.2,
+          "roundsFor": 45,
+          "roundsAgainst": 34,
+          "ctWinPercent": 52.5,
+          "tWinPercent": 49.3,
+          "latestPlayedAt": "2026-10-26T18:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Nuke",
+          "played": 1,
+          "wins": 0,
+          "winPercent": 0,
+          "pickPercent": 1.5,
+          "roundsFor": 5,
+          "roundsAgainst": 13,
+          "ctWinPercent": 28.6,
+          "tWinPercent": 37.9,
+          "latestPlayedAt": "2026-09-07T17:00:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-9928",
+      "name": "GamerLegion",
+      "windowDays": 90,
+      "matchWindow": 28,
+      "totalMaps": 56,
+      "mapWins": 27,
+      "mapWinPercent": 48.2,
+      "sideEconomy": {
+        "ctWinPercent": 49.9,
+        "tWinPercent": 47.9,
+        "pistolWinPercent": 50.8
+      },
+      "maps": [
+        {
+          "name": "Nuke",
+          "played": 12,
+          "wins": 8,
+          "winPercent": 66.7,
+          "pickPercent": 21.4,
+          "roundsFor": 134,
+          "roundsAgainst": 119,
+          "ctWinPercent": 54.1,
+          "tWinPercent": 47.8,
+          "latestPlayedAt": "2026-11-17T20:37:16.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 11,
+          "wins": 8,
+          "winPercent": 72.7,
+          "pickPercent": 19.6,
+          "roundsFor": 136,
+          "roundsAgainst": 120,
+          "ctWinPercent": 48.7,
+          "tWinPercent": 56.9,
+          "latestPlayedAt": "2026-11-17T20:37:16.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 10,
+          "wins": 4,
+          "winPercent": 40,
+          "pickPercent": 17.9,
+          "roundsFor": 100,
+          "roundsAgainst": 103,
+          "ctWinPercent": 53.1,
+          "tWinPercent": 43.3,
+          "latestPlayedAt": "2026-10-29T17:30:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 10,
+          "wins": 4,
+          "winPercent": 40,
+          "pickPercent": 17.9,
+          "roundsFor": 116,
+          "roundsAgainst": 122,
+          "ctWinPercent": 48.9,
+          "tWinPercent": 48.8,
+          "latestPlayedAt": "2026-10-27T17:30:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Mirage",
+          "played": 10,
+          "wins": 2,
+          "winPercent": 20,
+          "pickPercent": 17.9,
+          "roundsFor": 106,
+          "roundsAgainst": 131,
+          "ctWinPercent": 48.2,
+          "tWinPercent": 41,
+          "latestPlayedAt": "2026-11-17T20:37:16.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 3,
+          "wins": 1,
+          "winPercent": 33.3,
+          "pickPercent": 5.4,
+          "roundsFor": 23,
+          "roundsAgainst": 34,
+          "ctWinPercent": 48.9,
+          "tWinPercent": 48.9,
+          "latestPlayedAt": "2026-10-17T11:00:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-10577",
+      "name": "SINNERS",
+      "windowDays": 90,
+      "matchWindow": 40,
+      "totalMaps": 88,
+      "mapWins": 50,
+      "mapWinPercent": 56.8,
+      "sideEconomy": {
+        "ctWinPercent": 55.4,
+        "tWinPercent": 50.1,
+        "pistolWinPercent": 55.4
+      },
+      "maps": [
+        {
+          "name": "Mirage",
+          "played": 21,
+          "wins": 13,
+          "winPercent": 61.9,
+          "pickPercent": 23.9,
+          "roundsFor": 230,
+          "roundsAgainst": 184,
+          "ctWinPercent": 58.9,
+          "tWinPercent": 50.5,
+          "latestPlayedAt": "2026-11-17T10:20:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 17,
+          "wins": 12,
+          "winPercent": 70.6,
+          "pickPercent": 19.3,
+          "roundsFor": 216,
+          "roundsAgainst": 164,
+          "ctWinPercent": 54,
+          "tWinPercent": 57.6,
+          "latestPlayedAt": "2026-10-21T18:50:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 16,
+          "wins": 12,
+          "winPercent": 75,
+          "pickPercent": 18.2,
+          "roundsFor": 202,
+          "roundsAgainst": 154,
+          "ctWinPercent": 58,
+          "tWinPercent": 50.4,
+          "latestPlayedAt": "2026-11-17T10:20:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 14,
+          "wins": 6,
+          "winPercent": 42.9,
+          "pickPercent": 15.9,
+          "roundsFor": 154,
+          "roundsAgainst": 179,
+          "ctWinPercent": 50.4,
+          "tWinPercent": 45.2,
+          "latestPlayedAt": "2026-10-23T18:55:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Nuke",
+          "played": 11,
+          "wins": 3,
+          "winPercent": 27.3,
+          "pickPercent": 12.5,
+          "roundsFor": 113,
+          "roundsAgainst": 121,
+          "ctWinPercent": 55.3,
+          "tWinPercent": 42.1,
+          "latestPlayedAt": "2026-10-21T11:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 9,
+          "wins": 4,
+          "winPercent": 44.4,
+          "pickPercent": 10.2,
+          "roundsFor": 80,
+          "roundsAgainst": 92,
+          "ctWinPercent": 50,
+          "tWinPercent": 45.2,
+          "latestPlayedAt": "2026-10-21T18:50:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-12474",
+      "name": "Alliance",
+      "windowDays": 90,
+      "matchWindow": 28,
+      "totalMaps": 59,
+      "mapWins": 30,
+      "mapWinPercent": 50.8,
+      "sideEconomy": {
+        "ctWinPercent": 54.2,
+        "tWinPercent": 48.8,
+        "pistolWinPercent": 46.9
+      },
+      "maps": [
+        {
+          "name": "Inferno",
+          "played": 14,
+          "wins": 9,
+          "winPercent": 64.3,
+          "pickPercent": 23.7,
+          "roundsFor": 158,
+          "roundsAgainst": 153,
+          "ctWinPercent": 53,
+          "tWinPercent": 51.6,
+          "latestPlayedAt": "2026-11-14T14:15:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Mirage",
+          "played": 10,
+          "wins": 7,
+          "winPercent": 70,
+          "pickPercent": 16.9,
+          "roundsFor": 116,
+          "roundsAgainst": 95,
+          "ctWinPercent": 55.5,
+          "tWinPercent": 54.3,
+          "latestPlayedAt": "2026-11-13T18:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 10,
+          "wins": 5,
+          "winPercent": 50,
+          "pickPercent": 16.9,
+          "roundsFor": 110,
+          "roundsAgainst": 118,
+          "ctWinPercent": 58,
+          "tWinPercent": 49.5,
+          "latestPlayedAt": "2026-11-12T18:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 9,
+          "wins": 2,
+          "winPercent": 22.2,
+          "pickPercent": 15.3,
+          "roundsFor": 96,
+          "roundsAgainst": 119,
+          "ctWinPercent": 54.4,
+          "tWinPercent": 47,
+          "latestPlayedAt": "2026-11-14T18:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Nuke",
+          "played": 7,
+          "wins": 5,
+          "winPercent": 71.4,
+          "pickPercent": 11.9,
+          "roundsFor": 109,
+          "roundsAgainst": 95,
+          "ctWinPercent": 57,
+          "tWinPercent": 42,
+          "latestPlayedAt": "2026-11-17T12:50:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Anubis",
+          "played": 5,
+          "wins": 2,
+          "winPercent": 40,
+          "pickPercent": 8.5,
+          "roundsFor": 62,
+          "roundsAgainst": 62,
+          "ctWinPercent": 52,
+          "tWinPercent": 57,
+          "latestPlayedAt": "2026-11-17T12:50:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 4,
+          "wins": 0,
+          "winPercent": 0,
+          "pickPercent": 6.8,
+          "roundsFor": 25,
+          "roundsAgainst": 52,
+          "ctWinPercent": 38.9,
+          "tWinPercent": 10.5,
+          "latestPlayedAt": "2026-10-03T13:00:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-13117",
+      "name": "Inner Circle",
+      "windowDays": 90,
+      "matchWindow": 21,
+      "totalMaps": 36,
+      "mapWins": 16,
+      "mapWinPercent": 44.4,
+      "sideEconomy": {
+        "ctWinPercent": 56.2,
+        "tWinPercent": 50.6,
+        "pistolWinPercent": 52.4
+      },
+      "maps": [
+        {
+          "name": "Mirage",
+          "played": 7,
+          "wins": 4,
+          "winPercent": 57.1,
+          "pickPercent": 19.4,
+          "roundsFor": 75,
+          "roundsAgainst": 62,
+          "ctWinPercent": 56.2,
+          "tWinPercent": 51.6,
+          "latestPlayedAt": "2026-11-17T11:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Nuke",
+          "played": 7,
+          "wins": 3,
+          "winPercent": 42.9,
+          "pickPercent": 19.4,
+          "roundsFor": 68,
+          "roundsAgainst": 71,
+          "ctWinPercent": 64.1,
+          "tWinPercent": 39.8,
+          "latestPlayedAt": "2026-11-17T11:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 7,
+          "wins": 2,
+          "winPercent": 28.6,
+          "pickPercent": 19.4,
+          "roundsFor": 78,
+          "roundsAgainst": 85,
+          "ctWinPercent": 56.6,
+          "tWinPercent": 55.3,
+          "latestPlayedAt": "2026-10-29T13:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 6,
+          "wins": 3,
+          "winPercent": 50,
+          "pickPercent": 16.7,
+          "roundsFor": 64,
+          "roundsAgainst": 65,
+          "ctWinPercent": 56.4,
+          "tWinPercent": 46.5,
+          "latestPlayedAt": "2026-10-29T13:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 5,
+          "wins": 2,
+          "winPercent": 40,
+          "pickPercent": 13.9,
+          "roundsFor": 44,
+          "roundsAgainst": 60,
+          "ctWinPercent": 53.6,
+          "tWinPercent": 50.7,
+          "latestPlayedAt": "2026-10-29T13:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Anubis",
+          "played": 4,
+          "wins": 2,
+          "winPercent": 50,
+          "pickPercent": 11.1,
+          "roundsFor": 46,
+          "roundsAgainst": 43,
+          "ctWinPercent": 57.4,
+          "tWinPercent": 49.2,
+          "latestPlayedAt": "2026-10-12T10:00:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-10333",
+      "name": "Sangal",
+      "windowDays": 90,
+      "matchWindow": 40,
+      "totalMaps": 74,
+      "mapWins": 49,
+      "mapWinPercent": 66.2,
+      "sideEconomy": {
+        "ctWinPercent": 53.6,
+        "tWinPercent": 52,
+        "pistolWinPercent": 55.1
+      },
+      "maps": [
+        {
+          "name": "Nuke",
+          "played": 19,
+          "wins": 15,
+          "winPercent": 78.9,
+          "pickPercent": 25.7,
+          "roundsFor": 241,
+          "roundsAgainst": 190,
+          "ctWinPercent": 58.9,
+          "tWinPercent": 52.6,
+          "latestPlayedAt": "2026-11-17T13:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 16,
+          "wins": 11,
+          "winPercent": 68.8,
+          "pickPercent": 21.6,
+          "roundsFor": 190,
+          "roundsAgainst": 162,
+          "ctWinPercent": 60.1,
+          "tWinPercent": 50.5,
+          "latestPlayedAt": "2026-11-17T13:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Mirage",
+          "played": 11,
+          "wins": 8,
+          "winPercent": 72.7,
+          "pickPercent": 14.9,
+          "roundsFor": 126,
+          "roundsAgainst": 100,
+          "ctWinPercent": 54.6,
+          "tWinPercent": 52.7,
+          "latestPlayedAt": "2026-10-22T16:55:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 11,
+          "wins": 5,
+          "winPercent": 45.5,
+          "pickPercent": 14.9,
+          "roundsFor": 113,
+          "roundsAgainst": 133,
+          "ctWinPercent": 48.4,
+          "tWinPercent": 38.5,
+          "latestPlayedAt": "2026-10-16T17:35:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Anubis",
+          "played": 9,
+          "wins": 6,
+          "winPercent": 66.7,
+          "pickPercent": 12.2,
+          "roundsFor": 106,
+          "roundsAgainst": 84,
+          "ctWinPercent": 47.8,
+          "tWinPercent": 62.2,
+          "latestPlayedAt": "2026-10-21T15:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 8,
+          "wins": 4,
+          "winPercent": 50,
+          "pickPercent": 10.8,
+          "roundsFor": 82,
+          "roundsAgainst": 96,
+          "ctWinPercent": 45.3,
+          "tWinPercent": 52.1,
+          "latestPlayedAt": "2026-10-20T12:00:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-4411",
+      "name": "Ninjas in Pyjamas",
+      "windowDays": 90,
+      "matchWindow": 36,
+      "totalMaps": 72,
+      "mapWins": 44,
+      "mapWinPercent": 61.1,
+      "sideEconomy": {
+        "ctWinPercent": 56.1,
+        "tWinPercent": 48.5,
+        "pistolWinPercent": 56.3
+      },
+      "maps": [
+        {
+          "name": "Cache",
+          "played": 16,
+          "wins": 9,
+          "winPercent": 56.3,
+          "pickPercent": 22.2,
+          "roundsFor": 193,
+          "roundsAgainst": 163,
+          "ctWinPercent": 50.3,
+          "tWinPercent": 52.5,
+          "latestPlayedAt": "2026-11-17T15:20:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Mirage",
+          "played": 14,
+          "wins": 9,
+          "winPercent": 64.3,
+          "pickPercent": 19.4,
+          "roundsFor": 159,
+          "roundsAgainst": 138,
+          "ctWinPercent": 59.2,
+          "tWinPercent": 42.1,
+          "latestPlayedAt": "2026-10-17T17:20:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 13,
+          "wins": 8,
+          "winPercent": 61.5,
+          "pickPercent": 18.1,
+          "roundsFor": 160,
+          "roundsAgainst": 128,
+          "ctWinPercent": 56.8,
+          "tWinPercent": 50.4,
+          "latestPlayedAt": "2026-10-17T17:20:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Nuke",
+          "played": 11,
+          "wins": 9,
+          "winPercent": 81.8,
+          "pickPercent": 15.3,
+          "roundsFor": 141,
+          "roundsAgainst": 116,
+          "ctWinPercent": 64.1,
+          "tWinPercent": 49.9,
+          "latestPlayedAt": "2026-10-16T08:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 10,
+          "wins": 4,
+          "winPercent": 40,
+          "pickPercent": 13.9,
+          "roundsFor": 96,
+          "roundsAgainst": 109,
+          "ctWinPercent": 45.9,
+          "tWinPercent": 45.2,
+          "latestPlayedAt": "2026-11-17T15:20:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 8,
+          "wins": 5,
+          "winPercent": 62.5,
+          "pickPercent": 11.1,
+          "roundsFor": 93,
+          "roundsAgainst": 74,
+          "ctWinPercent": 53.2,
+          "tWinPercent": 56.1,
+          "latestPlayedAt": "2026-10-17T08:00:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-6290",
+      "name": "Luminosity",
+      "windowDays": 90,
+      "matchWindow": 22,
+      "totalMaps": 48,
+      "mapWins": 24,
+      "mapWinPercent": 50,
+      "sideEconomy": {
+        "ctWinPercent": 54.2,
+        "tWinPercent": 46.9,
+        "pistolWinPercent": 57
+      },
+      "maps": [
+        {
+          "name": "Mirage",
+          "played": 9,
+          "wins": 7,
+          "winPercent": 77.8,
+          "pickPercent": 18.8,
+          "roundsFor": 111,
+          "roundsAgainst": 95,
+          "ctWinPercent": 52,
+          "tWinPercent": 50,
+          "latestPlayedAt": "2026-11-17T20:37:16.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 9,
+          "wins": 3,
+          "winPercent": 33.3,
+          "pickPercent": 18.8,
+          "roundsFor": 109,
+          "roundsAgainst": 99,
+          "ctWinPercent": 59.8,
+          "tWinPercent": 45.9,
+          "latestPlayedAt": "2026-10-28T16:40:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 8,
+          "wins": 5,
+          "winPercent": 62.5,
+          "pickPercent": 16.7,
+          "roundsFor": 96,
+          "roundsAgainst": 88,
+          "ctWinPercent": 51.4,
+          "tWinPercent": 51.3,
+          "latestPlayedAt": "2026-10-28T16:40:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 8,
+          "wins": 4,
+          "winPercent": 50,
+          "pickPercent": 16.7,
+          "roundsFor": 93,
+          "roundsAgainst": 87,
+          "ctWinPercent": 54.7,
+          "tWinPercent": 47.2,
+          "latestPlayedAt": "2026-10-28T16:40:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Nuke",
+          "played": 8,
+          "wins": 3,
+          "winPercent": 37.5,
+          "pickPercent": 16.7,
+          "roundsFor": 83,
+          "roundsAgainst": 89,
+          "ctWinPercent": 56.2,
+          "tWinPercent": 38.8,
+          "latestPlayedAt": "2026-11-17T20:37:16.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 6,
+          "wins": 2,
+          "winPercent": 33.3,
+          "pickPercent": 12.5,
+          "roundsFor": 65,
+          "roundsAgainst": 66,
+          "ctWinPercent": 48.6,
+          "tWinPercent": 50.8,
+          "latestPlayedAt": "2026-11-17T20:37:16.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-13996",
+      "name": "BBL",
+      "windowDays": 90,
+      "matchWindow": 46,
+      "totalMaps": 85,
+      "mapWins": 43,
+      "mapWinPercent": 50.6,
+      "sideEconomy": {
+        "ctWinPercent": 51.8,
+        "tWinPercent": 50.4,
+        "pistolWinPercent": 47.5
+      },
+      "maps": [
+        {
+          "name": "Nuke",
+          "played": 22,
+          "wins": 12,
+          "winPercent": 54.5,
+          "pickPercent": 25.9,
+          "roundsFor": 220,
+          "roundsAgainst": 214,
+          "ctWinPercent": 50,
+          "tWinPercent": 51.2,
+          "latestPlayedAt": "2026-11-12T20:45:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Mirage",
+          "played": 17,
+          "wins": 8,
+          "winPercent": 47.1,
+          "pickPercent": 20,
+          "roundsFor": 174,
+          "roundsAgainst": 183,
+          "ctWinPercent": 56.7,
+          "tWinPercent": 37.6,
+          "latestPlayedAt": "2026-11-17T18:39:53.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 15,
+          "wins": 5,
+          "winPercent": 33.3,
+          "pickPercent": 17.6,
+          "roundsFor": 168,
+          "roundsAgainst": 175,
+          "ctWinPercent": 46,
+          "tWinPercent": 52.1,
+          "latestPlayedAt": "2026-11-13T15:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 14,
+          "wins": 9,
+          "winPercent": 64.3,
+          "pickPercent": 16.5,
+          "roundsFor": 165,
+          "roundsAgainst": 102,
+          "ctWinPercent": 61.4,
+          "tWinPercent": 57.5,
+          "latestPlayedAt": "2026-11-17T18:39:53.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 14,
+          "wins": 8,
+          "winPercent": 57.1,
+          "pickPercent": 16.5,
+          "roundsFor": 175,
+          "roundsAgainst": 166,
+          "ctWinPercent": 51.4,
+          "tWinPercent": 51.1,
+          "latestPlayedAt": "2026-11-17T18:39:53.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Anubis",
+          "played": 3,
+          "wins": 1,
+          "winPercent": 33.3,
+          "pickPercent": 3.5,
+          "roundsFor": 43,
+          "roundsAgainst": 46,
+          "ctWinPercent": 33.3,
+          "tWinPercent": 63.6,
+          "latestPlayedAt": "2026-10-17T17:00:00.000Z",
+          "inPool": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-5991",
+      "name": "Envy",
+      "windowDays": 90,
+      "matchWindow": 11,
+      "totalMaps": 23,
+      "mapWins": 9,
+      "mapWinPercent": 39.1,
+      "sideEconomy": {
+        "ctWinPercent": 53.6,
+        "tWinPercent": 40.6,
+        "pistolWinPercent": 38.6
+      },
+      "maps": [
+        {
+          "name": "Ancient",
+          "played": 7,
+          "wins": 3,
+          "winPercent": 42.9,
+          "pickPercent": 30.4,
+          "roundsFor": 63,
+          "roundsAgainst": 73,
+          "ctWinPercent": 55.4,
+          "tWinPercent": 32.1,
+          "latestPlayedAt": "2026-10-28T16:40:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 5,
+          "wins": 2,
+          "winPercent": 40,
+          "pickPercent": 21.7,
+          "roundsFor": 42,
+          "roundsAgainst": 49,
+          "ctWinPercent": 58.1,
+          "tWinPercent": 40,
+          "latestPlayedAt": "2026-10-28T19:55:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Nuke",
+          "played": 3,
+          "wins": 1,
+          "winPercent": 33.3,
+          "pickPercent": 13,
+          "roundsFor": 30,
+          "roundsAgainst": 35,
+          "ctWinPercent": 63.6,
+          "tWinPercent": 39.1,
+          "latestPlayedAt": "2026-11-17T19:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Cache",
+          "played": 3,
+          "wins": 1,
+          "winPercent": 33.3,
+          "pickPercent": 13,
+          "roundsFor": 35,
+          "roundsAgainst": 37,
+          "ctWinPercent": 55.6,
+          "tWinPercent": 41.7,
+          "latestPlayedAt": "2026-11-17T19:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Anubis",
+          "played": 3,
+          "wins": 0,
+          "winPercent": 0,
+          "pickPercent": 13,
+          "roundsFor": 28,
+          "roundsAgainst": 42,
+          "ctWinPercent": 35.9,
+          "tWinPercent": 45.2,
+          "latestPlayedAt": "2026-11-17T19:00:00.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Inferno",
+          "played": 2,
+          "wins": 2,
+          "winPercent": 100,
+          "pickPercent": 8.7,
+          "roundsFor": 26,
+          "roundsAgainst": 19,
+          "ctWinPercent": 58.3,
+          "tWinPercent": 57.1,
+          "latestPlayedAt": "2026-10-28T16:40:00.000Z",
+          "inPool": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "notes": "Fotografia dos dados consultados; não há atualização automática nem probabilidade calibrada. Times não retornados não são estimados."
+}
