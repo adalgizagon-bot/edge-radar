@@ -1,6 +1,6 @@
 {
   "source": "Cito API",
-  "fetchedAt": "2026-11-17T23:40:41.676Z",
+  "fetchedAt": "2026-11-17T23:40:53.357Z",
   "windowDays": 30,
   "teams": [
     {
@@ -588,6 +588,90 @@
           "role": "rifler",
           "teamId": "cs2-team-13996",
           "rating": 0.9
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-6290",
+      "name": "Luminosity",
+      "rosterFetchedAt": "2026-11-17T23:40:53.157Z",
+      "players": [
+        {
+          "id": "cs2-player-19926",
+          "nickname": "afro",
+          "role": "AWPer",
+          "teamId": "cs2-team-6290",
+          "rating": 1.08
+        },
+        {
+          "id": "cs2-player-22106",
+          "nickname": "AZUWU",
+          "role": "entry",
+          "teamId": "cs2-team-6290",
+          "rating": 1
+        },
+        {
+          "id": "cs2-player-22047",
+          "nickname": "yxngstxr",
+          "role": "rifler",
+          "teamId": "cs2-team-6290",
+          "rating": 0.99
+        },
+        {
+          "id": "cs2-player-17145",
+          "nickname": "Rainwaker",
+          "role": "rifler",
+          "teamId": "cs2-team-6290",
+          "rating": 1.06
+        },
+        {
+          "id": "cs2-player-20563",
+          "nickname": "lux",
+          "role": "rifler",
+          "teamId": "cs2-team-6290",
+          "rating": 1.07
+        }
+      ]
+    },
+    {
+      "id": "cs2-team-5991",
+      "name": "Envy",
+      "rosterFetchedAt": "2026-11-17T23:40:53.080Z",
+      "players": [
+        {
+          "id": "cs2-player-13138",
+          "nickname": "Maka",
+          "role": "AWPer",
+          "teamId": "cs2-team-5991",
+          "rating": 1.09
+        },
+        {
+          "id": "cs2-player-14176",
+          "nickname": "misutaaa",
+          "role": "entry",
+          "teamId": "cs2-team-5991",
+          "rating": 1.03
+        },
+        {
+          "id": "cs2-player-13497",
+          "nickname": "Lucky",
+          "role": "entry",
+          "teamId": "cs2-team-5991",
+          "rating": 1.05
+        },
+        {
+          "id": "cs2-player-21969",
+          "nickname": "Graviti",
+          "role": "entry",
+          "teamId": "cs2-team-5991",
+          "rating": 0.97
+        },
+        {
+          "id": "cs2-player-20482",
+          "nickname": "Kursy",
+          "role": "rifler",
+          "teamId": "cs2-team-5991",
+          "rating": 1.05
         }
       ]
     }
@@ -2243,8 +2327,5 @@
     }
   ],
   "note": "Escalações e estatísticas reais; kills por mapa são registros históricos e não previsões calibradas.",
-  "warnings": [
-    "roster Luminosity indisponível",
-    "roster Envy indisponível"
-  ]
+  "warnings": []
 }
