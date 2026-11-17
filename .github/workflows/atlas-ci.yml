@@ -1,0 +1,38 @@
+name: ATLAS - verificações
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/**'
+      - 'tests/**'
+      - 'public/**'
+      - '.github/workflows/atlas-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9f # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Verificar sintaxe
+        run: |
+          node --check public/app.js
+          node --check public/tournaments.js
+          node --check public/players.js
+          node --check public/validation.js
+          node --check scripts/model.mjs
+          node --check scripts/refresh.mjs
+      - name: Testes probabilísticos
+        run: node --test tests/model.test.mjs
