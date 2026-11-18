@@ -192,8 +192,8 @@
    catch(e){$('series-builder-note').textContent='Não foi possível copiar automaticamente neste navegador.'}
  }
  function init(){
-   Promise.all(['data/series-forecasts.json','data/br365-series-odds.json','data/tournaments.json'].map(path=>fetch(path,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(path);return r.json()})))
-   .then(([series,book,fixtures])=>{
+   Promise.all(['data/series-forecasts.json','data/br365-series-odds.json','data/tournaments.json','data/series-validation.json'].map(path=>fetch(path,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(path);return r.json()})))
+   .then(([series,book,fixtures,validation])=>{
      const modelMap=new Map(series.matches.map(x=>[x.matchId,x]));
      state.matches=fixtures.matches.map(g=>{
        const odds=book.odds.find(x=>x.matchId===g.id),model=modelMap.get(g.id);
@@ -210,6 +210,12 @@
      $('series-kpi-markets').textContent=String(marketCount);
      $('series-kpi-covered').textContent=String(state.matches.filter(x=>x.model).length);
      $('series-snapshot').textContent='Odds BR365: capturas em '+fmtDate(book.capturedApprox)+' (aprox.) · Cito: '+fmtDate(series.matches[0]?.modelSnapshotAt)+' · odds NÃO atualizadas automaticamente.';
+     const n=Number(validation.resolved)||0,total=Number(validation.total)||0;
+     const status=$('series-validation-status');
+     if(status)status.textContent=n+' de '+total+' mercados de série com resultados oficiais conferidos. '+(n===0?
+       'Ainda não há acertos ou erros calculados para este modelo.':
+       'A amostra de séries deve ser interpretada junto com calibração e cobertura, não apenas taxa de acerto.');
+
      rankedList();renderGames();preset(2);
    }).catch(e=>{
      $('series-ranked-list').textContent='Falha ao carregar mercados: '+e.message;
