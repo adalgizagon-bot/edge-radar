@@ -1,6 +1,6 @@
 {
   "source": "Cito CS2 match results + ranking as of 2026-11-17",
-  "fetchedAt": "2026-11-18T01:14:30.220Z",
+  "fetchedAt": "2026-11-18T08:21:48.422Z",
   "rankingDate": "2026-11-17T00:00:00Z",
   "windowDays": 180,
   "maximumRecentMatchesPerTeam": 15,
@@ -55,7 +55,7 @@
             "id": "cs2-team-10577",
             "name": "SINNERS",
             "rank": 37,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -86,7 +86,7 @@
             "id": "cs2-team-12857",
             "name": "FORZE Reload",
             "rank": 75,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -154,7 +154,7 @@
             "id": "cs2-team-11641",
             "name": "Metizport",
             "rank": 69,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -191,7 +191,7 @@
             "id": "cs2-team-11699",
             "name": "BAKS",
             "rank": 79,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -259,7 +259,7 @@
             "id": "cs2-team-13908",
             "name": "Butterfly",
             "rank": 86,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -296,7 +296,7 @@
             "id": "cs2-team-12857",
             "name": "FORZE Reload",
             "rank": 75,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -358,7 +358,7 @@
             "id": "cs2-team-10245",
             "name": "JiJieHao",
             "rank": 35,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -389,7 +389,7 @@
             "id": "cs2-team-13181",
             "name": "BASEMENT BOYS",
             "rank": 61,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -426,7 +426,7 @@
             "id": "cs2-team-10567",
             "name": "SAW",
             "rank": 64,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -463,7 +463,7 @@
             "id": "cs2-team-12878",
             "name": "BC.Game",
             "rank": 46,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -500,7 +500,7 @@
             "id": "cs2-team-6290",
             "name": "Luminosity",
             "rank": 36,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -524,7 +524,7 @@
           ]
         }
       ],
-      "fetchedAt": "2026-11-18T01:13:23.881Z"
+      "fetchedAt": "2026-11-18T08:21:48.422Z"
     },
     {
       "id": "cs2-team-13104",

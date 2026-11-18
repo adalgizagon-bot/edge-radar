@@ -1,6 +1,6 @@
 {
   "source": "Cito API",
-  "fetchedAt": "2026-11-18T00:15:54.489Z",
+  "fetchedAt": "2026-11-18T08:21:48.422Z",
   "windowDays": 30,
   "teams": [
     {
@@ -2706,6 +2706,134 @@
           "rounds": 117,
           "adr": 66,
           "rating": 0.98
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-19173",
+      "nickname": "fNk",
+      "teamId": "cs2-team-7187",
+      "role": "support",
+      "fetchedAt": "2026-11-18T08:21:48.422Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Ancient",
+          "count": 11,
+          "kpr": 0.68,
+          "kills": 140,
+          "rounds": 206,
+          "adr": 83,
+          "rating": 1.06
+        },
+        {
+          "name": "Anubis",
+          "count": 9,
+          "kpr": 0.76,
+          "kills": 147,
+          "rounds": 193,
+          "adr": 84,
+          "rating": 1.11
+        },
+        {
+          "name": "Dust2",
+          "count": 9,
+          "kpr": 0.64,
+          "kills": 125,
+          "rounds": 195,
+          "adr": 81,
+          "rating": 0.99
+        },
+        {
+          "name": "Cache",
+          "count": 6,
+          "kpr": 0.57,
+          "kills": 79,
+          "rounds": 138,
+          "adr": 68,
+          "rating": 0.95
+        },
+        {
+          "name": "Inferno",
+          "count": 5,
+          "kpr": 0.66,
+          "kills": 72,
+          "rounds": 109,
+          "adr": 82,
+          "rating": 1.07
+        },
+        {
+          "name": "Mirage",
+          "count": 5,
+          "kpr": 0.57,
+          "kills": 67,
+          "rounds": 117,
+          "adr": 68,
+          "rating": 0.97
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-9254",
+      "nickname": "mopoz",
+      "teamId": "cs2-team-13104",
+      "role": "rifler",
+      "fetchedAt": "2026-11-18T08:21:48.422Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Nuke",
+          "count": 8,
+          "kpr": 0.69,
+          "kills": 124,
+          "rounds": 180,
+          "adr": 80,
+          "rating": 1.03
+        },
+        {
+          "name": "Ancient",
+          "count": 6,
+          "kpr": 0.63,
+          "kills": 72,
+          "rounds": 115,
+          "adr": 85,
+          "rating": 1.05
+        },
+        {
+          "name": "Inferno",
+          "count": 5,
+          "kpr": 0.71,
+          "kills": 63,
+          "rounds": 89,
+          "adr": 92,
+          "rating": 1.2
+        },
+        {
+          "name": "Mirage",
+          "count": 5,
+          "kpr": 0.54,
+          "kills": 52,
+          "rounds": 97,
+          "adr": 61,
+          "rating": 0.87
+        },
+        {
+          "name": "Anubis",
+          "count": 3,
+          "kpr": 0.57,
+          "kills": 34,
+          "rounds": 60,
+          "adr": 63,
+          "rating": 0.91
+        },
+        {
+          "name": "Cache",
+          "count": 2,
+          "kpr": 0.67,
+          "kills": 29,
+          "rounds": 43,
+          "adr": 69,
+          "rating": 1
         }
       ]
     }

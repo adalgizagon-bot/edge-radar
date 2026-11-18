@@ -1,6 +1,6 @@
 {
   "source": "Cito API (MCP)",
-  "fetchedAt": "2026-11-18T00:15:54.489Z",
+  "fetchedAt": "2026-11-18T08:21:48.422Z",
   "windowDays": 90,
   "events": [
     {
@@ -340,7 +340,8 @@
           "latestPlayedAt": "2026-11-17T12:50:00.000Z",
           "inPool": true
         }
-      ]
+      ],
+      "fetchedAt": "2026-11-18T08:21:48.422Z"
     },
     {
       "id": "cs2-team-12916",
