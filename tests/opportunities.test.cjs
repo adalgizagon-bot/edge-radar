@@ -55,12 +55,11 @@ test('event and market filters do not cross-contaminate other matches',()=>{
  const qualified=core.filtered(signals,{quality:'8'});
  assert.ok(qualified.every(x=>x.sample>=8));
 });
-test('HTML contains new landing page and controls',()=>{
+test('historical conditional-map helper remains available for offline backtests',()=>{
+ const coreCode=fs.readFileSync(path.join(__dirname,'../public/opportunities-core.js'),'utf8');
+ assert.ok(coreCode.includes('AtlasOpportunityCore'));
  const html=fs.readFileSync(path.join(__dirname,'../public/index.html'),'utf8');
  assert.match(html,/<section class="view active" id="opportunities">/);
- for(const id of ['radar-ranked-list','radar-combo-legs','radar-game-grid','radar-copy','radar-event','radar-market']){
-  assert.ok(html.includes('id="'+id+'"'),'missing '+id);
- }
- assert.match(html,/src="opportunities-core.js"/);
- assert.match(html,/src="opportunities.js"/);
+ assert.ok(html.includes('src="series-radar.js"'));
+ assert.ok(!html.includes('src="opportunities.js"'));
 });
