@@ -45,3 +45,113 @@
 #validation-table{margin-top:15px;max-height:580px;overflow:auto}#validation-table .records{min-width:900px}
 #validation-table .records th{position:sticky;top:0}
 @media(max-width:900px){.player-grid,.validation-grid{grid-template-columns:1fr}}
+
+
+/* v0.5 — Radar de oportunidades de CS2: leitura editorial, não tela de apostas */
+.radar-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(290px,.8fr);gap:30px;padding:32px 34px;margin-bottom:17px;border:1px solid #285669;border-radius:19px;background:radial-gradient(circle at 90% 0%,#1d526266 0%,transparent 40%),linear-gradient(118deg,#112e37 0%,#17233a 58%,#19233f 100%)}
+.radar-hero:after{content:"";position:absolute;right:-70px;bottom:-145px;height:260px;width:260px;border:1px solid #579faf30;border-radius:50%;box-shadow:0 0 0 35px #478e9e0d,0 0 0 75px #478e9e0b;pointer-events:none}
+.radar-kicker{display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:1.5px;color:#96d9d0;font-weight:780}
+.radar-live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#86d4bd;box-shadow:0 0 0 4px #7bd0af24}
+.radar-hero h1{font-size:clamp(27px,3vw,37px);margin:14px 0 12px}
+.radar-hero-desc{color:#c1d1df;font-size:14px;max-width:640px;line-height:1.8}
+.radar-hero-meta{display:flex;flex-wrap:wrap;gap:11px;margin-top:20px}
+.radar-hero-meta span{font-size:11px;color:#b1d9dd;background:#22455680;border:1px solid #376475a6;border-radius:20px;padding:5px 11px}
+.radar-hero-metrics{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-self:center}
+.radar-hero-metrics>div{background:#0b1d2abf;border:1px solid #426c74aa;border-radius:12px;padding:14px}
+.radar-hero-metrics>div:last-child{grid-column:1/-1}
+.radar-hero-metrics strong{display:block;color:#e1fff6;font-size:25px;font-variant-numeric:tabular-nums;line-height:1.4;letter-spacing:-1px}
+.radar-hero-metrics span{display:block;color:#abcccf;font-size:11px}
+.radar-disclaimer{display:flex;gap:13px;padding:15px 17px;margin-bottom:19px;border:1px solid #6f5a36;background:#30291b59;border-radius:13px;color:#f1d4a3}
+.radar-disclaimer-icon{display:grid;place-items:center;flex-shrink:0;width:24px;height:24px;border:1px solid #9e7847;border-radius:50%;font-weight:900;font-size:12px}
+.radar-disclaimer strong{font-size:13px}
+.radar-disclaimer p{margin-top:3px;font-size:12px;color:#d3c2a7}
+.radar-workspace{display:grid;grid-template-columns:minmax(0,1.34fr) minmax(315px,.83fr);align-items:start;gap:17px;margin-bottom:20px}
+.radar-primary,.radar-aside{min-width:0}.radar-aside{position:sticky;top:16px}
+.radar-panel{background:#151f33;border:1px solid #2d3d56;border-radius:16px;padding:22px;min-width:0}
+.radar-title-row{display:flex;gap:14px;justify-content:space-between;align-items:flex-start;margin-bottom:17px}
+.radar-title-row h2{font-size:22px;margin:4px 0 2px;letter-spacing:-.5px}
+.radar-title-row p{color:#97acc8;font-size:12px;line-height:1.6;margin-top:4px}
+.radar-count-pill{white-space:nowrap;background:#26394d;border:1px solid #39566b;border-radius:20px;padding:6px 11px;font-size:11px;color:#bad7e0}
+.radar-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-bottom:15px}
+.radar-controls label{font-size:11px;font-weight:700;color:#a9bfd9}
+.radar-controls select{display:block;width:100%;min-width:0;color:#e9f4ff;background:#101b2f;border:1px solid #394c67;border-radius:9px;padding:10px 12px;margin-top:5px;line-height:1.3}
+.radar-sample-note{border-left:3px solid #567a98;background:#1b2a42;color:#9eb7d3;padding:10px 12px;border-radius:0 8px 8px 0;margin-bottom:16px;font-size:11px;line-height:1.65}
+.radar-sample-note b{color:#d6e6ef}
+.radar-ranked-list{display:flex;flex-direction:column;gap:10px}
+.radar-signal-card{display:grid;grid-template-columns:27px minmax(0,1fr) 118px;gap:10px;align-items:start;border:1px solid #354761;background:#19273c;border-radius:12px;padding:15px 12px;transition:border-color .15s,background .15s}
+.radar-signal-card:hover{border-color:#5e9ca3;background:#1c3145}
+.radar-signal-index{color:#658fa7;font-size:12px;font-weight:850;padding-top:3px;font-variant-numeric:tabular-nums}
+.radar-signal-main{min-width:0}
+.radar-signal-meta{display:flex;flex-wrap:wrap;align-items:center;gap:7px;color:#a8bed5;font-size:10px}
+.radar-event-tag{font-size:10px;letter-spacing:.5px;font-weight:750;color:#a9e7dd}
+.radar-signal-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0 3px}
+.radar-signal-head h3{font-size:15px;letter-spacing:-.25px;font-weight:760;line-height:1.35}
+.radar-signal-fixture{color:#cad7e7;font-size:12px}
+.radar-signal-foot{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:12px;color:#90a9c5;font-size:10px}
+.radar-tag{display:inline-block;border-radius:7px;padding:3px 7px;font-size:10px;line-height:1.4;font-weight:650}
+.veto-tag{color:#edc68a;background:#55402a66;border:1px solid #8f693d66}
+.type-tag{color:#adcff7;background:#2b3d5a;border:1px solid #416184}
+.quality-good{color:#8fe0bf;background:#1e453e;border:1px solid #3f816c}
+.quality-mid{color:#c2d6e9;background:#2c4054;border:1px solid #47677f}
+.quality-low{color:#f4c09b;background:#49362d;border:1px solid #876047}
+.radar-signal-right{text-align:right}
+.radar-large-percent{color:#7be1c8;font-weight:850;font-size:27px;line-height:1.18;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.radar-percent-label{font-size:9px;color:#a5bad0;margin-bottom:16px}
+.radar-add-button{color:#c6fff1;background:#245c59;border:1px solid #498f80;border-radius:8px;padding:7px 9px;font-size:10px;font-weight:750;width:100%;line-height:1.35}
+.radar-add-button:hover:not(:disabled){filter:brightness(1.13)}
+.radar-add-button:disabled{opacity:.55}
+.radar-show-more{width:100%;margin-top:14px;border-style:dashed;font-size:12px}
+.radar-combo-panel{background:linear-gradient(180deg,#1a2c42 0%,#121c30 100%);border-color:#36576b;padding:20px}
+.radar-combo-icon{font-size:27px;color:#90d8d5}
+.radar-combo-presets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.radar-combo-presets button{font-size:11px;padding:10px 4px;color:#b6c9dd;background:#18283f;border:1px solid #32475f;border-radius:7px;font-weight:760}
+.radar-combo-presets button.is-active{color:#0b2631;background:#84d7bd;border-color:#a1e9d1}
+.radar-combo-help{color:#a5bacf;margin:12px 0;font-size:11px;line-height:1.65}
+.radar-combo-legs{display:flex;flex-direction:column;gap:8px}
+.radar-leg{background:#121e32;border:1px solid #344862;border-radius:9px;padding:12px}
+.radar-leg-header{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.radar-leg-number{display:grid;place-items:center;width:24px;height:24px;border-radius:6px;background:#274652;color:#88daca;font-size:11px;font-weight:800}
+.radar-leg-fixture{font-size:11px;color:#dbe8f4;font-weight:700;min-width:0;flex:1}
+.radar-leg-percent{font-size:14px;color:#84dec6;font-variant-numeric:tabular-nums}
+.radar-leg-select{width:100%;padding:9px 8px;border:1px solid #3c5572;background:#1a2b43;color:#eef7ff;border-radius:7px;font-size:11px;min-width:0}
+.radar-leg-foot{display:flex;gap:6px;justify-content:space-between;flex-wrap:wrap;color:#a1b5ce;font-size:10px;margin-top:8px}
+.radar-leg-remove{display:block;margin-left:auto;margin-top:7px;color:#b8c9da;background:none;border:0;font-size:11px;padding:2px 0}
+.radar-leg-remove:hover{color:#fff}
+.radar-combo-summary{padding:16px;background:#0e2730;border:1px solid #386f72;border-radius:10px;margin:14px 0}
+.radar-combo-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.radar-combo-metrics>div:first-child{border-right:1px solid #3d6671;padding-right:8px}
+.radar-combo-metrics small{display:block;color:#a5cdd0;font-size:10px}
+.radar-combo-metrics strong{display:block;font-size:23px;font-weight:850;color:#a0f5d3;font-variant-numeric:tabular-nums;margin:3px 0}
+.radar-combo-meta{color:#b0cfcb;font-size:10px;line-height:1.6;margin:7px 0}
+.radar-combo-alert{border-top:1px solid #386365;margin-top:10px;padding-top:10px;color:#e9c9a3;font-size:11px;line-height:1.6}
+.radar-combo-actions{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:12px}
+.radar-combo-actions .primary{white-space:normal;line-height:1.3;text-align:center;font-size:12px}
+.radar-combo-actions .ghost{font-size:11px}
+.radar-combo-caution{border-top:1px solid #36506a;padding-top:13px;margin-top:18px;color:#aabdd2;font-size:11px;line-height:1.7}
+.radar-combo-caution b{color:#d7e4f4}
+.radar-empty{font-size:12px;color:#aac0db;padding:20px;text-align:center;background:#1b2b43;border:1px dashed #38526c;border-radius:10px}
+.radar-all-games{margin-bottom:18px}
+.radar-game-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.radar-game-card{padding:18px 18px 16px;background:#1b283d;border:1px solid #334960;border-radius:13px;min-width:0}
+.radar-game-top{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;color:#9fbacf;margin-bottom:8px}
+.radar-game-top span:first-child{font-weight:730;color:#91ddcc}
+.radar-game-card h3{font-size:16px;line-height:1.4;margin:0 0 13px}
+.radar-game-best{display:flex;gap:14px;align-items:center;justify-content:space-between;background:#142d39;padding:13px;border-radius:8px;border:1px solid #315b68}
+.radar-game-best>div{min-width:0}
+.radar-game-kicker{display:block;font-size:9px;color:#8ab7bc;letter-spacing:.9px;margin-bottom:4px;font-weight:780}
+.radar-game-best strong{font-size:12px;color:#e8fff6;line-height:1.4;display:block}
+.radar-game-best .radar-game-percent{font-size:24px;color:#82ead0;white-space:nowrap;font-variant-numeric:tabular-nums}
+.radar-game-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:11px;color:#acc0d4;font-size:10px}
+.radar-game-toggle{margin-top:12px;width:100%;text-align:left;color:#a1d9e1;background:transparent;border:0;border-top:1px solid #34475f;padding:12px 0 0;font-size:11px;font-weight:750}
+.radar-game-toggle:hover{color:#e3fff5}
+.radar-game-alt{border-top:1px solid #2b405a;padding-top:9px;margin-top:9px;max-height:400px;overflow:auto}
+.radar-game-alt-row{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;gap:10px;background:#17273c;border:1px solid transparent;border-radius:6px;margin-bottom:5px;color:#d1dfef;padding:9px;font-size:11px}
+.radar-game-alt-row small{white-space:nowrap;color:#a5dccc}
+.radar-game-alt-row:hover:not(:disabled),.radar-game-alt-row.is-selected{border-color:#5ba89d;background:#21414b}
+.radar-game-alt-row:disabled{opacity:.6;cursor:not-allowed}
+.radar-footer-links{border-top:1px solid #2d4159;padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.radar-footer-links p{font-size:12px;color:#98b0ce;max-width:750px}
+.radar-footer-links strong{color:#d4e7f7}
+@media(max-width:1200px){.radar-workspace{grid-template-columns:minmax(0,1fr)}.radar-aside{position:static}.radar-combo-legs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.radar-combo-summary{max-width:590px}.radar-hero{grid-template-columns:minmax(0,1fr) minmax(230px,.68fr)}}
+@media(max-width:800px){.radar-hero{grid-template-columns:1fr;padding:23px}.radar-hero-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.radar-hero-metrics>div:last-child{grid-column:auto}.radar-game-grid{grid-template-columns:1fr}.radar-combo-legs{grid-template-columns:1fr}.radar-footer-links{flex-direction:column;align-items:stretch}}
+@media(max-width:560px){.radar-panel{padding:16px}.radar-hero-metrics{grid-template-columns:1fr 1fr}.radar-hero-metrics>div:last-child{grid-column:1/-1}.radar-controls{grid-template-columns:1fr}.radar-signal-card{grid-template-columns:22px minmax(0,1fr);padding:13px}.radar-signal-right{grid-column:2;text-align:left;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4px 10px}.radar-large-percent{grid-row:1;font-size:26px}.radar-percent-label{grid-column:1;grid-row:2;margin:0}.radar-add-button{grid-column:2;grid-row:1/3}.radar-title-row{flex-wrap:wrap}.radar-combo-presets{grid-template-columns:repeat(4,1fr)}.radar-game-card{padding:15px}.radar-game-best .radar-game-percent{font-size:20px}}
