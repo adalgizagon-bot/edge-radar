@@ -1,0 +1,226 @@
+{
+  "source": "BR365 — oito capturas de tela enviadas pelo usuário",
+  "capturedApprox": "2026-11-17T21:49:00-03:00",
+  "capturedTimeIsApproximate": true,
+  "format": "BO3",
+  "scope": "mercados da série completa",
+  "updatedAutomatically": false,
+  "odds": [
+    {
+      "matchId": "cs2-match-2400440",
+      "event": "Stake Ranked Episode 6",
+      "a": "Apogee Esports",
+      "b": "BIG",
+      "aliasNote": "Apogee Esports = Betclic Apogee Esports (Cito: Betclic)",
+      "br365EventId": "18414383",
+      "timeShown": "18 Nov 08:00",
+      "winner": {
+        "a": 2.45,
+        "b": 1.45
+      },
+      "handicap": {
+        "aPlus1_5": 1.5,
+        "bMinus1_5": 2.35
+      },
+      "score": {
+        "a20": 4.75,
+        "a21": 4.4,
+        "b20": 2.45,
+        "b21": 3.3
+      },
+      "total": {
+        "over2_5": 2,
+        "under2_5": 1.68
+      }
+    },
+    {
+      "matchId": "cs2-match-2400441",
+      "event": "Stake Ranked Episode 6",
+      "a": "Team UNiTY",
+      "b": "GamerLegion",
+      "br365EventId": "18417758",
+      "timeShown": "18 Nov 10:30",
+      "winner": {
+        "a": 3.85,
+        "b": 1.2
+      },
+      "handicap": {
+        "aPlus1_5": 1.95,
+        "bMinus1_5": 1.71
+      },
+      "score": {
+        "a20": 7.25,
+        "a21": 6.25,
+        "b20": 1.74,
+        "b21": 3.4
+      },
+      "total": {
+        "over2_5": 2.35,
+        "under2_5": 1.5
+      }
+    },
+    {
+      "matchId": "cs2-match-2400442",
+      "event": "Stake Ranked Episode 6",
+      "a": "Inner Circle",
+      "b": "Sangal",
+      "br365EventId": "18414384",
+      "timeShown": "18 Nov 13:00",
+      "winner": {
+        "a": 1.43,
+        "b": 2.55
+      },
+      "handicap": {
+        "aMinus1_5": 2.35,
+        "bPlus1_5": 1.5
+      },
+      "score": {
+        "a20": 2.35,
+        "a21": 3.25,
+        "b20": 5,
+        "b21": 4.5
+      },
+      "total": {
+        "over2_5": 2,
+        "under2_5": 1.68
+      }
+    },
+    {
+      "matchId": "cs2-match-2400443",
+      "event": "Stake Ranked Episode 6",
+      "a": "Ninjas in Pyjamas",
+      "b": "Luminosity Gaming",
+      "br365EventId": "18417760",
+      "timeShown": "18 Nov 15:30",
+      "winner": {
+        "a": 1.44,
+        "b": 2.5
+      },
+      "handicap": {
+        "aMinus1_5": 2.3,
+        "bPlus1_5": 1.52
+      },
+      "score": {
+        "a20": 2.3,
+        "a21": 3.3,
+        "b20": 4.75,
+        "b21": 4.5
+      },
+      "total": {
+        "over2_5": 2.1,
+        "under2_5": 1.62
+      }
+    },
+    {
+      "matchId": "cs2-match-2400522",
+      "event": "RUSH:Brno 2026",
+      "a": "Nexus Gaming",
+      "b": "Iberian Soul",
+      "br365EventId": "18414390",
+      "timeShown": "18 Nov 07:00",
+      "winner": {
+        "a": 2.15,
+        "b": 1.58
+      },
+      "handicap": {
+        "aPlus1_5": 1.4,
+        "bMinus1_5": 2.65
+      },
+      "score": {
+        "a20": 3.85,
+        "a21": 4,
+        "b20": 2.7,
+        "b21": 3.4
+      },
+      "total": {
+        "over2_5": 2,
+        "under2_5": 1.68
+      }
+    },
+    {
+      "matchId": "cs2-match-2400523",
+      "event": "RUSH:Brno 2026",
+      "a": "Phantom",
+      "b": "Metizport",
+      "br365EventId": "18418131",
+      "timeShown": "18 Nov 10:00",
+      "winner": {
+        "a": 1.76,
+        "b": 1.9
+      },
+      "handicap": {
+        "aMinus1_5": 2.9,
+        "bPlus1_5": 1.33
+      },
+      "score": {
+        "a20": 3,
+        "a21": 3.6,
+        "b20": 3.4,
+        "b21": 3.85
+      },
+      "total": {
+        "over2_5": 2,
+        "under2_5": 1.68
+      }
+    },
+    {
+      "matchId": "cs2-match-2400524",
+      "event": "RUSH:Brno 2026",
+      "a": "Sinners Esports",
+      "b": "Alliance",
+      "br365EventId": "18414391",
+      "timeShown": "18 Nov 13:00",
+      "winner": {
+        "a": 1.44,
+        "b": 2.5
+      },
+      "handicap": {
+        "aMinus1_5": 2.35,
+        "bPlus1_5": 1.5
+      },
+      "score": {
+        "a20": 2.4,
+        "a21": 3.25,
+        "b20": 4.75,
+        "b21": 4.5
+      },
+      "total": {
+        "over2_5": 2,
+        "under2_5": 1.68
+      }
+    },
+    {
+      "matchId": "cs2-match-2400525",
+      "event": "RUSH:Brno 2026",
+      "a": "BBL Esports",
+      "b": "Team Envy",
+      "br365EventId": "18418128",
+      "timeShown": "18 Nov 16:00",
+      "winner": {
+        "a": 1.95,
+        "b": 1.71
+      },
+      "handicap": {
+        "aPlus1_5": 1.33,
+        "bMinus1_5": 2.9
+      },
+      "score": {
+        "a20": 3.5,
+        "a21": 3.85,
+        "b20": 3,
+        "b21": 3.6
+      },
+      "total": {
+        "over2_5": 2,
+        "under2_5": 1.68
+      }
+    }
+  ],
+  "notes": [
+    "Odds transcritas visualmente dos oito prints; verificação com o site em tempo real não foi feita.",
+    "Não são preços ao vivo. Conferir se ainda estão disponíveis antes de qualquer uso.",
+    "Handicap de mapas da série ≠ handicap de rounds de mapa.",
+    "Betclic Apogee Esports da Cito aparece como Apogee Esports na BR365.",
+    "Ninguém forneceu os preços específicos das abas Mapa 1 e Mapa 2."
+  ]
+}
