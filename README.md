@@ -39,6 +39,24 @@ A execução está agendada **uma vez ao dia, 07:07 UTC (04:07 Brasília)**, com
 
 O site é estático: o GitHub Actions consulta a API com o segredo protegido, grava novos arquivos JSON e a Vercel publica automaticamente o commit. A interface mostra a hora da última atualização, sem afirmar que os dados são ao vivo. Evite publicar a chave em arquivos ou mensagens.
 
+## Força dos adversários e amostras de 365 dias (V0.7)
+
+Nova aba **Força dos adversários**: confronto lado a lado para as 16 equipes acompanhadas, com 15 séries recentes por time (240 observações de equipe), placares, mapas realmente disputados e ranking dos adversários quando disponível. Os dados são da Cito. O ranking consultado em **17/11/2026** não corresponde necessariamente ao ranking no dia de cada partida. O ranking faltante aparece como indisponível.
+
+Também foram consultados os **365 dias de estatísticas por mapa** das 16 equipes, além do histórico de 90 dias já existente. Essas janelas são **aninhadas**: não se deve somar 365+90 nem pressupor que resultados antigos sejam representativos da escalação atual. O painel compara a taxa de vitórias por mapa, o tamanho da amostra e os resultados recentes contra rivais do top 20, 21–50, 51–100, 101+ e sem ranking.
+
+O indicador `acima/abaixo do esperado por ranking` compara os resultados com um **modelo simples e não calibrado** baseado na diferença entre rankings atuais e dá mais peso às partidas recentes (meia-vida de 45 dias). Trata-se de um **indicador exploratório**, não de probabilidade de vitória ou de suposta vantagem nas odds. Isso impede confundir mera taxa bruta de vitórias com a qualidade dos adversários, mas **não corrige completamente** mudanças de elenco, mapas, força da competição e ranking histórico.
+
+Arquivos:
+- `public/data/team-opponents.json` — até 15 séries completas por equipe com adversário e ranking conhecido
+- `public/data/team-long-history.json` — mapas e vitórias dos últimos 365 dias
+- `public/data/team-rankings.json` — fotografia datada do ranking Cito
+- `public/strength.js`, `public/strength-core.js`, `public/strength.css` — interface e estatísticas explicativas
+- `scripts/strength-sync.mjs` — normalização segura para atualizações diárias
+- `tests/strength.test.cjs`, `tests/strength-sync.test.mjs` — testes de cobertura e filtragem temporal
+
+A rotina diária do GitHub Actions continua limitada a **até sete requisições por execução**. Agora intercala resultados de partidas, estatísticas de 90 dias, últimos adversários de uma equipe, histórico de 365 dias (com ranking atualizado aos domingos) e dados de jogadores, conforme a quota disponível. Os 16 times são atualizados gradualmente. Os dados de contexto **não reescrevem previsões já congeladas**. Antes de usar força de adversários para alterar probabilidades de apostas, o novo método precisa ser comparado prospectivamente ao modelo anterior com os mesmos jogos e datas de corte.
+
 ## Radar pré-veto — mercados completos de BO3 (V0.6)
 
 A página inicial agora compara 80 preços da BR365, transcritos de **oito prints fornecidos em 17/11/2026 por volta de 21h49 em Brasília**, com o histórico CS2 da Cito. São preços fotografados, **não cotações disponíveis em tempo real**. A plataforma não possui acesso à conta ou ao saldo da BR365.
