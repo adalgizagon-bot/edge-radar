@@ -34,6 +34,13 @@ export function audit(frozen,completed,mapGrading,challenger=null,nowIso=new Dat
    verifiedAt:result.verifiedAt
   });
  }
+ const unmodeledResults=(frozen.unmodeled||[]).map(x=>{
+  const actual=byResult.get(x.matchId);
+  return{matchId:x.matchId,reason:x.reason,verified:Boolean(actual),
+   actualScore:actual?actual.scoreA+'–'+actual.scoreB:null,
+   teams:actual?[actual.teamA,actual.teamB]:null};
+ });
+ const totalVerified=games.length+unmodeledResults.filter(x=>x.verified).length;
  const finished=games.length;
  const winner={n:finished,correctModel:games.filter(x=>x.modelCorrect).length,correctMarket:games.filter(x=>x.marketCorrect).length,
   brierModel:mean(games,x=>x.modelBrier),brierMarket:mean(games,x=>x.marketBrier),
@@ -46,7 +53,7 @@ export function audit(frozen,completed,mapGrading,challenger=null,nowIso=new Dat
  const mapMarkets=(mapGrading?.byMarket||[]).map(m=>({kind:m.kind,n:m.observations,brier:m.brier,accuracy:m.classificationAccuracy,
     worseThanNeutral:m.observations>0&&m.brier>0.25}));
  return{version:AUDIT_VERSION,evaluatedAt:nowIso,source:'Cito completed series vs immutable pregame ATLAS and BR365 screenshots',
-  completed:finished,pending:(frozen.matches||[]).length-finished,unmodeled:frozen.unmodeled||[],marketModel: {snapshot:frozen.generatedAt,version:frozen.modelVersion},
+  completed:finished,totalScheduled:(frozen.matches||[]).length+(frozen.unmodeled||[]).length,totalVerified,pending:(frozen.matches||[]).length-finished,unmodeled:frozen.unmodeled||[],unmodeledResults,marketModel: {snapshot:frozen.generatedAt,version:frozen.modelVersion},
   samplesSmall:finished<30,
   winner,challenger:challengerResult,mapMarkets,
   games,actionItems:[
