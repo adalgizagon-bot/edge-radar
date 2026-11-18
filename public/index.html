@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="series-radar.css">
   <link rel="stylesheet" href="strength.css">
+  <link rel="stylesheet" href="audit.css">
   <script src="app.js" defer></script>
   <script src="tournaments.js" defer></script>
   <script src="players.js" defer></script>
@@ -16,6 +17,7 @@
   <script src="series-radar.js" defer></script>
   <script src="strength-core.js" defer></script>
   <script src="strength.js" defer></script>
+  <script src="audit.js" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -26,6 +28,7 @@
         <button class="nav" data-tab="dashboard"><span>▦</span> Visão geral</button>
         <button class="nav active" data-tab="opportunities"><span>✦</span> Radar de odds</button>
         <button class="nav" data-tab="strength"><span>◉</span> Força dos adversários</button>
+        <button class="nav" data-tab="audit"><span>▥</span> Auditoria de resultados</button>
         <button class="nav" data-tab="tournaments"><span>◉</span> Torneios em teste</button>
         <button class="nav" data-tab="simulator"><span>◈</span> Simulador CS2</button>
         <button class="nav" data-tab="data"><span>◫</span> Base histórica</button>
@@ -34,7 +37,7 @@
         <button class="nav" data-tab="registry"><span>▤</span> Registro de previsões</button>
         <button class="nav" data-tab="method"><span>◎</span> Metodologia</button>
       </nav>
-      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: sincronização diária</div><p>Dados da API atualizados pelo GitHub. Não são informações ao vivo.</p><div class="aside-tag">v0.7 • Força dos adversários</div></div>
+      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: sincronização diária</div><p>Dados da API atualizados pelo GitHub. Não são informações ao vivo.</p><div class="aside-tag">v0.8 • Auditoria de resultados</div></div>
     </aside>
     <main class="main">
       <header class="topbar"><div><span class="breadcrumb">INTELIGÊNCIA ESTATÍSTICA / CS2</span></div><div class="top-right"><span class="pill">◌ Modo simulação</span><span class="avatar">A</span></div></header>
@@ -206,7 +209,7 @@
   <div class="series-panel"><div class="series-heading"><div><div class="series-label">04 / AVALIAÇÃO E AUDITORIA</div><h2>Conferir depois do jogo</h2></div>
     <p class="series-section-foot">Os registros pré-jogo permanecem congelados para avaliação de placares reais. Ainda precisamos de uma amostra histórica de séries BO3 e de vetos para calibrar o novo modelo e avaliar sua precisão.</p>
     <p id="series-validation-status" class="series-section-foot">Lendo resultados confirmados da Cito...</p>
-    <button class="secondary" data-go="validation">Abrir validação das previsões →</button>
+    <button class="secondary" data-go="audit">Abrir auditoria completa →</button>
   </div>
  </div>
 </section>
@@ -250,6 +253,59 @@
     <p class="strength-muted">Uma taxa de vitórias alta contra adversários pouco exigentes não vale o mesmo que um aproveitamento menor contra rivais de elite. O ranking, porém, também tem vieses; precisamos manter separadas a qualidade dos rivais, a fase atual, os mapas jogados, a escalação e o tempo decorrido. Nenhuma das probabilidades BO3 já congeladas é reescrita com dados posteriores à partida.</p>
     <button class="secondary" data-go="opportunities">Voltar ao radar de odds →</button>
   </div>
+</section>
+
+<section class="view" id="audit">
+  <div class="audit-hero">
+    <div><div class="audit-eyebrow">ATLAS / AVALIAÇÃO PROSPECTIVA V1 / 18 NOV 2026</div>
+      <h1>O que <span>erramos?</span></h1>
+      <p>Auditoria dos registros congelados antes das partidas, conferidos com resultados da Cito e com as odds da BR365 fotografadas na véspera. A métrica aqui é qualidade estatística, não lucro.</p>
+    </div>
+    <div class="audit-score">
+      <div><strong id="audit-finished">—</strong><small>Séries com modelo / total de confrontos</small></div>
+      <div><strong id="audit-hit">—</strong><small>Favoritos corretos, modelo original</small></div>
+      <div><strong id="audit-model-brier">—</strong><small>Brier vencedor da série, ATLAS</small></div>
+      <div><strong id="audit-market-brier">—</strong><small>Brier vencedor, mercado sem margem</small></div>
+    </div>
+  </div>
+  <div class="audit-banner"><strong>Primeiro teste: amostra muito pequena e desempenho insuficiente.</strong>
+    <p>Não houve vantagem demonstrada sobre a BR365. Os mercados de kills, totais e vencedor de mapa tiveram Brier maior que 0,25. Resultados de mapas não disputados são excluídos. O histórico original permanece imutável e o protótipo novo não substitui as previsões de 18/11.</p>
+  </div>
+  <div class="audit-panel">
+   <div class="audit-panel-head"><div><span class="tiny-kicker">01 / PREVISÃO ANTES × RESULTADO DEPOIS</span><h2>Conferência das séries</h2>
+    <p>Compare os favoritos e a diferença entre o ATLAS e as probabilidades implícitas sem margem.</p></div></div>
+   <div class="audit-table-wrap"><table class="audit-table">
+    <thead><tr><th>Confronto</th><th>Placar</th><th>Favorito ATLAS</th><th>P(A) ATLAS</th><th>P(A) mercado</th><th>Distância</th><th>Amostra</th></tr></thead>
+    <tbody id="audit-match-body"></tbody></table></div>
+   <p class="audit-timestamp" id="audit-pending-note"></p>
+  </div>
+  <div class="audit-panel">
+   <div class="audit-panel-head"><div><span class="tiny-kicker">02 / MAPAS E JOGADORES</span><h2>Qualidade por mercado</h2>
+    <p>Acerto na classificação de 50% e Brier Score: quanto menor o Brier, melhor.</p></div></div>
+   <div class="audit-metrics" id="audit-market-stats"></div>
+  </div>
+  <div class="audit-panel">
+   <div class="audit-panel-head"><div><span class="tiny-kicker">03 / ERROS MAIS INSTRUTIVOS</span><h2>Onde o modelo divergiu muito da casa?</h2>
+    <p>Divergência não é necessariamente uma oportunidade: pode ser erro de força, veto ou composição da amostra.</p></div></div>
+   <div class="audit-tile-grid" id="audit-errors"></div>
+  </div>
+  <div class="audit-panel">
+   <div class="audit-panel-head"><div><span class="tiny-kicker">04 / NOVO MODELO EXPERIMENTAL</span><h2>Ranking e força dos adversários</h2>
+    <p>Ajuste independente de odds, baseado em contexto conhecido antes do jogo. A fórmula, porém, foi criada após ver os resultados.</p></div></div>
+   <div class="audit-metrics" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+    <div class="audit-metric"><span>Favoritos V2 na comparação retrospectiva</span><b id="audit-v2-wins">—</b><small>Não é teste prospectivo</small></div>
+    <div class="audit-metric"><span>Brier Score V2 retrospectivo</span><b id="audit-v2-brier">—</b><small>Não é melhoria comprovada</small></div>
+   </div>
+   <div class="audit-hypothesis" id="audit-posthoc-disclaimer">Lendo dados...</div>
+   <ol class="audit-steps">
+    <li>Usar ranking e força dos adversários antes da partida para moderar as probabilidades por mapa.</li>
+    <li>Reduzir confiança em amostras pequenas e impedir que grandes divergências sejam tratadas automaticamente como vantagens.</li>
+    <li>Exigir veto confirmado para mercados de mapas específicos e evitar duplicar mercados da mesma partida em uma múltipla.</li>
+    <li>Preservar o modelo anterior como controle e comparar a V2 em novas partidas ainda não disputadas.</li>
+   </ol>
+   <div class="audit-timestamp">Última auditoria: <span id="audit-last-checked">—</span>. Odds dos prints não são cotações ao vivo.</div>
+  </div>
+  <button class="secondary" data-go="opportunities">Voltar ao radar BO3 →</button>
 </section>
 
 <section class="view" id="validation">
