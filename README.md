@@ -28,19 +28,16 @@ Painel estatístico de pesquisa para **Counter-Strike 2**, publicado em https://
 | `.github/workflows/atlas-cito-sync.yml` | Atualização diária, com limite máximo de 7 requisições |
 | `.github/workflows/atlas-ci.yml` | Testes automáticos de sintaxe e modelo |
 
-## Ativar sincronização automática — AÇÃO NECESSÁRIA DA PROPRIETÁRIA
+## Sincronização automática ativa
 
-A conexão OAuth da Cito no ChatGPT **não autoriza automaticamente** o site na Vercel nem o GitHub Actions. A rotina automática está preparada, porém **não faz chamadas** até a configuração segura abaixo:
+A conexão Cito para a rotina GitHub Actions foi testada em 18/11/2026 UTC. O segredo `CITO_API_KEY` já estava salvo e **não foi necessário criar ou divulgar outra chave**. A primeira execução concluiu com sucesso: cinco requisições feitas, zero avisos, 16 escalações e 34 jogadores com estatísticas individuais por mapa. O commit automático foi `580cd6e`, com deploy da Vercel em produção.
 
-1. No painel da Cito, entre em **API Keys** e clique em **Create API Key**. Copie o **valor completo** da nova chave na criação; o dashboard depois mostra apenas o prefixo. Não envie a chave ao ChatGPT nem a salve em arquivos públicos.
-2. Abra https://github.com/adalgizagon-bot/edge-radar/settings/secrets/actions.
-3. Clique em **New repository secret**; em **Name**, use exatamente `CITO_API_KEY`; em **Secret**, cole a chave completa e salve.
-4. Em https://github.com/adalgizagon-bot/edge-radar/actions/workflows/atlas-cito-sync.yml, clique em **Run workflow**, escolha **main** e execute uma vez para testar.
-5. Confira os logs sem divulgar segredos. As atualizações dos arquivos em `public/data` produzem automaticamente um novo deploy na Vercel.
+- [Ver rotina programada no GitHub](https://github.com/adalgizagon-bot/edge-radar/actions/workflows/atlas-cito-sync.yml)
+- [Abrir a plataforma](https://edge-radar-gamma.vercel.app/)
 
-A rotina está programada uma vez ao dia, **07:07 UTC (04:07 Brasília)**, com **máximo de 7 chamadas Cito por execução** e intervalo mínimo de 7 segundos entre chamadas. Prioriza: jogos futuros, resultados de jogos encerrados, escalações, uma equipe e até dois jogadores por dia. Em 30 dias, o teto programado é de aproximadamente **210 chamadas**, sem incluir acessos adicionais por outras integrações. O plano Free possui limite mensal compartilhado; **acompanhe o painel Cito** e suspenda a rotina se aproximar do limite.
+A execução está agendada **uma vez ao dia, 07:07 UTC (04:07 Brasília)**, com **até sete requisições Cito por execução** e espaçamento mínimo de sete segundos. A rotina revisa jogos futuros, resultados encerrados, uma escalação, uma equipe e até dois jogadores por execução conforme orçamento disponível. O limite teórico de 210 consultas em 30 execuções é adicional ao consumo de outras integrações da mesma conta; confira o painel Cito periodicamente.
 
-Se a chave não for configurada, a execução do GitHub Actions apenas testa o código e sai sem fazer chamadas. Os dados já capturados continuam disponíveis como uma **fotografia estática**.
+O site é estático: o GitHub Actions consulta a API com o segredo protegido, grava novos arquivos JSON e a Vercel publica automaticamente o commit. A interface mostra a hora da última atualização, sem afirmar que os dados são ao vivo. Evite publicar a chave em arquivos ou mensagens.
 
 ## Metodologia e precauções
 
