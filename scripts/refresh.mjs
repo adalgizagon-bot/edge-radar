@@ -3,6 +3,8 @@
 import fs from 'node:fs/promises';
 import { generateFrozen, assess, metrics } from './model.mjs';
 import { validateSeries } from './series-model.mjs';
+import {audit} from './audit.mjs';
+import {appendProspective,gradeProspective} from './prospective.mjs';
 import { recentOpponents,longMapHistory,rankedSnapshot } from './strength-sync.mjs';
 const dir='public/data/';
 const read=async file=>JSON.parse(await fs.readFile(dir+file,'utf8'));
@@ -24,7 +26,7 @@ async function cito(path,params={}){
  if(json?.success!==true)throw new Error('Cito response invalid at '+path);
  return json.data;
 }
-const seriesFrozen=await read('series-forecasts.json');
+const seriesFrozen=await read('series-forecasts.json'),challengerFrozen=await read('challenger-review.json'),prospective=await read('prospective.json');
 const opponentForm=await read('team-opponents.json'),annual=await read('team-long-history.json'),rankings=await read('team-rankings.json');
 const snapshot=await read('tournaments.json'),players=await read('players.json'),predictions=await read('predictions.json'),
  results=await read('results.json'),sync=await read('sync-state.json');
@@ -87,11 +89,12 @@ try{
  const before=snapshot.matches.length;
  snapshot.matches=unique([...snapshot.matches,...additions],m=>m.id).sort((a,b)=>a.startTime.localeCompare(b.startTime));
  if(additions.length)console.log('Fixtures: '+before+' -> '+snapshot.matches.length);
- // 2) completed match verification, max two per day, round robin.
+ // 2) prioritize official completed match verification, up to four per day while respecting the seven-call cap.
  const unresolved=snapshot.matches.filter(m=>Date.parse(m.startTime)<nowMs-60*60*1000&&
   !(results.matches||[]).find(r=>r.id===m.id&&r.status==='completed'));
  const start=sync.matchCursor||0;
- for(let i=0;i<Math.min(2,unresolved.length);i++){
+ const matchQueries=Math.min(4,unresolved.length,Math.max(0,hardMax-calls));
+ for(let i=0;i<matchQueries;i++){
   const match=unresolved[(start+i)%unresolved.length];
   const raw=await safe('result '+match.id,'/cs2/matches/'+encodeURIComponent(match.id));
   if(!raw)continue;
@@ -99,7 +102,7 @@ try{
   if(parsed){results.matches=unique([...(results.matches||[]),parsed],x=>x.id);
    match.status='completed';match.scoreA=parsed.scoreA;match.scoreB=parsed.scoreB}
  }
- sync.matchCursor=unresolved.length?(start+2)%unresolved.length:0;
+ sync.matchCursor=unresolved.length?(start+matchQueries)%unresolved.length:0;
  // 3) refresh missing rosters only. Existing roster results are kept rather than re-querying every day.
  const missing=snapshot.teams.filter(t=>!(players.teams||[]).some(r=>r.id===t.id));
  const rosterTarget=missing[0];
@@ -159,9 +162,12 @@ try{
   assessed:checked.filter(x=>x.status==='resolved').map(x=>({id:x.id,kind:x.kind,matchId:x.matchId,map:x.map,probability:x.probability,outcome:x.outcome,brier:x.brier,actualScore:x.actualScore})),
   note:'Avaliação retrospectiva dos registros congelados antes dos jogos; não comprova vantagem financeira.'};
  const seriesEval=validateSeries(seriesFrozen,results,now);
+ const fullAudit=audit(seriesFrozen,results,evaluation,challengerFrozen,now);
+ const prospectiveUpdated=appendProspective(prospective,snapshot,opponentForm,rankings,now);
+ const prospectiveEval=gradeProspective(prospectiveUpdated,results,now);
  sync.updatedAt=now;sync.lastRun={status:warnings.length?'partial':'ok',requests:calls,warnings};
  await Promise.all([save('tournaments.json',snapshot),save('players.json',players),save('predictions.json',updated),save('results.json',results),
-  save('validation.json',evaluation),save('series-validation.json',seriesEval),save('team-opponents.json',opponentForm),save('team-long-history.json',annual),save('team-rankings.json',rankings),save('sync-state.json',sync)]);
+  save('validation.json',evaluation),save('series-validation.json',seriesEval),save('audit-2026-11-18.json',fullAudit),save('prospective.json',prospectiveUpdated),save('prospective-validation.json',prospectiveEval),save('team-opponents.json',opponentForm),save('team-long-history.json',annual),save('team-rankings.json',rankings),save('sync-state.json',sync)]);
  console.log(JSON.stringify({at:now,requests:calls,fixtures:snapshot.matches.length,rosters:players.teams.length,
-  playersWithStats:players.players.length,recentOpponentTeams:opponentForm.teams.length,annualTeams:annual.teams.length,frozen:updated.forecasts.length,resolved:evalSummary.resolved,seriesResolved:seriesEval.resolved,warnings},null,2));
+  playersWithStats:players.players.length,recentOpponentTeams:opponentForm.teams.length,annualTeams:annual.teams.length,frozen:updated.forecasts.length,resolved:evalSummary.resolved,seriesResolved:seriesEval.resolved,prospectiveRegistered:prospectiveUpdated.forecasts.length,prospectiveResolved:prospectiveEval.resolved,warnings},null,2));
 }catch(e){console.error('Sync failed safely:',e.message);process.exitCode=1}
