@@ -1,0 +1,91 @@
+/* ATLAS v0.6 — BO3 market radar: separated from conditional map models */
+.series-wrap{display:flex;flex-direction:column;gap:18px}
+.series-top{background:radial-gradient(ellipse at 100% 0%,#20625d90,transparent 52%),linear-gradient(120deg,#142c38,#14213a 68%);border:1px solid #3d626b;border-radius:20px;padding:27px 30px;display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:22px;position:relative;overflow:hidden}
+.series-top::after{content:"";pointer-events:none;position:absolute;right:-50px;top:-100px;border:1px solid #7fc9bf29;border-radius:50%;height:360px;width:360px;box-shadow:0 0 0 48px #56caba0a,0 0 0 95px #56caba08}
+.series-top-main{position:relative;z-index:1}.series-kicker{color:#89ddce;letter-spacing:1.4px;font-weight:800;font-size:10px;display:flex;gap:10px;align-items:center}
+.series-kicker i{display:block;width:8px;height:8px;background:#84dacb;border-radius:50%}
+.series-top h1{margin:12px 0 8px;font-size:clamp(25px,3vw,37px);letter-spacing:-1.1px}.series-top h1 span{color:#7ee1c8}
+.series-top p{color:#b8cede;font-size:13px;max-width:660px}.series-top-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.series-top-meta span{font-size:10px;background:#183b4c;border:1px solid #3a6471;padding:5px 10px;border-radius:20px;color:#bfdadd}
+.series-kpis{position:relative;z-index:1;align-self:center;display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.series-kpi{min-width:105px;background:#0c2430b5;border:1px solid #3a6470;padding:15px 13px;border-radius:12px}
+.series-kpi strong{font-size:28px;color:#d5fff1;display:block;line-height:1.3;font-variant-numeric:tabular-nums}
+.series-kpi small{display:block;color:#aac4d3;font-size:10px;line-height:1.4}
+.series-warning{display:flex;gap:11px;background:#392d1b;border:1px solid #705d39;border-radius:12px;padding:14px 16px;color:#f5d8a4}
+.series-warning .warning-icon{font-weight:800;font-size:13px;border:1px solid #a48345;border-radius:50%;width:22px;height:22px;flex-shrink:0;display:grid;place-items:center}
+.series-warning strong{font-size:12px}.series-warning p{font-size:11px;color:#e0cba8;margin-top:4px}
+.series-panel{background:#151f33;border:1px solid #2f3d55;border-radius:15px;padding:20px}
+.series-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:17px}
+.series-heading h2{font-size:21px;line-height:1.25;letter-spacing:-.5px;margin:4px 0}.series-heading p{font-size:12px;color:#9cb1cf}
+.series-label{color:#84d8ca;font-size:10px;font-weight:800;letter-spacing:1.2px}
+.series-count{background:#263a50;color:#d1e4f3;font-size:11px;padding:6px 11px;border:1px solid #405871;border-radius:18px;white-space:nowrap}
+.series-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(310px,.85fr);gap:17px;align-items:start}
+.series-layout>*{min-width:0}
+.series-builder{position:sticky;top:16px;background:linear-gradient(175deg,#1e3445,#172238 55%,#141e30);border-color:#41616d}
+.series-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:13px 0 15px}
+.series-filters label{font-size:10px;color:#aebfd4;font-weight:780}
+.series-filters select,.series-builder select{border:1px solid #405874;background:#111e32;border-radius:8px;color:#e7f4ff;min-height:40px;padding:9px 10px;width:100%;margin-top:5px;min-width:0;font-size:12px}
+.series-filter-note{font-size:11px;color:#acbfd5;background:#1b2c42;padding:10px 12px;border-left:3px solid #6094a5;border-radius:0 8px 8px 0;margin-bottom:15px}
+.series-signal-grid{display:flex;flex-direction:column;gap:10px}
+.series-signal{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;border:1px solid #35475f;border-radius:12px;background:#1a283c;padding:15px;align-items:center}
+.series-signal:hover{border-color:#588f98;background:#1e3045}
+.series-signal h3{font-size:15px;line-height:1.35;margin:7px 0 3px;letter-spacing:-.2px}
+.series-signal-where{display:flex;flex-wrap:wrap;gap:7px;color:#a3b9d1;font-size:10px}
+.series-signal-where .event{color:#9ddacc;font-weight:800}
+.series-signal-stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.series-signal-stats span{background:#253b4c;color:#b2cddd;border-radius:6px;padding:4px 7px;font-size:10px}
+.series-signal-details{font-size:10px;color:#b4c6dc;margin-top:10px}
+.series-signal-side{text-align:right;min-width:105px}
+.series-signal-side strong{display:block;font-size:26px;color:#83e4c9;line-height:1.2}
+.series-signal-side small{display:block;font-size:10px;color:#9cb5d1}
+.series-signal-side button{margin-top:10px;width:100%;font-size:11px;border-radius:8px;color:#dcfff5;border:1px solid #4a9a91;background:#27615c;padding:8px 10px;font-weight:800}
+.series-signal-side button:disabled{opacity:.5;cursor:not-allowed}
+.series-chip{display:inline-block;padding:3px 7px;font-size:10px;font-weight:800;border-radius:6px}
+.series-chip.warning{color:#eec9a7;background:#62442670;border:1px solid #876440}
+.series-chip.neutral{color:#bbd0e9;background:#273e58;border:1px solid #45617a}
+.series-chip.high{color:#e9c09e;background:#4d372b;border:1px solid #77503b}
+.series-model-delta{color:#f6c3a1!important}
+.series-empty{padding:25px;background:#1c2d43;border:1px dashed #4b5d72;border-radius:9px;color:#b4c9dd;font-size:12px;text-align:center}
+.series-more{margin-top:12px;width:100%;background:#223448;border:1px dashed #46617b;color:#c0dbe4;border-radius:9px;padding:10px;font-weight:800;font-size:12px}
+.series-presets{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:13px 0}
+.series-presets button{padding:10px 5px;font-size:11px;color:#c1d3ea;background:#20344a;border:1px solid #38566c;border-radius:8px}
+.series-presets button.active{color:#092a32;background:#85ddc4;border-color:#9be3d2;font-weight:850}
+.series-leg{border:1px solid #3d5369;border-radius:10px;background:#11253a;padding:12px;margin-top:9px}
+.series-leg-head{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.series-leg-index{display:grid;place-items:center;width:25px;height:25px;border-radius:6px;background:#2e5c60;color:#ccfff0;font-weight:850;font-size:11px}
+.series-leg-game{flex:1;font-size:12px;color:#e4f0fb;font-weight:760;min-width:0}
+.series-leg-odd{color:#93dec8;font-size:17px;font-weight:850}
+.series-leg label{display:block;font-size:10px;color:#aac4da}
+.series-leg .series-leg-select{font-size:11px;margin-top:4px}
+.series-leg-foot{display:flex;justify-content:space-between;gap:7px;align-items:center;font-size:10px;color:#9eb6cc;margin-top:8px}
+.series-leg-remove{background:transparent;color:#a8bbd4;border:0;font-size:11px;padding:4px}
+.series-leg-remove:hover{color:#fff}
+.series-combo-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;background:#0f2935;border:1px solid #477581;border-radius:12px;padding:14px;margin-top:14px}
+.series-combo-kpis small{font-size:10px;color:#aacbd3}.series-combo-kpis strong{display:block;font-size:25px;color:#8fe2cd;font-variant-numeric:tabular-nums}
+.series-combo-note{font-size:10px;color:#e2c6a5;border-top:1px solid #44666a;margin-top:12px;padding-top:11px;line-height:1.7}
+.series-actions{display:grid;grid-template-columns:1fr auto;gap:9px;margin-top:14px}
+.series-actions button{font-size:11px;white-space:normal;line-height:1.3}
+.series-aside-caption{color:#b4cadb;font-size:11px;line-height:1.7;border-top:1px solid #3a566a;padding-top:12px;margin-top:15px}
+.series-games-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.series-game{background:#1b293e;border:1px solid #364961;border-radius:12px;padding:16px;min-width:0}
+.series-game-top{display:flex;gap:7px;justify-content:space-between;align-items:center;font-size:10px;color:#a4c3d5;margin-bottom:8px}
+.series-game-top span:first-child{color:#9ee0d2;font-weight:780}
+.series-game h3{font-size:16px;margin:0 0 11px}
+.series-game-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.series-game-summary>div{background:#102b37;border:1px solid #356170;border-radius:8px;padding:11px}
+.series-game-summary span{display:block;font-size:11px;color:#bdd3e1;min-height:26px}
+.series-game-summary strong{font-size:19px;color:#98dfd2;display:block}
+.series-game-summary small{display:block;color:#a3b6cd;font-size:10px}
+.series-game-expand{width:100%;text-align:left;background:transparent;border:0;border-top:1px solid #3a4b63;padding:12px 0 0;margin-top:12px;color:#a7e4df;font-size:11px;font-weight:750}
+.series-game-details{display:flex;flex-direction:column;gap:6px;max-height:360px;overflow:auto;margin-top:13px}
+.series-game-detail-row{display:flex;gap:9px;align-items:center;justify-content:space-between;padding:9px;background:#172b41;border:1px solid #364c64;border-radius:8px;font-size:11px}
+.series-game-detail-row span{flex:1;color:#d3e1f0}.series-game-detail-row b{color:#88e6ca}.series-game-detail-row small{color:#b1c9d9}
+.series-section-foot{font-size:12px;color:#9cb5d1;line-height:1.75}
+.series-section-foot strong{color:#d7ecf6}
+.series-map-locked{display:flex;align-items:center;gap:15px;background:#14283d;border:1px dashed #49647e;border-radius:14px;padding:18px}
+.series-map-locked .lock-icon{font-size:24px;color:#95d4da}
+.series-map-locked h2{font-size:16px;margin-bottom:4px}.series-map-locked p{font-size:12px;color:#a6bfd4}
+.series-snapshot-line{display:flex;gap:10px;flex-wrap:wrap;font-size:10px;color:#92a9c4;margin-top:10px}
+@media(max-width:1160px){.series-layout{grid-template-columns:1fr}.series-builder{position:static}.series-kpis{grid-template-columns:repeat(3,minmax(85px,1fr))}}
+@media(max-width:820px){.series-top{grid-template-columns:1fr}.series-games-grid{grid-template-columns:1fr}}
+@media(max-width:620px){.series-top{padding:19px}.series-kpi{min-width:0}.series-kpi strong{font-size:23px}.series-filters{grid-template-columns:1fr}.series-panel{padding:15px}.series-signal{grid-template-columns:1fr}.series-signal-side{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;min-width:0}.series-signal-side button{width:auto;margin:0}.series-signal-side small{display:none}.series-signal-side strong{font-size:23px}.series-game-summary{grid-template-columns:1fr 1fr}.series-kpis{gap:6px}.series-kpi{padding:12px 9px}}
