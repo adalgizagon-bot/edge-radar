@@ -1,0 +1,10 @@
+{
+  "source": "Cito CS2 match results + ranking as of 2026-11-17",
+  "fetchedAt": null,
+  "rankingDate": "2026-11-17T00:00:00Z",
+  "windowDays": 180,
+  "maximumRecentMatchesPerTeam": 15,
+  "teams": [],
+  "warnings": [],
+  "method": "Tendência recente e força dos últimos adversários. Ranking conhecido na data de captura, não na data histórica da partida. Registros apenas de partidas completadas."
+}
