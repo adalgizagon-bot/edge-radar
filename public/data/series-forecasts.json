@@ -1,0 +1,2409 @@
+{
+  "modelVersion": "atlas-bo3-pre-veto-uniform-v1",
+  "generatedAt": "2026-11-18T00:55:32.513Z",
+  "lastProcessedAt": "2026-11-18T00:55:32.513Z",
+  "source": "Cito CS2 history + BR365 odds transcribed from user screenshots",
+  "matches": [
+    {
+      "matchId": "cs2-match-2400522",
+      "eventId": "cs2-event-9273",
+      "event": "Tipsport RUSH Brno 2026",
+      "startsAt": "2026-11-18T10:00:00.000Z",
+      "modelSnapshotAt": "2026-11-18T00:15:54.489Z",
+      "oddsCapturedApprox": "2026-11-17T21:49:00-03:00",
+      "frozenAt": "2026-11-18T00:55:32.513Z",
+      "modelVersion": "atlas-bo3-pre-veto-uniform-v1",
+      "teamA": {
+        "id": "cs2-team-7187",
+        "name": "Nexus",
+        "slug": "nexus"
+      },
+      "teamB": {
+        "id": "cs2-team-13104",
+        "name": "Iberian Soul",
+        "slug": "iberian-soul"
+      },
+      "bookTeamA": "Nexus Gaming",
+      "bookTeamB": "Iberian Soul",
+      "br365EventId": "18414390",
+      "model": {
+        "probabilities": {
+          "aWin": 0.6212164619755713,
+          "bWin": 0.37878353802442843,
+          "a20": 0.32385367261590303,
+          "a21": 0.29736278935966837,
+          "b20": 0.17021873585961447,
+          "b21": 0.20856480216481393,
+          "over2_5": 0.5059275915244823,
+          "under2_5": 0.4940724084755175,
+          "aMinus1_5": 0.32385367261590303,
+          "bPlus1_5": 0.676146327384097,
+          "aPlus1_5": 0.8297812641403856,
+          "bMinus1_5": 0.17021873585961447
+        },
+        "sensitivity": {
+          "aWin": {
+            "min": 0.4906984244111373,
+            "max": 0.7822397122825759
+          },
+          "bWin": {
+            "min": 0.2177602877174241,
+            "max": 0.5093015755888628
+          },
+          "a20": {
+            "min": 0.12284352363253367,
+            "max": 0.5024999358071238
+          },
+          "a21": {
+            "min": 0.08820448054491235,
+            "max": 0.44191787696664186
+          },
+          "b20": {
+            "min": 0.08453905112603949,
+            "max": 0.33411703306375956
+          },
+          "b21": {
+            "min": 0.11988270204598864,
+            "max": 0.372240485653763
+          },
+          "over2_5": {
+            "min": 0.41296101306683664,
+            "max": 0.626801100338344
+          },
+          "under2_5": {
+            "min": 0.37319889966165587,
+            "max": 0.5870389869331634
+          },
+          "aMinus1_5": {
+            "min": 0.12284352363253367,
+            "max": 0.5024999358071238
+          },
+          "bPlus1_5": {
+            "min": 0.4975000641928762,
+            "max": 0.8771564763674663
+          },
+          "aPlus1_5": {
+            "min": 0.6658829669362405,
+            "max": 0.9154609488739605
+          },
+          "bMinus1_5": {
+            "min": 0.08453905112603949,
+            "max": 0.33411703306375956
+          }
+        },
+        "commonMaps": [
+          {
+            "name": "Anubis",
+            "observationsA": 16,
+            "observationsB": 5,
+            "winProbA": 0.6965977199311929
+          },
+          {
+            "name": "Ancient",
+            "observationsA": 14,
+            "observationsB": 15,
+            "winProbA": 0.5751361569683557
+          },
+          {
+            "name": "Cache",
+            "observationsA": 12,
+            "observationsB": 9,
+            "winProbA": 0.7213631647498915
+          },
+          {
+            "name": "Mirage",
+            "observationsA": 9,
+            "observationsB": 13,
+            "winProbA": 0.6773999666408628
+          },
+          {
+            "name": "Inferno",
+            "observationsA": 8,
+            "observationsB": 12,
+            "winProbA": 0.21359033360041835
+          }
+        ],
+        "orderedTriplets": 60,
+        "minCommonMapHistory": 5,
+        "method": "Equal-weight all ordered three-map selections from maps with >=4 matches for both teams; map outcomes use independent round Bernoulli MR12 plus overtime."
+      },
+      "markets": [
+        {
+          "id": "cs2-match-2400522|bo3|aWin",
+          "key": "aWin",
+          "marketFamily": "winner",
+          "label": "Nexus Gaming vence série",
+          "bookOdds": 2.15,
+          "marketRaw": 0.46511627906976744,
+          "marketNoVig": 0.42359249329758714,
+          "marketOverround": 1.0980276714748307,
+          "modelP": 0.6212164619755713,
+          "modelRange": {
+            "min": 0.4906984244111373,
+            "max": 0.7822397122825759
+          },
+          "deltaPP": 19.762396867798422,
+          "hypotheticalROI": 33.561539324747834,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400522|bo3|bWin",
+          "key": "bWin",
+          "marketFamily": "winner",
+          "label": "Iberian Soul vence série",
+          "bookOdds": 1.58,
+          "marketRaw": 0.6329113924050632,
+          "marketNoVig": 0.5764075067024128,
+          "marketOverround": 1.0980276714748307,
+          "modelP": 0.37878353802442843,
+          "modelRange": {
+            "min": 0.2177602877174241,
+            "max": 0.5093015755888628
+          },
+          "deltaPP": -19.762396867798437,
+          "hypotheticalROI": -40.15220099214031,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400522|bo3|aPlus1_5",
+          "key": "aPlus1_5",
+          "marketFamily": "handicap",
+          "label": "Nexus Gaming +1,5 mapas",
+          "bookOdds": 1.4,
+          "marketRaw": 0.7142857142857143,
+          "marketNoVig": 0.654320987654321,
+          "marketOverround": 1.091644204851752,
+          "modelP": 0.8297812641403856,
+          "modelRange": {
+            "min": 0.6658829669362405,
+            "max": 0.9154609488739605
+          },
+          "deltaPP": 17.546027648606454,
+          "hypotheticalROI": 16.169376979653972,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400522|bo3|bMinus1_5",
+          "key": "bMinus1_5",
+          "marketFamily": "handicap",
+          "label": "Iberian Soul -1,5 mapas",
+          "bookOdds": 2.65,
+          "marketRaw": 0.37735849056603776,
+          "marketNoVig": 0.34567901234567905,
+          "marketOverround": 1.091644204851752,
+          "modelP": 0.17021873585961447,
+          "modelRange": {
+            "min": 0.08453905112603949,
+            "max": 0.33411703306375956
+          },
+          "deltaPP": -17.546027648606458,
+          "hypotheticalROI": -54.89203499720217,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400522|bo3|a20",
+          "key": "a20",
+          "marketFamily": "score",
+          "label": "Nexus Gaming 2–0",
+          "bookOdds": 3.85,
+          "marketRaw": 0.2597402597402597,
+          "marketNoVig": 0.22120082167189747,
+          "marketOverround": 1.1742282771694537,
+          "modelP": 0.32385367261590303,
+          "modelRange": {
+            "min": 0.12284352363253367,
+            "max": 0.5024999358071238
+          },
+          "deltaPP": 10.265285094400555,
+          "hypotheticalROI": 24.68366395712267,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400522|bo3|a21",
+          "key": "a21",
+          "marketFamily": "score",
+          "label": "Nexus Gaming 2–1",
+          "bookOdds": 4,
+          "marketRaw": 0.25,
+          "marketNoVig": 0.21290579085920133,
+          "marketOverround": 1.1742282771694537,
+          "modelP": 0.29736278935966837,
+          "modelRange": {
+            "min": 0.08820448054491235,
+            "max": 0.44191787696664186
+          },
+          "deltaPP": 8.445699850046703,
+          "hypotheticalROI": 18.945115743867348,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400522|bo3|b20",
+          "key": "b20",
+          "marketFamily": "score",
+          "label": "Iberian Soul 2–0",
+          "bookOdds": 2.7,
+          "marketRaw": 0.37037037037037035,
+          "marketNoVig": 0.31541598645807606,
+          "marketOverround": 1.1742282771694537,
+          "modelP": 0.17021873585961447,
+          "modelRange": {
+            "min": 0.08453905112603949,
+            "max": 0.33411703306375956
+          },
+          "deltaPP": -14.51972505984616,
+          "hypotheticalROI": -54.04094131790409,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400522|bo3|b21",
+          "key": "b21",
+          "marketFamily": "score",
+          "label": "Iberian Soul 2–1",
+          "bookOdds": 3.4,
+          "marketRaw": 0.29411764705882354,
+          "marketNoVig": 0.2504774010108251,
+          "marketOverround": 1.1742282771694537,
+          "modelP": 0.20856480216481393,
+          "modelRange": {
+            "min": 0.11988270204598864,
+            "max": 0.372240485653763
+          },
+          "deltaPP": -4.191259884601117,
+          "hypotheticalROI": -29.087967263963264,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400522|bo3|over2_5",
+          "key": "over2_5",
+          "marketFamily": "total",
+          "label": "Acima de 2,5 mapas",
+          "bookOdds": 2,
+          "marketRaw": 0.5,
+          "marketNoVig": 0.45652173913043476,
+          "marketOverround": 1.0952380952380953,
+          "modelP": 0.5059275915244823,
+          "modelRange": {
+            "min": 0.41296101306683664,
+            "max": 0.626801100338344
+          },
+          "deltaPP": 4.940585239404754,
+          "hypotheticalROI": 1.1855183048964602,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400522|bo3|under2_5",
+          "key": "under2_5",
+          "marketFamily": "total",
+          "label": "Abaixo de 2,5 mapas",
+          "bookOdds": 1.68,
+          "marketRaw": 0.5952380952380952,
+          "marketNoVig": 0.5434782608695652,
+          "marketOverround": 1.0952380952380953,
+          "modelP": 0.4940724084755175,
+          "modelRange": {
+            "min": 0.37319889966165587,
+            "max": 0.5870389869331634
+          },
+          "deltaPP": -4.940585239404771,
+          "hypotheticalROI": -16.995835376113067,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        }
+      ],
+      "status": "pending",
+      "warnings": [
+        "Veto desconhecido; igual probabilidade para cada ordem de 3 mapas elegíveis",
+        "Modelos de rounds e vetos não calibrados. Diferenca em odds não é vantagem validada",
+        "Odds de print podem estar alteradas ou indisponíveis"
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400440",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-18T11:00:00.000Z",
+      "modelSnapshotAt": "2026-11-18T00:15:54.489Z",
+      "oddsCapturedApprox": "2026-11-17T21:49:00-03:00",
+      "frozenAt": "2026-11-18T00:55:32.513Z",
+      "modelVersion": "atlas-bo3-pre-veto-uniform-v1",
+      "teamA": {
+        "id": "cs2-team-12916",
+        "name": "Betclic",
+        "slug": "betclic"
+      },
+      "teamB": {
+        "id": "cs2-team-7532",
+        "name": "BIG",
+        "slug": "big"
+      },
+      "bookTeamA": "Apogee Esports",
+      "bookTeamB": "BIG",
+      "br365EventId": "18414383",
+      "model": {
+        "probabilities": {
+          "aWin": 0.6300407637341947,
+          "bWin": 0.3699592362658054,
+          "a20": 0.3422920648972873,
+          "a21": 0.2877486988369074,
+          "b20": 0.1684731125656235,
+          "b21": 0.2014861237001819,
+          "over2_5": 0.4892348225370893,
+          "under2_5": 0.5107651774629108,
+          "aMinus1_5": 0.3422920648972873,
+          "bPlus1_5": 0.6577079351027126,
+          "aPlus1_5": 0.8315268874343765,
+          "bMinus1_5": 0.1684731125656235
+        },
+        "sensitivity": {
+          "aWin": {
+            "min": 0.6300407637341946,
+            "max": 0.6300407637341947
+          },
+          "bWin": {
+            "min": 0.3699592362658054,
+            "max": 0.3699592362658054
+          },
+          "a20": {
+            "min": 0.2950001119266356,
+            "max": 0.3872562050465529
+          },
+          "a21": {
+            "min": 0.24278455868764173,
+            "max": 0.33504065180755904
+          },
+          "b20": {
+            "min": 0.13889584939886834,
+            "max": 0.2068738535875657
+          },
+          "b21": {
+            "min": 0.1630853826782397,
+            "max": 0.23106338686693703
+          },
+          "over2_5": {
+            "min": 0.47384794555457876,
+            "max": 0.49812603448579873
+          },
+          "under2_5": {
+            "min": 0.5018739655142013,
+            "max": 0.5261520544454212
+          },
+          "aMinus1_5": {
+            "min": 0.2950001119266356,
+            "max": 0.3872562050465529
+          },
+          "bPlus1_5": {
+            "min": 0.6127437949534471,
+            "max": 0.7049998880733643
+          },
+          "aPlus1_5": {
+            "min": 0.7931261464124343,
+            "max": 0.8611041506011317
+          },
+          "bMinus1_5": {
+            "min": 0.13889584939886834,
+            "max": 0.2068738535875657
+          }
+        },
+        "commonMaps": [
+          {
+            "name": "Mirage",
+            "observationsA": 12,
+            "observationsB": 9,
+            "winProbA": 0.5123680728498111
+          },
+          {
+            "name": "Ancient",
+            "observationsA": 11,
+            "observationsB": 7,
+            "winProbA": 0.6726021701584257
+          },
+          {
+            "name": "Cache",
+            "observationsA": 9,
+            "observationsB": 12,
+            "winProbA": 0.5757581854892588
+          }
+        ],
+        "orderedTriplets": 6,
+        "minCommonMapHistory": 7,
+        "method": "Equal-weight all ordered three-map selections from maps with >=4 matches for both teams; map outcomes use independent round Bernoulli MR12 plus overtime."
+      },
+      "markets": [
+        {
+          "id": "cs2-match-2400440|bo3|aWin",
+          "key": "aWin",
+          "marketFamily": "winner",
+          "label": "Apogee Esports vence série",
+          "bookOdds": 2.45,
+          "marketRaw": 0.4081632653061224,
+          "marketNoVig": 0.37179487179487175,
+          "marketOverround": 1.0978184377199156,
+          "modelP": 0.6300407637341947,
+          "modelRange": {
+            "min": 0.6300407637341946,
+            "max": 0.6300407637341947
+          },
+          "deltaPP": 25.824589193932297,
+          "hypotheticalROI": 54.359987114877704,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400440|bo3|bWin",
+          "key": "bWin",
+          "marketFamily": "winner",
+          "label": "BIG vence série",
+          "bookOdds": 1.45,
+          "marketRaw": 0.6896551724137931,
+          "marketNoVig": 0.6282051282051282,
+          "marketOverround": 1.0978184377199156,
+          "modelP": 0.3699592362658054,
+          "modelRange": {
+            "min": 0.3699592362658054,
+            "max": 0.3699592362658054
+          },
+          "deltaPP": -25.82458919393228,
+          "hypotheticalROI": -46.35591074145822,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400440|bo3|aPlus1_5",
+          "key": "aPlus1_5",
+          "marketFamily": "handicap",
+          "label": "Apogee Esports +1,5 mapas",
+          "bookOdds": 1.5,
+          "marketRaw": 0.6666666666666666,
+          "marketNoVig": 0.6103896103896104,
+          "marketOverround": 1.0921985815602837,
+          "modelP": 0.8315268874343765,
+          "modelRange": {
+            "min": 0.7931261464124343,
+            "max": 0.8611041506011317
+          },
+          "deltaPP": 22.113727704476617,
+          "hypotheticalROI": 24.729033115156483,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400440|bo3|bMinus1_5",
+          "key": "bMinus1_5",
+          "marketFamily": "handicap",
+          "label": "BIG -1,5 mapas",
+          "bookOdds": 2.35,
+          "marketRaw": 0.425531914893617,
+          "marketNoVig": 0.38961038961038963,
+          "marketOverround": 1.0921985815602837,
+          "modelP": 0.1684731125656235,
+          "modelRange": {
+            "min": 0.13889584939886834,
+            "max": 0.2068738535875657
+          },
+          "deltaPP": -22.113727704476613,
+          "hypotheticalROI": -60.40881854707847,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400440|bo3|a20",
+          "key": "a20",
+          "marketFamily": "score",
+          "label": "Apogee Esports 2–0",
+          "bookOdds": 4.75,
+          "marketRaw": 0.21052631578947367,
+          "marketNoVig": 0.1832268664749791,
+          "marketOverround": 1.1489926113986264,
+          "modelP": 0.3422920648972873,
+          "modelRange": {
+            "min": 0.2950001119266356,
+            "max": 0.3872562050465529
+          },
+          "deltaPP": 15.906519842230821,
+          "hypotheticalROI": 62.58873082621148,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400440|bo3|a21",
+          "key": "a21",
+          "marketFamily": "score",
+          "label": "Apogee Esports 2–1",
+          "bookOdds": 4.4,
+          "marketRaw": 0.22727272727272727,
+          "marketNoVig": 0.19780173085367062,
+          "marketOverround": 1.1489926113986264,
+          "modelP": 0.2877486988369074,
+          "modelRange": {
+            "min": 0.24278455868764173,
+            "max": 0.33504065180755904
+          },
+          "deltaPP": 8.994696798323679,
+          "hypotheticalROI": 26.60942748823927,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400440|bo3|b20",
+          "key": "b20",
+          "marketFamily": "score",
+          "label": "BIG 2–0",
+          "bookOdds": 2.45,
+          "marketRaw": 0.4081632653061224,
+          "marketNoVig": 0.35523576153312275,
+          "marketOverround": 1.1489926113986264,
+          "modelP": 0.1684731125656235,
+          "modelRange": {
+            "min": 0.13889584939886834,
+            "max": 0.2068738535875657
+          },
+          "deltaPP": -18.676264896749924,
+          "hypotheticalROI": -58.72408742142223,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400440|bo3|b21",
+          "key": "b21",
+          "marketFamily": "score",
+          "label": "BIG 2–1",
+          "bookOdds": 3.3,
+          "marketRaw": 0.30303030303030304,
+          "marketNoVig": 0.2637356411382275,
+          "marketOverround": 1.1489926113986264,
+          "modelP": 0.2014861237001819,
+          "modelRange": {
+            "min": 0.1630853826782397,
+            "max": 0.23106338686693703
+          },
+          "deltaPP": -6.22495174380456,
+          "hypotheticalROI": -33.50957917893997,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400440|bo3|over2_5",
+          "key": "over2_5",
+          "marketFamily": "total",
+          "label": "Acima de 2,5 mapas",
+          "bookOdds": 2,
+          "marketRaw": 0.5,
+          "marketNoVig": 0.45652173913043476,
+          "marketOverround": 1.0952380952380953,
+          "modelP": 0.4892348225370893,
+          "modelRange": {
+            "min": 0.47384794555457876,
+            "max": 0.49812603448579873
+          },
+          "deltaPP": 3.2713083406654517,
+          "hypotheticalROI": -2.153035492582145,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400440|bo3|under2_5",
+          "key": "under2_5",
+          "marketFamily": "total",
+          "label": "Abaixo de 2,5 mapas",
+          "bookOdds": 1.68,
+          "marketRaw": 0.5952380952380952,
+          "marketNoVig": 0.5434782608695652,
+          "marketOverround": 1.0952380952380953,
+          "modelP": 0.5107651774629108,
+          "modelRange": {
+            "min": 0.5018739655142013,
+            "max": 0.5261520544454212
+          },
+          "deltaPP": -3.2713083406654353,
+          "hypotheticalROI": -14.19145018623098,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        }
+      ],
+      "status": "pending",
+      "warnings": [
+        "Veto desconhecido; igual probabilidade para cada ordem de 3 mapas elegíveis",
+        "Modelos de rounds e vetos não calibrados. Diferenca em odds não é vantagem validada",
+        "Odds de print podem estar alteradas ou indisponíveis"
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400523",
+      "eventId": "cs2-event-9273",
+      "event": "Tipsport RUSH Brno 2026",
+      "startsAt": "2026-11-18T13:00:00.000Z",
+      "modelSnapshotAt": "2026-11-18T00:15:54.489Z",
+      "oddsCapturedApprox": "2026-11-17T21:49:00-03:00",
+      "frozenAt": "2026-11-18T00:55:32.513Z",
+      "modelVersion": "atlas-bo3-pre-veto-uniform-v1",
+      "teamA": {
+        "id": "cs2-team-13173",
+        "name": "Phantom",
+        "slug": "phantom"
+      },
+      "teamB": {
+        "id": "cs2-team-11641",
+        "name": "Metizport",
+        "slug": "metizport"
+      },
+      "bookTeamA": "Phantom",
+      "bookTeamB": "Metizport",
+      "br365EventId": "18418131",
+      "model": {
+        "probabilities": {
+          "aWin": 0.414679261868522,
+          "bWin": 0.5853207381314779,
+          "a20": 0.19300316949126287,
+          "a21": 0.22167609237725916,
+          "b20": 0.30640080561028216,
+          "b21": 0.27891993252119573,
+          "over2_5": 0.5005960248984549,
+          "under2_5": 0.499403975101545,
+          "aMinus1_5": 0.19300316949126287,
+          "bPlus1_5": 0.8069968305087372,
+          "aPlus1_5": 0.6935991943897178,
+          "bMinus1_5": 0.30640080561028216
+        },
+        "sensitivity": {
+          "aWin": {
+            "min": 0.32095136020767145,
+            "max": 0.5413192280176773
+          },
+          "bWin": {
+            "min": 0.4586807719823227,
+            "max": 0.6790486397923285
+          },
+          "a20": {
+            "min": 0.09218734662212875,
+            "max": 0.2882045432931957
+          },
+          "a21": {
+            "min": 0.11244201918142781,
+            "max": 0.27932024744858713
+          },
+          "b20": {
+            "min": 0.21451070143996814,
+            "max": 0.45836873180699955
+          },
+          "b21": {
+            "min": 0.2080397242365743,
+            "max": 0.3922462447637119
+          },
+          "over2_5": {
+            "min": 0.44944392157087165,
+            "max": 0.5203320825492044
+          },
+          "under2_5": {
+            "min": 0.4796679174507956,
+            "max": 0.5505560784291283
+          },
+          "aMinus1_5": {
+            "min": 0.09218734662212875,
+            "max": 0.2882045432931957
+          },
+          "bPlus1_5": {
+            "min": 0.7117954567068043,
+            "max": 0.9078126533778712
+          },
+          "aPlus1_5": {
+            "min": 0.5416312681930004,
+            "max": 0.7854892985600319
+          },
+          "bMinus1_5": {
+            "min": 0.21451070143996814,
+            "max": 0.45836873180699955
+          }
+        },
+        "commonMaps": [
+          {
+            "name": "Ancient",
+            "observationsA": 14,
+            "observationsB": 8,
+            "winProbA": 0.5365763378706291
+          },
+          {
+            "name": "Inferno",
+            "observationsA": 11,
+            "observationsB": 12,
+            "winProbA": 0.22611193685415307
+          },
+          {
+            "name": "Mirage",
+            "observationsA": 10,
+            "observationsB": 13,
+            "winProbA": 0.5371175039825985
+          },
+          {
+            "name": "Nuke",
+            "observationsA": 10,
+            "observationsB": 21,
+            "winProbA": 0.5089934530340945
+          },
+          {
+            "name": "Anubis",
+            "observationsA": 7,
+            "observationsB": 10,
+            "winProbA": 0.40770667796097615
+          }
+        ],
+        "orderedTriplets": 60,
+        "minCommonMapHistory": 7,
+        "method": "Equal-weight all ordered three-map selections from maps with >=4 matches for both teams; map outcomes use independent round Bernoulli MR12 plus overtime."
+      },
+      "markets": [
+        {
+          "id": "cs2-match-2400523|bo3|aWin",
+          "key": "aWin",
+          "marketFamily": "winner",
+          "label": "Phantom vence série",
+          "bookOdds": 1.76,
+          "marketRaw": 0.5681818181818182,
+          "marketNoVig": 0.5191256830601093,
+          "marketOverround": 1.0944976076555024,
+          "modelP": 0.414679261868522,
+          "modelRange": {
+            "min": 0.32095136020767145,
+            "max": 0.5413192280176773
+          },
+          "deltaPP": -10.44464211915873,
+          "hypotheticalROI": -27.01644991114013,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400523|bo3|bWin",
+          "key": "bWin",
+          "marketFamily": "winner",
+          "label": "Metizport vence série",
+          "bookOdds": 1.9,
+          "marketRaw": 0.5263157894736842,
+          "marketNoVig": 0.4808743169398907,
+          "marketOverround": 1.0944976076555024,
+          "modelP": 0.5853207381314779,
+          "modelRange": {
+            "min": 0.4586807719823227,
+            "max": 0.6790486397923285
+          },
+          "deltaPP": 10.44464211915872,
+          "hypotheticalROI": 11.210940244980794,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400523|bo3|aMinus1_5",
+          "key": "aMinus1_5",
+          "marketFamily": "handicap",
+          "label": "Phantom -1,5 mapas",
+          "bookOdds": 2.9,
+          "marketRaw": 0.3448275862068966,
+          "marketNoVig": 0.3144208037825059,
+          "marketOverround": 1.0967072854550168,
+          "modelP": 0.19300316949126287,
+          "modelRange": {
+            "min": 0.09218734662212875,
+            "max": 0.2882045432931957
+          },
+          "deltaPP": -12.141763429124305,
+          "hypotheticalROI": -44.02908084753378,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400523|bo3|bPlus1_5",
+          "key": "bPlus1_5",
+          "marketFamily": "handicap",
+          "label": "Metizport +1,5 mapas",
+          "bookOdds": 1.33,
+          "marketRaw": 0.7518796992481203,
+          "marketNoVig": 0.6855791962174941,
+          "marketOverround": 1.0967072854550168,
+          "modelP": 0.8069968305087372,
+          "modelRange": {
+            "min": 0.7117954567068043,
+            "max": 0.9078126533778712
+          },
+          "deltaPP": 12.141763429124309,
+          "hypotheticalROI": 7.330578457662051,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400523|bo3|a20",
+          "key": "a20",
+          "marketFamily": "score",
+          "label": "Phantom 2–0",
+          "bookOdds": 3,
+          "marketRaw": 0.3333333333333333,
+          "marketNoVig": 0.2861306422820503,
+          "marketOverround": 1.1649690179101944,
+          "modelP": 0.19300316949126287,
+          "modelRange": {
+            "min": 0.09218734662212875,
+            "max": 0.2882045432931957
+          },
+          "deltaPP": -9.312747279078746,
+          "hypotheticalROI": -42.099049152621134,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400523|bo3|a21",
+          "key": "a21",
+          "marketFamily": "score",
+          "label": "Phantom 2–1",
+          "bookOdds": 3.6,
+          "marketRaw": 0.2777777777777778,
+          "marketNoVig": 0.23844220190170864,
+          "marketOverround": 1.1649690179101944,
+          "modelP": 0.22167609237725916,
+          "modelRange": {
+            "min": 0.11244201918142781,
+            "max": 0.27932024744858713
+          },
+          "deltaPP": -1.6766109524449484,
+          "hypotheticalROI": -20.196606744186695,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400523|bo3|b20",
+          "key": "b20",
+          "marketFamily": "score",
+          "label": "Metizport 2–0",
+          "bookOdds": 3.4,
+          "marketRaw": 0.29411764705882354,
+          "marketNoVig": 0.2524682137782797,
+          "marketOverround": 1.1649690179101944,
+          "modelP": 0.30640080561028216,
+          "modelRange": {
+            "min": 0.21451070143996814,
+            "max": 0.45836873180699955
+          },
+          "deltaPP": 5.393259183200244,
+          "hypotheticalROI": 4.176273907495931,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400523|bo3|b21",
+          "key": "b21",
+          "marketFamily": "score",
+          "label": "Metizport 2–1",
+          "bookOdds": 3.85,
+          "marketRaw": 0.2597402597402597,
+          "marketNoVig": 0.2229589420379613,
+          "marketOverround": 1.1649690179101944,
+          "modelP": 0.27891993252119573,
+          "modelRange": {
+            "min": 0.2080397242365743,
+            "max": 0.3922462447637119
+          },
+          "deltaPP": 5.596099048323444,
+          "hypotheticalROI": 7.384174020660361,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400523|bo3|over2_5",
+          "key": "over2_5",
+          "marketFamily": "total",
+          "label": "Acima de 2,5 mapas",
+          "bookOdds": 2,
+          "marketRaw": 0.5,
+          "marketNoVig": 0.45652173913043476,
+          "marketOverround": 1.0952380952380953,
+          "modelP": 0.5005960248984549,
+          "modelRange": {
+            "min": 0.44944392157087165,
+            "max": 0.5203320825492044
+          },
+          "deltaPP": 4.407428576802014,
+          "hypotheticalROI": 0.11920497969097887,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400523|bo3|under2_5",
+          "key": "under2_5",
+          "marketFamily": "total",
+          "label": "Abaixo de 2,5 mapas",
+          "bookOdds": 1.68,
+          "marketRaw": 0.5952380952380952,
+          "marketNoVig": 0.5434782608695652,
+          "marketOverround": 1.0952380952380953,
+          "modelP": 0.499403975101545,
+          "modelRange": {
+            "min": 0.4796679174507956,
+            "max": 0.5505560784291283
+          },
+          "deltaPP": -4.407428576802019,
+          "hypotheticalROI": -16.100132182940442,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        }
+      ],
+      "status": "pending",
+      "warnings": [
+        "Veto desconhecido; igual probabilidade para cada ordem de 3 mapas elegíveis",
+        "Modelos de rounds e vetos não calibrados. Diferenca em odds não é vantagem validada",
+        "Odds de print podem estar alteradas ou indisponíveis"
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400441",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-18T13:30:00.000Z",
+      "modelSnapshotAt": "2026-11-18T00:15:54.489Z",
+      "oddsCapturedApprox": "2026-11-17T21:49:00-03:00",
+      "frozenAt": "2026-11-18T00:55:32.513Z",
+      "modelVersion": "atlas-bo3-pre-veto-uniform-v1",
+      "teamA": {
+        "id": "cs2-team-12267",
+        "name": "UNiTY",
+        "slug": "unity"
+      },
+      "teamB": {
+        "id": "cs2-team-9928",
+        "name": "GamerLegion",
+        "slug": "gamerlegion"
+      },
+      "bookTeamA": "Team UNiTY",
+      "bookTeamB": "GamerLegion",
+      "br365EventId": "18417758",
+      "model": {
+        "probabilities": {
+          "aWin": 0.6477149312355204,
+          "bWin": 0.3522850687644796,
+          "a20": 0.34924533171609634,
+          "a21": 0.29846959951942403,
+          "b20": 0.15569300034181818,
+          "b21": 0.19659206842266141,
+          "over2_5": 0.49506166794208545,
+          "under2_5": 0.5049383320579145,
+          "aMinus1_5": 0.34924533171609634,
+          "bPlus1_5": 0.6507546682839036,
+          "aPlus1_5": 0.8443069996581818,
+          "bMinus1_5": 0.15569300034181818
+        },
+        "sensitivity": {
+          "aWin": {
+            "min": 0.5522874187090232,
+            "max": 0.7439347951586328
+          },
+          "bWin": {
+            "min": 0.2560652048413672,
+            "max": 0.44771258129097685
+          },
+          "a20": {
+            "min": 0.22063045881800059,
+            "max": 0.5063843326490977
+          },
+          "a21": {
+            "min": 0.16201434685675556,
+            "max": 0.4187882294634928
+          },
+          "b20": {
+            "min": 0.0759565721997578,
+            "max": 0.26395355651878405
+          },
+          "b21": {
+            "min": 0.10231936259268964,
+            "max": 0.29396673904229925
+          },
+          "over2_5": {
+            "min": 0.41765909515114463,
+            "max": 0.5643289332936992
+          },
+          "under2_5": {
+            "min": 0.43567106670630085,
+            "max": 0.5823409048488555
+          },
+          "aMinus1_5": {
+            "min": 0.22063045881800059,
+            "max": 0.5063843326490977
+          },
+          "bPlus1_5": {
+            "min": 0.49361566735090234,
+            "max": 0.7793695411819994
+          },
+          "aPlus1_5": {
+            "min": 0.736046443481216,
+            "max": 0.9240434278002422
+          },
+          "bMinus1_5": {
+            "min": 0.0759565721997578,
+            "max": 0.26395355651878405
+          }
+        },
+        "commonMaps": [
+          {
+            "name": "Dust2",
+            "observationsA": 15,
+            "observationsB": 10,
+            "winProbA": 0.6434743387086352
+          },
+          {
+            "name": "Mirage",
+            "observationsA": 14,
+            "observationsB": 10,
+            "winProbA": 0.7869534217407046
+          },
+          {
+            "name": "Ancient",
+            "observationsA": 9,
+            "observationsB": 10,
+            "winProbA": 0.5687664060651408
+          },
+          {
+            "name": "Cache",
+            "observationsA": 9,
+            "observationsB": 11,
+            "winProbA": 0.3879104962340757
+          }
+        ],
+        "orderedTriplets": 24,
+        "minCommonMapHistory": 9,
+        "method": "Equal-weight all ordered three-map selections from maps with >=4 matches for both teams; map outcomes use independent round Bernoulli MR12 plus overtime."
+      },
+      "markets": [
+        {
+          "id": "cs2-match-2400441|bo3|aWin",
+          "key": "aWin",
+          "marketFamily": "winner",
+          "label": "Team UNiTY vence série",
+          "bookOdds": 3.85,
+          "marketRaw": 0.2597402597402597,
+          "marketNoVig": 0.23762376237623759,
+          "marketOverround": 1.093073593073593,
+          "modelP": 0.6477149312355204,
+          "modelRange": {
+            "min": 0.5522874187090232,
+            "max": 0.7439347951586328
+          },
+          "deltaPP": 41.00911688592828,
+          "hypotheticalROI": 149.37024852567532,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400441|bo3|bWin",
+          "key": "bWin",
+          "marketFamily": "winner",
+          "label": "GamerLegion vence série",
+          "bookOdds": 1.2,
+          "marketRaw": 0.8333333333333334,
+          "marketNoVig": 0.7623762376237624,
+          "marketOverround": 1.093073593073593,
+          "modelP": 0.3522850687644796,
+          "modelRange": {
+            "min": 0.2560652048413672,
+            "max": 0.44771258129097685
+          },
+          "deltaPP": -41.00911688592828,
+          "hypotheticalROI": -57.725791748262445,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400441|bo3|aPlus1_5",
+          "key": "aPlus1_5",
+          "marketFamily": "handicap",
+          "label": "Team UNiTY +1,5 mapas",
+          "bookOdds": 1.95,
+          "marketRaw": 0.5128205128205129,
+          "marketNoVig": 0.4672131147540984,
+          "marketOverround": 1.0976158344579399,
+          "modelP": 0.8443069996581818,
+          "modelRange": {
+            "min": 0.736046443481216,
+            "max": 0.9240434278002422
+          },
+          "deltaPP": 37.709388490408344,
+          "hypotheticalROI": 64.63986493334544,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400441|bo3|bMinus1_5",
+          "key": "bMinus1_5",
+          "marketFamily": "handicap",
+          "label": "GamerLegion -1,5 mapas",
+          "bookOdds": 1.71,
+          "marketRaw": 0.5847953216374269,
+          "marketNoVig": 0.5327868852459016,
+          "marketOverround": 1.0976158344579399,
+          "modelP": 0.15569300034181818,
+          "modelRange": {
+            "min": 0.0759565721997578,
+            "max": 0.26395355651878405
+          },
+          "deltaPP": -37.70938849040834,
+          "hypotheticalROI": -73.37649694154908,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400441|bo3|a20",
+          "key": "a20",
+          "marketFamily": "score",
+          "label": "Team UNiTY 2–0",
+          "bookOdds": 7.25,
+          "marketRaw": 0.13793103448275862,
+          "marketNoVig": 0.11821700934146172,
+          "marketOverround": 1.166761325219743,
+          "modelP": 0.34924533171609634,
+          "modelRange": {
+            "min": 0.22063045881800059,
+            "max": 0.5063843326490977
+          },
+          "deltaPP": 23.10283223746346,
+          "hypotheticalROI": 153.20286549416986,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400441|bo3|a21",
+          "key": "a21",
+          "marketFamily": "score",
+          "label": "Team UNiTY 2–1",
+          "bookOdds": 6.25,
+          "marketRaw": 0.16,
+          "marketNoVig": 0.1371317308360956,
+          "marketOverround": 1.166761325219743,
+          "modelP": 0.29846959951942403,
+          "modelRange": {
+            "min": 0.16201434685675556,
+            "max": 0.4187882294634928
+          },
+          "deltaPP": 16.133786868332844,
+          "hypotheticalROI": 86.54349969964001,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400441|bo3|b20",
+          "key": "b20",
+          "marketFamily": "score",
+          "label": "GamerLegion 2–0",
+          "bookOdds": 1.74,
+          "marketRaw": 0.5747126436781609,
+          "marketNoVig": 0.4925708722560905,
+          "marketOverround": 1.166761325219743,
+          "modelP": 0.15569300034181818,
+          "modelRange": {
+            "min": 0.0759565721997578,
+            "max": 0.26395355651878405
+          },
+          "deltaPP": -33.68778719142723,
+          "hypotheticalROI": -72.90941794052364,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400441|bo3|b21",
+          "key": "b21",
+          "marketFamily": "score",
+          "label": "GamerLegion 2–1",
+          "bookOdds": 3.4,
+          "marketRaw": 0.29411764705882354,
+          "marketNoVig": 0.2520803875663522,
+          "marketOverround": 1.166761325219743,
+          "modelP": 0.19659206842266141,
+          "modelRange": {
+            "min": 0.10231936259268964,
+            "max": 0.29396673904229925
+          },
+          "deltaPP": -5.548831914369079,
+          "hypotheticalROI": -33.15869673629513,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400441|bo3|over2_5",
+          "key": "over2_5",
+          "marketFamily": "total",
+          "label": "Acima de 2,5 mapas",
+          "bookOdds": 2.35,
+          "marketRaw": 0.425531914893617,
+          "marketNoVig": 0.38961038961038963,
+          "marketOverround": 1.0921985815602837,
+          "modelP": 0.49506166794208545,
+          "modelRange": {
+            "min": 0.41765909515114463,
+            "max": 0.5643289332936992
+          },
+          "deltaPP": 10.545127833169582,
+          "hypotheticalROI": 16.339491966390085,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400441|bo3|under2_5",
+          "key": "under2_5",
+          "marketFamily": "total",
+          "label": "Abaixo de 2,5 mapas",
+          "bookOdds": 1.5,
+          "marketRaw": 0.6666666666666666,
+          "marketNoVig": 0.6103896103896104,
+          "marketOverround": 1.0921985815602837,
+          "modelP": 0.5049383320579145,
+          "modelRange": {
+            "min": 0.43567106670630085,
+            "max": 0.5823409048488555
+          },
+          "deltaPP": -10.545127833169587,
+          "hypotheticalROI": -24.25925019131283,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        }
+      ],
+      "status": "pending",
+      "warnings": [
+        "Veto desconhecido; igual probabilidade para cada ordem de 3 mapas elegíveis",
+        "Modelos de rounds e vetos não calibrados. Diferenca em odds não é vantagem validada",
+        "Odds de print podem estar alteradas ou indisponíveis"
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400524",
+      "eventId": "cs2-event-9273",
+      "event": "Tipsport RUSH Brno 2026",
+      "startsAt": "2026-11-18T16:00:00.000Z",
+      "modelSnapshotAt": "2026-11-18T00:15:54.489Z",
+      "oddsCapturedApprox": "2026-11-17T21:49:00-03:00",
+      "frozenAt": "2026-11-18T00:55:32.513Z",
+      "modelVersion": "atlas-bo3-pre-veto-uniform-v1",
+      "teamA": {
+        "id": "cs2-team-10577",
+        "name": "SINNERS",
+        "slug": "sinners"
+      },
+      "teamB": {
+        "id": "cs2-team-12474",
+        "name": "Alliance",
+        "slug": "alliance"
+      },
+      "bookTeamA": "Sinners Esports",
+      "bookTeamB": "Alliance",
+      "br365EventId": "18414391",
+      "model": {
+        "probabilities": {
+          "aWin": 0.6306764103663197,
+          "bWin": 0.36932358963368,
+          "a20": 0.33797646572618406,
+          "a21": 0.29269994464013566,
+          "b20": 0.16589035046517106,
+          "b21": 0.20343323916850894,
+          "over2_5": 0.4961331838086446,
+          "under2_5": 0.5038668161913551,
+          "aMinus1_5": 0.33797646572618406,
+          "bPlus1_5": 0.6620235342738159,
+          "aPlus1_5": 0.8341096495348289,
+          "bMinus1_5": 0.16589035046517106
+        },
+        "sensitivity": {
+          "aWin": {
+            "min": 0.4053220980453705,
+            "max": 0.8288088514877083
+          },
+          "bWin": {
+            "min": 0.17119114851229167,
+            "max": 0.5946779019546296
+          },
+          "a20": {
+            "min": 0.14549735768643612,
+            "max": 0.6003418109702403
+          },
+          "a21": {
+            "min": 0.12932969258926003,
+            "max": 0.4572092048215163
+          },
+          "b20": {
+            "min": 0.04895495488122463,
+            "max": 0.3821798228765042
+          },
+          "b21": {
+            "min": 0.08016342967677473,
+            "max": 0.3572243486778618
+          },
+          "over2_5": {
+            "min": 0.350703234148535,
+            "max": 0.5820306106357872
+          },
+          "under2_5": {
+            "min": 0.4179693893642128,
+            "max": 0.6492967658514649
+          },
+          "aMinus1_5": {
+            "min": 0.14549735768643612,
+            "max": 0.6003418109702403
+          },
+          "bPlus1_5": {
+            "min": 0.3996581890297597,
+            "max": 0.8545026423135639
+          },
+          "aPlus1_5": {
+            "min": 0.6178201771234958,
+            "max": 0.9510450451187754
+          },
+          "bMinus1_5": {
+            "min": 0.04895495488122463,
+            "max": 0.3821798228765042
+          }
+        },
+        "commonMaps": [
+          {
+            "name": "Mirage",
+            "observationsA": 21,
+            "observationsB": 10,
+            "winProbA": 0.5500999097790951
+          },
+          {
+            "name": "Dust2",
+            "observationsA": 17,
+            "observationsB": 9,
+            "winProbA": 0.8125510370445467
+          },
+          {
+            "name": "Ancient",
+            "observationsA": 16,
+            "observationsB": 10,
+            "winProbA": 0.738835819044469
+          },
+          {
+            "name": "Cache",
+            "observationsA": 14,
+            "observationsB": 4,
+            "winProbA": 0.6514540451049967
+          },
+          {
+            "name": "Nuke",
+            "observationsA": 11,
+            "observationsB": 7,
+            "winProbA": 0.3687724548741527
+          },
+          {
+            "name": "Inferno",
+            "observationsA": 9,
+            "observationsB": 14,
+            "winProbA": 0.39454507993577925
+          }
+        ],
+        "orderedTriplets": 120,
+        "minCommonMapHistory": 4,
+        "method": "Equal-weight all ordered three-map selections from maps with >=4 matches for both teams; map outcomes use independent round Bernoulli MR12 plus overtime."
+      },
+      "markets": [
+        {
+          "id": "cs2-match-2400524|bo3|aWin",
+          "key": "aWin",
+          "marketFamily": "winner",
+          "label": "Sinners Esports vence série",
+          "bookOdds": 1.44,
+          "marketRaw": 0.6944444444444444,
+          "marketNoVig": 0.6345177664974618,
+          "marketOverround": 1.0944444444444446,
+          "modelP": 0.6306764103663197,
+          "modelRange": {
+            "min": 0.4053220980453705,
+            "max": 0.8288088514877083
+          },
+          "deltaPP": -0.3841356131142115,
+          "hypotheticalROI": -9.182596907249962,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400524|bo3|bWin",
+          "key": "bWin",
+          "marketFamily": "winner",
+          "label": "Alliance vence série",
+          "bookOdds": 2.5,
+          "marketRaw": 0.4,
+          "marketNoVig": 0.36548223350253806,
+          "marketOverround": 1.0944444444444446,
+          "modelP": 0.36932358963368,
+          "modelRange": {
+            "min": 0.17119114851229167,
+            "max": 0.5946779019546296
+          },
+          "deltaPP": 0.38413561311419486,
+          "hypotheticalROI": -7.6691025915800015,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400524|bo3|aMinus1_5",
+          "key": "aMinus1_5",
+          "marketFamily": "handicap",
+          "label": "Sinners Esports -1,5 mapas",
+          "bookOdds": 2.35,
+          "marketRaw": 0.425531914893617,
+          "marketNoVig": 0.38961038961038963,
+          "marketOverround": 1.0921985815602837,
+          "modelP": 0.33797646572618406,
+          "modelRange": {
+            "min": 0.14549735768643612,
+            "max": 0.6003418109702403
+          },
+          "deltaPP": -5.163392388420557,
+          "hypotheticalROI": -20.575530554346745,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400524|bo3|bPlus1_5",
+          "key": "bPlus1_5",
+          "marketFamily": "handicap",
+          "label": "Alliance +1,5 mapas",
+          "bookOdds": 1.5,
+          "marketRaw": 0.6666666666666666,
+          "marketNoVig": 0.6103896103896104,
+          "marketOverround": 1.0921985815602837,
+          "modelP": 0.6620235342738159,
+          "modelRange": {
+            "min": 0.3996581890297597,
+            "max": 0.8545026423135639
+          },
+          "deltaPP": 5.163392388420551,
+          "hypotheticalROI": -0.6964698589276175,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400524|bo3|a20",
+          "key": "a20",
+          "marketFamily": "score",
+          "label": "Sinners Esports 2–0",
+          "bookOdds": 2.4,
+          "marketRaw": 0.4166666666666667,
+          "marketNoVig": 0.3600933035280397,
+          "marketOverround": 1.1571075123706702,
+          "modelP": 0.33797646572618406,
+          "modelRange": {
+            "min": 0.14549735768643612,
+            "max": 0.6003418109702403
+          },
+          "deltaPP": -2.211683780185564,
+          "hypotheticalROI": -18.885648225715823,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400524|bo3|a21",
+          "key": "a21",
+          "marketFamily": "score",
+          "label": "Sinners Esports 2–1",
+          "bookOdds": 3.25,
+          "marketRaw": 0.3076923076923077,
+          "marketNoVig": 0.2659150549130139,
+          "marketOverround": 1.1571075123706702,
+          "modelP": 0.29269994464013566,
+          "modelRange": {
+            "min": 0.12932969258926003,
+            "max": 0.4572092048215163
+          },
+          "deltaPP": 2.678488972712173,
+          "hypotheticalROI": -4.872517991955916,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400524|bo3|b20",
+          "key": "b20",
+          "marketFamily": "score",
+          "label": "Alliance 2–0",
+          "bookOdds": 4.75,
+          "marketRaw": 0.21052631578947367,
+          "marketNoVig": 0.1819418796773253,
+          "marketOverround": 1.1571075123706702,
+          "modelP": 0.16589035046517106,
+          "modelRange": {
+            "min": 0.04895495488122463,
+            "max": 0.3821798228765042
+          },
+          "deltaPP": -1.6051529212154247,
+          "hypotheticalROI": -21.202083529043747,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400524|bo3|b21",
+          "key": "b21",
+          "marketFamily": "score",
+          "label": "Alliance 2–1",
+          "bookOdds": 4.5,
+          "marketRaw": 0.2222222222222222,
+          "marketNoVig": 0.19204976188162115,
+          "marketOverround": 1.1571075123706702,
+          "modelP": 0.20343323916850894,
+          "modelRange": {
+            "min": 0.08016342967677473,
+            "max": 0.3572243486778618
+          },
+          "deltaPP": 1.1383477286887795,
+          "hypotheticalROI": -8.455042374170974,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400524|bo3|over2_5",
+          "key": "over2_5",
+          "marketFamily": "total",
+          "label": "Acima de 2,5 mapas",
+          "bookOdds": 2,
+          "marketRaw": 0.5,
+          "marketNoVig": 0.45652173913043476,
+          "marketOverround": 1.0952380952380953,
+          "modelP": 0.4961331838086446,
+          "modelRange": {
+            "min": 0.350703234148535,
+            "max": 0.5820306106357872
+          },
+          "deltaPP": 3.961144467820982,
+          "hypotheticalROI": -0.7733632382710853,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400524|bo3|under2_5",
+          "key": "under2_5",
+          "marketFamily": "total",
+          "label": "Abaixo de 2,5 mapas",
+          "bookOdds": 1.68,
+          "marketRaw": 0.5952380952380952,
+          "marketNoVig": 0.5434782608695652,
+          "marketOverround": 1.0952380952380953,
+          "modelP": 0.5038668161913551,
+          "modelRange": {
+            "min": 0.4179693893642128,
+            "max": 0.6492967658514649
+          },
+          "deltaPP": -3.9611444678210095,
+          "hypotheticalROI": -15.350374879852346,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        }
+      ],
+      "status": "pending",
+      "warnings": [
+        "Veto desconhecido; igual probabilidade para cada ordem de 3 mapas elegíveis",
+        "Modelos de rounds e vetos não calibrados. Diferenca em odds não é vantagem validada",
+        "Odds de print podem estar alteradas ou indisponíveis"
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400442",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-18T16:00:00.000Z",
+      "modelSnapshotAt": "2026-11-18T00:15:54.489Z",
+      "oddsCapturedApprox": "2026-11-17T21:49:00-03:00",
+      "frozenAt": "2026-11-18T00:55:32.513Z",
+      "modelVersion": "atlas-bo3-pre-veto-uniform-v1",
+      "teamA": {
+        "id": "cs2-team-13117",
+        "name": "Inner Circle",
+        "slug": "inner-circle"
+      },
+      "teamB": {
+        "id": "cs2-team-10333",
+        "name": "Sangal",
+        "slug": "sangal"
+      },
+      "bookTeamA": "Inner Circle",
+      "bookTeamB": "Sangal",
+      "br365EventId": "18414384",
+      "model": {
+        "probabilities": {
+          "aWin": 0.37921739952428496,
+          "bWin": 0.6207826004757148,
+          "a20": 0.17438693034090905,
+          "a21": 0.2048304691833759,
+          "b20": 0.3359084867413386,
+          "b21": 0.28487411373437616,
+          "over2_5": 0.4897045829177521,
+          "under2_5": 0.5102954170822477,
+          "aMinus1_5": 0.17438693034090905,
+          "bPlus1_5": 0.825613069659091,
+          "aPlus1_5": 0.6640915132586613,
+          "bMinus1_5": 0.3359084867413386
+        },
+        "sensitivity": {
+          "aWin": {
+            "min": 0.2820920265343771,
+            "max": 0.4813393726446344
+          },
+          "bWin": {
+            "min": 0.5186606273553657,
+            "max": 0.7179079734656229
+          },
+          "a20": {
+            "min": 0.10942772622932705,
+            "max": 0.2547499519677712
+          },
+          "a21": {
+            "min": 0.1386016272121204,
+            "max": 0.278127083199822
+          },
+          "b20": {
+            "min": 0.23952078766963428,
+            "max": 0.44333603162379315
+          },
+          "b21": {
+            "min": 0.19603448142266483,
+            "max": 0.363958164586174
+          },
+          "over2_5": {
+            "min": 0.44723624214687985,
+            "max": 0.5253583766570538
+          },
+          "under2_5": {
+            "min": 0.47464162334294635,
+            "max": 0.5527637578531202
+          },
+          "aMinus1_5": {
+            "min": 0.10942772622932705,
+            "max": 0.2547499519677712
+          },
+          "bPlus1_5": {
+            "min": 0.7452500480322288,
+            "max": 0.8905722737706729
+          },
+          "aPlus1_5": {
+            "min": 0.5566639683762069,
+            "max": 0.7604792123303658
+          },
+          "bMinus1_5": {
+            "min": 0.23952078766963428,
+            "max": 0.44333603162379315
+          }
+        },
+        "commonMaps": [
+          {
+            "name": "Mirage",
+            "observationsA": 7,
+            "observationsB": 11,
+            "winProbA": 0.44804490947271775
+          },
+          {
+            "name": "Nuke",
+            "observationsA": 7,
+            "observationsB": 19,
+            "winProbA": 0.2944218887240438
+          },
+          {
+            "name": "Dust2",
+            "observationsA": 7,
+            "observationsB": 11,
+            "winProbA": 0.5616757700994102
+          },
+          {
+            "name": "Cache",
+            "observationsA": 6,
+            "observationsB": 16,
+            "winProbA": 0.3716698058814901
+          },
+          {
+            "name": "Ancient",
+            "observationsA": 5,
+            "observationsB": 8,
+            "winProbA": 0.45355339419872676
+          },
+          {
+            "name": "Anubis",
+            "observationsA": 4,
+            "observationsB": 9,
+            "winProbA": 0.38606956242232315
+          }
+        ],
+        "orderedTriplets": 120,
+        "minCommonMapHistory": 4,
+        "method": "Equal-weight all ordered three-map selections from maps with >=4 matches for both teams; map outcomes use independent round Bernoulli MR12 plus overtime."
+      },
+      "markets": [
+        {
+          "id": "cs2-match-2400442|bo3|aWin",
+          "key": "aWin",
+          "marketFamily": "winner",
+          "label": "Inner Circle vence série",
+          "bookOdds": 1.43,
+          "marketRaw": 0.6993006993006994,
+          "marketNoVig": 0.6407035175879396,
+          "marketOverround": 1.0914575620457976,
+          "modelP": 0.37921739952428496,
+          "modelRange": {
+            "min": 0.2820920265343771,
+            "max": 0.4813393726446344
+          },
+          "deltaPP": -26.14861180636547,
+          "hypotheticalROI": -45.771911868027246,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400442|bo3|bWin",
+          "key": "bWin",
+          "marketFamily": "winner",
+          "label": "Sangal vence série",
+          "bookOdds": 2.55,
+          "marketRaw": 0.3921568627450981,
+          "marketNoVig": 0.35929648241206025,
+          "marketOverround": 1.0914575620457976,
+          "modelP": 0.6207826004757148,
+          "modelRange": {
+            "min": 0.5186606273553657,
+            "max": 0.7179079734656229
+          },
+          "deltaPP": 26.14861180636545,
+          "hypotheticalROI": 58.299563121307266,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400442|bo3|aMinus1_5",
+          "key": "aMinus1_5",
+          "marketFamily": "handicap",
+          "label": "Inner Circle -1,5 mapas",
+          "bookOdds": 2.35,
+          "marketRaw": 0.425531914893617,
+          "marketNoVig": 0.38961038961038963,
+          "marketOverround": 1.0921985815602837,
+          "modelP": 0.17438693034090905,
+          "modelRange": {
+            "min": 0.10942772622932705,
+            "max": 0.2547499519677712
+          },
+          "deltaPP": -21.52234592694806,
+          "hypotheticalROI": -59.019071369886376,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400442|bo3|bPlus1_5",
+          "key": "bPlus1_5",
+          "marketFamily": "handicap",
+          "label": "Sangal +1,5 mapas",
+          "bookOdds": 1.5,
+          "marketRaw": 0.6666666666666666,
+          "marketNoVig": 0.6103896103896104,
+          "marketOverround": 1.0921985815602837,
+          "modelP": 0.825613069659091,
+          "modelRange": {
+            "min": 0.7452500480322288,
+            "max": 0.8905722737706729
+          },
+          "deltaPP": 21.522345926948063,
+          "hypotheticalROI": 23.84196044886364,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400442|bo3|a20",
+          "key": "a20",
+          "marketFamily": "score",
+          "label": "Inner Circle 2–0",
+          "bookOdds": 2.35,
+          "marketRaw": 0.425531914893617,
+          "marketNoVig": 0.3682835468538513,
+          "marketOverround": 1.1554464448081467,
+          "modelP": 0.17438693034090905,
+          "modelRange": {
+            "min": 0.10942772622932705,
+            "max": 0.2547499519677712
+          },
+          "deltaPP": -19.389661651294222,
+          "hypotheticalROI": -59.019071369886376,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400442|bo3|a21",
+          "key": "a21",
+          "marketFamily": "score",
+          "label": "Inner Circle 2–1",
+          "bookOdds": 3.25,
+          "marketRaw": 0.3076923076923077,
+          "marketNoVig": 0.26629733387893867,
+          "marketOverround": 1.1554464448081467,
+          "modelP": 0.2048304691833759,
+          "modelRange": {
+            "min": 0.1386016272121204,
+            "max": 0.278127083199822
+          },
+          "deltaPP": -6.1466864695562755,
+          "hypotheticalROI": -33.43009751540282,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400442|bo3|b20",
+          "key": "b20",
+          "marketFamily": "score",
+          "label": "Sangal 2–0",
+          "bookOdds": 5,
+          "marketRaw": 0.2,
+          "marketNoVig": 0.17309326702131012,
+          "marketOverround": 1.1554464448081467,
+          "modelP": 0.3359084867413386,
+          "modelRange": {
+            "min": 0.23952078766963428,
+            "max": 0.44333603162379315
+          },
+          "deltaPP": 16.28152197200285,
+          "hypotheticalROI": 67.9542433706693,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400442|bo3|b21",
+          "key": "b21",
+          "marketFamily": "score",
+          "label": "Sangal 2–1",
+          "bookOdds": 4.5,
+          "marketRaw": 0.2222222222222222,
+          "marketNoVig": 0.19232585224590013,
+          "marketOverround": 1.1554464448081467,
+          "modelP": 0.28487411373437616,
+          "modelRange": {
+            "min": 0.19603448142266483,
+            "max": 0.363958164586174
+          },
+          "deltaPP": 9.254826148847602,
+          "hypotheticalROI": 28.19335118046926,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400442|bo3|over2_5",
+          "key": "over2_5",
+          "marketFamily": "total",
+          "label": "Acima de 2,5 mapas",
+          "bookOdds": 2,
+          "marketRaw": 0.5,
+          "marketNoVig": 0.45652173913043476,
+          "marketOverround": 1.0952380952380953,
+          "modelP": 0.4897045829177521,
+          "modelRange": {
+            "min": 0.44723624214687985,
+            "max": 0.5253583766570538
+          },
+          "deltaPP": 3.318284378731734,
+          "hypotheticalROI": -2.059083416449581,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400442|bo3|under2_5",
+          "key": "under2_5",
+          "marketFamily": "total",
+          "label": "Abaixo de 2,5 mapas",
+          "bookOdds": 1.68,
+          "marketRaw": 0.5952380952380952,
+          "marketNoVig": 0.5434782608695652,
+          "marketOverround": 1.0952380952380953,
+          "modelP": 0.5102954170822477,
+          "modelRange": {
+            "min": 0.47464162334294635,
+            "max": 0.5527637578531202
+          },
+          "deltaPP": -3.3182843787317506,
+          "hypotheticalROI": -14.270369930182392,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        }
+      ],
+      "status": "pending",
+      "warnings": [
+        "Veto desconhecido; igual probabilidade para cada ordem de 3 mapas elegíveis",
+        "Modelos de rounds e vetos não calibrados. Diferenca em odds não é vantagem validada",
+        "Odds de print podem estar alteradas ou indisponíveis"
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400443",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-18T18:30:00.000Z",
+      "modelSnapshotAt": "2026-11-18T00:15:54.489Z",
+      "oddsCapturedApprox": "2026-11-17T21:49:00-03:00",
+      "frozenAt": "2026-11-18T00:55:32.513Z",
+      "modelVersion": "atlas-bo3-pre-veto-uniform-v1",
+      "teamA": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas",
+        "slug": "ninjas-in-pyjamas"
+      },
+      "teamB": {
+        "id": "cs2-team-6290",
+        "name": "Luminosity",
+        "slug": "luminosity"
+      },
+      "bookTeamA": "Ninjas in Pyjamas",
+      "bookTeamB": "Luminosity Gaming",
+      "br365EventId": "18417760",
+      "model": {
+        "probabilities": {
+          "aWin": 0.593007294607749,
+          "bWin": 0.4069927053922513,
+          "a20": 0.31329291029668227,
+          "a21": 0.27971438431106677,
+          "b20": 0.19000905032137475,
+          "b21": 0.21698365507087652,
+          "over2_5": 0.4966980393819433,
+          "under2_5": 0.503301960618057,
+          "aMinus1_5": 0.31329291029668227,
+          "bPlus1_5": 0.6867070897033177,
+          "aPlus1_5": 0.8099909496786253,
+          "bMinus1_5": 0.19000905032137475
+        },
+        "sensitivity": {
+          "aWin": {
+            "min": 0.4781712902174668,
+            "max": 0.7018941876664322
+          },
+          "bWin": {
+            "min": 0.29810581233356775,
+            "max": 0.5218287097825333
+          },
+          "a20": {
+            "min": 0.18141546161795236,
+            "max": 0.42669176264813413
+          },
+          "a21": {
+            "min": 0.16328094625767048,
+            "max": 0.36116404718764183
+          },
+          "b20": {
+            "min": 0.1197679886282781,
+            "max": 0.3174893148110395
+          },
+          "b21": {
+            "min": 0.15480117601074062,
+            "max": 0.3195311517872147
+          },
+          "over2_5": {
+            "min": 0.45354024872358767,
+            "max": 0.5479785222328454
+          },
+          "under2_5": {
+            "min": 0.45202147776715473,
+            "max": 0.5464597512764122
+          },
+          "aMinus1_5": {
+            "min": 0.18141546161795236,
+            "max": 0.42669176264813413
+          },
+          "bPlus1_5": {
+            "min": 0.5733082373518659,
+            "max": 0.8185845383820476
+          },
+          "aPlus1_5": {
+            "min": 0.6825106851889605,
+            "max": 0.8802320113717219
+          },
+          "bMinus1_5": {
+            "min": 0.1197679886282781,
+            "max": 0.3174893148110395
+          }
+        },
+        "commonMaps": [
+          {
+            "name": "Cache",
+            "observationsA": 16,
+            "observationsB": 6,
+            "winProbA": 0.635554482774758
+          },
+          {
+            "name": "Mirage",
+            "observationsA": 14,
+            "observationsB": 9,
+            "winProbA": 0.5039119105463008
+          },
+          {
+            "name": "Ancient",
+            "observationsA": 13,
+            "observationsB": 8,
+            "winProbA": 0.6067872163337404
+          },
+          {
+            "name": "Nuke",
+            "observationsA": 11,
+            "observationsB": 8,
+            "winProbA": 0.671369291245098
+          },
+          {
+            "name": "Dust2",
+            "observationsA": 10,
+            "observationsB": 9,
+            "winProbA": 0.3600142362606121
+          },
+          {
+            "name": "Inferno",
+            "observationsA": 8,
+            "observationsB": 8,
+            "winProbA": 0.5922144427654126
+          }
+        ],
+        "orderedTriplets": 120,
+        "minCommonMapHistory": 6,
+        "method": "Equal-weight all ordered three-map selections from maps with >=4 matches for both teams; map outcomes use independent round Bernoulli MR12 plus overtime."
+      },
+      "markets": [
+        {
+          "id": "cs2-match-2400443|bo3|aWin",
+          "key": "aWin",
+          "marketFamily": "winner",
+          "label": "Ninjas in Pyjamas vence série",
+          "bookOdds": 1.44,
+          "marketRaw": 0.6944444444444444,
+          "marketNoVig": 0.6345177664974618,
+          "marketOverround": 1.0944444444444446,
+          "modelP": 0.593007294607749,
+          "modelRange": {
+            "min": 0.4781712902174668,
+            "max": 0.7018941876664322
+          },
+          "deltaPP": -4.15104718897128,
+          "hypotheticalROI": -14.60694957648414,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400443|bo3|bWin",
+          "key": "bWin",
+          "marketFamily": "winner",
+          "label": "Luminosity Gaming vence série",
+          "bookOdds": 2.5,
+          "marketRaw": 0.4,
+          "marketNoVig": 0.36548223350253806,
+          "marketOverround": 1.0944444444444446,
+          "modelP": 0.4069927053922513,
+          "modelRange": {
+            "min": 0.29810581233356775,
+            "max": 0.5218287097825333
+          },
+          "deltaPP": 4.151047188971324,
+          "hypotheticalROI": 1.7481763480628132,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400443|bo3|aMinus1_5",
+          "key": "aMinus1_5",
+          "marketFamily": "handicap",
+          "label": "Ninjas in Pyjamas -1,5 mapas",
+          "bookOdds": 2.3,
+          "marketRaw": 0.4347826086956522,
+          "marketNoVig": 0.39790575916230364,
+          "marketOverround": 1.0926773455377576,
+          "modelP": 0.31329291029668227,
+          "modelRange": {
+            "min": 0.18141546161795236,
+            "max": 0.42669176264813413
+          },
+          "deltaPP": -8.461284886562137,
+          "hypotheticalROI": -27.942630631763087,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400443|bo3|bPlus1_5",
+          "key": "bPlus1_5",
+          "marketFamily": "handicap",
+          "label": "Luminosity Gaming +1,5 mapas",
+          "bookOdds": 1.52,
+          "marketRaw": 0.6578947368421053,
+          "marketNoVig": 0.6020942408376962,
+          "marketOverround": 1.0926773455377576,
+          "modelP": 0.6867070897033177,
+          "modelRange": {
+            "min": 0.5733082373518659,
+            "max": 0.8185845383820476
+          },
+          "deltaPP": 8.461284886562147,
+          "hypotheticalROI": 4.379477634904294,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400443|bo3|a20",
+          "key": "a20",
+          "marketFamily": "score",
+          "label": "Ninjas in Pyjamas 2–0",
+          "bookOdds": 2.3,
+          "marketRaw": 0.4347826086956522,
+          "marketNoVig": 0.3714308281663441,
+          "marketOverround": 1.1705614497376513,
+          "modelP": 0.31329291029668227,
+          "modelRange": {
+            "min": 0.18141546161795236,
+            "max": 0.42669176264813413
+          },
+          "deltaPP": -5.813791786966183,
+          "hypotheticalROI": -27.942630631763087,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400443|bo3|a21",
+          "key": "a21",
+          "marketFamily": "score",
+          "label": "Ninjas in Pyjamas 2–1",
+          "bookOdds": 3.3,
+          "marketRaw": 0.30303030303030304,
+          "marketNoVig": 0.25887603175230045,
+          "marketOverround": 1.1705614497376513,
+          "modelP": 0.27971438431106677,
+          "modelRange": {
+            "min": 0.16328094625767048,
+            "max": 0.36116404718764183
+          },
+          "deltaPP": 2.0838352558766315,
+          "hypotheticalROI": -7.694253177347976,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400443|bo3|b20",
+          "key": "b20",
+          "marketFamily": "score",
+          "label": "Luminosity Gaming 2–0",
+          "bookOdds": 4.75,
+          "marketRaw": 0.21052631578947367,
+          "marketNoVig": 0.17985071679633502,
+          "marketOverround": 1.1705614497376513,
+          "modelP": 0.19000905032137475,
+          "modelRange": {
+            "min": 0.1197679886282781,
+            "max": 0.3174893148110395
+          },
+          "deltaPP": 1.0158333525039724,
+          "hypotheticalROI": -9.745701097346993,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400443|bo3|b21",
+          "key": "b21",
+          "marketFamily": "score",
+          "label": "Luminosity Gaming 2–1",
+          "bookOdds": 4.5,
+          "marketRaw": 0.2222222222222222,
+          "marketNoVig": 0.1898424232850203,
+          "marketOverround": 1.1705614497376513,
+          "modelP": 0.21698365507087652,
+          "modelRange": {
+            "min": 0.15480117601074062,
+            "max": 0.3195311517872147
+          },
+          "deltaPP": 2.714123178585623,
+          "hypotheticalROI": -2.3573552181055613,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400443|bo3|over2_5",
+          "key": "over2_5",
+          "marketFamily": "total",
+          "label": "Acima de 2,5 mapas",
+          "bookOdds": 2.1,
+          "marketRaw": 0.47619047619047616,
+          "marketNoVig": 0.43548387096774194,
+          "marketOverround": 1.09347442680776,
+          "modelP": 0.4966980393819433,
+          "modelRange": {
+            "min": 0.45354024872358767,
+            "max": 0.5479785222328454
+          },
+          "deltaPP": 6.121416841420135,
+          "hypotheticalROI": 4.306588270208089,
+          "persistentWithinHypotheticalMapTriplets": true,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        },
+        {
+          "id": "cs2-match-2400443|bo3|under2_5",
+          "key": "under2_5",
+          "marketFamily": "total",
+          "label": "Abaixo de 2,5 mapas",
+          "bookOdds": 1.62,
+          "marketRaw": 0.6172839506172839,
+          "marketNoVig": 0.5645161290322581,
+          "marketOverround": 1.09347442680776,
+          "modelP": 0.503301960618057,
+          "modelRange": {
+            "min": 0.45202147776715473,
+            "max": 0.5464597512764122
+          },
+          "deltaPP": -6.121416841420113,
+          "hypotheticalROI": -18.465082379874765,
+          "persistentWithinHypotheticalMapTriplets": false,
+          "confirmation": "unconfirmed_veto",
+          "priceStatus": "screenshot_only",
+          "independentOfMapVetoForSettlement": true
+        }
+      ],
+      "status": "pending",
+      "warnings": [
+        "Veto desconhecido; igual probabilidade para cada ordem de 3 mapas elegíveis",
+        "Modelos de rounds e vetos não calibrados. Diferenca em odds não é vantagem validada",
+        "Odds de print podem estar alteradas ou indisponíveis"
+      ]
+    }
+  ],
+  "unmodeled": [
+    {
+      "matchId": "cs2-match-2400525",
+      "reason": "Menos de três mapas comuns com ao menos quatro jogos de histórico para cada equipe"
+    }
+  ],
+  "note": "Modelo exploratório, não validado; somente mercados de séries BO3 independentes da divulgação dos mapas."
+}
