@@ -1,31 +1,31 @@
 {
-  "computedAt": "2026-11-18T23:12:47.875Z",
+  "computedAt": "2026-11-18T23:22:56.507Z",
   "total": 190,
-  "resolved": 91,
+  "resolved": 98,
   "byMarket": [
     {
       "kind": "map_a",
-      "observations": 17,
-      "brier": 0.2729,
-      "classificationAccuracy": 0.4706
+      "observations": 18,
+      "brier": 0.2977,
+      "classificationAccuracy": 0.4444
     },
     {
       "kind": "rounds_over_21_5",
-      "observations": 17,
-      "brier": 0.2557,
-      "classificationAccuracy": 0.4706
+      "observations": 18,
+      "brier": 0.2579,
+      "classificationAccuracy": 0.4444
     },
     {
       "kind": "handicap_a_minus_2_5",
-      "observations": 17,
-      "brier": 0.2264,
-      "classificationAccuracy": 0.5882
+      "observations": 18,
+      "brier": 0.2445,
+      "classificationAccuracy": 0.5556
     },
     {
       "kind": "kills_over_15_5",
-      "observations": 40,
-      "brier": 0.2894,
-      "classificationAccuracy": 0.475
+      "observations": 44,
+      "brier": 0.304,
+      "classificationAccuracy": 0.4545
     }
   ],
   "assessed": [
@@ -540,6 +540,36 @@
       "actualScore": "7–13"
     },
     {
+      "id": "cs2-match-2400525|ancient|map_a",
+      "kind": "map_a",
+      "matchId": "cs2-match-2400525",
+      "map": "Ancient",
+      "probability": 0.84871,
+      "outcome": 0,
+      "brier": 0.720309,
+      "actualScore": "18–22"
+    },
+    {
+      "id": "cs2-match-2400525|ancient|rounds_over_21_5",
+      "kind": "rounds_over_21_5",
+      "matchId": "cs2-match-2400525",
+      "map": "Ancient",
+      "probability": 0.456096,
+      "outcome": 1,
+      "brier": 0.295832,
+      "actualScore": "18–22"
+    },
+    {
+      "id": "cs2-match-2400525|ancient|handicap_a_minus_2_5",
+      "kind": "handicap_a_minus_2_5",
+      "matchId": "cs2-match-2400525",
+      "map": "Ancient",
+      "probability": 0.742938,
+      "outcome": 0,
+      "brier": 0.551957,
+      "actualScore": "18–22"
+    },
+    {
       "id": "cs2-match-2400522|anubis|kills_over_15_5|cs2-player-17117",
       "kind": "kills_over_15_5",
       "matchId": "cs2-match-2400522",
@@ -870,6 +900,46 @@
       "actualScore": "11–13"
     },
     {
+      "id": "cs2-match-2400525|ancient|kills_over_15_5|cs2-player-21571",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400525",
+      "map": "Ancient",
+      "probability": 0.500335,
+      "outcome": 1,
+      "brier": 0.249665,
+      "actualScore": "18–22"
+    },
+    {
+      "id": "cs2-match-2400525|ancient|kills_over_15_5|cs2-player-21379",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400525",
+      "map": "Ancient",
+      "probability": 0.356066,
+      "outcome": 1,
+      "brier": 0.414651,
+      "actualScore": "18–22"
+    },
+    {
+      "id": "cs2-match-2400525|ancient|kills_over_15_5|cs2-player-13138",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400525",
+      "map": "Ancient",
+      "probability": 0.338242,
+      "outcome": 1,
+      "brier": 0.437924,
+      "actualScore": "18–22"
+    },
+    {
+      "id": "cs2-match-2400525|ancient|kills_over_15_5|cs2-player-13497",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400525",
+      "map": "Ancient",
+      "probability": 0.163135,
+      "outcome": 1,
+      "brier": 0.700343,
+      "actualScore": "18–22"
+    },
+    {
       "id": "cs2-match-2400522|anubis|kills_over_15_5|cs2-player-20872",
       "kind": "kills_over_15_5",
       "matchId": "cs2-match-2400522",
@@ -940,5 +1010,5 @@
       "actualScore": "13–7"
     }
   ],
-  "note": "Resultados de mapas realmente disputados; pré-jogo original imutável. Brier menor é melhor, precisão não comprova vantagem financeira."
+  "note": "Todos os oito confrontos têm resultado oficial, mas apenas mapas jogados e estatísticas presentes são conferidos; sem palpite inventado para BBL-Envy BO3."
 }
