@@ -8,11 +8,14 @@
   <title>ATLAS Esports Lab | Inteligência estatística CS2</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="series-radar.css">
+  <link rel="stylesheet" href="strength.css">
   <script src="app.js" defer></script>
   <script src="tournaments.js" defer></script>
   <script src="players.js" defer></script>
   <script src="validation.js" defer></script>
   <script src="series-radar.js" defer></script>
+  <script src="strength-core.js" defer></script>
+  <script src="strength.js" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -22,6 +25,7 @@
       <nav aria-label="Menu principal">
         <button class="nav" data-tab="dashboard"><span>▦</span> Visão geral</button>
         <button class="nav active" data-tab="opportunities"><span>✦</span> Radar de odds</button>
+        <button class="nav" data-tab="strength"><span>◉</span> Força dos adversários</button>
         <button class="nav" data-tab="tournaments"><span>◉</span> Torneios em teste</button>
         <button class="nav" data-tab="simulator"><span>◈</span> Simulador CS2</button>
         <button class="nav" data-tab="data"><span>◫</span> Base histórica</button>
@@ -30,7 +34,7 @@
         <button class="nav" data-tab="registry"><span>▤</span> Registro de previsões</button>
         <button class="nav" data-tab="method"><span>◎</span> Metodologia</button>
       </nav>
-      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: sincronização diária</div><p>Dados da API atualizados pelo GitHub. Não são informações ao vivo.</p><div class="aside-tag">v0.6 • Mercado BO3 pré-veto</div></div>
+      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: sincronização diária</div><p>Dados da API atualizados pelo GitHub. Não são informações ao vivo.</p><div class="aside-tag">v0.7 • Força dos adversários</div></div>
     </aside>
     <main class="main">
       <header class="topbar"><div><span class="breadcrumb">INTELIGÊNCIA ESTATÍSTICA / CS2</span></div><div class="top-right"><span class="pill">◌ Modo simulação</span><span class="avatar">A</span></div></header>
@@ -190,6 +194,7 @@
      <span class="series-count" id="series-game-counter">—</span></div>
    <div id="series-games" class="series-games-grid"></div>
   </div>
+  <div class="series-map-locked"><span class="lock-icon">◎</span><div><h2>Os últimos adversários também importam</h2><p>Compare forma recente, força dos oponentes e desempenho em 90 versus 365 dias. Isso ajuda a entender discrepâncias entre resultados e odds, sem alterar previsões já congeladas.</p></div><button class="secondary" data-go="strength">Comparar adversários →</button></div>
   <div class="series-map-locked">
     <span class="lock-icon">◫</span>
     <div><h2>Mercados de mapas individuais: somente após o veto</h2>
@@ -204,6 +209,47 @@
     <button class="secondary" data-go="validation">Abrir validação das previsões →</button>
   </div>
  </div>
+</section>
+
+
+<section class="view" id="strength">
+  <div class="strength-hero">
+    <div><div class="strength-kicker">ANÁLISE CONTEXTUAL / CITO CS2</div>
+      <h1>Força dos <span>adversários</span></h1>
+      <p>Veja se a boa fase vem contra equipes competitivas, compare placares e desempenho por mapa e confronte os últimos resultados com a amostra de 12 meses.</p>
+    </div>
+    <div class="strength-hero-stats">
+      <div><strong id="strength-team-total">—</strong><small>Equipes pesquisadas</small></div>
+      <div><strong id="strength-games-total">—</strong><small>Registros recentes</small></div>
+      <div><strong id="strength-history-label">365</strong><small>Dias de histórico</small></div>
+    </div>
+  </div>
+  <div class="strength-warning"><span>ⓘ</span><div><b>Ranking atual, não histórico.</b>
+   <p>As posições são da consulta da Cito em 17/11/2026, e podem ser diferentes das posições na época de cada partida. O indicador ajustado por ranking é uma heurística explicativa, <b>não uma probabilidade calibrada de vitória</b>. O histórico anual inclui o de 90 dias; as amostras não são somadas.</p></div></div>
+  <div class="strength-panel">
+    <div class="strength-panel-title"><div><span class="tiny-kicker">01 / SELEÇÃO DO CONFRONTO</span><h2>Comparativo entre equipes</h2></div>
+      <span class="strength-source" id="strength-updated">Fonte: Cito</span></div>
+    <div class="strength-inputs">
+      <label>Jogo<select id="strength-game"><option>Carregando partidas...</option></select></label>
+      <label>Últimas partidas<select id="strength-limit"><option value="5">Últimas 5 séries</option><option value="10">Últimas 10 séries</option><option value="15" selected>Últimas 15 séries</option></select></label>
+    </div>
+    <div id="strength-versus" class="strength-vs"></div>
+    <p id="strength-context-note" class="strength-muted"></p>
+  </div>
+  <div class="strength-panel">
+    <div class="strength-panel-title"><div><span class="tiny-kicker">02 / AMOSTRAGEM</span><h2>90 dias × 365 dias</h2><p>Históricos aninhados: um resultado recente também está contido na janela anual.</p></div></div>
+    <div id="strength-history" class="strength-history"></div>
+  </div>
+  <div class="strength-panel">
+    <div class="strength-panel-title"><div><span class="tiny-kicker">03 / DE QUEM VIERAM AS VITÓRIAS E DERROTAS?</span><h2>Últimos adversários</h2>
+      <p>Placar da série, ranking conhecido atualmente e margem de rounds nos mapas efetivamente disputados.</p></div></div>
+    <div id="strength-opponents" class="strength-opponent-grid"></div>
+  </div>
+  <div class="strength-panel">
+    <div class="strength-panel-title"><div><span class="tiny-kicker">04 / COMO USAR ESSA ANÁLISE</span><h2>Resultados sem contexto podem enganar</h2></div></div>
+    <p class="strength-muted">Uma taxa de vitórias alta contra adversários pouco exigentes não vale o mesmo que um aproveitamento menor contra rivais de elite. O ranking, porém, também tem vieses; precisamos manter separadas a qualidade dos rivais, a fase atual, os mapas jogados, a escalação e o tempo decorrido. Nenhuma das probabilidades BO3 já congeladas é reescrita com dados posteriores à partida.</p>
+    <button class="secondary" data-go="opportunities">Voltar ao radar de odds →</button>
+  </div>
 </section>
 
 <section class="view" id="validation">
