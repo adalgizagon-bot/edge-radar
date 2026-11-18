@@ -1,0 +1,300 @@
+{
+  "version": "atlas-audit-v1",
+  "evaluatedAt": "2026-11-18T23:17:21.666Z",
+  "source": "Cito completed series vs immutable pregame ATLAS and BR365 screenshots",
+  "completed": 7,
+  "pending": 0,
+  "unmodeled": [
+    {
+      "matchId": "cs2-match-2400525",
+      "reason": "Menos de três mapas comuns com ao menos quatro jogos de histórico para cada equipe"
+    }
+  ],
+  "marketModel": {
+    "snapshot": "2026-11-18T00:55:32.513Z",
+    "version": "atlas-bo3-pre-veto-uniform-v1"
+  },
+  "samplesSmall": true,
+  "winner": {
+    "n": 7,
+    "correctModel": 3,
+    "correctMarket": 2,
+    "brierModel": 0.2893054395952625,
+    "brierMarket": 0.28745145102653363,
+    "avgAbsoluteGapPP": 18.246362810752668,
+    "severeDisagreements": 3
+  },
+  "challenger": {
+    "n": 7,
+    "correct": 5,
+    "brier": 0.26804430784167377,
+    "interpretation": "POST-HOC PROTOTYPE — created after the results and NOT an out-of-sample improvement claim."
+  },
+  "mapMarkets": [
+    {
+      "kind": "map_a",
+      "n": 17,
+      "brier": 0.2729,
+      "accuracy": 0.4706,
+      "worseThanNeutral": true
+    },
+    {
+      "kind": "rounds_over_21_5",
+      "n": 17,
+      "brier": 0.2557,
+      "accuracy": 0.4706,
+      "worseThanNeutral": true
+    },
+    {
+      "kind": "handicap_a_minus_2_5",
+      "n": 17,
+      "brier": 0.2264,
+      "accuracy": 0.5882,
+      "worseThanNeutral": false
+    },
+    {
+      "kind": "kills_over_15_5",
+      "n": 40,
+      "brier": 0.2894,
+      "accuracy": 0.475,
+      "worseThanNeutral": true
+    }
+  ],
+  "games": [
+    {
+      "matchId": "cs2-match-2400522",
+      "event": "Tipsport RUSH Brno 2026",
+      "startsAt": "2026-11-18T10:00:00.000Z",
+      "teams": [
+        "Nexus",
+        "Iberian Soul"
+      ],
+      "actualScore": "2–0",
+      "winner": "Nexus",
+      "modelP_A": 0.6212164619755713,
+      "marketP_A": 0.42359249329758714,
+      "challengerP_A": 0.5426390415722748,
+      "modelFav": "Nexus",
+      "marketFav": "Iberian Soul",
+      "v2Fav": "Nexus",
+      "modelCorrect": true,
+      "marketCorrect": false,
+      "v2Correct": true,
+      "modelBrier": 0.14347696867830378,
+      "marketBrier": 0.3322456137828921,
+      "v2Brier": 0.20917904629392736,
+      "absMarketGapPP": 19.762396867798422,
+      "minMapHistory": 5,
+      "modelCommonMaps": 5,
+      "playedMaps": [
+        "Anubis",
+        "Inferno"
+      ],
+      "outOfModelMaps": [],
+      "verifiedAt": "2026-11-18T23:01:08.875Z"
+    },
+    {
+      "matchId": "cs2-match-2400440",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-18T11:00:00.000Z",
+      "teams": [
+        "Betclic",
+        "BIG"
+      ],
+      "actualScore": "0–2",
+      "winner": "BIG",
+      "modelP_A": 0.6300407637341947,
+      "marketP_A": 0.37179487179487175,
+      "challengerP_A": 0.47859968988350143,
+      "modelFav": "Betclic",
+      "marketFav": "BIG",
+      "v2Fav": "BIG",
+      "modelCorrect": false,
+      "marketCorrect": true,
+      "v2Correct": true,
+      "modelBrier": 0.39695136396676733,
+      "marketBrier": 0.13823142669296512,
+      "v2Brier": 0.22905766315658374,
+      "absMarketGapPP": 25.824589193932297,
+      "minMapHistory": 7,
+      "modelCommonMaps": 3,
+      "playedMaps": [
+        "Ancient",
+        "Mirage"
+      ],
+      "outOfModelMaps": [],
+      "verifiedAt": "2026-11-18T23:00:58.206Z"
+    },
+    {
+      "matchId": "cs2-match-2400523",
+      "event": "Tipsport RUSH Brno 2026",
+      "startsAt": "2026-11-18T13:00:00.000Z",
+      "teams": [
+        "Phantom",
+        "Metizport"
+      ],
+      "actualScore": "1–2",
+      "winner": "Metizport",
+      "modelP_A": 0.414679261868522,
+      "marketP_A": 0.5191256830601093,
+      "challengerP_A": 0.4968039040484989,
+      "modelFav": "Metizport",
+      "marketFav": "Phantom",
+      "v2Fav": "Metizport",
+      "modelCorrect": true,
+      "marketCorrect": false,
+      "v2Correct": true,
+      "modelBrier": 0.17195889022382224,
+      "marketBrier": 0.2694914748126251,
+      "v2Brier": 0.2468141190778301,
+      "absMarketGapPP": 10.44464211915873,
+      "minMapHistory": 7,
+      "modelCommonMaps": 5,
+      "playedMaps": [
+        "Ancient",
+        "Inferno",
+        "Nuke"
+      ],
+      "outOfModelMaps": [],
+      "verifiedAt": "2026-11-18T21:45:15.919Z"
+    },
+    {
+      "matchId": "cs2-match-2400441",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-18T13:30:00.000Z",
+      "teams": [
+        "UNiTY",
+        "GamerLegion"
+      ],
+      "actualScore": "1–2",
+      "winner": "GamerLegion",
+      "modelP_A": 0.6477149312355204,
+      "marketP_A": 0.23762376237623759,
+      "challengerP_A": 0.4699446357195609,
+      "modelFav": "UNiTY",
+      "marketFav": "GamerLegion",
+      "v2Fav": "GamerLegion",
+      "modelCorrect": false,
+      "marketCorrect": true,
+      "v2Correct": true,
+      "modelBrier": 0.4195346321454349,
+      "marketBrier": 0.056465052445838625,
+      "v2Brier": 0.22084796064159082,
+      "absMarketGapPP": 41.00911688592828,
+      "minMapHistory": 9,
+      "modelCommonMaps": 4,
+      "playedMaps": [
+        "Mirage",
+        "Dust2",
+        "Ancient"
+      ],
+      "outOfModelMaps": [],
+      "verifiedAt": "2026-11-18T21:45:15.413Z"
+    },
+    {
+      "matchId": "cs2-match-2400524",
+      "event": "Tipsport RUSH Brno 2026",
+      "startsAt": "2026-11-18T16:00:00.000Z",
+      "teams": [
+        "SINNERS",
+        "Alliance"
+      ],
+      "actualScore": "1–2",
+      "winner": "Alliance",
+      "modelP_A": 0.6306764103663197,
+      "marketP_A": 0.6345177664974618,
+      "challengerP_A": 0.5605416560945541,
+      "modelFav": "SINNERS",
+      "marketFav": "SINNERS",
+      "v2Fav": "SINNERS",
+      "modelCorrect": false,
+      "marketCorrect": false,
+      "v2Correct": false,
+      "modelBrier": 0.3977527345925465,
+      "marketBrier": 0.4026127960009275,
+      "v2Brier": 0.31420694821722533,
+      "absMarketGapPP": 0.3841356131142115,
+      "minMapHistory": 4,
+      "modelCommonMaps": 6,
+      "playedMaps": [
+        "Inferno",
+        "Mirage",
+        "Ancient"
+      ],
+      "outOfModelMaps": [],
+      "verifiedAt": "2026-11-18T21:45:13.602Z"
+    },
+    {
+      "matchId": "cs2-match-2400442",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-18T16:00:00.000Z",
+      "teams": [
+        "Inner Circle",
+        "Sangal"
+      ],
+      "actualScore": "0–2",
+      "winner": "Sangal",
+      "modelP_A": 0.37921739952428496,
+      "marketP_A": 0.6407035175879396,
+      "challengerP_A": 0.4650858984171937,
+      "modelFav": "Sangal",
+      "marketFav": "Inner Circle",
+      "v2Fav": "Sangal",
+      "modelCorrect": true,
+      "marketCorrect": false,
+      "v2Correct": true,
+      "modelBrier": 0.14380583610196115,
+      "marketBrier": 0.41050099744955926,
+      "v2Brier": 0.21630489290652824,
+      "absMarketGapPP": 26.14861180636547,
+      "minMapHistory": 4,
+      "modelCommonMaps": 6,
+      "playedMaps": [
+        "Cache",
+        "Ancient"
+      ],
+      "outOfModelMaps": [],
+      "verifiedAt": "2026-11-18T23:00:13.672Z"
+    },
+    {
+      "matchId": "cs2-match-2400443",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-18T18:30:00.000Z",
+      "teams": [
+        "Ninjas in Pyjamas",
+        "Luminosity"
+      ],
+      "actualScore": "0–2",
+      "winner": "Luminosity",
+      "modelP_A": 0.593007294607749,
+      "marketP_A": 0.6345177664974618,
+      "challengerP_A": 0.6632492175630745,
+      "modelFav": "Ninjas in Pyjamas",
+      "marketFav": "Ninjas in Pyjamas",
+      "v2Fav": "Ninjas in Pyjamas",
+      "modelCorrect": false,
+      "marketCorrect": false,
+      "v2Correct": false,
+      "modelBrier": 0.35165765145800165,
+      "marketBrier": 0.4026127960009275,
+      "v2Brier": 0.43989952459803056,
+      "absMarketGapPP": 4.15104718897128,
+      "minMapHistory": 6,
+      "modelCommonMaps": 6,
+      "playedMaps": [
+        "Mirage",
+        "Cache"
+      ],
+      "outOfModelMaps": [],
+      "verifiedAt": "2026-11-18T21:45:12.464Z"
+    }
+  ],
+  "actionItems": [
+    "Keep v1 pregame forecasts immutable. Challenger v2 is retrospective and must be tested in future games.",
+    "Ranked strength-of-opponent context must be known before the match. Do not use after-match form or ranking.",
+    "Do not call model-market gaps an edge before calibration, line availability and sample audit.",
+    "For map kills and totals, do not recommend bets until prospectively validated and veto is known.",
+    "Map selection must use veto probabilities rather than uniform permutations after enough historical data exists."
+  ],
+  "note": "Brier compares probability quality; accuracy is just 50% threshold classification. Small sample; price snapshots are not tradable quotes."
+}
