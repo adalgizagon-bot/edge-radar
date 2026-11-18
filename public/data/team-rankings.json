@@ -1,0 +1,708 @@
+{
+  "source": "Cito CS2 rankings",
+  "rankingDate": "2026-11-17T00:00:00.000Z",
+  "fetchedAt": "2026-11-18T01:12:40.903Z",
+  "ranks": [
+    {
+      "id": "cs2-team-8297",
+      "name": "FURIA",
+      "rank": 1,
+      "points": 960,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-4494",
+      "name": "MOUZ",
+      "rank": 2,
+      "points": 808,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-7020",
+      "name": "Spirit",
+      "rank": 3,
+      "points": 766,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-9565",
+      "name": "Vitality",
+      "rank": 4,
+      "points": 638,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-11283",
+      "name": "Falcons",
+      "rank": 5,
+      "points": 448,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-11861",
+      "name": "Aurora",
+      "rank": 6,
+      "points": 419,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12394",
+      "name": "BETBOOM",
+      "rank": 7,
+      "points": 355,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-4608",
+      "name": "Natus Vincere",
+      "rank": 8,
+      "points": 336,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13286",
+      "name": "FUT",
+      "rank": 9,
+      "points": 272,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-6248",
+      "name": "The MongolZ",
+      "rank": 10,
+      "points": 267,
+      "region": "Asia"
+    },
+    {
+      "id": "cs2-team-7969",
+      "name": "Nemiga",
+      "rank": 11,
+      "points": 264,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-5995",
+      "name": "G2",
+      "rank": 12,
+      "points": 223,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12467",
+      "name": "PARIVISION",
+      "rank": 13,
+      "points": 188,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12468",
+      "name": "Legacy",
+      "rank": 14,
+      "points": 172,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-10621",
+      "name": "1win",
+      "rank": 15,
+      "points": 141,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-5973",
+      "name": "Liquid",
+      "rank": 16,
+      "points": 128,
+      "region": "North America"
+    },
+    {
+      "id": "cs2-team-9215",
+      "name": "MIBR",
+      "rank": 17,
+      "points": 115,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-4411",
+      "name": "Ninjas in Pyjamas",
+      "rank": 18,
+      "points": 93,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-6667",
+      "name": "FaZe",
+      "rank": 19,
+      "points": 90,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-6665",
+      "name": "Astralis",
+      "rank": 20,
+      "points": 89,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-9996",
+      "name": "9z",
+      "rank": 21,
+      "points": 89,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-11251",
+      "name": "Eternal Fire",
+      "rank": 22,
+      "points": 76,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-7175",
+      "name": "HEROIC",
+      "rank": 23,
+      "points": 76,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12376",
+      "name": "M80",
+      "rank": 24,
+      "points": 71,
+      "region": "North America"
+    },
+    {
+      "id": "cs2-team-4991",
+      "name": "fnatic",
+      "rank": 25,
+      "points": 71,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-11241",
+      "name": "B8",
+      "rank": 26,
+      "points": 70,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-9928",
+      "name": "GamerLegion",
+      "rank": 27,
+      "points": 70,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13592",
+      "name": "magic",
+      "rank": 28,
+      "points": 60,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-8474",
+      "name": "100 Thieves",
+      "rank": 29,
+      "points": 55,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-11581",
+      "name": "HOTU",
+      "rank": 30,
+      "points": 52,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-4863",
+      "name": "TYLOO",
+      "rank": 31,
+      "points": 52,
+      "region": "Asia"
+    },
+    {
+      "id": "cs2-team-5991",
+      "name": "Envy",
+      "rank": 32,
+      "points": 50,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13926",
+      "name": "DENDELE",
+      "rank": 33,
+      "points": 48,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-7532",
+      "name": "BIG",
+      "rank": 34,
+      "points": 47,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-10245",
+      "name": "JiJieHao",
+      "rank": 35,
+      "points": 41,
+      "region": "Asia"
+    },
+    {
+      "id": "cs2-team-6290",
+      "name": "Luminosity",
+      "rank": 36,
+      "points": 38,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-10577",
+      "name": "SINNERS",
+      "rank": 37,
+      "points": 38,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12474",
+      "name": "Alliance",
+      "rank": 38,
+      "points": 37,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13117",
+      "name": "Inner Circle",
+      "rank": 39,
+      "points": 35,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-4773",
+      "name": "paiN",
+      "rank": 40,
+      "points": 34,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-10333",
+      "name": "Sangal",
+      "rank": 41,
+      "points": 33,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12257",
+      "name": "Wildcard",
+      "rank": 42,
+      "points": 32,
+      "region": "North America"
+    },
+    {
+      "id": "cs2-team-6673",
+      "name": "NRG",
+      "rank": 43,
+      "points": 32,
+      "region": "North America"
+    },
+    {
+      "id": "cs2-team-8840",
+      "name": "Lynn Vision",
+      "rank": 44,
+      "points": 30,
+      "region": "Asia"
+    },
+    {
+      "id": "cs2-team-14030",
+      "name": "PRIVATE",
+      "rank": 45,
+      "points": 29,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12878",
+      "name": "BC.Game",
+      "rank": 46,
+      "points": 29,
+      "region": null
+    },
+    {
+      "id": "cs2-team-12895",
+      "name": "K27",
+      "rank": 47,
+      "points": 28,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-9455",
+      "name": "Imperial",
+      "rank": 48,
+      "points": 27,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-13724",
+      "name": "5star",
+      "rank": 49,
+      "points": 25,
+      "region": "Asia"
+    },
+    {
+      "id": "cs2-team-13996",
+      "name": "BBL",
+      "rank": 50,
+      "points": 23,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-7187",
+      "name": "Nexus",
+      "rank": 51,
+      "points": 21,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13355",
+      "name": "Nemesis",
+      "rank": 52,
+      "points": 20,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13104",
+      "name": "Iberian Soul",
+      "rank": 53,
+      "points": 17,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12916",
+      "name": "Betclic",
+      "rank": 54,
+      "points": 17,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13924",
+      "name": "Black Phoenix",
+      "rank": 55,
+      "points": 17,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12959",
+      "name": "ShindeN",
+      "rank": 56,
+      "points": 16,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-13679",
+      "name": "FOKUS",
+      "rank": 57,
+      "points": 16,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12774",
+      "name": "FlyQuest",
+      "rank": 58,
+      "points": 15,
+      "region": "Oceania"
+    },
+    {
+      "id": "cs2-team-12646",
+      "name": "Chinggis Warriors",
+      "rank": 59,
+      "points": 15,
+      "region": "Asia"
+    },
+    {
+      "id": "cs2-team-13027",
+      "name": "Nuclear TigeRES",
+      "rank": 60,
+      "points": 15,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13181",
+      "name": "BASEMENT BOYS",
+      "rank": 61,
+      "points": 14,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12144",
+      "name": "BESTIA",
+      "rank": 62,
+      "points": 14,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-13173",
+      "name": "Phantom",
+      "rank": 63,
+      "points": 13,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-10567",
+      "name": "SAW",
+      "rank": 64,
+      "points": 13,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12677",
+      "name": "Galorys",
+      "rank": 65,
+      "points": 12,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-13499",
+      "name": "Voca",
+      "rank": 66,
+      "points": 11,
+      "region": "North America"
+    },
+    {
+      "id": "cs2-team-13667",
+      "name": "NEXVOID",
+      "rank": 67,
+      "points": 11,
+      "region": "Asia"
+    },
+    {
+      "id": "cs2-team-5378",
+      "name": "Virtus.pro",
+      "rank": 68,
+      "points": 11,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-11641",
+      "name": "Metizport",
+      "rank": 69,
+      "points": 11,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13777",
+      "name": "PURE",
+      "rank": 70,
+      "points": 10,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-14107",
+      "name": "BARCA",
+      "rank": 71,
+      "points": 10,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-12267",
+      "name": "UNiTY",
+      "rank": 72,
+      "points": 9,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-11737",
+      "name": "EYEBALLERS",
+      "rank": 73,
+      "points": 9,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-6914",
+      "name": "Without a Roof",
+      "rank": 74,
+      "points": 9,
+      "region": "North America"
+    },
+    {
+      "id": "cs2-team-12857",
+      "name": "FORZE Reload",
+      "rank": 75,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-14051",
+      "name": "Low Cortisol",
+      "rank": 76,
+      "points": 8,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-13623",
+      "name": "STATE",
+      "rank": 77,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-14147",
+      "name": "Hype Tech",
+      "rank": 78,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-11699",
+      "name": "BAKS",
+      "rank": 79,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13297",
+      "name": "33",
+      "rank": 80,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12642",
+      "name": "RBLS",
+      "rank": 81,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-6810",
+      "name": "aimclub",
+      "rank": 82,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12510",
+      "name": "The Huns",
+      "rank": 83,
+      "points": 8,
+      "region": "Asia"
+    },
+    {
+      "id": "cs2-team-11719",
+      "name": "Illyrians",
+      "rank": 84,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13681",
+      "name": "Inner Circle Academy",
+      "rank": 85,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13908",
+      "name": "Butterfly",
+      "rank": 86,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13999",
+      "name": "WBT Academy",
+      "rank": 87,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-10823",
+      "name": "INFINITE",
+      "rank": 88,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-10997",
+      "name": "Procyon",
+      "rank": 89,
+      "points": 8,
+      "region": "South America"
+    },
+    {
+      "id": "cs2-team-11446",
+      "name": "Leo",
+      "rank": 90,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13759",
+      "name": "mellren",
+      "rank": 91,
+      "points": 8,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-10371",
+      "name": "NAVI Junior",
+      "rank": 92,
+      "points": 7,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13333",
+      "name": "ASTRAL",
+      "rank": 93,
+      "points": 7,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12087",
+      "name": "Lazer Cats",
+      "rank": 94,
+      "points": 7,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-7900",
+      "name": "Spirit Academy",
+      "rank": 95,
+      "points": 7,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12604",
+      "name": "Johnny Speeds",
+      "rank": 96,
+      "points": 7,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-10503",
+      "name": "OG",
+      "rank": 97,
+      "points": 7,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-12889",
+      "name": "G2 Ares",
+      "rank": 98,
+      "points": 7,
+      "region": "Europe"
+    },
+    {
+      "id": "cs2-team-13124",
+      "name": "Marsborne",
+      "rank": 99,
+      "points": 7,
+      "region": "North America"
+    },
+    {
+      "id": "cs2-team-14077",
+      "name": "Glitch",
+      "rank": 100,
+      "points": 7,
+      "region": "Europe"
+    }
+  ],
+  "note": "Ranking da data da consulta; não indica posição histórica exata na data dos confrontos."
+}
