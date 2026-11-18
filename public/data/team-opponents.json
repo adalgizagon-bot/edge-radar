@@ -1,10 +1,2053 @@
 {
   "source": "Cito CS2 match results + ranking as of 2026-11-17",
-  "fetchedAt": null,
+  "fetchedAt": "2026-11-18T01:13:23.881Z",
   "rankingDate": "2026-11-17T00:00:00Z",
   "windowDays": 180,
   "maximumRecentMatchesPerTeam": 15,
-  "teams": [],
+  "teams": [
+    {
+      "id": "cs2-team-7187",
+      "name": "Nexus",
+      "totalReturned": 30,
+      "recent": [
+        {
+          "id": "cs2-match-2400262",
+          "startsAt": "2026-11-17T18:00:00.000Z",
+          "endsAt": "2026-11-17T19:35:08.521Z",
+          "event": "CCT 2026 Europe Series 14",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13808",
+            "name": "Walczaki",
+            "rank": 165,
+            "rankingSource": "Cito match-card worldRanking"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": "cs2-team-13808"
+            },
+            {
+              "name": "Anubis",
+              "ourRounds": 13,
+              "theirRounds": 6,
+              "pickTeamId": "cs2-team-7187"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400518",
+          "startsAt": "2026-11-17T10:20:00.000Z",
+          "endsAt": "2026-11-17T12:08:04.584Z",
+          "event": "Tipsport RUSH Brno 2026",
+          "eventTier": null,
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-10577",
+            "name": "SINNERS",
+            "rank": 37,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 4,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 8,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-10577"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400255",
+          "startsAt": "2026-11-15T18:34:28.000Z",
+          "endsAt": "2026-11-15T18:37:01.612Z",
+          "event": "CCT 2026 Europe Series 14",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-12857",
+            "name": "FORZE Reload",
+            "rank": 75,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Anubis",
+              "ourRounds": 14,
+              "theirRounds": 16,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-12857"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 6,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400248",
+          "startsAt": "2026-11-13T18:00:00.000Z",
+          "endsAt": "2026-11-13T19:47:55.905Z",
+          "event": "CCT 2026 Europe Series 14",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13901",
+            "name": "ex-RUSTEC",
+            "rank": 128,
+            "rankingSource": "Cito match-card worldRanking"
+          },
+          "maps": [
+            {
+              "name": "Dust2",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": "cs2-team-13901"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 6,
+              "pickTeamId": "cs2-team-7187"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400153",
+          "startsAt": "2026-11-13T09:00:00.000Z",
+          "endsAt": "2026-11-13T12:12:41.285Z",
+          "event": "CCT 2026 Europe Series 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-11641",
+            "name": "Metizport",
+            "rank": 69,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Anubis",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 13,
+              "theirRounds": 16,
+              "pickTeamId": "cs2-team-11641"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 5,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400148",
+          "startsAt": "2026-11-11T15:00:00.000Z",
+          "endsAt": "2026-11-11T17:58:55.817Z",
+          "event": "CCT 2026 Europe Series 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-11699",
+            "name": "BAKS",
+            "rank": 79,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 7,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-11699"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 5,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400238",
+          "startsAt": "2026-11-11T12:00:00.000Z",
+          "endsAt": "2026-11-11T13:48:54.050Z",
+          "event": "CCT 2026 Europe Series 14",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-11176",
+            "name": "MOUZ NXT",
+            "rank": 152,
+            "rankingSource": "Cito match-card worldRanking"
+          },
+          "maps": [
+            {
+              "name": "Anubis",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": "cs2-team-11176"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400142",
+          "startsAt": "2026-11-09T15:00:00.000Z",
+          "endsAt": "2026-11-09T17:40:53.202Z",
+          "event": "CCT 2026 Europe Series 12 Closed Qualifierundefined",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-13908",
+            "name": "Butterfly",
+            "rank": 86,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Dust2",
+              "ourRounds": 6,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13908"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 3,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 8,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400135",
+          "startsAt": "2026-11-07T18:05:00.000Z",
+          "endsAt": "2026-11-07T20:15:57.652Z",
+          "event": "CCT 2026 Europe Series 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-12857",
+            "name": "FORZE Reload",
+            "rank": 75,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Dust2",
+              "ourRounds": 13,
+              "theirRounds": 11,
+              "pickTeamId": "cs2-team-12857"
+            },
+            {
+              "name": "Anubis",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-7187"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400123",
+          "startsAt": "2026-11-04T18:00:00.000Z",
+          "endsAt": "2026-11-04T19:46:31.394Z",
+          "event": "CCT 2026 Europe Series 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-6089",
+            "name": "The Last Resort",
+            "rank": 134,
+            "rankingSource": "Cito match-card worldRanking"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 8,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": "cs2-team-6089"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399634",
+          "startsAt": "2026-10-22T13:15:00.000Z",
+          "endsAt": "2026-10-22T15:34:49.158Z",
+          "event": "Digital Crusade DraculaN Season 7",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-10245",
+            "name": "JiJieHao",
+            "rank": 35,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Dust2",
+              "ourRounds": 11,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 12,
+              "theirRounds": 16,
+              "pickTeamId": "cs2-team-10245"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399632",
+          "startsAt": "2026-10-21T19:35:00.000Z",
+          "endsAt": "2026-10-21T22:05:57.576Z",
+          "event": "Digital Crusade DraculaN Season 7",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13181",
+            "name": "BASEMENT BOYS",
+            "rank": 61,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Anubis",
+              "ourRounds": 2,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 5,
+              "pickTeamId": "cs2-team-13181"
+            },
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 8,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399626",
+          "startsAt": "2026-10-21T15:25:00.000Z",
+          "endsAt": "2026-10-21T18:21:49.887Z",
+          "event": "Digital Crusade DraculaN Season 7",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-10567",
+            "name": "SAW",
+            "rank": 64,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Inferno",
+              "ourRounds": 3,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-10567"
+            },
+            {
+              "name": "Anubis",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399625",
+          "startsAt": "2026-10-21T11:10:00.000Z",
+          "endsAt": "2026-10-21T14:22:48.875Z",
+          "event": "Digital Crusade DraculaN Season 7",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-12878",
+            "name": "BC.Game",
+            "rank": 46,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 1,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Cache",
+              "ourRounds": 16,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-12878"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 9,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399617",
+          "startsAt": "2026-10-20T14:25:00.000Z",
+          "endsAt": "2026-10-20T17:31:55.013Z",
+          "event": "Digital Crusade DraculaN Season 7",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-6290",
+            "name": "Luminosity",
+            "rank": 36,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 10,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-6290"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": null
+            }
+          ]
+        }
+      ],
+      "fetchedAt": "2026-11-18T01:13:23.881Z"
+    },
+    {
+      "id": "cs2-team-13104",
+      "name": "Iberian Soul",
+      "totalReturned": 30,
+      "recent": [
+        {
+          "id": "cs2-match-2400519",
+          "startsAt": "2026-11-17T12:50:00.000Z",
+          "endsAt": "2026-11-17T15:03:07.737Z",
+          "event": "Tipsport RUSH Brno 2026",
+          "eventTier": null,
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-12474",
+            "name": "Alliance",
+            "rank": 38,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Nuke",
+              "ourRounds": 10,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13104"
+            },
+            {
+              "name": "Anubis",
+              "ourRounds": 11,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-12474"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400162",
+          "startsAt": "2026-11-15T12:00:00.000Z",
+          "endsAt": "2026-11-15T14:43:04.951Z",
+          "event": "CCT 2026 Europe Series 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-13479",
+            "name": "Omega",
+            "rank": 114,
+            "rankingSource": "Cito match-card worldRanking"
+          },
+          "maps": [
+            {
+              "name": "Mirage",
+              "ourRounds": 2,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13479"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 13,
+              "theirRounds": 5,
+              "pickTeamId": "cs2-team-13104"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 10,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400159",
+          "startsAt": "2026-11-14T15:00:00.000Z",
+          "endsAt": "2026-11-14T18:20:55.191Z",
+          "event": "CCT 2026 Europe Series 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-12857",
+            "name": "FORZE Reload",
+            "rank": 75,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 8,
+              "pickTeamId": "cs2-team-12857"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 10,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13104"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399946",
+          "startsAt": "2026-11-01T16:55:00.000Z",
+          "endsAt": "2026-11-01T18:31:50.664Z",
+          "event": "HyperX Retake Season 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-10245",
+            "name": "JiJieHao",
+            "rank": 35,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Inferno",
+              "ourRounds": 13,
+              "theirRounds": 3,
+              "pickTeamId": "cs2-team-13104"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 4,
+              "pickTeamId": "cs2-team-10245"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399945",
+          "startsAt": "2026-11-01T14:05:00.000Z",
+          "endsAt": "2026-11-01T15:53:50.557Z",
+          "event": "HyperX Retake Season 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-13999",
+            "name": "WBT Academy",
+            "rank": 87,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Anubis",
+              "ourRounds": 6,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13999"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 4,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13104"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399943",
+          "startsAt": "2026-10-31T17:45:00.000Z",
+          "endsAt": "2026-10-31T20:31:50.216Z",
+          "event": "HyperX Retake Season 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-10503",
+            "name": "OG",
+            "rank": 97,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Anubis",
+              "ourRounds": 4,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-10503"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-13104"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 13,
+              "theirRounds": 2,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399930",
+          "startsAt": "2026-10-29T17:10:00.000Z",
+          "endsAt": "2026-10-29T20:51:49.640Z",
+          "event": "HyperX Retake Season 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-4863",
+            "name": "TYLOO",
+            "rank": 31,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Nuke",
+              "ourRounds": 16,
+              "theirRounds": 14,
+              "pickTeamId": "cs2-team-13104"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 8,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-4863"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 5,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399929",
+          "startsAt": "2026-10-29T14:10:00.000Z",
+          "endsAt": "2026-10-29T15:14:58.320Z",
+          "event": "HyperX Retake Season 13",
+          "eventTier": "B",
+          "bestOf": 1,
+          "ourScore": 1,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13797",
+            "name": "ZOTIX",
+            "rank": 243,
+            "rankingSource": "Cito match-card worldRanking"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 3,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399627",
+          "startsAt": "2026-10-21T15:00:00.000Z",
+          "endsAt": "2026-10-21T17:56:05.526Z",
+          "event": "Digital Crusade DraculaN Season 7",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-13181",
+            "name": "BASEMENT BOYS",
+            "rank": 61,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 16,
+              "pickTeamId": "cs2-team-13181"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-13104"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 2,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399619",
+          "startsAt": "2026-10-20T18:40:00.000Z",
+          "endsAt": "2026-10-20T21:00:48.798Z",
+          "event": "Digital Crusade DraculaN Season 7",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13333",
+            "name": "ASTRAL",
+            "rank": 93,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": "cs2-team-13333"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-13104"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399616",
+          "startsAt": "2026-10-20T15:05:00.000Z",
+          "endsAt": "2026-10-20T17:51:49.798Z",
+          "event": "Digital Crusade DraculaN Season 7",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-10245",
+            "name": "JiJieHao",
+            "rank": 35,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Inferno",
+              "ourRounds": 13,
+              "theirRounds": 3,
+              "pickTeamId": "cs2-team-13104"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 5,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-10245"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 10,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399600",
+          "startsAt": "2026-10-19T12:50:00.000Z",
+          "endsAt": "2026-10-19T13:46:03.879Z",
+          "event": "Digital Crusade DraculaN Season 7",
+          "eventTier": "A",
+          "bestOf": 1,
+          "ourScore": 1,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-11712",
+            "name": "Sashi",
+            "rank": null,
+            "rankingSource": null
+          },
+          "maps": [
+            {
+              "name": "Inferno",
+              "ourRounds": 13,
+              "theirRounds": 8,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399594",
+          "startsAt": "2026-10-19T11:00:00.000Z",
+          "endsAt": "2026-10-19T11:48:48.235Z",
+          "event": "Digital Crusade DraculaN Season 7",
+          "eventTier": "A",
+          "bestOf": 1,
+          "ourScore": 1,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13012",
+            "name": "HYPERSPIRIT",
+            "rank": null,
+            "rankingSource": null
+          },
+          "maps": [
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 5,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2398413",
+          "startsAt": "2026-10-10T16:20:00.000Z",
+          "endsAt": "2026-10-10T18:05:55.915Z",
+          "event": "CCT 2026 Europe Series 10",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-13924",
+            "name": "Black Phoenix",
+            "rank": 55,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Mirage",
+              "ourRounds": 6,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13924"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 7,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13104"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2398411",
+          "startsAt": "2026-10-10T10:00:00.000Z",
+          "endsAt": "2026-10-10T13:11:50.471Z",
+          "event": "CCT 2026 Europe Series 10",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-7969",
+            "name": "Nemiga",
+            "rank": 11,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": "cs2-team-7969"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 13,
+              "theirRounds": 16,
+              "pickTeamId": "cs2-team-13104"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": null
+            }
+          ]
+        }
+      ],
+      "fetchedAt": "2026-11-18T01:13:23.881Z"
+    },
+    {
+      "id": "cs2-team-12916",
+      "name": "Betclic",
+      "totalReturned": 30,
+      "recent": [
+        {
+          "id": "cs2-match-2400283",
+          "startsAt": "2026-11-17T11:00:00.000Z",
+          "endsAt": "2026-11-17T12:40:48.659Z",
+          "event": "Stake Ranked Episode 6",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-13117",
+            "name": "Inner Circle",
+            "rank": 39,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Nuke",
+              "ourRounds": 5,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 9,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13117"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400399",
+          "startsAt": "2026-11-16T12:27:09.000Z",
+          "endsAt": "2026-11-16T12:27:54.549Z",
+          "event": "European Pro League Series 10",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-13945",
+            "name": "MAYBE",
+            "rank": 122,
+            "rankingSource": "Cito match-card worldRanking"
+          },
+          "maps": [
+            {
+              "name": "Anubis",
+              "ourRounds": 17,
+              "theirRounds": 19,
+              "pickTeamId": "cs2-team-13945"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 13,
+              "theirRounds": 5,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 10,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400164",
+          "startsAt": "2026-11-15T21:08:01.000Z",
+          "endsAt": "2026-11-15T21:10:17.838Z",
+          "event": "CCT 2026 Europe Series 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-14030",
+            "name": "PRIVATE",
+            "rank": 45,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Anubis",
+              "ourRounds": 10,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 16,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-14030"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 8,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400155",
+          "startsAt": "2026-11-13T15:15:00.000Z",
+          "endsAt": "2026-11-13T17:06:03.440Z",
+          "event": "CCT 2026 Europe Series 13",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-11446",
+            "name": "Leo",
+            "rank": 90,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Nuke",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": "cs2-team-11446"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": "cs2-team-12916"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399532",
+          "startsAt": "2026-11-01T18:00:00.000Z",
+          "endsAt": "2026-11-01T20:16:58.228Z",
+          "event": "CCT 2026 Europe Series 12",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13679",
+            "name": "FOKUS",
+            "rank": 57,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": "cs2-team-13679"
+            },
+            {
+              "name": "Anubis",
+              "ourRounds": 16,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-12916"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399530",
+          "startsAt": "2026-11-01T11:00:00.000Z",
+          "endsAt": "2026-11-01T14:19:50.005Z",
+          "event": "CCT 2026 Europe Series 12",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13173",
+            "name": "Phantom",
+            "rank": 63,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-13173"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 17,
+              "theirRounds": 19,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Anubis",
+              "ourRounds": 13,
+              "theirRounds": 2,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399527",
+          "startsAt": "2026-10-31T12:00:00.000Z",
+          "endsAt": "2026-10-31T13:49:49.573Z",
+          "event": "CCT 2026 Europe Series 12",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-10278",
+            "name": "9INE",
+            "rank": 111,
+            "rankingSource": "Cito match-card worldRanking"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 6,
+              "pickTeamId": "cs2-team-10278"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": "cs2-team-12916"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399524",
+          "startsAt": "2026-10-30T15:00:00.000Z",
+          "endsAt": "2026-10-30T16:43:07.467Z",
+          "event": "CCT 2026 Europe Series 12",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-11719",
+            "name": "Illyrians",
+            "rank": 84,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 11,
+              "pickTeamId": "cs2-team-11719"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399784",
+          "startsAt": "2026-10-22T14:00:00.000Z",
+          "endsAt": "2026-10-22T16:47:54.050Z",
+          "event": "Stake Ranked Episode 6 Closed Qualifier",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-12267",
+            "name": "UNiTY",
+            "rank": 72,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 11,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-12267"
+            },
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 6,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 4,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399781",
+          "startsAt": "2026-10-21T12:25:00.000Z",
+          "endsAt": "2026-10-21T14:08:57.019Z",
+          "event": "Stake Ranked Episode 6 Closed Qualifier",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-6810",
+            "name": "aimclub",
+            "rank": 82,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": "cs2-team-6810"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399666",
+          "startsAt": "2026-10-20T14:00:00.000Z",
+          "endsAt": "2026-10-20T16:19:49.126Z",
+          "event": "PGL Bucharest 2027 Closed Qualifier",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13355",
+            "name": "Nemesis",
+            "rank": 52,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": "cs2-team-13355"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399664",
+          "startsAt": "2026-10-19T14:00:00.000Z",
+          "endsAt": "2026-10-19T16:56:58.654Z",
+          "event": "PGL Bucharest 2027 Closed Qualifier",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-13996",
+            "name": "BBL",
+            "rank": 50,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 9,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 13,
+              "theirRounds": 11,
+              "pickTeamId": "cs2-team-13996"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 5,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399772",
+          "startsAt": "2026-10-19T09:00:00.000Z",
+          "endsAt": "2026-10-19T11:53:55.640Z",
+          "event": "Stake Ranked Episode 6 Closed Qualifier",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-7900",
+            "name": "Spirit Academy",
+            "rank": 95,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Nuke",
+              "ourRounds": 9,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7900"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399660",
+          "startsAt": "2026-10-17T14:10:00.000Z",
+          "endsAt": "2026-10-17T16:05:57.955Z",
+          "event": "PGL Bucharest 2027 Closed Qualifier",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13355",
+            "name": "Nemesis",
+            "rank": 52,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 11,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-13355"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399654",
+          "startsAt": "2026-10-16T08:30:00.000Z",
+          "endsAt": "2026-10-16T11:31:51.352Z",
+          "event": "PGL Bucharest 2027 Closed Qualifier",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-11251",
+            "name": "Eternal Fire",
+            "rank": 22,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Anubis",
+              "ourRounds": 7,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-12916"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 13,
+              "theirRounds": 11,
+              "pickTeamId": "cs2-team-11251"
+            },
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": null
+            }
+          ]
+        }
+      ],
+      "fetchedAt": "2026-11-18T01:13:23.881Z"
+    },
+    {
+      "id": "cs2-team-7532",
+      "name": "BIG",
+      "totalReturned": 30,
+      "recent": [
+        {
+          "id": "cs2-match-2400284",
+          "startsAt": "2026-11-17T13:00:00.000Z",
+          "endsAt": "2026-11-17T15:03:59.622Z",
+          "event": "Stake Ranked Episode 6",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-10333",
+            "name": "Sangal",
+            "rank": 41,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Nuke",
+              "ourRounds": 11,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-10333"
+            },
+            {
+              "name": "Cache",
+              "ourRounds": 14,
+              "theirRounds": 16,
+              "pickTeamId": "cs2-team-7532"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399714",
+          "startsAt": "2026-10-29T11:00:00.000Z",
+          "endsAt": "2026-10-29T12:41:53.494Z",
+          "event": "Stake Ranked Episode 5",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-11251",
+            "name": "Eternal Fire",
+            "rank": 22,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 9,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-11251"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 4,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7532"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399711",
+          "startsAt": "2026-10-28T17:10:00.000Z",
+          "endsAt": "2026-10-28T18:59:50.843Z",
+          "event": "Stake Ranked Episode 5",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-4991",
+            "name": "fnatic",
+            "rank": 25,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 6,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-4991"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 11,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7532"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399705",
+          "startsAt": "2026-10-27T11:00:00.000Z",
+          "endsAt": "2026-10-27T14:08:49.921Z",
+          "event": "Stake Ranked Episode 5",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13592",
+            "name": "magic",
+            "rank": 28,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 10,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13592"
+            },
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": "cs2-team-7532"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 11,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2399001",
+          "startsAt": "2026-10-22T11:00:00.000Z",
+          "endsAt": "2026-10-22T14:01:51.685Z",
+          "event": "1win Private Club Season 2",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-6248",
+            "name": "The MongolZ",
+            "rank": 10,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 4,
+              "pickTeamId": "cs2-team-7532"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 3,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-6248"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 7,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2398999",
+          "startsAt": "2026-10-21T15:05:00.000Z",
+          "endsAt": "2026-10-21T17:16:50.558Z",
+          "event": "1win Private Club Season 2",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-12467",
+            "name": "PARIVISION",
+            "rank": 13,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 9,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7532"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 7,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-12467"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2398995",
+          "startsAt": "2026-10-20T14:20:00.000Z",
+          "endsAt": "2026-10-20T16:12:48.032Z",
+          "event": "1win Private Club Season 2",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-6248",
+            "name": "The MongolZ",
+            "rank": 10,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 8,
+              "pickTeamId": "cs2-team-7532"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 4,
+              "pickTeamId": "cs2-team-6248"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2398989",
+          "startsAt": "2026-10-19T12:10:00.000Z",
+          "endsAt": "2026-10-19T14:08:04.259Z",
+          "event": "1win Private Club Season 2",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-14030",
+            "name": "PRIVATE",
+            "rank": 45,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 5,
+              "pickTeamId": "cs2-team-7532"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 10,
+              "pickTeamId": "cs2-team-14030"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2398004",
+          "startsAt": "2026-10-03T10:00:00.000Z",
+          "endsAt": "2026-10-03T12:45:50.930Z",
+          "event": "Stake Ranked Episode 4",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-6665",
+            "name": "Astralis",
+            "rank": 20,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 5,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-6665"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 13,
+              "theirRounds": 11,
+              "pickTeamId": "cs2-team-7532"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 1,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2398002",
+          "startsAt": "2026-10-02T15:30:00.000Z",
+          "endsAt": "2026-10-02T18:22:52.282Z",
+          "event": "Stake Ranked Episode 4",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-6290",
+            "name": "Luminosity",
+            "rank": 36,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Inferno",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": "cs2-team-6290"
+            },
+            {
+              "name": "Cache",
+              "ourRounds": 5,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7532"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 16,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2397939",
+          "startsAt": "2026-10-01T12:15:00.000Z",
+          "endsAt": "2026-10-01T15:12:50.242Z",
+          "event": "Stake Ranked Episode 4",
+          "eventTier": "B",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-4991",
+            "name": "fnatic",
+            "rank": 25,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 11,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-4991"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 13,
+              "theirRounds": 11,
+              "pickTeamId": "cs2-team-7532"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2397605",
+          "startsAt": "2026-09-09T08:10:00.000Z",
+          "endsAt": "2026-09-09T11:34:05.185Z",
+          "event": "FISSURE Playground 3",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-5995",
+            "name": "G2",
+            "rank": 12,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 8,
+              "pickTeamId": "cs2-team-7532"
+            },
+            {
+              "name": "Mirage",
+              "ourRounds": 7,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-5995"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 10,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2397601",
+          "startsAt": "2026-09-08T09:25:00.000Z",
+          "endsAt": "2026-09-08T11:24:30.551Z",
+          "event": "FISSURE Playground 3",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-12394",
+            "name": "BETBOOM",
+            "rank": 7,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Cache",
+              "ourRounds": 8,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7532"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 9,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-12394"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2397325",
+          "startsAt": "2026-09-03T12:00:00.000Z",
+          "endsAt": "2026-09-03T14:34:27.235Z",
+          "event": "IEM Beijing 2026 Closed Qualifier",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-13592",
+            "name": "magic",
+            "rank": 28,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 5,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13592"
+            },
+            {
+              "name": "Cache",
+              "ourRounds": 17,
+              "theirRounds": 19,
+              "pickTeamId": "cs2-team-7532"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2397321",
+          "startsAt": "2026-09-02T19:00:00.000Z",
+          "endsAt": "2026-09-02T21:18:26.955Z",
+          "event": "IEM Beijing 2026 Closed Qualifier",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-4773",
+            "name": "paiN",
+            "rank": 40,
+            "rankingSource": "Cito 2026-11-17 rankings"
+          },
+          "maps": [
+            {
+              "name": "Dust2",
+              "ourRounds": 13,
+              "theirRounds": 6,
+              "pickTeamId": "cs2-team-4773"
+            },
+            {
+              "name": "Cache",
+              "ourRounds": 13,
+              "theirRounds": 8,
+              "pickTeamId": "cs2-team-7532"
+            }
+          ]
+        }
+      ],
+      "fetchedAt": "2026-11-18T01:13:23.881Z"
+    }
+  ],
   "warnings": [],
   "method": "Tendência recente e força dos últimos adversários. Ranking conhecido na data de captura, não na data histórica da partida. Registros apenas de partidas completadas."
 }
