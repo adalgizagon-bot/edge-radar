@@ -66,7 +66,9 @@
       text('span','','Modelo '+fmtProb(x.modelP)));
      main.append(stats);
      const more=text('div','series-signal-details');
-     more.textContent='Faixa entre vetos simulados '+fmtProb(x.modelRange.min)+'–'+fmtProb(x.modelRange.max)+
+     more.textContent='Odd de equilíbrio do modelo (teórica): '+fmtOdd(1/x.modelP)+
+       ' · Faixa entre vetos simulados '+fmtProb(x.modelRange.min)+'–'+fmtProb(x.modelRange.max)+
+       ' · Margem do mercado capturado: '+(100*(x.marketOverround-1)).toLocaleString('pt-BR',{maximumFractionDigits:1})+'%'+
        ' · '+m.model.commonMaps.length+' mapas elegíveis · '+risk(m);
      main.append(more);
      const side=text('div','series-signal-side');
