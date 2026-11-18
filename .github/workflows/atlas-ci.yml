@@ -35,6 +35,8 @@ jobs:
           node --check public/opportunities-core.js
           node --check public/opportunities.js
           node --check scripts/model.mjs
+          node --check scripts/series-model.mjs
+          node --check public/series-radar.js
           node --check scripts/refresh.mjs
       - name: Testes probabilísticos e painel de chances
-        run: node --test tests/model.test.mjs tests/opportunities.test.cjs
+        run: node --test tests/model.test.mjs tests/opportunities.test.cjs tests/series-model.test.mjs tests/simulator.test.cjs
