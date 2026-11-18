@@ -32,7 +32,9 @@ jobs:
           node --check public/tournaments.js
           node --check public/players.js
           node --check public/validation.js
+          node --check public/opportunities-core.js
+          node --check public/opportunities.js
           node --check scripts/model.mjs
           node --check scripts/refresh.mjs
-      - name: Testes probabilísticos
-        run: node --test tests/model.test.mjs
+      - name: Testes probabilísticos e painel de chances
+        run: node --test tests/model.test.mjs tests/opportunities.test.cjs
