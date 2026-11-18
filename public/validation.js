@@ -29,7 +29,7 @@ function renderValidationTable(){
  const root=document.getElementById('validation-table');root.textContent='';
  if(!selected.length){root.append(vNode('p','muted','Nenhuma previsão neste filtro.'));return}
  const table=vNode('table','records');table.innerHTML='<thead><tr><th>Partida</th><th>Mapa</th><th>Mercado</th><th>Probabilidade</th><th>Registro pré-jogo</th><th>Resultado</th></tr></thead><tbody></tbody>';
- for(const f of selected.slice(0,80)){
+ for(const f of selected){
   const tr=vNode('tr'),assessment=byId.get(f.id);
   for(const content of [f.teamA+' × '+f.teamB,f.map,f.label,vPct(f.probability),vWhen(f.snapshotAt),
    assessment?(assessment.outcome?'Ocorreu':'Não ocorreu')+' · Brier '+assessment.brier:'Pendente']){
@@ -37,7 +37,7 @@ function renderValidationTable(){
   table.querySelector('tbody').append(tr);
  }
  root.append(table);
- if(selected.length>80)root.append(vNode('p','muted','Exibindo 80 de '+selected.length+' previsões filtradas.'));
+ root.append(vNode('p','muted','Exibindo '+selected.length+' previsões filtradas.'));
 }
 async function startValidation(){
  try{
@@ -50,6 +50,15 @@ async function startValidation(){
  document.getElementById('validation-total').textContent=predictions.forecasts.length;
  document.getElementById('validation-resolved').textContent=checks.resolved||0;
  document.getElementById('validation-market-count').textContent=new Set(predictions.forecasts.map(x=>x.kind)).size;
+ const markets=new Set(predictions.forecasts.map(x=>x.kind)).size;
+ const homeTotal=document.getElementById('home-cito-total');
+ const homeResolved=document.getElementById('home-cito-resolved');
+ const homeMarkets=document.getElementById('home-cito-markets');
+ const homeBrier=document.getElementById('home-cito-brier');
+ if(homeTotal)homeTotal.textContent=String(predictions.forecasts.length);
+ if(homeResolved)homeResolved.textContent=String(checks.resolved||0);
+ if(homeMarkets)homeMarkets.textContent=String(markets);
+ if(homeBrier){const verified=checks.assessed||[];const score=verified.length?verified.reduce((a,r)=>a+Number(r.brier||0),0)/verified.length:null;homeBrier.textContent=score===null?'—':score.toFixed(3)}
  document.getElementById('validation-last').textContent=vWhen(checks.computedAt||predictions.generatedAt);
  document.getElementById('validation-model').textContent=predictions.model||'Modelo não informado';
  document.getElementById('validation-source-note').textContent=
