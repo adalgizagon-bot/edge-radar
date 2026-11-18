@@ -78,8 +78,13 @@
     };
   }
   function initialSelections(signals,slots){
-    const unique=onePerGame(signals.filter(s=>s.upcoming));
-    return unique.slice(0,Math.max(0,Math.min(8,slots)));
+    const future=(signals||[]).filter(s=>s.upcoming);
+    // Prefer at least eight map observations when available. Some matches have no such market;
+    // only then fall back to smaller samples and label that exposure in the UI.
+    const selected=new Map();
+    for(const s of onePerGame(future.filter(s=>s.sample>=8)))selected.set(s.matchId,s);
+    for(const s of onePerGame(future))if(!selected.has(s.matchId))selected.set(s.matchId,s);
+    return [...selected.values()].sort((a,b)=>b.score-a.score).slice(0,Math.max(0,Math.min(8,slots)));
   }
   const publicAPI={MARKET_NAMES,assemble,filtered,onePerGame,groupedGames,combinationStats,initialSelections,isEligible,sampleSize,rankValue};
   root.AtlasOpportunityCore=publicAPI;
