@@ -158,14 +158,14 @@
    <div class="radar-primary">
      <section class="radar-panel radar-ranking">
        <div class="radar-title-row">
-         <div><span class="tiny-kicker">RADAR DE MERCADOS</span><h2>Melhores chances</h2><p>Ordenadas pela probabilidade do modelo com desconto para amostras pequenas.</p></div>
+         <div><span class="tiny-kicker">RADAR DE MERCADOS</span><h2>Melhores chances</h2><p>Prioridade para amostras maiores. A ordenação é exploratória, não um índice de acerto.</p></div>
          <div class="radar-count-pill" id="radar-filter-count">— sinais</div>
        </div>
        <div class="radar-controls">
         <label>Campeonato<select id="radar-event" aria-label="Filtrar campeonato"><option value="all">Todos os campeonatos</option><option value="cs2-event-9258">Stake Ranked Episode 6</option><option value="cs2-event-9273">Tipsport RUSH Brno 2026</option></select></label>
         <label>Mercado<select id="radar-market" aria-label="Filtrar mercado"><option value="all">Todos os mercados</option><option value="map_a">Vencedor de mapa</option><option value="rounds_over_21_5">Total de rounds</option><option value="handicap_a_minus_2_5">Handicap de mapa</option><option value="kills_over_15_5">Kills dos jogadores</option></select></label>
         <label>Probabilidade mínima<select id="radar-minimum" aria-label="Filtrar probabilidade"><option value="0.50">50% ou mais</option><option value="0.60">60% ou mais</option><option value="0.70">70% ou mais</option><option value="0.80">80% ou mais</option></select></label>
-        <label>Cobertura<select id="radar-quality" aria-label="Filtrar cobertura histórica"><option value="all">Todas as amostras</option><option value="8">8+ mapas por lado</option><option value="12">12+ mapas por lado</option></select></label>
+        <label>Cobertura<select id="radar-quality" aria-label="Filtrar cobertura histórica"><option value="8" selected>8+ mapas por lado</option><option value="all">Todas as amostras</option><option value="12">12+ mapas por lado</option></select></label>
        </div>
        <div class="radar-sample-note">Cada sinal corresponde a um <b>mercado em um mapa específico</b>; ele só poderá ser conferido se esse mapa acontecer. Uma equipe pode aparecer em vários mercados, mas as combinações permitem somente um mercado por jogo.</div>
        <div id="radar-ranked-list" class="radar-ranked-list"><p class="muted">Carregando estatísticas...</p></div>
@@ -181,7 +181,7 @@
          <button type="button" data-radar-preset="4">4 jogos</button>
          <button type="button" data-radar-preset="8">8 jogos</button>
        </div>
-       <p class="radar-combo-help" id="radar-combo-help">Seleções escolhidas automaticamente como ponto de partida. Você pode trocar cada mercado.</p>
+       <p class="radar-combo-help" id="radar-combo-help">Seleções escolhidas automaticamente como ponto de partida, priorizando amostras maiores. Você pode trocar cada mercado.</p>
        <div id="radar-combo-legs" class="radar-combo-legs"></div>
        <div id="radar-combo-summary" class="radar-combo-summary"></div>
        <div class="radar-combo-actions">
