@@ -1,0 +1,681 @@
+{
+  "version": "atlas-rank-strength-challenger-v2-prototype",
+  "generatedAt": "2026-11-18T23:17:21.663Z",
+  "trainedOnToday": false,
+  "createdAfterResults": true,
+  "prospectivelyValidated": false,
+  "note": "RETROSPECTIVE DESIGN, NOT AN OUT-OF-SAMPLE EVALUATION. Inputs were pregame snapshots; formula was designed after seeing results. Do not use as betting advice.",
+  "inputSnapshots": {
+    "rankingsAt": "2026-11-18T01:12:40.903Z",
+    "opponentsAt": "2026-11-18T08:21:48.422Z",
+    "seriesAt": "2026-11-18T00:55:32.513Z"
+  },
+  "forecasts": [
+    {
+      "matchId": "cs2-match-2400522",
+      "startsAt": "2026-11-18T10:00:00.000Z",
+      "teamA": "Nexus",
+      "teamB": "Iberian Soul",
+      "version": "atlas-rank-strength-challenger-v2-prototype",
+      "inputSnapshots": {
+        "original": "2026-11-18T00:55:32.513Z",
+        "form": "2026-11-18T08:21:48.422Z"
+      },
+      "rankA": 51,
+      "rankB": 53,
+      "rankPriorA": 0.5062504450136134,
+      "rankPriorFormula": "sigmoid(0.65 × ln(rankB/rankA))",
+      "formA": {
+        "residual": 0.02779794110744123,
+        "usable": 15,
+        "weighted": 12.380855493819624
+      },
+      "formB": {
+        "residual": 0.008628891325050824,
+        "usable": 13,
+        "weighted": 9.703212479358793
+      },
+      "formDeltaLogit": 0.004451714811619015,
+      "mapWeight": 0.3,
+      "rankedWeight": 0.7,
+      "maps": 5,
+      "minimumMapHistory": 5,
+      "probabilities": {
+        "aWin": 0.5426390415722748,
+        "bWin": 0.4573609584277251,
+        "a20": 0.2781220934964968,
+        "a21": 0.2645169480757781,
+        "b20": 0.2215601755347131,
+        "b21": 0.235800782893012,
+        "aMinus1_5": 0.2781220934964968,
+        "bPlus1_5": 0.7218779065035033,
+        "aPlus1_5": 0.7784398244652869,
+        "bMinus1_5": 0.2215601755347131,
+        "over2_5": 0.5003177309687901,
+        "under2_5": 0.49968226903120994
+      },
+      "sensitivity": {
+        "aWin": {
+          "min": 0.49919328023113246,
+          "max": 0.6016088307799525
+        },
+        "bWin": {
+          "min": 0.39839116922004736,
+          "max": 0.5008067197688675
+        },
+        "a20": {
+          "min": 0.21589821180381105,
+          "max": 0.32696069909981285
+        },
+        "a21": {
+          "min": 0.20018147152718302,
+          "max": 0.29520393011173723
+        },
+        "b20": {
+          "min": 0.18331713845125508,
+          "max": 0.278961364801937
+        },
+        "b21": {
+          "min": 0.2084089103667927,
+          "max": 0.293591129567313
+        },
+        "aMinus1_5": {
+          "min": 0.21589821180381105,
+          "max": 0.32696069909981285
+        },
+        "bPlus1_5": {
+          "min": 0.6730393009001872,
+          "max": 0.7841017881961889
+        },
+        "aPlus1_5": {
+          "min": 0.721038635198063,
+          "max": 0.8166828615487449
+        },
+        "bMinus1_5": {
+          "min": 0.18331713845125508,
+          "max": 0.278961364801937
+        },
+        "over2_5": {
+          "min": 0.489722162448932,
+          "max": 0.513909979175649
+        },
+        "under2_5": {
+          "min": 0.48609002082435093,
+          "max": 0.5102778375510679
+        }
+      },
+      "qualityWarning": "Exploratory rank and recent-form adjustment. NOT prospectively validated. Original forecasts are untouched."
+    },
+    {
+      "matchId": "cs2-match-2400440",
+      "startsAt": "2026-11-18T11:00:00.000Z",
+      "teamA": "Betclic",
+      "teamB": "BIG",
+      "version": "atlas-rank-strength-challenger-v2-prototype",
+      "inputSnapshots": {
+        "original": "2026-11-18T00:55:32.513Z",
+        "form": "2026-11-18T08:21:48.422Z"
+      },
+      "rankA": 54,
+      "rankB": 34,
+      "rankPriorA": 0.4253850784240558,
+      "rankPriorFormula": "sigmoid(0.65 × ln(rankB/rankA))",
+      "formA": {
+        "residual": 0.0999878676438013,
+        "usable": 15,
+        "weighted": 11.319230262453976
+      },
+      "formB": {
+        "residual": -0.10396025834048432,
+        "usable": 15,
+        "weighted": 8.490272352995303
+      },
+      "formDeltaLogit": 0.045888328346464266,
+      "mapWeight": 0.3,
+      "rankedWeight": 0.7,
+      "maps": 3,
+      "minimumMapHistory": 7,
+      "probabilities": {
+        "aWin": 0.47859968988350143,
+        "bWin": 0.5214003101164986,
+        "a20": 0.23573391695528936,
+        "a21": 0.2428657729282121,
+        "b20": 0.26424431771750545,
+        "b21": 0.25715599239899306,
+        "aMinus1_5": 0.23573391695528936,
+        "bPlus1_5": 0.7642660830447107,
+        "aPlus1_5": 0.7357556822824945,
+        "bMinus1_5": 0.26424431771750545,
+        "over2_5": 0.5000217653272052,
+        "under2_5": 0.4999782346727948
+      },
+      "sensitivity": {
+        "aWin": {
+          "min": 0.47859968988350143,
+          "max": 0.47859968988350143
+        },
+        "bWin": {
+          "min": 0.5214003101164986,
+          "max": 0.5214003101164986
+        },
+        "a20": {
+          "min": 0.22287672378160506,
+          "max": 0.24706810122380723
+        },
+        "a21": {
+          "min": 0.23153158865969423,
+          "max": 0.2557229661018964
+        },
+        "b20": {
+          "min": 0.2524633576120368,
+          "max": 0.278486504217451
+        },
+        "b21": {
+          "min": 0.2429138058990475,
+          "max": 0.26893695250446176
+        },
+        "aMinus1_5": {
+          "min": 0.22287672378160506,
+          "max": 0.24706810122380723
+        },
+        "bPlus1_5": {
+          "min": 0.7529318987761928,
+          "max": 0.7771232762183949
+        },
+        "aPlus1_5": {
+          "min": 0.721513495782549,
+          "max": 0.7475366423879632
+        },
+        "bMinus1_5": {
+          "min": 0.2524633576120368,
+          "max": 0.278486504217451
+        },
+        "over2_5": {
+          "min": 0.4986367720009439,
+          "max": 0.5009599828165155
+        },
+        "under2_5": {
+          "min": 0.49904001718348445,
+          "max": 0.5013632279990561
+        }
+      },
+      "qualityWarning": "Exploratory rank and recent-form adjustment. NOT prospectively validated. Original forecasts are untouched."
+    },
+    {
+      "matchId": "cs2-match-2400523",
+      "startsAt": "2026-11-18T13:00:00.000Z",
+      "teamA": "Phantom",
+      "teamB": "Metizport",
+      "version": "atlas-rank-strength-challenger-v2-prototype",
+      "inputSnapshots": {
+        "original": "2026-11-18T00:55:32.513Z",
+        "form": "2026-11-18T08:21:48.422Z"
+      },
+      "rankA": 63,
+      "rankB": 69,
+      "rankPriorA": 0.5147786080275129,
+      "rankPriorFormula": "sigmoid(0.65 × ln(rankB/rankA))",
+      "formA": {
+        "residual": 0.14009682188419983,
+        "usable": 14,
+        "weighted": 10.214066724148736
+      },
+      "formB": {
+        "residual": 0.020442869273374867,
+        "usable": 14,
+        "weighted": 10.356125485142108
+      },
+      "formDeltaLogit": 0.025993789705110258,
+      "mapWeight": 0.3,
+      "rankedWeight": 0.7,
+      "maps": 5,
+      "minimumMapHistory": 7,
+      "probabilities": {
+        "aWin": 0.4968039040484989,
+        "bWin": 0.503196095951501,
+        "a20": 0.2474806471990449,
+        "a21": 0.249323256849454,
+        "b20": 0.251764118864393,
+        "b21": 0.25143197708710807,
+        "aMinus1_5": 0.2474806471990449,
+        "bPlus1_5": 0.752519352800955,
+        "aPlus1_5": 0.748235881135607,
+        "bMinus1_5": 0.251764118864393,
+        "over2_5": 0.5007552339365621,
+        "under2_5": 0.4992447660634379
+      },
+      "sensitivity": {
+        "aWin": {
+          "min": 0.4667213581375402,
+          "max": 0.5376286960739501
+        },
+        "bWin": {
+          "min": 0.46237130392604986,
+          "max": 0.5332786418624599
+        },
+        "a20": {
+          "min": 0.2078221298077158,
+          "max": 0.278669595125794
+        },
+        "a21": {
+          "min": 0.21190546933501464,
+          "max": 0.2661850427132441
+        },
+        "b20": {
+          "min": 0.22288628071714783,
+          "max": 0.29384898876929527
+        },
+        "b21": {
+          "min": 0.23522467624650392,
+          "max": 0.287792020154689
+        },
+        "aMinus1_5": {
+          "min": 0.2078221298077158,
+          "max": 0.278669595125794
+        },
+        "bPlus1_5": {
+          "min": 0.721330404874206,
+          "max": 0.7921778701922841
+        },
+        "aPlus1_5": {
+          "min": 0.7061510112307048,
+          "max": 0.7771137192828521
+        },
+        "bMinus1_5": {
+          "min": 0.22288628071714783,
+          "max": 0.29384898876929527
+        },
+        "over2_5": {
+          "min": 0.4983288814229889,
+          "max": 0.504188464852335
+        },
+        "under2_5": {
+          "min": 0.49581153514766496,
+          "max": 0.5016711185770111
+        }
+      },
+      "qualityWarning": "Exploratory rank and recent-form adjustment. NOT prospectively validated. Original forecasts are untouched."
+    },
+    {
+      "matchId": "cs2-match-2400441",
+      "startsAt": "2026-11-18T13:30:00.000Z",
+      "teamA": "UNiTY",
+      "teamB": "GamerLegion",
+      "version": "atlas-rank-strength-challenger-v2-prototype",
+      "inputSnapshots": {
+        "original": "2026-11-18T00:55:32.513Z",
+        "form": "2026-11-18T08:21:48.422Z"
+      },
+      "rankA": 72,
+      "rankB": 27,
+      "rankPriorA": 0.3458030602061639,
+      "rankPriorFormula": "sigmoid(0.65 × ln(rankB/rankA))",
+      "formA": {
+        "residual": 0.24587974917809471,
+        "usable": 14,
+        "weighted": 8.333668819682742
+      },
+      "formB": {
+        "residual": -0.10826347985050307,
+        "usable": 13,
+        "weighted": 8.28719311837362
+      },
+      "formDeltaLogit": 0.07603459003898247,
+      "mapWeight": 0.45,
+      "rankedWeight": 0.55,
+      "maps": 4,
+      "minimumMapHistory": 9,
+      "probabilities": {
+        "aWin": 0.4699446357195609,
+        "bWin": 0.5300553642804391,
+        "a20": 0.22883664258257622,
+        "a21": 0.2411079931369847,
+        "b20": 0.2686707868015627,
+        "b21": 0.26138457747887645,
+        "aMinus1_5": 0.22883664258257622,
+        "bPlus1_5": 0.7711633574174238,
+        "aPlus1_5": 0.7313292131984372,
+        "bMinus1_5": 0.2686707868015627,
+        "over2_5": 0.5024925706158612,
+        "under2_5": 0.49750742938413894
+      },
+      "sensitivity": {
+        "aWin": {
+          "min": 0.4213299006239587,
+          "max": 0.5190101560648798
+        },
+        "bWin": {
+          "min": 0.48098984393512023,
+          "max": 0.5786700993760414
+        },
+        "a20": {
+          "min": 0.17682978947168762,
+          "max": 0.2875704959041065
+        },
+        "a21": {
+          "min": 0.19107907986040656,
+          "max": 0.28875933530132764
+        },
+        "b20": {
+          "min": 0.21208378126389582,
+          "max": 0.3319847925498713
+        },
+        "b21": {
+          "min": 0.20742213766989986,
+          "max": 0.3124517798977278
+        },
+        "aMinus1_5": {
+          "min": 0.17682978947168762,
+          "max": 0.2875704959041065
+        },
+        "bPlus1_5": {
+          "min": 0.7124295040958935,
+          "max": 0.8231702105283124
+        },
+        "aPlus1_5": {
+          "min": 0.6680152074501287,
+          "max": 0.7879162187361042
+        },
+        "bMinus1_5": {
+          "min": 0.21208378126389582,
+          "max": 0.3319847925498713
+        },
+        "over2_5": {
+          "min": 0.49118541797844106,
+          "max": 0.5182954506377255
+        },
+        "under2_5": {
+          "min": 0.4817045493622746,
+          "max": 0.5088145820215589
+        }
+      },
+      "qualityWarning": "Exploratory rank and recent-form adjustment. NOT prospectively validated. Original forecasts are untouched."
+    },
+    {
+      "matchId": "cs2-match-2400524",
+      "startsAt": "2026-11-18T16:00:00.000Z",
+      "teamA": "SINNERS",
+      "teamB": "Alliance",
+      "version": "atlas-rank-strength-challenger-v2-prototype",
+      "inputSnapshots": {
+        "original": "2026-11-18T00:55:32.513Z",
+        "form": "2026-11-18T08:21:48.422Z"
+      },
+      "rankA": 37,
+      "rankB": 38,
+      "rankPriorA": 0.5043334816409936,
+      "rankPriorFormula": "sigmoid(0.65 × ln(rankB/rankA))",
+      "formA": {
+        "residual": 0.1655688463491775,
+        "usable": 14,
+        "weighted": 8.28002261425167
+      },
+      "formB": {
+        "residual": 0.012048620613589313,
+        "usable": 15,
+        "weighted": 12.893522172827545
+      },
+      "formDeltaLogit": 0.03325746491366028,
+      "mapWeight": 0.3,
+      "rankedWeight": 0.7,
+      "maps": 6,
+      "minimumMapHistory": 4,
+      "probabilities": {
+        "aWin": 0.5605416560945541,
+        "bWin": 0.43945834390544614,
+        "a20": 0.2913991849799405,
+        "a21": 0.2691424711146136,
+        "b20": 0.21068869651068706,
+        "b21": 0.2287696473947591,
+        "aMinus1_5": 0.2913991849799405,
+        "bPlus1_5": 0.7086008150200596,
+        "aPlus1_5": 0.7893113034893129,
+        "bMinus1_5": 0.21068869651068706,
+        "over2_5": 0.49791211850937267,
+        "under2_5": 0.5020878814906276
+      },
+      "sensitivity": {
+        "aWin": {
+          "min": 0.4883252478192033,
+          "max": 0.6314883745656612
+        },
+        "bWin": {
+          "min": 0.3685116254343389,
+          "max": 0.5116747521807967
+        },
+        "a20": {
+          "min": 0.225755601350316,
+          "max": 0.36423387804546914
+        },
+        "a21": {
+          "min": 0.22562135209767623,
+          "max": 0.3126767340424831
+        },
+        "b20": {
+          "min": 0.15680979459608904,
+          "max": 0.27544554855019804
+        },
+        "b21": {
+          "min": 0.18658328155130285,
+          "max": 0.2670793037307306
+        },
+        "aMinus1_5": {
+          "min": 0.225755601350316,
+          "max": 0.36423387804546914
+        },
+        "bPlus1_5": {
+          "min": 0.6357661219545309,
+          "max": 0.774244398649684
+        },
+        "aPlus1_5": {
+          "min": 0.7245544514498019,
+          "max": 0.843190205403911
+        },
+        "bMinus1_5": {
+          "min": 0.15680979459608904,
+          "max": 0.27544554855019804
+        },
+        "over2_5": {
+          "min": 0.47895632735844185,
+          "max": 0.5068868313339557
+        },
+        "under2_5": {
+          "min": 0.49311316866604427,
+          "max": 0.5210436726415582
+        }
+      },
+      "qualityWarning": "Exploratory rank and recent-form adjustment. NOT prospectively validated. Original forecasts are untouched."
+    },
+    {
+      "matchId": "cs2-match-2400442",
+      "startsAt": "2026-11-18T16:00:00.000Z",
+      "teamA": "Inner Circle",
+      "teamB": "Sangal",
+      "version": "atlas-rank-strength-challenger-v2-prototype",
+      "inputSnapshots": {
+        "original": "2026-11-18T00:55:32.513Z",
+        "form": "2026-11-18T08:21:48.422Z"
+      },
+      "rankA": 39,
+      "rankB": 41,
+      "rankPriorA": 0.5081259778024804,
+      "rankPriorFormula": "sigmoid(0.65 × ln(rankB/rankA))",
+      "formA": {
+        "residual": 0.054184518772146896,
+        "usable": 13,
+        "weighted": 7.099540531830118
+      },
+      "formB": {
+        "residual": 0.12003289286269264,
+        "usable": 15,
+        "weighted": 8.988092442710103
+      },
+      "formDeltaLogit": -0.015686706793496583,
+      "mapWeight": 0.3,
+      "rankedWeight": 0.7,
+      "maps": 6,
+      "minimumMapHistory": 4,
+      "probabilities": {
+        "aWin": 0.4650858984171937,
+        "bWin": 0.534914101582806,
+        "a20": 0.22712776127842943,
+        "a21": 0.23795813713876426,
+        "b20": 0.27368781177492935,
+        "b21": 0.2612262898078766,
+        "aMinus1_5": 0.22712776127842943,
+        "bPlus1_5": 0.7728722387215705,
+        "aPlus1_5": 0.7263121882250707,
+        "bMinus1_5": 0.27368781177492935,
+        "over2_5": 0.4991844269466409,
+        "under2_5": 0.5008155730533588
+      },
+      "sensitivity": {
+        "aWin": {
+          "min": 0.4331790226761776,
+          "max": 0.49713107725474026
+        },
+        "bWin": {
+          "min": 0.5028689227452596,
+          "max": 0.5668209773238224
+        },
+        "a20": {
+          "min": 0.20189101478853144,
+          "max": 0.2538257724331384
+        },
+        "a21": {
+          "min": 0.21719937346228044,
+          "max": 0.2600003954508197
+        },
+        "b20": {
+          "min": 0.24567741270330068,
+          "max": 0.30287224063306883
+        },
+        "b21": {
+          "min": 0.23753872165352313,
+          "max": 0.2825808028066083
+        },
+        "aMinus1_5": {
+          "min": 0.20189101478853144,
+          "max": 0.2538257724331384
+        },
+        "bPlus1_5": {
+          "min": 0.7461742275668616,
+          "max": 0.7981089852114686
+        },
+        "aPlus1_5": {
+          "min": 0.6971277593669312,
+          "max": 0.7543225872966993
+        },
+        "bMinus1_5": {
+          "min": 0.24567741270330068,
+          "max": 0.30287224063306883
+        },
+        "over2_5": {
+          "min": 0.4952367445783997,
+          "max": 0.5025823941350458
+        },
+        "under2_5": {
+          "min": 0.4974176058649542,
+          "max": 0.5047632554216003
+        }
+      },
+      "qualityWarning": "Exploratory rank and recent-form adjustment. NOT prospectively validated. Original forecasts are untouched."
+    },
+    {
+      "matchId": "cs2-match-2400443",
+      "startsAt": "2026-11-18T18:30:00.000Z",
+      "teamA": "Ninjas in Pyjamas",
+      "teamB": "Luminosity",
+      "version": "atlas-rank-strength-challenger-v2-prototype",
+      "inputSnapshots": {
+        "original": "2026-11-18T00:55:32.513Z",
+        "form": "2026-11-18T08:21:48.422Z"
+      },
+      "rankA": 18,
+      "rankB": 36,
+      "rankPriorA": 0.6107689634188607,
+      "rankPriorFormula": "sigmoid(0.65 × ln(rankB/rankA))",
+      "formA": {
+        "residual": 0.2743129521643531,
+        "usable": 14,
+        "weighted": 8.017762632128397
+      },
+      "formB": {
+        "residual": -0.0018959239295225532,
+        "usable": 14,
+        "weighted": 7.60781055277702
+      },
+      "formDeltaLogit": 0.06000399722039368,
+      "mapWeight": 0.3,
+      "rankedWeight": 0.7,
+      "maps": 6,
+      "minimumMapHistory": 6,
+      "probabilities": {
+        "aWin": 0.6632492175630745,
+        "bWin": 0.3367507824369255,
+        "a20": 0.3725776449656013,
+        "a21": 0.2906715725974732,
+        "b20": 0.15148466169867636,
+        "b21": 0.18526612073824916,
+        "aMinus1_5": 0.3725776449656013,
+        "bPlus1_5": 0.6274223550343987,
+        "aPlus1_5": 0.8485153383013236,
+        "bMinus1_5": 0.15148466169867636,
+        "over2_5": 0.4759376933357224,
+        "under2_5": 0.5240623066642777
+      },
+      "sensitivity": {
+        "aWin": {
+          "min": 0.630813480037981,
+          "max": 0.6949988928401968
+        },
+        "bWin": {
+          "min": 0.3050011071598032,
+          "max": 0.369186519962019
+        },
+        "a20": {
+          "min": 0.3269531182716895,
+          "max": 0.4067752419785169
+        },
+        "a21": {
+          "min": 0.2543843858082625,
+          "max": 0.31554472590011023
+        },
+        "b20": {
+          "min": 0.13114941431502555,
+          "max": 0.1825348622963799
+        },
+        "b21": {
+          "min": 0.16666827650542945,
+          "max": 0.21465281181140297
+        },
+        "aMinus1_5": {
+          "min": 0.3269531182716895,
+          "max": 0.4067752419785169
+        },
+        "bPlus1_5": {
+          "min": 0.5932247580214831,
+          "max": 0.6730468817283105
+        },
+        "aPlus1_5": {
+          "min": 0.8174651377036201,
+          "max": 0.8688505856849744
+        },
+        "bMinus1_5": {
+          "min": 0.13114941431502555,
+          "max": 0.1825348622963799
+        },
+        "over2_5": {
+          "min": 0.4620753437064576,
+          "max": 0.49051201943193057
+        },
+        "under2_5": {
+          "min": 0.5094879805680694,
+          "max": 0.5379246562935425
+        }
+      },
+      "qualityWarning": "Exploratory rank and recent-form adjustment. NOT prospectively validated. Original forecasts are untouched."
+    }
+  ],
+  "unmodeled": []
+}
