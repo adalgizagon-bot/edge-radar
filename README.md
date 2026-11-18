@@ -39,6 +39,28 @@ A execução está agendada **uma vez ao dia, 07:07 UTC (04:07 Brasília)**, com
 
 O site é estático: o GitHub Actions consulta a API com o segredo protegido, grava novos arquivos JSON e a Vercel publica automaticamente o commit. A interface mostra a hora da última atualização, sem afirmar que os dados são ao vivo. Evite publicar a chave em arquivos ou mensagens.
 
+## Radar pré-veto — mercados completos de BO3 (V0.6)
+
+A página inicial agora compara 80 preços da BR365, transcritos de **oito prints fornecidos em 17/11/2026 por volta de 21h49 em Brasília**, com o histórico CS2 da Cito. São preços fotografados, **não cotações disponíveis em tempo real**. A plataforma não possui acesso à conta ou ao saldo da BR365.
+
+Os mercados analisados antes do veto são: vencedor da série BO3, handicap de mapas da série (+1,5/−1,5), placar exato da série (2–0, 2–1, 0–2, 1–2) e total de mapas acima/abaixo de 2,5. Essas apostas são **independentes do veto para sua definição**, ao contrário de mercados de kills, rounds ou vencedor de um mapa específico.
+
+No novo simulador, o veto é tratado como desconhecido. Ele usa apenas mapas nos quais as duas equipes disputaram pelo menos quatro partidas nos 90 dias de histórico. Enumera todas as sequências ordenadas possíveis de três mapas, atribuindo a **mesma importância a cada sequência**. Isso **não corresponde à distribuição real de vetos ou picks**, que depende das escolhas das equipes e de seu contexto. O modelo também não ajusta adequadamente a força dos oponentes ou mudanças de elenco, portanto suas probabilidades **não estão calibradas**.
+
+Foi possível formar estimativas para **7 de 8 partidas**. Para BBL × Envy existem menos de três mapas em comum com amostra mínima, e por isso a plataforma exibe **somente preços da BR365** sem fabricar projeções. A equipe chamada de `Betclic` na Cito corresponde a `Betclic Apogee Esports`, apresentada como `Apogee Esports` na BR365. O identificador da partida é conferido.
+
+As probabilidades de mercado sem margem são calculadas normalizando as probabilidades implícitas em cada família de mercado (vencedor, handicap, placar e total). A diferença em pontos percentuais entre esse valor e o modelo é uma **divergência para investigar** — não é evidência de lucro ou valor esperado positivo comprovado. Especialmente divergências enormes são suspeitas de erro de modelo. O construtor de cenários de 2, 3, 4 ou 8 jogos inclui no máximo **um mercado por partida** e não utiliza seleções de mapas que dependem de veto. Na configuração de 8 jogos, BBL × Envy pode constar com odd registrada, mas a probabilidade conjunta do modelo fica **indisponível**.
+
+Arquivos:
+- `public/data/br365-series-odds.json` — 80 cotações transcritas dos screenshots
+- `scripts/series-model.mjs` — modelo teórico pré-veto e cálculo sem margem
+- `public/data/series-forecasts.json` — previsões congeladas antes do começo
+- `public/data/series-validation.json` — acertos e Brier Score de séries concluídas
+- `public/series-radar.js`, `public/series-radar.css` — interface de radar e construtor
+- `tests/series-model.test.mjs` — testes de consistência e regressão
+
+A rotina GitHub Actions calcula a validação de séries encerradas quando a Cito confirma os placares. Os preços históricos nunca são reclassificados como odds atuais. Para mercados de mapas específicos, aguarde o veto confirmado e novos preços.
+
 ## Metodologia e precauções
 
 O modelo usa rates de rounds da equipe em um mapa, suavizados, para calcular uma probabilidade simplificada por round; por simulação/distribuição MR12 e OT, obtém resultados por mapa, handicaps e totais. Kills usam taxa histórica individual por round e Poisson simplificada com duração projetada do mapa. **Não há calibração comprovada**, ajuste explícito por adversário, CT/TR, veto, elenco confirmado, patch, viés de seleção ou probabilidade de odds.
