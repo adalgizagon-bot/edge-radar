@@ -95,7 +95,7 @@ export function expandBookMarkets(oddsEntry,model){
     modelP,modelRange:sens,
     deltaPP:(modelP-marketNoVig)*100,
     hypotheticalROI:(modelP*bookOdds-1)*100,
-    consistentAcrossVeto:sens.min>marketNoVig,
+    persistentWithinHypotheticalMapTriplets:sens.min>marketNoVig,
     confirmation:'unconfirmed_veto',
     priceStatus:'screenshot_only',
     independentOfMapVetoForSettlement:true
@@ -106,7 +106,7 @@ export function expandBookMarkets(oddsEntry,model){
 }
 export function freezeSeries(existing,snapshot,odds,nowIso){
  if(!snapshot?.matches||!snapshot.teams||!odds?.odds)throw Error('Missing series snapshot');
- const result=Array.isArray(existing?.matches)?[...existing.matches]:[],
+ const result=Array.isArray(existing?.matches)?[...existing.matches]:[],unmodeled=[],
   saved=new Set(result.map(x=>x.matchId)),now=Date.parse(nowIso),teams=new Map(snapshot.teams.map(t=>[t.id,t]));
  const priceCapturedAt=Date.parse(odds.capturedApprox);
  if(!Number.isFinite(priceCapturedAt)||!Number.isFinite(now))throw Error('Date invalid');
@@ -114,9 +114,9 @@ export function freezeSeries(existing,snapshot,odds,nowIso){
   if(saved.has(m.id)||Date.parse(m.startTime)<=now)continue;
   if(Date.parse(snapshot.fetchedAt)>=Date.parse(m.startTime)||priceCapturedAt>=Date.parse(m.startTime))continue;
   const a=teams.get(m.teamA.id),b=teams.get(m.teamB.id),book=odds.odds.find(x=>x.matchId===m.id);
-  if(!a||!b||!book)continue;
+  if(!a||!b||!book){unmodeled.push({matchId:m.id,reason:'Fonte de equipes ou odds indisponível'});continue;}
   const sim=preVetoSeries(a,b);
-  if(!sim)continue;
+  if(!sim){unmodeled.push({matchId:m.id,reason:'Menos de três mapas comuns com ao menos quatro jogos de histórico para cada equipe'});continue;}
   const markets=expandBookMarkets(book,sim);
   result.push({matchId:m.id,eventId:m.eventId,event:m.event,startsAt:m.startTime,
    modelSnapshotAt:snapshot.fetchedAt,oddsCapturedApprox:odds.capturedApprox,
@@ -128,7 +128,7 @@ export function freezeSeries(existing,snapshot,odds,nowIso){
     'Odds de print podem estar alteradas ou indisponíveis']});
  }
  return{modelVersion:SERIES_MODEL_VERSION,generatedAt:existing?.generatedAt||nowIso,
-   lastProcessedAt:nowIso,source:'Cito CS2 history + BR365 odds transcribed from user screenshots',matches:result,
+   lastProcessedAt:nowIso,source:'Cito CS2 history + BR365 odds transcribed from user screenshots',matches:result,unmodeled,
    note:'Modelo exploratório, não validado; somente mercados de séries BO3 independentes da divulgação dos mapas.'};
 }
 export function validateSeries(frozen,official,nowIso){
