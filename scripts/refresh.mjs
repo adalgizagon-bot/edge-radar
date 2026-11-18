@@ -3,6 +3,7 @@
 import fs from 'node:fs/promises';
 import { generateFrozen, assess, metrics } from './model.mjs';
 import { validateSeries } from './series-model.mjs';
+import { recentOpponents,longMapHistory,rankedSnapshot } from './strength-sync.mjs';
 const dir='public/data/';
 const read=async file=>JSON.parse(await fs.readFile(dir+file,'utf8'));
 const save=async(file,data)=>fs.writeFile(dir+file,JSON.stringify(data,null,2)+'\n');
@@ -24,6 +25,7 @@ async function cito(path,params={}){
  return json.data;
 }
 const seriesFrozen=await read('series-forecasts.json');
+const opponentForm=await read('team-opponents.json'),annual=await read('team-long-history.json'),rankings=await read('team-rankings.json');
 const snapshot=await read('tournaments.json'),players=await read('players.json'),predictions=await read('predictions.json'),
  results=await read('results.json'),sync=await read('sync-state.json');
 const now=new Date().toISOString(),nowMs=Date.now();
@@ -98,24 +100,44 @@ try{
    match.status='completed';match.scoreA=parsed.scoreA;match.scoreB=parsed.scoreB}
  }
  sync.matchCursor=unresolved.length?(start+2)%unresolved.length:0;
- // 3) roster: missing first, otherwise oldest.
+ // 3) refresh missing rosters only. Existing roster results are kept rather than re-querying every day.
  const missing=snapshot.teams.filter(t=>!(players.teams||[]).some(r=>r.id===t.id));
- let t=missing[0];
- if(!t){const sorted=[...(players.teams||[])].sort((a,b)=>(a.rosterFetchedAt||'').localeCompare(b.rosterFetchedAt||''));const oldest=sorted[0];t=snapshot.teams.find(x=>x.id===oldest?.id)}
- if(t){
-  const raw=await safe('roster '+t.name,'/cs2/teams/'+encodeURIComponent(t.id)+'/roster');
-  const roster=normalizeRoster(raw,t.id,t.name);
+ const rosterTarget=missing[0];
+ if(rosterTarget){
+  const raw=await safe('roster '+rosterTarget.name,'/cs2/teams/'+encodeURIComponent(rosterTarget.id)+'/roster');
+  const roster=normalizeRoster(raw,rosterTarget.id,rosterTarget.name);
   if(roster)players.teams=unique([...(players.teams||[]),roster],x=>x.id);
  }
- // 4) one team map-stat refresh per run.
+ // 4) one 90-day team map refresh per day. Frozen forecasts stay immutable.
  if(snapshot.teams.length){
-  const idx=(sync.teamCursor||0)%snapshot.teams.length;const t=snapshot.teams[idx];
-  const raw=await safe('map-stats '+t.name,'/cs2/teams/'+encodeURIComponent(t.id)+'/map-stats',{days:90});
+  const idx=(sync.teamCursor||0)%snapshot.teams.length,t=snapshot.teams[idx];
+  const raw=await safe('90d map-stats '+t.name,'/cs2/teams/'+encodeURIComponent(t.id)+'/map-stats',{days:90});
   const updated=normalizeTeamStats(raw,t.id);
-  if(updated){snapshot.teams=snapshot.teams.map(x=>x.id===t.id?updated:x)}
-  sync.teamCursor=(idx+1)%snapshot.teams.length;
+  if(updated){snapshot.teams=snapshot.teams.map(x=>x.id===t.id?updated:x);
+   sync.teamCursor=(idx+1)%snapshot.teams.length}
  }
- // 5) two (or more if budget remains) players per run, give missing history priority.
+ // 5) one team's 15 latest completed matches per day, with their opponents' ranks.
+ if(snapshot.teams.length){
+  const idx=(sync.opponentCursor||0)%snapshot.teams.length,t=snapshot.teams[idx];
+  const raw=await safe('opponents '+t.name,'/cs2/teams/'+encodeURIComponent(t.id)+'/matches',{limit:30,status:'completed'});
+  const updated=recentOpponents(raw,t,rankings,now);
+  if(updated){opponentForm.teams=unique([...(opponentForm.teams||[]),updated],x=>x.id);
+   opponentForm.fetchedAt=now;sync.opponentCursor=(idx+1)%snapshot.teams.length}
+ }
+ // 6) long-term sample, or refresh the world-ranking context once each week.
+ if(new Date(now).getUTCDay()===0){
+  const raw=await safe('rankings','/cs2/rankings/teams',{limit:100});
+  const updated=rankedSnapshot(raw,now);
+  if(updated)Object.assign(rankings,updated);
+ }else if(snapshot.teams.length){
+  const idx=(sync.annualCursor||0)%snapshot.teams.length,t=snapshot.teams[idx];
+  const raw=await safe('365d map-stats '+t.name,'/cs2/teams/'+encodeURIComponent(t.id)+'/map-stats',{days:365});
+  const updated=longMapHistory(raw,t);
+  if(updated){annual.teams=unique([...(annual.teams||[]),updated],x=>x.id);annual.fetchedAt=now;
+   sync.annualCursor=(idx+1)%snapshot.teams.length}
+ }
+ // 7) player form only with remaining quota; do not sacrifice result verification.
+ // Give missing player history priority within the remaining daily request budget.
  const universe=(players.teams||[]).flatMap(t=>t.players||[]).filter(p=>p.id);
  const need=universe.filter(p=>!(players.players||[]).some(x=>x.id===p.id));
  const have=universe.filter(p=>(players.players||[]).some(x=>x.id===p.id));
@@ -139,7 +161,7 @@ try{
  const seriesEval=validateSeries(seriesFrozen,results,now);
  sync.updatedAt=now;sync.lastRun={status:warnings.length?'partial':'ok',requests:calls,warnings};
  await Promise.all([save('tournaments.json',snapshot),save('players.json',players),save('predictions.json',updated),save('results.json',results),
-  save('validation.json',evaluation),save('series-validation.json',seriesEval),save('sync-state.json',sync)]);
+  save('validation.json',evaluation),save('series-validation.json',seriesEval),save('team-opponents.json',opponentForm),save('team-long-history.json',annual),save('team-rankings.json',rankings),save('sync-state.json',sync)]);
  console.log(JSON.stringify({at:now,requests:calls,fixtures:snapshot.matches.length,rosters:players.teams.length,
-  playersWithStats:players.players.length,frozen:updated.forecasts.length,resolved:evalSummary.resolved,seriesResolved:seriesEval.resolved,warnings},null,2));
+  playersWithStats:players.players.length,recentOpponentTeams:opponentForm.teams.length,annualTeams:annual.teams.length,frozen:updated.forecasts.length,resolved:evalSummary.resolved,seriesResolved:seriesEval.resolved,warnings},null,2));
 }catch(e){console.error('Sync failed safely:',e.message);process.exitCode=1}
