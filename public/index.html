@@ -20,8 +20,8 @@
       <div class="brand"><div class="brand-mark">A<span>✦</span></div><div><strong>ATLAS</strong><small>ESPORTS LAB</small></div></div>
       <div class="side-label">NAVEGAÇÃO</div>
       <nav aria-label="Menu principal">
-        <button class="nav active" data-tab="dashboard"><span>▦</span> Visão geral</button>
-        <button class="nav" data-tab="opportunities"><span>✦</span> Melhores chances</button>
+        <button class="nav" data-tab="dashboard"><span>▦</span> Visão geral</button>
+        <button class="nav active" data-tab="opportunities"><span>✦</span> Melhores chances</button>
         <button class="nav" data-tab="tournaments"><span>◉</span> Torneios em teste</button>
         <button class="nav" data-tab="simulator"><span>◈</span> Simulador CS2</button>
         <button class="nav" data-tab="data"><span>◫</span> Base histórica</button>
@@ -30,12 +30,12 @@
         <button class="nav" data-tab="registry"><span>▤</span> Registro de previsões</button>
         <button class="nav" data-tab="method"><span>◎</span> Metodologia</button>
       </nav>
-      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: histórico capturado</div><p>Dados reais dos torneios em fotografia datada. Sem atualização automática.</p><div class="aside-tag">v0.5 • Radar de chances</div></div>
+      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: sincronização diária</div><p>Dados da API atualizados pelo GitHub. Não são informações ao vivo.</p><div class="aside-tag">v0.5 • Radar de chances</div></div>
     </aside>
     <main class="main">
       <header class="topbar"><div><span class="breadcrumb">INTELIGÊNCIA ESTATÍSTICA / CS2</span></div><div class="top-right"><span class="pill">◌ Modo simulação</span><span class="avatar">A</span></div></header>
       <div class="content">
-        <section class="view active" id="dashboard">
+        <section class="view" id="dashboard">
           <div class="heading"><div><div class="eyebrow">PESQUISA QUANTITATIVA</div><h1>Visão geral <span>do laboratório</span></h1><p>Modelos verificáveis. Estatísticas antes de opiniões.</p></div><button class="primary" data-go="opportunities">Analisar chances <span>↗</span></button></div>
           <div class="notice"><span class="notice-icon">ⓘ</span><div><strong>Dois torneios com estatísticas reais</strong><p>A Cito forneceu 8 jogos e 16 equipes para comparação estatística. O simulador permanece experimental: não foram medidos índices de acerto nem criadas recomendações financeiras.</p></div></div>
           <div class="metric-grid"><article class="metric"><label>Mercados acompanhados na Cito</label><strong id="home-cito-markets">—</strong><small>Modelos pré-jogo em teste</small></article><article class="metric"><label>Previsões automáticas Cito</label><strong id="home-cito-total">—</strong><small>Probabilidades registradas antes das partidas</small></article><article class="metric"><label>Previsões Cito conferidas</label><strong id="home-cito-resolved">—</strong><small>Somente resultados verificados</small></article><article class="metric"><label>Brier Score Cito</label><strong id="home-cito-brier">—</strong><small>Calculado após resultados reais</small></article></div><div class="panel" style="padding:16px 20px"><div class="panel-head" style="margin-bottom:8px"><div><strong>Previsões automáticas dos campeonatos</strong><p class="muted">Vencedores por mapa, rounds, handicap e kills por jogador.</p></div><button class="primary" data-go="opportunities">Abrir radar de chances →</button></div><p class="muted">Simulações salvas manualmente no navegador: <strong id="count-total">0</strong> previsões, <strong id="count-resolved">0</strong> conferidas, Brier <strong id="metric-brier">—</strong>. <button class="ghost" data-go="registry" style="padding:4px 8px;margin-left:8px">Registro manual</button></p></div>
@@ -134,7 +134,7 @@
  </div>
 </section>
 
-<section class="view" id="opportunities">
+<section class="view active" id="opportunities">
  <div class="radar-hero">
    <div>
      <div class="radar-kicker"><span class="radar-live-dot"></span> ATLAS RADAR / CS2 / ANÁLISE PRÉ-JOGO</div>
