@@ -9,7 +9,7 @@
   handicap_a_minus_2_5:'Handicap −2,5 rounds',kills_over_15_5:'Mais de 15,5 kills'};
  const display=(id,value)=>{const t=$(id);if(t)t.textContent=value};
  function summaryPanel(review){
-  display('audit-finished',review.completed+' / '+(review.completed+review.unmodeled.length+review.pending));
+  display('audit-finished',review.totalVerified+' / '+review.totalScheduled);
   display('audit-hit',review.winner.correctModel+' / '+review.winner.n);
   display('audit-model-brier',n(review.winner.brierModel));
   display('audit-market-brier',n(review.winner.brierMarket));
@@ -55,9 +55,10 @@
    if(!r.ok)throw Error('Arquivo de auditoria indisponível');
    const review=await r.json();
    summaryPanel(review);rows(review);markets(review);observations(review);
-   display('audit-pending-note',review.unmodeled.length?
-    'Uma partida não recebeu previsão BO3 por falta de três mapas comparáveis. Somente placares confirmados foram contabilizados.':
-    'Todas as previsões elegíveis possuem conferência de resultados.');
+   const skipped=(review.unmodeledResults||[]).filter(x=>x.verified);
+   display('audit-pending-note',skipped.length?
+    'BBL × Envy encerrou em '+skipped[0].actualScore+'. Não havia previsão válida da série por histórico insuficiente; seus mapas foram avaliados apenas onde existiam previsões congeladas.':
+    'Séries sem cobertura permanecem explicitamente indicadas; nunca recebem previsões retroativas.');
    display('audit-posthoc-disclaimer','O protótipo V2 foi criado DEPOIS dos resultados: '+review.challenger.correct+
     '/'+review.challenger.n+' favoritos corretos e Brier '+n(review.challenger.brier)+
     '. Isso é apenas uma comparação retrospectiva, NÃO demonstra que melhorará previsões futuras.');
