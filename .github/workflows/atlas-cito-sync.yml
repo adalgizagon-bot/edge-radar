@@ -2,6 +2,10 @@ name: ATLAS - atualização econômica da Cito
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/atlas-cito-sync.yml'
   schedule:
     - cron: '7 7 * * *'
 
