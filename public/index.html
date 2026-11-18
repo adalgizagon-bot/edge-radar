@@ -7,12 +7,12 @@
   <meta name="description" content="Laboratório independente de análise probabilística de CS2 com simulações e registro de previsões.">
   <title>ATLAS Esports Lab | Inteligência estatística CS2</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="series-radar.css">
   <script src="app.js" defer></script>
   <script src="tournaments.js" defer></script>
   <script src="players.js" defer></script>
   <script src="validation.js" defer></script>
-  <script src="opportunities-core.js" defer></script>
-  <script src="opportunities.js" defer></script>
+  <script src="series-radar.js" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -21,7 +21,7 @@
       <div class="side-label">NAVEGAÇÃO</div>
       <nav aria-label="Menu principal">
         <button class="nav" data-tab="dashboard"><span>▦</span> Visão geral</button>
-        <button class="nav active" data-tab="opportunities"><span>✦</span> Melhores chances</button>
+        <button class="nav active" data-tab="opportunities"><span>✦</span> Radar de odds</button>
         <button class="nav" data-tab="tournaments"><span>◉</span> Torneios em teste</button>
         <button class="nav" data-tab="simulator"><span>◈</span> Simulador CS2</button>
         <button class="nav" data-tab="data"><span>◫</span> Base histórica</button>
@@ -30,7 +30,7 @@
         <button class="nav" data-tab="registry"><span>▤</span> Registro de previsões</button>
         <button class="nav" data-tab="method"><span>◎</span> Metodologia</button>
       </nav>
-      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: sincronização diária</div><p>Dados da API atualizados pelo GitHub. Não são informações ao vivo.</p><div class="aside-tag">v0.5 • Radar de chances</div></div>
+      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: sincronização diária</div><p>Dados da API atualizados pelo GitHub. Não são informações ao vivo.</p><div class="aside-tag">v0.6 • Mercado BO3 pré-veto</div></div>
     </aside>
     <main class="main">
       <header class="topbar"><div><span class="breadcrumb">INTELIGÊNCIA ESTATÍSTICA / CS2</span></div><div class="top-right"><span class="pill">◌ Modo simulação</span><span class="avatar">A</span></div></header>
@@ -135,70 +135,73 @@
 </section>
 
 <section class="view active" id="opportunities">
- <div class="radar-hero">
-   <div>
-     <div class="radar-kicker"><span class="radar-live-dot"></span> ATLAS RADAR / CS2 / ANÁLISE PRÉ-JOGO</div>
-     <h1>Melhores <span>chances do modelo</span></h1>
-     <p class="radar-hero-desc">Encontre os sinais estatísticos mais fortes, compare mercados e estude combinações entre os oito confrontos dos dois torneios.</p>
-     <div class="radar-hero-meta"><span>◷ Histórico Cito</span><span>◈ 4 mercados</span><span>◫ Sem apostas reais</span></div>
+ <div class="series-wrap">
+  <div class="series-top">
+   <div class="series-top-main">
+    <div class="series-kicker"><i></i> ATLAS / RADAR DE SÉRIES CS2 / PRÉ-VETO</div>
+    <h1>Melhores <span>comparações de odds</span></h1>
+    <p>Vencedor da partida, handicap de mapas, placar exato e total de mapas. Compare as odds capturadas na BR365 com um modelo exploratório baseado em estatísticas da Cito.</p>
+    <div class="series-top-meta"><span>✓ Não depende do veto</span><span>◈ 2 campeonatos</span><span>◷ Prints de odds, não feed ao vivo</span></div>
    </div>
-   <div class="radar-hero-metrics">
-     <div><strong id="radar-count-games">—</strong><span>Jogos acompanhados</span></div>
-     <div><strong id="radar-count-markets">—</strong><span>Projeções com amostra</span></div>
-     <div><strong id="radar-refresh">—</strong><span>Última sincronização (BRT)</span></div>
+   <div class="series-kpis">
+    <div class="series-kpi"><strong id="series-kpi-games">—</strong><small>Partidas identificadas</small></div>
+    <div class="series-kpi"><strong id="series-kpi-markets">—</strong><small>Preços capturados</small></div>
+    <div class="series-kpi"><strong id="series-kpi-covered">—</strong><small>Partidas com modelo</small></div>
    </div>
- </div>
- <div class="radar-disclaimer">
-   <span class="radar-disclaimer-icon">!</span>
-   <div><strong>Probabilidade alta não significa vantagem sobre as odds.</strong>
-     <p>Os mapas ainda são candidatos históricos — sem veto confirmado. O modelo é experimental e não foi calibrado. Combinações abaixo são cenários matemáticos condicionais, não recomendações validadas de apostas.</p>
+  </div>
+  <div class="series-warning">
+    <span class="warning-icon">!</span>
+    <div><strong>Diferença entre o modelo e a casa não é, por si só, uma oportunidade lucrativa.</strong>
+     <p>O modelo ainda não foi calibrado, não conhece o veto, não pondera adequadamente a força de cada adversário e considera igualmente prováveis combinações de três mapas elegíveis. Divergências muito grandes devem ser investigadas como possíveis erros de modelagem. Odds dos prints são históricas e podem ter mudado.</p></div>
+  </div>
+  <div class="series-layout">
+   <div class="series-panel">
+    <div class="series-heading"><div><div class="series-label">01 / COMPARAÇÃO DE MERCADOS</div><h2>Diferenças para investigar</h2>
+      <p>Modelo × probabilidade de mercado ajustada pela margem. Não é um ranking de apostas validadas.</p></div>
+      <span id="series-rank-count" class="series-count">Carregando</span></div>
+    <div class="series-filters">
+      <label>Campeonato<select id="series-filter-event"><option value="all">Ambos</option><option value="cs2-event-9258">Stake Ranked</option><option value="cs2-event-9273">RUSH Brno</option></select></label>
+      <label>Mercado<select id="series-filter-market"><option value="all">Todos os mercados</option><option value="winner">Vencedor da série</option><option value="handicap">Handicap de mapas</option><option value="score">Placar exato</option><option value="total">Total de mapas</option></select></label>
+      <label>Diferença<select id="series-filter-show"><option value="positive">Modelo acima do mercado</option><option value="all">Todas as diferenças</option><option value="caution">Diferenças acima de 12 p.p.</option></select></label>
+    </div>
+    <div class="series-filter-note">A probabilidade da casa é estimada por <b>1 ÷ odd</b> e depois normalizada dentro do mercado para remover a margem. Odds de vencedores e handicaps são mercados diferentes. As porcentagens do modelo não são confiáveis até sua validação.</div>
+    <div id="series-ranked-list" class="series-signal-grid"><p class="series-empty">Carregando comparações...</p></div>
+    <button type="button" class="series-more" id="series-more">Mostrar mais comparações</button>
    </div>
- </div>
- <div class="radar-workspace">
-   <div class="radar-primary">
-     <section class="radar-panel radar-ranking">
-       <div class="radar-title-row">
-         <div><span class="tiny-kicker">RADAR DE MERCADOS</span><h2>Melhores chances</h2><p>Prioridade para amostras maiores. A ordenação é exploratória, não um índice de acerto.</p></div>
-         <div class="radar-count-pill" id="radar-filter-count">— sinais</div>
-       </div>
-       <div class="radar-controls">
-        <label>Campeonato<select id="radar-event" aria-label="Filtrar campeonato"><option value="all">Todos os campeonatos</option><option value="cs2-event-9258">Stake Ranked Episode 6</option><option value="cs2-event-9273">Tipsport RUSH Brno 2026</option></select></label>
-        <label>Mercado<select id="radar-market" aria-label="Filtrar mercado"><option value="all">Todos os mercados</option><option value="map_a">Vencedor de mapa</option><option value="rounds_over_21_5">Total de rounds</option><option value="handicap_a_minus_2_5">Handicap de mapa</option><option value="kills_over_15_5">Kills dos jogadores</option></select></label>
-        <label>Probabilidade mínima<select id="radar-minimum" aria-label="Filtrar probabilidade"><option value="0.50">50% ou mais</option><option value="0.60">60% ou mais</option><option value="0.70">70% ou mais</option><option value="0.80">80% ou mais</option></select></label>
-        <label>Cobertura<select id="radar-quality" aria-label="Filtrar cobertura histórica"><option value="8" selected>8+ mapas por lado</option><option value="all">Todas as amostras</option><option value="12">12+ mapas por lado</option></select></label>
-       </div>
-       <div class="radar-sample-note">Cada sinal corresponde a um <b>mercado em um mapa específico</b>; ele só poderá ser conferido se esse mapa acontecer. Uma equipe pode aparecer em vários mercados, mas as combinações permitem somente um mercado por jogo.</div>
-       <div id="radar-ranked-list" class="radar-ranked-list"><p class="muted">Carregando estatísticas...</p></div>
-       <button class="ghost radar-show-more" id="radar-more" type="button">Mostrar mais mercados</button>
-     </section>
-   </div>
-   <aside class="radar-aside">
-     <section class="radar-panel radar-combo-panel">
-       <div class="radar-title-row"><div><span class="tiny-kicker">CONSTRUTOR DE CENÁRIOS</span><h2>Parlays em estudo</h2><p>Uma seleção por partida, combinando jogos diferentes.</p></div><span class="radar-combo-icon">▥</span></div>
-       <div class="radar-combo-presets" role="group" aria-label="Quantidade de jogos na combinação">
-         <button type="button" data-radar-preset="2">Dupla</button>
-         <button type="button" data-radar-preset="3" class="is-active">Tripla</button>
-         <button type="button" data-radar-preset="4">4 jogos</button>
-         <button type="button" data-radar-preset="8">8 jogos</button>
-       </div>
-       <p class="radar-combo-help" id="radar-combo-help">Seleções escolhidas automaticamente como ponto de partida, priorizando amostras maiores. Você pode trocar cada mercado.</p>
-       <div id="radar-combo-legs" class="radar-combo-legs"></div>
-       <div id="radar-combo-summary" class="radar-combo-summary"></div>
-       <div class="radar-combo-actions">
-         <button class="primary" type="button" id="radar-copy">Copiar cenário para análise</button>
-         <button class="ghost" type="button" id="radar-clear">Limpar</button>
-       </div>
-       <p class="radar-combo-caution">Probabilidade combinada = produto das probabilidades individuais, <b>assumindo independência</b>, hipótese não demonstrada. Não há odds reais, avaliação de valor esperado nem garantia de que os mapas serão disputados.</p>
-     </section>
+   <aside class="series-panel series-builder">
+     <div class="series-heading"><div><div class="series-label">02 / CONSTRUTOR PRÉ-VETO</div><h2>Cenários de múltiplas</h2>
+       <p>Mercados da série BO3. Um mercado por partida, independentemente dos mapas vetados.</p></div></div>
+     <div class="series-presets" role="group" aria-label="Número de partidas">
+       <button type="button" data-series-preset="2" class="active">2 jogos</button>
+       <button type="button" data-series-preset="3">3 jogos</button>
+       <button type="button" data-series-preset="4">4 jogos</button>
+       <button type="button" data-series-preset="8">8 jogos</button>
+     </div>
+     <p class="series-section-foot" id="series-builder-note">Escolha o número de jogos ou adicione mercados do comparador.</p>
+     <div id="series-combo-legs"></div>
+     <div id="series-combo-summary"></div>
+     <div class="series-actions"><button type="button" id="series-copy" class="primary">Copiar análise</button><button type="button" id="series-clear" class="ghost">Limpar</button></div>
+     <p class="series-aside-caption">As odds combinadas são o produto matemático dos preços capturados, não uma cotação atual. A probabilidade conjunta do modelo só aparece quando todas as seleções têm estimativa; mesmo assim pressupõe independência não verificada. Não são recomendações para apostar dinheiro.</p>
    </aside>
- </div>
- <section class="radar-panel radar-all-games">
-  <div class="radar-title-row"><div><span class="tiny-kicker">COBERTURA COMPLETA / 2 COMPETIÇÕES</span><h2>Todos os jogos</h2><p>Veja um sinal principal por confronto e abra os demais mercados disponíveis.</p></div><span id="radar-games-counter" class="radar-count-pill">8 jogos</span></div>
-  <div id="radar-game-grid" class="radar-game-grid"></div>
- </section>
- <div class="radar-footer-links">
-   <p>Para conferir acertos depois dos jogos, utilize a área técnica de validação. Nesta página, a prioridade é <strong>organizar os confrontos e avaliar cenários</strong>.</p>
-   <button class="ghost" data-go="validation">Abrir validação completa →</button>
+  </div>
+  <div class="series-panel">
+   <div class="series-heading"><div><div class="series-label">03 / OITO PARTIDAS EM DETALHES</div><h2>Comparar jogo por jogo</h2>
+     <p>Todos os confrontos dos dois torneios, incluindo os que ainda não têm amostra suficiente.</p></div>
+     <span class="series-count" id="series-game-counter">—</span></div>
+   <div id="series-games" class="series-games-grid"></div>
+  </div>
+  <div class="series-map-locked">
+    <span class="lock-icon">◫</span>
+    <div><h2>Mercados de mapas individuais: somente após o veto</h2>
+      <p>Os seus prints mostram mercados da <b>partida completa</b>. Ainda faltam as odds das abas Mapa 1/Mapa 2 e a confirmação dos mapas. Por enquanto, essas projeções ficam fora do construtor de múltiplas.</p>
+    </div>
+    <button type="button" class="ghost" data-go="tournaments">Ver histórico dos mapas →</button>
+  </div>
+  <div class="series-snapshot-line"><span id="series-snapshot">Aguardando fotografias da Cito e BR365</span><span>Dados estáticos; nenhuma aposta é realizada pela plataforma.</span></div>
+  <div class="series-panel"><div class="series-heading"><div><div class="series-label">04 / AVALIAÇÃO E AUDITORIA</div><h2>Conferir depois do jogo</h2></div>
+    <p class="series-section-foot">Os registros pré-jogo permanecem congelados para avaliação de placares reais. Ainda precisamos de uma amostra histórica de séries BO3 e de vetos para calibrar o novo modelo e avaliar sua precisão.</p>
+    <button class="secondary" data-go="validation">Abrir validação das previsões →</button>
+  </div>
  </div>
 </section>
 
