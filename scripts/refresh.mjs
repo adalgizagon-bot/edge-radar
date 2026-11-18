@@ -2,6 +2,7 @@
 // Conservative daily cap; never exposes the key in commits or browser bundles.
 import fs from 'node:fs/promises';
 import { generateFrozen, assess, metrics } from './model.mjs';
+import { validateSeries } from './series-model.mjs';
 const dir='public/data/';
 const read=async file=>JSON.parse(await fs.readFile(dir+file,'utf8'));
 const save=async(file,data)=>fs.writeFile(dir+file,JSON.stringify(data,null,2)+'\n');
@@ -22,6 +23,7 @@ async function cito(path,params={}){
  if(json?.success!==true)throw new Error('Cito response invalid at '+path);
  return json.data;
 }
+const seriesFrozen=await read('series-forecasts.json');
 const snapshot=await read('tournaments.json'),players=await read('players.json'),predictions=await read('predictions.json'),
  results=await read('results.json'),sync=await read('sync-state.json');
 const now=new Date().toISOString(),nowMs=Date.now();
@@ -134,9 +136,10 @@ try{
  const evaluation={computedAt:now,...evalSummary,
   assessed:checked.filter(x=>x.status==='resolved').map(x=>({id:x.id,kind:x.kind,matchId:x.matchId,map:x.map,probability:x.probability,outcome:x.outcome,brier:x.brier,actualScore:x.actualScore})),
   note:'Avaliação retrospectiva dos registros congelados antes dos jogos; não comprova vantagem financeira.'};
+ const seriesEval=validateSeries(seriesFrozen,results,now);
  sync.updatedAt=now;sync.lastRun={status:warnings.length?'partial':'ok',requests:calls,warnings};
  await Promise.all([save('tournaments.json',snapshot),save('players.json',players),save('predictions.json',updated),save('results.json',results),
-  save('validation.json',evaluation),save('sync-state.json',sync)]);
+  save('validation.json',evaluation),save('series-validation.json',seriesEval),save('sync-state.json',sync)]);
  console.log(JSON.stringify({at:now,requests:calls,fixtures:snapshot.matches.length,rosters:players.teams.length,
-  playersWithStats:players.players.length,frozen:updated.forecasts.length,resolved:evalSummary.resolved,warnings},null,2));
+  playersWithStats:players.players.length,frozen:updated.forecasts.length,resolved:evalSummary.resolved,seriesResolved:seriesEval.resolved,warnings},null,2));
 }catch(e){console.error('Sync failed safely:',e.message);process.exitCode=1}
