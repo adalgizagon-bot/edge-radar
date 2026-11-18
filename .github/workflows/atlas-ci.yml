@@ -40,5 +40,6 @@ jobs:
           node --check public/strength-core.js
           node --check public/strength.js
           node --check scripts/refresh.mjs
+          node --check scripts/strength-sync.mjs
       - name: Testes probabilísticos e painel de chances
-        run: node --test tests/model.test.mjs tests/opportunities.test.cjs tests/series-model.test.mjs tests/simulator.test.cjs tests/strength.test.cjs
+        run: node --test tests/model.test.mjs tests/opportunities.test.cjs tests/series-model.test.mjs tests/simulator.test.cjs tests/strength.test.cjs tests/strength-sync.test.mjs
