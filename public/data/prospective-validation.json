@@ -1,0 +1,9 @@
+{
+  "gradedAt": null,
+  "registered": 0,
+  "resolved": 0,
+  "meanBrierV1": null,
+  "meanBrierV2": null,
+  "records": [],
+  "note": "No out-of-sample games yet; retrospective challenger Nov 18 is explicitly excluded."
+}
