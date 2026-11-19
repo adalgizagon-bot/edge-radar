@@ -59,7 +59,8 @@ test('historical conditional-map helper remains available for offline backtests'
  const coreCode=fs.readFileSync(path.join(__dirname,'../public/opportunities-core.js'),'utf8');
  assert.ok(coreCode.includes('AtlasOpportunityCore'));
  const html=fs.readFileSync(path.join(__dirname,'../public/index.html'),'utf8');
- assert.match(html,/<section class="view active" id="opportunities">/);
+ assert.match(html,/<section class="view" id="opportunities">/);
+ assert.match(html,/<section class="view active" id="nextday">/);
  assert.ok(html.includes('src="series-radar.js"'));
  assert.ok(!html.includes('src="opportunities.js"'));
 });
