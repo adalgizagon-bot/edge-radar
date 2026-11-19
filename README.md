@@ -2,9 +2,25 @@
 
 Painel estatístico de pesquisa para **Counter-Strike 2**, publicado em https://edge-radar-gamma.vercel.app/ e ligado à Vercel pelo repositório GitHub `adalgizagon-bot/edge-radar`. O projeto antigo de criptomoedas ficou preservado na ramificação `backup/edge-radar-2026-11-17`.
 
+## Radar Unificado — interface principal (19/11/2026)
+
+O ATLAS agora tem **uma única área de trabalho**, sem uma página nova a cada data:
+- **Radar de odds**: apenas jogos futuros, com filtro por equipes, campeonato e disponibilidade de preços. Selecionar uma partida abre seus mercados à direita, junto da comparação de probabilidades V1/V2, odds e histórico resumido
+- **Meu estudo**: uma seleção por partida, odds multiplicadas apenas como exercício matemático, sem aposta automática ou promessa de lucro. As seleções expiram após o horário de início
+- **Resultados**: jogos passados e placares confirmados, separadamente da lista de oportunidades
+
+Arquivos de referência:
+- `public/index.html`, `public/radar.css`, `public/radar-app.js`, `public/radar-core.js` — interface principal
+- `public/data/radar-feed.json` — único catálogo para radar, estudo e histórico
+- `scripts/radar-feed.mjs` — consolida partidas Cito, registros imutáveis de V1/V2, odds de prints e resultados
+- `public/laboratorio.html` — versão antiga preservada para auditorias e ferramentas técnicas
+- `tests/radar-workflow.test.mjs` — evita retrocesso para partidas antigas e repetição de seleção no mesmo jogo
+
+**Fontes e atualizações:** partidas e resultados via Cito, sincronização econômica diária no GitHub Actions; odds de screenshots fornecidos manualmente e **não** capturadas em tempo real. A interface sempre filtra pelo início da partida no horário atual. Se a fonte não trouxer novas partidas, exibe aviso explícito, nunca jogos de dias anteriores como se fossem disponíveis. Jogos sem preços podem aparecer como "sem odds cadastradas", sem números fabricados. As probabilidades são experimentais e não calibradas.
+
 ## Estado atual
 
-- **Torneios em teste**: Stake Ranked Episode 6 e Tipsport RUSH Brno 2026, com 8 partidas previstas em 18/11/2026 e estatísticas de 16 equipes obtidas via Cito API.
+- **Torneios monitorados inicialmente**: Stake Ranked Episode 6 e Tipsport RUSH Brno 2026. O radar usa os próximos confrontos dessas competições conforme a Cito; as oito partidas de 18/11 estão arquivadas.
 - **Kills dos jogadores**: 16 escalações (80 jogadores identificados), com um subconjunto de históricos individuais por mapa; dados ausentes aparecem como indisponíveis, nunca são inventados.
 - **Simulador CS2**: séries BO3, MR12, prorrogação, placar exato, total de rounds, handicap e modelo simplificado para kills.
 - **Previsões congeladas**: arquivos datados antes do início das partidas para todos os mapas com cobertura suficiente. Mapas que não forem disputados não contam na validação.
@@ -16,7 +32,7 @@ Painel estatístico de pesquisa para **Counter-Strike 2**, publicado em https://
 
 | Caminho | Responsabilidade |
 | --- | --- |
-| `public/index.html` e `public/*.js` | Interface web estática, sem credenciais |
+| `public/index.html` e `public/radar-*.js` | Nova interface de Radar / Estudo / Resultados, sem credenciais |
 | `public/data/tournaments.json` | Agenda e histórico Cito de equipes |
 | `public/data/players.json` | Escalações e estatísticas individuais por mapa |
 | `public/data/predictions.json` | Probabilidades congeladas antes das partidas |
