@@ -1,0 +1,251 @@
+{
+  "version": "atlas-bo3-nov19-pre-veto",
+  "date": "2026-11-19",
+  "frozenAt": "2026-11-19T00:09:31.876Z",
+  "contextSnapshotAt": "2026-11-19T00:07:13.856Z",
+  "oddsCapturedAtApprox": "2026-11-18T21:03:00-03:00",
+  "purpose": "New out-of-sample V1 vs V2 comparison following Nov 18 mistakes",
+  "metrics": [
+    {
+      "id": "cs2-match-2400444",
+      "event": "Stake Ranked Episode 6",
+      "scheduledAt": "2026-11-19T11:00:00.000Z",
+      "displayTimeBR": "08:00",
+      "teamA": {
+        "id": "cs2-team-9928",
+        "name": "GamerLegion"
+      },
+      "teamB": {
+        "id": "cs2-team-13117",
+        "name": "Inner Circle"
+      },
+      "status": "upcoming_at_freeze",
+      "vetoStatus": "not_confirmed",
+      "odds": {
+        "a": 1.62,
+        "b": 2.1,
+        "margin": 0.09347442680776008,
+        "noVigA": 0.5645161290322581,
+        "noVigB": 0.43548387096774194,
+        "capturedAtApprox": "2026-11-18T21:03:00-03:00",
+        "verifiedLive": false
+      },
+      "history": {
+        "a": {
+          "rank": 27,
+          "maps90": 59,
+          "form": {
+            "last15": 15,
+            "wins": 8,
+            "losses": 7,
+            "vsTop50": 11,
+            "winsVsTop50": 6,
+            "lastOpponent": "UNiTY",
+            "lastResult": "W"
+          }
+        },
+        "b": {
+          "rank": 39,
+          "maps90": 38,
+          "form": {
+            "last15": 15,
+            "wins": 7,
+            "losses": 8,
+            "vsTop50": 9,
+            "winsVsTop50": 3,
+            "lastOpponent": "Sangal",
+            "lastResult": "L"
+          }
+        }
+      },
+      "v1": {
+        "pA": 0.5720886492053774,
+        "pB": 0.4279113507946225,
+        "sensitivityA": {
+          "min": 0.4817276872985675,
+          "max": 0.6869679859525466
+        },
+        "sampleFloor": 6,
+        "eligibleMaps": 5,
+        "orderedTriplets": 60
+      },
+      "v2": {
+        "pA": 0.57989499301651,
+        "pB": 0.4201050069834902,
+        "sensitivityA": {
+          "min": 0.5507399340308478,
+          "max": 0.6180227154766411
+        },
+        "rankPriorA": 0.5594724024131223,
+        "formDelta": -0.0037682374971447084,
+        "version": "atlas-rank-strength-challenger-v2-prototype"
+      },
+      "disagreementPP": 0.7806343811132654,
+      "marketGapPP": 1.5378863984251923,
+      "researchStatus": "unvalidated_needs_prospective_evaluation"
+    },
+    {
+      "id": "cs2-match-2400445",
+      "event": "Stake Ranked Episode 6",
+      "scheduledAt": "2026-11-19T13:30:00.000Z",
+      "displayTimeBR": "10:30",
+      "teamA": {
+        "id": "cs2-team-7532",
+        "name": "BIG"
+      },
+      "teamB": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas"
+      },
+      "status": "upcoming_at_freeze",
+      "vetoStatus": "not_confirmed",
+      "odds": {
+        "a": 2.2,
+        "b": 1.57,
+        "margin": 0.09148812970469011,
+        "noVigA": 0.4164456233421751,
+        "noVigB": 0.583554376657825,
+        "capturedAtApprox": "2026-11-18T21:03:00-03:00",
+        "verifiedLive": false
+      },
+      "history": {
+        "a": {
+          "rank": 34,
+          "maps90": 41,
+          "form": {
+            "last15": 15,
+            "wins": 5,
+            "losses": 10,
+            "vsTop50": 14,
+            "winsVsTop50": 4,
+            "lastOpponent": "Betclic",
+            "lastResult": "W"
+          }
+        },
+        "b": {
+          "rank": 18,
+          "maps90": 74,
+          "form": {
+            "last15": 15,
+            "wins": 12,
+            "losses": 3,
+            "vsTop50": 11,
+            "winsVsTop50": 8,
+            "lastOpponent": "Luminosity",
+            "lastResult": "L"
+          }
+        }
+      },
+      "v1": {
+        "pA": 0.24073754308098622,
+        "pB": 0.7592624569190136,
+        "sensitivityA": {
+          "min": 0.1942246169100048,
+          "max": 0.29641425744513367
+        },
+        "sampleFloor": 6,
+        "eligibleMaps": 4,
+        "orderedTriplets": 24
+      },
+      "v2": {
+        "pA": 0.29583703089247193,
+        "pB": 0.7041629691075282,
+        "sensitivityA": {
+          "min": 0.28002304716477966,
+          "max": 0.3150143738485015
+        },
+        "rankPriorA": 0.39809889541196153,
+        "formDelta": -0.052259301079857906,
+        "version": "atlas-rank-strength-challenger-v2-prototype"
+      },
+      "disagreementPP": 5.509948781148571,
+      "marketGapPP": -12.060859244970318,
+      "researchStatus": "unvalidated_needs_prospective_evaluation"
+    },
+    {
+      "id": "cs2-match-2400446",
+      "event": "Stake Ranked Episode 6",
+      "scheduledAt": "2026-11-19T16:00:00.000Z",
+      "displayTimeBR": "13:00",
+      "teamA": {
+        "id": "cs2-team-10333",
+        "name": "Sangal"
+      },
+      "teamB": {
+        "id": "cs2-team-6290",
+        "name": "Luminosity"
+      },
+      "status": "upcoming_at_freeze",
+      "vetoStatus": "not_confirmed",
+      "odds": {
+        "a": 2.05,
+        "b": 1.64,
+        "margin": 0.09756097560975618,
+        "noVigA": 0.4444444444444445,
+        "noVigB": 0.5555555555555555,
+        "capturedAtApprox": "2026-11-18T21:03:00-03:00",
+        "verifiedLive": false
+      },
+      "history": {
+        "a": {
+          "rank": 41,
+          "maps90": 76,
+          "form": {
+            "last15": 15,
+            "wins": 11,
+            "losses": 4,
+            "vsTop50": 6,
+            "winsVsTop50": 3,
+            "lastOpponent": "Inner Circle",
+            "lastResult": "W"
+          }
+        },
+        "b": {
+          "rank": 36,
+          "maps90": 50,
+          "form": {
+            "last15": 15,
+            "wins": 8,
+            "losses": 7,
+            "vsTop50": 13,
+            "winsVsTop50": 8,
+            "lastOpponent": "Ninjas in Pyjamas",
+            "lastResult": "W"
+          }
+        }
+      },
+      "v1": {
+        "pA": 0.5207483167588902,
+        "pB": 0.47925168324110956,
+        "sensitivityA": {
+          "min": 0.36942765605742284,
+          "max": 0.6744392919755428
+        },
+        "sampleFloor": 7,
+        "eligibleMaps": 5,
+        "orderedTriplets": 60
+      },
+      "v2": {
+        "pA": 0.49425845624792514,
+        "pB": 0.5057415437520749,
+        "sensitivityA": {
+          "min": 0.4472810134265765,
+          "max": 0.5424999026411412
+        },
+        "rankPriorA": 0.47887894290510474,
+        "formDelta": 0.025300070743318366,
+        "version": "atlas-rank-strength-challenger-v2-prototype"
+      },
+      "disagreementPP": -2.648986051096508,
+      "marketGapPP": 4.981401180348066,
+      "researchStatus": "unvalidated_needs_prospective_evaluation"
+    }
+  ],
+  "warnings": [
+    "Odds from user's BR365 screenshot only; no realtime betting availability.",
+    "Both statistical models are uncalibrated. This is not a verified edge or guaranteed profit.",
+    "No map vetos yet. Scenarios assume uniformly weighted ordered map triplets.",
+    "Confidence sensitivity ranges are not calibrated statistical confidence intervals.",
+    "Predictions are frozen before kickoff and are not rewritten after results."
+  ]
+}
