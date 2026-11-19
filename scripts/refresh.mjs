@@ -3,6 +3,7 @@
 import fs from 'node:fs/promises';
 import { generateFrozen, assess, metrics } from './model.mjs';
 import { validateSeries } from './series-model.mjs';
+import {buildRadarFeed} from './radar-feed.mjs';
 import {audit} from './audit.mjs';
 import {appendProspective,gradeProspective} from './prospective.mjs';
 import { recentOpponents,longMapHistory,rankedSnapshot } from './strength-sync.mjs';
@@ -28,6 +29,7 @@ async function cito(path,params={}){
 }
 const seriesFrozen=await read('series-forecasts.json'),challengerFrozen=await read('challenger-review.json'),prospective=await read('prospective.json');
 const opponentForm=await read('team-opponents.json'),annual=await read('team-long-history.json'),rankings=await read('team-rankings.json');
+const nov19Context=await read('nov19-context.json'),nov19Predictions=await read('nov19-forecasts.json'),nov19Quotes=await read('nov19-br365-all-markets.json'),previousQuotes=await read('br365-series-odds.json');
 const snapshot=await read('tournaments.json'),players=await read('players.json'),predictions=await read('predictions.json'),
  results=await read('results.json'),sync=await read('sync-state.json');
 const now=new Date().toISOString(),nowMs=Date.now();
@@ -166,8 +168,9 @@ try{
  const prospectiveUpdated=appendProspective(prospective,snapshot,opponentForm,rankings,now);
  const prospectiveEval=gradeProspective(prospectiveUpdated,results,now);
  sync.updatedAt=now;sync.lastRun={status:warnings.length?'partial':'ok',requests:calls,warnings};
+ const radar=buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quotes,prospective:prospectiveUpdated,completed:results,previousQuotes,seriesFrozen,forms:opponentForm,ranks:rankings,sync,nowIso:now});
  await Promise.all([save('tournaments.json',snapshot),save('players.json',players),save('predictions.json',updated),save('results.json',results),
-  save('validation.json',evaluation),save('series-validation.json',seriesEval),save('audit-2026-11-18.json',fullAudit),save('prospective.json',prospectiveUpdated),save('prospective-validation.json',prospectiveEval),save('team-opponents.json',opponentForm),save('team-long-history.json',annual),save('team-rankings.json',rankings),save('sync-state.json',sync)]);
+  save('validation.json',evaluation),save('series-validation.json',seriesEval),save('audit-2026-11-18.json',fullAudit),save('prospective.json',prospectiveUpdated),save('prospective-validation.json',prospectiveEval),save('team-opponents.json',opponentForm),save('team-long-history.json',annual),save('team-rankings.json',rankings),save('sync-state.json',sync),save('radar-feed.json',radar)]);
  console.log(JSON.stringify({at:now,requests:calls,fixtures:snapshot.matches.length,rosters:players.teams.length,
-  playersWithStats:players.players.length,recentOpponentTeams:opponentForm.teams.length,annualTeams:annual.teams.length,frozen:updated.forecasts.length,resolved:evalSummary.resolved,seriesResolved:seriesEval.resolved,prospectiveRegistered:prospectiveUpdated.forecasts.length,prospectiveResolved:prospectiveEval.resolved,warnings},null,2));
+  playersWithStats:players.players.length,recentOpponentTeams:opponentForm.teams.length,annualTeams:annual.teams.length,frozen:updated.forecasts.length,resolved:evalSummary.resolved,seriesResolved:seriesEval.resolved,prospectiveRegistered:prospectiveUpdated.forecasts.length,prospectiveResolved:prospectiveEval.resolved,radarUpcoming:radar.games.filter(g=>Date.parse(g.startTime)>Date.parse(now)&&g.status!=='completed').length,warnings},null,2));
 }catch(e){console.error('Sync failed safely:',e.message);process.exitCode=1}
