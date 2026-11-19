@@ -1,0 +1,1607 @@
+{
+  "version": "atlas-radar-unificado-v1",
+  "generatedAt": "2026-11-19T00:28:24.174Z",
+  "dataStatus": {
+    "citoAt": "2026-11-18T08:21:48.422Z",
+    "formAt": "2026-11-18T08:21:48.422Z",
+    "rankingsAt": "2026-11-18T01:12:40.903Z",
+    "dailySyncAt": "2026-11-18T08:21:48.422Z",
+    "oddsType": "prints_manualmente_enviados",
+    "automaticOdds": false,
+    "dailyCitoUpdatesDependOnGitHubActions": true
+  },
+  "games": [
+    {
+      "id": "cs2-match-2400522",
+      "startTime": "2026-11-18T10:00:00.000Z",
+      "event": "Tipsport RUSH Brno 2026",
+      "eventId": "cs2-event-9273",
+      "status": "completed",
+      "teamA": {
+        "id": "cs2-team-7187",
+        "name": "Nexus"
+      },
+      "teamB": {
+        "id": "cs2-team-13104",
+        "name": "Iberian Soul"
+      },
+      "result": {
+        "scoreA": 2,
+        "scoreB": 0,
+        "verifiedAt": "2026-11-18T23:01:08.875Z"
+      },
+      "model": {
+        "v1": 0.6212164619755713,
+        "v2": null,
+        "frozenAt": "2026-11-18T00:55:32.513Z",
+        "version": "V1",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.6212164619755713,
+          "bWin": 0.37878353802442843,
+          "a20": 0.32385367261590303,
+          "a21": 0.29736278935966837,
+          "b20": 0.17021873585961447,
+          "b21": 0.20856480216481393,
+          "over2_5": 0.5059275915244823,
+          "under2_5": 0.4940724084755175,
+          "aMinus1_5": 0.32385367261590303,
+          "bPlus1_5": 0.676146327384097,
+          "aPlus1_5": 0.8297812641403856,
+          "bMinus1_5": 0.17021873585961447
+        },
+        "v2Score": null
+      },
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 51,
+          "maps90": 78,
+          "form": {
+            "n": 15,
+            "wins": 9,
+            "losses": 6,
+            "vsTop50": 4,
+            "winsVsTop50": 1
+          },
+          "asOf": "2026-11-18T08:21:48.422Z"
+        },
+        "b": {
+          "rank": 53,
+          "maps90": 70,
+          "form": {
+            "n": 15,
+            "wins": 9,
+            "losses": 6,
+            "vsTop50": 5,
+            "winsVsTop50": 3
+          },
+          "asOf": "2026-11-18T01:13:23.881Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": {
+        "availableForAudit": true
+      }
+    },
+    {
+      "id": "cs2-match-2400440",
+      "startTime": "2026-11-18T11:00:00.000Z",
+      "event": "Stake Ranked Episode 6",
+      "eventId": "cs2-event-9258",
+      "status": "completed",
+      "teamA": {
+        "id": "cs2-team-12916",
+        "name": "Betclic"
+      },
+      "teamB": {
+        "id": "cs2-team-7532",
+        "name": "BIG"
+      },
+      "result": {
+        "scoreA": 0,
+        "scoreB": 2,
+        "verifiedAt": "2026-11-18T23:00:58.206Z"
+      },
+      "model": {
+        "v1": 0.6300407637341947,
+        "v2": null,
+        "frozenAt": "2026-11-18T00:55:32.513Z",
+        "version": "V1",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.6300407637341947,
+          "bWin": 0.3699592362658054,
+          "a20": 0.3422920648972873,
+          "a21": 0.2877486988369074,
+          "b20": 0.1684731125656235,
+          "b21": 0.2014861237001819,
+          "over2_5": 0.4892348225370893,
+          "under2_5": 0.5107651774629108,
+          "aMinus1_5": 0.3422920648972873,
+          "bPlus1_5": 0.6577079351027126,
+          "aPlus1_5": 0.8315268874343765,
+          "bMinus1_5": 0.1684731125656235
+        },
+        "v2Score": null
+      },
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 54,
+          "maps90": 58,
+          "form": {
+            "n": 15,
+            "wins": 10,
+            "losses": 5,
+            "vsTop50": 4,
+            "winsVsTop50": 1
+          },
+          "asOf": "2026-11-18T01:13:23.881Z"
+        },
+        "b": {
+          "rank": 34,
+          "maps90": 39,
+          "form": {
+            "n": 15,
+            "wins": 5,
+            "losses": 10,
+            "vsTop50": 15,
+            "winsVsTop50": 5
+          },
+          "asOf": "2026-11-18T01:13:23.881Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": {
+        "availableForAudit": true
+      }
+    },
+    {
+      "id": "cs2-match-2400523",
+      "startTime": "2026-11-18T13:00:00.000Z",
+      "event": "Tipsport RUSH Brno 2026",
+      "eventId": "cs2-event-9273",
+      "status": "completed",
+      "teamA": {
+        "id": "cs2-team-13173",
+        "name": "Phantom"
+      },
+      "teamB": {
+        "id": "cs2-team-11641",
+        "name": "Metizport"
+      },
+      "result": {
+        "scoreA": 1,
+        "scoreB": 2,
+        "verifiedAt": "2026-11-18T21:45:15.919Z"
+      },
+      "model": {
+        "v1": 0.414679261868522,
+        "v2": null,
+        "frozenAt": "2026-11-18T00:55:32.513Z",
+        "version": "V1",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.414679261868522,
+          "bWin": 0.5853207381314779,
+          "a20": 0.19300316949126287,
+          "a21": 0.22167609237725916,
+          "b20": 0.30640080561028216,
+          "b21": 0.27891993252119573,
+          "over2_5": 0.5005960248984549,
+          "under2_5": 0.499403975101545,
+          "aMinus1_5": 0.19300316949126287,
+          "bPlus1_5": 0.8069968305087372,
+          "aPlus1_5": 0.6935991943897178,
+          "bMinus1_5": 0.30640080561028216
+        },
+        "v2Score": null
+      },
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 63,
+          "maps90": 62,
+          "form": {
+            "n": 15,
+            "wins": 11,
+            "losses": 4,
+            "vsTop50": 1,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-18T01:13:48.420Z"
+        },
+        "b": {
+          "rank": 69,
+          "maps90": 75,
+          "form": {
+            "n": 15,
+            "wins": 8,
+            "losses": 7,
+            "vsTop50": 6,
+            "winsVsTop50": 3
+          },
+          "asOf": "2026-11-18T01:13:48.420Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": {
+        "availableForAudit": true
+      }
+    },
+    {
+      "id": "cs2-match-2400441",
+      "startTime": "2026-11-18T13:30:00.000Z",
+      "event": "Stake Ranked Episode 6",
+      "eventId": "cs2-event-9258",
+      "status": "completed",
+      "teamA": {
+        "id": "cs2-team-12267",
+        "name": "UNiTY"
+      },
+      "teamB": {
+        "id": "cs2-team-9928",
+        "name": "GamerLegion"
+      },
+      "result": {
+        "scoreA": 1,
+        "scoreB": 2,
+        "verifiedAt": "2026-11-18T21:45:15.413Z"
+      },
+      "model": {
+        "v1": 0.6477149312355204,
+        "v2": null,
+        "frozenAt": "2026-11-18T00:55:32.513Z",
+        "version": "V1",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.6477149312355204,
+          "bWin": 0.3522850687644796,
+          "a20": 0.34924533171609634,
+          "a21": 0.29846959951942403,
+          "b20": 0.15569300034181818,
+          "b21": 0.19659206842266141,
+          "over2_5": 0.49506166794208545,
+          "under2_5": 0.5049383320579145,
+          "aMinus1_5": 0.34924533171609634,
+          "bPlus1_5": 0.6507546682839036,
+          "aPlus1_5": 0.8443069996581818,
+          "bMinus1_5": 0.15569300034181818
+        },
+        "v2Score": null
+      },
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 72,
+          "maps90": 65,
+          "form": {
+            "n": 15,
+            "wins": 12,
+            "losses": 3,
+            "vsTop50": 1,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-18T01:13:48.420Z"
+        },
+        "b": {
+          "rank": 27,
+          "maps90": 56,
+          "form": {
+            "n": 15,
+            "wins": 8,
+            "losses": 7,
+            "vsTop50": 11,
+            "winsVsTop50": 6
+          },
+          "asOf": "2026-11-18T01:13:48.420Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": {
+        "availableForAudit": true
+      }
+    },
+    {
+      "id": "cs2-match-2400442",
+      "startTime": "2026-11-18T16:00:00.000Z",
+      "event": "Stake Ranked Episode 6",
+      "eventId": "cs2-event-9258",
+      "status": "completed",
+      "teamA": {
+        "id": "cs2-team-13117",
+        "name": "Inner Circle"
+      },
+      "teamB": {
+        "id": "cs2-team-10333",
+        "name": "Sangal"
+      },
+      "result": {
+        "scoreA": 0,
+        "scoreB": 2,
+        "verifiedAt": "2026-11-18T23:00:13.672Z"
+      },
+      "model": {
+        "v1": 0.37921739952428496,
+        "v2": null,
+        "frozenAt": "2026-11-18T00:55:32.513Z",
+        "version": "V1",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.37921739952428496,
+          "bWin": 0.6207826004757148,
+          "a20": 0.17438693034090905,
+          "a21": 0.2048304691833759,
+          "b20": 0.3359084867413386,
+          "b21": 0.28487411373437616,
+          "over2_5": 0.4897045829177521,
+          "under2_5": 0.5102954170822477,
+          "aMinus1_5": 0.17438693034090905,
+          "bPlus1_5": 0.825613069659091,
+          "aPlus1_5": 0.6640915132586613,
+          "bMinus1_5": 0.3359084867413386
+        },
+        "v2Score": null
+      },
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 39,
+          "maps90": 36,
+          "form": {
+            "n": 15,
+            "wins": 8,
+            "losses": 7,
+            "vsTop50": 9,
+            "winsVsTop50": 4
+          },
+          "asOf": "2026-11-18T01:14:09.705Z"
+        },
+        "b": {
+          "rank": 41,
+          "maps90": 74,
+          "form": {
+            "n": 15,
+            "wins": 10,
+            "losses": 5,
+            "vsTop50": 5,
+            "winsVsTop50": 2
+          },
+          "asOf": "2026-11-18T01:14:09.705Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": {
+        "availableForAudit": true
+      }
+    },
+    {
+      "id": "cs2-match-2400524",
+      "startTime": "2026-11-18T16:00:00.000Z",
+      "event": "Tipsport RUSH Brno 2026",
+      "eventId": "cs2-event-9273",
+      "status": "completed",
+      "teamA": {
+        "id": "cs2-team-10577",
+        "name": "SINNERS"
+      },
+      "teamB": {
+        "id": "cs2-team-12474",
+        "name": "Alliance"
+      },
+      "result": {
+        "scoreA": 1,
+        "scoreB": 2,
+        "verifiedAt": "2026-11-18T21:45:13.602Z"
+      },
+      "model": {
+        "v1": 0.6306764103663197,
+        "v2": null,
+        "frozenAt": "2026-11-18T00:55:32.513Z",
+        "version": "V1",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.6306764103663197,
+          "bWin": 0.36932358963368,
+          "a20": 0.33797646572618406,
+          "a21": 0.29269994464013566,
+          "b20": 0.16589035046517106,
+          "b21": 0.20343323916850894,
+          "over2_5": 0.4961331838086446,
+          "under2_5": 0.5038668161913551,
+          "aMinus1_5": 0.33797646572618406,
+          "bPlus1_5": 0.6620235342738159,
+          "aPlus1_5": 0.8341096495348289,
+          "bMinus1_5": 0.16589035046517106
+        },
+        "v2Score": null
+      },
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 37,
+          "maps90": 88,
+          "form": {
+            "n": 15,
+            "wins": 10,
+            "losses": 5,
+            "vsTop50": 8,
+            "winsVsTop50": 4
+          },
+          "asOf": "2026-11-18T01:14:09.705Z"
+        },
+        "b": {
+          "rank": 38,
+          "maps90": 59,
+          "form": {
+            "n": 15,
+            "wins": 9,
+            "losses": 6,
+            "vsTop50": 4,
+            "winsVsTop50": 1
+          },
+          "asOf": "2026-11-18T01:14:09.705Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": {
+        "availableForAudit": true
+      }
+    },
+    {
+      "id": "cs2-match-2400443",
+      "startTime": "2026-11-18T18:30:00.000Z",
+      "event": "Stake Ranked Episode 6",
+      "eventId": "cs2-event-9258",
+      "status": "completed",
+      "teamA": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas"
+      },
+      "teamB": {
+        "id": "cs2-team-6290",
+        "name": "Luminosity"
+      },
+      "result": {
+        "scoreA": 0,
+        "scoreB": 2,
+        "verifiedAt": "2026-11-18T21:45:12.464Z"
+      },
+      "model": {
+        "v1": 0.593007294607749,
+        "v2": null,
+        "frozenAt": "2026-11-18T00:55:32.513Z",
+        "version": "V1",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.593007294607749,
+          "bWin": 0.4069927053922513,
+          "a20": 0.31329291029668227,
+          "a21": 0.27971438431106677,
+          "b20": 0.19000905032137475,
+          "b21": 0.21698365507087652,
+          "over2_5": 0.4966980393819433,
+          "under2_5": 0.503301960618057,
+          "aMinus1_5": 0.31329291029668227,
+          "bPlus1_5": 0.6867070897033177,
+          "aPlus1_5": 0.8099909496786253,
+          "bMinus1_5": 0.19000905032137475
+        },
+        "v2Score": null
+      },
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 18,
+          "maps90": 72,
+          "form": {
+            "n": 15,
+            "wins": 13,
+            "losses": 2,
+            "vsTop50": 10,
+            "winsVsTop50": 8
+          },
+          "asOf": "2026-11-18T01:14:30.220Z"
+        },
+        "b": {
+          "rank": 36,
+          "maps90": 48,
+          "form": {
+            "n": 15,
+            "wins": 7,
+            "losses": 8,
+            "vsTop50": 13,
+            "winsVsTop50": 7
+          },
+          "asOf": "2026-11-18T01:14:30.220Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": {
+        "availableForAudit": true
+      }
+    },
+    {
+      "id": "cs2-match-2400525",
+      "startTime": "2026-11-18T19:00:00.000Z",
+      "event": "Tipsport RUSH Brno 2026",
+      "eventId": "cs2-event-9273",
+      "status": "completed",
+      "teamA": {
+        "id": "cs2-team-13996",
+        "name": "BBL"
+      },
+      "teamB": {
+        "id": "cs2-team-5991",
+        "name": "Envy"
+      },
+      "result": {
+        "scoreA": 2,
+        "scoreB": 1,
+        "verifiedAt": "2026-11-18T23:21:47.149Z"
+      },
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 50,
+          "maps90": 85,
+          "form": {
+            "n": 15,
+            "wins": 10,
+            "losses": 5,
+            "vsTop50": 6,
+            "winsVsTop50": 2
+          },
+          "asOf": "2026-11-18T01:14:30.220Z"
+        },
+        "b": {
+          "rank": 32,
+          "maps90": 23,
+          "form": {
+            "n": 15,
+            "wins": 5,
+            "losses": 10,
+            "vsTop50": 12,
+            "winsVsTop50": 3
+          },
+          "asOf": "2026-11-18T01:14:30.220Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": {
+        "availableForAudit": true
+      }
+    },
+    {
+      "id": "cs2-match-2400444",
+      "startTime": "2026-11-19T11:00:00.000Z",
+      "event": "Stake Ranked Episode 6",
+      "eventId": "cs2-event-9258",
+      "status": "scheduled",
+      "teamA": {
+        "id": "cs2-team-9928",
+        "name": "GamerLegion"
+      },
+      "teamB": {
+        "id": "cs2-team-13117",
+        "name": "Inner Circle"
+      },
+      "result": null,
+      "model": {
+        "v1": 0.5720886492053774,
+        "v2": 0.57989499301651,
+        "frozenAt": "2026-11-19T00:09:31.876Z",
+        "version": "V1 vs V2",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.5720886492053774,
+          "bWin": 0.4279113507946225,
+          "a20": 0.2923795157606014,
+          "a21": 0.27970913344477594,
+          "b20": 0.20033111352940727,
+          "b21": 0.2275802372652152,
+          "over2_5": 0.5072893707099911,
+          "under2_5": 0.49271062929000864,
+          "aMinus1_5": 0.2923795157606014,
+          "bPlus1_5": 0.7076204842393986,
+          "aPlus1_5": 0.7996688864705928,
+          "bMinus1_5": 0.20033111352940727
+        },
+        "v2Score": {
+          "aWin": 0.57989499301651,
+          "bWin": 0.4201050069834902,
+          "a20": 0.30554924352708906,
+          "a21": 0.2743457494894209,
+          "b20": 0.19894519439905425,
+          "b21": 0.22115981258443593,
+          "aMinus1_5": 0.30554924352708906,
+          "bPlus1_5": 0.694450756472911,
+          "aPlus1_5": 0.8010548056009458,
+          "bMinus1_5": 0.19894519439905425,
+          "over2_5": 0.4955055620738569,
+          "under2_5": 0.5044944379261433
+        }
+      },
+      "quotes": {
+        "source": "BR365 / prints enviados",
+        "capturedAt": "2026-11-18T21:12:00-03:00",
+        "eventId": "18427676",
+        "live": false
+      },
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "GamerLegion vence a série",
+          "odd": 1.62,
+          "impliedNoVig": 0.56451613,
+          "impliedRaw": 0.61728395,
+          "v1P": 0.5720886492053774,
+          "v2P": 0.57989499301651,
+          "marketOverround": 0.09347443,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "Inner Circle vence a série",
+          "odd": 2.1,
+          "impliedNoVig": 0.43548387,
+          "impliedRaw": 0.47619048,
+          "v1P": 0.4279113507946225,
+          "v2P": 0.4201050069834902,
+          "marketOverround": 0.09347443,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "aPlus1_5",
+          "family": "map_handicap",
+          "label": "GamerLegion +1,5 mapas",
+          "odd": 1.21,
+          "impliedNoVig": 0.75604839,
+          "impliedRaw": 0.82644628,
+          "v1P": 0.7996688864705928,
+          "v2P": 0.8010548056009458,
+          "marketOverround": 0.09311295,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bMinus1_5",
+          "family": "map_handicap",
+          "label": "Inner Circle -1,5 mapas",
+          "odd": 3.75,
+          "impliedNoVig": 0.24395161,
+          "impliedRaw": 0.26666667,
+          "v1P": 0.20033111352940727,
+          "v2P": 0.19894519439905425,
+          "marketOverround": 0.09311295,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "aMinus1_5",
+          "family": "map_handicap",
+          "label": "GamerLegion -1,5 mapas",
+          "odd": 2.8,
+          "impliedNoVig": 0.32692308,
+          "impliedRaw": 0.35714286,
+          "v1P": 0.2923795157606014,
+          "v2P": 0.30554924352708906,
+          "marketOverround": 0.09243697,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bPlus1_5",
+          "family": "map_handicap",
+          "label": "Inner Circle +1,5 mapas",
+          "odd": 1.36,
+          "impliedNoVig": 0.67307692,
+          "impliedRaw": 0.73529412,
+          "v1P": 0.7076204842393986,
+          "v2P": 0.694450756472911,
+          "marketOverround": 0.09243697,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "a20",
+          "family": "correct_score",
+          "label": "GamerLegion 2–0",
+          "odd": 2.85,
+          "impliedNoVig": 0.30385947,
+          "impliedRaw": 0.35087719,
+          "v1P": 0.2923795157606014,
+          "v2P": 0.30554924352708906,
+          "marketOverround": 0.1547351,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "b20",
+          "family": "correct_score",
+          "label": "Inner Circle 2–0",
+          "odd": 3.85,
+          "impliedNoVig": 0.22493493,
+          "impliedRaw": 0.25974026,
+          "v1P": 0.20033111352940727,
+          "v2P": 0.19894519439905425,
+          "marketOverround": 0.1547351,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "a21",
+          "family": "correct_score",
+          "label": "GamerLegion 2–1",
+          "odd": 3.4,
+          "impliedNoVig": 0.25470573,
+          "impliedRaw": 0.29411765,
+          "v1P": 0.27970913344477594,
+          "v2P": 0.2743457494894209,
+          "marketOverround": 0.1547351,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "b21",
+          "family": "correct_score",
+          "label": "Inner Circle 2–1",
+          "odd": 4,
+          "impliedNoVig": 0.21649987,
+          "impliedRaw": 0.25,
+          "v1P": 0.2275802372652152,
+          "v2P": 0.22115981258443593,
+          "marketOverround": 0.1547351,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "over2_5",
+          "family": "total_maps",
+          "label": "Mais de 2,5 mapas",
+          "odd": 1.95,
+          "impliedNoVig": 0.46721311,
+          "impliedRaw": 0.51282051,
+          "v1P": 0.5072893707099911,
+          "v2P": 0.4955055620738569,
+          "marketOverround": 0.09761583,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "under2_5",
+          "family": "total_maps",
+          "label": "Menos de 2,5 mapas",
+          "odd": 1.71,
+          "impliedNoVig": 0.53278689,
+          "impliedRaw": 0.58479532,
+          "v1P": 0.49271062929000864,
+          "v2P": 0.5044944379261433,
+          "marketOverround": 0.09761583,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        }
+      ],
+      "unmodeledRoundHandicaps": [
+        {
+          "label": "GamerLegion -0.5 rodadas",
+          "line": -0.5,
+          "team": "GamerLegion",
+          "odd": 1.64,
+          "side": "a",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Inner Circle +0.5 rodadas",
+          "line": 0.5,
+          "team": "Inner Circle",
+          "odd": 2.05,
+          "side": "b",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "GamerLegion -1.5 rodadas",
+          "line": -1.5,
+          "team": "GamerLegion",
+          "odd": 1.71,
+          "side": "a",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Inner Circle +1.5 rodadas",
+          "line": 1.5,
+          "team": "Inner Circle",
+          "odd": 1.95,
+          "side": "b",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        }
+      ],
+      "pricingConsistency": [
+        {
+          "outcome": "GamerLegion 2–0",
+          "correctScoreOdd": 2.85,
+          "mapHandicapOdd": 2.8,
+          "higherOdd": 2.85,
+          "oddDifference": 0.05,
+          "relativeDifferencePercent": 1.78571429,
+          "settlementRulesNeedChecking": true
+        },
+        {
+          "outcome": "Inner Circle 2–0",
+          "correctScoreOdd": 3.85,
+          "mapHandicapOdd": 3.75,
+          "higherOdd": 3.85,
+          "oddDifference": 0.1,
+          "relativeDifferencePercent": 2.66666667,
+          "settlementRulesNeedChecking": true
+        }
+      ],
+      "form": {
+        "a": {
+          "rank": 27,
+          "maps90": 59,
+          "form": {
+            "n": 15,
+            "wins": 8,
+            "losses": 7,
+            "vsTop50": 11,
+            "winsVsTop50": 6
+          },
+          "asOf": "2026-11-19T00:07:13.856Z"
+        },
+        "b": {
+          "rank": 39,
+          "maps90": 38,
+          "form": {
+            "n": 15,
+            "wins": 7,
+            "losses": 8,
+            "vsTop50": 9,
+            "winsVsTop50": 3
+          },
+          "asOf": "2026-11-19T00:07:13.856Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400445",
+      "startTime": "2026-11-19T13:30:00.000Z",
+      "event": "Stake Ranked Episode 6",
+      "eventId": "cs2-event-9258",
+      "status": "scheduled",
+      "teamA": {
+        "id": "cs2-team-7532",
+        "name": "BIG"
+      },
+      "teamB": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas"
+      },
+      "result": null,
+      "model": {
+        "v1": 0.24073754308098622,
+        "v2": 0.29583703089247193,
+        "frozenAt": "2026-11-19T00:09:31.876Z",
+        "version": "V1 vs V2",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.24073754308098622,
+          "bWin": 0.7592624569190136,
+          "a20": 0.10065257520087846,
+          "a21": 0.14008496788010774,
+          "b20": 0.45781775637817845,
+          "b21": 0.3014447005408352,
+          "over2_5": 0.441529668420943,
+          "under2_5": 0.5584703315790569,
+          "aMinus1_5": 0.10065257520087846,
+          "bPlus1_5": 0.8993474247991216,
+          "aPlus1_5": 0.5421822436218215,
+          "bMinus1_5": 0.45781775637817845
+        },
+        "v2Score": {
+          "aWin": 0.29583703089247193,
+          "bWin": 0.7041629691075282,
+          "a20": 0.12961798694394655,
+          "a21": 0.16621904394852535,
+          "b20": 0.40877080271335725,
+          "b21": 0.2953921663941709,
+          "aMinus1_5": 0.12961798694394655,
+          "bPlus1_5": 0.8703820130560534,
+          "aPlus1_5": 0.5912291972866428,
+          "bMinus1_5": 0.40877080271335725,
+          "over2_5": 0.46161121034269625,
+          "under2_5": 0.5383887896573039
+        }
+      },
+      "quotes": {
+        "source": "BR365 / prints enviados",
+        "capturedAt": "2026-11-18T21:12:00-03:00",
+        "eventId": "18428182",
+        "live": false
+      },
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "BIG vence a série",
+          "odd": 2.2,
+          "impliedNoVig": 0.41644562,
+          "impliedRaw": 0.45454545,
+          "v1P": 0.24073754308098622,
+          "v2P": 0.29583703089247193,
+          "marketOverround": 0.09148813,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "Ninjas in Pyjamas vence a série",
+          "odd": 1.57,
+          "impliedNoVig": 0.58355438,
+          "impliedRaw": 0.63694268,
+          "v1P": 0.7592624569190136,
+          "v2P": 0.7041629691075282,
+          "marketOverround": 0.09148813,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "aPlus1_5",
+          "family": "map_handicap",
+          "label": "BIG +1,5 mapas",
+          "odd": 1.4,
+          "impliedNoVig": 0.65432099,
+          "impliedRaw": 0.71428571,
+          "v1P": 0.5421822436218215,
+          "v2P": 0.5912291972866428,
+          "marketOverround": 0.0916442,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bMinus1_5",
+          "family": "map_handicap",
+          "label": "Ninjas in Pyjamas -1,5 mapas",
+          "odd": 2.65,
+          "impliedNoVig": 0.34567901,
+          "impliedRaw": 0.37735849,
+          "v1P": 0.45781775637817845,
+          "v2P": 0.40877080271335725,
+          "marketOverround": 0.0916442,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "aMinus1_5",
+          "family": "map_handicap",
+          "label": "BIG -1,5 mapas",
+          "odd": 3.85,
+          "impliedNoVig": 0.23762376,
+          "impliedRaw": 0.25974026,
+          "v1P": 0.10065257520087846,
+          "v2P": 0.12961798694394655,
+          "marketOverround": 0.09307359,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bPlus1_5",
+          "family": "map_handicap",
+          "label": "Ninjas in Pyjamas +1,5 mapas",
+          "odd": 1.2,
+          "impliedNoVig": 0.76237624,
+          "impliedRaw": 0.83333333,
+          "v1P": 0.8993474247991216,
+          "v2P": 0.8703820130560534,
+          "marketOverround": 0.09307359,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "a20",
+          "family": "correct_score",
+          "label": "BIG 2–0",
+          "odd": 4.25,
+          "impliedNoVig": 0.20185088,
+          "impliedRaw": 0.23529412,
+          "v1P": 0.10065257520087846,
+          "v2P": 0.12961798694394655,
+          "marketOverround": 0.16568291,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "b20",
+          "family": "correct_score",
+          "label": "Ninjas in Pyjamas 2–0",
+          "odd": 2.65,
+          "impliedNoVig": 0.3237231,
+          "impliedRaw": 0.37735849,
+          "v1P": 0.45781775637817845,
+          "v2P": 0.40877080271335725,
+          "marketOverround": 0.16568291,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "a21",
+          "family": "correct_score",
+          "label": "BIG 2–1",
+          "odd": 4,
+          "impliedNoVig": 0.21446656,
+          "impliedRaw": 0.25,
+          "v1P": 0.14008496788010774,
+          "v2P": 0.16621904394852535,
+          "marketOverround": 0.16568291,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "b21",
+          "family": "correct_score",
+          "label": "Ninjas in Pyjamas 2–1",
+          "odd": 3.3,
+          "impliedNoVig": 0.25995946,
+          "impliedRaw": 0.3030303,
+          "v1P": 0.3014447005408352,
+          "v2P": 0.2953921663941709,
+          "marketOverround": 0.16568291,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "over2_5",
+          "family": "total_maps",
+          "label": "Mais de 2,5 mapas",
+          "odd": 1.95,
+          "impliedNoVig": 0.46721311,
+          "impliedRaw": 0.51282051,
+          "v1P": 0.441529668420943,
+          "v2P": 0.46161121034269625,
+          "marketOverround": 0.09761583,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "under2_5",
+          "family": "total_maps",
+          "label": "Menos de 2,5 mapas",
+          "odd": 1.71,
+          "impliedNoVig": 0.53278689,
+          "impliedRaw": 0.58479532,
+          "v1P": 0.5584703315790569,
+          "v2P": 0.5383887896573039,
+          "marketOverround": 0.09761583,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        }
+      ],
+      "unmodeledRoundHandicaps": [
+        {
+          "label": "BIG +6.5 rodadas",
+          "line": 6.5,
+          "team": "BIG",
+          "odd": 1.57,
+          "side": "a",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Ninjas in Pyjamas -6.5 rodadas",
+          "line": -6.5,
+          "team": "Ninjas in Pyjamas",
+          "odd": 2.2,
+          "side": "b",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "BIG +5.5 rodadas",
+          "line": 5.5,
+          "team": "BIG",
+          "odd": 1.68,
+          "side": "a",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Ninjas in Pyjamas -5.5 rodadas",
+          "line": -5.5,
+          "team": "Ninjas in Pyjamas",
+          "odd": 2,
+          "side": "b",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "BIG +4.5 rodadas",
+          "line": 4.5,
+          "team": "BIG",
+          "odd": 1.8,
+          "side": "a",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Ninjas in Pyjamas -4.5 rodadas",
+          "line": -4.5,
+          "team": "Ninjas in Pyjamas",
+          "odd": 1.86,
+          "side": "b",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "BIG +3.5 rodadas",
+          "line": 3.5,
+          "team": "BIG",
+          "odd": 1.86,
+          "side": "a",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Ninjas in Pyjamas -3.5 rodadas",
+          "line": -3.5,
+          "team": "Ninjas in Pyjamas",
+          "odd": 1.8,
+          "side": "b",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        }
+      ],
+      "pricingConsistency": [
+        {
+          "outcome": "BIG 2–0",
+          "correctScoreOdd": 4.25,
+          "mapHandicapOdd": 3.85,
+          "higherOdd": 4.25,
+          "oddDifference": 0.4,
+          "relativeDifferencePercent": 10.38961039,
+          "settlementRulesNeedChecking": true
+        },
+        {
+          "outcome": "Ninjas in Pyjamas 2–0",
+          "correctScoreOdd": 2.65,
+          "mapHandicapOdd": 2.65,
+          "higherOdd": 2.65,
+          "oddDifference": 0,
+          "relativeDifferencePercent": 0,
+          "settlementRulesNeedChecking": true
+        }
+      ],
+      "form": {
+        "a": {
+          "rank": 34,
+          "maps90": 41,
+          "form": {
+            "n": 15,
+            "wins": 5,
+            "losses": 10,
+            "vsTop50": 14,
+            "winsVsTop50": 4
+          },
+          "asOf": "2026-11-19T00:07:13.856Z"
+        },
+        "b": {
+          "rank": 18,
+          "maps90": 74,
+          "form": {
+            "n": 15,
+            "wins": 12,
+            "losses": 3,
+            "vsTop50": 11,
+            "winsVsTop50": 8
+          },
+          "asOf": "2026-11-19T00:07:13.856Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400446",
+      "startTime": "2026-11-19T16:00:00.000Z",
+      "event": "Stake Ranked Episode 6",
+      "eventId": "cs2-event-9258",
+      "status": "scheduled",
+      "teamA": {
+        "id": "cs2-team-10333",
+        "name": "Sangal"
+      },
+      "teamB": {
+        "id": "cs2-team-6290",
+        "name": "Luminosity"
+      },
+      "result": null,
+      "model": {
+        "v1": 0.5207483167588902,
+        "v2": 0.49425845624792514,
+        "frozenAt": "2026-11-19T00:09:31.876Z",
+        "version": "V1 vs V2",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.5207483167588902,
+          "bWin": 0.47925168324110956,
+          "a20": 0.2587531826493913,
+          "a21": 0.261995134109499,
+          "b20": 0.2314916367611833,
+          "b21": 0.24776004647992628,
+          "over2_5": 0.5097551805894253,
+          "under2_5": 0.49024481941057463,
+          "aMinus1_5": 0.2587531826493913,
+          "bPlus1_5": 0.7412468173506087,
+          "aPlus1_5": 0.7685083632388167,
+          "bMinus1_5": 0.2314916367611833
+        },
+        "v2Score": {
+          "aWin": 0.49425845624792514,
+          "bWin": 0.5057415437520749,
+          "a20": 0.24569918057453635,
+          "a21": 0.24855927567338879,
+          "b20": 0.25333359196884786,
+          "b21": 0.2524079517832271,
+          "aMinus1_5": 0.24569918057453635,
+          "bPlus1_5": 0.7543008194254637,
+          "aPlus1_5": 0.7466664080311521,
+          "bMinus1_5": 0.25333359196884786,
+          "over2_5": 0.5009672274566159,
+          "under2_5": 0.4990327725433842
+        }
+      },
+      "quotes": {
+        "source": "BR365 / prints enviados",
+        "capturedAt": "2026-11-18T21:13:00-03:00",
+        "eventId": "18428210",
+        "live": false
+      },
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "Sangal vence a série",
+          "odd": 2.05,
+          "impliedNoVig": 0.44444444,
+          "impliedRaw": 0.48780488,
+          "v1P": 0.5207483167588902,
+          "v2P": 0.49425845624792514,
+          "marketOverround": 0.09756098,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "Luminosity vence a série",
+          "odd": 1.64,
+          "impliedNoVig": 0.55555556,
+          "impliedRaw": 0.6097561,
+          "v1P": 0.47925168324110956,
+          "v2P": 0.5057415437520749,
+          "marketOverround": 0.09756098,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "aPlus1_5",
+          "family": "map_handicap",
+          "label": "Sangal +1,5 mapas",
+          "odd": 1.35,
+          "impliedNoVig": 0.6746988,
+          "impliedRaw": 0.74074074,
+          "v1P": 0.7685083632388167,
+          "v2P": 0.7466664080311521,
+          "marketOverround": 0.0978836,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bMinus1_5",
+          "family": "map_handicap",
+          "label": "Luminosity -1,5 mapas",
+          "odd": 2.8,
+          "impliedNoVig": 0.3253012,
+          "impliedRaw": 0.35714286,
+          "v1P": 0.2314916367611833,
+          "v2P": 0.25333359196884786,
+          "marketOverround": 0.0978836,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "aMinus1_5",
+          "family": "map_handicap",
+          "label": "Sangal -1,5 mapas",
+          "odd": 3.6,
+          "impliedNoVig": 0.25311203,
+          "impliedRaw": 0.27777778,
+          "v1P": 0.2587531826493913,
+          "v2P": 0.24569918057453635,
+          "marketOverround": 0.09744991,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bPlus1_5",
+          "family": "map_handicap",
+          "label": "Luminosity +1,5 mapas",
+          "odd": 1.22,
+          "impliedNoVig": 0.74688797,
+          "impliedRaw": 0.81967213,
+          "v1P": 0.7412468173506087,
+          "v2P": 0.7543008194254637,
+          "marketOverround": 0.09744991,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "a20",
+          "family": "correct_score",
+          "label": "Sangal 2–0",
+          "odd": 3.75,
+          "impliedNoVig": 0.22882926,
+          "impliedRaw": 0.26666667,
+          "v1P": 0.2587531826493913,
+          "v2P": 0.24569918057453635,
+          "marketOverround": 0.16535216,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "b20",
+          "family": "correct_score",
+          "label": "Luminosity 2–0",
+          "odd": 2.9,
+          "impliedNoVig": 0.2958999,
+          "impliedRaw": 0.34482759,
+          "v1P": 0.2314916367611833,
+          "v2P": 0.25333359196884786,
+          "marketOverround": 0.16535216,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "a21",
+          "family": "correct_score",
+          "label": "Sangal 2–1",
+          "odd": 3.85,
+          "impliedNoVig": 0.22288564,
+          "impliedRaw": 0.25974026,
+          "v1P": 0.261995134109499,
+          "v2P": 0.24855927567338879,
+          "marketOverround": 0.16535216,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "b21",
+          "family": "correct_score",
+          "label": "Luminosity 2–1",
+          "odd": 3.4,
+          "impliedNoVig": 0.25238521,
+          "impliedRaw": 0.29411765,
+          "v1P": 0.24776004647992628,
+          "v2P": 0.2524079517832271,
+          "marketOverround": 0.16535216,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "over2_5",
+          "family": "total_maps",
+          "label": "Mais de 2,5 mapas",
+          "odd": 1.95,
+          "impliedNoVig": 0.46721311,
+          "impliedRaw": 0.51282051,
+          "v1P": 0.5097551805894253,
+          "v2P": 0.5009672274566159,
+          "marketOverround": 0.09761583,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "under2_5",
+          "family": "total_maps",
+          "label": "Menos de 2,5 mapas",
+          "odd": 1.71,
+          "impliedNoVig": 0.53278689,
+          "impliedRaw": 0.58479532,
+          "v1P": 0.49024481941057463,
+          "v2P": 0.4990327725433842,
+          "marketOverround": 0.09761583,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        }
+      ],
+      "unmodeledRoundHandicaps": [
+        {
+          "label": "Sangal +4.5 rodadas",
+          "line": 4.5,
+          "team": "Sangal",
+          "odd": 1.68,
+          "side": "a",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Luminosity -4.5 rodadas",
+          "line": -4.5,
+          "team": "Luminosity",
+          "odd": 2,
+          "side": "b",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Sangal +3.5 rodadas",
+          "line": 3.5,
+          "team": "Sangal",
+          "odd": 1.76,
+          "side": "a",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Luminosity -3.5 rodadas",
+          "line": -3.5,
+          "team": "Luminosity",
+          "odd": 1.9,
+          "side": "b",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Sangal +2.5 rodadas",
+          "line": 2.5,
+          "team": "Sangal",
+          "odd": 1.83,
+          "side": "a",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Luminosity -2.5 rodadas",
+          "line": -2.5,
+          "team": "Luminosity",
+          "odd": 1.83,
+          "side": "b",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Sangal +1.5 rodadas",
+          "line": 1.5,
+          "team": "Sangal",
+          "odd": 1.9,
+          "side": "a",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        },
+        {
+          "label": "Luminosity -1.5 rodadas",
+          "line": -1.5,
+          "team": "Luminosity",
+          "odd": 1.76,
+          "side": "b",
+          "market": "rounds_handicap",
+          "seriesOrMapUnconfirmed": true,
+          "modelAvailable": false
+        }
+      ],
+      "pricingConsistency": [
+        {
+          "outcome": "Sangal 2–0",
+          "correctScoreOdd": 3.75,
+          "mapHandicapOdd": 3.6,
+          "higherOdd": 3.75,
+          "oddDifference": 0.15,
+          "relativeDifferencePercent": 4.16666667,
+          "settlementRulesNeedChecking": true
+        },
+        {
+          "outcome": "Luminosity 2–0",
+          "correctScoreOdd": 2.9,
+          "mapHandicapOdd": 2.8,
+          "higherOdd": 2.9,
+          "oddDifference": 0.1,
+          "relativeDifferencePercent": 3.57142857,
+          "settlementRulesNeedChecking": true
+        }
+      ],
+      "form": {
+        "a": {
+          "rank": 41,
+          "maps90": 76,
+          "form": {
+            "n": 15,
+            "wins": 11,
+            "losses": 4,
+            "vsTop50": 6,
+            "winsVsTop50": 3
+          },
+          "asOf": "2026-11-19T00:07:13.856Z"
+        },
+        "b": {
+          "rank": 36,
+          "maps90": 50,
+          "form": {
+            "n": 15,
+            "wins": 8,
+            "losses": 7,
+            "vsTop50": 13,
+            "winsVsTop50": 8
+          },
+          "asOf": "2026-11-19T00:07:13.856Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    }
+  ],
+  "rules": {
+    "upcomingOnly": "filter at render time using game.startTime > Date.now(); never show expired fixtures on radar",
+    "history": "completed results and past matches only, separate from the radar",
+    "noPrice": "show awaiting odds, never fabricate",
+    "oneMarketPerMatch": true,
+    "warnings": "model uncalibrated; price photographed; not an automated bet or recommendation"
+  },
+  "archive": {
+    "count": 8
+  }
+}
