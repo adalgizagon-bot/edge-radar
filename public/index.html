@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="series-radar.css">
   <link rel="stylesheet" href="strength.css">
   <link rel="stylesheet" href="audit.css">
+  <link rel="stylesheet" href="nextday.css">
   <script src="app.js" defer></script>
   <script src="tournaments.js" defer></script>
   <script src="players.js" defer></script>
@@ -18,6 +19,7 @@
   <script src="strength-core.js" defer></script>
   <script src="strength.js" defer></script>
   <script src="audit.js" defer></script>
+  <script src="nextday.js" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -26,7 +28,8 @@
       <div class="side-label">NAVEGAÇÃO</div>
       <nav aria-label="Menu principal">
         <button class="nav" data-tab="dashboard"><span>▦</span> Visão geral</button>
-        <button class="nav active" data-tab="opportunities"><span>✦</span> Radar de odds</button>
+        <button class="nav active" data-tab="nextday"><span>◷</span> Jogos 19/11</button>
+        <button class="nav" data-tab="opportunities"><span>✦</span> Radar de odds</button>
         <button class="nav" data-tab="strength"><span>◉</span> Força dos adversários</button>
         <button class="nav" data-tab="audit"><span>▥</span> Auditoria de resultados</button>
         <button class="nav" data-tab="tournaments"><span>◉</span> Torneios em teste</button>
@@ -37,7 +40,7 @@
         <button class="nav" data-tab="registry"><span>▤</span> Registro de previsões</button>
         <button class="nav" data-tab="method"><span>◎</span> Metodologia</button>
       </nav>
-      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: sincronização diária</div><p>Dados da API atualizados pelo GitHub. Não são informações ao vivo.</p><div class="aside-tag">v0.8 • Auditoria de resultados</div></div>
+      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: sincronização diária</div><p>Dados da API atualizados pelo GitHub. Não são informações ao vivo.</p><div class="aside-tag">v0.9 • Próximos jogos e teste V1 × V2</div></div>
     </aside>
     <main class="main">
       <header class="topbar"><div><span class="breadcrumb">INTELIGÊNCIA ESTATÍSTICA / CS2</span></div><div class="top-right"><span class="pill">◌ Modo simulação</span><span class="avatar">A</span></div></header>
@@ -141,7 +144,36 @@
  </div>
 </section>
 
-<section class="view active" id="opportunities">
+<section class="view active" id="nextday">
+ <div class="nd-layout">
+  <div class="nd-hero">
+   <div class="nd-hero-copy">
+     <span class="nd-eyebrow"><span class="nd-dot"></span> ATLAS ESPORTS LAB · EXPERIMENTO PRÉ-JOGO</span>
+     <h1>Radar de jogos <em>19 de novembro</em></h1>
+     <p>Três partidas BO3 do Stake Ranked Episode 6. Dados recentes da Cito, preços fotografados na BR365 e confronto entre o modelo original e a versão ajustada por força dos adversários.</p>
+     <div class="nd-hero-tags"><span>Veto ainda não confirmado</span><span>3 séries</span><span>Odds dos prints, não ao vivo</span></div>
+   </div>
+   <div class="nd-hero-stats">
+    <div><strong>03</strong><span>Confrontos</span></div><div><strong>02</strong><span>Modelos</span></div><div><strong>0</strong><span>Testes V2 futuros resolvidos*</span></div>
+   </div>
+  </div>
+  <div class="nd-alert"><b>Leitura correta dos percentuais:</b> as odds da casa são reais no momento do print; as probabilidades V1/V2 são estimativas não calibradas. Uma diferença entre elas não estabelece valor esperado positivo. Nenhuma aposta ou múltipla é enviada pela plataforma.</div>
+  <div class="nd-section-head"><div><span class="nd-eyebrow">01 · COMPARAÇÃO PRÉ-VETO</span><h2>Estudo jogo por jogo</h2><p>As previsões foram congeladas antes do horário de início e não serão ajustadas retroativamente.</p></div><span class="nd-count" id="nd-game-count">3 confrontos</span></div>
+  <div class="nd-game-list" id="nd-games"><p class="nd-loading">Carregando análises de 19/11...</p></div>
+  <div class="nd-detail-panel">
+    <div><span class="nd-eyebrow">02 · COMO LER OS DADOS</span><h2>O que mudou depois dos erros de ontem?</h2></div>
+    <div class="nd-reasons">
+      <article><b>Força dos adversários</b><p>O novo modelo usa ranking, histórico recente e o nível dos oponentes, não apenas vitórias e derrotas.</p></article>
+      <article><b>Amostras pequenas</b><p>Mapas com poucos jogos têm menor peso. A comparação mostra o mínimo de partidas por mapa para as duas equipes.</p></article>
+      <article><b>Teste real V1 × V2</b><p>As probabilidades de ambos os modelos ficam congeladas. O resultado posterior será avaliado pelo Brier Score.</p></article>
+    </div>
+    <div class="nd-foot"><span id="nd-frozen">Fotografia pré-jogo ainda não carregada.</span><span id="nd-validation">Acompanhamento prospectivo não carregado.</span></div>
+  </div>
+  <div class="nd-actions"><button class="secondary" data-go="strength">Comparar últimos adversários →</button><button class="secondary" data-go="audit">Ver erros de 18/11 →</button></div>
+ </div>
+</section>
+
+<section class="view" id="opportunities">
  <div class="series-wrap">
   <div class="series-top">
    <div class="series-top-main">

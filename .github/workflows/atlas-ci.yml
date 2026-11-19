@@ -44,6 +44,7 @@ jobs:
           node --check scripts/audit.mjs
           node --check scripts/prospective.mjs
           node --check public/audit.js
+          node --check public/nextday.js
           node --check scripts/strength-sync.mjs
       - name: Testes probabilísticos e painel de chances
-        run: node --test tests/model.test.mjs tests/opportunities.test.cjs tests/series-model.test.mjs tests/simulator.test.cjs tests/strength.test.cjs tests/strength-sync.test.mjs tests/audit-prospective.test.mjs
+        run: node --test tests/model.test.mjs tests/opportunities.test.cjs tests/series-model.test.mjs tests/simulator.test.cjs tests/strength.test.cjs tests/strength-sync.test.mjs tests/audit-prospective.test.mjs tests/nextday.test.mjs
