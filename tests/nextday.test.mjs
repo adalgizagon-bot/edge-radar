@@ -27,7 +27,7 @@ test('19 Nov snapshots include six distinct teams, recent form and ranking',()=>
  assert.ok(context.ranking.ranks.length>=50);
 });
 test('dashboard is the Nov 19 starting page, without invented post-veto markets',()=>{
- const html=fs.readFileSync(path.join(base,'index.html'),'utf8');
+ const html=fs.readFileSync(path.join(base,'laboratorio.html'),'utf8');
  assert.ok(html.includes('data-tab="nextday"'));
  assert.ok(html.includes('<section class="view active" id="nextday">'));
  assert.ok(html.includes('src="nextday.js"'));

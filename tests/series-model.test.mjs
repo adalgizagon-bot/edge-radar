@@ -79,7 +79,7 @@ test('match result validation settles series markets correctly',()=>{
  assert.equal(invalid.resolved,0);
 });
 test('new interface displays independent series markets, not veto-dependent accumulator',()=>{
- const html=fs.readFileSync(path.join(import.meta.dirname,'..','public','index.html'),'utf8');
+ const html=fs.readFileSync(path.join(import.meta.dirname,'..','public','laboratorio.html'),'utf8');
  for(const needle of ['id="series-ranked-list"','id="series-combo-legs"','id="series-games"','id="series-filter-market"','id="series-kpi-markets"','src="series-radar.js"']){
   assert.ok(html.includes(needle),'missing '+needle);
  }

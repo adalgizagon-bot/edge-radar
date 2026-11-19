@@ -63,7 +63,7 @@ test('only verified completed matches grade future A/B predictions',()=>{
  assert.ok(score.meanBrierV2>=0&&score.meanBrierV2<=1);
 });
 test('audited UI and scripts remain available',()=>{
- const html=fs.readFileSync(path.join(import.meta.dirname,'../public/index.html'),'utf8');
+ const html=fs.readFileSync(path.join(import.meta.dirname,'../public/laboratorio.html'),'utf8');
  assert.ok(html.includes('data-tab="audit"'));
  assert.ok(html.includes('<section class="view" id="audit">'));
  for(const needle of ['src="audit.js"','href="audit.css"','id="audit-match-body"','id="audit-model-brier"'])assert.ok(html.includes(needle));

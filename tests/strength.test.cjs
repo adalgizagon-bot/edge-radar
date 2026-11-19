@@ -59,7 +59,7 @@ test('selecting 5 or 10 series never changes the underlying data',()=>{
  assert.ok([five,ten].every(x=>x.wins+x.losses===x.n));
 });
 test('front-end includes reachable strength page and loadable scripts',()=>{
- const html=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
+ const html=fs.readFileSync(path.join(root,'public/laboratorio.html'),'utf8');
  assert.ok(html.includes('data-tab="strength"'));
  assert.ok(html.includes('<section class="view" id="strength">'));
  for(const t of ['id="strength-game"','id="strength-limit"','id="strength-versus"','id="strength-history"','id="strength-opponents"','src="strength-core.js"','src="strength.js"','href="strength.css"'])
