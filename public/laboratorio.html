@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a1020">
+  <meta name="description" content="Laboratório independente de análise probabilística de CS2 com simulações e registro de previsões.">
+  <title>ATLAS Esports Lab | Inteligência estatística CS2</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="series-radar.css">
+  <link rel="stylesheet" href="strength.css">
+  <link rel="stylesheet" href="audit.css">
+  <link rel="stylesheet" href="nextday.css">
+  <script src="app.js" defer></script>
+  <script src="tournaments.js" defer></script>
+  <script src="players.js" defer></script>
+  <script src="validation.js" defer></script>
+  <script src="series-radar.js" defer></script>
+  <script src="strength-core.js" defer></script>
+  <script src="strength.js" defer></script>
+  <script src="audit.js" defer></script>
+  <script src="nextday.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">A<span>✦</span></div><div><strong>ATLAS</strong><small>ESPORTS LAB</small></div></div>
+      <div class="side-label">NAVEGAÇÃO</div>
+      <nav aria-label="Menu principal">
+        <button class="nav" data-tab="dashboard"><span>▦</span> Visão geral</button>
+        <button class="nav active" data-tab="nextday"><span>◷</span> Jogos 19/11</button>
+        <button class="nav" data-tab="opportunities"><span>✦</span> Radar de odds</button>
+        <button class="nav" data-tab="strength"><span>◉</span> Força dos adversários</button>
+        <button class="nav" data-tab="audit"><span>▥</span> Auditoria de resultados</button>
+        <button class="nav" data-tab="tournaments"><span>◉</span> Torneios em teste</button>
+        <button class="nav" data-tab="simulator"><span>◈</span> Simulador CS2</button>
+        <button class="nav" data-tab="data"><span>◫</span> Base histórica</button>
+        <button class="nav" data-tab="players"><span>◎</span> Kills dos jogadores</button>
+        <button class="nav" data-tab="validation"><span>▥</span> Validação Cito</button>
+        <button class="nav" data-tab="registry"><span>▤</span> Registro de previsões</button>
+        <button class="nav" data-tab="method"><span>◎</span> Metodologia</button>
+      </nav>
+      <div class="aside-bottom"><div class="tiny-kicker">INTEGRAÇÃO</div><div class="status"><i></i> Cito: sincronização diária</div><p>Dados da API atualizados pelo GitHub. Não são informações ao vivo.</p><div class="aside-tag">v0.9 • Próximos jogos e teste V1 × V2</div></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><span class="breadcrumb">INTELIGÊNCIA ESTATÍSTICA / CS2</span></div><div class="top-right"><span class="pill">◌ Modo simulação</span><span class="avatar">A</span></div></header>
+      <div class="content">
+        <section class="view" id="dashboard">
+          <div class="heading"><div><div class="eyebrow">PESQUISA QUANTITATIVA</div><h1>Visão geral <span>do laboratório</span></h1><p>Modelos verificáveis. Estatísticas antes de opiniões.</p></div><button class="primary" data-go="opportunities">Analisar chances <span>↗</span></button></div>
+          <div class="notice"><span class="notice-icon">ⓘ</span><div><strong>Dois torneios com estatísticas reais</strong><p>A Cito forneceu 8 jogos e 16 equipes para comparação estatística. O simulador permanece experimental: não foram medidos índices de acerto nem criadas recomendações financeiras.</p></div></div>
+          <div class="metric-grid"><article class="metric"><label>Mercados acompanhados na Cito</label><strong id="home-cito-markets">—</strong><small>Modelos pré-jogo em teste</small></article><article class="metric"><label>Previsões automáticas Cito</label><strong id="home-cito-total">—</strong><small>Probabilidades registradas antes das partidas</small></article><article class="metric"><label>Previsões Cito conferidas</label><strong id="home-cito-resolved">—</strong><small>Somente resultados verificados</small></article><article class="metric"><label>Brier Score Cito</label><strong id="home-cito-brier">—</strong><small>Calculado após resultados reais</small></article></div><div class="panel" style="padding:16px 20px"><div class="panel-head" style="margin-bottom:8px"><div><strong>Previsões automáticas dos campeonatos</strong><p class="muted">Vencedores por mapa, rounds, handicap e kills por jogador.</p></div><button class="primary" data-go="opportunities">Abrir radar de chances →</button></div><p class="muted">Simulações salvas manualmente no navegador: <strong id="count-total">0</strong> previsões, <strong id="count-resolved">0</strong> conferidas, Brier <strong id="metric-brier">—</strong>. <button class="ghost" data-go="registry" style="padding:4px 8px;margin-left:8px">Registro manual</button></p></div>
+          <div class="panel" id="home-tournaments"><div class="panel-head"><div><span class="tiny-kicker">BASE CITO • 18/11/2026</span><h2>Stake Ranked Episode 6 &amp; Tipsport RUSH Brno 2026</h2></div><button class="secondary" data-go="tournaments">Analisar confrontos →</button></div><p class="muted">8 partidas agendadas e 16 equipes com histórico por mapa nos últimos 90 dias. Consulta datada, sem atualização ao vivo.</p></div><div class="split"><div class="panel"><div class="panel-head"><div><span class="tiny-kicker">ARQUITETURA</span><h2>Um motor. Vários mercados.</h2></div><span class="mini-pill">CS2 MR12</span></div><div class="pipeline"><div><b>01</b><strong>Entradas por mapa</strong><p>Probabilidade de vencer um round e kills por round</p></div><i>↓</i><div><b>02</b><strong>Monte Carlo</strong><p>Simulações com prorrogação e série melhor de três</p></div><i>↓</i><div><b>03</b><strong>Mercados derivados</strong><p>Mapas, handicaps, rounds e kills</p></div></div></div><div class="panel"><div class="panel-head"><div><span class="tiny-kicker">VALIDAÇÃO</span><h2>O que vamos medir</h2></div></div><div class="checks"><div><span>✓</span><div><b>Probabilidade x resultado</b><p>Calibração e Brier Score das previsões resolvidas.</p></div></div><div><span>✓</span><div><b>Previsões registradas antes</b><p>Timestamp local para separar análise prospectiva de retrospectiva.</p></div></div><div><span>○</span><div><b>Backtest histórico real</b><p>Pendente de base auditável e acesso regularizado à API.</p></div></div><div><span>○</span><div><b>Resultados fora da amostra</b><p>Necessários antes de afirmar qualquer vantagem estatística.</p></div></div></div></div></div>
+          <div class="panel low"><div class="panel-head"><div><span class="tiny-kicker">ESCOPO INICIAL</span><h2>Mercados contemplados</h2></div></div><div class="chip-row"><span>Vitória no mapa</span><span>Total de rounds</span><span>Handicap de rounds</span><span>Kills por mapa</span><span>Resultado 2–0</span><span>Resultado 2–1</span><span>Vitória na série</span><span>Kills na série</span></div></div>
+        </section>
+        
+        <section class="view" id="tournaments">
+          <div class="heading"><div><div class="eyebrow">COMPETIÇÕES MONITORADAS</div><h1>Torneios <span>em teste</span></h1><p>Confrontos reais e estatísticas por mapa para estudar o comportamento das equipes.</p></div><span class="pill">Cito API • fotografia de dados</span></div>
+          <div class="notice"><span class="notice-icon">ⓘ</span><div><strong>Histórico real, modelo ainda experimental</strong><p>Os horários e estatísticas foram consultados em 17/11/2026. Não são dados ao vivo e não se atualizam automaticamente. As linhas de odds do print não foram importadas. O resultado de uma simulação não é um percentual calibrado de acerto.</p></div></div>
+          <div class="metric-grid three">
+            <article class="metric"><label>Partidas agendadas</label><strong id="tournament-match-count">—</strong><small>18 de novembro de 2026</small></article>
+            <article class="metric"><label>Equipes com dados</label><strong id="tournament-team-count">—</strong><small>Histórico Cito de 90 dias</small></article>
+            <article class="metric"><label>Última consulta à Cito</label><strong id="tournament-snapshot-age" class="snapshot-date">—</strong><small>Atualização manual, não ao vivo</small></article>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="tiny-kicker">01 / ESCOLHA UM CAMPEONATO</span><h2>Jogos para análise</h2></div><span class="mini-pill">Horário de Brasília</span></div>
+            <div class="chip-row tournament-filters" id="tournament-filters">
+              <button type="button" class="secondary" data-event-filter="all">Todos</button>
+              <button type="button" class="ghost" data-event-filter="cs2-event-9258">Stake Ranked</button>
+              <button type="button" class="ghost" data-event-filter="cs2-event-9273">RUSH Brno</button>
+            </div>
+            <p class="muted tournament-caption" id="tournament-source">Carregando dados Cito...</p>
+            <div id="tournament-matches" class="match-grid"></div>
+          </div>
+          <div class="panel" id="tournament-detail">
+            <div class="panel-head"><div><span class="tiny-kicker">02 / CONFRONTO SELECIONADO</span><h2 id="selected-match-heading">Selecione uma partida</h2></div><span class="mini-pill" id="selected-match-time">—</span></div>
+            <div id="team-comparison"></div>
+            <div class="analysis-footer">
+              <p class="muted" id="team-comparison-note">As vitórias por mapa são históricas e não representam probabilidades ajustadas ao adversário.</p>
+              <button class="primary" id="send-match-to-sim" disabled>Preencher simulador com histórico →</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="simulator">
+          <div class="heading"><div><div class="eyebrow">MOTOR DE PROBABILIDADES</div><h1>Simulador <span>CS2</span></h1><p>Configure cenários. Compare os mercados a partir da mesma distribuição simulada.</p></div><button class="ghost" id="reset-form">Restaurar parâmetros</button></div>
+          <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>Entradas manuais ou estimadas com CSV — ainda não são previsões validadas.</strong><p>A importação de histórico gera estimativas iniciais, não um modelo calibrado. Verifique cobertura e resultados fora da amostra.</p></div></div>
+          <div class="sim-layout"><form class="panel config" id="sim-form"><div class="panel-head"><div><span class="tiny-kicker">01 / ENTRADAS</span><h2>Parâmetros do cenário</h2></div></div>
+             <div class="input-pair"><label>Equipe A<input id="team-a" maxlength="40" value="Equipe A" required></label><label>Equipe B<input id="team-b" maxlength="40" value="Equipe B" required></label></div>
+             <label class="field-label">Probabilidade estimada de a Equipe A vencer <b>cada round</b> <span>(não é a chance de vencer o mapa)</span></label>
+             <div class="map-inputs"><div class="map-row"><label>Mapa 1<select id="map-1"><option>Mirage</option><option>Inferno</option><option>Nuke</option><option>Ancient</option><option>Anubis</option><option>Dust2</option><option>Train</option><option>Overpass</option></select></label><label>Chance por round (%)<input type="number" id="prob-1" min="1" max="99" value="53" step="0.1" required></label></div><div class="map-row"><label>Mapa 2<select id="map-2"><option>Inferno</option><option>Mirage</option><option>Nuke</option><option>Ancient</option><option>Anubis</option><option>Dust2</option><option>Train</option><option>Overpass</option></select></label><label>Chance por round (%)<input type="number" id="prob-2" min="1" max="99" value="50" step="0.1" required></label></div><div class="map-row"><label>Mapa 3 (desempate)<select id="map-3"><option>Nuke</option><option>Mirage</option><option>Inferno</option><option>Ancient</option><option>Anubis</option><option>Dust2</option><option>Train</option><option>Overpass</option></select></label><label>Chance por round (%)<input type="number" id="prob-3" min="1" max="99" value="48" step="0.1" required></label></div></div>
+             <div class="hr"></div><div class="input-pair"><label>Linha de rounds (Mapa 1)<input type="number" id="round-line" min="13.5" max="80.5" step="1" value="21.5" required></label><label>Handicap A no Mapa 1<input type="number" id="handicap-line" min="-30.5" max="30.5" step="1" value="-2.5" required><small>Ex.: −2,5 exige vencer por 3+ rounds</small></label></div>
+             <div class="hr"></div><label>Jogador analisado<input id="player" maxlength="50" value="Jogador exemplo" required></label><div class="input-pair"><label>Equipe do jogador<select id="player-side"><option value="A">Equipe A</option><option value="B">Equipe B</option></select></label><label>Kills por round esperadas<input type="number" id="kpr" min="0.05" max="1.8" step="0.001" value="0.72" required></label></div><div class="input-pair"><label>Linha kills no Mapa 1<input type="number" id="kills-line" min="0.5" max="100.5" step="1" value="15.5" required></label><label>Linha kills na série BO3<input type="number" id="kills-series-line" min="0.5" max="150.5" step="1" value="32.5" required></label></div>
+             <label>Simulações<select id="sim-count"><option value="5000">5.000 — rápida</option><option value="10000" selected>10.000 — padrão</option><option value="20000">20.000 — detalhada</option></select></label>
+             <button type="submit" class="primary full" id="run">Executar simulação <span>→</span></button><p class="form-foot">Modelo exploratório, com rounds independentes e distribuição simplificada de kills. Não substitui calibração histórica.</p><p class="data-result" id="model-report" aria-live="polite"></p>
+           </form><div class="results"><div class="panel empty-state" id="sim-empty"><div class="empty-icon">◈</div><h2>Pronto para simular</h2><p>Ajuste as entradas e execute para produzir probabilidades por mercado.</p><button class="ghost" data-trigger="run">Simular cenário ilustrativo</button></div><div id="sim-output" hidden><div class="panel"><div class="panel-head"><div><span class="tiny-kicker">02 / RESULTADOS</span><h2>Probabilidades simuladas</h2></div><span class="mini-pill" id="results-count">10.000 cenários</span></div><p class="muted result-sub">Percentuais calculados exclusivamente a partir dos parâmetros acima.</p><div class="result-grid" id="market-cards"></div><div class="sim-foot">Incerteza exibida: apenas ruído de Monte Carlo. Não incorpora o erro de modelagem nem viés dos parâmetros.</div></div><div class="panel register-panel"><div class="panel-head"><div><span class="tiny-kicker">03 / ACOMPANHAMENTO</span><h2>Registrar uma previsão</h2></div></div><p class="muted">Salve uma probabilidade e marque o resultado quando o evento terminar.</p><label>Mercado<select id="market-picker"></select></label><label>Identificação / ID da partida<input id="match-note" maxlength="100" placeholder="Ex.: partida e data, sem dados sensíveis"></label><button class="secondary full" id="save-prediction">Salvar previsão pendente</button><p class="form-foot" id="save-hint"></p></div></div></div></div>
+        </section>
+        <section class="view" id="registry"><div class="heading"><div><div class="eyebrow">AVALIAÇÃO PROSPECTIVA</div><h1>Registro <span>de previsões</span></h1><p>Registre antes, avalie depois. Resultados salvos apenas neste navegador.</p></div><button class="ghost" id="export-csv">Exportar CSV</button></div><div class="metric-grid three"><article class="metric"><label>Total registrado</label><strong id="reg-total">0</strong><small>Inclui pendentes</small></article><article class="metric"><label>Taxa de acerto</label><strong id="reg-accuracy">—</strong><small>Após resolução</small></article><article class="metric"><label>Brier Score</label><strong id="reg-brier">—</strong><small>Erro quadrático médio</small></article></div><div class="panel"><div class="panel-head"><div><span class="tiny-kicker">HISTÓRICO LOCAL</span><h2>Previsões e resultados</h2></div></div><div id="registry-table"></div></div><div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>Limitação de auditoria</strong><p>O registro usa armazenamento local do navegador e pode ser apagado ou manipulado. Para uma trilha auditável real precisaremos de banco de dados, autenticação e servidor com timestamps.</p></div></div></section>
+        
+<section class="view" id="data">
+  <div class="heading"><div><div class="eyebrow">DADOS E VALIDAÇÃO</div><h1>Base <span>histórica CS2</span></h1><p>Importe mapas reais, calcule parâmetros com suavização e avalie previsões fora do período de treinamento.</p></div></div>
+  <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>Estatísticas Cito disponíveis na aba Torneios.</strong><p>A fotografia da Cito foi consultada pelo ChatGPT. Aqui você também pode importar um CSV próprio, mantido somente neste navegador. A integração direta do site ainda não está ativa.</p></div></div>
+  <div class="panel data-panel">
+    <div class="panel-head"><div><span class="tiny-kicker">01 / CARREGAMENTO</span><h2>Importar resultados por mapa</h2></div><span class="mini-pill">CSV local</span></div>
+    <p class="muted">Uma linha por jogador e mapa, ou só uma linha para mapa sem kills. Repita o mesmo match_id, mapa e placar para registrar vários jogadores sem duplicar o mapa. Colunas obrigatórias: <code>date,match_id,team_a,team_b,map,rounds_a,rounds_b</code>. Colunas opcionais: <code>player,player_team,kills</code>. Data no formato AAAA-MM-DD; os resultados precisam corresponder a partidas encerradas. Limite: 4 MB e 10.000 mapas. Vírgula e ponto-e-vírgula são aceitos.</p>
+    <div class="dataset-row"><label>Arquivo CSV<input id="history-file" type="file" accept=".csv,text/csv"></label><label>Data de corte para as estimativas<input id="data-cutoff" type="date"><small>Se a análise é para uma partida, selecione sua data para não usar informação posterior.</small></label></div>
+    <div class="dataset-info" id="data-summary">Nenhum histórico importado.</div>
+    <div class="dataset-info" style="margin-top:8px" id="data-teams">—</div>
+    <p class="form-foot" id="data-status"></p>
+    <div class="data-actions">
+      <button class="primary" id="history-apply">Estimar parâmetros e abrir simulador →</button>
+      <button class="secondary" id="history-test">Avaliar modelo no período final</button>
+      <button class="ghost" id="history-clear">Limpar dados locais</button>
+    </div>
+    <div class="data-result" id="backtest-report" aria-live="polite"></div>
+    <div class="panel-head"><div><span class="tiny-kicker">02 / DADOS RECENTES</span><h2>Últimos mapas importados</h2></div></div>
+    <div class="table-wrap"><table class="records"><thead><tr><th>Data</th><th>Confronto</th><th>Mapa</th><th>Placar</th><th>Jogador (se houver)</th></tr></thead><tbody id="data-preview"></tbody></table></div>
+  </div>
+  <div class="panel prose"><h2>Como as estimativas funcionam</h2><p>O motor calcula a fração histórica de rounds vencidos por equipe e mapa, aplica uma regularização para evitar taxas extremas e compara os dois lados. Para kills, regulariza a taxa individual por round quando existem dados do jogador. A simulação continua simplificada: não ajusta o efeito do adversário, lados CT/TR, rosters ou veto.</p><p>O teste separa os últimos 25% dos mapas e mede Brier Score em relação a um referencial simples, usando somente os primeiros 75% para estimar os parâmetros. Isso ainda não equivale a validação prospectiva. Exija boa cobertura antes de interpretar os percentuais.</p></div>
+</section>
+
+<section class="view" id="players">
+ <div class="heading"><div><div class="eyebrow">CITO API / ESTATÍSTICAS INDIVIDUAIS</div><h1>Kills <span>por jogador</span></h1>
+  <p>Escalações reais, taxas históricas por mapa e cobertura de dados. A ausência de informação nunca é substituída por números fictícios.</p></div></div>
+ <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>Histórico individual não é previsão calibrada.</strong>
+ <p>A taxa KPR depende da amostra, da escalação e da duração do mapa. O cálculo futuro usa uma distribuição de Poisson simplificada e será avaliado depois dos jogos. Apenas atletas com histórico suficiente têm parâmetros preenchidos automaticamente.</p></div></div>
+ <div class="metric-grid three">
+  <article class="metric"><label>Equipes com escalação</label><strong id="roster-teams">—</strong><small>Fonte Cito API</small></article>
+  <article class="metric"><label>Atletas identificados</label><strong id="roster-players">—</strong><small>Sem treinadores</small></article>
+  <article class="metric"><label>Atletas com dados de kills</label><strong id="kills-coverage">—</strong><small>Taxas KPR por mapa</small></article>
+ </div>
+ <div class="panel">
+  <div class="panel-head"><div><span class="tiny-kicker">01 / EXPLORAR</span><h2>Jogadores por confronto e mapa</h2></div><span class="mini-pill">Histórico Cito</span></div>
+  <div class="input-pair">
+   <label>Confronto<select id="players-match-select" class="dark-select"><option>Carregando...</option></select></label>
+   <label>Mapa<select id="players-map-select" class="dark-select"><option>Carregando...</option></select></label>
+  </div>
+  <p class="muted" id="players-source-note">Aguardando dados...</p>
+  <div id="players-card-list" class="player-grid"></div>
+ </div>
+ <div class="panel">
+  <div class="panel-head"><div><span class="tiny-kicker">02 / ENVIAR PARA SIMULAÇÃO</span><h2>Selecionar atleta</h2></div></div>
+  <p class="muted" id="players-choice-help">Escolha um jogador com KPR registrado em pelo menos quatro mapas. Os mapas da simulação continuam selecionados por disponibilidade histórica, não por veto oficial.</p>
+  <button id="player-to-simulator" class="primary" disabled>Preencher simulador com jogador →</button>
+ </div>
+</section>
+
+<section class="view active" id="nextday">
+ <div class="nd-layout">
+  <div class="nd-hero">
+   <div class="nd-hero-copy">
+     <span class="nd-eyebrow"><span class="nd-dot"></span> ATLAS ESPORTS LAB · EXPERIMENTO PRÉ-JOGO</span>
+     <h1>Radar de jogos <em>19 de novembro</em></h1>
+     <p>Três partidas BO3 do Stake Ranked Episode 6. Dados recentes da Cito, preços fotografados na BR365 e confronto entre o modelo original e a versão ajustada por força dos adversários.</p>
+     <div class="nd-hero-tags"><span>Veto ainda não confirmado</span><span>3 séries</span><span>Odds dos prints, não ao vivo</span></div>
+   </div>
+   <div class="nd-hero-stats">
+    <div><strong>03</strong><span>Confrontos</span></div><div><strong>02</strong><span>Modelos</span></div><div><strong id="nd-resolved-count">0</strong><span>Testes futuros resolvidos</span></div>
+   </div>
+  </div>
+  <div class="nd-alert"><b>Leitura correta dos percentuais:</b> as odds da casa são reais no momento do print; as probabilidades V1/V2 são estimativas não calibradas. Uma diferença entre elas não estabelece valor esperado positivo. Nenhuma aposta ou múltipla é enviada pela plataforma.</div>
+  <div class="nd-section-head"><div><span class="nd-eyebrow">01 · COMPARAÇÃO PRÉ-VETO</span><h2>Estudo jogo por jogo</h2><p>As previsões foram congeladas antes do horário de início e não serão ajustadas retroativamente.</p></div><span class="nd-count" id="nd-game-count">3 confrontos</span></div>
+  <div class="nd-game-list" id="nd-games"><p class="nd-loading">Carregando análises de 19/11...</p></div>
+  <div class="nd-detail-panel">
+    <div><span class="nd-eyebrow">02 · COMO LER OS DADOS</span><h2>O que mudou depois dos erros de ontem?</h2></div>
+    <div class="nd-reasons">
+      <article><b>Força dos adversários</b><p>O novo modelo usa ranking, histórico recente e o nível dos oponentes, não apenas vitórias e derrotas.</p></article>
+      <article><b>Amostras pequenas</b><p>Mapas com poucos jogos têm menor peso. A comparação mostra o mínimo de partidas por mapa para as duas equipes.</p></article>
+      <article><b>Teste real V1 × V2</b><p>As probabilidades de ambos os modelos ficam congeladas. O resultado posterior será avaliado pelo Brier Score.</p></article>
+    </div>
+    <div class="nd-foot"><span id="nd-frozen">Fotografia pré-jogo ainda não carregada.</span><span id="nd-validation">Acompanhamento prospectivo não carregado.</span></div>
+  </div>
+  <div class="nd-actions"><button class="secondary" data-go="strength">Comparar últimos adversários →</button><button class="secondary" data-go="audit">Ver erros de 18/11 →</button></div>
+ </div>
+</section>
+
+<section class="view" id="opportunities">
+ <div class="series-wrap">
+  <div class="series-top">
+   <div class="series-top-main">
+    <div class="series-kicker"><i></i> ATLAS / RADAR DE SÉRIES CS2 / PRÉ-VETO</div>
+    <h1>Melhores <span>comparações de odds</span></h1>
+    <p>Vencedor da partida, handicap de mapas, placar exato e total de mapas. Compare as odds capturadas na BR365 com um modelo exploratório baseado em estatísticas da Cito.</p>
+    <div class="series-top-meta"><span>✓ Não depende do veto</span><span>◈ 2 campeonatos</span><span>◷ Prints de odds, não feed ao vivo</span></div>
+   </div>
+   <div class="series-kpis">
+    <div class="series-kpi"><strong id="series-kpi-games">—</strong><small>Partidas identificadas</small></div>
+    <div class="series-kpi"><strong id="series-kpi-markets">—</strong><small>Preços capturados</small></div>
+    <div class="series-kpi"><strong id="series-kpi-covered">—</strong><small>Partidas com modelo</small></div>
+   </div>
+  </div>
+  <div class="series-warning">
+    <span class="warning-icon">!</span>
+    <div><strong>Diferença entre o modelo e a casa não é, por si só, uma oportunidade lucrativa.</strong>
+     <p>O modelo ainda não foi calibrado, não conhece o veto, não pondera adequadamente a força de cada adversário e considera igualmente prováveis combinações de três mapas elegíveis. Divergências muito grandes devem ser investigadas como possíveis erros de modelagem. Odds dos prints são históricas e podem ter mudado.</p></div>
+  </div>
+  <div class="series-layout">
+   <div class="series-panel">
+    <div class="series-heading"><div><div class="series-label">01 / COMPARAÇÃO DE MERCADOS</div><h2>Diferenças para investigar</h2>
+      <p>Modelo × probabilidade de mercado ajustada pela margem. Não é um ranking de apostas validadas.</p></div>
+      <span id="series-rank-count" class="series-count">Carregando</span></div>
+    <div class="series-filters">
+      <label>Campeonato<select id="series-filter-event"><option value="all">Ambos</option><option value="cs2-event-9258">Stake Ranked</option><option value="cs2-event-9273">RUSH Brno</option></select></label>
+      <label>Mercado<select id="series-filter-market"><option value="all">Todos os mercados</option><option value="winner">Vencedor da série</option><option value="handicap">Handicap de mapas</option><option value="score">Placar exato</option><option value="total">Total de mapas</option></select></label>
+      <label>Diferença<select id="series-filter-show"><option value="positive">Modelo acima do mercado</option><option value="all">Todas as diferenças</option><option value="caution">Diferenças acima de 12 p.p.</option></select></label>
+    </div>
+    <div class="series-filter-note">A probabilidade da casa é estimada por <b>1 ÷ odd</b> e depois normalizada dentro do mercado para remover a margem. Odds de vencedores e handicaps são mercados diferentes. As porcentagens do modelo não são confiáveis até sua validação.</div>
+    <div id="series-ranked-list" class="series-signal-grid"><p class="series-empty">Carregando comparações...</p></div>
+    <button type="button" class="series-more" id="series-more">Mostrar mais comparações</button>
+   </div>
+   <aside class="series-panel series-builder">
+     <div class="series-heading"><div><div class="series-label">02 / CONSTRUTOR PRÉ-VETO</div><h2>Cenários de múltiplas</h2>
+       <p>Mercados da série BO3. Um mercado por partida, independentemente dos mapas vetados.</p></div></div>
+     <div class="series-presets" role="group" aria-label="Número de partidas">
+       <button type="button" data-series-preset="2" class="active">2 jogos</button>
+       <button type="button" data-series-preset="3">3 jogos</button>
+       <button type="button" data-series-preset="4">4 jogos</button>
+       <button type="button" data-series-preset="8">8 jogos</button>
+     </div>
+     <p class="series-section-foot" id="series-builder-note">Escolha o número de jogos ou adicione mercados do comparador.</p>
+     <div id="series-combo-legs"></div>
+     <div id="series-combo-summary"></div>
+     <div class="series-actions"><button type="button" id="series-copy" class="primary">Copiar análise</button><button type="button" id="series-clear" class="ghost">Limpar</button></div>
+     <p class="series-aside-caption">As odds combinadas são o produto matemático dos preços capturados, não uma cotação atual. A probabilidade conjunta do modelo só aparece quando todas as seleções têm estimativa; mesmo assim pressupõe independência não verificada. Não são recomendações para apostar dinheiro.</p>
+   </aside>
+  </div>
+  <div class="series-panel">
+   <div class="series-heading"><div><div class="series-label">03 / OITO PARTIDAS EM DETALHES</div><h2>Comparar jogo por jogo</h2>
+     <p>Todos os confrontos dos dois torneios, incluindo os que ainda não têm amostra suficiente.</p></div>
+     <span class="series-count" id="series-game-counter">—</span></div>
+   <div id="series-games" class="series-games-grid"></div>
+  </div>
+  <div class="series-map-locked"><span class="lock-icon">◎</span><div><h2>Os últimos adversários também importam</h2><p>Compare forma recente, força dos oponentes e desempenho em 90 versus 365 dias. Isso ajuda a entender discrepâncias entre resultados e odds, sem alterar previsões já congeladas.</p></div><button class="secondary" data-go="strength">Comparar adversários →</button></div>
+  <div class="series-map-locked">
+    <span class="lock-icon">◫</span>
+    <div><h2>Mercados de mapas individuais: somente após o veto</h2>
+      <p>Os seus prints mostram mercados da <b>partida completa</b>. Ainda faltam as odds das abas Mapa 1/Mapa 2 e a confirmação dos mapas. Por enquanto, essas projeções ficam fora do construtor de múltiplas.</p>
+    </div>
+    <button type="button" class="ghost" data-go="tournaments">Ver histórico dos mapas →</button>
+  </div>
+  <div class="series-snapshot-line"><span id="series-snapshot">Aguardando fotografias da Cito e BR365</span><span>Dados estáticos; nenhuma aposta é realizada pela plataforma.</span></div>
+  <div class="series-panel"><div class="series-heading"><div><div class="series-label">04 / AVALIAÇÃO E AUDITORIA</div><h2>Conferir depois do jogo</h2></div>
+    <p class="series-section-foot">Os registros pré-jogo permanecem congelados para avaliação de placares reais. Ainda precisamos de uma amostra histórica de séries BO3 e de vetos para calibrar o novo modelo e avaliar sua precisão.</p>
+    <p id="series-validation-status" class="series-section-foot">Lendo resultados confirmados da Cito...</p>
+    <button class="secondary" data-go="audit">Abrir auditoria completa →</button>
+  </div>
+ </div>
+</section>
+
+
+<section class="view" id="strength">
+  <div class="strength-hero">
+    <div><div class="strength-kicker">ANÁLISE CONTEXTUAL / CITO CS2</div>
+      <h1>Força dos <span>adversários</span></h1>
+      <p>Veja se a boa fase vem contra equipes competitivas, compare placares e desempenho por mapa e confronte os últimos resultados com a amostra de 12 meses.</p>
+    </div>
+    <div class="strength-hero-stats">
+      <div><strong id="strength-team-total">—</strong><small>Equipes pesquisadas</small></div>
+      <div><strong id="strength-games-total">—</strong><small>Registros recentes</small></div>
+      <div><strong id="strength-history-label">365</strong><small>Dias de histórico</small></div>
+    </div>
+  </div>
+  <div class="strength-warning"><span>ⓘ</span><div><b>Ranking atual, não histórico.</b>
+   <p>As posições são da consulta da Cito em 17/11/2026, e podem ser diferentes das posições na época de cada partida. O indicador ajustado por ranking é uma heurística explicativa, <b>não uma probabilidade calibrada de vitória</b>. O histórico anual inclui o de 90 dias; as amostras não são somadas.</p></div></div>
+  <div class="strength-panel">
+    <div class="strength-panel-title"><div><span class="tiny-kicker">01 / SELEÇÃO DO CONFRONTO</span><h2>Comparativo entre equipes</h2></div>
+      <span class="strength-source" id="strength-updated">Fonte: Cito</span></div>
+    <div class="strength-inputs">
+      <label>Jogo<select id="strength-game"><option>Carregando partidas...</option></select></label>
+      <label>Últimas partidas<select id="strength-limit"><option value="5">Últimas 5 séries</option><option value="10">Últimas 10 séries</option><option value="15" selected>Últimas 15 séries</option></select></label>
+    </div>
+    <div id="strength-versus" class="strength-vs"></div>
+    <p id="strength-context-note" class="strength-muted"></p>
+  </div>
+  <div class="strength-panel">
+    <div class="strength-panel-title"><div><span class="tiny-kicker">02 / AMOSTRAGEM</span><h2>90 dias × 365 dias</h2><p>Históricos aninhados: um resultado recente também está contido na janela anual.</p></div></div>
+    <div id="strength-history" class="strength-history"></div>
+  </div>
+  <div class="strength-panel">
+    <div class="strength-panel-title"><div><span class="tiny-kicker">03 / DE QUEM VIERAM AS VITÓRIAS E DERROTAS?</span><h2>Últimos adversários</h2>
+      <p>Placar da série, ranking conhecido atualmente e margem de rounds nos mapas efetivamente disputados.</p></div></div>
+    <div id="strength-opponents" class="strength-opponent-grid"></div>
+  </div>
+  <div class="strength-panel">
+    <div class="strength-panel-title"><div><span class="tiny-kicker">04 / COMO USAR ESSA ANÁLISE</span><h2>Resultados sem contexto podem enganar</h2></div></div>
+    <p class="strength-muted">Uma taxa de vitórias alta contra adversários pouco exigentes não vale o mesmo que um aproveitamento menor contra rivais de elite. O ranking, porém, também tem vieses; precisamos manter separadas a qualidade dos rivais, a fase atual, os mapas jogados, a escalação e o tempo decorrido. Nenhuma das probabilidades BO3 já congeladas é reescrita com dados posteriores à partida.</p>
+    <button class="secondary" data-go="opportunities">Voltar ao radar de odds →</button>
+  </div>
+</section>
+
+<section class="view" id="audit">
+  <div class="audit-hero">
+    <div><div class="audit-eyebrow">ATLAS / AVALIAÇÃO PROSPECTIVA V1 / 18 NOV 2026</div>
+      <h1>O que <span>erramos?</span></h1>
+      <p>Auditoria dos registros congelados antes das partidas, conferidos com resultados da Cito e com as odds da BR365 fotografadas na véspera. A métrica aqui é qualidade estatística, não lucro.</p>
+    </div>
+    <div class="audit-score">
+      <div><strong id="audit-finished">—</strong><small>Séries com modelo / total de confrontos</small></div>
+      <div><strong id="audit-hit">—</strong><small>Favoritos corretos, modelo original</small></div>
+      <div><strong id="audit-model-brier">—</strong><small>Brier vencedor da série, ATLAS</small></div>
+      <div><strong id="audit-market-brier">—</strong><small>Brier vencedor, mercado sem margem</small></div>
+    </div>
+  </div>
+  <div class="audit-banner"><strong>Primeiro teste: amostra muito pequena e desempenho insuficiente.</strong>
+    <p>Não houve vantagem demonstrada sobre a BR365. Os mercados de kills, totais e vencedor de mapa tiveram Brier maior que 0,25. Resultados de mapas não disputados são excluídos. O histórico original permanece imutável e o protótipo novo não substitui as previsões de 18/11.</p>
+  </div>
+  <div class="audit-panel">
+   <div class="audit-panel-head"><div><span class="tiny-kicker">01 / PREVISÃO ANTES × RESULTADO DEPOIS</span><h2>Conferência das séries</h2>
+    <p>Compare os favoritos e a diferença entre o ATLAS e as probabilidades implícitas sem margem.</p></div></div>
+   <div class="audit-table-wrap"><table class="audit-table">
+    <thead><tr><th>Confronto</th><th>Placar</th><th>Favorito ATLAS</th><th>P(A) ATLAS</th><th>P(A) mercado</th><th>Distância</th><th>Amostra</th></tr></thead>
+    <tbody id="audit-match-body"></tbody></table></div>
+   <p class="audit-timestamp" id="audit-pending-note"></p>
+  </div>
+  <div class="audit-panel">
+   <div class="audit-panel-head"><div><span class="tiny-kicker">02 / MAPAS E JOGADORES</span><h2>Qualidade por mercado</h2>
+    <p>Acerto na classificação de 50% e Brier Score: quanto menor o Brier, melhor.</p></div></div>
+   <div class="audit-metrics" id="audit-market-stats"></div>
+  </div>
+  <div class="audit-panel">
+   <div class="audit-panel-head"><div><span class="tiny-kicker">03 / ERROS MAIS INSTRUTIVOS</span><h2>Onde o modelo divergiu muito da casa?</h2>
+    <p>Divergência não é necessariamente uma oportunidade: pode ser erro de força, veto ou composição da amostra.</p></div></div>
+   <div class="audit-tile-grid" id="audit-errors"></div>
+  </div>
+  <div class="audit-panel">
+   <div class="audit-panel-head"><div><span class="tiny-kicker">04 / NOVO MODELO EXPERIMENTAL</span><h2>Ranking e força dos adversários</h2>
+    <p>Ajuste independente de odds, baseado em contexto conhecido antes do jogo. A fórmula, porém, foi criada após ver os resultados.</p></div></div>
+   <div class="audit-metrics" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+    <div class="audit-metric"><span>Favoritos V2 na comparação retrospectiva</span><b id="audit-v2-wins">—</b><small>Não é teste prospectivo</small></div>
+    <div class="audit-metric"><span>Brier Score V2 retrospectivo</span><b id="audit-v2-brier">—</b><small>Não é melhoria comprovada</small></div>
+   </div>
+   <div class="audit-hypothesis" id="audit-posthoc-disclaimer">Lendo dados...</div>
+   <ol class="audit-steps">
+    <li>Usar ranking e força dos adversários antes da partida para moderar as probabilidades por mapa.</li>
+    <li>Reduzir confiança em amostras pequenas e impedir que grandes divergências sejam tratadas automaticamente como vantagens.</li>
+    <li>Exigir veto confirmado para mercados de mapas específicos e evitar duplicar mercados da mesma partida em uma múltipla.</li>
+    <li>Preservar o modelo anterior como controle e comparar a V2 em novas partidas ainda não disputadas.</li>
+   </ol>
+   <div class="audit-timestamp">Última auditoria: <span id="audit-last-checked">—</span>. Odds dos prints não são cotações ao vivo.</div>
+  </div>
+  <button class="secondary" data-go="opportunities">Voltar ao radar BO3 →</button>
+</section>
+
+<section class="view" id="validation">
+ <div class="heading"><div><div class="eyebrow">AVALIAÇÃO CONGELADA / SEM LOOK-AHEAD</div><h1>Validação <span>das previsões</span></h1>
+  <p>Probabilidades registradas antes das partidas, confrontadas com placares e kills oficiais após o encerramento.</p></div></div>
+ <div class="notice compact"><span class="notice-icon">ⓘ</span><div><strong>O resultado só conta quando a Cito confirma o mapa disputado.</strong>
+  <p>Previsões criadas antes do horário do jogo não são substituídas após o resultado. Brier Score menor é melhor; este teste mede precisão estatística, não rentabilidade.</p></div></div>
+ <div class="metric-grid">
+  <article class="metric"><label>Previsões registradas</label><strong id="validation-total">—</strong><small>Mercados/mapas congelados</small></article>
+  <article class="metric"><label>Conferidas</label><strong id="validation-resolved">—</strong><small>Resultados verificados</small></article>
+  <article class="metric"><label>Erros por mercado</label><strong id="validation-market-count">—</strong><small>Classificação separada</small></article>
+  <article class="metric"><label>Último processamento</label><strong id="validation-last" class="snapshot-date">—</strong><small>Sem atualização ao vivo</small></article>
+ </div>
+ <div class="panel">
+  <div class="panel-head"><div><span class="tiny-kicker">MERCADOS COMPARADOS</span><h2>Desempenho histórico</h2></div></div>
+  <div id="validation-stats" class="validation-grid"></div>
+ </div>
+ <div class="panel">
+  <div class="panel-head"><div><span class="tiny-kicker">TRILHA DE PREVISÕES</span><h2>Pré-jogo × resultado real</h2></div><span class="mini-pill" id="validation-model">—</span></div>
+  <div class="input-pair"><label>Filtrar mercado
+   <select id="validation-filter" class="dark-select"><option value="all">Todos</option><option value="map_a">Vencedor de mapa</option><option value="rounds_over_21_5">Total de rounds</option><option value="handicap_a_minus_2_5">Handicap de rounds</option><option value="kills_over_15_5">Kills dos jogadores</option></select>
+  </label><label>Filtrar resultado<select id="validation-status" class="dark-select"><option value="all">Todos</option><option value="pending">Aguardando jogo</option><option value="resolved">Resultado confirmado</option></select></label></div>
+  <p id="validation-source-note" class="muted"></p>
+  <div class="table-wrap" id="validation-table"></div>
+ </div>
+ <div class="panel">
+  <div class="panel-head"><div><span class="tiny-kicker">ATUALIZAÇÃO AUTOMÁTICA</span><h2>Estado da sincronização</h2></div></div>
+  <p id="sync-status-detail" class="muted">Verificando configuração de atualização...</p>
+  <p class="muted">A coleta automatizada depende do segredo CITO_API_KEY no GitHub Actions. A credencial nunca fica no navegador. Limite programado: até sete solicitações Cito por execução diária.</p>
+ </div>
+</section>
+
+<section class="view" id="method"><div class="heading"><div><div class="eyebrow">TRANSPARÊNCIA</div><h1>Metodologia <span>e limitações</span></h1><p>O que este protótipo calcula e o que ainda não podemos afirmar.</p></div></div><div class="panel prose"><h2>O que o motor faz agora</h2><p>Simula séries BO3 de Counter-Strike 2 com até três mapas, usando uma probabilidade fixa por round para a Equipe A em cada mapa. O primeiro time a 13 rounds vence no tempo regulamentar; um empate em 12–12 aciona prorrogações de seis rounds até desempate. Uma série termina quando uma equipe vence dois mapas.</p><p>O modelo gera kills individuais por round com distribuição de Poisson simplificada e limite de cinco kills no round, ajustada de maneira heurística ao resultado do round. Os totais variam com a duração dos mapas e com a possibilidade de disputar o terceiro mapa.</p><h2>O que ainda falta</h2><ul><li>Aprimorar e calibrar os parâmetros já extraídos da Cito: incluir adversários, lado CT/TR, escolha e veto de mapas, mudanças de elenco e calendário.</li><li>Calibrar a distribuição de kills e rounds com dados históricos e correlacioná-la com contexto de cada partida.</li><li>Separar treinamento, validação e teste por datas, sem vazamento de informações posteriores ao evento.</li><li>Comparar resultados com modelos simples de referência, medir erro de calibração, Brier Score e incerteza em amostras prospectivas.</li><li>Verificar cobertura, credenciais, limites, termos de uso e licenciamento da Cito API antes de usar dados em produção.</li></ul><h2>Como interpretar probabilidades</h2><p>Uma saída de 63% significa que o cenário aconteceu em aproximadamente 63% das simulações <em>dado o conjunto de suposições de entrada</em>. Não significa que a chance real do evento seja 63%. A incerteza estrutural pode ser muito maior que o erro de Monte Carlo.</p><h2>Segurança e privacidade</h2><p>Não há login, pagamentos, integração com casas, execução de apostas nem envio de credenciais. Dados de previsão ficam no armazenamento local do navegador. Não informe senhas ou chaves de API no formulário.</p></div></section>
+      </div>
+    </main>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body></html>
