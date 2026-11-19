@@ -31,5 +31,6 @@ test('dashboard is the Nov 19 starting page, without invented post-veto markets'
  assert.ok(html.includes('data-tab="nextday"'));
  assert.ok(html.includes('<section class="view active" id="nextday">'));
  assert.ok(html.includes('src="nextday.js"'));
+ assert.ok(html.includes('id="nd-resolved-count"'));
  assert.ok(html.includes('href="nextday.css"'));
 });

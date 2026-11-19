@@ -64,6 +64,7 @@
    if(!data?.metrics?.length)throw Error('Sem partidas identificadas');
    for(const m of data.metrics)root.append(card(m));
    $('nd-game-count').textContent=data.metrics.length+' confrontos';
+   $('nd-resolved-count').textContent=String(validation.resolved||0);
    $('nd-frozen').textContent='Probabilidades congeladas em '+when(data.frozenAt)+' (Brasília). Odds dos prints de 18/11; não são cotações atuais.';
    $('nd-validation').textContent='V1 × V2: '+(validation.resolved||0)+' partidas futuras avaliadas até agora.';
   }catch(e){$('nd-games').textContent='Não foi possível carregar as previsões: '+e.message;}
