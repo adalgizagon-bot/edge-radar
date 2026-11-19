@@ -1,6 +1,6 @@
 {
   "source": "Cito CS2 match results + ranking as of 2026-11-17",
-  "fetchedAt": "2026-11-18T08:21:48.422Z",
+  "fetchedAt": "2026-11-19T08:27:20.713Z",
   "rankingDate": "2026-11-17T00:00:00Z",
   "windowDays": 180,
   "maximumRecentMatchesPerTeam": 15,
@@ -532,8 +532,39 @@
       "totalReturned": 30,
       "recent": [
         {
+          "id": "cs2-match-2400522",
+          "startsAt": "2026-11-18T11:51:40.000Z",
+          "endsAt": "2026-11-18T11:54:04.584Z",
+          "event": "Tipsport RUSH Brno 2026",
+          "eventTier": null,
+          "bestOf": 3,
+          "ourScore": 0,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-7187",
+            "name": "Nexus",
+            "rank": 51,
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
+          },
+          "maps": [
+            {
+              "name": "Anubis",
+              "ourRounds": 8,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-7187"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 7,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13104"
+            }
+          ]
+        },
+        {
           "id": "cs2-match-2400519",
-          "startsAt": "2026-11-17T12:50:00.000Z",
+          "startsAt": "2026-11-17T15:01:57.000Z",
           "endsAt": "2026-11-17T15:03:07.737Z",
           "event": "Tipsport RUSH Brno 2026",
           "eventTier": null,
@@ -545,7 +576,7 @@
             "id": "cs2-team-12474",
             "name": "Alliance",
             "rank": 38,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -613,7 +644,7 @@
             "id": "cs2-team-12857",
             "name": "FORZE Reload",
             "rank": 75,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -650,7 +681,7 @@
             "id": "cs2-team-10245",
             "name": "JiJieHao",
             "rank": 35,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -681,7 +712,7 @@
             "id": "cs2-team-13999",
             "name": "WBT Academy",
             "rank": 87,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -712,7 +743,7 @@
             "id": "cs2-team-10503",
             "name": "OG",
             "rank": 97,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -749,7 +780,7 @@
             "id": "cs2-team-4863",
             "name": "TYLOO",
             "rank": 31,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -811,7 +842,7 @@
             "id": "cs2-team-13181",
             "name": "BASEMENT BOYS",
             "rank": 61,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -848,7 +879,7 @@
             "id": "cs2-team-13333",
             "name": "ASTRAL",
             "rank": 93,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -879,7 +910,7 @@
             "id": "cs2-team-10245",
             "name": "JiJieHao",
             "rank": 35,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -966,7 +997,7 @@
             "id": "cs2-team-13924",
             "name": "Black Phoenix",
             "rank": 55,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -982,46 +1013,9 @@
               "pickTeamId": "cs2-team-13104"
             }
           ]
-        },
-        {
-          "id": "cs2-match-2398411",
-          "startsAt": "2026-10-10T10:00:00.000Z",
-          "endsAt": "2026-10-10T13:11:50.471Z",
-          "event": "CCT 2026 Europe Series 10",
-          "eventTier": "B",
-          "bestOf": 3,
-          "ourScore": 2,
-          "theirScore": 1,
-          "result": "W",
-          "opponent": {
-            "id": "cs2-team-7969",
-            "name": "Nemiga",
-            "rank": 11,
-            "rankingSource": "Cito 2026-11-17 rankings"
-          },
-          "maps": [
-            {
-              "name": "Cache",
-              "ourRounds": 13,
-              "theirRounds": 7,
-              "pickTeamId": "cs2-team-7969"
-            },
-            {
-              "name": "Nuke",
-              "ourRounds": 13,
-              "theirRounds": 16,
-              "pickTeamId": "cs2-team-13104"
-            },
-            {
-              "name": "Mirage",
-              "ourRounds": 13,
-              "theirRounds": 9,
-              "pickTeamId": null
-            }
-          ]
         }
       ],
-      "fetchedAt": "2026-11-18T01:13:23.881Z"
+      "fetchedAt": "2026-11-19T08:27:20.713Z"
     },
     {
       "id": "cs2-team-12916",

@@ -1,11 +1,11 @@
 {
   "version": "atlas-radar-unificado-v1",
-  "generatedAt": "2026-11-19T00:28:24.174Z",
+  "generatedAt": "2026-11-19T08:27:20.713Z",
   "dataStatus": {
-    "citoAt": "2026-11-18T08:21:48.422Z",
-    "formAt": "2026-11-18T08:21:48.422Z",
+    "citoAt": "2026-11-19T08:27:20.713Z",
+    "formAt": "2026-11-19T08:27:20.713Z",
     "rankingsAt": "2026-11-18T01:12:40.903Z",
-    "dailySyncAt": "2026-11-18T08:21:48.422Z",
+    "dailySyncAt": "2026-11-19T08:27:20.713Z",
     "oddsType": "prints_manualmente_enviados",
     "automaticOdds": false,
     "dailyCitoUpdatesDependOnGitHubActions": true
@@ -74,12 +74,12 @@
           "maps90": 70,
           "form": {
             "n": 15,
-            "wins": 9,
-            "losses": 6,
-            "vsTop50": 5,
-            "winsVsTop50": 3
+            "wins": 8,
+            "losses": 7,
+            "vsTop50": 4,
+            "winsVsTop50": 2
           },
-          "asOf": "2026-11-18T01:13:23.881Z"
+          "asOf": "2026-11-19T08:27:20.713Z"
         }
       },
       "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
@@ -135,7 +135,7 @@
       "form": {
         "a": {
           "rank": 54,
-          "maps90": 58,
+          "maps90": 60,
           "form": {
             "n": 15,
             "wins": 10,

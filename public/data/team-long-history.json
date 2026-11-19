@@ -1,6 +1,6 @@
 {
   "source": "Cito CS2 team map stats",
-  "fetchedAt": "2026-11-18T08:21:48.422Z",
+  "fetchedAt": "2026-11-19T08:27:20.713Z",
   "windowDays": 365,
   "teams": [
     {
@@ -116,9 +116,9 @@
       "id": "cs2-team-13104",
       "name": "Iberian Soul",
       "windowDays": 365,
-      "totalMaps": 81,
+      "totalMaps": 83,
       "mapWins": 44,
-      "mapWinPercent": 54.3,
+      "mapWinPercent": 53,
       "maps": [
         {
           "name": "Ancient",
@@ -140,18 +140,18 @@
           "roundsAgainst": 173,
           "inPool": true,
           "poolStatus": "in_pool",
-          "latestPlayedAt": "2026-11-17T12:50:00.000Z"
+          "latestPlayedAt": "2026-11-17T15:01:57.000Z"
         },
         {
           "name": "Inferno",
-          "played": 15,
+          "played": 16,
           "wins": 10,
-          "winPercent": 66.7,
-          "roundsFor": 173,
-          "roundsAgainst": 116,
+          "winPercent": 62.5,
+          "roundsFor": 180,
+          "roundsAgainst": 129,
           "inPool": true,
           "poolStatus": "in_pool",
-          "latestPlayedAt": "2026-11-01T16:55:00.000Z"
+          "latestPlayedAt": "2026-11-18T11:51:40.000Z"
         },
         {
           "name": "Mirage",
@@ -177,14 +177,14 @@
         },
         {
           "name": "Anubis",
-          "played": 6,
+          "played": 7,
           "wins": 2,
-          "winPercent": 33.3,
-          "roundsFor": 58,
-          "roundsAgainst": 64,
+          "winPercent": 28.6,
+          "roundsFor": 66,
+          "roundsAgainst": 77,
           "inPool": true,
           "poolStatus": "in_pool",
-          "latestPlayedAt": "2026-11-17T12:50:00.000Z"
+          "latestPlayedAt": "2026-11-18T11:51:40.000Z"
         }
       ]
     },

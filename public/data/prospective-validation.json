@@ -1,9 +1,9 @@
 {
-  "gradedAt": null,
-  "registered": 0,
+  "gradedAt": "2026-11-19T08:27:20.713Z",
+  "registered": 3,
   "resolved": 0,
   "meanBrierV1": null,
   "meanBrierV2": null,
   "records": [],
-  "note": "No out-of-sample games yet; retrospective challenger Nov 18 is explicitly excluded."
+  "note": "Only snapshots made before each match. Sample remains too small for profit or calibration claims."
 }

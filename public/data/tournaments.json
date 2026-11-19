@@ -1,6 +1,6 @@
 {
   "source": "Cito API (MCP)",
-  "fetchedAt": "2026-11-18T08:21:48.422Z",
+  "fetchedAt": "2026-11-19T08:27:20.713Z",
   "windowDays": 90,
   "events": [
     {
@@ -149,6 +149,57 @@
         "id": "cs2-team-5991",
         "name": "Envy",
         "slug": "envy"
+      }
+    },
+    {
+      "id": "cs2-match-2400444",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startTime": "2026-11-19T11:00:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-9928",
+        "name": "GamerLegion",
+        "slug": "gamerlegion"
+      },
+      "teamB": {
+        "id": "cs2-team-13117",
+        "name": "Inner Circle",
+        "slug": "inner-circle"
+      }
+    },
+    {
+      "id": "cs2-match-2400445",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startTime": "2026-11-19T13:30:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-7532",
+        "name": "BIG",
+        "slug": "big"
+      },
+      "teamB": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas",
+        "slug": "ninjas-in-pyjamas"
+      }
+    },
+    {
+      "id": "cs2-match-2400446",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startTime": "2026-11-19T16:00:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-10333",
+        "name": "Sangal",
+        "slug": "sangal"
+      },
+      "teamB": {
+        "id": "cs2-team-6290",
+        "name": "Luminosity",
+        "slug": "luminosity"
       }
     }
   ],
@@ -347,27 +398,40 @@
       "id": "cs2-team-12916",
       "name": "Betclic",
       "windowDays": 90,
-      "matchWindow": 26,
-      "totalMaps": 58,
+      "matchWindow": 27,
+      "totalMaps": 60,
       "mapWins": 30,
-      "mapWinPercent": 51.7,
+      "mapWinPercent": 50,
       "sideEconomy": {
-        "ctWinPercent": 53.7,
-        "tWinPercent": 48.2,
-        "pistolWinPercent": 52.1
+        "ctWinPercent": 53.5,
+        "tWinPercent": 47.7,
+        "pistolWinPercent": 52.4
       },
       "maps": [
         {
           "name": "Mirage",
-          "played": 12,
+          "played": 13,
           "wins": 6,
-          "winPercent": 50,
-          "pickPercent": 20.7,
-          "roundsFor": 126,
-          "roundsAgainst": 137,
-          "ctWinPercent": 53.5,
-          "tWinPercent": 44.8,
-          "latestPlayedAt": "2026-11-17T11:00:00.000Z",
+          "winPercent": 46.2,
+          "pickPercent": 21.7,
+          "roundsFor": 149,
+          "roundsAgainst": 162,
+          "ctWinPercent": 54.7,
+          "tWinPercent": 43.1,
+          "latestPlayedAt": "2026-11-18T13:41:26.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Ancient",
+          "played": 12,
+          "wins": 5,
+          "winPercent": 41.7,
+          "pickPercent": 20,
+          "roundsFor": 129,
+          "roundsAgainst": 140,
+          "ctWinPercent": 54.7,
+          "tWinPercent": 47.1,
+          "latestPlayedAt": "2026-11-18T13:41:26.000Z",
           "inPool": true
         },
         {
@@ -375,25 +439,12 @@
           "played": 11,
           "wins": 5,
           "winPercent": 45.5,
-          "pickPercent": 19,
+          "pickPercent": 18.3,
           "roundsFor": 120,
           "roundsAgainst": 131,
-          "ctWinPercent": 55.9,
-          "tWinPercent": 48,
-          "latestPlayedAt": "2026-11-17T11:00:00.000Z",
-          "inPool": true
-        },
-        {
-          "name": "Ancient",
-          "played": 11,
-          "wins": 5,
-          "winPercent": 45.5,
-          "pickPercent": 19,
-          "roundsFor": 120,
-          "roundsAgainst": 127,
-          "ctWinPercent": 56.7,
-          "tWinPercent": 46.6,
-          "latestPlayedAt": "2026-11-16T12:27:09.000Z",
+          "ctWinPercent": 55.8,
+          "tWinPercent": 47.3,
+          "latestPlayedAt": "2026-11-17T12:40:26.000Z",
           "inPool": true
         },
         {
@@ -401,7 +452,7 @@
           "played": 9,
           "wins": 7,
           "winPercent": 77.8,
-          "pickPercent": 15.5,
+          "pickPercent": 15,
           "roundsFor": 100,
           "roundsAgainst": 83,
           "ctWinPercent": 54.2,
@@ -414,10 +465,10 @@
           "played": 9,
           "wins": 2,
           "winPercent": 22.2,
-          "pickPercent": 15.5,
+          "pickPercent": 15,
           "roundsFor": 110,
           "roundsAgainst": 118,
-          "ctWinPercent": 52.6,
+          "ctWinPercent": 52.5,
           "tWinPercent": 57.6,
           "latestPlayedAt": "2026-11-16T12:27:09.000Z",
           "inPool": true
@@ -427,7 +478,7 @@
           "played": 6,
           "wins": 5,
           "winPercent": 83.3,
-          "pickPercent": 10.3,
+          "pickPercent": 10,
           "roundsFor": 72,
           "roundsAgainst": 62,
           "ctWinPercent": 59.1,
@@ -435,7 +486,8 @@
           "latestPlayedAt": "2026-11-15T21:08:01.000Z",
           "inPool": true
         }
-      ]
+      ],
+      "fetchedAt": "2026-11-19T08:27:20.713Z"
     },
     {
       "id": "cs2-team-7532",
