@@ -1,6 +1,6 @@
 {
   "source": "Cito API (MCP)",
-  "fetchedAt": "2026-11-19T08:27:20.713Z",
+  "fetchedAt": "2026-11-20T16:04:09.113Z",
   "windowDays": 90,
   "events": [
     {
@@ -156,7 +156,7 @@
       "eventId": "cs2-event-9258",
       "event": "Stake Ranked Episode 6",
       "startTime": "2026-11-19T11:00:00.000Z",
-      "status": "upcoming",
+      "status": "completed",
       "teamA": {
         "id": "cs2-team-9928",
         "name": "GamerLegion",
@@ -166,14 +166,16 @@
         "id": "cs2-team-13117",
         "name": "Inner Circle",
         "slug": "inner-circle"
-      }
+      },
+      "scoreA": 2,
+      "scoreB": 1
     },
     {
       "id": "cs2-match-2400445",
       "eventId": "cs2-event-9258",
       "event": "Stake Ranked Episode 6",
       "startTime": "2026-11-19T13:30:00.000Z",
-      "status": "upcoming",
+      "status": "completed",
       "teamA": {
         "id": "cs2-team-7532",
         "name": "BIG",
@@ -183,13 +185,34 @@
         "id": "cs2-team-4411",
         "name": "Ninjas in Pyjamas",
         "slug": "ninjas-in-pyjamas"
-      }
+      },
+      "scoreA": 2,
+      "scoreB": 1
     },
     {
       "id": "cs2-match-2400446",
       "eventId": "cs2-event-9258",
       "event": "Stake Ranked Episode 6",
       "startTime": "2026-11-19T16:00:00.000Z",
+      "status": "completed",
+      "teamA": {
+        "id": "cs2-team-10333",
+        "name": "Sangal",
+        "slug": "sangal"
+      },
+      "teamB": {
+        "id": "cs2-team-6290",
+        "name": "Luminosity",
+        "slug": "luminosity"
+      },
+      "scoreA": 2,
+      "scoreB": 0
+    },
+    {
+      "id": "cs2-match-2400449",
+      "eventId": "cs2-event-9258",
+      "event": "Stake Ranked Episode 6",
+      "startTime": "2026-11-20T16:30:00.000Z",
       "status": "upcoming",
       "teamA": {
         "id": "cs2-team-10333",
@@ -200,6 +223,23 @@
         "id": "cs2-team-6290",
         "name": "Luminosity",
         "slug": "luminosity"
+      }
+    },
+    {
+      "id": "cs2-match-2400527",
+      "eventId": "cs2-event-9273",
+      "event": "Tipsport RUSH Brno 2026",
+      "startTime": "2026-11-20T18:00:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-10577",
+        "name": "SINNERS",
+        "slug": "sinners"
+      },
+      "teamB": {
+        "id": "cs2-team-11641",
+        "name": "Metizport",
+        "slug": "metizport"
       }
     }
   ],
@@ -493,66 +533,79 @@
       "id": "cs2-team-7532",
       "name": "BIG",
       "windowDays": 90,
-      "matchWindow": 18,
-      "totalMaps": 39,
-      "mapWins": 15,
-      "mapWinPercent": 38.5,
+      "matchWindow": 21,
+      "totalMaps": 50,
+      "mapWins": 22,
+      "mapWinPercent": 44,
       "sideEconomy": {
-        "ctWinPercent": 54.6,
-        "tWinPercent": 48.9,
-        "pistolWinPercent": 44.6
+        "ctWinPercent": 54.9,
+        "tWinPercent": 49.5,
+        "pistolWinPercent": 46.2
       },
       "maps": [
         {
           "name": "Cache",
-          "played": 12,
-          "wins": 6,
+          "played": 14,
+          "wins": 7,
           "winPercent": 50,
-          "pickPercent": 30.8,
-          "roundsFor": 136,
-          "roundsAgainst": 129,
+          "pickPercent": 28,
+          "roundsFor": 152,
+          "roundsAgainst": 147,
           "ctWinPercent": 49.7,
           "tWinPercent": 57.4,
-          "latestPlayedAt": "2026-11-17T13:00:00.000Z",
+          "latestPlayedAt": "2026-11-20T15:24:43.000Z",
           "inPool": true
         },
         {
           "name": "Mirage",
-          "played": 9,
-          "wins": 4,
-          "winPercent": 44.4,
-          "pickPercent": 23.1,
-          "roundsFor": 91,
-          "roundsAgainst": 102,
-          "ctWinPercent": 54.5,
-          "tWinPercent": 38.8,
-          "latestPlayedAt": "2026-10-27T11:00:00.000Z",
+          "played": 11,
+          "wins": 6,
+          "winPercent": 54.5,
+          "pickPercent": 22,
+          "roundsFor": 129,
+          "roundsAgainst": 134,
+          "ctWinPercent": 56.1,
+          "tWinPercent": 41.6,
+          "latestPlayedAt": "2026-11-19T22:34:52.000Z",
           "inPool": true
         },
         {
           "name": "Ancient",
-          "played": 7,
-          "wins": 0,
-          "winPercent": 0,
-          "pickPercent": 17.9,
-          "roundsFor": 64,
-          "roundsAgainst": 94,
-          "ctWinPercent": 51.3,
-          "tWinPercent": 49.2,
-          "latestPlayedAt": "2026-10-29T11:00:00.000Z",
+          "played": 10,
+          "wins": 2,
+          "winPercent": 20,
+          "pickPercent": 20,
+          "roundsFor": 104,
+          "roundsAgainst": 123,
+          "ctWinPercent": 51.6,
+          "tWinPercent": 49.1,
+          "latestPlayedAt": "2026-11-20T15:24:43.000Z",
           "inPool": true
         },
         {
           "name": "Inferno",
-          "played": 6,
-          "wins": 3,
-          "winPercent": 50,
-          "pickPercent": 15.4,
-          "roundsFor": 57,
-          "roundsAgainst": 70,
-          "ctWinPercent": 50,
-          "tWinPercent": 56.1,
-          "latestPlayedAt": "2026-10-29T11:00:00.000Z",
+          "played": 9,
+          "wins": 5,
+          "winPercent": 55.6,
+          "pickPercent": 18,
+          "roundsFor": 92,
+          "roundsAgainst": 99,
+          "ctWinPercent": 52.2,
+          "tWinPercent": 57.1,
+          "latestPlayedAt": "2026-11-20T15:24:43.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Dust2",
+          "played": 3,
+          "wins": 1,
+          "winPercent": 33.3,
+          "pickPercent": 6,
+          "roundsFor": 24,
+          "roundsAgainst": 32,
+          "ctWinPercent": 51.9,
+          "tWinPercent": 36.6,
+          "latestPlayedAt": "2026-11-19T22:34:52.000Z",
           "inPool": true
         },
         {
@@ -560,28 +613,16 @@
           "played": 3,
           "wins": 1,
           "winPercent": 33.3,
-          "pickPercent": 7.7,
+          "pickPercent": 6,
           "roundsFor": 33,
           "roundsAgainst": 37,
-          "ctWinPercent": 64.1,
-          "tWinPercent": 42.4,
+          "ctWinPercent": 63.8,
+          "tWinPercent": 43.4,
           "latestPlayedAt": "2026-11-17T13:00:00.000Z",
           "inPool": true
-        },
-        {
-          "name": "Dust2",
-          "played": 2,
-          "wins": 1,
-          "winPercent": 50,
-          "pickPercent": 5.1,
-          "roundsFor": 20,
-          "roundsAgainst": 19,
-          "ctWinPercent": 55.6,
-          "tWinPercent": 32.9,
-          "latestPlayedAt": "2026-10-21T15:05:00.000Z",
-          "inPool": true
         }
-      ]
+      ],
+      "fetchedAt": "2026-11-20T16:04:09.113Z"
     },
     {
       "id": "cs2-team-13173",

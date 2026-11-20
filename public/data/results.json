@@ -1,6 +1,6 @@
 {
   "source": "Cito CS2 /cs2/matches/:id; only completed verified matches",
-  "fetchedAt": "2026-11-19T08:27:20.713Z",
+  "fetchedAt": "2026-11-20T16:04:09.113Z",
   "matches": [
     {
       "id": "cs2-match-2400440",
@@ -1759,6 +1759,583 @@
           "name": "cache",
           "action": "decider",
           "played": true
+        }
+      ]
+    },
+    {
+      "id": "cs2-match-2400444",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-19T11:00:00.000Z",
+      "status": "completed",
+      "scoreA": 2,
+      "scoreB": 1,
+      "verifiedAt": "2026-11-20T16:04:09.113Z",
+      "maps": [
+        {
+          "number": 1,
+          "name": "Nuke",
+          "scoreA": 13,
+          "scoreB": 16,
+          "players": [
+            {
+              "id": "cs2-player-20994",
+              "name": "FL4MUS",
+              "kills": 19,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-9278",
+              "name": "REZ",
+              "kills": 20,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-20301",
+              "name": "Tauson",
+              "kills": 13,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-23766",
+              "name": "hypex",
+              "kills": 17,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-17011",
+              "name": "shalfey",
+              "kills": 17,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-24282",
+              "name": "Dawy",
+              "kills": 25,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-16147",
+              "name": "cptkurtka023",
+              "kills": 18,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-19592",
+              "name": "headtr1ck",
+              "kills": 15,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-24168",
+              "name": "onic",
+              "kills": 21,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-23415",
+              "name": "zeRRoFIX",
+              "kills": 15,
+              "teamId": "cs2-team-13117"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "name": "Mirage",
+          "scoreA": 13,
+          "scoreB": 8,
+          "players": [
+            {
+              "id": "cs2-player-20994",
+              "name": "FL4MUS",
+              "kills": 14,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-9278",
+              "name": "REZ",
+              "kills": 9,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-20301",
+              "name": "Tauson",
+              "kills": 15,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-23766",
+              "name": "hypex",
+              "kills": 20,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-17011",
+              "name": "shalfey",
+              "kills": 16,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-24282",
+              "name": "Dawy",
+              "kills": 10,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-16147",
+              "name": "cptkurtka023",
+              "kills": 13,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-19592",
+              "name": "headtr1ck",
+              "kills": 11,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-24168",
+              "name": "onic",
+              "kills": 12,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-23415",
+              "name": "zeRRoFIX",
+              "kills": 22,
+              "teamId": "cs2-team-13117"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "name": "Dust2",
+          "scoreA": 13,
+          "scoreB": 10,
+          "players": [
+            {
+              "id": "cs2-player-20994",
+              "name": "FL4MUS",
+              "kills": 23,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-9278",
+              "name": "REZ",
+              "kills": 22,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-20301",
+              "name": "Tauson",
+              "kills": 10,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-23766",
+              "name": "hypex",
+              "kills": 19,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-17011",
+              "name": "shalfey",
+              "kills": 10,
+              "teamId": "cs2-team-9928"
+            },
+            {
+              "id": "cs2-player-24282",
+              "name": "Dawy",
+              "kills": 12,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-16147",
+              "name": "cptkurtka023",
+              "kills": 13,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-19592",
+              "name": "headtr1ck",
+              "kills": 17,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-24168",
+              "name": "onic",
+              "kills": 9,
+              "teamId": "cs2-team-13117"
+            },
+            {
+              "id": "cs2-player-23415",
+              "name": "zeRRoFIX",
+              "kills": 20,
+              "teamId": "cs2-team-13117"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cs2-match-2400445",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-19T13:30:00.000Z",
+      "status": "completed",
+      "scoreA": 2,
+      "scoreB": 1,
+      "verifiedAt": "2026-11-20T16:04:09.113Z",
+      "maps": [
+        {
+          "number": 1,
+          "name": "Inferno",
+          "scoreA": 13,
+          "scoreB": 11,
+          "players": [
+            {
+              "id": "cs2-player-14929",
+              "name": "JDC",
+              "kills": 20,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-15165",
+              "name": "blameF",
+              "kills": 17,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-14932",
+              "name": "faveN",
+              "kills": 11,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-22884",
+              "name": "gr1ks",
+              "kills": 18,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-5794",
+              "name": "tabseN",
+              "kills": 13,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-19899",
+              "name": "Krimbo",
+              "kills": 7,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-20878",
+              "name": "adamb",
+              "kills": 20,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-14148",
+              "name": "sjuush",
+              "kills": 13,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-10994",
+              "name": "stavn",
+              "kills": 16,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-23372",
+              "name": "xKacpersky",
+              "kills": 17,
+              "teamId": "cs2-team-4411"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "name": "Ancient",
+          "scoreA": 14,
+          "scoreB": 16,
+          "players": [
+            {
+              "id": "cs2-player-14929",
+              "name": "JDC",
+              "kills": 26,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-15165",
+              "name": "blameF",
+              "kills": 19,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-14932",
+              "name": "faveN",
+              "kills": 21,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-22884",
+              "name": "gr1ks",
+              "kills": 19,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-5794",
+              "name": "tabseN",
+              "kills": 19,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-19899",
+              "name": "Krimbo",
+              "kills": 24,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-20878",
+              "name": "adamb",
+              "kills": 17,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-14148",
+              "name": "sjuush",
+              "kills": 18,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-10994",
+              "name": "stavn",
+              "kills": 22,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-23372",
+              "name": "xKacpersky",
+              "kills": 19,
+              "teamId": "cs2-team-4411"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "name": "Cache",
+          "scoreA": 13,
+          "scoreB": 5,
+          "players": [
+            {
+              "id": "cs2-player-14929",
+              "name": "JDC",
+              "kills": 13,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-15165",
+              "name": "blameF",
+              "kills": 16,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-14932",
+              "name": "faveN",
+              "kills": 14,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-22884",
+              "name": "gr1ks",
+              "kills": 15,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-5794",
+              "name": "tabseN",
+              "kills": 10,
+              "teamId": "cs2-team-7532"
+            },
+            {
+              "id": "cs2-player-19899",
+              "name": "Krimbo",
+              "kills": 11,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-20878",
+              "name": "adamb",
+              "kills": 7,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-14148",
+              "name": "sjuush",
+              "kills": 10,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-10994",
+              "name": "stavn",
+              "kills": 16,
+              "teamId": "cs2-team-4411"
+            },
+            {
+              "id": "cs2-player-23372",
+              "name": "xKacpersky",
+              "kills": 6,
+              "teamId": "cs2-team-4411"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cs2-match-2400446",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-19T16:00:00.000Z",
+      "status": "completed",
+      "scoreA": 2,
+      "scoreB": 0,
+      "verifiedAt": "2026-11-20T16:04:09.113Z",
+      "maps": [
+        {
+          "number": 1,
+          "name": "Nuke",
+          "scoreA": 13,
+          "scoreB": 11,
+          "players": [
+            {
+              "id": "cs2-player-22106",
+              "name": "AZUWU",
+              "kills": 12,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-17145",
+              "name": "Rainwaker",
+              "kills": 12,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-19926",
+              "name": "afro",
+              "kills": 24,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-20563",
+              "name": "lux",
+              "kills": 13,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-22047",
+              "name": "yxngstxr",
+              "kills": 16,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-25253",
+              "name": "Joey",
+              "kills": 15,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-25110",
+              "name": "R4DYX",
+              "kills": 19,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-19698",
+              "name": "adamS",
+              "kills": 17,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-20309",
+              "name": "bnox",
+              "kills": 16,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-22144",
+              "name": "puuha",
+              "kills": 13,
+              "teamId": "cs2-team-10333"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "name": "Ancient",
+          "scoreA": 13,
+          "scoreB": 9,
+          "players": [
+            {
+              "id": "cs2-player-22106",
+              "name": "AZUWU",
+              "kills": 16,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-17145",
+              "name": "Rainwaker",
+              "kills": 18,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-19926",
+              "name": "afro",
+              "kills": 12,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-20563",
+              "name": "lux",
+              "kills": 7,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-22047",
+              "name": "yxngstxr",
+              "kills": 11,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-25253",
+              "name": "Joey",
+              "kills": 21,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-25110",
+              "name": "R4DYX",
+              "kills": 21,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-19698",
+              "name": "adamS",
+              "kills": 13,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-20309",
+              "name": "bnox",
+              "kills": 15,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-22144",
+              "name": "puuha",
+              "kills": 11,
+              "teamId": "cs2-team-10333"
+            }
+          ]
         }
       ]
     }

@@ -1,15 +1,15 @@
 {
-  "updatedAt": "2026-11-19T08:27:20.713Z",
-  "teamCursor": 3,
+  "updatedAt": "2026-11-20T16:04:09.113Z",
+  "teamCursor": 4,
   "rosterCursor": 0,
   "matchCursor": 0,
   "playerCursor": 0,
   "lastRun": {
     "status": "ok",
-    "requests": 6,
+    "requests": 7,
     "warnings": []
   },
   "instructions": "A automação será ativada quando o segredo CITO_API_KEY estiver configurado no GitHub Actions.",
-  "opponentCursor": 2,
-  "annualCursor": 2
+  "opponentCursor": 3,
+  "annualCursor": 3
 }

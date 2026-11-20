@@ -1,11 +1,11 @@
 {
   "version": "atlas-radar-unificado-v1",
-  "generatedAt": "2026-11-19T08:27:20.713Z",
+  "generatedAt": "2026-11-20T16:04:09.113Z",
   "dataStatus": {
-    "citoAt": "2026-11-19T08:27:20.713Z",
-    "formAt": "2026-11-19T08:27:20.713Z",
+    "citoAt": "2026-11-20T16:04:09.113Z",
+    "formAt": "2026-11-20T16:04:09.113Z",
     "rankingsAt": "2026-11-18T01:12:40.903Z",
-    "dailySyncAt": "2026-11-19T08:27:20.713Z",
+    "dailySyncAt": "2026-11-20T16:04:09.113Z",
     "oddsType": "prints_manualmente_enviados",
     "automaticOdds": false,
     "dailyCitoUpdatesDependOnGitHubActions": true
@@ -138,16 +138,16 @@
           "maps90": 60,
           "form": {
             "n": 15,
-            "wins": 10,
-            "losses": 5,
+            "wins": 9,
+            "losses": 6,
             "vsTop50": 4,
-            "winsVsTop50": 1
+            "winsVsTop50": 0
           },
-          "asOf": "2026-11-18T01:13:23.881Z"
+          "asOf": "2026-11-20T16:04:09.113Z"
         },
         "b": {
           "rank": 34,
-          "maps90": 39,
+          "maps90": 50,
           "form": {
             "n": 15,
             "wins": 5,
@@ -603,7 +603,7 @@
       "startTime": "2026-11-19T11:00:00.000Z",
       "event": "Stake Ranked Episode 6",
       "eventId": "cs2-event-9258",
-      "status": "scheduled",
+      "status": "completed",
       "teamA": {
         "id": "cs2-team-9928",
         "name": "GamerLegion"
@@ -612,7 +612,11 @@
         "id": "cs2-team-13117",
         "name": "Inner Circle"
       },
-      "result": null,
+      "result": {
+        "scoreA": 2,
+        "scoreB": 1,
+        "verifiedAt": "2026-11-20T16:04:09.113Z"
+      },
       "model": {
         "v1": 0.5720886492053774,
         "v2": 0.57989499301651,
@@ -908,7 +912,7 @@
       "startTime": "2026-11-19T13:30:00.000Z",
       "event": "Stake Ranked Episode 6",
       "eventId": "cs2-event-9258",
-      "status": "scheduled",
+      "status": "completed",
       "teamA": {
         "id": "cs2-team-7532",
         "name": "BIG"
@@ -917,7 +921,11 @@
         "id": "cs2-team-4411",
         "name": "Ninjas in Pyjamas"
       },
-      "result": null,
+      "result": {
+        "scoreA": 2,
+        "scoreB": 1,
+        "verifiedAt": "2026-11-20T16:04:09.113Z"
+      },
       "model": {
         "v1": 0.24073754308098622,
         "v2": 0.29583703089247193,
@@ -1253,7 +1261,7 @@
       "startTime": "2026-11-19T16:00:00.000Z",
       "event": "Stake Ranked Episode 6",
       "eventId": "cs2-event-9258",
-      "status": "scheduled",
+      "status": "completed",
       "teamA": {
         "id": "cs2-team-10333",
         "name": "Sangal"
@@ -1262,7 +1270,11 @@
         "id": "cs2-team-6290",
         "name": "Luminosity"
       },
-      "result": null,
+      "result": {
+        "scoreA": 2,
+        "scoreB": 0,
+        "verifiedAt": "2026-11-20T16:04:09.113Z"
+      },
       "model": {
         "v1": 0.5207483167588902,
         "v2": 0.49425845624792514,
@@ -1592,6 +1604,486 @@
       },
       "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
       "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400449",
+      "startTime": "2026-11-20T16:30:00.000Z",
+      "event": "Stake Ranked Episode 6",
+      "eventId": "cs2-event-9258",
+      "status": "scheduled",
+      "teamA": {
+        "id": "cs2-team-10333",
+        "name": "Sangal"
+      },
+      "teamB": {
+        "id": "cs2-team-6290",
+        "name": "Luminosity"
+      },
+      "result": null,
+      "model": {
+        "v1": 0.527696738449647,
+        "v2": 0.49698465654270774,
+        "frozenAt": "2026-11-20T16:04:09.113Z",
+        "version": "V1 vs V2",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.527696738449647,
+          "bWin": 0.47230326155035274,
+          "a20": 0.2625495890355915,
+          "a21": 0.26514714941405554,
+          "b20": 0.2265267474155933,
+          "b21": 0.24577651413475946,
+          "over2_5": 0.510923663548815,
+          "under2_5": 0.4890763364511848,
+          "aMinus1_5": 0.2625495890355915,
+          "bPlus1_5": 0.7374504109644084,
+          "aPlus1_5": 0.7734732525844067,
+          "bMinus1_5": 0.2265267474155933
+        },
+        "v2Score": {
+          "aWin": 0.49698465654270774,
+          "bWin": 0.5030153434572922,
+          "a20": 0.24743008821706955,
+          "a21": 0.24955456832563822,
+          "b20": 0.2514425045007862,
+          "b21": 0.251572838956506,
+          "aMinus1_5": 0.24743008821706955,
+          "bPlus1_5": 0.7525699117829304,
+          "aPlus1_5": 0.7485574954992138,
+          "bMinus1_5": 0.2514425045007862,
+          "over2_5": 0.5011274072821442,
+          "under2_5": 0.4988725927178558
+        }
+      },
+      "quotes": null,
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "Sangal vence",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.527696738449647,
+          "v2P": 0.49698465654270774,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "Luminosity vence",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.47230326155035274,
+          "v2P": 0.5030153434572922,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "aPlus1_5",
+          "family": "map_handicap",
+          "label": "Sangal +1,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.7734732525844067,
+          "v2P": 0.7485574954992138,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "bMinus1_5",
+          "family": "map_handicap",
+          "label": "Luminosity −1,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.2265267474155933,
+          "v2P": 0.2514425045007862,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "aMinus1_5",
+          "family": "map_handicap",
+          "label": "Sangal −1,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.2625495890355915,
+          "v2P": 0.24743008821706955,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "bPlus1_5",
+          "family": "map_handicap",
+          "label": "Luminosity +1,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.7374504109644084,
+          "v2P": 0.7525699117829304,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "a20",
+          "family": "correct_score",
+          "label": "Sangal 2–0",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.2625495890355915,
+          "v2P": 0.24743008821706955,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "b20",
+          "family": "correct_score",
+          "label": "Luminosity 2–0",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.2265267474155933,
+          "v2P": 0.2514425045007862,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "a21",
+          "family": "correct_score",
+          "label": "Sangal 2–1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.26514714941405554,
+          "v2P": 0.24955456832563822,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "b21",
+          "family": "correct_score",
+          "label": "Luminosity 2–1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.24577651413475946,
+          "v2P": 0.251572838956506,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "over2_5",
+          "family": "total_maps",
+          "label": "Mais de 2,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.510923663548815,
+          "v2P": 0.5011274072821442,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "under2_5",
+          "family": "total_maps",
+          "label": "Menos de 2,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.4890763364511848,
+          "v2P": 0.4988725927178558,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        }
+      ],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 41,
+          "maps90": 74,
+          "form": {
+            "n": 15,
+            "wins": 10,
+            "losses": 5,
+            "vsTop50": 5,
+            "winsVsTop50": 2
+          },
+          "asOf": "2026-11-18T01:14:09.705Z"
+        },
+        "b": {
+          "rank": 36,
+          "maps90": 48,
+          "form": {
+            "n": 15,
+            "wins": 7,
+            "losses": 8,
+            "vsTop50": 13,
+            "winsVsTop50": 7
+          },
+          "asOf": "2026-11-18T01:14:30.220Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400527",
+      "startTime": "2026-11-20T18:00:00.000Z",
+      "event": "Tipsport RUSH Brno 2026",
+      "eventId": "cs2-event-9273",
+      "status": "scheduled",
+      "teamA": {
+        "id": "cs2-team-10577",
+        "name": "SINNERS"
+      },
+      "teamB": {
+        "id": "cs2-team-11641",
+        "name": "Metizport"
+      },
+      "result": null,
+      "model": {
+        "v1": 0.44339057980454494,
+        "v2": 0.5678232345269885,
+        "frozenAt": "2026-11-20T16:04:09.113Z",
+        "version": "V1 vs V2",
+        "status": "experimental",
+        "v1Score": {
+          "aWin": 0.44339057980454494,
+          "bWin": 0.556609420195455,
+          "a20": 0.2098856812283649,
+          "a21": 0.23350489857618004,
+          "b20": 0.2838108347780373,
+          "b21": 0.27279858541741764,
+          "over2_5": 0.5063034839935977,
+          "under2_5": 0.4936965160064022,
+          "aMinus1_5": 0.2098856812283649,
+          "bPlus1_5": 0.7901143187716351,
+          "aPlus1_5": 0.7161891652219627,
+          "bMinus1_5": 0.2838108347780373
+        },
+        "v2Score": {
+          "aWin": 0.5678232345269885,
+          "bWin": 0.4321767654730114,
+          "a20": 0.29627583867722806,
+          "a21": 0.27154739584976034,
+          "b20": 0.20591037995781872,
+          "b21": 0.22626638551519268,
+          "aMinus1_5": 0.29627583867722806,
+          "bPlus1_5": 0.7037241613227719,
+          "aPlus1_5": 0.7940896200421813,
+          "bMinus1_5": 0.20591037995781872,
+          "over2_5": 0.497813781364953,
+          "under2_5": 0.5021862186350468
+        }
+      },
+      "quotes": null,
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "SINNERS vence",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.44339057980454494,
+          "v2P": 0.5678232345269885,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "Metizport vence",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.556609420195455,
+          "v2P": 0.4321767654730114,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "aPlus1_5",
+          "family": "map_handicap",
+          "label": "SINNERS +1,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.7161891652219627,
+          "v2P": 0.7940896200421813,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "bMinus1_5",
+          "family": "map_handicap",
+          "label": "Metizport −1,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.2838108347780373,
+          "v2P": 0.20591037995781872,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "aMinus1_5",
+          "family": "map_handicap",
+          "label": "SINNERS −1,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.2098856812283649,
+          "v2P": 0.29627583867722806,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "bPlus1_5",
+          "family": "map_handicap",
+          "label": "Metizport +1,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.7901143187716351,
+          "v2P": 0.7037241613227719,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "a20",
+          "family": "correct_score",
+          "label": "SINNERS 2–0",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.2098856812283649,
+          "v2P": 0.29627583867722806,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "b20",
+          "family": "correct_score",
+          "label": "Metizport 2–0",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.2838108347780373,
+          "v2P": 0.20591037995781872,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "a21",
+          "family": "correct_score",
+          "label": "SINNERS 2–1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.23350489857618004,
+          "v2P": 0.27154739584976034,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "b21",
+          "family": "correct_score",
+          "label": "Metizport 2–1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.27279858541741764,
+          "v2P": 0.22626638551519268,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "over2_5",
+          "family": "total_maps",
+          "label": "Mais de 2,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.5063034839935977,
+          "v2P": 0.497813781364953,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        },
+        {
+          "key": "under2_5",
+          "family": "total_maps",
+          "label": "Menos de 2,5 mapas",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": 0.4936965160064022,
+          "v2P": 0.5021862186350468,
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted"
+        }
+      ],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 37,
+          "maps90": 88,
+          "form": {
+            "n": 15,
+            "wins": 10,
+            "losses": 5,
+            "vsTop50": 8,
+            "winsVsTop50": 4
+          },
+          "asOf": "2026-11-18T01:14:09.705Z"
+        },
+        "b": {
+          "rank": 69,
+          "maps90": 75,
+          "form": {
+            "n": 15,
+            "wins": 8,
+            "losses": 7,
+            "vsTop50": 6,
+            "winsVsTop50": 3
+          },
+          "asOf": "2026-11-18T01:13:48.420Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
     }
   ],
   "rules": {
@@ -1602,6 +2094,6 @@
     "warnings": "model uncalibrated; price photographed; not an automated bet or recommendation"
   },
   "archive": {
-    "count": 8
+    "count": 11
   }
 }

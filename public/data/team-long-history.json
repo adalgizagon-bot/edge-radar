@@ -1,6 +1,6 @@
 {
   "source": "Cito CS2 team map stats",
-  "fetchedAt": "2026-11-19T08:27:20.713Z",
+  "fetchedAt": "2026-11-20T16:04:09.113Z",
   "windowDays": 365,
   "teams": [
     {
@@ -192,9 +192,9 @@
       "id": "cs2-team-12916",
       "name": "Betclic",
       "windowDays": 365,
-      "totalMaps": 219,
+      "totalMaps": 221,
       "mapWins": 112,
-      "mapWinPercent": 51.1,
+      "mapWinPercent": 50.7,
       "maps": [
         {
           "name": "Nuke",
@@ -220,25 +220,25 @@
         },
         {
           "name": "Ancient",
-          "played": 37,
+          "played": 38,
           "wins": 18,
-          "winPercent": 48.6,
-          "roundsFor": 384,
-          "roundsAgainst": 394,
+          "winPercent": 47.4,
+          "roundsFor": 393,
+          "roundsAgainst": 407,
           "inPool": true,
           "poolStatus": "in_pool",
-          "latestPlayedAt": "2026-11-16T12:27:09.000Z"
+          "latestPlayedAt": "2026-11-18T11:00:00.000Z"
         },
         {
           "name": "Mirage",
-          "played": 30,
+          "played": 31,
           "wins": 14,
-          "winPercent": 46.7,
-          "roundsFor": 323,
-          "roundsAgainst": 348,
+          "winPercent": 45.2,
+          "roundsFor": 346,
+          "roundsAgainst": 373,
           "inPool": true,
           "poolStatus": "in_pool",
-          "latestPlayedAt": "2026-11-17T11:00:00.000Z"
+          "latestPlayedAt": "2026-11-18T11:00:00.000Z"
         },
         {
           "name": "Dust2",
