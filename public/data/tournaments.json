@@ -1,6 +1,6 @@
 {
   "source": "Cito API (MCP)",
-  "fetchedAt": "2026-11-20T16:04:09.113Z",
+  "fetchedAt": "2026-11-21T15:16:37.328Z",
   "windowDays": 90,
   "events": [
     {
@@ -213,7 +213,7 @@
       "eventId": "cs2-event-9258",
       "event": "Stake Ranked Episode 6",
       "startTime": "2026-11-20T16:30:00.000Z",
-      "status": "upcoming",
+      "status": "completed",
       "teamA": {
         "id": "cs2-team-10333",
         "name": "Sangal",
@@ -223,14 +223,16 @@
         "id": "cs2-team-6290",
         "name": "Luminosity",
         "slug": "luminosity"
-      }
+      },
+      "scoreA": 1,
+      "scoreB": 3
     },
     {
       "id": "cs2-match-2400527",
       "eventId": "cs2-event-9273",
       "event": "Tipsport RUSH Brno 2026",
       "startTime": "2026-11-20T18:00:00.000Z",
-      "status": "upcoming",
+      "status": "completed",
       "teamA": {
         "id": "cs2-team-10577",
         "name": "SINNERS",
@@ -240,6 +242,25 @@
         "id": "cs2-team-11641",
         "name": "Metizport",
         "slug": "metizport"
+      },
+      "scoreA": 2,
+      "scoreB": 0
+    },
+    {
+      "id": "cs2-match-2400529",
+      "eventId": "cs2-event-9273",
+      "event": "Tipsport RUSH Brno 2026",
+      "startTime": "2026-11-21T16:00:00.000Z",
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-13996",
+        "name": "BBL",
+        "slug": "bbl"
+      },
+      "teamB": {
+        "id": "cs2-team-10577",
+        "name": "SINNERS",
+        "slug": "sinners"
       }
     }
   ],
@@ -628,40 +649,53 @@
       "id": "cs2-team-13173",
       "name": "Phantom",
       "windowDays": 90,
-      "matchWindow": 29,
-      "totalMaps": 62,
-      "mapWins": 34,
-      "mapWinPercent": 54.8,
+      "matchWindow": 30,
+      "totalMaps": 67,
+      "mapWins": 37,
+      "mapWinPercent": 55.2,
       "sideEconomy": {
-        "ctWinPercent": 53.6,
-        "tWinPercent": 48.1,
+        "ctWinPercent": 53.7,
+        "tWinPercent": 47.5,
         "pistolWinPercent": 54.1
       },
       "maps": [
         {
           "name": "Ancient",
-          "played": 14,
-          "wins": 9,
-          "winPercent": 64.3,
-          "pickPercent": 22.6,
-          "roundsFor": 159,
-          "roundsAgainst": 124,
-          "ctWinPercent": 50.5,
-          "tWinPercent": 51.6,
-          "latestPlayedAt": "2026-11-17T18:39:53.000Z",
+          "played": 16,
+          "wins": 11,
+          "winPercent": 68.8,
+          "pickPercent": 23.9,
+          "roundsFor": 185,
+          "roundsAgainst": 139,
+          "ctWinPercent": 52.2,
+          "tWinPercent": 51.1,
+          "latestPlayedAt": "2026-11-20T20:41:53.000Z",
           "inPool": true
         },
         {
           "name": "Inferno",
-          "played": 11,
+          "played": 12,
           "wins": 3,
-          "winPercent": 27.3,
-          "pickPercent": 17.7,
-          "roundsFor": 98,
-          "roundsAgainst": 134,
-          "ctWinPercent": 49.7,
-          "tWinPercent": 45.7,
-          "latestPlayedAt": "2026-11-17T18:39:53.000Z",
+          "winPercent": 25,
+          "pickPercent": 17.9,
+          "roundsFor": 111,
+          "roundsAgainst": 150,
+          "ctWinPercent": 50.5,
+          "tWinPercent": 44.4,
+          "latestPlayedAt": "2026-11-18T15:40:38.000Z",
+          "inPool": true
+        },
+        {
+          "name": "Nuke",
+          "played": 11,
+          "wins": 6,
+          "winPercent": 54.5,
+          "pickPercent": 16.4,
+          "roundsFor": 128,
+          "roundsAgainst": 125,
+          "ctWinPercent": 58.5,
+          "tWinPercent": 41.8,
+          "latestPlayedAt": "2026-11-18T15:40:38.000Z",
           "inPool": true
         },
         {
@@ -669,25 +703,12 @@
           "played": 10,
           "wins": 6,
           "winPercent": 60,
-          "pickPercent": 16.1,
+          "pickPercent": 14.9,
           "roundsFor": 118,
           "roundsAgainst": 110,
-          "ctWinPercent": 53.5,
-          "tWinPercent": 49.7,
+          "ctWinPercent": 51.8,
+          "tWinPercent": 48.2,
           "latestPlayedAt": "2026-11-17T18:39:53.000Z",
-          "inPool": true
-        },
-        {
-          "name": "Nuke",
-          "played": 10,
-          "wins": 6,
-          "winPercent": 60,
-          "pickPercent": 16.1,
-          "roundsFor": 117,
-          "roundsAgainst": 112,
-          "ctWinPercent": 58.3,
-          "tWinPercent": 41.9,
-          "latestPlayedAt": "2026-11-14T12:00:00.000Z",
           "inPool": true
         },
         {
@@ -695,25 +716,25 @@
           "played": 9,
           "wins": 6,
           "winPercent": 66.7,
-          "pickPercent": 14.5,
+          "pickPercent": 13.4,
           "roundsFor": 104,
           "roundsAgainst": 79,
-          "ctWinPercent": 55.8,
-          "tWinPercent": 51.5,
+          "ctWinPercent": 54,
+          "tWinPercent": 50.8,
           "latestPlayedAt": "2026-11-14T12:00:00.000Z",
           "inPool": true
         },
         {
           "name": "Anubis",
-          "played": 7,
-          "wins": 4,
-          "winPercent": 57.1,
-          "pickPercent": 11.3,
-          "roundsFor": 67,
-          "roundsAgainst": 82,
-          "ctWinPercent": 45.1,
-          "tWinPercent": 50.8,
-          "latestPlayedAt": "2026-11-01T11:00:00.000Z",
+          "played": 8,
+          "wins": 5,
+          "winPercent": 62.5,
+          "pickPercent": 11.9,
+          "roundsFor": 80,
+          "roundsAgainst": 91,
+          "ctWinPercent": 47,
+          "tWinPercent": 51.9,
+          "latestPlayedAt": "2026-11-20T20:41:53.000Z",
           "inPool": true
         },
         {
@@ -721,7 +742,7 @@
           "played": 1,
           "wins": 0,
           "winPercent": 0,
-          "pickPercent": 1.6,
+          "pickPercent": 1.5,
           "roundsFor": 11,
           "roundsAgainst": 13,
           "ctWinPercent": 33.3,
@@ -729,7 +750,8 @@
           "latestPlayedAt": "2026-08-29T17:00:00.000Z",
           "inPool": true
         }
-      ]
+      ],
+      "fetchedAt": "2026-11-21T15:16:37.328Z"
     },
     {
       "id": "cs2-team-11641",

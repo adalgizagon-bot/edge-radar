@@ -1,30 +1,30 @@
 {
-  "computedAt": "2026-11-20T16:04:09.113Z",
-  "total": 286,
-  "resolved": 130,
+  "computedAt": "2026-11-21T15:16:37.328Z",
+  "total": 315,
+  "resolved": 156,
   "byMarket": [
     {
       "kind": "map_a",
-      "observations": 26,
-      "brier": 0.3029,
-      "classificationAccuracy": 0.4231
+      "observations": 32,
+      "brier": 0.2932,
+      "classificationAccuracy": 0.4375
     },
     {
       "kind": "rounds_over_21_5",
-      "observations": 26,
-      "brier": 0.248,
+      "observations": 32,
+      "brier": 0.2505,
       "classificationAccuracy": 0.5
     },
     {
       "kind": "handicap_a_minus_2_5",
-      "observations": 26,
-      "brier": 0.272,
+      "observations": 32,
+      "brier": 0.2686,
       "classificationAccuracy": 0.5
     },
     {
       "kind": "kills_over_15_5",
-      "observations": 52,
-      "brier": 0.2881,
+      "observations": 60,
+      "brier": 0.2892,
       "classificationAccuracy": 0.5
     }
   ],
@@ -1327,6 +1327,266 @@
       "probability": 0.259456,
       "outcome": 1,
       "brier": 0.548405,
+      "actualScore": "13–9"
+    },
+    {
+      "id": "cs2-match-2400449|nuke|map_a",
+      "kind": "map_a",
+      "matchId": "cs2-match-2400449",
+      "map": "Nuke",
+      "probability": 0.721064,
+      "outcome": 0,
+      "brier": 0.519933,
+      "actualScore": "9–13"
+    },
+    {
+      "id": "cs2-match-2400449|nuke|rounds_over_21_5",
+      "kind": "rounds_over_21_5",
+      "matchId": "cs2-match-2400449",
+      "map": "Nuke",
+      "probability": 0.559824,
+      "outcome": 1,
+      "brier": 0.193755,
+      "actualScore": "9–13"
+    },
+    {
+      "id": "cs2-match-2400449|nuke|handicap_a_minus_2_5",
+      "kind": "handicap_a_minus_2_5",
+      "matchId": "cs2-match-2400449",
+      "map": "Nuke",
+      "probability": 0.596576,
+      "outcome": 0,
+      "brier": 0.355903,
+      "actualScore": "9–13"
+    },
+    {
+      "id": "cs2-match-2400449|nuke|kills_over_15_5|cs2-player-19698",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400449",
+      "map": "Nuke",
+      "probability": 0.479963,
+      "outcome": 0,
+      "brier": 0.230364,
+      "actualScore": "9–13"
+    },
+    {
+      "id": "cs2-match-2400449|nuke|kills_over_15_5|cs2-player-20309",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400449",
+      "map": "Nuke",
+      "probability": 0.516853,
+      "outcome": 1,
+      "brier": 0.233431,
+      "actualScore": "9–13"
+    },
+    {
+      "id": "cs2-match-2400449|cache|map_a",
+      "kind": "map_a",
+      "matchId": "cs2-match-2400449",
+      "map": "Cache",
+      "probability": 0.628274,
+      "outcome": 1,
+      "brier": 0.13818,
+      "actualScore": "13–11"
+    },
+    {
+      "id": "cs2-match-2400449|cache|rounds_over_21_5",
+      "kind": "rounds_over_21_5",
+      "matchId": "cs2-match-2400449",
+      "map": "Cache",
+      "probability": 0.598404,
+      "outcome": 1,
+      "brier": 0.161279,
+      "actualScore": "13–11"
+    },
+    {
+      "id": "cs2-match-2400449|cache|handicap_a_minus_2_5",
+      "kind": "handicap_a_minus_2_5",
+      "matchId": "cs2-match-2400449",
+      "map": "Cache",
+      "probability": 0.502274,
+      "outcome": 0,
+      "brier": 0.252279,
+      "actualScore": "13–11"
+    },
+    {
+      "id": "cs2-match-2400449|mirage|map_a",
+      "kind": "map_a",
+      "matchId": "cs2-match-2400449",
+      "map": "Mirage",
+      "probability": 0.553428,
+      "outcome": 0,
+      "brier": 0.306283,
+      "actualScore": "7–13"
+    },
+    {
+      "id": "cs2-match-2400449|mirage|rounds_over_21_5",
+      "kind": "rounds_over_21_5",
+      "matchId": "cs2-match-2400449",
+      "map": "Mirage",
+      "probability": 0.613574,
+      "outcome": 0,
+      "brier": 0.376473,
+      "actualScore": "7–13"
+    },
+    {
+      "id": "cs2-match-2400449|mirage|handicap_a_minus_2_5",
+      "kind": "handicap_a_minus_2_5",
+      "matchId": "cs2-match-2400449",
+      "map": "Mirage",
+      "probability": 0.43124,
+      "outcome": 0,
+      "brier": 0.185968,
+      "actualScore": "7–13"
+    },
+    {
+      "id": "cs2-match-2400449|dust2|map_a",
+      "kind": "map_a",
+      "matchId": "cs2-match-2400449",
+      "map": "Dust2",
+      "probability": 0.331914,
+      "outcome": 0,
+      "brier": 0.110167,
+      "actualScore": "6–13"
+    },
+    {
+      "id": "cs2-match-2400449|dust2|rounds_over_21_5",
+      "kind": "rounds_over_21_5",
+      "matchId": "cs2-match-2400449",
+      "map": "Dust2",
+      "probability": 0.58478,
+      "outcome": 0,
+      "brier": 0.341968,
+      "actualScore": "6–13"
+    },
+    {
+      "id": "cs2-match-2400449|dust2|handicap_a_minus_2_5",
+      "kind": "handicap_a_minus_2_5",
+      "matchId": "cs2-match-2400449",
+      "map": "Dust2",
+      "probability": 0.240422,
+      "outcome": 0,
+      "brier": 0.057803,
+      "actualScore": "6–13"
+    },
+    {
+      "id": "cs2-match-2400527|mirage|map_a",
+      "kind": "map_a",
+      "matchId": "cs2-match-2400527",
+      "map": "Mirage",
+      "probability": 0.664439,
+      "outcome": 1,
+      "brier": 0.112601,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400527|mirage|rounds_over_21_5",
+      "kind": "rounds_over_21_5",
+      "matchId": "cs2-match-2400527",
+      "map": "Mirage",
+      "probability": 0.586201,
+      "outcome": 0,
+      "brier": 0.343632,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400527|mirage|handicap_a_minus_2_5",
+      "kind": "handicap_a_minus_2_5",
+      "matchId": "cs2-match-2400527",
+      "map": "Mirage",
+      "probability": 0.538109,
+      "outcome": 1,
+      "brier": 0.213343,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400527|mirage|kills_over_15_5|cs2-player-19069",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400527",
+      "map": "Mirage",
+      "probability": 0.583694,
+      "outcome": 0,
+      "brier": 0.340699,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400527|mirage|kills_over_15_5|cs2-player-24083",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400527",
+      "map": "Mirage",
+      "probability": 0.22021,
+      "outcome": 0,
+      "brier": 0.048492,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400527|mirage|kills_over_15_5|cs2-player-23459",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400527",
+      "map": "Mirage",
+      "probability": 0.888458,
+      "outcome": 0,
+      "brier": 0.789358,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400527|mirage|kills_over_15_5|cs2-player-21113",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400527",
+      "map": "Mirage",
+      "probability": 0.323802,
+      "outcome": 0,
+      "brier": 0.104848,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400527|nuke|map_a",
+      "kind": "map_a",
+      "matchId": "cs2-match-2400527",
+      "map": "Nuke",
+      "probability": 0.434041,
+      "outcome": 1,
+      "brier": 0.32031,
+      "actualScore": "13–9"
+    },
+    {
+      "id": "cs2-match-2400527|nuke|rounds_over_21_5",
+      "kind": "rounds_over_21_5",
+      "matchId": "cs2-match-2400527",
+      "map": "Nuke",
+      "probability": 0.611932,
+      "outcome": 1,
+      "brier": 0.150597,
+      "actualScore": "13–9"
+    },
+    {
+      "id": "cs2-match-2400527|nuke|handicap_a_minus_2_5",
+      "kind": "handicap_a_minus_2_5",
+      "matchId": "cs2-match-2400527",
+      "map": "Nuke",
+      "probability": 0.3252,
+      "outcome": 1,
+      "brier": 0.455355,
+      "actualScore": "13–9"
+    },
+    {
+      "id": "cs2-match-2400527|nuke|kills_over_15_5|cs2-player-19069",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400527",
+      "map": "Nuke",
+      "probability": 0.524231,
+      "outcome": 0,
+      "brier": 0.274818,
+      "actualScore": "13–9"
+    },
+    {
+      "id": "cs2-match-2400527|nuke|kills_over_15_5|cs2-player-24083",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400527",
+      "map": "Nuke",
+      "probability": 0.410403,
+      "outcome": 1,
+      "brier": 0.347625,
       "actualScore": "13–9"
     }
   ],

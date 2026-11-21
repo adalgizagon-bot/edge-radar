@@ -1,6 +1,6 @@
 {
   "source": "Cito CS2 /cs2/matches/:id; only completed verified matches",
-  "fetchedAt": "2026-11-20T16:04:09.113Z",
+  "fetchedAt": "2026-11-21T15:16:37.328Z",
   "matches": [
     {
       "id": "cs2-match-2400440",
@@ -2334,6 +2334,436 @@
               "name": "puuha",
               "kills": 11,
               "teamId": "cs2-team-10333"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cs2-match-2400449",
+      "event": "Stake Ranked Episode 6",
+      "startsAt": "2026-11-20T16:30:00.000Z",
+      "status": "completed",
+      "scoreA": 1,
+      "scoreB": 3,
+      "verifiedAt": "2026-11-21T15:16:37.328Z",
+      "maps": [
+        {
+          "number": 1,
+          "name": "Nuke",
+          "scoreA": 9,
+          "scoreB": 13,
+          "players": [
+            {
+              "id": "cs2-player-22106",
+              "name": "AZUWU",
+              "kills": 11,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-17145",
+              "name": "Rainwaker",
+              "kills": 13,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-19926",
+              "name": "afro",
+              "kills": 22,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-20563",
+              "name": "lux",
+              "kills": 18,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-22047",
+              "name": "yxngstxr",
+              "kills": 13,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-25253",
+              "name": "Joey",
+              "kills": 10,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-25110",
+              "name": "R4DYX",
+              "kills": 12,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-19698",
+              "name": "adamS",
+              "kills": 14,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-20309",
+              "name": "bnox",
+              "kills": 17,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-22144",
+              "name": "puuha",
+              "kills": 13,
+              "teamId": "cs2-team-10333"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "name": "Mirage",
+          "scoreA": 7,
+          "scoreB": 13,
+          "players": [
+            {
+              "id": "cs2-player-22106",
+              "name": "AZUWU",
+              "kills": 10,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-17145",
+              "name": "Rainwaker",
+              "kills": 15,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-19926",
+              "name": "afro",
+              "kills": 18,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-20563",
+              "name": "lux",
+              "kills": 20,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-22047",
+              "name": "yxngstxr",
+              "kills": 13,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-25253",
+              "name": "Joey",
+              "kills": 9,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-25110",
+              "name": "R4DYX",
+              "kills": 10,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-19698",
+              "name": "adamS",
+              "kills": 10,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-20309",
+              "name": "bnox",
+              "kills": 11,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-22144",
+              "name": "puuha",
+              "kills": 12,
+              "teamId": "cs2-team-10333"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "name": "Cache",
+          "scoreA": 13,
+          "scoreB": 11,
+          "players": [
+            {
+              "id": "cs2-player-22106",
+              "name": "AZUWU",
+              "kills": 23,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-17145",
+              "name": "Rainwaker",
+              "kills": 11,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-19926",
+              "name": "afro",
+              "kills": 15,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-20563",
+              "name": "lux",
+              "kills": 11,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-22047",
+              "name": "yxngstxr",
+              "kills": 16,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-25253",
+              "name": "Joey",
+              "kills": 20,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-25110",
+              "name": "R4DYX",
+              "kills": 12,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-19698",
+              "name": "adamS",
+              "kills": 11,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-20309",
+              "name": "bnox",
+              "kills": 26,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-22144",
+              "name": "puuha",
+              "kills": 12,
+              "teamId": "cs2-team-10333"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "name": "Dust2",
+          "scoreA": 6,
+          "scoreB": 13,
+          "players": [
+            {
+              "id": "cs2-player-22106",
+              "name": "AZUWU",
+              "kills": 11,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-17145",
+              "name": "Rainwaker",
+              "kills": 16,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-19926",
+              "name": "afro",
+              "kills": 12,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-20563",
+              "name": "lux",
+              "kills": 13,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-22047",
+              "name": "yxngstxr",
+              "kills": 21,
+              "teamId": "cs2-team-6290"
+            },
+            {
+              "id": "cs2-player-25253",
+              "name": "Joey",
+              "kills": 15,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-25110",
+              "name": "R4DYX",
+              "kills": 5,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-19698",
+              "name": "adamS",
+              "kills": 8,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-20309",
+              "name": "bnox",
+              "kills": 11,
+              "teamId": "cs2-team-10333"
+            },
+            {
+              "id": "cs2-player-22144",
+              "name": "puuha",
+              "kills": 12,
+              "teamId": "cs2-team-10333"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cs2-match-2400527",
+      "event": "Tipsport RUSH Brno 2026",
+      "startsAt": "2026-11-20T18:00:00.000Z",
+      "status": "completed",
+      "scoreA": 2,
+      "scoreB": 0,
+      "verifiedAt": "2026-11-21T15:16:37.328Z",
+      "maps": [
+        {
+          "number": 1,
+          "name": "Nuke",
+          "scoreA": 13,
+          "scoreB": 9,
+          "players": [
+            {
+              "id": "cs2-player-19044",
+              "name": "F1KU",
+              "kills": 14,
+              "teamId": "cs2-team-11641"
+            },
+            {
+              "id": "cs2-player-24083",
+              "name": "MaiL09",
+              "kills": 19,
+              "teamId": "cs2-team-11641"
+            },
+            {
+              "id": "cs2-player-14218",
+              "name": "Plopski",
+              "kills": 13,
+              "teamId": "cs2-team-11641"
+            },
+            {
+              "id": "cs2-player-19069",
+              "name": "forsyy",
+              "kills": 12,
+              "teamId": "cs2-team-11641"
+            },
+            {
+              "id": "cs2-player-8507",
+              "name": "stanislaw",
+              "kills": 6,
+              "teamId": "cs2-team-11641"
+            },
+            {
+              "id": "cs2-player-21113",
+              "name": "MoDo",
+              "kills": 11,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-12810",
+              "name": "SHOCK",
+              "kills": 13,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-11199",
+              "name": "beastik",
+              "kills": 15,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-23295",
+              "name": "kisserek",
+              "kills": 20,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-23459",
+              "name": "stressarN",
+              "kills": 13,
+              "teamId": "cs2-team-10577"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "name": "Mirage",
+          "scoreA": 13,
+          "scoreB": 5,
+          "players": [
+            {
+              "id": "cs2-player-19044",
+              "name": "F1KU",
+              "kills": 7,
+              "teamId": "cs2-team-11641"
+            },
+            {
+              "id": "cs2-player-24083",
+              "name": "MaiL09",
+              "kills": 9,
+              "teamId": "cs2-team-11641"
+            },
+            {
+              "id": "cs2-player-14218",
+              "name": "Plopski",
+              "kills": 7,
+              "teamId": "cs2-team-11641"
+            },
+            {
+              "id": "cs2-player-19069",
+              "name": "forsyy",
+              "kills": 10,
+              "teamId": "cs2-team-11641"
+            },
+            {
+              "id": "cs2-player-8507",
+              "name": "stanislaw",
+              "kills": 10,
+              "teamId": "cs2-team-11641"
+            },
+            {
+              "id": "cs2-player-21113",
+              "name": "MoDo",
+              "kills": 15,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-12810",
+              "name": "SHOCK",
+              "kills": 7,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-11199",
+              "name": "beastik",
+              "kills": 13,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-23295",
+              "name": "kisserek",
+              "kills": 17,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-23459",
+              "name": "stressarN",
+              "kills": 13,
+              "teamId": "cs2-team-10577"
             }
           ]
         }

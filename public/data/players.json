@@ -1,6 +1,6 @@
 {
   "source": "Cito API",
-  "fetchedAt": "2026-11-20T16:04:09.113Z",
+  "fetchedAt": "2026-11-21T15:16:37.328Z",
   "windowDays": 30,
   "teams": [
     {
@@ -2962,6 +2962,70 @@
           "rounds": 43,
           "adr": 61,
           "rating": 1.07
+        }
+      ]
+    },
+    {
+      "id": "cs2-player-22473",
+      "nickname": "Qlocuu",
+      "teamId": "cs2-team-12916",
+      "role": "entry",
+      "fetchedAt": "2026-11-21T15:16:37.328Z",
+      "windowDays": 30,
+      "maps": [
+        {
+          "name": "Ancient",
+          "count": 5,
+          "kpr": 0.64,
+          "kills": 69,
+          "rounds": 107,
+          "adr": 71,
+          "rating": 1
+        },
+        {
+          "name": "Nuke",
+          "count": 5,
+          "kpr": 0.68,
+          "kills": 77,
+          "rounds": 113,
+          "adr": 74,
+          "rating": 1.02
+        },
+        {
+          "name": "Anubis",
+          "count": 4,
+          "kpr": 0.6,
+          "kills": 62,
+          "rounds": 103,
+          "adr": 67,
+          "rating": 1.02
+        },
+        {
+          "name": "Dust2",
+          "count": 3,
+          "kpr": 0.59,
+          "kills": 42,
+          "rounds": 71,
+          "adr": 65,
+          "rating": 1.05
+        },
+        {
+          "name": "Mirage",
+          "count": 3,
+          "kpr": 0.63,
+          "kills": 59,
+          "rounds": 94,
+          "adr": 66,
+          "rating": 0.96
+        },
+        {
+          "name": "Cache",
+          "count": 1,
+          "kpr": 0.73,
+          "kills": 16,
+          "rounds": 22,
+          "adr": 78,
+          "rating": 1.19
         }
       ]
     }

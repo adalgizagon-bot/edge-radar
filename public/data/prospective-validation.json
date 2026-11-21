@@ -1,9 +1,9 @@
 {
-  "gradedAt": "2026-11-20T16:04:09.113Z",
-  "registered": 5,
-  "resolved": 3,
-  "meanBrierV1": 0.32975659283833764,
-  "meanBrierV2": 0.30936940434388654,
+  "gradedAt": "2026-11-21T15:16:37.328Z",
+  "registered": 6,
+  "resolved": 5,
+  "meanBrierV1": 0.31550953458714576,
+  "meanBrierV2": 0.2723757436970494,
   "records": [
     {
       "matchId": "cs2-match-2400444",
@@ -34,6 +34,26 @@
       "pV2": 0.49425845624792514,
       "brierV1": 0.22968217588943704,
       "brierV2": 0.2557745090767319
+    },
+    {
+      "matchId": "cs2-match-2400449",
+      "startsAt": "2026-11-20T16:30:00.000Z",
+      "score": "1–3",
+      "y": 0,
+      "pV1": 0.527696738449647,
+      "pV2": 0.49698465654270774,
+      "brierV1": 0.2784638477703952,
+      "brierV2": 0.24699374883887318
+    },
+    {
+      "matchId": "cs2-match-2400527",
+      "startsAt": "2026-11-20T18:00:00.000Z",
+      "score": "2–0",
+      "y": 1,
+      "pV1": 0.44339057980454494,
+      "pV2": 0.5678232345269885,
+      "brierV1": 0.3098140466503206,
+      "brierV2": 0.1867767566147144
     }
   ],
   "note": "Only snapshots made before each match. Sample remains too small for profit or calibration claims."

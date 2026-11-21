@@ -1,6 +1,6 @@
 {
   "version": "atlas-prospective-a-b-v1",
-  "lastChecked": "2026-11-20T16:04:09.113Z",
+  "lastChecked": "2026-11-21T15:16:37.328Z",
   "forecasts": [
     {
       "matchId": "cs2-match-2400444",
@@ -307,6 +307,69 @@
       "snapshotAt": {
         "teams": "2026-11-20T16:04:09.113Z",
         "forms": "2026-11-20T16:04:09.113Z",
+        "rankings": "2026-11-18T01:12:40.903Z"
+      },
+      "note": "Both predictions frozen concurrently strictly before kickoff. No odds. Do not overwrite."
+    },
+    {
+      "matchId": "cs2-match-2400529",
+      "event": "Tipsport RUSH Brno 2026",
+      "eventId": "cs2-event-9273",
+      "startsAt": "2026-11-21T16:00:00.000Z",
+      "teamA": {
+        "id": "cs2-team-13996",
+        "name": "BBL",
+        "slug": "bbl"
+      },
+      "teamB": {
+        "id": "cs2-team-10577",
+        "name": "SINNERS",
+        "slug": "sinners"
+      },
+      "frozenAt": "2026-11-21T15:16:37.328Z",
+      "v1": {
+        "model": "atlas-bo3-pre-veto-uniform-v1",
+        "pA": 0.5583332733499377,
+        "score": {
+          "aWin": 0.5583332733499377,
+          "bWin": 0.44166672665006224,
+          "a20": 0.28532768127740427,
+          "a21": 0.2730055920725334,
+          "b20": 0.20976930122294643,
+          "b21": 0.2318974254271158,
+          "over2_5": 0.5049030174996492,
+          "under2_5": 0.4950969825003507,
+          "aMinus1_5": 0.28532768127740427,
+          "bPlus1_5": 0.7146723187225957,
+          "aPlus1_5": 0.7902306987770535,
+          "bMinus1_5": 0.20976930122294643
+        }
+      },
+      "v2": {
+        "model": "atlas-rank-strength-challenger-v2-prototype",
+        "pA": 0.484470085153923,
+        "score": {
+          "aWin": 0.484470085153923,
+          "bWin": 0.515529914846077,
+          "a20": 0.23889568210638465,
+          "a21": 0.24557440304753833,
+          "b20": 0.2596543415086601,
+          "b21": 0.25587557333741695,
+          "aMinus1_5": 0.23889568210638465,
+          "bPlus1_5": 0.7611043178936153,
+          "aPlus1_5": 0.7403456584913399,
+          "bMinus1_5": 0.2596543415086601,
+          "over2_5": 0.5014499763849553,
+          "under2_5": 0.49855002361504475
+        },
+        "rankPriorA": 0.4512260164047568,
+        "rankA": 50,
+        "rankB": 37,
+        "formDelta": -0.0014190345349541125
+      },
+      "snapshotAt": {
+        "teams": "2026-11-21T15:16:37.328Z",
+        "forms": "2026-11-21T15:16:37.328Z",
         "rankings": "2026-11-18T01:12:40.903Z"
       },
       "note": "Both predictions frozen concurrently strictly before kickoff. No odds. Do not overwrite."
