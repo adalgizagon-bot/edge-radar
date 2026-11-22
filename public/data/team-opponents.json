@@ -1,6 +1,6 @@
 {
   "source": "Cito CS2 match results + ranking as of 2026-11-17",
-  "fetchedAt": "2026-11-21T15:16:37.328Z",
+  "fetchedAt": "2026-11-22T15:13:39.579Z",
   "rankingDate": "2026-11-17T00:00:00Z",
   "windowDays": 180,
   "maximumRecentMatchesPerTeam": 15,
@@ -2053,6 +2053,111 @@
       "totalReturned": 30,
       "recent": [
         {
+          "id": "cs2-match-2400368",
+          "startsAt": "2026-11-22T12:02:59.000Z",
+          "endsAt": "2026-11-22T12:04:55.721Z",
+          "event": "NODWIN Clutch Series 14",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 1,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13297",
+            "name": "33",
+            "rank": 80,
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
+          },
+          "maps": [
+            {
+              "name": "Nuke",
+              "ourRounds": 11,
+              "theirRounds": 13,
+              "pickTeamId": "cs2-team-13297"
+            },
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 4,
+              "pickTeamId": "cs2-team-13173"
+            },
+            {
+              "name": "Dust2",
+              "ourRounds": 13,
+              "theirRounds": 6,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400363",
+          "startsAt": "2026-11-20T18:40:00.000Z",
+          "endsAt": "2026-11-20T20:42:55.282Z",
+          "event": "NODWIN Clutch Series 14",
+          "eventTier": "A",
+          "bestOf": 3,
+          "ourScore": 2,
+          "theirScore": 0,
+          "result": "W",
+          "opponent": {
+            "id": "cs2-team-13683",
+            "name": "WBT",
+            "rank": 110,
+            "rankingSource": "Cito match-card worldRanking"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 8,
+              "pickTeamId": "cs2-team-13173"
+            },
+            {
+              "name": "Anubis",
+              "ourRounds": 13,
+              "theirRounds": 9,
+              "pickTeamId": "cs2-team-13683"
+            }
+          ]
+        },
+        {
+          "id": "cs2-match-2400523",
+          "startsAt": "2026-11-18T15:40:38.000Z",
+          "endsAt": "2026-11-18T15:42:06.216Z",
+          "event": "Tipsport RUSH Brno 2026",
+          "eventTier": null,
+          "bestOf": 3,
+          "ourScore": 1,
+          "theirScore": 2,
+          "result": "L",
+          "opponent": {
+            "id": "cs2-team-11641",
+            "name": "Metizport",
+            "rank": 69,
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
+          },
+          "maps": [
+            {
+              "name": "Ancient",
+              "ourRounds": 13,
+              "theirRounds": 7,
+              "pickTeamId": "cs2-team-13173"
+            },
+            {
+              "name": "Inferno",
+              "ourRounds": 13,
+              "theirRounds": 16,
+              "pickTeamId": "cs2-team-11641"
+            },
+            {
+              "name": "Nuke",
+              "ourRounds": 11,
+              "theirRounds": 13,
+              "pickTeamId": null
+            }
+          ]
+        },
+        {
           "id": "cs2-match-2400520",
           "startsAt": "2026-11-17T18:39:53.000Z",
           "endsAt": "2026-11-17T18:40:13.467Z",
@@ -2066,7 +2171,7 @@
             "id": "cs2-team-13996",
             "name": "BBL",
             "rank": 50,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -2103,7 +2208,7 @@
             "id": "cs2-team-14147",
             "name": "Hype Tech",
             "rank": 78,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -2140,7 +2245,7 @@
             "id": "cs2-team-11719",
             "name": "Illyrians",
             "rank": 84,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -2202,7 +2307,7 @@
             "id": "cs2-team-12916",
             "name": "Betclic",
             "rank": 54,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -2239,7 +2344,7 @@
             "id": "cs2-team-7900",
             "name": "Spirit Academy",
             "rank": 95,
-            "rankingSource": "Cito 2026-11-17 rankings"
+            "rankingSource": "Cito ranking 2026-11-17T00:00:00.000Z"
           },
           "maps": [
             {
@@ -2435,96 +2540,9 @@
               "pickTeamId": null
             }
           ]
-        },
-        {
-          "id": "cs2-match-2399424",
-          "startsAt": "2026-10-16T08:00:00.000Z",
-          "endsAt": "2026-10-16T08:44:02.929Z",
-          "event": "Elisa BreakOut Series 2",
-          "eventTier": null,
-          "bestOf": 1,
-          "ourScore": 1,
-          "theirScore": 0,
-          "result": "W",
-          "opponent": {
-            "id": "cs2-team-13499",
-            "name": "Voca",
-            "rank": 66,
-            "rankingSource": "Cito 2026-11-17 rankings"
-          },
-          "maps": [
-            {
-              "name": "Ancient",
-              "ourRounds": 13,
-              "theirRounds": 4,
-              "pickTeamId": null
-            }
-          ]
-        },
-        {
-          "id": "cs2-match-2399557",
-          "startsAt": "2026-10-14T14:15:00.000Z",
-          "endsAt": "2026-10-14T16:48:57.633Z",
-          "event": "PGL Bucharest 2027 Open Qualifier 2",
-          "eventTier": "C",
-          "bestOf": 3,
-          "ourScore": 1,
-          "theirScore": 2,
-          "result": "L",
-          "opponent": {
-            "id": "cs2-team-13027",
-            "name": "Nuclear TigeRES",
-            "rank": 60,
-            "rankingSource": "Cito 2026-11-17 rankings"
-          },
-          "maps": [
-            {
-              "name": "Anubis",
-              "ourRounds": 1,
-              "theirRounds": 13,
-              "pickTeamId": "cs2-team-13027"
-            },
-            {
-              "name": "Mirage",
-              "ourRounds": 13,
-              "theirRounds": 6,
-              "pickTeamId": "cs2-team-13173"
-            },
-            {
-              "name": "Dust2",
-              "ourRounds": 7,
-              "theirRounds": 13,
-              "pickTeamId": null
-            }
-          ]
-        },
-        {
-          "id": "cs2-match-2399550",
-          "startsAt": "2026-10-13T17:50:00.000Z",
-          "endsAt": "2026-10-13T18:24:52.869Z",
-          "event": "PGL Bucharest 2027 Open Qualifier 2",
-          "eventTier": "C",
-          "bestOf": 1,
-          "ourScore": 1,
-          "theirScore": 0,
-          "result": "W",
-          "opponent": {
-            "id": "cs2-team-13803",
-            "name": "DNK",
-            "rank": 196,
-            "rankingSource": "Cito match-card worldRanking"
-          },
-          "maps": [
-            {
-              "name": "Dust2",
-              "ourRounds": 13,
-              "theirRounds": 3,
-              "pickTeamId": null
-            }
-          ]
         }
       ],
-      "fetchedAt": "2026-11-18T01:13:48.420Z"
+      "fetchedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-team-11641",

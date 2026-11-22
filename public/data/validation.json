@@ -1,31 +1,31 @@
 {
-  "computedAt": "2026-11-21T15:16:37.328Z",
+  "computedAt": "2026-11-22T15:13:39.579Z",
   "total": 315,
-  "resolved": 156,
+  "resolved": 173,
   "byMarket": [
     {
       "kind": "map_a",
-      "observations": 32,
-      "brier": 0.2932,
-      "classificationAccuracy": 0.4375
+      "observations": 35,
+      "brier": 0.2855,
+      "classificationAccuracy": 0.4571
     },
     {
       "kind": "rounds_over_21_5",
-      "observations": 32,
-      "brier": 0.2505,
-      "classificationAccuracy": 0.5
+      "observations": 35,
+      "brier": 0.2533,
+      "classificationAccuracy": 0.4857
     },
     {
       "kind": "handicap_a_minus_2_5",
-      "observations": 32,
-      "brier": 0.2686,
-      "classificationAccuracy": 0.5
+      "observations": 35,
+      "brier": 0.2616,
+      "classificationAccuracy": 0.5143
     },
     {
       "kind": "kills_over_15_5",
-      "observations": 60,
-      "brier": 0.2892,
-      "classificationAccuracy": 0.5
+      "observations": 68,
+      "brier": 0.3007,
+      "classificationAccuracy": 0.4853
     }
   ],
   "assessed": [
@@ -1588,6 +1588,176 @@
       "outcome": 1,
       "brier": 0.347625,
       "actualScore": "13–9"
+    },
+    {
+      "id": "cs2-match-2400529|nuke|map_a",
+      "kind": "map_a",
+      "matchId": "cs2-match-2400529",
+      "map": "Nuke",
+      "probability": 0.568247,
+      "outcome": 1,
+      "brier": 0.186411,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400529|nuke|rounds_over_21_5",
+      "kind": "rounds_over_21_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Nuke",
+      "probability": 0.611594,
+      "outcome": 0,
+      "brier": 0.374047,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400529|nuke|handicap_a_minus_2_5",
+      "kind": "handicap_a_minus_2_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Nuke",
+      "probability": 0.444997,
+      "outcome": 1,
+      "brier": 0.308028,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400529|nuke|kills_over_15_5|cs2-player-21571",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Nuke",
+      "probability": 0.596215,
+      "outcome": 0,
+      "brier": 0.355472,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400529|nuke|kills_over_15_5|cs2-player-21379",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Nuke",
+      "probability": 0.316132,
+      "outcome": 0,
+      "brier": 0.099939,
+      "actualScore": "13–5"
+    },
+    {
+      "id": "cs2-match-2400529|mirage|map_a",
+      "kind": "map_a",
+      "matchId": "cs2-match-2400529",
+      "map": "Mirage",
+      "probability": 0.292526,
+      "outcome": 0,
+      "brier": 0.085571,
+      "actualScore": "7–13"
+    },
+    {
+      "id": "cs2-match-2400529|mirage|rounds_over_21_5",
+      "kind": "rounds_over_21_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Mirage",
+      "probability": 0.567032,
+      "outcome": 0,
+      "brier": 0.321525,
+      "actualScore": "7–13"
+    },
+    {
+      "id": "cs2-match-2400529|mirage|handicap_a_minus_2_5",
+      "kind": "handicap_a_minus_2_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Mirage",
+      "probability": 0.209038,
+      "outcome": 0,
+      "brier": 0.043697,
+      "actualScore": "7–13"
+    },
+    {
+      "id": "cs2-match-2400529|mirage|kills_over_15_5|cs2-player-23459",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Mirage",
+      "probability": 0.882969,
+      "outcome": 0,
+      "brier": 0.779634,
+      "actualScore": "7–13"
+    },
+    {
+      "id": "cs2-match-2400529|mirage|kills_over_15_5|cs2-player-21113",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Mirage",
+      "probability": 0.315691,
+      "outcome": 1,
+      "brier": 0.468279,
+      "actualScore": "7–13"
+    },
+    {
+      "id": "cs2-match-2400529|mirage|kills_over_15_5|cs2-player-21571",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Mirage",
+      "probability": 0.730513,
+      "outcome": 0,
+      "brier": 0.533649,
+      "actualScore": "7–13"
+    },
+    {
+      "id": "cs2-match-2400529|mirage|kills_over_15_5|cs2-player-21379",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Mirage",
+      "probability": 0.464832,
+      "outcome": 0,
+      "brier": 0.216069,
+      "actualScore": "7–13"
+    },
+    {
+      "id": "cs2-match-2400529|cache|map_a",
+      "kind": "map_a",
+      "matchId": "cs2-match-2400529",
+      "map": "Cache",
+      "probability": 0.58212,
+      "outcome": 0,
+      "brier": 0.338864,
+      "actualScore": "15–19"
+    },
+    {
+      "id": "cs2-match-2400529|cache|rounds_over_21_5",
+      "kind": "rounds_over_21_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Cache",
+      "probability": 0.609291,
+      "outcome": 1,
+      "brier": 0.152654,
+      "actualScore": "15–19"
+    },
+    {
+      "id": "cs2-match-2400529|cache|handicap_a_minus_2_5",
+      "kind": "handicap_a_minus_2_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Cache",
+      "probability": 0.458008,
+      "outcome": 0,
+      "brier": 0.209771,
+      "actualScore": "15–19"
+    },
+    {
+      "id": "cs2-match-2400529|cache|kills_over_15_5|cs2-player-21571",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Cache",
+      "probability": 0.645739,
+      "outcome": 1,
+      "brier": 0.125501,
+      "actualScore": "15–19"
+    },
+    {
+      "id": "cs2-match-2400529|cache|kills_over_15_5|cs2-player-21379",
+      "kind": "kills_over_15_5",
+      "matchId": "cs2-match-2400529",
+      "map": "Cache",
+      "probability": 0.279209,
+      "outcome": 1,
+      "brier": 0.51954,
+      "actualScore": "15–19"
     }
   ],
   "note": "Avaliação retrospectiva dos registros congelados antes dos jogos; não comprova vantagem financeira."

@@ -1,6 +1,6 @@
 {
   "version": "atlas-audit-v1",
-  "evaluatedAt": "2026-11-21T15:16:37.328Z",
+  "evaluatedAt": "2026-11-22T15:13:39.579Z",
   "source": "Cito completed series vs immutable pregame ATLAS and BR365 screenshots",
   "completed": 7,
   "totalScheduled": 8,
@@ -47,30 +47,30 @@
   "mapMarkets": [
     {
       "kind": "map_a",
-      "n": 32,
-      "brier": 0.2932,
-      "accuracy": 0.4375,
+      "n": 35,
+      "brier": 0.2855,
+      "accuracy": 0.4571,
       "worseThanNeutral": true
     },
     {
       "kind": "rounds_over_21_5",
-      "n": 32,
-      "brier": 0.2505,
-      "accuracy": 0.5,
+      "n": 35,
+      "brier": 0.2533,
+      "accuracy": 0.4857,
       "worseThanNeutral": true
     },
     {
       "kind": "handicap_a_minus_2_5",
-      "n": 32,
-      "brier": 0.2686,
-      "accuracy": 0.5,
+      "n": 35,
+      "brier": 0.2616,
+      "accuracy": 0.5143,
       "worseThanNeutral": true
     },
     {
       "kind": "kills_over_15_5",
-      "n": 60,
-      "brier": 0.2892,
-      "accuracy": 0.5,
+      "n": 68,
+      "brier": 0.3007,
+      "accuracy": 0.4853,
       "worseThanNeutral": true
     }
   ],

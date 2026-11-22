@@ -1,11 +1,11 @@
 {
   "version": "atlas-radar-unificado-v1",
-  "generatedAt": "2026-11-21T15:16:37.328Z",
+  "generatedAt": "2026-11-22T15:13:39.579Z",
   "dataStatus": {
-    "citoAt": "2026-11-21T15:16:37.328Z",
-    "formAt": "2026-11-21T15:16:37.328Z",
-    "rankingsAt": "2026-11-18T01:12:40.903Z",
-    "dailySyncAt": "2026-11-21T15:16:37.328Z",
+    "citoAt": "2026-11-22T15:13:39.579Z",
+    "formAt": "2026-11-22T15:13:39.579Z",
+    "rankingsAt": "2026-11-22T15:13:39.579Z",
+    "dailySyncAt": "2026-11-22T15:13:39.579Z",
     "oddsType": "prints_manualmente_enviados",
     "automaticOdds": false,
     "dailyCitoUpdatesDependOnGitHubActions": true
@@ -219,11 +219,11 @@
             "vsTop50": 1,
             "winsVsTop50": 0
           },
-          "asOf": "2026-11-18T01:13:48.420Z"
+          "asOf": "2026-11-22T15:13:39.579Z"
         },
         "b": {
           "rank": 69,
-          "maps90": 75,
+          "maps90": 77,
           "form": {
             "n": 15,
             "wins": 8,
@@ -2079,7 +2079,7 @@
         },
         "b": {
           "rank": 69,
-          "maps90": 75,
+          "maps90": 77,
           "form": {
             "n": 15,
             "wins": 8,
@@ -2098,7 +2098,7 @@
       "startTime": "2026-11-21T16:00:00.000Z",
       "event": "Tipsport RUSH Brno 2026",
       "eventId": "cs2-event-9273",
-      "status": "scheduled",
+      "status": "completed",
       "teamA": {
         "id": "cs2-team-13996",
         "name": "BBL"
@@ -2107,7 +2107,11 @@
         "id": "cs2-team-10577",
         "name": "SINNERS"
       },
-      "result": null,
+      "result": {
+        "scoreA": 1,
+        "scoreB": 2,
+        "verifiedAt": "2026-11-22T15:13:39.579Z"
+      },
       "model": {
         "v1": 0.5583332733499377,
         "v2": 0.484470085153923,
@@ -2342,6 +2346,6 @@
     "warnings": "model uncalibrated; price photographed; not an automated bet or recommendation"
   },
   "archive": {
-    "count": 13
+    "count": 14
   }
 }

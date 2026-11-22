@@ -1,6 +1,6 @@
 {
   "source": "Cito CS2 /cs2/matches/:id; only completed verified matches",
-  "fetchedAt": "2026-11-21T15:16:37.328Z",
+  "fetchedAt": "2026-11-22T15:13:39.579Z",
   "matches": [
     {
       "id": "cs2-match-2400440",
@@ -2763,6 +2763,221 @@
               "id": "cs2-player-23459",
               "name": "stressarN",
               "kills": 13,
+              "teamId": "cs2-team-10577"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cs2-match-2400529",
+      "event": "Tipsport RUSH Brno 2026",
+      "startsAt": "2026-11-21T16:00:00.000Z",
+      "status": "completed",
+      "scoreA": 1,
+      "scoreB": 2,
+      "verifiedAt": "2026-11-22T15:13:39.579Z",
+      "maps": [
+        {
+          "number": 1,
+          "name": "Mirage",
+          "scoreA": 7,
+          "scoreB": 13,
+          "players": [
+            {
+              "id": "cs2-player-16731",
+              "name": "IceBerg",
+              "kills": 12,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21571",
+              "name": "Leakz",
+              "kills": 4,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21199",
+              "name": "MistR",
+              "kills": 11,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-24104",
+              "name": "NickyB",
+              "kills": 18,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21379",
+              "name": "salazar",
+              "kills": 11,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21113",
+              "name": "MoDo",
+              "kills": 23,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-12810",
+              "name": "SHOCK",
+              "kills": 9,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-11199",
+              "name": "beastik",
+              "kills": 15,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-23295",
+              "name": "kisserek",
+              "kills": 18,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-23459",
+              "name": "stressarN",
+              "kills": 13,
+              "teamId": "cs2-team-10577"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "name": "Nuke",
+          "scoreA": 13,
+          "scoreB": 5,
+          "players": [
+            {
+              "id": "cs2-player-16731",
+              "name": "IceBerg",
+              "kills": 21,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21571",
+              "name": "Leakz",
+              "kills": 11,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21199",
+              "name": "MistR",
+              "kills": 14,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-24104",
+              "name": "NickyB",
+              "kills": 15,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21379",
+              "name": "salazar",
+              "kills": 7,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21113",
+              "name": "MoDo",
+              "kills": 13,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-12810",
+              "name": "SHOCK",
+              "kills": 12,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-11199",
+              "name": "beastik",
+              "kills": 9,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-23295",
+              "name": "kisserek",
+              "kills": 13,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-23459",
+              "name": "stressarN",
+              "kills": 2,
+              "teamId": "cs2-team-10577"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "name": "Cache",
+          "scoreA": 15,
+          "scoreB": 19,
+          "players": [
+            {
+              "id": "cs2-player-16731",
+              "name": "IceBerg",
+              "kills": 16,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21571",
+              "name": "Leakz",
+              "kills": 22,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21199",
+              "name": "MistR",
+              "kills": 18,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-24104",
+              "name": "NickyB",
+              "kills": 27,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21379",
+              "name": "salazar",
+              "kills": 20,
+              "teamId": "cs2-team-13996"
+            },
+            {
+              "id": "cs2-player-21113",
+              "name": "MoDo",
+              "kills": 38,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-12810",
+              "name": "SHOCK",
+              "kills": 19,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-11199",
+              "name": "beastik",
+              "kills": 20,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-23295",
+              "name": "kisserek",
+              "kills": 24,
+              "teamId": "cs2-team-10577"
+            },
+            {
+              "id": "cs2-player-23459",
+              "name": "stressarN",
+              "kills": 25,
               "teamId": "cs2-team-10577"
             }
           ]

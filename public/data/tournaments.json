@@ -1,6 +1,6 @@
 {
   "source": "Cito API (MCP)",
-  "fetchedAt": "2026-11-21T15:16:37.328Z",
+  "fetchedAt": "2026-11-22T15:13:39.579Z",
   "windowDays": 90,
   "events": [
     {
@@ -251,7 +251,7 @@
       "eventId": "cs2-event-9273",
       "event": "Tipsport RUSH Brno 2026",
       "startTime": "2026-11-21T16:00:00.000Z",
-      "status": "upcoming",
+      "status": "completed",
       "teamA": {
         "id": "cs2-team-13996",
         "name": "BBL",
@@ -261,7 +261,9 @@
         "id": "cs2-team-10577",
         "name": "SINNERS",
         "slug": "sinners"
-      }
+      },
+      "scoreA": 1,
+      "scoreB": 2
     }
   ],
   "teams": [
@@ -757,40 +759,40 @@
       "id": "cs2-team-11641",
       "name": "Metizport",
       "windowDays": 90,
-      "matchWindow": 38,
-      "totalMaps": 75,
+      "matchWindow": 37,
+      "totalMaps": 77,
       "mapWins": 43,
-      "mapWinPercent": 57.3,
+      "mapWinPercent": 55.8,
       "sideEconomy": {
-        "ctWinPercent": 54.1,
-        "tWinPercent": 49.5,
-        "pistolWinPercent": 53.7
+        "ctWinPercent": 53.4,
+        "tWinPercent": 49.8,
+        "pistolWinPercent": 51.2
       },
       "maps": [
         {
           "name": "Nuke",
-          "played": 21,
+          "played": 22,
           "wins": 11,
-          "winPercent": 52.4,
-          "pickPercent": 28,
-          "roundsFor": 253,
-          "roundsAgainst": 247,
-          "ctWinPercent": 52.8,
-          "tWinPercent": 49.6,
-          "latestPlayedAt": "2026-11-17T19:00:00.000Z",
+          "winPercent": 50,
+          "pickPercent": 28.6,
+          "roundsFor": 262,
+          "roundsAgainst": 260,
+          "ctWinPercent": 52,
+          "tWinPercent": 51.1,
+          "latestPlayedAt": "2026-11-20T20:00:00.000Z",
           "inPool": true
         },
         {
           "name": "Mirage",
-          "played": 13,
+          "played": 14,
           "wins": 6,
-          "winPercent": 46.2,
-          "pickPercent": 17.3,
-          "roundsFor": 154,
-          "roundsAgainst": 152,
-          "ctWinPercent": 55.1,
+          "winPercent": 42.9,
+          "pickPercent": 18.2,
+          "roundsFor": 159,
+          "roundsAgainst": 165,
+          "ctWinPercent": 54.6,
           "tWinPercent": 43.2,
-          "latestPlayedAt": "2026-11-15T15:00:00.000Z",
+          "latestPlayedAt": "2026-11-20T20:00:00.000Z",
           "inPool": true
         },
         {
@@ -798,12 +800,12 @@
           "played": 12,
           "wins": 9,
           "winPercent": 75,
-          "pickPercent": 16,
+          "pickPercent": 15.6,
           "roundsFor": 150,
-          "roundsAgainst": 132,
-          "ctWinPercent": 53.5,
-          "tWinPercent": 51,
-          "latestPlayedAt": "2026-11-13T09:00:00.000Z",
+          "roundsAgainst": 131,
+          "ctWinPercent": 53.6,
+          "tWinPercent": 48.9,
+          "latestPlayedAt": "2026-11-18T15:40:38.000Z",
           "inPool": true
         },
         {
@@ -811,12 +813,12 @@
           "played": 11,
           "wins": 6,
           "winPercent": 54.5,
-          "pickPercent": 14.7,
+          "pickPercent": 14.3,
           "roundsFor": 126,
           "roundsAgainst": 113,
           "ctWinPercent": 57.1,
           "tWinPercent": 45.5,
-          "latestPlayedAt": "2026-11-17T19:00:00.000Z",
+          "latestPlayedAt": "2026-11-17T21:47:06.000Z",
           "inPool": true
         },
         {
@@ -824,12 +826,12 @@
           "played": 10,
           "wins": 5,
           "winPercent": 50,
-          "pickPercent": 13.3,
+          "pickPercent": 13,
           "roundsFor": 101,
           "roundsAgainst": 104,
           "ctWinPercent": 48.2,
           "tWinPercent": 56.1,
-          "latestPlayedAt": "2026-11-17T19:00:00.000Z",
+          "latestPlayedAt": "2026-11-17T21:47:06.000Z",
           "inPool": true
         },
         {
@@ -837,15 +839,16 @@
           "played": 8,
           "wins": 6,
           "winPercent": 75,
-          "pickPercent": 10.7,
+          "pickPercent": 10.4,
           "roundsFor": 100,
           "roundsAgainst": 79,
-          "ctWinPercent": 57,
-          "tWinPercent": 55.1,
-          "latestPlayedAt": "2026-11-13T09:00:00.000Z",
+          "ctWinPercent": 56.7,
+          "tWinPercent": 53.3,
+          "latestPlayedAt": "2026-11-18T15:40:38.000Z",
           "inPool": true
         }
-      ]
+      ],
+      "fetchedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-team-12267",

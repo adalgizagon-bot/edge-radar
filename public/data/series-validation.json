@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T15:16:37.328Z",
+  "updatedAt": "2026-11-22T15:13:39.579Z",
   "total": 70,
   "resolved": 70,
   "byFamily": [
@@ -36,7 +36,7 @@
       "outcome": 1,
       "brier": 0.14347696867830378,
       "finalScore": "2–0",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400522|bo3|bWin",
@@ -49,7 +49,7 @@
       "outcome": 0,
       "brier": 0.14347696867830362,
       "finalScore": "2–0",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400522|bo3|aPlus1_5",
@@ -62,7 +62,7 @@
       "outcome": 1,
       "brier": 0.028974418037645194,
       "finalScore": "2–0",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400522|bo3|bMinus1_5",
@@ -75,7 +75,7 @@
       "outcome": 0,
       "brier": 0.0289744180376452,
       "finalScore": "2–0",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400522|bo3|a20",
@@ -88,7 +88,7 @@
       "outcome": 1,
       "brier": 0.45717385603500243,
       "finalScore": "2–0",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400522|bo3|a21",
@@ -101,7 +101,7 @@
       "outcome": 0,
       "brier": 0.08842462849576249,
       "finalScore": "2–0",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400522|bo3|b20",
@@ -114,7 +114,7 @@
       "outcome": 0,
       "brier": 0.0289744180376452,
       "finalScore": "2–0",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400522|bo3|b21",
@@ -127,7 +127,7 @@
       "outcome": 0,
       "brier": 0.04349927670204797,
       "finalScore": "2–0",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400522|bo3|over2_5",
@@ -140,7 +140,7 @@
       "outcome": 0,
       "brier": 0.2559627278657634,
       "finalScore": "2–0",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400522|bo3|under2_5",
@@ -153,7 +153,7 @@
       "outcome": 1,
       "brier": 0.25596272786576363,
       "finalScore": "2–0",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400440|bo3|aWin",
@@ -166,7 +166,7 @@
       "outcome": 0,
       "brier": 0.39695136396676733,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400440|bo3|bWin",
@@ -179,7 +179,7 @@
       "outcome": 1,
       "brier": 0.3969513639667672,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400440|bo3|aPlus1_5",
@@ -192,7 +192,7 @@
       "outcome": 0,
       "brier": 0.6914369645263023,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400440|bo3|bMinus1_5",
@@ -205,7 +205,7 @@
       "outcome": 1,
       "brier": 0.6914369645263023,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400440|bo3|a20",
@@ -218,7 +218,7 @@
       "outcome": 0,
       "brier": 0.11716385769164875,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400440|bo3|a21",
@@ -231,7 +231,7 @@
       "outcome": 0,
       "brier": 0.08279931368233323,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400440|bo3|b20",
@@ -244,7 +244,7 @@
       "outcome": 1,
       "brier": 0.6914369645263023,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400440|bo3|b21",
@@ -257,7 +257,7 @@
       "outcome": 0,
       "brier": 0.040596658043725004,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400440|bo3|over2_5",
@@ -270,7 +270,7 @@
       "outcome": 0,
       "brier": 0.23935071158289722,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400440|bo3|under2_5",
@@ -283,7 +283,7 @@
       "outcome": 1,
       "brier": 0.23935071158289714,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400523|bo3|aWin",
@@ -296,7 +296,7 @@
       "outcome": 0,
       "brier": 0.17195889022382224,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400523|bo3|bWin",
@@ -309,7 +309,7 @@
       "outcome": 1,
       "brier": 0.17195889022382232,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400523|bo3|aMinus1_5",
@@ -322,7 +322,7 @@
       "outcome": 0,
       "brier": 0.03725022343367314,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400523|bo3|bPlus1_5",
@@ -335,7 +335,7 @@
       "outcome": 1,
       "brier": 0.03725022343367313,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400523|bo3|a20",
@@ -348,7 +348,7 @@
       "outcome": 0,
       "brier": 0.03725022343367314,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400523|bo3|a21",
@@ -361,7 +361,7 @@
       "outcome": 0,
       "brier": 0.049140289931651135,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400523|bo3|b20",
@@ -374,7 +374,7 @@
       "outcome": 0,
       "brier": 0.09388145367862992,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400523|bo3|b21",
@@ -387,7 +387,7 @@
       "outcome": 1,
       "brier": 0.519956463715237,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400523|bo3|over2_5",
@@ -400,7 +400,7 @@
       "outcome": 1,
       "brier": 0.24940433034722467,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400523|bo3|under2_5",
@@ -413,7 +413,7 @@
       "outcome": 0,
       "brier": 0.24940433034722456,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400441|bo3|aWin",
@@ -426,7 +426,7 @@
       "outcome": 0,
       "brier": 0.4195346321454349,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400441|bo3|bWin",
@@ -439,7 +439,7 @@
       "outcome": 1,
       "brier": 0.4195346321454349,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400441|bo3|aPlus1_5",
@@ -452,7 +452,7 @@
       "outcome": 1,
       "brier": 0.024240310355437406,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400441|bo3|bMinus1_5",
@@ -465,7 +465,7 @@
       "outcome": 0,
       "brier": 0.024240310355437396,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400441|bo3|a20",
@@ -478,7 +478,7 @@
       "outcome": 0,
       "brier": 0.12197230172548616,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400441|bo3|a21",
@@ -491,7 +491,7 @@
       "outcome": 0,
       "brier": 0.08908410183728536,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400441|bo3|b20",
@@ -504,7 +504,7 @@
       "outcome": 0,
       "brier": 0.024240310355437396,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400441|bo3|b21",
@@ -517,7 +517,7 @@
       "outcome": 1,
       "brier": 0.6454643045213776,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400441|bo3|over2_5",
@@ -530,7 +530,7 @@
       "outcome": 1,
       "brier": 0.2549627191814288,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400441|bo3|under2_5",
@@ -543,7 +543,7 @@
       "outcome": 0,
       "brier": 0.2549627191814287,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400524|bo3|aWin",
@@ -556,7 +556,7 @@
       "outcome": 0,
       "brier": 0.3977527345925465,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400524|bo3|bWin",
@@ -569,7 +569,7 @@
       "outcome": 1,
       "brier": 0.39775273459254695,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400524|bo3|aMinus1_5",
@@ -582,7 +582,7 @@
       "outcome": 0,
       "brier": 0.11422809138476248,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400524|bo3|bPlus1_5",
@@ -595,7 +595,7 @@
       "outcome": 1,
       "brier": 0.1142280913847625,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400524|bo3|a20",
@@ -608,7 +608,7 @@
       "outcome": 0,
       "brier": 0.11422809138476248,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400524|bo3|a21",
@@ -621,7 +621,7 @@
       "outcome": 0,
       "brier": 0.08567325759233847,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400524|bo3|b20",
@@ -634,7 +634,7 @@
       "outcome": 0,
       "brier": 0.02751960837745728,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400524|bo3|b21",
@@ -647,7 +647,7 @@
       "outcome": 1,
       "brier": 0.6345186044615738,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400524|bo3|over2_5",
@@ -660,7 +660,7 @@
       "outcome": 1,
       "brier": 0.25388176845881316,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400524|bo3|under2_5",
@@ -673,7 +673,7 @@
       "outcome": 0,
       "brier": 0.25388176845881283,
       "finalScore": "1–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400442|bo3|aWin",
@@ -686,7 +686,7 @@
       "outcome": 0,
       "brier": 0.14380583610196115,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400442|bo3|bWin",
@@ -699,7 +699,7 @@
       "outcome": 1,
       "brier": 0.14380583610196138,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400442|bo3|aMinus1_5",
@@ -712,7 +712,7 @@
       "outcome": 0,
       "brier": 0.030410801473725064,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400442|bo3|bPlus1_5",
@@ -725,7 +725,7 @@
       "outcome": 1,
       "brier": 0.030410801473725053,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400442|bo3|a20",
@@ -738,7 +738,7 @@
       "outcome": 0,
       "brier": 0.030410801473725064,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400442|bo3|a21",
@@ -751,7 +751,7 @@
       "outcome": 0,
       "brier": 0.04195552110588191,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400442|bo3|b20",
@@ -764,7 +764,7 @@
       "outcome": 1,
       "brier": 0.44101753798217874,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400442|bo3|b21",
@@ -777,7 +777,7 @@
       "outcome": 0,
       "brier": 0.08115326067594628,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400442|bo3|over2_5",
@@ -790,7 +790,7 @@
       "outcome": 0,
       "brier": 0.23981057853064955,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400442|bo3|under2_5",
@@ -803,7 +803,7 @@
       "outcome": 1,
       "brier": 0.23981057853064974,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400443|bo3|aWin",
@@ -816,7 +816,7 @@
       "outcome": 0,
       "brier": 0.35165765145800165,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400443|bo3|bWin",
@@ -829,7 +829,7 @@
       "outcome": 1,
       "brier": 0.35165765145800126,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400443|bo3|aMinus1_5",
@@ -842,7 +842,7 @@
       "outcome": 0,
       "brier": 0.098152447642165,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400443|bo3|bPlus1_5",
@@ -855,7 +855,7 @@
       "outcome": 1,
       "brier": 0.098152447642165,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400443|bo3|a20",
@@ -868,7 +868,7 @@
       "outcome": 0,
       "brier": 0.098152447642165,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400443|bo3|a21",
@@ -881,7 +881,7 @@
       "outcome": 0,
       "brier": 0.07824013679051915,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400443|bo3|b20",
@@ -894,7 +894,7 @@
       "outcome": 1,
       "brier": 0.6560853385612813,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400443|bo3|b21",
@@ -907,7 +907,7 @@
       "outcome": 0,
       "brier": 0.04708190656791712,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400443|bo3|over2_5",
@@ -920,7 +920,7 @@
       "outcome": 0,
       "brier": 0.2467089423258665,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     },
     {
       "id": "cs2-match-2400443|bo3|under2_5",
@@ -933,7 +933,7 @@
       "outcome": 1,
       "brier": 0.2467089423258662,
       "finalScore": "0–2",
-      "verifiedAt": "2026-11-21T15:16:37.328Z"
+      "verifiedAt": "2026-11-22T15:13:39.579Z"
     }
   ]
 }

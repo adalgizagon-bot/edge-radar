@@ -1,7 +1,7 @@
 {
   "source": "Cito CS2 rankings",
-  "rankingDate": "2026-11-17T00:00:00.000Z",
-  "fetchedAt": "2026-11-18T01:12:40.903Z",
+  "rankingDate": "2026-11-22T00:00:00.000Z",
+  "fetchedAt": "2026-11-22T15:13:39.579Z",
   "ranks": [
     {
       "id": "cs2-team-8297",
@@ -704,5 +704,5 @@
       "region": "Europe"
     }
   ],
-  "note": "Ranking da data da consulta; não indica posição histórica exata na data dos confrontos."
+  "note": "Ranking atual, não posição histórica em cada jogo."
 }
