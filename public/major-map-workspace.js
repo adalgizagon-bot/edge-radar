@@ -140,7 +140,7 @@
   if(left&&right){draw(game,container,left,right,onMapProjection);return}
   container.textContent='';container.append(mk('p','atlas-map-placeholder','Carregando mapas e estatísticas individuais da Cito…'));
   Promise.all([getTeam(game.teamA.id),getTeam(game.teamB.id)]).then(([a,b])=>{
-   if(container.isConnected&&container.dataset.matchId===game.id)draw(game,container,a,b);
+   if(container.isConnected&&container.dataset.matchId===game.id)draw(game,container,a,b,onMapProjection);
   }).catch(error=>{
    if(!container.isConnected||container.dataset.matchId!==game.id)return;
    container.textContent='';container.append(mk('p','atlas-map-alert','Dados por mapa indisponíveis: '+error.message+'. Não será exibida uma projeção inventada.'));
