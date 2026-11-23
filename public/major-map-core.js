@@ -13,6 +13,43 @@
   }
   return[...map.values()].sort((a,b)=>a.localeCompare(b,'pt-BR'));
  };
+ const logistic=x=>1/(1+Math.exp(-x));
+ const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+ const logit=x=>Math.log(clamp(x,.000001,.999999)/(1-clamp(x,.000001,.999999)));
+ /* Selected-map formula matches the previously frozen Major BO1 map scenarios.
+    It is exploratory, not calibrated and never borrows bookmaker odds. */
+ const projectMap=(game,teamA,teamB,map)=>{
+  if(!game||game.bestOf!==1||!map)return null;
+  const a=getTeamMap(teamA,map),b=getTeamMap(teamB,map);
+  const sample={map,playedA:a?.played??0,playedB:b?.played??0,
+   rawWinA:a&&good(a.played)&&a.played>0&&good(a.wins)?a.wins/a.played:null,
+   rawWinB:b&&good(b.played)&&b.played>0&&good(b.wins)?b.wins/b.played:null};
+  if(!a||!b||a.inPool===false||b.inPool===false||
+     !good(a.played)||!good(b.played)||!good(a.wins)||!good(b.wins)||
+     a.played<5||b.played<5)
+   return{...sample,status:'insufficient_data',probabilityA:null,probabilityB:null,
+    reason:'Mínimo de 5 mapas por equipe neste mapa, nos últimos 90 dias.'};
+  const rankA=game.form?.a?.rank,rankB=game.form?.b?.rank;
+  if(!good(rankA)||rankA<=0||!good(rankB)||rankB<=0)
+   return{...sample,status:'insufficient_data',probabilityA:null,probabilityB:null,
+    reason:'Ranking do evento indisponível; vitórias brutas não bastam para estimar.'};
+  const rankPrior=logistic(clamp(.45*Math.log(rankB/rankA),-1,1));
+  const aSmooth=(a.wins+6)/(a.played+12),bSmooth=(b.wins+6)/(b.played+12);
+  const probabilityA=logistic(.60*logit(rankPrior)+.40*(logit(aSmooth)-logit(bSmooth)));
+  return{...sample,status:'estimated',probabilityA,probabilityB:1-probabilityA,
+   rankA,rankB,source:'Cito: últimos 90 dias do mapa + ranking do evento',
+   version:'Major BO1 mapa selecionado - heurística experimental v1',
+   opponentAdjusted:false,rosterAdjusted:false,calibrated:false,
+   reason:'Estimativa exploratória; não ajusta integralmente força dos adversários nem elenco.'};
+ };
+ /* View only. Frozen pre-veto predictions and photographed odds remain unchanged. */
+ const withSelectedMap=(game,map,projection)=>{
+  if(!game?.major)return game;
+  const valid=Boolean(map&&projection?.status==='estimated'&&good(projection.probabilityA));
+  return{...game,selectedMap:map||null,mapProjection:projection||null,
+   markets:(game.markets||[]).map(m=>m.family!=='winner'?m:
+    {...m,v2P:valid?(m.key==='aWin'?projection.probabilityA:m.key==='bWin'?projection.probabilityB:null):null})};
+ };
  const filterRows=(player,map,days,at)=>{
   const end=Date.parse(at);
   if(!Number.isFinite(end)||![90,180].includes(days))return[];
@@ -46,7 +83,7 @@
    gap:n>=12&&!sourceTruncated?observedRate-implied:null,
    sufficient:n>=12&&!sourceTruncated};
  };
- const api={norm,round,getMaps,getTeamMap,filterRows,summarize,comparePrice};
+ const api={norm,round,getMaps,getTeamMap,projectMap,withSelectedMap,filterRows,summarize,comparePrice};
  root.AtlasMajorMaps=api;
  if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

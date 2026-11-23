@@ -6,6 +6,12 @@ Painel estatístico de pesquisa para **Counter-Strike 2**, publicado em https://
 
 As odds de vencedor BO1 foram capturadas manualmente de um print da BR365 às aproximadamente 16h07 BRT para sete dos oito confrontos de abertura. Liquid × BC.Game permanece sem preços porque não aparece na imagem. A fonte `public/data/major-br365-odds.json` é auditável; o `scripts/radar-feed.mjs` conserva a identificação de captura, coloca apenas mercados de vencedor BO1, normaliza as probabilidades implícitas com a margem da casa e não altera as previsões pré-veto congeladas. Quatro confrontos têm estudo experimental, outros quatro têm amostragem insuficiente; ver uma odd não autoriza fabricar previsão.
 
+## Porcentagens dinâmicas por mapa (23/11/2026)
+
+Ao selecionar um mapa de BO1, o mesmo cálculo alimenta **as duas porcentagens do topo** e a coluna **Estimativa** do mercado de vencedor, inclusive a divergência em p.p. contra as odds fotografadas. Antes de escolher o mapa, essas probabilidades ficam em branco (—); não se mostra mais a média pré-veto no lugar do número específico do mapa. A troca entre dois mapas recalcula ambos os lados, com soma de 100%, **sem alterar os arquivos históricos de previsões congeladas**.
+
+A fórmula por mapa reproduz a heurística registrada em `scripts/major-bo1.mjs` (60% no logit do prior de ranking, 40% no logit da diferença de vitórias suavizadas por mapa). Exige **pelo menos 5 mapas dos últimos 90 dias por equipe** e ranking registrado no evento; caso contrário, mostra amostra insuficiente em vez de porcentagem fabricada. Nenhuma estimativa é calibrada por força do adversário ou pela escalação e, portanto, **não representa uma vantagem real comprovada ou retorno esperado positivo**.
+
 ## Radar BO1 por mapa e kills (23/11/2026)
 
 A página principal preserva o **mesmo fluxo**: radar de partidas → selecionar jogo → selecionar manualmente o mapa depois do veto → equipe × equipe no mapa → 10 jogadores e kills → mercado de vencedor. Nenhum mapa é escolhido automaticamente ou afirmado como veto confirmado. A decisão manual fica no próprio navegador. O mapa escolhido altera os históricos e as análises; **a média genérica pré-veto não é exibida como se fosse projeção do mapa**.

@@ -102,13 +102,20 @@
   }
   renderDetail(items.find(g=>g.id===state.activeId));
  }
- function teamBox(team,modelProb,win,major=false){
+ function teamBox(team,modelProb,win,major=false,selectedMap=null){
   const box=el('div','compare-team');
   box.append(el('strong','',team.name));
-  box.append(el('span','price',win?.odd?C.round2(win.odd):'—'));
-  box.append(el('small','',Number.isFinite(modelProb)?
-    'Modelo experimental: '+C.formatPercent(modelProb):
-    major?'Veja a comparação por mapa abaixo':'Sem projeção V2 disponível'));
+  if(major){
+   box.append(el('span','price',C.formatPercent(modelProb)));
+   box.append(el('small','',!selectedMap?'Selecione o mapa para estimar':
+    Number.isFinite(modelProb)?'Estimativa em '+selectedMap+' · não calibrada':
+    'Amostra insuficiente em '+selectedMap));
+   box.append(el('small','',Number.isFinite(win?.odd)?'Odd do print: '+C.round2(win.odd):'Sem odd de vencedor'));
+  }else{
+   box.append(el('span','price',win?.odd?C.round2(win.odd):'—'));
+   box.append(el('small','',Number.isFinite(modelProb)?
+    'Modelo experimental: '+C.formatPercent(modelProb):'Sem projeção V2 disponível'));
+  }
   return box;
  }
  function addSelection(matchId,key){
@@ -123,8 +130,9 @@
  }
  function marketSection(game){
   const fragment=document.createDocumentFragment();
+  const chosenMap=game.major?game.selectedMap:null;
   const head=el('div','subsection-top');
-  const heading=el('div','');heading.append(el('h3','',game.bestOf===1?'Vencedor do mapa BO1':'Mercados da série'),el('p','',game.bestOf===1?'Uma partida, um mapa; veto ainda não confirmado.':'Uma análise de cada vez. Odds registradas, nunca ao vivo.'));
+  const heading=el('div','');heading.append(el('h3','',game.bestOf===1?'Vencedor do mapa '+(chosenMap||'BO1'):'Mercados da série'),el('p','',game.bestOf===1?(chosenMap?'Estimativa específica de '+chosenMap+'. Confirme que é o mapa realmente escolhido.':'Selecione o mapa acima para calcular a probabilidade de cada equipe.'):'Uma análise de cada vez. Odds registradas, nunca ao vivo.'));
   head.append(heading,el('span','snapshot-note',game.quotes?'Print: '+hours(game.quotes.capturedAt):'Aguardando odds'));
   fragment.append(head);
   const families=[...new Set((game.markets||[]).map(x=>x.family))];
@@ -145,7 +153,7 @@
   }
   const outer=el('div','hscroll'),table=el('table','market-table');
   const thead=el('thead',''),tr=el('tr','');
-  for(const label of ['Seleção','Odd','Mercado*','Modelo','Dif.','Estudo'])tr.append(el('th','',label));
+  for(const label of ['Seleção','Odd','Mercado*',game.major?'Estimativa':'Modelo','Dif.','Estudo'])tr.append(el('th','',label));
   thead.append(tr);table.append(thead);
   const tbody=el('tbody','');
   for(const m of visible){
@@ -165,7 +173,10 @@
   }
   table.append(tbody);outer.append(table);fragment.append(outer);
   fragment.append(el('p','below-table',game.bestOf===1?
-    'BO1: probabilidade pré-veto exploratória baseada em ranking e amostras de mapas. Sem odds da casa, não existe comparação de preço nem oportunidade demonstrada.':
+    (!chosenMap?'Selecione o mapa para ver a estimativa específica. A projeção média pré-veto foi desativada nesta tabela.':
+     game.mapProjection?.status==='estimated'?
+      'Estimativa de '+chosenMap+' usando ranking do evento e amostras específicas desse mapa (90 dias). Não calibrada, sem ajuste completo por adversários ou escalações. A diferença para o mercado não comprova vantagem.':
+      'Sem projeção para '+chosenMap+': '+(game.mapProjection?.reason||'histórico insuficiente')+' Odds fotografadas não são atuais.'):
     '*Mercado sem margem é uma normalização das odds do print. Dif. = V2 − mercado, em pontos percentuais. Não indica vantagem comprovada: a V2 ainda não foi calibrada.'));
   return fragment;
  }
@@ -189,24 +200,15 @@
    columns.append(box);
   }
   body.append(columns,el('p','context-warning','Ranking atual não é ranking histórico de cada confronto. A Cito disponibiliza fotografias do histórico; escalações e vetos podem mudar. Modelos V1 e V2 são experimentais.'));
-  if(game.major&&game.model?.mapScenarios?.length){
-   const scenarios=el('div','major-map-scenarios');
-   scenarios.append(el('b','','Cenários por mapa — NÃO são vetos confirmados'));
-   const each=el('div','major-scenarios-list');
-   for(const row of game.model.mapScenarios){
-    const line=el('div','major-scenario');
-    line.append(el('span','',row.map+' · '+row.playedA+' / '+row.playedB+' jogos'),
-      el('b','',C.formatPercent(row.projectionA)+' '+game.teamA.name));
-    each.append(line);
-   }
-   scenarios.append(each);
-   const v=game.model.vetoSensitivity;
-   if(v)scenarios.append(el('small','',
-     'Faixa entre cenários: '+C.formatPercent(v.minA)+' a '+C.formatPercent(v.maxA)+
-     ' para '+game.teamA.name+'. Isto NÃO é um intervalo de confiança estatístico.'));
-   body.append(scenarios);
-  }else if(game.major)body.append(el('p','context-warning',
-    'Sem amostra suficiente nos dois times para uma projeção BO1. Não mostramos probabilidade baseada apenas no ranking.'));
+  if(game.major){
+   const p=game.mapProjection;
+   const explanation=!game.selectedMap?'Selecione o mapa no radar para comparar as equipes. A projeção geral pré-veto não substitui a específica do mapa.':
+    p?.status==='estimated'?'Mapa '+game.selectedMap+': '+game.teamA.name+' '+C.formatPercent(p.probabilityA)+
+     ' x '+game.teamB.name+' '+C.formatPercent(p.probabilityB)+'. Amostras: '+p.playedA+' e '+p.playedB+
+     ' mapas nos últimos 90 dias. A estimativa combina ranking e resultados no mapa, sem calibração ou ajuste completo de adversários.':
+    'Mapa '+game.selectedMap+': '+(p?.reason||'dados insuficientes para estimar a vitória.');
+   body.append(el('p','context-warning',explanation));
+  }
   details.append(body);
   if(game.pricingConsistency?.some(x=>x.relativeDifferencePercent>=5)){
    const note=el('p','context-warning','Há preços distintos para resultados aparentemente equivalentes de 2–0 e handicap −1,5. É necessário conferir as regras da casa, pois isso não comprova arbitragem.');
@@ -231,17 +233,38 @@
   const header=el('div','detail-head'),meta=el('div','detail-super');
   meta.append(el('span','strong',game.event),el('span','',hours(game.startTime)+' · Brasília'));
   header.append(meta,el('h2','detail-title',game.teamA.name+' × '+game.teamB.name));
-  header.append(el('p','detail-caption',game.major?
-    C.hasOdds(game)?'PGL Major · BO1 · odds do print de 23/11, não ao vivo. Selecione o mapa abaixo para analisar equipes, rounds e kills dos jogadores.':'PGL Major · BO1 · sem odd de vencedor cadastrada. Selecione o mapa para analisar as estatísticas de kills e rounds.':
-    C.hasOdds(game)?'Odds dos prints da BR365, sem verificação ao vivo. Modelo V2 congelado antes do jogo.':
-    'Ainda não há odds capturadas para este confronto. As probabilidades, quando disponíveis, não são cotações.'));
-  const winner=C.winnerMarket(game),left=winner.find(m=>m.key==='aWin'),right=winner.find(m=>m.key==='bWin');
-  const compare=el('div','detail-compare');
-  compare.append(teamBox(game.teamA,game.major?null:game.model?.v2??null,left,!!game.major),teamBox(game.teamB,game.major?null:Number.isFinite(game.model?.v2)?1-game.model.v2:null,right,!!game.major));
-  header.append(compare);panel.append(header);
-  if(game.major&&window.AtlasMapWorkspace){const mapArea=el('div','atlas-map-workspace');panel.append(mapArea);window.AtlasMapWorkspace.render(game,mapArea);}
-  const body=el('div','detail-body');body.append(marketSection(game),contextSection(game));
-  panel.append(body);
+  const caption=el('p','detail-caption');
+  header.append(caption);
+  const left=C.winnerMarket(game).find(m=>m.key==='aWin'),right=C.winnerMarket(game).find(m=>m.key==='bWin');
+  const compare=el('div','detail-compare');header.append(compare);panel.append(header);
+  const mapArea=game.major?el('div','atlas-map-workspace'):null;
+  if(mapArea)panel.append(mapArea);
+  const body=el('div','detail-body'),marketHost=el('div',''),contextHost=el('div','');
+  body.append(marketHost,contextHost);panel.append(body);
+  const updateMap=(map,projection)=>{
+   if(!panel.isConnected)return;
+   const visibleGame=game.major&&window.AtlasMajorMaps?
+    window.AtlasMajorMaps.withSelectedMap(game,map,projection):game;
+   const markets=C.winnerMarket(visibleGame);
+   const pA=markets.find(m=>m.key==='aWin')?.v2P??null;
+   const pB=markets.find(m=>m.key==='bWin')?.v2P??null;
+   compare.replaceChildren(
+    teamBox(game.teamA,pA,left,!!game.major,map),
+    teamBox(game.teamB,pB,right,!!game.major,map));
+   if(game.major){
+    caption.textContent=!map?'Major BO1 · escolha o mapa quando sair o veto. Odds do print de 23/11, não ao vivo.':
+     projection?.status==='estimated'?'Major BO1 · '+map+' selecionado manualmente · comparação específica do mapa, ainda experimental.':
+     'Major BO1 · '+map+' selecionado · dados insuficientes para projetar vencedor. Odds do print não são ao vivo.';
+   }else caption.textContent=C.hasOdds(game)?'Odds dos prints da BR365, sem verificação ao vivo. Modelo V2 congelado antes do jogo.':
+    'Ainda não há odds capturadas para este confronto. As probabilidades, quando disponíveis, não são cotações.';
+   marketHost.replaceChildren(marketSection(visibleGame));
+   contextHost.replaceChildren(contextSection(visibleGame));
+  };
+  updateMap(null,null);
+  if(mapArea){
+   if(window.AtlasMapWorkspace)window.AtlasMapWorkspace.render(game,mapArea,updateMap);
+   else mapArea.append(el('p','atlas-map-alert','Painel por mapa não está disponível neste carregamento.'));
+  }
  }
  function renderStudy(){
   const panel=$('study-body');panel.textContent='';

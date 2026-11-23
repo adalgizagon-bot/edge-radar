@@ -76,25 +76,28 @@
   detail.append(mk('p','atlas-map-hint','Odds inseridas manualmente, só neste navegador. Taxas históricas não são probabilidades calibradas. Kills também dependem da duração do mapa, da escalação e do adversário.'));
   container.append(detail);
  }
- function draw(game,container,left,right){
+ function draw(game,container,left,right,onMapProjection){
   if(!container.isConnected||container.dataset.matchId!==game.id)return;
   container.textContent='';
   container.append(textBlock('Mapa e kills dos jogadores','Selecione o mapa real quando o veto sair. A análise abaixo muda para o mapa escolhido, não usa a média genérica de BO1.'));
   const allMaps=core.getMaps(left,right),chosen=allMaps.includes(mapStore[game.id])?mapStore[game.id]:'';
+  const projection=chosen?core.projectMap(game,left,right,chosen):null;
+  if(typeof onMapProjection==='function')onMapProjection(chosen,projection);
   const controls=mk('div','atlas-map-controls');
   controls.append(labeledSelect('Mapa disputado',[['','Selecione o mapa'],...allMaps.map(m=>[m,m])],chosen,newValue=>{
-   mapStore[game.id]=newValue;write('atlas_major_maps_v2',mapStore);activePlayer=null;draw(game,container,left,right);
+   mapStore[game.id]=newValue;write('atlas_major_maps_v2',mapStore);activePlayer=null;draw(game,container,left,right,onMapProjection);
   }));
   controls.append(mk('div','atlas-map-status','Mapa selecionado manualmente. A Cito ainda não confirmou o veto no snapshot.'));
   container.append(controls);
   if(!chosen){container.append(mk('p','atlas-map-placeholder','Escolha o mapa acima para ver o desempenho das duas equipes e dos 10 jogadores. Nenhum mapa é presumido.'));return}
   const sides=mk('div','atlas-map-teams');appendTeamStat(sides,left,chosen);appendTeamStat(sides,right,chosen);container.append(sides);
-  const scenario=game.model?.mapScenarios?.find(x=>core.norm(x.map)===core.norm(chosen));
-  container.append(mk('p','atlas-map-hint',scenario?'Estimativa experimental para '+chosen+': '+game.teamA.name+' '+fmt(scenario.projectionA)+' · '+game.teamB.name+' '+fmt(scenario.projectionB)+'. NÃO calibrada; sem ajuste completo por adversários.':'Sem projeção confiável de vitória neste mapa. As estatísticas de jogadores continuam disponíveis.'));
+  container.append(mk('p',projection?.status==='estimated'?'atlas-map-hint':'atlas-map-alert',projection?.status==='estimated'?
+   'No '+chosen+': '+game.teamA.name+' '+fmt(projection.probabilityA)+' × '+game.teamB.name+' '+fmt(projection.probabilityB)+'. Projeção experimental com dados do mapa, não calibrada.':
+   (projection?.reason||'Estimativa por mapa indisponível; veja os históricos das equipes abaixo.')));
   const bar=mk('div','atlas-kills-toolbar');
-  bar.append(labeledSelect('Linha de kills',[[12.5,'12,5'],[14.5,'14,5'],[16.5,'16,5'],[18.5,'18,5'],[20.5,'20,5'],[22.5,'22,5'],[24.5,'24,5']],line,x=>{line=Number(x);draw(game,container,left,right)}));
-  bar.append(labeledSelect('Amostragem',[[90,'Últimos 90 dias'],[180,'Últimos 180 dias']],days,x=>{days=Number(x);draw(game,container,left,right)}));
-  bar.append(labeledSelect('Histórico', [['current','Somente time atual'],['all','Todas as equipes']],scope,x=>{scope=x;draw(game,container,left,right)}));
+  bar.append(labeledSelect('Linha de kills',[[12.5,'12,5'],[14.5,'14,5'],[16.5,'16,5'],[18.5,'18,5'],[20.5,'20,5'],[22.5,'22,5'],[24.5,'24,5']],line,x=>{line=Number(x);draw(game,container,left,right,onMapProjection)}));
+  bar.append(labeledSelect('Amostragem',[[90,'Últimos 90 dias'],[180,'Últimos 180 dias']],days,x=>{days=Number(x);draw(game,container,left,right,onMapProjection)}));
+  bar.append(labeledSelect('Histórico', [['current','Somente time atual'],['all','Todas as equipes']],scope,x=>{scope=x;draw(game,container,left,right,onMapProjection)}));
   container.append(bar);
   const players=[...left.players.map(player=>({player,team:left})),...right.players.map(player=>({player,team:right}))].map(row=>({...row,summary:core.summarize(row.player,chosen,days,line,row.team.teamId,game.startTime,scope)}));
   if(!players.length){container.append(mk('p','atlas-map-alert','Nenhum jogador com estatísticas importadas.'));return}
@@ -108,7 +111,7 @@
    const enough=s.n>=5;
    row.append(mk('td','',enough?fmt(s.overRate)+' ('+s.over+'/'+s.n+')':'amostra curta'),mk('td','',enough?fmt(s.underRate)+' ('+s.under+'/'+s.n+')':'amostra curta'));
    const action=mk('td'),button=mk('button','atlas-player-button',activePlayer===item.player.id?'Aberto':'Detalhes');
-   button.type='button';button.addEventListener('click',()=>{activePlayer=item.player.id;draw(game,container,left,right)});
+   button.type='button';button.addEventListener('click',()=>{activePlayer=item.player.id;draw(game,container,left,right,onMapProjection)});
    action.append(button);row.append(action);body.append(row);
   }
   table.append(body);wrapper.append(table);container.append(wrapper);
@@ -130,11 +133,11 @@
   const details=mk('div');renderSelectedPlayer(details,game,chosen,players);container.append(details);
   container.append(mk('p','atlas-map-hint','Taxas acima/abaixo são frequências observadas, não odds justas. O filtro de equipe controla se resultados antigos de outras escalações entram no cálculo.'));
  }
- function render(game,container){
+ function render(game,container,onMapProjection){
   if(!game?.major||!container||!core)return;
   container.dataset.matchId=game.id;
   const left=data.get(game.teamA.id),right=data.get(game.teamB.id);
-  if(left&&right){draw(game,container,left,right);return}
+  if(left&&right){draw(game,container,left,right,onMapProjection);return}
   container.textContent='';container.append(mk('p','atlas-map-placeholder','Carregando mapas e estatísticas individuais da Cito…'));
   Promise.all([getTeam(game.teamA.id),getTeam(game.teamB.id)]).then(([a,b])=>{
    if(container.isConnected&&container.dataset.matchId===game.id)draw(game,container,a,b);
