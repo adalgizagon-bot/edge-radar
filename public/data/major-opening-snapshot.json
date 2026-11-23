@@ -1,0 +1,778 @@
+{
+  "version": "major-opening-2026-11-24-free-quota-v1",
+  "capturedAt": "2026-11-23T18:54:12.966Z",
+  "event": {
+    "id": "cs2-event-9303",
+    "name": "PGL Major Singapore 2026 Stage 1",
+    "format": "Swiss BO1 first round, BO3 in elimination/progression",
+    "location": "Singapore"
+  },
+  "fixtures": [
+    {
+      "id": "cs2-match-2400494",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T04:00:00.000Z",
+      "bestOf": 1,
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-7175",
+        "name": "HEROIC"
+      },
+      "teamB": {
+        "id": "cs2-team-9455",
+        "name": "Imperial"
+      },
+      "stage": "Swiss Round 1",
+      "veto": {
+        "status": "not_verified",
+        "confirmedMap": null
+      },
+      "odds": []
+    },
+    {
+      "id": "cs2-match-2400495",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T04:00:00.000Z",
+      "bestOf": 1,
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-9996",
+        "name": "9z"
+      },
+      "teamB": {
+        "id": "cs2-team-8840",
+        "name": "Lynn Vision"
+      },
+      "stage": "Swiss Round 1",
+      "veto": {
+        "status": "not_verified",
+        "confirmedMap": null
+      },
+      "odds": []
+    },
+    {
+      "id": "cs2-match-2400496",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T05:00:00.000Z",
+      "bestOf": 1,
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas"
+      },
+      "teamB": {
+        "id": "cs2-team-12376",
+        "name": "M80"
+      },
+      "stage": "Swiss Round 1",
+      "veto": {
+        "status": "not_verified",
+        "confirmedMap": null
+      },
+      "odds": []
+    },
+    {
+      "id": "cs2-match-2400497",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T05:00:00.000Z",
+      "bestOf": 1,
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-8474",
+        "name": "100 Thieves"
+      },
+      "teamB": {
+        "id": "cs2-team-12646",
+        "name": "Chinggis Warriors"
+      },
+      "stage": "Swiss Round 1",
+      "veto": {
+        "status": "not_verified",
+        "confirmedMap": null
+      },
+      "odds": []
+    },
+    {
+      "id": "cs2-match-2400498",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T06:00:00.000Z",
+      "bestOf": 1,
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-5973",
+        "name": "Liquid"
+      },
+      "teamB": {
+        "id": "cs2-team-12878",
+        "name": "BC.Game"
+      },
+      "stage": "Swiss Round 1",
+      "veto": {
+        "status": "not_verified",
+        "confirmedMap": null
+      },
+      "odds": []
+    },
+    {
+      "id": "cs2-match-2400499",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T06:00:00.000Z",
+      "bestOf": 1,
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-12467",
+        "name": "PARIVISION"
+      },
+      "teamB": {
+        "id": "cs2-team-13926",
+        "name": "DENDELE"
+      },
+      "stage": "Swiss Round 1",
+      "veto": {
+        "status": "not_verified",
+        "confirmedMap": null
+      },
+      "odds": []
+    },
+    {
+      "id": "cs2-match-2400500",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T07:00:00.000Z",
+      "bestOf": 1,
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-6667",
+        "name": "FaZe"
+      },
+      "teamB": {
+        "id": "cs2-team-12257",
+        "name": "Wildcard"
+      },
+      "stage": "Swiss Round 1",
+      "veto": {
+        "status": "not_verified",
+        "confirmedMap": null
+      },
+      "odds": []
+    },
+    {
+      "id": "cs2-match-2400501",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T07:00:00.000Z",
+      "bestOf": 1,
+      "status": "upcoming",
+      "teamA": {
+        "id": "cs2-team-11251",
+        "name": "Eternal Fire"
+      },
+      "teamB": {
+        "id": "cs2-team-12774",
+        "name": "FlyQuest"
+      },
+      "stage": "Swiss Round 1",
+      "veto": {
+        "status": "not_verified",
+        "confirmedMap": null
+      },
+      "odds": []
+    }
+  ],
+  "teams": [
+    {
+      "id": "cs2-team-7175",
+      "name": "HEROIC",
+      "worldRankAtEvent": 23,
+      "mapStats": {
+        "id": "cs2-team-7175",
+        "name": "HEROIC",
+        "totalMaps": 83,
+        "winPercent": 65.1,
+        "maps": [
+          {
+            "name": "Dust2",
+            "played": 19,
+            "wins": 10,
+            "winPercent": 52.63157894736842,
+            "inPool": true
+          },
+          {
+            "name": "Ancient",
+            "played": 16,
+            "wins": 12,
+            "winPercent": 75,
+            "inPool": true
+          },
+          {
+            "name": "Cache",
+            "played": 14,
+            "wins": 10,
+            "winPercent": 71.42857142857143,
+            "inPool": true
+          },
+          {
+            "name": "Inferno",
+            "played": 14,
+            "wins": 10,
+            "winPercent": 71.42857142857143,
+            "inPool": true
+          },
+          {
+            "name": "Mirage",
+            "played": 11,
+            "wins": 5,
+            "winPercent": 45.45454545454545,
+            "inPool": true
+          },
+          {
+            "name": "Nuke",
+            "played": 9,
+            "wins": 7,
+            "winPercent": 77.77777777777777,
+            "inPool": true
+          }
+        ],
+        "asOf": "2026-11-23T18:50:00Z",
+        "source": "Cito 90d map-stats"
+      },
+      "formCoverage": "90d map history",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-9455",
+      "name": "Imperial",
+      "worldRankAtEvent": 48,
+      "mapStats": {
+        "id": "cs2-team-9455",
+        "name": "Imperial",
+        "totalMaps": 82,
+        "winPercent": 68.3,
+        "maps": [
+          {
+            "name": "Inferno",
+            "played": 17,
+            "wins": 10,
+            "winPercent": 58.8235294117647,
+            "inPool": true
+          },
+          {
+            "name": "Mirage",
+            "played": 16,
+            "wins": 11,
+            "winPercent": 68.75,
+            "inPool": true
+          },
+          {
+            "name": "Cache",
+            "played": 14,
+            "wins": 10,
+            "winPercent": 71.42857142857143,
+            "inPool": true
+          },
+          {
+            "name": "Nuke",
+            "played": 13,
+            "wins": 11,
+            "winPercent": 84.61538461538461,
+            "inPool": true
+          },
+          {
+            "name": "Dust2",
+            "played": 12,
+            "wins": 8,
+            "winPercent": 66.66666666666667,
+            "inPool": true
+          },
+          {
+            "name": "Anubis",
+            "played": 10,
+            "wins": 6,
+            "winPercent": 60,
+            "inPool": true
+          }
+        ],
+        "asOf": "2026-11-23T18:50:00Z",
+        "source": "Cito 90d map-stats"
+      },
+      "formCoverage": "90d map history",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-9996",
+      "name": "9z",
+      "worldRankAtEvent": 21,
+      "mapStats": {
+        "id": "cs2-team-9996",
+        "name": "9z",
+        "totalMaps": 40,
+        "winPercent": 30,
+        "maps": [
+          {
+            "name": "Nuke",
+            "played": 11,
+            "wins": 3,
+            "winPercent": 27.3,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-26T10:55:00.000Z"
+          },
+          {
+            "name": "Mirage",
+            "played": 8,
+            "wins": 3,
+            "winPercent": 37.5,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-02T07:00:00.000Z"
+          },
+          {
+            "name": "Dust2",
+            "played": 7,
+            "wins": 3,
+            "winPercent": 42.9,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-02T07:00:00.000Z"
+          },
+          {
+            "name": "Inferno",
+            "played": 6,
+            "wins": 2,
+            "winPercent": 33.3,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-03T04:35:00.000Z"
+          },
+          {
+            "name": "Cache",
+            "played": 6,
+            "wins": 1,
+            "winPercent": 16.7,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-03T04:35:00.000Z"
+          },
+          {
+            "name": "Ancient",
+            "played": 2,
+            "wins": 0,
+            "winPercent": 0,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-02T07:00:00.000Z"
+          }
+        ],
+        "asOf": "2026-11-23T18:54:12.962Z",
+        "source": "Cito 90d map-stats"
+      },
+      "formCoverage": "90d map history",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-8840",
+      "name": "Lynn Vision",
+      "worldRankAtEvent": 44,
+      "mapStats": {
+        "id": "cs2-team-8840",
+        "name": "Lynn Vision",
+        "totalMaps": 41,
+        "winPercent": 65.9,
+        "maps": [
+          {
+            "name": "Dust2",
+            "played": 13,
+            "wins": 10,
+            "winPercent": 76.9,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-24T06:40:00.000Z"
+          },
+          {
+            "name": "Ancient",
+            "played": 8,
+            "wins": 6,
+            "winPercent": 75,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-20T03:00:00.000Z"
+          },
+          {
+            "name": "Inferno",
+            "played": 7,
+            "wins": 5,
+            "winPercent": 71.4,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-23T03:00:00.000Z"
+          },
+          {
+            "name": "Nuke",
+            "played": 6,
+            "wins": 3,
+            "winPercent": 50,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-24T06:40:00.000Z"
+          },
+          {
+            "name": "Cache",
+            "played": 5,
+            "wins": 3,
+            "winPercent": 60,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-24T06:40:00.000Z"
+          },
+          {
+            "name": "Anubis",
+            "played": 2,
+            "wins": 0,
+            "winPercent": 0,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-14T13:00:00.000Z"
+          }
+        ],
+        "asOf": "2026-11-23T18:54:12.966Z",
+        "source": "Cito 90d map-stats"
+      },
+      "formCoverage": "90d map history",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-4411",
+      "name": "Ninjas in Pyjamas",
+      "worldRankAtEvent": 18,
+      "mapStats": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas",
+        "totalMaps": 77,
+        "winPercent": 58.4,
+        "maps": [
+          {
+            "name": "Cache",
+            "played": 18,
+            "wins": 9,
+            "winPercent": 50,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-19T17:31:23.000Z"
+          },
+          {
+            "name": "Mirage",
+            "played": 15,
+            "wins": 9,
+            "winPercent": 60,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-18T18:50:00.000Z"
+          },
+          {
+            "name": "Ancient",
+            "played": 14,
+            "wins": 9,
+            "winPercent": 64.3,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-19T17:31:23.000Z"
+          },
+          {
+            "name": "Nuke",
+            "played": 11,
+            "wins": 9,
+            "winPercent": 81.8,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-16T08:00:00.000Z"
+          },
+          {
+            "name": "Dust2",
+            "played": 10,
+            "wins": 4,
+            "winPercent": 40,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-17T15:20:00.000Z"
+          },
+          {
+            "name": "Inferno",
+            "played": 9,
+            "wins": 5,
+            "winPercent": 55.6,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-19T17:31:23.000Z"
+          }
+        ],
+        "asOf": "2026-11-23T18:54:12.966Z",
+        "source": "Cito 90d map-stats"
+      },
+      "formCoverage": "90d map history",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-12376",
+      "name": "M80",
+      "worldRankAtEvent": 24,
+      "mapStats": {
+        "id": "cs2-team-12376",
+        "name": "M80",
+        "totalMaps": 50,
+        "winPercent": 50,
+        "maps": [
+          {
+            "name": "Cache",
+            "played": 13,
+            "wins": 8,
+            "winPercent": 61.5,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-07T20:10:32.000Z"
+          },
+          {
+            "name": "Mirage",
+            "played": 10,
+            "wins": 4,
+            "winPercent": 40,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-06T17:00:00.000Z"
+          },
+          {
+            "name": "Dust2",
+            "played": 8,
+            "wins": 4,
+            "winPercent": 50,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-07T20:10:32.000Z"
+          },
+          {
+            "name": "Inferno",
+            "played": 7,
+            "wins": 3,
+            "winPercent": 42.9,
+            "inPool": true,
+            "latestPlayedAt": "2026-09-27T17:00:00.000Z"
+          },
+          {
+            "name": "Anubis",
+            "played": 6,
+            "wins": 3,
+            "winPercent": 50,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-05T14:00:00.000Z"
+          },
+          {
+            "name": "Ancient",
+            "played": 6,
+            "wins": 3,
+            "winPercent": 50,
+            "inPool": true,
+            "latestPlayedAt": "2026-09-26T17:00:00.000Z"
+          }
+        ],
+        "asOf": "2026-11-23T18:54:12.966Z",
+        "source": "Cito 90d map-stats"
+      },
+      "formCoverage": "90d map history",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-8474",
+      "name": "100 Thieves",
+      "worldRankAtEvent": 29,
+      "mapStats": null,
+      "formCoverage": "ranking only",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-12646",
+      "name": "Chinggis Warriors",
+      "worldRankAtEvent": 59,
+      "mapStats": null,
+      "formCoverage": "ranking only",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-5973",
+      "name": "Liquid",
+      "worldRankAtEvent": 16,
+      "mapStats": {
+        "id": "cs2-team-5973",
+        "name": "Liquid",
+        "totalMaps": 64,
+        "winPercent": 54.7,
+        "maps": [
+          {
+            "name": "Mirage",
+            "played": 12,
+            "wins": 9,
+            "winPercent": 75,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-04T07:00:00.000Z"
+          },
+          {
+            "name": "Inferno",
+            "played": 12,
+            "wins": 9,
+            "winPercent": 75,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-03T02:00:00.000Z"
+          },
+          {
+            "name": "Nuke",
+            "played": 11,
+            "wins": 5,
+            "winPercent": 45.5,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-04T07:00:00.000Z"
+          },
+          {
+            "name": "Cache",
+            "played": 10,
+            "wins": 5,
+            "winPercent": 50,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-27T11:00:00.000Z"
+          },
+          {
+            "name": "Anubis",
+            "played": 9,
+            "wins": 5,
+            "winPercent": 55.6,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-04T07:00:00.000Z"
+          },
+          {
+            "name": "Dust2",
+            "played": 6,
+            "wins": 1,
+            "winPercent": 16.7,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-25T08:00:00.000Z"
+          },
+          {
+            "name": "Ancient",
+            "played": 4,
+            "wins": 1,
+            "winPercent": 25,
+            "inPool": true,
+            "latestPlayedAt": "2026-11-03T02:00:00.000Z"
+          }
+        ],
+        "asOf": "2026-11-23T18:54:12.966Z",
+        "source": "Cito 90d map-stats"
+      },
+      "formCoverage": "90d map history",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-12878",
+      "name": "BC.Game",
+      "worldRankAtEvent": 46,
+      "mapStats": {
+        "id": "cs2-team-12878",
+        "name": "BC.Game",
+        "totalMaps": 40,
+        "winPercent": 52.5,
+        "maps": [
+          {
+            "name": "Cache",
+            "played": 9,
+            "wins": 5,
+            "winPercent": 55.6,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-30T21:20:00.000Z"
+          },
+          {
+            "name": "Nuke",
+            "played": 8,
+            "wins": 5,
+            "winPercent": 62.5,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-30T18:15:00.000Z"
+          },
+          {
+            "name": "Dust2",
+            "played": 7,
+            "wins": 6,
+            "winPercent": 85.7,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-22T16:55:00.000Z"
+          },
+          {
+            "name": "Ancient",
+            "played": 7,
+            "wins": 2,
+            "winPercent": 28.6,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-30T18:15:00.000Z"
+          },
+          {
+            "name": "Mirage",
+            "played": 6,
+            "wins": 3,
+            "winPercent": 50,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-30T18:15:00.000Z"
+          },
+          {
+            "name": "Inferno",
+            "played": 3,
+            "wins": 0,
+            "winPercent": 0,
+            "inPool": true,
+            "latestPlayedAt": "2026-10-30T21:20:00.000Z"
+          }
+        ],
+        "asOf": "2026-11-23T18:54:12.966Z",
+        "source": "Cito 90d map-stats"
+      },
+      "formCoverage": "90d map history",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-12467",
+      "name": "PARIVISION",
+      "worldRankAtEvent": 13,
+      "mapStats": null,
+      "formCoverage": "ranking only",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-13926",
+      "name": "DENDELE",
+      "worldRankAtEvent": 33,
+      "mapStats": null,
+      "formCoverage": "ranking only",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-6667",
+      "name": "FaZe",
+      "worldRankAtEvent": 19,
+      "mapStats": null,
+      "formCoverage": "ranking only",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-12257",
+      "name": "Wildcard",
+      "worldRankAtEvent": 42,
+      "mapStats": null,
+      "formCoverage": "ranking only",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-11251",
+      "name": "Eternal Fire",
+      "worldRankAtEvent": 22,
+      "mapStats": null,
+      "formCoverage": "ranking only",
+      "rosterVerified": false
+    },
+    {
+      "id": "cs2-team-12774",
+      "name": "FlyQuest",
+      "worldRankAtEvent": 58,
+      "mapStats": null,
+      "formCoverage": "ranking only",
+      "rosterVerified": false
+    }
+  ],
+  "dataProvenance": "Cito event matches & event standings inspected 2026-11-23; 90d map-stats Cito for eight teams only",
+  "warnings": [
+    "No bookmaker odds captured",
+    "No confirmed map veto",
+    "Rankings at the event are not opponent-adjusted historical strength",
+    "Map samples from different opponents and lineups are not calibrated probabilities",
+    "Remaining Cito free quota reserved for event result updates"
+  ]
+}
