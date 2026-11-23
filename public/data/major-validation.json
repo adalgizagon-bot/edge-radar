@@ -1,10 +1,11 @@
 {
-  "evaluatedAt": null,
+  "evaluatedAt": "2026-11-23T19:11:03.365Z",
+  "modelVersion": "major-bo1-pre-veto-v1-experimental",
   "registered": 8,
   "modeled": 4,
   "resolved": 0,
   "meanBrier": null,
   "correct": 0,
   "records": [],
-  "warning": "No Major BO1 results yet; scores only from forecasts frozen before first kickoff."
+  "warning": "Prospective accuracy only from predictions frozen before kickoff. This does not measure profit or establish market edge."
 }

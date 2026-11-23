@@ -1,12 +1,12 @@
 {
   "version": "atlas-radar-unificado-v1",
-  "generatedAt": "2026-11-23T18:58:55.249Z",
+  "generatedAt": "2026-11-23T19:11:03.365Z",
   "dataStatus": {
     "citoAt": "2026-11-22T15:13:39.579Z",
-    "majorAt": "2026-11-23T18:54:12.966Z",
+    "majorAt": "2026-11-23T19:11:03.365Z",
     "formAt": "2026-11-22T15:13:39.579Z",
     "rankingsAt": "2026-11-22T15:13:39.579Z",
-    "dailySyncAt": "2026-11-22T15:13:39.579Z",
+    "dailySyncAt": "2026-11-23T19:11:03.365Z",
     "oddsType": "prints_manualmente_enviados",
     "automaticOdds": false,
     "dailyCitoUpdatesDependOnGitHubActions": true
@@ -2387,7 +2387,7 @@
       "eventId": "cs2-event-9303",
       "status": "scheduled",
       "bestOf": 1,
-      "stage": "Swiss Round 1",
+      "stage": "Swiss round 1",
       "major": {
         "event": "PGL Major Singapore 2026",
         "format": "BO1",
@@ -2542,7 +2542,7 @@
       "eventId": "cs2-event-9303",
       "status": "scheduled",
       "bestOf": 1,
-      "stage": "Swiss Round 1",
+      "stage": "Swiss round 1",
       "major": {
         "event": "PGL Major Singapore 2026",
         "format": "BO1",
@@ -2686,7 +2686,7 @@
       "eventId": "cs2-event-9303",
       "status": "scheduled",
       "bestOf": 1,
-      "stage": "Swiss Round 1",
+      "stage": "Swiss round 1",
       "major": {
         "event": "PGL Major Singapore 2026",
         "format": "BO1",
@@ -2841,7 +2841,7 @@
       "eventId": "cs2-event-9303",
       "status": "scheduled",
       "bestOf": 1,
-      "stage": "Swiss Round 1",
+      "stage": "Swiss round 1",
       "major": {
         "event": "PGL Major Singapore 2026",
         "format": "BO1",
@@ -2902,7 +2902,7 @@
       "eventId": "cs2-event-9303",
       "status": "scheduled",
       "bestOf": 1,
-      "stage": "Swiss Round 1",
+      "stage": "Swiss round 1",
       "major": {
         "event": "PGL Major Singapore 2026",
         "format": "BO1",
@@ -3046,7 +3046,7 @@
       "eventId": "cs2-event-9303",
       "status": "scheduled",
       "bestOf": 1,
-      "stage": "Swiss Round 1",
+      "stage": "Swiss round 1",
       "major": {
         "event": "PGL Major Singapore 2026",
         "format": "BO1",
@@ -3107,7 +3107,7 @@
       "eventId": "cs2-event-9303",
       "status": "scheduled",
       "bestOf": 1,
-      "stage": "Swiss Round 1",
+      "stage": "Swiss round 1",
       "major": {
         "event": "PGL Major Singapore 2026",
         "format": "BO1",
@@ -3168,7 +3168,7 @@
       "eventId": "cs2-event-9303",
       "status": "scheduled",
       "bestOf": 1,
-      "stage": "Swiss Round 1",
+      "stage": "Swiss round 1",
       "major": {
         "event": "PGL Major Singapore 2026",
         "format": "BO1",
