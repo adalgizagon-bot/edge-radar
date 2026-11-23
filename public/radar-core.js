@@ -36,7 +36,7 @@
  const round2=p=>numeric(p)?p.toLocaleString('pt-BR',{maximumFractionDigits:2,minimumFractionDigits:2}):'—';
  const gapPP=m=>{const x=marketGap(m);return x===null?'—':(x>0?'+':'')+x.toLocaleString('pt-BR',{maximumFractionDigits:1,minimumFractionDigits:1})+' p.p.'};
  const isSourceStale=(feed,now=Date.now(),hours=30)=>{
-  const at=toTime(feed?.dataStatus?.dailySyncAt||feed?.dataStatus?.citoAt);
+  const at=Math.max(...[feed?.dataStatus?.majorAt,feed?.dataStatus?.dailySyncAt,feed?.dataStatus?.citoAt].map(toTime).filter(Number.isFinite),0);
   return !numeric(at)||now-at>hours*3600000;
  };
  const dateOnly=(str)=>new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',year:'numeric'}).format(new Date(str));
