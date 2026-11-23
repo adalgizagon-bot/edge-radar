@@ -175,7 +175,7 @@
   fragment.append(el('p','below-table',game.bestOf===1?
     (!chosenMap?'Selecione o mapa para ver a estimativa específica. A projeção média pré-veto foi desativada nesta tabela.':
      game.mapProjection?.status==='estimated'?
-      'Estimativa de '+chosenMap+' usando ranking do evento e amostras específicas desse mapa (90 dias). Não calibrada, sem ajuste completo por adversários ou escalações. A diferença para o mercado não comprova vantagem.':
+      'Estimativa de '+chosenMap+': '+(game.mapProjection?.modelStatus==='opponent_adjusted'?'corrigida pela dificuldade dos últimos adversários e diferença de rounds.':'sem cobertura suficiente de adversários; usando histórico base.')+' Probabilidades ainda NÃO calibradas. Diferenças para o preço não comprovam vantagem.':
       'Sem projeção para '+chosenMap+': '+(game.mapProjection?.reason||'histórico insuficiente')+' Odds fotografadas não são atuais.'):
     '*Mercado sem margem é uma normalização das odds do print. Dif. = V2 − mercado, em pontos percentuais. Não indica vantagem comprovada: a V2 ainda não foi calibrada.'));
   return fragment;
@@ -315,6 +315,7 @@
  function removeSelection(id){state.selections=state.selections.filter(x=>x.matchId!==id);saveSelections();updateTop();renderStudy()}
  function renderHistory(){
   const root=$('history-body');root.textContent='';
+  if(window.AtlasMajorAuditUI)window.AtlasMajorAuditUI.render(root);
   const games=C.getHistory(state.feed);
   if(!games.length){root.append(el('div','empty-list','Nenhum jogo passado na base ainda.'));return}
   for(const g of games){

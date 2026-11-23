@@ -1,0 +1,39 @@
+name: ATLAS - congelamento pregame Major
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/major-preflight.mjs'
+      - '.github/workflows/atlas-major-pregame.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: atlas-major-preflight
+  cancel-in-progress: false
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: true
+      - name: Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Congelar previsões antes de cada estreia, sem Cito API
+        run: node scripts/major-preflight.mjs
+      - name: Registrar previsões de forma imutável no Git
+        run: |
+          git add public/data/major-preflight-v1.json
+          if git diff --cached --quiet; then
+            echo 'Pré-registro já existe ou não mudou.'
+            exit 0
+          fi
+          git config user.name "atlas-cs2-bot"
+          git config user.email "atlas-cs2-bot@users.noreply.github.com"
+          git commit -m "data: congelar cenários de mapas e kills antes do Major [skip ci]"
+          git push origin HEAD:main

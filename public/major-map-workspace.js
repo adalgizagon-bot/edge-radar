@@ -1,7 +1,7 @@
 'use strict';
 /* Map → teams → player kills. Browser-only analysis; prices entered locally, never submitted. */
 (function(root){
- const core=root.AtlasMajorMaps,C=root.AtlasRadarCore;
+ const core=root.AtlasMajorMaps,C=root.AtlasRadarCore,I=root.AtlasMajorIntel;
  if(!core)return;
  const mk=(tag,cls='',value)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(value!==undefined)n.textContent=String(value);return n};
  const fmt=p=>typeof p==='number'&&Number.isFinite(p)?(100*p).toLocaleString('pt-BR',{maximumFractionDigits:1,minimumFractionDigits:1})+'%':'—';
@@ -10,6 +10,11 @@
  const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
  const mapStore=read('atlas_major_maps_v2'),oddsStore=read('atlas_major_player_prices_v2');
  const data=new Map(),pending=new Map();
+ let rankPromise=null;
+ const getRanks=()=>rankPromise||(rankPromise=fetch('data/major-opponent-rank-history.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('rank history '+r.status);return r.json()}).catch(()=>null));
+ const FREEZE='atlas_major_frozen_v1';
+ const allFrozen=()=>{try{const a=JSON.parse(localStorage.getItem(FREEZE)||'[]');return Array.isArray(a)?a:[]}catch{return[]}};
+ const setFrozen=records=>{try{localStorage.setItem(FREEZE,JSON.stringify(records));return true}catch{return false}};
  let activePlayer=null,days=90,line=16.5,scope='current';
  function getTeam(id){
   if(data.has(id))return Promise.resolve(data.get(id));
@@ -42,7 +47,7 @@
   box.append(mk('small','',Number.isFinite(m.ctWinPercent)?'CT '+val(m.ctWinPercent)+'%  ·  TR '+val(m.tWinPercent)+'%':'Lados CT/TR indisponíveis'));
   container.append(box);
  }
- function linePrice(key,kind,summary,container){
+ function linePrice(key,kind,summary,container,prediction){
   const field=mk('label','atlas-odds-field');
   field.append(mk('span','',kind==='over'?'Odd MAIS kills':'Odd MENOS kills'));
   const input=mk('input','atlas-odds-input');input.type='number';input.min='1.01';input.step='0.01';input.placeholder='Ex.: 1,85';
@@ -53,11 +58,13 @@
    const odd=Number(String(input.value).replace(',','.'));
    if(odd>1&&Number.isFinite(odd))oddsStore[key]=odd;else delete oddsStore[key];
    write('atlas_major_player_prices_v2',oddsStore);
-   const rate=kind==='over'?summary.overRate:summary.underRate;
+   const historical=kind==='over'?summary.overRate:summary.underRate;
+   const modeled=kind==='over'?prediction?.overProbability:prediction?.underProbability;
+   const rate=Number.isFinite(modeled)?modeled:historical;
    const info=core.comparePrice(odd,rate,summary.n,summary.sourceTruncated);
    if(!Number.isFinite(info.implied))note.textContent='Digite uma odd para comparar.';
    else if(!info.sufficient)note.textContent='Breakeven '+fmt(info.implied)+' · amostra insuficiente para comparar.';
-   else note.textContent='Histórico '+fmt(rate)+' · preço exige '+fmt(info.implied)+' · diferença '+(info.gap>=0?'+':'')+val(info.gap*100)+' p.p.';
+   else note.textContent='Modelo experimental '+fmt(rate)+' · histórico '+fmt(historical)+' · preço exige '+fmt(info.implied)+' · diferença exploratória '+(info.gap>=0?'+':'')+val(info.gap*100)+' p.p. (não calibrada).';
   };
   input.addEventListener('change',refresh);
   refresh();field.append(note);container.append(field);
@@ -65,53 +72,70 @@
  function renderSelectedPlayer(container,game,map,rows){
   const chosen=rows.find(x=>x.player.id===activePlayer);
   if(!chosen){container.append(mk('p','atlas-map-hint','Clique em “Detalhes” de um jogador para comparar linhas e odds de kills.'));return}
-  const s=chosen.summary,p=chosen.player;
+  const s=chosen.summary,p=chosen.player,k=chosen.prediction;
   const detail=mk('div','atlas-player-detail');detail.append(textBlock(p.nickname+' · '+chosen.team.teamName,'Mapa '+map+' · últimos '+days+' dias · linha '+line+' kills'));
   detail.append(mk('p','',s.n+' mapas válidos na seleção ('+(scope==='current'?'apenas equipe atual':'todas as equipes')+') · '+s.currentTeamN+' nesta equipe · '+s.priorTeamN+' em equipes anteriores. Média '+val(s.meanKills)+' kills e '+val(s.meanRounds)+' rounds por mapa.'));
+  if(k?.expectedKills!==null&&k?.expectedKills!==undefined)
+   detail.append(mk('p','atlas-kills-forecast','Projeção: '+val(k.expectedKills)+' kills em '+val(k.expectedRounds)+' rounds · MAIS '+line+' '+fmt(k.overProbability)+' · MENOS '+line+' '+fmt(k.underProbability)+'. Modelo exploratório, não calibrado.'));
   if(s.lastFive.length)detail.append(mk('p','atlas-map-hint','Últimos 5 mapas: '+s.lastFive.map(x=>x.kills+' kills ('+x.rounds+' rounds)').join(' · ')));
   if(s.n<5){detail.append(mk('p','atlas-map-alert','Menos de 5 mapas nesta condição. Dados exibidos sem qualquer avaliação de linhas.'));container.append(detail);return}
   const prices=mk('div','atlas-prices-grid'),prefix=game.id+'|'+map+'|'+p.id+'|'+line+'|';
-  linePrice(prefix+'over','over',s,prices);linePrice(prefix+'under','under',s,prices);
+  linePrice(prefix+'over','over',s,prices,k);linePrice(prefix+'under','under',s,prices,k);
   detail.append(prices);
   detail.append(mk('p','atlas-map-hint','Odds inseridas manualmente, só neste navegador. Taxas históricas não são probabilidades calibradas. Kills também dependem da duração do mapa, da escalação e do adversário.'));
   container.append(detail);
  }
- function draw(game,container,left,right,onMapProjection){
+ function draw(game,container,left,right,onMapProjection,rankHistory){
   if(!container.isConnected||container.dataset.matchId!==game.id)return;
   container.textContent='';
   container.append(textBlock('Mapa e kills dos jogadores','Selecione o mapa real quando o veto sair. A análise abaixo muda para o mapa escolhido, não usa a média genérica de BO1.'));
   const allMaps=core.getMaps(left,right),chosen=allMaps.includes(mapStore[game.id])?mapStore[game.id]:'';
-  const projection=chosen?core.projectMap(game,left,right,chosen):null;
+  const projection=chosen?(I?I.winner(game,left,right,chosen,rankHistory):core.projectMap(game,left,right,chosen)):null;
   if(typeof onMapProjection==='function')onMapProjection(chosen,projection);
   const controls=mk('div','atlas-map-controls');
   controls.append(labeledSelect('Mapa disputado',[['','Selecione o mapa'],...allMaps.map(m=>[m,m])],chosen,newValue=>{
-   mapStore[game.id]=newValue;write('atlas_major_maps_v2',mapStore);activePlayer=null;draw(game,container,left,right,onMapProjection);
+   mapStore[game.id]=newValue;write('atlas_major_maps_v2',mapStore);activePlayer=null;draw(game,container,left,right,onMapProjection,rankHistory);
   }));
   controls.append(mk('div','atlas-map-status','Mapa selecionado manualmente. A Cito ainda não confirmou o veto no snapshot.'));
   container.append(controls);
   if(!chosen){container.append(mk('p','atlas-map-placeholder','Escolha o mapa acima para ver o desempenho das duas equipes e dos 10 jogadores. Nenhum mapa é presumido.'));return}
-  const sides=mk('div','atlas-map-teams');appendTeamStat(sides,left,chosen);appendTeamStat(sides,right,chosen);container.append(sides);
+  const sides=mk('div','atlas-map-teams');
+  appendTeamStat(sides,left,chosen);appendTeamStat(sides,right,chosen);
+  container.append(sides);
+  const strength=mk('div','atlas-strength-brief');
+  for(const side of [{p:projection?.strengthA,name:game.teamA.name},{p:projection?.strengthB,name:game.teamB.name}]){
+   const s=side.p;
+   strength.append(mk('span','',side.name+': '+(s?.ranked? s.ranked+' adversários ranqueados / '+s.played+' mapas; posição média '+val(s.averageOpponentRank):'força adversária indisponível')));
+  }
+  if(projection?.modelStatus==='opponent_adjusted')strength.append(mk('b','','Ajuste histórico de adversários aplicado · modelo NÃO calibrado'));
+  else strength.append(mk('b','','Sem cobertura suficiente para ajuste histórico · estimativa base não ajustada'));
+  container.append(strength);
   container.append(mk('p',projection?.status==='estimated'?'atlas-map-hint':'atlas-map-alert',projection?.status==='estimated'?
-   'No '+chosen+': '+game.teamA.name+' '+fmt(projection.probabilityA)+' × '+game.teamB.name+' '+fmt(projection.probabilityB)+'. Projeção experimental com dados do mapa, não calibrada.':
+   'No '+chosen+': '+game.teamA.name+' '+fmt(projection.probabilityA)+' × '+game.teamB.name+' '+fmt(projection.probabilityB)+'. '+(projection.modelStatus==='opponent_adjusted'?'Corrigido pela força histórica dos adversários.':'Modelo base sem ajuste de adversários suficiente.')+' Não calibrado.':
    (projection?.reason||'Estimativa por mapa indisponível; veja os históricos das equipes abaixo.')));
   const bar=mk('div','atlas-kills-toolbar');
-  bar.append(labeledSelect('Linha de kills',[[12.5,'12,5'],[14.5,'14,5'],[16.5,'16,5'],[18.5,'18,5'],[20.5,'20,5'],[22.5,'22,5'],[24.5,'24,5']],line,x=>{line=Number(x);draw(game,container,left,right,onMapProjection)}));
-  bar.append(labeledSelect('Amostragem',[[90,'Últimos 90 dias'],[180,'Últimos 180 dias']],days,x=>{days=Number(x);draw(game,container,left,right,onMapProjection)}));
-  bar.append(labeledSelect('Histórico', [['current','Somente time atual'],['all','Todas as equipes']],scope,x=>{scope=x;draw(game,container,left,right,onMapProjection)}));
+  bar.append(labeledSelect('Linha de kills',[[12.5,'12,5'],[14.5,'14,5'],[16.5,'16,5'],[18.5,'18,5'],[20.5,'20,5'],[22.5,'22,5'],[24.5,'24,5']],line,x=>{line=Number(x);draw(game,container,left,right,onMapProjection,rankHistory)}));
+  bar.append(labeledSelect('Amostragem',[[90,'Últimos 90 dias'],[180,'Últimos 180 dias']],days,x=>{days=Number(x);draw(game,container,left,right,onMapProjection,rankHistory)}));
+  bar.append(labeledSelect('Histórico', [['current','Somente time atual'],['all','Todas as equipes']],scope,x=>{scope=x;draw(game,container,left,right,onMapProjection,rankHistory)}));
   container.append(bar);
-  const players=[...left.players.map(player=>({player,team:left})),...right.players.map(player=>({player,team:right}))].map(row=>({...row,summary:core.summarize(row.player,chosen,days,line,row.team.teamId,game.startTime,scope)}));
+  const players=[...left.players.map(player=>({player,team:left,opponent:right})),...right.players.map(player=>({player,team:right,opponent:left}))].map(row=>({
+   ...row,summary:core.summarize(row.player,chosen,days,line,row.team.teamId,game.startTime,scope),
+   prediction:I?I.playerKills(row.player,row.team,row.opponent,game,chosen,days,line,scope,rankHistory,projection?.rounds):null
+  }));
   if(!players.length){container.append(mk('p','atlas-map-alert','Nenhum jogador com estatísticas importadas.'));return}
   const wrapper=mk('div','hscroll atlas-map-table-wrap'),table=mk('table','atlas-map-table'),head=mk('thead'),tr=mk('tr');
-  for(const str of ['Jogador','Equipe','Mapas','Kills/média','Kills/round','Mais '+line,'Menos '+line,''])tr.append(mk('th','',str));
+  for(const str of ['Jogador','Equipe','Mapas','Média','Kills/round','Proj. kills','Mais '+line+' (modelo)','Hist. mais',''])tr.append(mk('th','',str));
   head.append(tr);table.append(head);const body=mk('tbody');
   for(const item of players){
    const s=item.summary,row=mk('tr',activePlayer===item.player.id?'atlas-player-active':'');
    const nam=mk('td');nam.append(mk('b','',item.player.nickname),mk('small','',s.currentTeamN+' na equipe atual'));row.append(nam);
    row.append(mk('td','',item.team.teamName),mk('td','',s.n+(s.sourceTruncated?'*':'')),mk('td','',val(s.meanKills)),mk('td','',s.killsPerRound===null?'—':String(s.killsPerRound).replace('.',',')));
    const enough=s.n>=5;
-   row.append(mk('td','',enough?fmt(s.overRate)+' ('+s.over+'/'+s.n+')':'amostra curta'),mk('td','',enough?fmt(s.underRate)+' ('+s.under+'/'+s.n+')':'amostra curta'));
+   row.append(mk('td','',item.prediction?.expectedKills===null||item.prediction?.expectedKills===undefined?'—':val(item.prediction.expectedKills)));
+   row.append(mk('td','',Number.isFinite(item.prediction?.overProbability)?fmt(item.prediction.overProbability):'—'));
+   row.append(mk('td','',enough?fmt(s.overRate)+' ('+s.over+'/'+s.n+')':'amostra curta'));
    const action=mk('td'),button=mk('button','atlas-player-button',activePlayer===item.player.id?'Aberto':'Detalhes');
-   button.type='button';button.addEventListener('click',()=>{activePlayer=item.player.id;draw(game,container,left,right,onMapProjection)});
+   button.type='button';button.addEventListener('click',()=>{activePlayer=item.player.id;draw(game,container,left,right,onMapProjection,rankHistory)});
    action.append(button);row.append(action);body.append(row);
   }
   table.append(body);wrapper.append(table);container.append(wrapper);
@@ -130,17 +154,31 @@
    setTimeout(()=>URL.revokeObjectURL(url),500);
   });
   container.append(csvButton);
+  const freezeButton=mk('button','atlas-player-button atlas-freeze-button','Registrar previsão antes do jogo');
+  freezeButton.type='button';
+  const frozenExists=allFrozen().some(x=>x.matchId===game.id);
+  freezeButton.disabled=frozenExists||Date.now()>=Date.parse(game.startTime)||!I||!projection||projection.status!=='estimated';
+  if(frozenExists)freezeButton.textContent='Previsão já registrada (não editável)';
+  freezeButton.addEventListener('click',()=>{
+   if(Date.now()>=Date.parse(game.startTime)||allFrozen().some(x=>x.matchId===game.id))return;
+   const winOdds=(game.markets||[]).filter(x=>x.family==='winner').map(x=>({key:x.key,odd:x.odd,source:x.source||null}));
+   const current=allFrozen(),createdAt=new Date().toISOString();
+   const record=I.makeFrozen(game,chosen,projection,players.map(x=>x.prediction).filter(Boolean),createdAt,
+    {line,scope,days,odds:winOdds});
+   if(!record)return;
+   if(setFrozen([...current,record])){freezeButton.disabled=true;freezeButton.textContent='Previsão registrada no navegador';}
+  });
+  container.append(freezeButton);
+  container.append(mk('p','atlas-map-hint','O registro é imutável nesta interface e fica salvo apenas neste navegador. Exporte o JSON na aba Resultados para backup. Não é uma previsão validada.')); 
   const details=mk('div');renderSelectedPlayer(details,game,chosen,players);container.append(details);
   container.append(mk('p','atlas-map-hint','Taxas acima/abaixo são frequências observadas, não odds justas. O filtro de equipe controla se resultados antigos de outras escalações entram no cálculo.'));
  }
  function render(game,container,onMapProjection){
   if(!game?.major||!container||!core)return;
   container.dataset.matchId=game.id;
-  const left=data.get(game.teamA.id),right=data.get(game.teamB.id);
-  if(left&&right){draw(game,container,left,right,onMapProjection);return}
   container.textContent='';container.append(mk('p','atlas-map-placeholder','Carregando mapas e estatísticas individuais da Cito…'));
-  Promise.all([getTeam(game.teamA.id),getTeam(game.teamB.id)]).then(([a,b])=>{
-   if(container.isConnected&&container.dataset.matchId===game.id)draw(game,container,a,b,onMapProjection);
+  Promise.all([getTeam(game.teamA.id),getTeam(game.teamB.id),getRanks()]).then(([a,b,ranks])=>{
+   if(container.isConnected&&container.dataset.matchId===game.id)draw(game,container,a,b,onMapProjection,ranks);
   }).catch(error=>{
    if(!container.isConnected||container.dataset.matchId!==game.id)return;
    container.textContent='';container.append(mk('p','atlas-map-alert','Dados por mapa indisponíveis: '+error.message+'. Não será exibida uma projeção inventada.'));

@@ -1,5 +1,14 @@
 # ATLAS Esports Lab — CS2
 
+## Inteligência por adversários, kills e validação (23/11/2026)
+
+No fluxo único jogo → mapa, o modelo experimental tenta corrigir a estimativa de vitória com rankings **anteriores a cada partida histórica** (7 fotografias em intervalos de até 14 dias de 24/ago a 16/nov), cobertura dos oponentes, amostra de vitórias no mapa e diferença agregada de rounds. O ajuste só é ativado com pelo menos 5 mapas por lado e aproximadamente 55% de cobertura ranqueada; caso contrário, mantém o antigo modelo de mapa rotulado como **não ajustado**, jamais fingindo conhecer o ranking. Os registros históricos da Cito da conta nova foram armazenados localmente no projeto; a conexão no ChatGPT não atualiza o segredo no GitHub.
+
+O modelo de kills usa **kills/round**, duração média estimada do mapa entre as duas equipes e ajuste leve por dificuldade histórica do adversário (limitado a ±10%); estima uma distribuição binomial negativa com variância das amostras. Exige pelo menos 5 mapas do jogador na seleção. Frequência histórica e estimativa modelada são mostradas separadas, com número de observações. **Não se trata de probabilidade calibrada, odd justa comprovada ou recomendação de investimento/aposta.**
+
+A validação prospectiva oferece registro irreversível **antes do kickoff**, salvo apenas no navegador (exportável via aba Resultados), e um pré-registro único de todos os mapas candidatos antes do Major em `public/data/major-preflight-v1.json`, gerado por workflow sem API key. Depois, apenas o cenário do mapa jogado pode ser avaliado contra `public/data/major-live.json`. A Brier de vencedor e o erro absoluto médio de kills ficam **pendentes** até resultados confirmados; nenhum modelo é reescrito com resultados posteriores. Caso a Cito permaneça bloqueada por cota, a sincronização depende de restaurar credenciais/quota ou alimentar arquivos verificados; **não há validação automática de kills disponível até essa coleta**.
+
+
 Painel estatístico de pesquisa para **Counter-Strike 2**, publicado em https://edge-radar-gamma.vercel.app/ e ligado à Vercel pelo repositório GitHub `adalgizagon-bot/edge-radar`. O projeto antigo de criptomoedas ficou preservado na ramificação `backup/edge-radar-2026-11-17`.
 
 ## Cotações do Major Singapore — 23/11/2026
