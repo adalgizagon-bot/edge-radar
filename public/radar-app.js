@@ -95,7 +95,7 @@
    else prices.append(el('span','','Odds ainda não cadastradas'));
    const note=el('div','card-note');
    note.append(el('i','mini-dot'+(C.hasOdds(g)?'':' missing')),
-    el('span','',g.major?(g.model?'Major BO1 · estudo pré-veto · sem odds':'Major BO1 · amostra insuficiente · sem odds'):C.sourceLabel(g)));
+    el('span','',g.major?(C.hasOdds(g)?(g.model?'Major BO1 · odds do print · pré-veto':'Major BO1 · odds do print · sem projeção'):(g.model?'Major BO1 · estudo pré-veto · sem odds':'Major BO1 · amostra insuficiente · sem odds')):C.sourceLabel(g)));
    card.append(prices,note);
    card.addEventListener('click',()=>{state.activeId=g.id;state.family='winner';renderList()});
    list.append(card);
@@ -232,7 +232,7 @@
   meta.append(el('span','strong',game.event),el('span','',hours(game.startTime)+' · Brasília'));
   header.append(meta,el('h2','detail-title',game.teamA.name+' × '+game.teamB.name));
   header.append(el('p','detail-caption',game.major?
-    'PGL Major · BO1 · veto não confirmado · sem odds da casa. Projeções somente quando há histórico suficiente; não são recomendação de aposta.':
+    C.hasOdds(game)?'PGL Major · BO1 · odds do print de 23/11, não ao vivo · veto não confirmado. Modelo experimental; diferenças não demonstram valor financeiro.':'PGL Major · BO1 · veto não confirmado · sem odds cadastradas. Projeções somente quando há histórico suficiente.':
     C.hasOdds(game)?'Odds dos prints da BR365, sem verificação ao vivo. Modelo V2 congelado antes do jogo.':
     'Ainda não há odds capturadas para este confronto. As probabilidades, quando disponíveis, não são cotações.'));
   const winner=C.winnerMarket(game),left=winner.find(m=>m.key==='aWin'),right=winner.find(m=>m.key==='bWin');

@@ -2,6 +2,10 @@
 
 Painel estatístico de pesquisa para **Counter-Strike 2**, publicado em https://edge-radar-gamma.vercel.app/ e ligado à Vercel pelo repositório GitHub `adalgizagon-bot/edge-radar`. O projeto antigo de criptomoedas ficou preservado na ramificação `backup/edge-radar-2026-11-17`.
 
+## Cotações do Major Singapore — 23/11/2026
+
+As odds de vencedor BO1 foram capturadas manualmente de um print da BR365 às aproximadamente 16h07 BRT para sete dos oito confrontos de abertura. Liquid × BC.Game permanece sem preços porque não aparece na imagem. A fonte `public/data/major-br365-odds.json` é auditável; o `scripts/radar-feed.mjs` conserva a identificação de captura, coloca apenas mercados de vencedor BO1, normaliza as probabilidades implícitas com a margem da casa e não altera as previsões pré-veto congeladas. Quatro confrontos têm estudo experimental, outros quatro têm amostragem insuficiente; ver uma odd não autoriza fabricar previsão.
+
 ## Radar Unificado — interface principal (19/11/2026)
 
 O ATLAS agora tem **uma única área de trabalho**, sem uma página nova a cada data:

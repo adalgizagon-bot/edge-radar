@@ -35,19 +35,33 @@ test('study accepts only one quoted selection per match and expires it at kickof
  assert.equal(s.items.length,2);assert.equal(s.removed,1);assert.ok(s.product>1);
  assert.equal(C.studySummary(picks,feed,tMajor).items.length,0);
 });
-test('major BO1 games never receive fictional odds or BO3 handicap markets',()=>{
+test('Major BO1 has seven dated screenshot quotes, not live odds or BO3-only markets',()=>{
  const major=C.getUpcoming(feed,tMajor);
  assert.equal(major.length,8);
- assert.equal(major.filter(g=>g.model?.v2!==undefined&&g.model?.v2!==null).length,4);
- assert.ok(major.every(g=>!C.hasOdds(g)&&!g.quotes));
- assert.ok(major.every(g=>g.markets.every(m=>m.family==='winner'&&m.odd===null)));
- assert.ok(major.every(g=>g.major?.vetoConfirmed===false));
- assert.equal(C.studySummary([{matchId:major[0].id,key:'aWin'}],feed,tMajor).items.length,0);
+ assert.equal(major.filter(g=>Number.isFinite(g.model?.v2)).length,4);
+ assert.equal(major.filter(C.hasOdds).length,7);
+ for(const g of major){
+  assert.ok(g.markets.every(m=>m.family==='winner'));
+  assert.equal(g.major?.vetoConfirmed,false);
+  if(C.hasOdds(g)){
+   assert.equal(g.quotes.live,false);
+   assert.equal(g.markets.length,2);
+   assert.ok(Date.parse(g.quotes.capturedAt)<Date.parse(g.startTime));
+   assert.ok(g.markets.every(m=>Number.isFinite(m.odd)&&Number.isFinite(m.impliedNoVig)));
+   assert.ok(Math.abs(g.markets.reduce((s,m)=>s+m.impliedNoVig,0)-1)<1e-10);
+  }else{
+   assert.equal(g.id,'cs2-match-2400498');
+   assert.ok(g.markets.every(m=>m.odd===null));
+  }
+ }
+ const quoted=major.find(g=>g.id==='cs2-match-2400495');
+ assert.equal(C.studySummary([{matchId:quoted.id,key:'aWin'}],feed,tMajor).items.length,1);
 });
-test('missing team map history means no invented BO1 probability',()=>{
+test('no map history means odds can be shown without inventing a model probability',()=>{
  const noModel=C.getUpcoming(feed,tMajor).filter(g=>!g.model);
  assert.equal(noModel.length,4);
- assert.ok(noModel.every(g=>g.markets.length===0));
+ assert.ok(noModel.every(g=>g.markets.every(m=>m.v2P===null)));
+ assert.ok(noModel.every(g=>g.major?.modelStatus==='insufficient_data'));
 });
 test('old frozen Nov 19 odds and models are preserved unchanged',()=>{
  const records=load('prospective.json').forecasts;
@@ -68,7 +82,7 @@ test('radar feed reconstructs from dated sources without modifying frozen foreca
  previousQuotes:load('br365-series-odds.json'),seriesFrozen:load('series-forecasts.json'),
  forms:load('team-opponents.json'),ranks:load('team-rankings.json'),sync:load('sync-state.json'),
  majorOpening:load('major-opening-snapshot.json'),majorAnalysis:load('major-opening-analysis.json'),
- majorLive:load('major-live.json'),nowIso:'2026-11-23T19:00:00Z'};
+ majorLive:load('major-live.json'),majorQuotes:load('major-br365-odds.json'),nowIso:'2026-11-23T19:00:00Z'};
  const generated=buildRadarFeed(params);
  assert.deepEqual(generated.games,feed.games);
  assert.equal(generated.games.filter(x=>x.major).length,8);

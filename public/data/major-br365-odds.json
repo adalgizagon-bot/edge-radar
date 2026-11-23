@@ -1,0 +1,69 @@
+{
+  "version": "major-br365-user-screenshot-2026-11-23",
+  "capturedAt": "2026-11-23T19:07:00.000Z",
+  "source": "captura manual do usuário - BR365 (não ao vivo)",
+  "eventId": "cs2-event-9303",
+  "betType": "BO1 match winner",
+  "matches": [
+    {
+      "matchId": "cs2-match-2400495",
+      "teamA": "9z",
+      "teamB": "Lynn Vision",
+      "oddA": 1.57,
+      "oddB": 2.35,
+      "capturedAt": "2026-11-23T19:07:00.000Z"
+    },
+    {
+      "matchId": "cs2-match-2400494",
+      "teamA": "HEROIC",
+      "teamB": "Imperial",
+      "oddA": 1.43,
+      "oddB": 2.75,
+      "capturedAt": "2026-11-23T19:07:00.000Z"
+    },
+    {
+      "matchId": "cs2-match-2400496",
+      "teamA": "Ninjas in Pyjamas",
+      "teamB": "M80",
+      "oddA": 1.6,
+      "oddB": 2.25,
+      "capturedAt": "2026-11-23T19:07:00.000Z"
+    },
+    {
+      "matchId": "cs2-match-2400497",
+      "teamA": "100 Thieves",
+      "teamB": "Chinggis Warriors",
+      "oddA": 1.12,
+      "oddB": 5.5,
+      "capturedAt": "2026-11-23T19:07:00.000Z"
+    },
+    {
+      "matchId": "cs2-match-2400499",
+      "teamA": "PARIVISION",
+      "teamB": "DENDELE",
+      "oddA": 1.55,
+      "oddB": 2.4,
+      "capturedAt": "2026-11-23T19:07:00.000Z"
+    },
+    {
+      "matchId": "cs2-match-2400500",
+      "teamA": "FaZe",
+      "teamB": "Wildcard",
+      "oddA": 1.45,
+      "oddB": 2.6,
+      "capturedAt": "2026-11-23T19:07:00.000Z"
+    },
+    {
+      "matchId": "cs2-match-2400501",
+      "teamA": "Eternal Fire",
+      "teamB": "FlyQuest",
+      "oddA": 1.62,
+      "oddB": 2.2,
+      "capturedAt": "2026-11-23T19:07:00.000Z"
+    }
+  ],
+  "missingOdds": [
+    "cs2-match-2400498"
+  ],
+  "warning": "Preços visíveis na imagem de 23/11/2026 16:07 BRT. Não há captura contínua, nem confirmação posterior de validade. Não inferir vantagem financeira."
+}

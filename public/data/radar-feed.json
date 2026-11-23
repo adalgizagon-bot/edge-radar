@@ -9,7 +9,8 @@
     "dailySyncAt": "2026-11-23T19:11:03.365Z",
     "oddsType": "prints_manualmente_enviados",
     "automaticOdds": false,
-    "dailyCitoUpdatesDependOnGitHubActions": true
+    "dailyCitoUpdatesDependOnGitHubActions": true,
+    "majorOddsAt": "2026-11-23T19:07:00.000Z"
   },
   "games": [
     {
@@ -2394,7 +2395,7 @@
         "vetoConfirmed": false,
         "modelStatus": "exploratory",
         "limitation": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta.",
-        "noOdds": true
+        "noOdds": false
       },
       "teamA": {
         "id": "cs2-team-7175",
@@ -2477,29 +2478,38 @@
         ],
         "mapsEligible": 5
       },
-      "quotes": null,
+      "quotes": {
+        "source": "BR365 / print enviado",
+        "capturedAt": "2026-11-23T19:07:00.000Z",
+        "eventId": "cs2-event-9303",
+        "live": false
+      },
       "markets": [
         {
           "key": "aWin",
           "family": "winner",
           "label": "HEROIC vence o mapa BO1",
-          "odd": null,
-          "impliedNoVig": null,
-          "impliedRaw": null,
+          "odd": 1.43,
+          "impliedNoVig": 0.6578947368421053,
+          "impliedRaw": 0.6993006993006994,
           "v1P": null,
           "v2P": 0.5335027130384907,
-          "status": "unquoted_major_bo1"
+          "marketOverround": 1.062937062937063,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
         },
         {
           "key": "bWin",
           "family": "winner",
           "label": "Imperial vence o mapa BO1",
-          "odd": null,
-          "impliedNoVig": null,
-          "impliedRaw": null,
+          "odd": 2.75,
+          "impliedNoVig": 0.34210526315789475,
+          "impliedRaw": 0.36363636363636365,
           "v1P": null,
           "v2P": 0.46649728696150927,
-          "status": "unquoted_major_bo1"
+          "marketOverround": 1.062937062937063,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
         }
       ],
       "unmodeledRoundHandicaps": [],
@@ -2549,7 +2559,7 @@
         "vetoConfirmed": false,
         "modelStatus": "exploratory",
         "limitation": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta.",
-        "noOdds": true
+        "noOdds": false
       },
       "teamA": {
         "id": "cs2-team-9996",
@@ -2621,29 +2631,38 @@
         ],
         "mapsEligible": 4
       },
-      "quotes": null,
+      "quotes": {
+        "source": "BR365 / print enviado",
+        "capturedAt": "2026-11-23T19:07:00.000Z",
+        "eventId": "cs2-event-9303",
+        "live": false
+      },
       "markets": [
         {
           "key": "aWin",
           "family": "winner",
           "label": "9z vence o mapa BO1",
-          "odd": null,
-          "impliedNoVig": null,
-          "impliedRaw": null,
+          "odd": 1.57,
+          "impliedNoVig": 0.5994897959183673,
+          "impliedRaw": 0.6369426751592356,
           "v1P": null,
           "v2P": 0.49408153351086925,
-          "status": "unquoted_major_bo1"
+          "marketOverround": 1.0624745900528527,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
         },
         {
           "key": "bWin",
           "family": "winner",
           "label": "Lynn Vision vence o mapa BO1",
-          "odd": null,
-          "impliedNoVig": null,
-          "impliedRaw": null,
+          "odd": 2.35,
+          "impliedNoVig": 0.4005102040816326,
+          "impliedRaw": 0.425531914893617,
           "v1P": null,
           "v2P": 0.5059184664891307,
-          "status": "unquoted_major_bo1"
+          "marketOverround": 1.0624745900528527,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
         }
       ],
       "unmodeledRoundHandicaps": [],
@@ -2693,7 +2712,7 @@
         "vetoConfirmed": false,
         "modelStatus": "exploratory",
         "limitation": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta.",
-        "noOdds": true
+        "noOdds": false
       },
       "teamA": {
         "id": "cs2-team-4411",
@@ -2776,29 +2795,38 @@
         ],
         "mapsEligible": 5
       },
-      "quotes": null,
+      "quotes": {
+        "source": "BR365 / print enviado",
+        "capturedAt": "2026-11-23T19:07:00.000Z",
+        "eventId": "cs2-event-9303",
+        "live": false
+      },
       "markets": [
         {
           "key": "aWin",
           "family": "winner",
           "label": "Ninjas in Pyjamas vence o mapa BO1",
-          "odd": null,
-          "impliedNoVig": null,
-          "impliedRaw": null,
+          "odd": 1.6,
+          "impliedNoVig": 0.5844155844155844,
+          "impliedRaw": 0.625,
           "v1P": null,
           "v2P": 0.5291670928127452,
-          "status": "unquoted_major_bo1"
+          "marketOverround": 1.0694444444444444,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
         },
         {
           "key": "bWin",
           "family": "winner",
           "label": "M80 vence o mapa BO1",
-          "odd": null,
-          "impliedNoVig": null,
-          "impliedRaw": null,
+          "odd": 2.25,
+          "impliedNoVig": 0.41558441558441556,
+          "impliedRaw": 0.4444444444444444,
           "v1P": null,
           "v2P": 0.4708329071872548,
-          "status": "unquoted_major_bo1"
+          "marketOverround": 1.0694444444444444,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
         }
       ],
       "unmodeledRoundHandicaps": [],
@@ -2848,7 +2876,7 @@
         "vetoConfirmed": false,
         "modelStatus": "insufficient_data",
         "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
-        "noOdds": true
+        "noOdds": false
       },
       "teamA": {
         "id": "cs2-team-8474",
@@ -2860,8 +2888,40 @@
       },
       "result": null,
       "model": null,
-      "quotes": null,
-      "markets": [],
+      "quotes": {
+        "source": "BR365 / print enviado",
+        "capturedAt": "2026-11-23T19:07:00.000Z",
+        "eventId": "cs2-event-9303",
+        "live": false
+      },
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "100 Thieves vence o mapa BO1",
+          "odd": 1.12,
+          "impliedNoVig": 0.8308157099697885,
+          "impliedRaw": 0.8928571428571428,
+          "v1P": null,
+          "v2P": null,
+          "marketOverround": 1.0746753246753247,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "Chinggis Warriors vence o mapa BO1",
+          "odd": 5.5,
+          "impliedNoVig": 0.1691842900302115,
+          "impliedRaw": 0.18181818181818182,
+          "v1P": null,
+          "v2P": null,
+          "marketOverround": 1.0746753246753247,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        }
+      ],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
       "form": {
@@ -3053,7 +3113,7 @@
         "vetoConfirmed": false,
         "modelStatus": "insufficient_data",
         "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
-        "noOdds": true
+        "noOdds": false
       },
       "teamA": {
         "id": "cs2-team-12467",
@@ -3065,8 +3125,40 @@
       },
       "result": null,
       "model": null,
-      "quotes": null,
-      "markets": [],
+      "quotes": {
+        "source": "BR365 / print enviado",
+        "capturedAt": "2026-11-23T19:07:00.000Z",
+        "eventId": "cs2-event-9303",
+        "live": false
+      },
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "PARIVISION vence o mapa BO1",
+          "odd": 1.55,
+          "impliedNoVig": 0.6075949367088608,
+          "impliedRaw": 0.6451612903225806,
+          "v1P": null,
+          "v2P": null,
+          "marketOverround": 1.0618279569892473,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "DENDELE vence o mapa BO1",
+          "odd": 2.4,
+          "impliedNoVig": 0.3924050632911393,
+          "impliedRaw": 0.4166666666666667,
+          "v1P": null,
+          "v2P": null,
+          "marketOverround": 1.0618279569892473,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        }
+      ],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
       "form": {
@@ -3114,7 +3206,7 @@
         "vetoConfirmed": false,
         "modelStatus": "insufficient_data",
         "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
-        "noOdds": true
+        "noOdds": false
       },
       "teamA": {
         "id": "cs2-team-6667",
@@ -3126,8 +3218,40 @@
       },
       "result": null,
       "model": null,
-      "quotes": null,
-      "markets": [],
+      "quotes": {
+        "source": "BR365 / print enviado",
+        "capturedAt": "2026-11-23T19:07:00.000Z",
+        "eventId": "cs2-event-9303",
+        "live": false
+      },
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "FaZe vence o mapa BO1",
+          "odd": 1.45,
+          "impliedNoVig": 0.6419753086419754,
+          "impliedRaw": 0.6896551724137931,
+          "v1P": null,
+          "v2P": null,
+          "marketOverround": 1.0742705570291777,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "Wildcard vence o mapa BO1",
+          "odd": 2.6,
+          "impliedNoVig": 0.35802469135802467,
+          "impliedRaw": 0.3846153846153846,
+          "v1P": null,
+          "v2P": null,
+          "marketOverround": 1.0742705570291777,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        }
+      ],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
       "form": {
@@ -3175,7 +3299,7 @@
         "vetoConfirmed": false,
         "modelStatus": "insufficient_data",
         "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
-        "noOdds": true
+        "noOdds": false
       },
       "teamA": {
         "id": "cs2-team-11251",
@@ -3187,8 +3311,40 @@
       },
       "result": null,
       "model": null,
-      "quotes": null,
-      "markets": [],
+      "quotes": {
+        "source": "BR365 / print enviado",
+        "capturedAt": "2026-11-23T19:07:00.000Z",
+        "eventId": "cs2-event-9303",
+        "live": false
+      },
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "Eternal Fire vence o mapa BO1",
+          "odd": 1.62,
+          "impliedNoVig": 0.5759162303664922,
+          "impliedRaw": 0.6172839506172839,
+          "v1P": null,
+          "v2P": null,
+          "marketOverround": 1.0718294051627384,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "FlyQuest vence o mapa BO1",
+          "odd": 2.2,
+          "impliedNoVig": 0.42408376963350786,
+          "impliedRaw": 0.45454545454545453,
+          "v1P": null,
+          "v2P": null,
+          "marketOverround": 1.0718294051627384,
+          "source": "br365_screenshot",
+          "status": "research_only_unvalidated"
+        }
+      ],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
       "form": {
