@@ -95,20 +95,20 @@
    else prices.append(el('span','','Odds ainda não cadastradas'));
    const note=el('div','card-note');
    note.append(el('i','mini-dot'+(C.hasOdds(g)?'':' missing')),
-    el('span','',g.major?(C.hasOdds(g)?(g.model?'Major BO1 · odds do print · pré-veto':'Major BO1 · odds do print · sem projeção'):(g.model?'Major BO1 · estudo pré-veto · sem odds':'Major BO1 · amostra insuficiente · sem odds')):C.sourceLabel(g)));
+    el('span','',g.major?(C.hasOdds(g)?'Major BO1 · mapa e kills · odds do print':'Major BO1 · mapa e kills · sem odds'):C.sourceLabel(g)));
    card.append(prices,note);
    card.addEventListener('click',()=>{state.activeId=g.id;state.family='winner';renderList()});
    list.append(card);
   }
   renderDetail(items.find(g=>g.id===state.activeId));
  }
- function teamBox(team,modelProb,win){
+ function teamBox(team,modelProb,win,major=false){
   const box=el('div','compare-team');
   box.append(el('strong','',team.name));
   box.append(el('span','price',win?.odd?C.round2(win.odd):'—'));
   box.append(el('small','',Number.isFinite(modelProb)?
     'Modelo experimental: '+C.formatPercent(modelProb):
-    'Sem projeção V2 disponível'));
+    major?'Veja a comparação por mapa abaixo':'Sem projeção V2 disponível'));
   return box;
  }
  function addSelection(matchId,key){
@@ -232,13 +232,14 @@
   meta.append(el('span','strong',game.event),el('span','',hours(game.startTime)+' · Brasília'));
   header.append(meta,el('h2','detail-title',game.teamA.name+' × '+game.teamB.name));
   header.append(el('p','detail-caption',game.major?
-    C.hasOdds(game)?'PGL Major · BO1 · odds do print de 23/11, não ao vivo · veto não confirmado. Modelo experimental; diferenças não demonstram valor financeiro.':'PGL Major · BO1 · veto não confirmado · sem odds cadastradas. Projeções somente quando há histórico suficiente.':
+    C.hasOdds(game)?'PGL Major · BO1 · odds do print de 23/11, não ao vivo. Selecione o mapa abaixo para analisar equipes, rounds e kills dos jogadores.':'PGL Major · BO1 · sem odd de vencedor cadastrada. Selecione o mapa para analisar as estatísticas de kills e rounds.':
     C.hasOdds(game)?'Odds dos prints da BR365, sem verificação ao vivo. Modelo V2 congelado antes do jogo.':
     'Ainda não há odds capturadas para este confronto. As probabilidades, quando disponíveis, não são cotações.'));
   const winner=C.winnerMarket(game),left=winner.find(m=>m.key==='aWin'),right=winner.find(m=>m.key==='bWin');
   const compare=el('div','detail-compare');
-  compare.append(teamBox(game.teamA,game.model?.v2??null,left),teamBox(game.teamB,Number.isFinite(game.model?.v2)?1-game.model.v2:null,right));
+  compare.append(teamBox(game.teamA,game.major?null:game.model?.v2??null,left,!!game.major),teamBox(game.teamB,game.major?null:Number.isFinite(game.model?.v2)?1-game.model.v2:null,right,!!game.major));
   header.append(compare);panel.append(header);
+  if(game.major&&window.AtlasMapWorkspace){const mapArea=el('div','atlas-map-workspace');panel.append(mapArea);window.AtlasMapWorkspace.render(game,mapArea);}
   const body=el('div','detail-body');body.append(marketSection(game),contextSection(game));
   panel.append(body);
  }

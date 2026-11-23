@@ -1,0 +1,36 @@
+
+/* Selected map workspace; part of the existing Radar detail flow (no extra screen). */
+.atlas-map-workspace{padding:19px 20px 23px;border-bottom:1px solid var(--line);background:rgba(9,20,34,.35)}
+.atlas-workspace-heading{display:grid;gap:4px;margin-bottom:15px}
+.atlas-workspace-heading h3{font-size:16px;color:#ecf9fb;font-weight:800}
+.atlas-workspace-heading p{font-size:12px;color:var(--muted);line-height:1.55}
+.atlas-map-controls,.atlas-kills-toolbar{display:flex;align-items:flex-end;flex-wrap:wrap;gap:13px;margin-bottom:15px}
+.atlas-map-field{display:flex;flex-direction:column;gap:5px;min-width:176px;color:#c7dce4;font-weight:750;font-size:12px}
+.atlas-map-select,.atlas-odds-input{width:100%;height:37px;border:1px solid #456176;background:#101e2e;color:#f1f9fb;border-radius:8px;padding:6px 10px}
+.atlas-map-select:focus-visible,.atlas-odds-input:focus-visible,.atlas-player-button:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.atlas-map-status{font-size:11px;color:#f0ca95;max-width:310px}
+.atlas-map-placeholder,.atlas-map-hint,.atlas-map-alert{font-size:12px;line-height:1.55;margin:11px 0;color:#a8c4d2}
+.atlas-map-alert{color:#f0c4ab}
+.atlas-map-teams{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:13px}
+.atlas-map-stat{display:flex;flex-direction:column;gap:5px;background:#13273a;border:1px solid #38556a;border-radius:11px;padding:13px}
+.atlas-map-stat strong{font-size:14px;color:#e9faf9}
+.atlas-map-stat-large{font-size:15px;color:#94e6d1}
+.atlas-map-stat small{font-size:11px;color:#aac2d1}
+.atlas-map-empty{color:#e2c09b;font-size:11px}
+.atlas-kills-toolbar{padding-top:12px;border-top:1px solid #2d475b}
+.atlas-map-table-wrap{overflow:auto;max-width:100%;border:1px solid #304b61;border-radius:10px}
+.atlas-map-table{width:100%;border-collapse:collapse;min-width:690px;font-size:12px}
+.atlas-map-table th{text-align:left;background:#152d40;color:#c2dbe5;padding:10px 9px;font-weight:800;white-space:nowrap}
+.atlas-map-table td{padding:9px;border-top:1px solid #29465a;color:#dae9ef;vertical-align:middle;white-space:nowrap}
+.atlas-map-table td:first-child b{display:block;color:#eef9fa}
+.atlas-map-table td:first-child small{display:block;color:#8eafc1;font-size:10px;margin-top:2px}
+.atlas-map-table tr.atlas-player-active td{background:#193a46}
+.atlas-player-button{background:#244b55;color:#d3fff3;border:1px solid #4d8e85;border-radius:7px;padding:6px 9px;font-weight:700;font-size:11px;white-space:nowrap}
+.atlas-player-button:hover{background:#30656e}
+.atlas-player-detail{margin-top:14px;padding:15px;border-radius:12px;border:1px solid #3c6370;background:#102535}
+.atlas-player-detail p{font-size:12px;color:#c4d9e2;line-height:1.55;margin:7px 0}
+.atlas-prices-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.atlas-odds-field{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:12px}
+.atlas-odds-input{max-width:190px}
+.atlas-odds-note{display:block;font-size:11px;font-weight:400;color:#aac7d1;line-height:1.5}
+@media(max-width:700px){.atlas-map-workspace{padding:14px}.atlas-map-teams,.atlas-prices-grid{grid-template-columns:1fr}.atlas-map-controls,.atlas-kills-toolbar{display:grid;grid-template-columns:1fr 1fr}.atlas-map-field{min-width:0}.atlas-map-status{grid-column:1/-1}.atlas-map-table{min-width:660px}}

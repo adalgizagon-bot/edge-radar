@@ -6,6 +6,16 @@ Painel estatístico de pesquisa para **Counter-Strike 2**, publicado em https://
 
 As odds de vencedor BO1 foram capturadas manualmente de um print da BR365 às aproximadamente 16h07 BRT para sete dos oito confrontos de abertura. Liquid × BC.Game permanece sem preços porque não aparece na imagem. A fonte `public/data/major-br365-odds.json` é auditável; o `scripts/radar-feed.mjs` conserva a identificação de captura, coloca apenas mercados de vencedor BO1, normaliza as probabilidades implícitas com a margem da casa e não altera as previsões pré-veto congeladas. Quatro confrontos têm estudo experimental, outros quatro têm amostragem insuficiente; ver uma odd não autoriza fabricar previsão.
 
+## Radar BO1 por mapa e kills (23/11/2026)
+
+A página principal preserva o **mesmo fluxo**: radar de partidas → selecionar jogo → selecionar manualmente o mapa depois do veto → equipe × equipe no mapa → 10 jogadores e kills → mercado de vencedor. Nenhum mapa é escolhido automaticamente ou afirmado como veto confirmado. A decisão manual fica no próprio navegador. O mapa escolhido altera os históricos e as análises; **a média genérica pré-veto não é exibida como se fosse projeção do mapa**.
+
+Fontes estáticas coletadas da **nova conexão Cito**: `public/data/major-teams/cs2-team-*.json` (cada uma com cinco jogadores ativos, partidas e kills por mapa, rounds, data e equipe em cada partida, mais win rate CT/TR de 90 dias). `public/major-map-core.js` calcula estatísticas sobre os últimos 90 ou 180 dias, sem misturar mapas. Exibe quantidade de partidas, partidas com a equipe atual, média de kills, kills/round, média de rounds e taxas observadas de mais/menos kills nas linhas selecionadas. Amostras de outras equipes são contadas separadamente; dados ausentes nunca são completados artificialmente.
+
+As odds de kills são digitadas pelo usuário **localmente**, sem integração com bookmaker, e comparadas ao breakeven bruto `1/odd`. Qualquer diferença é diagnóstico de estudo, não validação de lucro: taxas históricas não são ajustadas integralmente para rival, duração do mapa, elencos ou mercados e não são probabilidades calibradas. Com menos de 12 mapas ou amostra incompleta, a diferença nem é calculada. O projeto só tem odds de vencedor no screenshot BR365, nenhuma odd de kills importada automaticamente.
+
+**Sincronização**: dados de jogadores desta captura são históricos datados. A conexão Cito ChatGPT da nova conta não altera automaticamente o segredo `CITO_API_KEY` configurado anteriormente no GitHub Actions; o job diário pode continuar usando a conta anterior até que o segredo seja trocado separadamente em local seguro.
+
 ## Radar Unificado — interface principal (19/11/2026)
 
 O ATLAS agora tem **uma única área de trabalho**, sem uma página nova a cada data:

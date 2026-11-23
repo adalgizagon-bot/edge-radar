@@ -6,7 +6,10 @@
 <title>ATLAS Esports Lab | Radar CS2</title>
 <meta name="description" content="Radar estatístico de CS2. Próximos jogos, comparação de odds e resultados em um só fluxo.">
 <link rel="stylesheet" href="radar.css">
+<link rel="stylesheet" href="major-map-workspace.css">
 <script defer src="radar-core.js"></script>
+<script defer src="major-map-core.js"></script>
+<script defer src="major-map-workspace.js"></script>
 <script defer src="radar-app.js"></script>
 </head>
 <body>
@@ -30,7 +33,7 @@
   </header>
   <main class="main-inner">
    <section id="page-radar" class="page is-active" aria-labelledby="radar-title">
-    <div class="page-title"><div><div class="eyebrow">RADAR / PRÓXIMAS PARTIDAS</div><h1 id="radar-title">Major Singapura: radar BO1</h1><p>Oito confrontos da estreia, num único fluxo. Escolha a partida e veja o histórico por mapa, a projeção pré-veto e as odds quando forem cadastradas. Sem apostas automáticas.</p></div>
+    <div class="page-title"><div><div class="eyebrow">RADAR / PRÓXIMAS PARTIDAS</div><h1 id="radar-title">Major Singapura: radar BO1</h1><p>Oito confrontos da estreia. Abra um jogo, selecione o mapa após o veto e compare estatísticas de equipe, rounds, kills por jogador e odds digitadas para mais/menos kills. Sem apostas automáticas.</p></div>
     <div class="title-meta"><b id="upcoming-total">—</b><span>jogos futuros</span></div></div>
     <div class="info-strip"><span><b id="priced-total">—</b> com odds registradas</span><span class="soft-divider"></span><span><b id="next-kickoff">—</b> próximo início</span><span class="soft-divider"></span><span id="capture-status">Sem odds confirmadas para o Major</span></div>
     <div id="stale-alert" class="feed-alert" role="note"></div>
