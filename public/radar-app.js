@@ -352,7 +352,11 @@
  document.querySelectorAll('[data-price-filter]').forEach(n=>n.addEventListener('click',()=>{state.filter=n.dataset.priceFilter;renderList()}));
  $('search-games').addEventListener('input',e=>{state.query=e.target.value.trim();renderList()});
  $('event-filter').addEventListener('change',e=>{state.event=e.target.value;renderList()});
- $('reload-feed').addEventListener('click',()=>loadFeed());
+ $('reload-feed').addEventListener('click',()=>{
+   const url=new URL(window.location.href);
+   url.searchParams.set('atlas_refresh',String(Date.now()));
+   window.location.replace(url.toString());
+  });
  // A kickoff that passes while the tab remains open leaves the radar and expires its selections.
  setInterval(()=>{if(!state.feed)return;const n=C.getUpcoming(state.feed).length;
   if(n!==Number($('upcoming-total').textContent)){updateTop();renderList();renderStudy();renderHistory();}

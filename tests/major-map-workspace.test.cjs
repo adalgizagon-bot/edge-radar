@@ -103,3 +103,15 @@ test('frontend refreshes both header and winner market from same map-specific vi
  assert.ok(panel.includes('onMapProjection(chosen,projection)'));
  assert.ok(!panel.includes('game.model?.mapScenarios'));
 });
+
+test('browser does not reuse old BO1 JS bundles; update button refreshes HTML + code',()=>{
+ const html=fs.readFileSync(path.join(__dirname,'../public/index.html'),'utf8');
+ const js=fs.readFileSync(path.join(__dirname,'../public/radar-app.js'),'utf8');
+ const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'../vercel.json'),'utf8'));
+ assert.ok(html.includes('meta name="atlas-build"'));
+ for(const name of ['radar-app.js','radar-core.js','major-map-core.js','major-map-workspace.js'])
+  assert.match(html,new RegExp(name.replace(/[.]/g,'\\.')+'\\?v=major-map-dynamic-20261123-b'));
+ assert.ok(js.includes("url.searchParams.set('atlas_refresh'"));
+ assert.ok(js.includes('window.location.replace(url.toString())'));
+ assert.ok(cfg.headers.some(x=>x.headers.some(h=>h.key==='Cache-Control'&&/must-revalidate/.test(h.value))));
+});
