@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import { generateFrozen, assess, metrics } from './model.mjs';
 import { validateSeries } from './series-model.mjs';
 import {buildRadarFeed} from './radar-feed.mjs';
+import {reconcileMajorLive,gradeMajorBO1} from './major-sync.mjs';
 import {audit} from './audit.mjs';
 import {appendProspective,gradeProspective} from './prospective.mjs';
 import { recentOpponents,longMapHistory,rankedSnapshot } from './strength-sync.mjs';
@@ -30,6 +31,8 @@ async function cito(path,params={}){
 const seriesFrozen=await read('series-forecasts.json'),challengerFrozen=await read('challenger-review.json'),prospective=await read('prospective.json');
 const opponentForm=await read('team-opponents.json'),annual=await read('team-long-history.json'),rankings=await read('team-rankings.json');
 const nov19Context=await read('nov19-context.json'),nov19Predictions=await read('nov19-forecasts.json'),nov19Quotes=await read('nov19-br365-all-markets.json'),previousQuotes=await read('br365-series-odds.json');
+const majorOpening=await read('major-opening-snapshot.json'),majorAnalysis=await read('major-opening-analysis.json');
+let majorLive=await read('major-live.json');
 const snapshot=await read('tournaments.json'),players=await read('players.json'),predictions=await read('predictions.json'),
  results=await read('results.json'),sync=await read('sync-state.json');
 const now=new Date().toISOString(),nowMs=Date.now();
@@ -85,7 +88,34 @@ let requestsBlocked=false;
 const safe=async(label,path,query={})=>{if(requestsBlocked||calls>=hardMax)return null;
  try{return await cito(path,query)}catch(e){warnings.push(label+': '+String(e.message).slice(0,120));if(String(e.message).includes('RATE_LIMIT')||String(e.message).includes('HTTP 401')||String(e.message).includes('HTTP 403'))requestsBlocked=true;return null}};
 try{
- // 1) upcoming fixtures for the monitored two events only.
+ // Major priority: ONE event-level Cito request per run, not seven obsolete team queries.
+ // The free plan currently has very limited remaining monthly quota. Results and future
+ // Swiss fixtures are obtained in the same event-matches response.
+ const inMajor=nowMs>=Date.parse('2026-11-23T00:00:00Z')&&nowMs<Date.parse('2026-12-14T00:00:00Z');
+ if(inMajor){
+  const majorEvent=nowMs<Date.parse('2026-11-28T00:00:00Z')?'cs2-event-9303':
+   nowMs<Date.parse('2026-12-02T00:00:00Z')?'cs2-event-9304':'cs2-event-8302';
+  const eventRows=await safe('Major '+majorEvent,'/cs2/events/'+majorEvent+'/matches',{limit:100});
+  if(Array.isArray(eventRows)){
+   majorLive=reconcileMajorLive(majorLive,eventRows,majorEvent,now);
+   const majorValidation=gradeMajorBO1(majorAnalysis,majorLive,now);
+   sync.updatedAt=now;sync.lastRun={status:'ok',requests:calls,warnings,majorEvent};
+   const radar=buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quotes,
+    prospective,completed:results,previousQuotes,seriesFrozen,forms:opponentForm,
+    ranks:rankings,sync,majorOpening,majorAnalysis,majorLive,nowIso:now});
+   await Promise.all([save('major-live.json',majorLive),save('major-validation.json',majorValidation),
+    save('radar-feed.json',radar),save('sync-state.json',sync)]);
+   console.log(JSON.stringify({at:now,majorEvent,requests:calls,majorFixtures:majorLive.fixtures.length,
+    results:majorLive.results.length,bo1Resolved:majorValidation.resolved,radarUpcoming:radar.games.filter(g=>
+     Date.parse(g.startTime)>nowMs&&g.status!=='completed').length},null,2));
+  }else{
+   // Preserve last verified snapshot, do not reset to upcoming or manufacture scores.
+   sync.lastRun={status:'partial',requests:calls,warnings,majorEvent};
+   await save('sync-state.json',sync);
+   console.warn('Major update unavailable: retained last verified radar and forecasts.');
+  }
+ }else{
+ // 1) legacy fixture updater, kept for old historical projects only.
  const fixtures=await safe('upcoming','/cs2/matches/upcoming',{limit:100});
  const additions=(Array.isArray(fixtures)?fixtures:fixtures?.items||[]).map(normalizedFixture).filter(Boolean);
  const before=snapshot.matches.length;
@@ -168,9 +198,10 @@ try{
  const prospectiveUpdated=appendProspective(prospective,snapshot,opponentForm,rankings,now);
  const prospectiveEval=gradeProspective(prospectiveUpdated,results,now);
  sync.updatedAt=now;sync.lastRun={status:warnings.length?'partial':'ok',requests:calls,warnings};
- const radar=buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quotes,prospective:prospectiveUpdated,completed:results,previousQuotes,seriesFrozen,forms:opponentForm,ranks:rankings,sync,nowIso:now});
+ const radar=buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quotes,prospective:prospectiveUpdated,completed:results,previousQuotes,seriesFrozen,forms:opponentForm,ranks:rankings,sync,majorOpening,majorAnalysis,majorLive,nowIso:now});
  await Promise.all([save('tournaments.json',snapshot),save('players.json',players),save('predictions.json',updated),save('results.json',results),
   save('validation.json',evaluation),save('series-validation.json',seriesEval),save('audit-2026-11-18.json',fullAudit),save('prospective.json',prospectiveUpdated),save('prospective-validation.json',prospectiveEval),save('team-opponents.json',opponentForm),save('team-long-history.json',annual),save('team-rankings.json',rankings),save('sync-state.json',sync),save('radar-feed.json',radar)]);
  console.log(JSON.stringify({at:now,requests:calls,fixtures:snapshot.matches.length,rosters:players.teams.length,
   playersWithStats:players.players.length,recentOpponentTeams:opponentForm.teams.length,annualTeams:annual.teams.length,frozen:updated.forecasts.length,resolved:evalSummary.resolved,seriesResolved:seriesEval.resolved,prospectiveRegistered:prospectiveUpdated.forecasts.length,prospectiveResolved:prospectiveEval.resolved,radarUpcoming:radar.games.filter(g=>Date.parse(g.startTime)>Date.parse(now)&&g.status!=='completed').length,warnings},null,2));
+ }
 }catch(e){console.error('Sync failed safely:',e.message);process.exitCode=1}
