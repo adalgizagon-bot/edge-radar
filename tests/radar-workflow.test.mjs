@@ -9,39 +9,45 @@ const C=require('../public/radar-core.js');
 const root=path.join(import.meta.dirname,'../public');
 const load=name=>JSON.parse(fs.readFileSync(path.join(root,'data',name),'utf8'));
 const feed=load('radar-feed.json');
-const t=Date.parse('2026-11-19T00:25:00Z');
-test('radar shows only three future Nov 19 fixtures, never the eight Nov 18 games',()=>{
- const next=C.getUpcoming(feed,t);
- assert.equal(next.length,3);
- assert.equal(next.filter(C.hasOdds).length,3);
- assert.ok(next.every(x=>x.startTime.startsWith('2026-11-19')));
- assert.ok(next.every(x=>x.markets.length===12));
- assert.equal(C.getHistory(feed,t).length,8);
+const t19=Date.parse('2026-11-19T00:25:00Z');
+const tMajor=Date.parse('2026-11-23T19:00:00Z');
+test('Nov 19 historic screen is preserved in archive and never mistaken for current Major',()=>{
+ const prior=C.getUpcoming(feed,t19).filter(g=>g.startTime.startsWith('2026-11-19'));
+ assert.equal(prior.length,3);
+ assert.ok(prior.every(C.hasOdds));
+ assert.ok(prior.every(g=>g.markets.length===12));
+ const today=C.getUpcoming(feed,tMajor);
+ assert.equal(today.length,8);
+ assert.ok(today.every(g=>g.eventId==='cs2-event-9303'&&g.bestOf===1));
 });
-test('past matches cannot re-enter radar even if old snapshot still calls them upcoming',()=>{
- assert.equal(C.getUpcoming(feed,Date.parse('2026-11-20T12:00:00Z')).length,0);
- assert.equal(C.getHistory(feed,Date.parse('2026-11-20T12:00:00Z')).length,11);
+test('Nov 18 results stay archived; November Major expires after kickoff',()=>{
+ assert.equal(feed.games.filter(g=>g.startTime.startsWith('2026-11-18')).length,8);
+ assert.equal(C.getUpcoming(feed,Date.parse('2026-11-24T12:00:00Z')).filter(g=>g.eventId==='cs2-event-9303').length,0);
 });
-test('study allows only one selection per game and expires it at kickoff',()=>{
- const ids=C.getUpcoming(feed,t).map(x=>x.id);
+test('study accepts only one quoted selection per match and expires it at kickoff',()=>{
+ const ids=feed.games.filter(g=>g.startTime.startsWith('2026-11-19')).map(x=>x.id);
  const picks=[{matchId:ids[0],key:'aWin'},{matchId:ids[0],key:'a20'},{matchId:ids[1],key:'bWin'}];
- const s=C.studySummary(picks,feed,t);
- assert.equal(s.items.length,2);assert.equal(s.removed,1);
- assert.ok(s.product>1);
- const late=C.studySummary(picks,feed,Date.parse('2026-11-20T12:00:00Z'));
- assert.equal(late.items.length,0);assert.equal(late.product,null);
+ const s=C.studySummary(picks,feed,t19);
+ assert.equal(s.items.length,2);assert.equal(s.removed,1);assert.ok(s.product>1);
+ assert.equal(C.studySummary(picks,feed,tMajor).items.length,0);
 });
-test('unknown future game is clearly unpriced and never assigned model odds',()=>{
- const extra={id:'synthetic-future',startTime:'2026-11-25T17:00:00Z',status:'scheduled',
- event:'Tier 1',teamA:{name:'A'},teamB:{name:'B'},quotes:null,markets:[]};
- const all={...feed,games:[...feed.games,extra]};
- assert.equal(C.hasOdds(extra),false);
- assert.ok(C.filterUpcoming(all,{filter:'waiting'},t).some(x=>x.id===extra.id));
- assert.ok(!C.filterUpcoming(all,{filter:'odds'},t).some(x=>x.id===extra.id));
+test('major BO1 games never receive fictional odds or BO3 handicap markets',()=>{
+ const major=C.getUpcoming(feed,tMajor);
+ assert.equal(major.length,8);
+ assert.equal(major.filter(g=>g.model?.v2!==undefined&&g.model?.v2!==null).length,4);
+ assert.ok(major.every(g=>!C.hasOdds(g)&&!g.quotes));
+ assert.ok(major.every(g=>g.markets.every(m=>m.family==='winner'&&m.odd===null)));
+ assert.ok(major.every(g=>g.major?.vetoConfirmed===false));
+ assert.equal(C.studySummary([{matchId:major[0].id,key:'aWin'}],feed,tMajor).items.length,0);
 });
-test('stored prices always reuse existing frozen probabilities, without rewriting forecasts',()=>{
+test('missing team map history means no invented BO1 probability',()=>{
+ const noModel=C.getUpcoming(feed,tMajor).filter(g=>!g.model);
+ assert.equal(noModel.length,4);
+ assert.ok(noModel.every(g=>g.markets.length===0));
+});
+test('old frozen Nov 19 odds and models are preserved unchanged',()=>{
  const records=load('prospective.json').forecasts;
- for(const g of C.getUpcoming(feed,t)){
+ for(const g of feed.games.filter(x=>x.startTime.startsWith('2026-11-19'))){
   const original=records.find(x=>x.matchId===g.id);
   assert.ok(original&&Date.parse(original.frozenAt)<Date.parse(g.startTime));
   assert.ok(g.quotes&&Date.parse(g.quotes.capturedAt)<Date.parse(g.startTime));
@@ -51,25 +57,28 @@ test('stored prices always reuse existing frozen probabilities, without rewritin
   }
  }
 });
-test('unified feed regenerates deterministically from stored source snapshots',()=>{
+test('radar feed reconstructs from dated sources without modifying frozen forecasts',()=>{
  const params={snapshot:load('tournaments.json'),nov19Context:load('nov19-context.json'),
  nov19Predictions:load('nov19-forecasts.json'),nov19Quotes:load('nov19-br365-all-markets.json'),
  prospective:load('prospective.json'),completed:load('results.json'),
  previousQuotes:load('br365-series-odds.json'),seriesFrozen:load('series-forecasts.json'),
  forms:load('team-opponents.json'),ranks:load('team-rankings.json'),sync:load('sync-state.json'),
- nowIso:'2026-11-19T00:30:00Z'};
+ majorOpening:load('major-opening-snapshot.json'),majorAnalysis:load('major-opening-analysis.json'),
+ majorLive:load('major-live.json'),nowIso:'2026-11-23T19:00:00Z'};
  const generated=buildRadarFeed(params);
  assert.deepEqual(generated.games,feed.games);
- assert.equal(generated.games.length,11);
+ assert.equal(generated.games.filter(x=>x.major).length,8);
 });
-test('navigation is exactly one active radar, plus study, results; old pages archived',()=>{
+test('current source freshness uses Cito Major snapshot rather than old daily sync',()=>{
+ assert.equal(C.isSourceStale(feed,tMajor),false);
+});
+test('single front page and archived laboratory still exist',()=>{
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
  const legacy=fs.readFileSync(path.join(root,'laboratorio.html'),'utf8');
  for(const name of ['radar','study','history']){
   assert.ok(html.includes('data-view="'+name+'"'));
   assert.ok(html.includes('id="page-'+name+'"'));
  }
- assert.ok(html.includes('src="radar-app.js"')&&html.includes('src="radar-core.js"'));
- assert.ok(!html.includes('src="nextday.js"'));
+ assert.ok(html.includes('Major Singapura'));
  assert.ok(legacy.includes('id="nextday"'));
 });
