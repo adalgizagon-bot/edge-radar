@@ -1,0 +1,10 @@
+{
+  "evaluatedAt": null,
+  "registered": 8,
+  "modeled": 4,
+  "resolved": 0,
+  "meanBrier": null,
+  "correct": 0,
+  "records": [],
+  "warning": "No Major BO1 results yet; scores only from forecasts frozen before first kickoff."
+}

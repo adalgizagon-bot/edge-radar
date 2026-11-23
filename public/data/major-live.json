@@ -1,0 +1,8 @@
+{
+  "version": "major-event-sync-v1",
+  "eventId": "cs2-event-9303",
+  "fetchedAt": null,
+  "fixtures": [],
+  "results": [],
+  "note": "Major fixture snapshots refreshed with one Cito event-matches call per scheduled run."
+}
