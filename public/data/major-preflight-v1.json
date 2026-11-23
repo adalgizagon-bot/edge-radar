@@ -1,0 +1,5836 @@
+{
+  "version": "atlas-major-pre-veto-conditional-v1",
+  "frozenAt": "2026-11-23T20:18:34.462Z",
+  "generatedBeforeEveryMatch": true,
+  "source": "Cito player history and rank snapshots stored before kickoff",
+  "mapSelection": "all candidate maps were registered; evaluation uses ONLY the actually played map",
+  "rankTimeRule": "historical ranking snapshots <= match dates; no future rankings",
+  "calibrated": false,
+  "warning": "Exploratory estimates are not calibrated odds; a model advantage is not verified profit.",
+  "forecasts": [
+    {
+      "matchId": "cs2-match-2400494",
+      "startsAt": "2026-11-24T04:00:00.000Z",
+      "teamA": {
+        "id": "cs2-team-7175",
+        "name": "HEROIC"
+      },
+      "teamB": {
+        "id": "cs2-team-9455",
+        "name": "Imperial"
+      },
+      "maps": [
+        {
+          "map": "Ancient",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 16,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-21239",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 16,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-13666",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 16,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21163",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 16,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21983",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 16,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20119",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 16,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22965",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-10566",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20183",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22564",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-12822",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Anubis",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 0,
+          "rankedOpponentsB": 8,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-21239",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-13666",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21163",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21983",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20119",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22965",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 10,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-10566",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 10,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20183",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 10,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22564",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 10,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-12822",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 10,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Cache",
+          "probabilityA": 0.5460248925529737,
+          "probabilityB": 0.4539751074470263,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21.5,
+          "rankedOpponentsA": 14,
+          "rankedOpponentsB": 13,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-21239",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 14,
+              "mean": 13.1,
+              "pOver": 0.2185206231899216,
+              "pUnder": 0.7814793768100784
+            },
+            {
+              "playerId": "cs2-player-13666",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 14,
+              "mean": 16.4,
+              "pOver": 0.46502863035178543,
+              "pUnder": 0.5349713696482146
+            },
+            {
+              "playerId": "cs2-player-21163",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 14,
+              "mean": 14.6,
+              "pOver": 0.3070967923142329,
+              "pUnder": 0.6929032076857671
+            },
+            {
+              "playerId": "cs2-player-21983",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 14,
+              "mean": 14.7,
+              "pOver": 0.3155697128918402,
+              "pUnder": 0.6844302871081598
+            },
+            {
+              "playerId": "cs2-player-20119",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 14,
+              "mean": 17.3,
+              "pOver": 0.4978031382900371,
+              "pUnder": 0.5021968617099629
+            },
+            {
+              "playerId": "cs2-player-22965",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 14,
+              "mean": 14.5,
+              "pOver": 0.2978453412936628,
+              "pUnder": 0.7021546587063372
+            },
+            {
+              "playerId": "cs2-player-10566",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 14,
+              "mean": 13.5,
+              "pOver": 0.25455779065826334,
+              "pUnder": 0.7454422093417367
+            },
+            {
+              "playerId": "cs2-player-20183",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 14,
+              "mean": 14.2,
+              "pOver": 0.26574540718922757,
+              "pUnder": 0.7342545928107724
+            },
+            {
+              "playerId": "cs2-player-22564",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 14,
+              "mean": 13.1,
+              "pOver": 0.2066497761876097,
+              "pUnder": 0.7933502238123903
+            },
+            {
+              "playerId": "cs2-player-12822",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 14,
+              "mean": 13.3,
+              "pOver": 0.1916848220449322,
+              "pUnder": 0.8083151779550678
+            }
+          ]
+        },
+        {
+          "map": "Dust2",
+          "probabilityA": 0.5132814351568058,
+          "probabilityB": 0.4867185648431942,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21.1,
+          "rankedOpponentsA": 18,
+          "rankedOpponentsB": 11,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-21239",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 19,
+              "mean": 15.6,
+              "pOver": 0.4004863523324069,
+              "pUnder": 0.5995136476675931
+            },
+            {
+              "playerId": "cs2-player-13666",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 19,
+              "mean": 13.9,
+              "pOver": 0.28453945272112136,
+              "pUnder": 0.7154605472788786
+            },
+            {
+              "playerId": "cs2-player-21163",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 19,
+              "mean": 13.8,
+              "pOver": 0.24901587122794866,
+              "pUnder": 0.7509841287720513
+            },
+            {
+              "playerId": "cs2-player-21983",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 19,
+              "mean": 12.9,
+              "pOver": 0.16791092335705793,
+              "pUnder": 0.8320890766429421
+            },
+            {
+              "playerId": "cs2-player-20119",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 19,
+              "mean": 14.5,
+              "pOver": 0.3260216795555566,
+              "pUnder": 0.6739783204444434
+            },
+            {
+              "playerId": "cs2-player-22965",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 12,
+              "mean": 15.1,
+              "pOver": 0.3471680839151484,
+              "pUnder": 0.6528319160848516
+            },
+            {
+              "playerId": "cs2-player-10566",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 12,
+              "mean": 11.4,
+              "pOver": 0.12109156004445953,
+              "pUnder": 0.8789084399555405
+            },
+            {
+              "playerId": "cs2-player-20183",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 12,
+              "mean": 14,
+              "pOver": 0.26342253100365653,
+              "pUnder": 0.7365774689963435
+            },
+            {
+              "playerId": "cs2-player-22564",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 12,
+              "mean": 14.3,
+              "pOver": 0.29106084337465177,
+              "pUnder": 0.7089391566253482
+            },
+            {
+              "playerId": "cs2-player-12822",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 12,
+              "mean": 13.2,
+              "pOver": 0.26781627993046075,
+              "pUnder": 0.7321837200695392
+            }
+          ]
+        },
+        {
+          "map": "Inferno",
+          "probabilityA": 0.5808687463679039,
+          "probabilityB": 0.41913125363209613,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 20.2,
+          "rankedOpponentsA": 14,
+          "rankedOpponentsB": 15,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-21239",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 14,
+              "mean": 13.7,
+              "pOver": 0.24506107672118893,
+              "pUnder": 0.7549389232788111
+            },
+            {
+              "playerId": "cs2-player-13666",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 14,
+              "mean": 16.6,
+              "pOver": 0.48651897820339074,
+              "pUnder": 0.5134810217966093
+            },
+            {
+              "playerId": "cs2-player-21163",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 14,
+              "mean": 13.9,
+              "pOver": 0.27442382111540087,
+              "pUnder": 0.7255761788845991
+            },
+            {
+              "playerId": "cs2-player-21983",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 14,
+              "mean": 12.4,
+              "pOver": 0.13327522165169825,
+              "pUnder": 0.8667247783483017
+            },
+            {
+              "playerId": "cs2-player-20119",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 14,
+              "mean": 14.3,
+              "pOver": 0.2949301195295144,
+              "pUnder": 0.7050698804704856
+            },
+            {
+              "playerId": "cs2-player-22965",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 17,
+              "mean": 12,
+              "pOver": 0.17269417508238494,
+              "pUnder": 0.8273058249176151
+            },
+            {
+              "playerId": "cs2-player-10566",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 17,
+              "mean": 12.2,
+              "pOver": 0.18217976391086832,
+              "pUnder": 0.8178202360891317
+            },
+            {
+              "playerId": "cs2-player-20183",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 17,
+              "mean": 14,
+              "pOver": 0.29848217262862575,
+              "pUnder": 0.7015178273713742
+            },
+            {
+              "playerId": "cs2-player-22564",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 17,
+              "mean": 11.8,
+              "pOver": 0.19103407409089712,
+              "pUnder": 0.8089659259091029
+            },
+            {
+              "playerId": "cs2-player-12822",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 17,
+              "mean": 13.3,
+              "pOver": 0.20446317074904163,
+              "pUnder": 0.7955368292509584
+            }
+          ]
+        },
+        {
+          "map": "Mirage",
+          "probabilityA": 0.48036090309061297,
+          "probabilityB": 0.519639096909387,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 22.7,
+          "rankedOpponentsA": 10,
+          "rankedOpponentsB": 15,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-21239",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 11,
+              "mean": 14.2,
+              "pOver": 0.26932997184274465,
+              "pUnder": 0.7306700281572553
+            },
+            {
+              "playerId": "cs2-player-13666",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 11,
+              "mean": 13.5,
+              "pOver": 0.21030829322857125,
+              "pUnder": 0.7896917067714287
+            },
+            {
+              "playerId": "cs2-player-21163",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 11,
+              "mean": 14.4,
+              "pOver": 0.284910261950578,
+              "pUnder": 0.715089738049422
+            },
+            {
+              "playerId": "cs2-player-21983",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 11,
+              "mean": 15.1,
+              "pOver": 0.3614625745297746,
+              "pUnder": 0.6385374254702254
+            },
+            {
+              "playerId": "cs2-player-20119",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 11,
+              "mean": 17.3,
+              "pOver": 0.520255586479401,
+              "pUnder": 0.4797444135205991
+            },
+            {
+              "playerId": "cs2-player-22965",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 15,
+              "mean": 14.6,
+              "pOver": 0.305448041730196,
+              "pUnder": 0.694551958269804
+            },
+            {
+              "playerId": "cs2-player-10566",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 15,
+              "mean": 12,
+              "pOver": 0.11204627997863392,
+              "pUnder": 0.8879537200213661
+            },
+            {
+              "playerId": "cs2-player-20183",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 15,
+              "mean": 17.1,
+              "pOver": 0.5401123241391262,
+              "pUnder": 0.45988767586087376
+            },
+            {
+              "playerId": "cs2-player-22564",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 15,
+              "mean": 13.3,
+              "pOver": 0.20126670460221796,
+              "pUnder": 0.798733295397782
+            },
+            {
+              "playerId": "cs2-player-12822",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 15,
+              "mean": 13.4,
+              "pOver": 0.2026937639456503,
+              "pUnder": 0.7973062360543497
+            }
+          ]
+        },
+        {
+          "map": "Nuke",
+          "probabilityA": 0.5174213586842895,
+          "probabilityB": 0.4825786413157105,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21.3,
+          "rankedOpponentsA": 9,
+          "rankedOpponentsB": 10,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-21239",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 9,
+              "mean": 16.3,
+              "pOver": 0.4569426357081714,
+              "pUnder": 0.5430573642918286
+            },
+            {
+              "playerId": "cs2-player-13666",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 9,
+              "mean": 15.5,
+              "pOver": 0.3869071365370442,
+              "pUnder": 0.6130928634629558
+            },
+            {
+              "playerId": "cs2-player-21163",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 9,
+              "mean": 13.7,
+              "pOver": 0.2818390630885721,
+              "pUnder": 0.7181609369114279
+            },
+            {
+              "playerId": "cs2-player-21983",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 9,
+              "mean": 14.7,
+              "pOver": 0.3166858647643973,
+              "pUnder": 0.6833141352356027
+            },
+            {
+              "playerId": "cs2-player-20119",
+              "teamId": "cs2-team-7175",
+              "line": 16.5,
+              "n": 9,
+              "mean": 16.5,
+              "pOver": 0.4787131309121446,
+              "pUnder": 0.5212868690878554
+            },
+            {
+              "playerId": "cs2-player-22965",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 12,
+              "mean": 15.4,
+              "pOver": 0.37899424650776914,
+              "pUnder": 0.6210057534922309
+            },
+            {
+              "playerId": "cs2-player-10566",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 12,
+              "mean": 13.9,
+              "pOver": 0.27615134177326983,
+              "pUnder": 0.7238486582267302
+            },
+            {
+              "playerId": "cs2-player-20183",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 12,
+              "mean": 13.2,
+              "pOver": 0.19052597272891303,
+              "pUnder": 0.809474027271087
+            },
+            {
+              "playerId": "cs2-player-22564",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 12,
+              "mean": 15.4,
+              "pOver": 0.3885955380265793,
+              "pUnder": 0.6114044619734207
+            },
+            {
+              "playerId": "cs2-player-12822",
+              "teamId": "cs2-team-9455",
+              "line": 16.5,
+              "n": 12,
+              "mean": 12.9,
+              "pOver": 0.18768419626683364,
+              "pUnder": 0.8123158037331664
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400495",
+      "startsAt": "2026-11-24T04:00:00.000Z",
+      "teamA": {
+        "id": "cs2-team-9996",
+        "name": "9z"
+      },
+      "teamB": {
+        "id": "cs2-team-8840",
+        "name": "Lynn Vision"
+      },
+      "maps": [
+        {
+          "map": "Ancient",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 0,
+          "rankedOpponentsB": 7,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20939",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-14736",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20394",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22613",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-12092",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18744",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-16551",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20254",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-23100",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22922",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Anubis",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 0,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20939",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-14736",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20394",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22613",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-12092",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18744",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-16551",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20254",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-23100",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22922",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Cache",
+          "probabilityA": 0.4846737405616729,
+          "probabilityB": 0.5153262594383271,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 22.3,
+          "rankedOpponentsA": 6,
+          "rankedOpponentsB": 5,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20939",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-14736",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 6,
+              "mean": 16.8,
+              "pOver": 0.44587292513877874,
+              "pUnder": 0.5541270748612213
+            },
+            {
+              "playerId": "cs2-player-20394",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 6,
+              "mean": 15.2,
+              "pOver": 0.35847121701779194,
+              "pUnder": 0.6415287829822081
+            },
+            {
+              "playerId": "cs2-player-22613",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 6,
+              "mean": 13.2,
+              "pOver": 0.21503459851880746,
+              "pUnder": 0.7849654014811925
+            },
+            {
+              "playerId": "cs2-player-12092",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 6,
+              "mean": 10.9,
+              "pOver": 0.15112104451201558,
+              "pUnder": 0.8488789554879844
+            },
+            {
+              "playerId": "cs2-player-18744",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 5,
+              "mean": 13.3,
+              "pOver": 0.19793743413538667,
+              "pUnder": 0.8020625658646133
+            },
+            {
+              "playerId": "cs2-player-16551",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 5,
+              "mean": 13.7,
+              "pOver": 0.22426036192387944,
+              "pUnder": 0.7757396380761206
+            },
+            {
+              "playerId": "cs2-player-20254",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 5,
+              "mean": 15.1,
+              "pOver": 0.37002802298591475,
+              "pUnder": 0.6299719770140852
+            },
+            {
+              "playerId": "cs2-player-23100",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 5,
+              "mean": 11.6,
+              "pOver": 0.12803879584508648,
+              "pUnder": 0.8719612041549135
+            },
+            {
+              "playerId": "cs2-player-22922",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 5,
+              "mean": 13.1,
+              "pOver": 0.233031709397023,
+              "pUnder": 0.766968290602977
+            }
+          ]
+        },
+        {
+          "map": "Dust2",
+          "probabilityA": 0.4609884208212225,
+          "probabilityB": 0.5390115791787775,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21.7,
+          "rankedOpponentsA": 7,
+          "rankedOpponentsB": 12,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20939",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-14736",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 7,
+              "mean": 13.4,
+              "pOver": 0.254350892369794,
+              "pUnder": 0.745649107630206
+            },
+            {
+              "playerId": "cs2-player-20394",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 7,
+              "mean": 13.4,
+              "pOver": 0.2689717411047876,
+              "pUnder": 0.7310282588952124
+            },
+            {
+              "playerId": "cs2-player-22613",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 7,
+              "mean": 18.8,
+              "pOver": 0.6805515330113392,
+              "pUnder": 0.3194484669886608
+            },
+            {
+              "playerId": "cs2-player-12092",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 7,
+              "mean": 10.6,
+              "pOver": 0.07606290311995056,
+              "pUnder": 0.9239370968800494
+            },
+            {
+              "playerId": "cs2-player-18744",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 13,
+              "mean": 15.1,
+              "pOver": 0.3655641321924259,
+              "pUnder": 0.6344358678075741
+            },
+            {
+              "playerId": "cs2-player-16551",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 13,
+              "mean": 15.9,
+              "pOver": 0.4236349415698548,
+              "pUnder": 0.5763650584301452
+            },
+            {
+              "playerId": "cs2-player-20254",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 13,
+              "mean": 13.8,
+              "pOver": 0.28855886476726955,
+              "pUnder": 0.7114411352327304
+            },
+            {
+              "playerId": "cs2-player-23100",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 13,
+              "mean": 11.6,
+              "pOver": 0.15032033872442474,
+              "pUnder": 0.8496796612755753
+            },
+            {
+              "playerId": "cs2-player-22922",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 13,
+              "mean": 11.5,
+              "pOver": 0.15173473763714618,
+              "pUnder": 0.8482652623628538
+            }
+          ]
+        },
+        {
+          "map": "Inferno",
+          "probabilityA": 0.4674449888451752,
+          "probabilityB": 0.5325550111548247,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21.3,
+          "rankedOpponentsA": 6,
+          "rankedOpponentsB": 7,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20939",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-14736",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 6,
+              "mean": 15.6,
+              "pOver": 0.399434462227399,
+              "pUnder": 0.600565537772601
+            },
+            {
+              "playerId": "cs2-player-20394",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 6,
+              "mean": 10,
+              "pOver": 0.13290609789709962,
+              "pUnder": 0.8670939021029004
+            },
+            {
+              "playerId": "cs2-player-22613",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 6,
+              "mean": 14.5,
+              "pOver": 0.2932458393256093,
+              "pUnder": 0.7067541606743907
+            },
+            {
+              "playerId": "cs2-player-12092",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 6,
+              "mean": 10,
+              "pOver": 0.03061304893328609,
+              "pUnder": 0.9693869510667139
+            },
+            {
+              "playerId": "cs2-player-18744",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 7,
+              "mean": 13,
+              "pOver": 0.245150377183728,
+              "pUnder": 0.754849622816272
+            },
+            {
+              "playerId": "cs2-player-16551",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 7,
+              "mean": 11.3,
+              "pOver": 0.16987907267984748,
+              "pUnder": 0.8301209273201525
+            },
+            {
+              "playerId": "cs2-player-20254",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 7,
+              "mean": 15.5,
+              "pOver": 0.385286600020599,
+              "pUnder": 0.614713399979401
+            },
+            {
+              "playerId": "cs2-player-23100",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 7,
+              "mean": 11.6,
+              "pOver": 0.0864123823405828,
+              "pUnder": 0.9135876176594172
+            },
+            {
+              "playerId": "cs2-player-22922",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 7,
+              "mean": 15.4,
+              "pOver": 0.3737694633090103,
+              "pUnder": 0.6262305366909897
+            }
+          ]
+        },
+        {
+          "map": "Mirage",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 8,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20939",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-14736",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20394",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22613",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-12092",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18744",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-16551",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20254",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-23100",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22922",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Nuke",
+          "probabilityA": 0.4867984203303946,
+          "probabilityB": 0.5132015796696054,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 20.1,
+          "rankedOpponentsA": 11,
+          "rankedOpponentsB": 6,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20939",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-14736",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 11,
+              "mean": 14.8,
+              "pOver": 0.32200243883738655,
+              "pUnder": 0.6779975611626134
+            },
+            {
+              "playerId": "cs2-player-20394",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 11,
+              "mean": 14.9,
+              "pOver": 0.3318414592495703,
+              "pUnder": 0.6681585407504297
+            },
+            {
+              "playerId": "cs2-player-22613",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 11,
+              "mean": 11.6,
+              "pOver": 0.16090789044799814,
+              "pUnder": 0.8390921095520019
+            },
+            {
+              "playerId": "cs2-player-12092",
+              "teamId": "cs2-team-9996",
+              "line": 16.5,
+              "n": 11,
+              "mean": 13.5,
+              "pOver": 0.27008795294313626,
+              "pUnder": 0.7299120470568637
+            },
+            {
+              "playerId": "cs2-player-18744",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 6,
+              "mean": 12.7,
+              "pOver": 0.18568881529245262,
+              "pUnder": 0.8143111847075474
+            },
+            {
+              "playerId": "cs2-player-16551",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 6,
+              "mean": 10,
+              "pOver": 0.03221787707583512,
+              "pUnder": 0.9677821229241649
+            },
+            {
+              "playerId": "cs2-player-20254",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 6,
+              "mean": 14.1,
+              "pOver": 0.28317596841875314,
+              "pUnder": 0.7168240315812469
+            },
+            {
+              "playerId": "cs2-player-23100",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 6,
+              "mean": 14.6,
+              "pOver": 0.30002350368149666,
+              "pUnder": 0.6999764963185033
+            },
+            {
+              "playerId": "cs2-player-22922",
+              "teamId": "cs2-team-8840",
+              "line": 16.5,
+              "n": 6,
+              "mean": 12.6,
+              "pOver": 0.21543124141456682,
+              "pUnder": 0.7845687585854332
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400496",
+      "startsAt": "2026-11-24T05:00:00.000Z",
+      "teamA": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas"
+      },
+      "teamB": {
+        "id": "cs2-team-12376",
+        "name": "M80"
+      },
+      "maps": [
+        {
+          "map": "Ancient",
+          "probabilityA": 0.5724312013305596,
+          "probabilityB": 0.4275687986694404,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 25,
+          "rankedOpponentsA": 14,
+          "rankedOpponentsB": 5,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-10994",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 14,
+              "mean": 16.4,
+              "pOver": 0.44831672056577476,
+              "pUnder": 0.5516832794342252
+            },
+            {
+              "playerId": "cs2-player-19899",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 14,
+              "mean": 18,
+              "pOver": 0.6117642709406755,
+              "pUnder": 0.38823572905932446
+            },
+            {
+              "playerId": "cs2-player-23372",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 14,
+              "mean": 16.9,
+              "pOver": 0.5179736616319901,
+              "pUnder": 0.4820263383680099
+            },
+            {
+              "playerId": "cs2-player-14148",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 14,
+              "mean": 15,
+              "pOver": 0.3460745796842094,
+              "pUnder": 0.6539254203157906
+            },
+            {
+              "playerId": "cs2-player-20878",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 10,
+              "mean": 16.7,
+              "pOver": 0.4431215899353267,
+              "pUnder": 0.5568784100646733
+            },
+            {
+              "playerId": "cs2-player-15370",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 6,
+              "mean": 15.8,
+              "pOver": 0.4118626059252083,
+              "pUnder": 0.5881373940747917
+            },
+            {
+              "playerId": "cs2-player-22921",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 6,
+              "mean": 17.9,
+              "pOver": 0.6062985736320963,
+              "pUnder": 0.39370142636790373
+            },
+            {
+              "playerId": "cs2-player-16599",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 6,
+              "mean": 12.5,
+              "pOver": 0.1394247620837803,
+              "pUnder": 0.8605752379162197
+            },
+            {
+              "playerId": "cs2-player-21665",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 6,
+              "mean": 14.3,
+              "pOver": 0.3298824192501387,
+              "pUnder": 0.6701175807498613
+            },
+            {
+              "playerId": "cs2-player-20104",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 6,
+              "mean": 14.6,
+              "pOver": 0.3161513072293938,
+              "pUnder": 0.6838486927706062
+            }
+          ]
+        },
+        {
+          "map": "Anubis",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 0,
+          "rankedOpponentsB": 6,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-10994",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-19899",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-23372",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-14148",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20878",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-15370",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 6,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22921",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 6,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-16599",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 6,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21665",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 6,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20104",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 6,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Cache",
+          "probabilityA": 0.47598781756340103,
+          "probabilityB": 0.524012182436599,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 22.8,
+          "rankedOpponentsA": 18,
+          "rankedOpponentsB": 13,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-10994",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 18,
+              "mean": 16,
+              "pOver": 0.43550020747649565,
+              "pUnder": 0.5644997925235044
+            },
+            {
+              "playerId": "cs2-player-19899",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 18,
+              "mean": 14.1,
+              "pOver": 0.25966984225688095,
+              "pUnder": 0.740330157743119
+            },
+            {
+              "playerId": "cs2-player-23372",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 18,
+              "mean": 14.5,
+              "pOver": 0.3241301186121044,
+              "pUnder": 0.6758698813878956
+            },
+            {
+              "playerId": "cs2-player-14148",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 18,
+              "mean": 14.2,
+              "pOver": 0.31013263544012826,
+              "pUnder": 0.6898673645598717
+            },
+            {
+              "playerId": "cs2-player-20878",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 15,
+              "mean": 13.4,
+              "pOver": 0.2006822485648012,
+              "pUnder": 0.7993177514351988
+            },
+            {
+              "playerId": "cs2-player-15370",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 13,
+              "mean": 14.5,
+              "pOver": 0.3344966701998163,
+              "pUnder": 0.6655033298001837
+            },
+            {
+              "playerId": "cs2-player-22921",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 13,
+              "mean": 16.5,
+              "pOver": 0.47704871089653544,
+              "pUnder": 0.5229512891034646
+            },
+            {
+              "playerId": "cs2-player-16599",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 13,
+              "mean": 13.8,
+              "pOver": 0.24395825498521806,
+              "pUnder": 0.7560417450147819
+            },
+            {
+              "playerId": "cs2-player-21665",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 13,
+              "mean": 15.8,
+              "pOver": 0.41767079929760853,
+              "pUnder": 0.5823292007023915
+            },
+            {
+              "playerId": "cs2-player-20104",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 13,
+              "mean": 13.2,
+              "pOver": 0.1875785221600974,
+              "pUnder": 0.8124214778399026
+            }
+          ]
+        },
+        {
+          "map": "Dust2",
+          "probabilityA": 0.4902289117010463,
+          "probabilityB": 0.5097710882989537,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 20.3,
+          "rankedOpponentsA": 10,
+          "rankedOpponentsB": 7,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-10994",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 10,
+              "mean": 12,
+              "pOver": 0.18994575661761137,
+              "pUnder": 0.8100542433823886
+            },
+            {
+              "playerId": "cs2-player-19899",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 10,
+              "mean": 11.5,
+              "pOver": 0.1633704577112135,
+              "pUnder": 0.8366295422887865
+            },
+            {
+              "playerId": "cs2-player-23372",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 10,
+              "mean": 13.7,
+              "pOver": 0.29702173496832773,
+              "pUnder": 0.7029782650316723
+            },
+            {
+              "playerId": "cs2-player-14148",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 10,
+              "mean": 12.8,
+              "pOver": 0.15896726005899997,
+              "pUnder": 0.841032739941
+            },
+            {
+              "playerId": "cs2-player-20878",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 6,
+              "mean": 11.2,
+              "pOver": 0.11875291579715441,
+              "pUnder": 0.8812470842028456
+            },
+            {
+              "playerId": "cs2-player-15370",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 8,
+              "mean": 14.4,
+              "pOver": 0.3282497918308417,
+              "pUnder": 0.6717502081691583
+            },
+            {
+              "playerId": "cs2-player-22921",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 8,
+              "mean": 14.3,
+              "pOver": 0.2772083479528141,
+              "pUnder": 0.7227916520471859
+            },
+            {
+              "playerId": "cs2-player-16599",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 8,
+              "mean": 9.8,
+              "pOver": 0.027516905674918934,
+              "pUnder": 0.9724830943250811
+            },
+            {
+              "playerId": "cs2-player-21665",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 8,
+              "mean": 13,
+              "pOver": 0.1949382570346081,
+              "pUnder": 0.8050617429653919
+            },
+            {
+              "playerId": "cs2-player-20104",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 8,
+              "mean": 14.3,
+              "pOver": 0.29039804373483236,
+              "pUnder": 0.7096019562651676
+            }
+          ]
+        },
+        {
+          "map": "Inferno",
+          "probabilityA": 0.545254551496592,
+          "probabilityB": 0.45474544850340803,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21,
+          "rankedOpponentsA": 8,
+          "rankedOpponentsB": 6,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-10994",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 9,
+              "mean": 15.7,
+              "pOver": 0.4008674350622611,
+              "pUnder": 0.5991325649377389
+            },
+            {
+              "playerId": "cs2-player-19899",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 9,
+              "mean": 11.9,
+              "pOver": 0.14544970309655203,
+              "pUnder": 0.854550296903448
+            },
+            {
+              "playerId": "cs2-player-23372",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 9,
+              "mean": 12.4,
+              "pOver": 0.13300554041589574,
+              "pUnder": 0.8669944595841043
+            },
+            {
+              "playerId": "cs2-player-14148",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 9,
+              "mean": 12.1,
+              "pOver": 0.11439493023592662,
+              "pUnder": 0.8856050697640734
+            },
+            {
+              "playerId": "cs2-player-20878",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 8,
+              "mean": 14.2,
+              "pOver": 0.2728456499602172,
+              "pUnder": 0.7271543500397828
+            },
+            {
+              "playerId": "cs2-player-15370",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 7,
+              "mean": 13.9,
+              "pOver": 0.3006446510026173,
+              "pUnder": 0.6993553489973827
+            },
+            {
+              "playerId": "cs2-player-22921",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 7,
+              "mean": 13.7,
+              "pOver": 0.2302913025601896,
+              "pUnder": 0.7697086974398104
+            },
+            {
+              "playerId": "cs2-player-16599",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 7,
+              "mean": 10.2,
+              "pOver": 0.06377988886819586,
+              "pUnder": 0.9362201111318041
+            },
+            {
+              "playerId": "cs2-player-21665",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 7,
+              "mean": 13.7,
+              "pOver": 0.24283206946925517,
+              "pUnder": 0.7571679305307448
+            },
+            {
+              "playerId": "cs2-player-20104",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 7,
+              "mean": 12.8,
+              "pOver": 0.15669034949416416,
+              "pUnder": 0.8433096505058358
+            }
+          ]
+        },
+        {
+          "map": "Mirage",
+          "probabilityA": 0.5663874488437788,
+          "probabilityB": 0.4336125511562212,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21.5,
+          "rankedOpponentsA": 15,
+          "rankedOpponentsB": 10,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-10994",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 15,
+              "mean": 15.8,
+              "pOver": 0.41508476952715545,
+              "pUnder": 0.5849152304728445
+            },
+            {
+              "playerId": "cs2-player-19899",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 15,
+              "mean": 11.7,
+              "pOver": 0.17578893323275036,
+              "pUnder": 0.8242110667672496
+            },
+            {
+              "playerId": "cs2-player-23372",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 15,
+              "mean": 13.4,
+              "pOver": 0.26779446221306913,
+              "pUnder": 0.7322055377869309
+            },
+            {
+              "playerId": "cs2-player-14148",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 15,
+              "mean": 13.4,
+              "pOver": 0.23647130822679818,
+              "pUnder": 0.7635286917732018
+            },
+            {
+              "playerId": "cs2-player-20878",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 9,
+              "mean": 17.1,
+              "pOver": 0.4991370005669725,
+              "pUnder": 0.5008629994330275
+            },
+            {
+              "playerId": "cs2-player-15370",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 10,
+              "mean": 16.3,
+              "pOver": 0.4557539481487237,
+              "pUnder": 0.5442460518512763
+            },
+            {
+              "playerId": "cs2-player-22921",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 10,
+              "mean": 12.7,
+              "pOver": 0.1901997312627599,
+              "pUnder": 0.8098002687372401
+            },
+            {
+              "playerId": "cs2-player-16599",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 10,
+              "mean": 13,
+              "pOver": 0.2041801005943682,
+              "pUnder": 0.7958198994056318
+            },
+            {
+              "playerId": "cs2-player-21665",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 10,
+              "mean": 11.6,
+              "pOver": 0.14346318535828462,
+              "pUnder": 0.8565368146417154
+            },
+            {
+              "playerId": "cs2-player-20104",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 10,
+              "mean": 12,
+              "pOver": 0.12186133150738843,
+              "pUnder": 0.8781386684926116
+            }
+          ]
+        },
+        {
+          "map": "Nuke",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 11,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-10994",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 11,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-19899",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 11,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-23372",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 11,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-14148",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 11,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20878",
+              "teamId": "cs2-team-4411",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-15370",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22921",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-16599",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21665",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20104",
+              "teamId": "cs2-team-12376",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400497",
+      "startsAt": "2026-11-24T05:00:00.000Z",
+      "teamA": {
+        "id": "cs2-team-8474",
+        "name": "100 Thieves"
+      },
+      "teamB": {
+        "id": "cs2-team-12646",
+        "name": "Chinggis Warriors"
+      },
+      "maps": [
+        {
+          "map": "Ancient",
+          "probabilityA": 0.49841000906435773,
+          "probabilityB": 0.5015899909356423,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21,
+          "rankedOpponentsA": 10,
+          "rankedOpponentsB": 10,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-7592",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 11,
+              "mean": 16.1,
+              "pOver": 0.4365532283929737,
+              "pUnder": 0.5634467716070263
+            },
+            {
+              "playerId": "cs2-player-23397",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 11,
+              "mean": 16.2,
+              "pOver": 0.44480519940366414,
+              "pUnder": 0.5551948005963359
+            },
+            {
+              "playerId": "cs2-player-8183",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 11,
+              "mean": 14.1,
+              "pOver": 0.323491207412668,
+              "pUnder": 0.676508792587332
+            },
+            {
+              "playerId": "cs2-player-21816",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 11,
+              "mean": 11.8,
+              "pOver": 0.1459508260170459,
+              "pUnder": 0.8540491739829541
+            },
+            {
+              "playerId": "cs2-player-22695",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 11,
+              "mean": 12.9,
+              "pOver": 0.1663508237386101,
+              "pUnder": 0.8336491762613899
+            },
+            {
+              "playerId": "cs2-player-19537",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 15,
+              "mean": 13.6,
+              "pOver": 0.2672797247490084,
+              "pUnder": 0.7327202752509916
+            },
+            {
+              "playerId": "cs2-player-21428",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 15,
+              "mean": 14.2,
+              "pOver": 0.2823434742640407,
+              "pUnder": 0.7176565257359593
+            },
+            {
+              "playerId": "cs2-player-18638",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 17,
+              "mean": 13.6,
+              "pOver": 0.22187145754742854,
+              "pUnder": 0.7781285424525715
+            },
+            {
+              "playerId": "cs2-player-19229",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 17,
+              "mean": 13.2,
+              "pOver": 0.21436095971945057,
+              "pUnder": 0.7856390402805494
+            },
+            {
+              "playerId": "cs2-player-25510",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 13,
+              "mean": 15.4,
+              "pOver": 0.38247740060696056,
+              "pUnder": 0.6175225993930394
+            }
+          ]
+        },
+        {
+          "map": "Anubis",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 0,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-7592",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-23397",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8183",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21816",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22695",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-19537",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21428",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18638",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-19229",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-25510",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Cache",
+          "probabilityA": 0.5813057364221783,
+          "probabilityB": 0.4186942635778217,
+          "modelStatus": "unadjusted",
+          "method": "baseline 90d: ranking + win rates; opponent adjustment unavailable",
+          "expectedRounds": 24.4,
+          "rankedOpponentsA": 6,
+          "rankedOpponentsB": 4,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-7592",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 6,
+              "mean": 17,
+              "pOver": 0.5263281919164925,
+              "pUnder": 0.4736718080835075
+            },
+            {
+              "playerId": "cs2-player-23397",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 6,
+              "mean": 17.7,
+              "pOver": 0.5839157940382043,
+              "pUnder": 0.4160842059617957
+            },
+            {
+              "playerId": "cs2-player-8183",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 6,
+              "mean": 19.2,
+              "pOver": 0.6839425351046193,
+              "pUnder": 0.3160574648953806
+            },
+            {
+              "playerId": "cs2-player-21816",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 6,
+              "mean": 14.4,
+              "pOver": 0.33668821100179547,
+              "pUnder": 0.6633117889982045
+            },
+            {
+              "playerId": "cs2-player-22695",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 6,
+              "mean": 19.9,
+              "pOver": 0.7589000343001768,
+              "pUnder": 0.24109996569982317
+            },
+            {
+              "playerId": "cs2-player-19537",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 5,
+              "mean": 16.1,
+              "pOver": 0.44641633500103484,
+              "pUnder": 0.5535836649989652
+            },
+            {
+              "playerId": "cs2-player-21428",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 5,
+              "mean": 16.1,
+              "pOver": 0.44641633500103484,
+              "pUnder": 0.5535836649989652
+            },
+            {
+              "playerId": "cs2-player-18638",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 5,
+              "mean": 13.1,
+              "pOver": 0.1811117004273236,
+              "pUnder": 0.8188882995726764
+            },
+            {
+              "playerId": "cs2-player-19229",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 5,
+              "mean": 17.9,
+              "pOver": 0.6105996619244878,
+              "pUnder": 0.38940033807551216
+            },
+            {
+              "playerId": "cs2-player-25510",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 5,
+              "mean": 18.6,
+              "pOver": 0.6600253430644799,
+              "pUnder": 0.3399746569355201
+            }
+          ]
+        },
+        {
+          "map": "Dust2",
+          "probabilityA": 0.6758122602720217,
+          "probabilityB": 0.3241877397279783,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21.7,
+          "rankedOpponentsA": 16,
+          "rankedOpponentsB": 12,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-7592",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 17,
+              "mean": 17,
+              "pOver": 0.5305350818887422,
+              "pUnder": 0.4694649181112578
+            },
+            {
+              "playerId": "cs2-player-23397",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 17,
+              "mean": 17.6,
+              "pOver": 0.5559240519159601,
+              "pUnder": 0.4440759480840399
+            },
+            {
+              "playerId": "cs2-player-8183",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 17,
+              "mean": 15.2,
+              "pOver": 0.3542851782338836,
+              "pUnder": 0.6457148217661164
+            },
+            {
+              "playerId": "cs2-player-21816",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 17,
+              "mean": 14.8,
+              "pOver": 0.31844656394889304,
+              "pUnder": 0.681553436051107
+            },
+            {
+              "playerId": "cs2-player-22695",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 17,
+              "mean": 16.1,
+              "pOver": 0.4358304368957071,
+              "pUnder": 0.5641695631042929
+            },
+            {
+              "playerId": "cs2-player-19537",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 14,
+              "mean": 13.3,
+              "pOver": 0.2766977150835155,
+              "pUnder": 0.7233022849164845
+            },
+            {
+              "playerId": "cs2-player-21428",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 14,
+              "mean": 11.7,
+              "pOver": 0.1504061575955118,
+              "pUnder": 0.8495938424044882
+            },
+            {
+              "playerId": "cs2-player-18638",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 15,
+              "mean": 14.6,
+              "pOver": 0.3395034994724855,
+              "pUnder": 0.6604965005275145
+            },
+            {
+              "playerId": "cs2-player-19229",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 15,
+              "mean": 12.8,
+              "pOver": 0.15795392399486963,
+              "pUnder": 0.8420460760051304
+            },
+            {
+              "playerId": "cs2-player-25510",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 12,
+              "mean": 16.2,
+              "pOver": 0.45460419746926783,
+              "pUnder": 0.5453958025307322
+            }
+          ]
+        },
+        {
+          "map": "Inferno",
+          "probabilityA": 0.551144038042173,
+          "probabilityB": 0.44885596195782695,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 22,
+          "rankedOpponentsA": 10,
+          "rankedOpponentsB": 13,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-7592",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 10,
+              "mean": 16,
+              "pOver": 0.4360256021444191,
+              "pUnder": 0.5639743978555809
+            },
+            {
+              "playerId": "cs2-player-23397",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 10,
+              "mean": 13.3,
+              "pOver": 0.27607091758158775,
+              "pUnder": 0.7239290824184123
+            },
+            {
+              "playerId": "cs2-player-8183",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 10,
+              "mean": 17.7,
+              "pOver": 0.5874073467489941,
+              "pUnder": 0.4125926532510059
+            },
+            {
+              "playerId": "cs2-player-21816",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 10,
+              "mean": 15.4,
+              "pOver": 0.3779898756900587,
+              "pUnder": 0.6220101243099413
+            },
+            {
+              "playerId": "cs2-player-22695",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 10,
+              "mean": 14.9,
+              "pOver": 0.3375679672104889,
+              "pUnder": 0.6624320327895111
+            },
+            {
+              "playerId": "cs2-player-19537",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 16,
+              "mean": 14.1,
+              "pOver": 0.2863455319759103,
+              "pUnder": 0.7136544680240897
+            },
+            {
+              "playerId": "cs2-player-21428",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 16,
+              "mean": 11.3,
+              "pOver": 0.10804494442874457,
+              "pUnder": 0.8919550555712554
+            },
+            {
+              "playerId": "cs2-player-18638",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 16,
+              "mean": 16,
+              "pOver": 0.42756657832997336,
+              "pUnder": 0.5724334216700266
+            },
+            {
+              "playerId": "cs2-player-19229",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 16,
+              "mean": 13.1,
+              "pOver": 0.1831462997908777,
+              "pUnder": 0.8168537002091223
+            },
+            {
+              "playerId": "cs2-player-25510",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 13,
+              "mean": 14.4,
+              "pOver": 0.32544645417897555,
+              "pUnder": 0.6745535458210244
+            }
+          ]
+        },
+        {
+          "map": "Mirage",
+          "probabilityA": 0.5314693517927392,
+          "probabilityB": 0.46853064820726076,
+          "modelStatus": "unadjusted",
+          "method": "baseline 90d: ranking + win rates; opponent adjustment unavailable",
+          "expectedRounds": 20.8,
+          "rankedOpponentsA": 8,
+          "rankedOpponentsB": 4,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-7592",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 9,
+              "mean": 15.1,
+              "pOver": 0.35040539357389144,
+              "pUnder": 0.6495946064261086
+            },
+            {
+              "playerId": "cs2-player-23397",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 9,
+              "mean": 17.8,
+              "pOver": 0.5966142783960114,
+              "pUnder": 0.40338572160398856
+            },
+            {
+              "playerId": "cs2-player-8183",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 9,
+              "mean": 12.6,
+              "pOver": 0.1428682624251314,
+              "pUnder": 0.8571317375748686
+            },
+            {
+              "playerId": "cs2-player-21816",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 9,
+              "mean": 13.4,
+              "pOver": 0.22321775361383156,
+              "pUnder": 0.7767822463861684
+            },
+            {
+              "playerId": "cs2-player-22695",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 9,
+              "mean": 14.2,
+              "pOver": 0.3228208320588073,
+              "pUnder": 0.6771791679411927
+            },
+            {
+              "playerId": "cs2-player-19537",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 5,
+              "mean": 19.8,
+              "pOver": 0.7389551858881644,
+              "pUnder": 0.26104481411183555
+            },
+            {
+              "playerId": "cs2-player-21428",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 5,
+              "mean": 14.4,
+              "pOver": 0.32675898364717726,
+              "pUnder": 0.6732410163528227
+            },
+            {
+              "playerId": "cs2-player-18638",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 6,
+              "mean": 19.2,
+              "pOver": 0.7070658646355423,
+              "pUnder": 0.29293413536445767
+            },
+            {
+              "playerId": "cs2-player-19229",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 6,
+              "mean": 11.1,
+              "pOver": 0.0644748625567414,
+              "pUnder": 0.9355251374432586
+            },
+            {
+              "playerId": "cs2-player-25510",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Nuke",
+          "probabilityA": 0.4969360633748837,
+          "probabilityB": 0.5030639366251163,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 20.1,
+          "rankedOpponentsA": 6,
+          "rankedOpponentsB": 15,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-7592",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 6,
+              "mean": 16.4,
+              "pOver": 0.4430140702135542,
+              "pUnder": 0.5569859297864458
+            },
+            {
+              "playerId": "cs2-player-23397",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 6,
+              "mean": 13,
+              "pOver": 0.19419586378715414,
+              "pUnder": 0.8058041362128459
+            },
+            {
+              "playerId": "cs2-player-8183",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 6,
+              "mean": 13.4,
+              "pOver": 0.2760618150918467,
+              "pUnder": 0.7239381849081533
+            },
+            {
+              "playerId": "cs2-player-21816",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 6,
+              "mean": 10,
+              "pOver": 0.0682049317722937,
+              "pUnder": 0.9317950682277063
+            },
+            {
+              "playerId": "cs2-player-22695",
+              "teamId": "cs2-team-8474",
+              "line": 16.5,
+              "n": 6,
+              "mean": 13.4,
+              "pOver": 0.221637694684384,
+              "pUnder": 0.778362305315616
+            },
+            {
+              "playerId": "cs2-player-19537",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 20,
+              "mean": 12.8,
+              "pOver": 0.18418585732125192,
+              "pUnder": 0.8158141426787481
+            },
+            {
+              "playerId": "cs2-player-21428",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 20,
+              "mean": 12.3,
+              "pOver": 0.16913438660803415,
+              "pUnder": 0.8308656133919659
+            },
+            {
+              "playerId": "cs2-player-18638",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 23,
+              "mean": 13.4,
+              "pOver": 0.19928422571842452,
+              "pUnder": 0.8007157742815755
+            },
+            {
+              "playerId": "cs2-player-19229",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 23,
+              "mean": 12.3,
+              "pOver": 0.19228104457606587,
+              "pUnder": 0.8077189554239341
+            },
+            {
+              "playerId": "cs2-player-25510",
+              "teamId": "cs2-team-12646",
+              "line": 16.5,
+              "n": 17,
+              "mean": 14,
+              "pOver": 0.25767037038506213,
+              "pUnder": 0.7423296296149379
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400498",
+      "startsAt": "2026-11-24T06:00:00.000Z",
+      "teamA": {
+        "id": "cs2-team-5973",
+        "name": "Liquid"
+      },
+      "teamB": {
+        "id": "cs2-team-12878",
+        "name": "BC.Game"
+      },
+      "maps": [
+        {
+          "map": "Ancient",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 0,
+          "rankedOpponentsB": 7,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-24203",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-11630",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-11617",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8738",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8520",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-7998",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 7,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18545",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 7,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20903",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 7,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21001",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 7,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-9032",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 7,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Anubis",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 9,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-24203",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 9,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-11630",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 9,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-11617",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 9,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8738",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 9,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8520",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 9,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-7998",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18545",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20903",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21001",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-9032",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Cache",
+          "probabilityA": 0.5519132430960224,
+          "probabilityB": 0.4480867569039776,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 23,
+          "rankedOpponentsA": 10,
+          "rankedOpponentsB": 9,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-24203",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 10,
+              "mean": 15,
+              "pOver": 0.35090438751946107,
+              "pUnder": 0.6490956124805389
+            },
+            {
+              "playerId": "cs2-player-11630",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 10,
+              "mean": 12.2,
+              "pOver": 0.2179394064928616,
+              "pUnder": 0.7820605935071384
+            },
+            {
+              "playerId": "cs2-player-11617",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 9,
+              "mean": 14.7,
+              "pOver": 0.34192609257028617,
+              "pUnder": 0.6580739074297138
+            },
+            {
+              "playerId": "cs2-player-8738",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 10,
+              "mean": 18,
+              "pOver": 0.5773478952202304,
+              "pUnder": 0.4226521047797695
+            },
+            {
+              "playerId": "cs2-player-8520",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 10,
+              "mean": 14.3,
+              "pOver": 0.3170377599279909,
+              "pUnder": 0.6829622400720091
+            },
+            {
+              "playerId": "cs2-player-7998",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 9,
+              "mean": 16.5,
+              "pOver": 0.4657818445382579,
+              "pUnder": 0.5342181554617421
+            },
+            {
+              "playerId": "cs2-player-18545",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 9,
+              "mean": 12.5,
+              "pOver": 0.16227635065628787,
+              "pUnder": 0.8377236493437121
+            },
+            {
+              "playerId": "cs2-player-20903",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 9,
+              "mean": 16.8,
+              "pOver": 0.5090654602197626,
+              "pUnder": 0.49093453978023743
+            },
+            {
+              "playerId": "cs2-player-21001",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 9,
+              "mean": 13.4,
+              "pOver": 0.24110101206796286,
+              "pUnder": 0.7588989879320371
+            },
+            {
+              "playerId": "cs2-player-9032",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 9,
+              "mean": 10.9,
+              "pOver": 0.0910963345086262,
+              "pUnder": 0.9089036654913738
+            }
+          ]
+        },
+        {
+          "map": "Dust2",
+          "probabilityA": 0.41697710521578446,
+          "probabilityB": 0.5830228947842155,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 19.9,
+          "rankedOpponentsA": 6,
+          "rankedOpponentsB": 6,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-24203",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 6,
+              "mean": 11.9,
+              "pOver": 0.10260639086788159,
+              "pUnder": 0.8973936091321184
+            },
+            {
+              "playerId": "cs2-player-11630",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 6,
+              "mean": 11.7,
+              "pOver": 0.1747768644516372,
+              "pUnder": 0.8252231355483628
+            },
+            {
+              "playerId": "cs2-player-11617",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 6,
+              "mean": 10.4,
+              "pOver": 0.04167399355275281,
+              "pUnder": 0.9583260064472472
+            },
+            {
+              "playerId": "cs2-player-8738",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 6,
+              "mean": 12.5,
+              "pOver": 0.14142649495337034,
+              "pUnder": 0.8585735050466297
+            },
+            {
+              "playerId": "cs2-player-8520",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 6,
+              "mean": 11,
+              "pOver": 0.06433388442511889,
+              "pUnder": 0.9356661155748811
+            },
+            {
+              "playerId": "cs2-player-7998",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 7,
+              "mean": 13.3,
+              "pOver": 0.19806761515906923,
+              "pUnder": 0.8019323848409308
+            },
+            {
+              "playerId": "cs2-player-18545",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 6,
+              "mean": 10.4,
+              "pOver": 0.10038682131017429,
+              "pUnder": 0.8996131786898257
+            },
+            {
+              "playerId": "cs2-player-20903",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 7,
+              "mean": 14.9,
+              "pOver": 0.3597440198729711,
+              "pUnder": 0.6402559801270289
+            },
+            {
+              "playerId": "cs2-player-21001",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 7,
+              "mean": 13.1,
+              "pOver": 0.2755673109308998,
+              "pUnder": 0.7244326890691002
+            },
+            {
+              "playerId": "cs2-player-9032",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 7,
+              "mean": 12.6,
+              "pOver": 0.14270113943966178,
+              "pUnder": 0.8572988605603382
+            }
+          ]
+        },
+        {
+          "map": "Inferno",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 12,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-24203",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 12,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-11630",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 12,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-11617",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 12,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8738",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 12,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8520",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 12,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-7998",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18545",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20903",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21001",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-9032",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Mirage",
+          "probabilityA": 0.6290635741017121,
+          "probabilityB": 0.3709364258982879,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 22.4,
+          "rankedOpponentsA": 11,
+          "rankedOpponentsB": 6,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-24203",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 12,
+              "mean": 16.2,
+              "pOver": 0.44989107414819973,
+              "pUnder": 0.5501089258518003
+            },
+            {
+              "playerId": "cs2-player-11630",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 12,
+              "mean": 12,
+              "pOver": 0.11212099505837636,
+              "pUnder": 0.8878790049416236
+            },
+            {
+              "playerId": "cs2-player-11617",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 10,
+              "mean": 17.7,
+              "pOver": 0.5869493708948297,
+              "pUnder": 0.41305062910517026
+            },
+            {
+              "playerId": "cs2-player-8738",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 12,
+              "mean": 18.9,
+              "pOver": 0.6861682036935609,
+              "pUnder": 0.3138317963064391
+            },
+            {
+              "playerId": "cs2-player-8520",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 12,
+              "mean": 15.4,
+              "pOver": 0.37995922303929486,
+              "pUnder": 0.6200407769607051
+            },
+            {
+              "playerId": "cs2-player-7998",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 6,
+              "mean": 11.9,
+              "pOver": 0.10641480055729624,
+              "pUnder": 0.8935851994427038
+            },
+            {
+              "playerId": "cs2-player-18545",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 5,
+              "mean": 11,
+              "pOver": 0.07226033093150486,
+              "pUnder": 0.9277396690684951
+            },
+            {
+              "playerId": "cs2-player-20903",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 6,
+              "mean": 14,
+              "pOver": 0.24803284049676944,
+              "pUnder": 0.7519671595032306
+            },
+            {
+              "playerId": "cs2-player-21001",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 6,
+              "mean": 14.3,
+              "pOver": 0.27452908110981544,
+              "pUnder": 0.7254709188901846
+            },
+            {
+              "playerId": "cs2-player-9032",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 6,
+              "mean": 13.5,
+              "pOver": 0.2644182075826451,
+              "pUnder": 0.7355817924173549
+            }
+          ]
+        },
+        {
+          "map": "Nuke",
+          "probabilityA": 0.5199410328779788,
+          "probabilityB": 0.48005896712202123,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 23.1,
+          "rankedOpponentsA": 10,
+          "rankedOpponentsB": 8,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-24203",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 11,
+              "mean": 15.6,
+              "pOver": 0.40250587236435065,
+              "pUnder": 0.5974941276356494
+            },
+            {
+              "playerId": "cs2-player-11630",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 11,
+              "mean": 14.7,
+              "pOver": 0.3405573601403159,
+              "pUnder": 0.6594426398596841
+            },
+            {
+              "playerId": "cs2-player-11617",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 9,
+              "mean": 15.4,
+              "pOver": 0.3795398192853189,
+              "pUnder": 0.6204601807146811
+            },
+            {
+              "playerId": "cs2-player-8738",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 11,
+              "mean": 17.9,
+              "pOver": 0.5978840399789513,
+              "pUnder": 0.4021159600210486
+            },
+            {
+              "playerId": "cs2-player-8520",
+              "teamId": "cs2-team-5973",
+              "line": 16.5,
+              "n": 11,
+              "mean": 16.5,
+              "pOver": 0.4781347941298363,
+              "pUnder": 0.5218652058701637
+            },
+            {
+              "playerId": "cs2-player-7998",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 8,
+              "mean": 18.5,
+              "pOver": 0.6289503879216134,
+              "pUnder": 0.37104961207838666
+            },
+            {
+              "playerId": "cs2-player-18545",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 6,
+              "mean": 14,
+              "pOver": 0.27714632123564764,
+              "pUnder": 0.7228536787643524
+            },
+            {
+              "playerId": "cs2-player-20903",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 8,
+              "mean": 16.2,
+              "pOver": 0.4453865547916429,
+              "pUnder": 0.5546134452083571
+            },
+            {
+              "playerId": "cs2-player-21001",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 8,
+              "mean": 14.7,
+              "pOver": 0.3496654639076566,
+              "pUnder": 0.6503345360923434
+            },
+            {
+              "playerId": "cs2-player-9032",
+              "teamId": "cs2-team-12878",
+              "line": 16.5,
+              "n": 8,
+              "mean": 13.4,
+              "pOver": 0.20388372541500244,
+              "pUnder": 0.7961162745849976
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400499",
+      "startsAt": "2026-11-24T06:00:00.000Z",
+      "teamA": {
+        "id": "cs2-team-12467",
+        "name": "PARIVISION"
+      },
+      "teamB": {
+        "id": "cs2-team-13926",
+        "name": "DENDELE"
+      },
+      "maps": [
+        {
+          "map": "Ancient",
+          "probabilityA": 0.5732370617706387,
+          "probabilityB": 0.4267629382293613,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21.5,
+          "rankedOpponentsA": 16,
+          "rankedOpponentsB": 9,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-13776",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 17,
+              "mean": 14.4,
+              "pOver": 0.286181336502762,
+              "pUnder": 0.713818663497238
+            },
+            {
+              "playerId": "cs2-player-22471",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 17,
+              "mean": 17,
+              "pOver": 0.5151822107240791,
+              "pUnder": 0.4848177892759209
+            },
+            {
+              "playerId": "cs2-player-12732",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 17,
+              "mean": 14.3,
+              "pOver": 0.31404723393104017,
+              "pUnder": 0.6859527660689598
+            },
+            {
+              "playerId": "cs2-player-23685",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 17,
+              "mean": 12.7,
+              "pOver": 0.20978136077514842,
+              "pUnder": 0.7902186392248516
+            },
+            {
+              "playerId": "cs2-player-8528",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 14,
+              "mean": 15,
+              "pOver": 0.3500036147453732,
+              "pUnder": 0.6499963852546268
+            },
+            {
+              "playerId": "cs2-player-21221",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 11,
+              "mean": 14.4,
+              "pOver": 0.33586491862787793,
+              "pUnder": 0.6641350813721221
+            },
+            {
+              "playerId": "cs2-player-21921",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 11,
+              "mean": 11.5,
+              "pOver": 0.1883709652098725,
+              "pUnder": 0.8116290347901275
+            },
+            {
+              "playerId": "cs2-player-20558",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 11,
+              "mean": 12.1,
+              "pOver": 0.12825722326111821,
+              "pUnder": 0.8717427767388818
+            },
+            {
+              "playerId": "cs2-player-22911",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 11,
+              "mean": 16,
+              "pOver": 0.4295882466008726,
+              "pUnder": 0.5704117533991274
+            },
+            {
+              "playerId": "cs2-player-21170",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 11,
+              "mean": 15.1,
+              "pOver": 0.34526854936732665,
+              "pUnder": 0.6547314506326734
+            }
+          ]
+        },
+        {
+          "map": "Anubis",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 4,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-13776",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 5,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22471",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 5,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-12732",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 5,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-23685",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 5,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8528",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 5,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21221",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21921",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20558",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22911",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21170",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Cache",
+          "probabilityA": 0.5028063782745601,
+          "probabilityB": 0.4971936217254399,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 22.2,
+          "rankedOpponentsA": 5,
+          "rankedOpponentsB": 12,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-13776",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 5,
+              "mean": 13.7,
+              "pOver": 0.22704415191077265,
+              "pUnder": 0.7729558480892273
+            },
+            {
+              "playerId": "cs2-player-22471",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 5,
+              "mean": 14.7,
+              "pOver": 0.3419154935412718,
+              "pUnder": 0.6580845064587282
+            },
+            {
+              "playerId": "cs2-player-12732",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 5,
+              "mean": 15.5,
+              "pOver": 0.3835189775040646,
+              "pUnder": 0.6164810224959354
+            },
+            {
+              "playerId": "cs2-player-23685",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 5,
+              "mean": 11.5,
+              "pOver": 0.09804811964124305,
+              "pUnder": 0.901951880358757
+            },
+            {
+              "playerId": "cs2-player-8528",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 5,
+              "mean": 13.1,
+              "pOver": 0.1817065817817154,
+              "pUnder": 0.8182934182182846
+            },
+            {
+              "playerId": "cs2-player-21221",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 13,
+              "mean": 12.5,
+              "pOver": 0.17983474651420628,
+              "pUnder": 0.8201652534857937
+            },
+            {
+              "playerId": "cs2-player-21921",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 13,
+              "mean": 14.3,
+              "pOver": 0.3263308903829468,
+              "pUnder": 0.6736691096170532
+            },
+            {
+              "playerId": "cs2-player-20558",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 13,
+              "mean": 11.6,
+              "pOver": 0.08778209608675769,
+              "pUnder": 0.9122179039132423
+            },
+            {
+              "playerId": "cs2-player-22911",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 13,
+              "mean": 15.4,
+              "pOver": 0.38870051169768727,
+              "pUnder": 0.6112994883023127
+            },
+            {
+              "playerId": "cs2-player-21170",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 13,
+              "mean": 14.4,
+              "pOver": 0.3281773015546915,
+              "pUnder": 0.6718226984453085
+            }
+          ]
+        },
+        {
+          "map": "Dust2",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 8,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-13776",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 9,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22471",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 9,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-12732",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 9,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-23685",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 9,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8528",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 9,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21221",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21921",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20558",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22911",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21170",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Inferno",
+          "probabilityA": 0.4876431681854264,
+          "probabilityB": 0.5123568318145736,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21.9,
+          "rankedOpponentsA": 12,
+          "rankedOpponentsB": 8,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-13776",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 12,
+              "mean": 14.9,
+              "pOver": 0.3408022718912709,
+              "pUnder": 0.6591977281087291
+            },
+            {
+              "playerId": "cs2-player-22471",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 12,
+              "mean": 15,
+              "pOver": 0.35687406198450256,
+              "pUnder": 0.6431259380154974
+            },
+            {
+              "playerId": "cs2-player-12732",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 12,
+              "mean": 14.1,
+              "pOver": 0.2931363970237104,
+              "pUnder": 0.7068636029762896
+            },
+            {
+              "playerId": "cs2-player-23685",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 12,
+              "mean": 14.4,
+              "pOver": 0.28971431096074085,
+              "pUnder": 0.7102856890392591
+            },
+            {
+              "playerId": "cs2-player-8528",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 9,
+              "mean": 13.4,
+              "pOver": 0.24653791989675733,
+              "pUnder": 0.7534620801032427
+            },
+            {
+              "playerId": "cs2-player-21221",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 10,
+              "mean": 13,
+              "pOver": 0.2335886134995292,
+              "pUnder": 0.7664113865004708
+            },
+            {
+              "playerId": "cs2-player-21921",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 10,
+              "mean": 13.2,
+              "pOver": 0.18598058372933612,
+              "pUnder": 0.8140194162706639
+            },
+            {
+              "playerId": "cs2-player-20558",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 10,
+              "mean": 11.4,
+              "pOver": 0.08905232553041342,
+              "pUnder": 0.9109476744695866
+            },
+            {
+              "playerId": "cs2-player-22911",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 10,
+              "mean": 15,
+              "pOver": 0.36245884799780737,
+              "pUnder": 0.6375411520021926
+            },
+            {
+              "playerId": "cs2-player-21170",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 10,
+              "mean": 18.1,
+              "pOver": 0.5928305471051906,
+              "pUnder": 0.40716945289480944
+            }
+          ]
+        },
+        {
+          "map": "Mirage",
+          "probabilityA": 0.5271801727189315,
+          "probabilityB": 0.4728198272810685,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 23.2,
+          "rankedOpponentsA": 8,
+          "rankedOpponentsB": 12,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-13776",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 8,
+              "mean": 17.2,
+              "pOver": 0.5473219656949981,
+              "pUnder": 0.4526780343050018
+            },
+            {
+              "playerId": "cs2-player-22471",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 8,
+              "mean": 19.8,
+              "pOver": 0.6732761632506623,
+              "pUnder": 0.3267238367493377
+            },
+            {
+              "playerId": "cs2-player-12732",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 8,
+              "mean": 14.4,
+              "pOver": 0.31360027374379607,
+              "pUnder": 0.6863997262562039
+            },
+            {
+              "playerId": "cs2-player-23685",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 8,
+              "mean": 15.3,
+              "pOver": 0.3703713949866201,
+              "pUnder": 0.6296286050133799
+            },
+            {
+              "playerId": "cs2-player-8528",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 8,
+              "mean": 13.7,
+              "pOver": 0.22656238549538155,
+              "pUnder": 0.7734376145046185
+            },
+            {
+              "playerId": "cs2-player-21221",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 13,
+              "mean": 13,
+              "pOver": 0.21663051489973661,
+              "pUnder": 0.7833694851002634
+            },
+            {
+              "playerId": "cs2-player-21921",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 13,
+              "mean": 14.1,
+              "pOver": 0.2869310016484,
+              "pUnder": 0.7130689983516
+            },
+            {
+              "playerId": "cs2-player-20558",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 13,
+              "mean": 12.3,
+              "pOver": 0.13724406226923314,
+              "pUnder": 0.8627559377307669
+            },
+            {
+              "playerId": "cs2-player-22911",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 13,
+              "mean": 16.7,
+              "pOver": 0.46786120125600805,
+              "pUnder": 0.532138798743992
+            },
+            {
+              "playerId": "cs2-player-21170",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 13,
+              "mean": 12.7,
+              "pOver": 0.1601199983892866,
+              "pUnder": 0.8398800016107134
+            }
+          ]
+        },
+        {
+          "map": "Nuke",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 0,
+          "rankedOpponentsB": 8,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-13776",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22471",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-12732",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-23685",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8528",
+              "teamId": "cs2-team-12467",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21221",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21921",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20558",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22911",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21170",
+              "teamId": "cs2-team-13926",
+              "line": 16.5,
+              "n": 8,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400500",
+      "startsAt": "2026-11-24T07:00:00.000Z",
+      "teamA": {
+        "id": "cs2-team-6667",
+        "name": "FaZe"
+      },
+      "teamB": {
+        "id": "cs2-team-12257",
+        "name": "Wildcard"
+      },
+      "maps": [
+        {
+          "map": "Ancient",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 13,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-22866",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 13,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-10394",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 13,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22383",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 13,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21972",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 13,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-9960",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 13,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20018",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-17353",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8311",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18838",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-17378",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Anubis",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 6,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-22866",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 6,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-10394",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 6,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22383",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 5,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21972",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 6,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-9960",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 6,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20018",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-17353",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8311",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18838",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-17378",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 2,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Cache",
+          "probabilityA": 0.5109099574896887,
+          "probabilityB": 0.4890900425103113,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 23.9,
+          "rankedOpponentsA": 5,
+          "rankedOpponentsB": 7,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-22866",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 5,
+              "mean": 19.1,
+              "pOver": 0.6658519061189928,
+              "pUnder": 0.3341480938810072
+            },
+            {
+              "playerId": "cs2-player-10394",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 5,
+              "mean": 18.7,
+              "pOver": 0.6578027038347225,
+              "pUnder": 0.34219729616527744
+            },
+            {
+              "playerId": "cs2-player-22383",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 5,
+              "mean": 13.9,
+              "pOver": 0.25980221490515043,
+              "pUnder": 0.7401977850948496
+            },
+            {
+              "playerId": "cs2-player-21972",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 5,
+              "mean": 14.5,
+              "pOver": 0.29449412476438597,
+              "pUnder": 0.705505875235614
+            },
+            {
+              "playerId": "cs2-player-9960",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 5,
+              "mean": 12.8,
+              "pOver": 0.15629470056747385,
+              "pUnder": 0.8437052994325261
+            },
+            {
+              "playerId": "cs2-player-20018",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 5,
+              "mean": 14.6,
+              "pOver": 0.34366262758878363,
+              "pUnder": 0.6563373724112164
+            },
+            {
+              "playerId": "cs2-player-17353",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 7,
+              "mean": 17.5,
+              "pOver": 0.5172543718358001,
+              "pUnder": 0.48274562816419986
+            },
+            {
+              "playerId": "cs2-player-8311",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 7,
+              "mean": 14.1,
+              "pOver": 0.27285515620875556,
+              "pUnder": 0.7271448437912444
+            },
+            {
+              "playerId": "cs2-player-18838",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 7,
+              "mean": 16.7,
+              "pOver": 0.4965754351387234,
+              "pUnder": 0.5034245648612766
+            },
+            {
+              "playerId": "cs2-player-17378",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 7,
+              "mean": 14.1,
+              "pOver": 0.26431038017221153,
+              "pUnder": 0.7356896198277885
+            }
+          ]
+        },
+        {
+          "map": "Dust2",
+          "probabilityA": 0.5469504877136303,
+          "probabilityB": 0.4530495122863697,
+          "modelStatus": "unadjusted",
+          "method": "baseline 90d: ranking + win rates; opponent adjustment unavailable",
+          "expectedRounds": 22,
+          "rankedOpponentsA": 10,
+          "rankedOpponentsB": 4,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-22866",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 13.5,
+              "pOver": 0.20730773604839703,
+              "pUnder": 0.792692263951603
+            },
+            {
+              "playerId": "cs2-player-10394",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 16.3,
+              "pOver": 0.46189845470436186,
+              "pUnder": 0.5381015452956381
+            },
+            {
+              "playerId": "cs2-player-22383",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 12.9,
+              "pOver": 0.16527627309177484,
+              "pUnder": 0.8347237269082252
+            },
+            {
+              "playerId": "cs2-player-21972",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 12.9,
+              "pOver": 0.17138141736977097,
+              "pUnder": 0.828618582630229
+            },
+            {
+              "playerId": "cs2-player-9960",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 16.1,
+              "pOver": 0.43244754253960227,
+              "pUnder": 0.5675524574603977
+            },
+            {
+              "playerId": "cs2-player-20018",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 4,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-17353",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 5,
+              "mean": 14.5,
+              "pOver": 0.3211279929908568,
+              "pUnder": 0.6788720070091432
+            },
+            {
+              "playerId": "cs2-player-8311",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 5,
+              "mean": 13.9,
+              "pOver": 0.24186060669534837,
+              "pUnder": 0.7581393933046516
+            },
+            {
+              "playerId": "cs2-player-18838",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 5,
+              "mean": 15,
+              "pOver": 0.3587254423720514,
+              "pUnder": 0.6412745576279486
+            },
+            {
+              "playerId": "cs2-player-17378",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 5,
+              "mean": 13.2,
+              "pOver": 0.2713128406079275,
+              "pUnder": 0.7286871593920725
+            }
+          ]
+        },
+        {
+          "map": "Inferno",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 0,
+          "rankedOpponentsB": 12,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-22866",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-10394",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22383",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21972",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-9960",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20018",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 11,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-17353",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 13,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-8311",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 13,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18838",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 13,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-17378",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 13,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Mirage",
+          "probabilityA": 0.6292823275963614,
+          "probabilityB": 0.3707176724036386,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 22.4,
+          "rankedOpponentsA": 10,
+          "rankedOpponentsB": 12,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-22866",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 13.4,
+              "pOver": 0.222385766626489,
+              "pUnder": 0.777614233373511
+            },
+            {
+              "playerId": "cs2-player-10394",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 16.1,
+              "pOver": 0.44278731358980916,
+              "pUnder": 0.5572126864101908
+            },
+            {
+              "playerId": "cs2-player-22383",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 16.8,
+              "pOver": 0.49412771441799175,
+              "pUnder": 0.5058722855820083
+            },
+            {
+              "playerId": "cs2-player-21972",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 12.6,
+              "pOver": 0.14497312537271023,
+              "pUnder": 0.8550268746272898
+            },
+            {
+              "playerId": "cs2-player-9960",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 16.3,
+              "pOver": 0.46023929661769747,
+              "pUnder": 0.5397607033823025
+            },
+            {
+              "playerId": "cs2-player-20018",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 10,
+              "mean": 14.8,
+              "pOver": 0.34089049317619124,
+              "pUnder": 0.6591095068238088
+            },
+            {
+              "playerId": "cs2-player-17353",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 12,
+              "mean": 12.6,
+              "pOver": 0.1462466694050607,
+              "pUnder": 0.8537533305949393
+            },
+            {
+              "playerId": "cs2-player-8311",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 12,
+              "mean": 12.6,
+              "pOver": 0.2049322149406464,
+              "pUnder": 0.7950677850593536
+            },
+            {
+              "playerId": "cs2-player-18838",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 12,
+              "mean": 12.6,
+              "pOver": 0.20047782418647198,
+              "pUnder": 0.799522175813528
+            },
+            {
+              "playerId": "cs2-player-17378",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 12,
+              "mean": 12.8,
+              "pOver": 0.2390406888210045,
+              "pUnder": 0.7609593111789955
+            }
+          ]
+        },
+        {
+          "map": "Nuke",
+          "probabilityA": 0.5170813868963531,
+          "probabilityB": 0.4829186131036469,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 21.1,
+          "rankedOpponentsA": 10,
+          "rankedOpponentsB": 10,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-22866",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 15.4,
+              "pOver": 0.3741810946851776,
+              "pUnder": 0.6258189053148224
+            },
+            {
+              "playerId": "cs2-player-10394",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 15.7,
+              "pOver": 0.40962009898441565,
+              "pUnder": 0.5903799010155844
+            },
+            {
+              "playerId": "cs2-player-22383",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 13.7,
+              "pOver": 0.23634818221135945,
+              "pUnder": 0.7636518177886406
+            },
+            {
+              "playerId": "cs2-player-21972",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 12.3,
+              "pOver": 0.13344446433514778,
+              "pUnder": 0.8665555356648522
+            },
+            {
+              "playerId": "cs2-player-9960",
+              "teamId": "cs2-team-6667",
+              "line": 16.5,
+              "n": 10,
+              "mean": 13.6,
+              "pOver": 0.2440789298159841,
+              "pUnder": 0.7559210701840159
+            },
+            {
+              "playerId": "cs2-player-20018",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 9,
+              "mean": 12.3,
+              "pOver": 0.1413190340249637,
+              "pUnder": 0.8586809659750363
+            },
+            {
+              "playerId": "cs2-player-17353",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 11,
+              "mean": 11.5,
+              "pOver": 0.118691526400305,
+              "pUnder": 0.881308473599695
+            },
+            {
+              "playerId": "cs2-player-8311",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 11,
+              "mean": 14,
+              "pOver": 0.2755284400129676,
+              "pUnder": 0.7244715599870324
+            },
+            {
+              "playerId": "cs2-player-18838",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 11,
+              "mean": 13.6,
+              "pOver": 0.25081978323439336,
+              "pUnder": 0.7491802167656066
+            },
+            {
+              "playerId": "cs2-player-17378",
+              "teamId": "cs2-team-12257",
+              "line": 16.5,
+              "n": 11,
+              "mean": 13.6,
+              "pOver": 0.2791942870143036,
+              "pUnder": 0.7208057129856964
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "matchId": "cs2-match-2400501",
+      "startsAt": "2026-11-24T07:00:00.000Z",
+      "teamA": {
+        "id": "cs2-team-11251",
+        "name": "Eternal Fire"
+      },
+      "teamB": {
+        "id": "cs2-team-12774",
+        "name": "FlyQuest"
+      },
+      "maps": [
+        {
+          "map": "Ancient",
+          "probabilityA": 0.6178396868740927,
+          "probabilityB": 0.38216031312590726,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 22.8,
+          "rankedOpponentsA": 21,
+          "rankedOpponentsB": 7,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20123",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 25,
+              "mean": 16.6,
+              "pOver": 0.483571934424721,
+              "pUnder": 0.516428065575279
+            },
+            {
+              "playerId": "cs2-player-22361",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 25,
+              "mean": 17.3,
+              "pOver": 0.5428675472929717,
+              "pUnder": 0.4571324527070283
+            },
+            {
+              "playerId": "cs2-player-21452",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 25,
+              "mean": 17.5,
+              "pOver": 0.5578031583025571,
+              "pUnder": 0.4421968416974429
+            },
+            {
+              "playerId": "cs2-player-20968",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 25,
+              "mean": 15.3,
+              "pOver": 0.3699699482193255,
+              "pUnder": 0.6300300517806745
+            },
+            {
+              "playerId": "cs2-player-16811",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 25,
+              "mean": 13.5,
+              "pOver": 0.21304865532279105,
+              "pUnder": 0.786951344677209
+            },
+            {
+              "playerId": "cs2-player-11139",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 8,
+              "mean": 13.8,
+              "pOver": 0.300237979798032,
+              "pUnder": 0.699762020201968
+            },
+            {
+              "playerId": "cs2-player-18214",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 8,
+              "mean": 13,
+              "pOver": 0.17626470043467568,
+              "pUnder": 0.8237352995653243
+            },
+            {
+              "playerId": "cs2-player-17384",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 8,
+              "mean": 16,
+              "pOver": 0.4296744594925924,
+              "pUnder": 0.5703255405074076
+            },
+            {
+              "playerId": "cs2-player-4679",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 8,
+              "mean": 15.7,
+              "pOver": 0.4033547237882217,
+              "pUnder": 0.5966452762117783
+            },
+            {
+              "playerId": "cs2-player-11140",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 8,
+              "mean": 15.8,
+              "pOver": 0.41523225217141835,
+              "pUnder": 0.5847677478285817
+            }
+          ]
+        },
+        {
+          "map": "Anubis",
+          "probabilityA": 0.48561552451645623,
+          "probabilityB": 0.5143844754835438,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 22.1,
+          "rankedOpponentsA": 13,
+          "rankedOpponentsB": 11,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20123",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 14,
+              "mean": 14,
+              "pOver": 0.286437546383857,
+              "pUnder": 0.713562453616143
+            },
+            {
+              "playerId": "cs2-player-22361",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 14,
+              "mean": 16.1,
+              "pOver": 0.44332921940676484,
+              "pUnder": 0.5566707805932352
+            },
+            {
+              "playerId": "cs2-player-21452",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 14,
+              "mean": 15.3,
+              "pOver": 0.3732301016910673,
+              "pUnder": 0.6267698983089327
+            },
+            {
+              "playerId": "cs2-player-20968",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 14,
+              "mean": 16.1,
+              "pOver": 0.44292510755451076,
+              "pUnder": 0.5570748924454892
+            },
+            {
+              "playerId": "cs2-player-16811",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 14,
+              "mean": 12.4,
+              "pOver": 0.1824634249080238,
+              "pUnder": 0.8175365750919762
+            },
+            {
+              "playerId": "cs2-player-11139",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 11,
+              "mean": 12.2,
+              "pOver": 0.12185951612619639,
+              "pUnder": 0.8781404838738036
+            },
+            {
+              "playerId": "cs2-player-18214",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 11,
+              "mean": 12.5,
+              "pOver": 0.14444064998325123,
+              "pUnder": 0.8555593500167488
+            },
+            {
+              "playerId": "cs2-player-17384",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 11,
+              "mean": 16.6,
+              "pOver": 0.4677071999867556,
+              "pUnder": 0.5322928000132444
+            },
+            {
+              "playerId": "cs2-player-4679",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 11,
+              "mean": 16.9,
+              "pOver": 0.47220148513424254,
+              "pUnder": 0.5277985148657575
+            },
+            {
+              "playerId": "cs2-player-11140",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 11,
+              "mean": 13.4,
+              "pOver": 0.26645517173600486,
+              "pUnder": 0.7335448282639951
+            }
+          ]
+        },
+        {
+          "map": "Cache",
+          "probabilityA": 0.5452433758366054,
+          "probabilityB": 0.4547566241633946,
+          "modelStatus": "unadjusted",
+          "method": "baseline 90d: ranking + win rates; opponent adjustment unavailable",
+          "expectedRounds": 21,
+          "rankedOpponentsA": 23,
+          "rankedOpponentsB": 3,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20123",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 23,
+              "mean": 14.3,
+              "pOver": 0.2927567425459723,
+              "pUnder": 0.7072432574540277
+            },
+            {
+              "playerId": "cs2-player-22361",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 23,
+              "mean": 15.8,
+              "pOver": 0.42005774888992464,
+              "pUnder": 0.5799422511100754
+            },
+            {
+              "playerId": "cs2-player-21452",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 23,
+              "mean": 14.9,
+              "pOver": 0.3326763973669953,
+              "pUnder": 0.6673236026330047
+            },
+            {
+              "playerId": "cs2-player-20968",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 22,
+              "mean": 15.1,
+              "pOver": 0.3654620005965523,
+              "pUnder": 0.6345379994034477
+            },
+            {
+              "playerId": "cs2-player-16811",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 23,
+              "mean": 12.4,
+              "pOver": 0.13072030217122343,
+              "pUnder": 0.8692796978287766
+            },
+            {
+              "playerId": "cs2-player-11139",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 5,
+              "mean": 15.4,
+              "pOver": 0.3796734867176381,
+              "pUnder": 0.6203265132823619
+            },
+            {
+              "playerId": "cs2-player-18214",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 5,
+              "mean": 16.9,
+              "pOver": 0.5025803507951809,
+              "pUnder": 0.4974196492048191
+            },
+            {
+              "playerId": "cs2-player-17384",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 5,
+              "mean": 19,
+              "pOver": 0.6219862429760701,
+              "pUnder": 0.37801375702393
+            },
+            {
+              "playerId": "cs2-player-4679",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 5,
+              "mean": 15.6,
+              "pOver": 0.3944197689157054,
+              "pUnder": 0.6055802310842946
+            },
+            {
+              "playerId": "cs2-player-11140",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 5,
+              "mean": 15.6,
+              "pOver": 0.3984132221331165,
+              "pUnder": 0.6015867778668835
+            }
+          ]
+        },
+        {
+          "map": "Dust2",
+          "probabilityA": 0.513868532206499,
+          "probabilityB": 0.486131467793501,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 22,
+          "rankedOpponentsA": 16,
+          "rankedOpponentsB": 10,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20123",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 17,
+              "mean": 14.2,
+              "pOver": 0.265225604698456,
+              "pUnder": 0.734774395301544
+            },
+            {
+              "playerId": "cs2-player-22361",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 17,
+              "mean": 17.1,
+              "pOver": 0.5365039151564007,
+              "pUnder": 0.4634960848435993
+            },
+            {
+              "playerId": "cs2-player-21452",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 17,
+              "mean": 16.8,
+              "pOver": 0.5059982943799022,
+              "pUnder": 0.49400170562009776
+            },
+            {
+              "playerId": "cs2-player-20968",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 17,
+              "mean": 15.7,
+              "pOver": 0.40566684182222135,
+              "pUnder": 0.5943331581777787
+            },
+            {
+              "playerId": "cs2-player-16811",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 17,
+              "mean": 13.4,
+              "pOver": 0.201752400756125,
+              "pUnder": 0.798247599243875
+            },
+            {
+              "playerId": "cs2-player-11139",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 13,
+              "mean": 14,
+              "pOver": 0.24925921693282238,
+              "pUnder": 0.7507407830671776
+            },
+            {
+              "playerId": "cs2-player-18214",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 13,
+              "mean": 14.3,
+              "pOver": 0.2974042377649887,
+              "pUnder": 0.7025957622350113
+            },
+            {
+              "playerId": "cs2-player-17384",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 13,
+              "mean": 18.6,
+              "pOver": 0.5651599630805931,
+              "pUnder": 0.43484003691940687
+            },
+            {
+              "playerId": "cs2-player-4679",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 13,
+              "mean": 14.2,
+              "pOver": 0.29537639817221406,
+              "pUnder": 0.7046236018277859
+            },
+            {
+              "playerId": "cs2-player-11140",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 13,
+              "mean": 13.3,
+              "pOver": 0.22266183056257283,
+              "pUnder": 0.7773381694374272
+            }
+          ]
+        },
+        {
+          "map": "Inferno",
+          "probabilityA": 0.5148832688674788,
+          "probabilityB": 0.4851167311325212,
+          "modelStatus": "opponent_adjusted",
+          "method": "pre-match rank prior + shrunk map outcomes vs historical opponent ranks + round differential",
+          "expectedRounds": 20.2,
+          "rankedOpponentsA": 12,
+          "rankedOpponentsB": 15,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20123",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 14,
+              "mean": 14.3,
+              "pOver": 0.2983800680723888,
+              "pUnder": 0.7016199319276112
+            },
+            {
+              "playerId": "cs2-player-22361",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 14,
+              "mean": 15.8,
+              "pOver": 0.41560082549731214,
+              "pUnder": 0.5843991745026879
+            },
+            {
+              "playerId": "cs2-player-21452",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 14,
+              "mean": 18.4,
+              "pOver": 0.5853982117947663,
+              "pUnder": 0.4146017882052337
+            },
+            {
+              "playerId": "cs2-player-20968",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 14,
+              "mean": 15.8,
+              "pOver": 0.4119479186268198,
+              "pUnder": 0.5880520813731802
+            },
+            {
+              "playerId": "cs2-player-16811",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 14,
+              "mean": 10.4,
+              "pOver": 0.05264855860819684,
+              "pUnder": 0.9473514413918032
+            },
+            {
+              "playerId": "cs2-player-11139",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 18,
+              "mean": 14.2,
+              "pOver": 0.28608968801388834,
+              "pUnder": 0.7139103119861117
+            },
+            {
+              "playerId": "cs2-player-18214",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 18,
+              "mean": 13.2,
+              "pOver": 0.22834196517655658,
+              "pUnder": 0.7716580348234434
+            },
+            {
+              "playerId": "cs2-player-17384",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 18,
+              "mean": 13.2,
+              "pOver": 0.19653822175246982,
+              "pUnder": 0.8034617782475302
+            },
+            {
+              "playerId": "cs2-player-4679",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 18,
+              "mean": 14.3,
+              "pOver": 0.2756861195873762,
+              "pUnder": 0.7243138804126238
+            },
+            {
+              "playerId": "cs2-player-11140",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 18,
+              "mean": 11.9,
+              "pOver": 0.11252958171236072,
+              "pUnder": 0.8874704182876393
+            }
+          ]
+        },
+        {
+          "map": "Mirage",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 17,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20123",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 17,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22361",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 17,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21452",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 17,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20968",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 17,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-16811",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 17,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-11139",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18214",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-17384",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-4679",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-11140",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        },
+        {
+          "map": "Nuke",
+          "probabilityA": null,
+          "probabilityB": null,
+          "modelStatus": "insufficient_data",
+          "method": "insufficient",
+          "expectedRounds": null,
+          "rankedOpponentsA": 0,
+          "rankedOpponentsB": 0,
+          "playerForecasts": [
+            {
+              "playerId": "cs2-player-20123",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-22361",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-21452",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-20968",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-16811",
+              "teamId": "cs2-team-11251",
+              "line": 16.5,
+              "n": 0,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-11139",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-18214",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-17384",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-4679",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            },
+            {
+              "playerId": "cs2-player-11140",
+              "teamId": "cs2-team-12774",
+              "line": 16.5,
+              "n": 3,
+              "mean": null,
+              "pOver": null,
+              "pUnder": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
