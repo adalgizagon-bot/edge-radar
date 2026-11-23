@@ -3052,7 +3052,9 @@
           "impliedRaw": null,
           "v1P": null,
           "v2P": 0.5490119890200449,
-          "status": "unquoted_major_bo1"
+          "status": "unquoted_major_bo1",
+          "marketOverround": null,
+          "source": "sem_odds"
         },
         {
           "key": "bWin",
@@ -3063,7 +3065,9 @@
           "impliedRaw": null,
           "v1P": null,
           "v2P": 0.4509880109799551,
-          "status": "unquoted_major_bo1"
+          "status": "unquoted_major_bo1",
+          "marketOverround": null,
+          "source": "sem_odds"
         }
       ],
       "unmodeledRoundHandicaps": [],
