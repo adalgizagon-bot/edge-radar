@@ -110,7 +110,7 @@ test('browser does not reuse old BO1 JS bundles; update button refreshes HTML + 
  const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'../vercel.json'),'utf8'));
  assert.ok(html.includes('meta name="atlas-build"'));
  for(const name of ['radar-app.js','radar-core.js','major-map-core.js','major-map-workspace.js'])
-  assert.match(html,new RegExp(name.replace(/[.]/g,'\\.')+'\\?v=major-map-dynamic-20261123-b'));
+  assert.match(html,new RegExp(name.replace(/[.]/g,'\\.')+'\\?v=major-map-dynamic-20261123-c'));
  assert.ok(js.includes("url.searchParams.set('atlas_refresh'"));
  assert.ok(js.includes('window.location.replace(url.toString())'));
  assert.ok(cfg.headers.some(x=>x.headers.some(h=>h.key==='Cache-Control'&&/must-revalidate/.test(h.value))));
