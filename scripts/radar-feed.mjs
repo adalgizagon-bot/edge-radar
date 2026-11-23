@@ -22,23 +22,29 @@ function scoreMarketsFromFrozen(entry){
   odd:null,impliedNoVig:null,impliedRaw:null,v1P:entry.v1.score[key],v2P:entry.v2.score[key],
   marketOverround:null,source:'sem_odds',status:'unquoted'}));
 }
-export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quotes,prospective,completed,previousQuotes,seriesFrozen,forms,ranks,sync,nowIso}){
+export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quotes,prospective,completed,previousQuotes,seriesFrozen,forms,ranks,sync,majorOpening=null,majorAnalysis=null,majorLive=null,nowIso}){
  if(!goodDate(nowIso))throw Error('Invalid generatedAt');
- const snapshots=[...(snapshot?.matches||[]),...(nov19Context?.fixtures||[])];
+ const majorBase=(majorOpening?.fixtures||[]).map(g=>({...g,event:g.eventName||majorOpening.event?.name||'Major',
+   snapshotAt:majorOpening.capturedAt}));
+ const majorUpdates=(majorLive?.fixtures||[]).map(g=>({...g,event:g.eventName||'Major',
+   snapshotAt:g.snapshotAt||majorLive.fetchedAt}));
+ const snapshots=[...(snapshot?.matches||[]),...(nov19Context?.fixtures||[]),...majorBase,...majorUpdates];
  const matches=new Map();
  for(const g of snapshots){
   const id=g?.id||g?.matchId,at=g?.startTime||g?.startsAt;
   if(!id||!goodDate(at)||!g.teamA?.id||!g.teamB?.id)continue;
   const row={id,event:g.event||'CS2',eventId:g.eventId||null,startTime:at,teamA:g.teamA,teamB:g.teamB,
-   status:normStatus(g.status),source:g.snapshotAt||snapshot?.fetchedAt||null};
+   status:normStatus(g.status),bestOf:g.bestOf??null,stage:g.stage||null,source:g.snapshotAt||snapshot?.fetchedAt||null};
   // Prefer the specifically verified 19 Nov Cito snapshot over the older tournament photo.
   if(!matches.has(id)||(g.snapshotAt&&(!matches.get(id).source||Date.parse(g.snapshotAt)>=Date.parse(matches.get(id).source))))matches.set(id,row);
  }
- const done=byId(completed?.matches||[],'id');
+ const done=byId([...(completed?.matches||[]),...(majorLive?.results||[])],'id');
  const pre=byId(prospective?.forecasts||[],'matchId'),quote=byId(nov19Quotes?.matches||[],'matchId'),old=byId(seriesFrozen?.matches||[],'matchId');
  const snapshots19=byId(nov19Predictions?.metrics||[],'id');
  const formById=byId(forms?.teams||[]),rankById=byId(ranks?.ranks||[]);
  const priceOld=byId(previousQuotes?.odds||[],'matchId');
+ const majorById=byId(majorAnalysis?.forecasts||[],'matchId');
+ const majorTeamById=byId(majorOpening?.teams||[],'id');
  const out=[];
  for(const game of matches.values()){
   const resolved=done.get(game.id);
@@ -48,11 +54,23 @@ export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quot
   const status=isFinished?'completed':game.status;
   const forecastValid=Boolean(frozen&&goodDate(frozen.frozenAt)&&Date.parse(frozen.frozenAt)<start);
   const fore=forecastValid?frozen:null;
-  const model=fore?{v1:fore.v1?.pA??null,v2:fore.v2?.pA??null,
+  let model=fore?{v1:fore.v1?.pA??null,v2:fore.v2?.pA??null,
     frozenAt:fore.frozenAt,version:'V1 vs V2',status:'experimental',v1Score:fore.v1.score,v2Score:fore.v2.score}:
     legacy&&goodDate(legacy.frozenAt)&&Date.parse(legacy.frozenAt)<start?
     {v1:legacy.model?.probabilities?.aWin??null,v2:null,frozenAt:legacy.frozenAt,version:'V1',status:'experimental',v1Score:legacy.model?.probabilities||null,v2Score:null}:null;
-  const priceValid=odds&&goodDate(odds.screenshotCapturedAtApprox)&&Date.parse(odds.screenshotCapturedAtApprox)<start;
+  const isBo1=game.bestOf===1;
+  const majorFrozen=majorById.get(game.id);
+  if(isBo1){
+   const usable=majorFrozen?.status==='exploratory'&&goodDate(majorFrozen.frozenAt)&&
+    Date.parse(majorFrozen.frozenAt)<start;
+   model=usable?{v1:null,v2:majorFrozen.modelProbabilityA,frozenAt:majorFrozen.frozenAt,
+      version:'Major BO1 experimental',status:'unvalidated',
+      format:'BO1',rankPriorA:majorFrozen.rankPriorA,
+      vetoSensitivity:majorFrozen.vetoSensitivity,
+      mapScenarios:majorFrozen.mapScenarios,
+      mapsEligible:majorFrozen.mapsEligible}:null;
+  }
+  const priceValid=!isBo1&&odds&&goodDate(odds.screenshotCapturedAtApprox)&&Date.parse(odds.screenshotCapturedAtApprox)<start;
   let markets=[];
   if(fore)markets=scoreMarketsFromFrozen(fore);
   if(priceValid){
@@ -66,8 +84,23 @@ export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quot
    });
    if(fore)markets.push(...scoreMarketsFromFrozen(fore).filter(q=>!seen.has(q.key)));
   }
+  if(isBo1){
+   markets=model?[
+    {key:'aWin',family:'winner',label:game.teamA.name+' vence o mapa BO1',odd:null,
+     impliedNoVig:null,impliedRaw:null,v1P:null,v2P:model.v2,status:'unquoted_major_bo1'},
+    {key:'bWin',family:'winner',label:game.teamB.name+' vence o mapa BO1',odd:null,
+     impliedNoVig:null,impliedRaw:null,v1P:null,v2P:1-model.v2,status:'unquoted_major_bo1'}
+   ]:[];
+  }
   const matchingNov19=nov19;
   const side=(team,code)=>{
+   if(isBo1){
+    const captured=majorTeamById.get(team.id);
+    return{rank:captured?.worldRankAtEvent??null,maps90:captured?.mapStats?.totalMaps??null,
+      form:{n:0,wins:0,losses:0,vsTop50:0,winsVsTop50:0},
+      available:Boolean(captured?.mapStats),
+      asOf:majorOpening?.capturedAt??null};
+   }
    const frozenHistory=matchingNov19?.history?.[code];
    const current=formById.get(team.id);
    const played=current?.recent||[];
@@ -82,6 +115,10 @@ export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quot
     asOf:matchingNov19?nov19Context?.fetchedAt:(current?.fetchedAt||forms?.fetchedAt||null)};
   };
   out.push({id:game.id,startTime:game.startTime,event:game.event,eventId:game.eventId,status,
+    bestOf:game.bestOf,stage:game.stage,
+    major:isBo1?{event:'PGL Major Singapore 2026',format:'BO1',vetoConfirmed:false,
+      modelStatus:majorFrozen?.status||'not_modeled',
+      limitation:majorFrozen?.reason||'No pregame model',noOdds:true}:null,
     teamA:{id:game.teamA.id,name:game.teamA.name},teamB:{id:game.teamB.id,name:game.teamB.name},
     result:resolved?.status==='completed'?{scoreA:resolved.scoreA,scoreB:resolved.scoreB,verifiedAt:resolved.verifiedAt}:null,
     model,quotes:priceValid?{source:'BR365 / prints enviados',capturedAt:odds.screenshotCapturedAtApprox,eventId:odds.br365EventId,live:false}:null,
@@ -94,7 +131,7 @@ export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quot
  }
  out.sort((a,b)=>a.startTime.localeCompare(b.startTime)||a.id.localeCompare(b.id));
  return{version:RADAR_VERSION,generatedAt:nowIso,
-  dataStatus:{citoAt:snapshot?.fetchedAt||null,formAt:forms?.fetchedAt||null,rankingsAt:ranks?.fetchedAt||null,
+  dataStatus:{citoAt:snapshot?.fetchedAt||null,majorAt:majorLive?.fetchedAt||majorOpening?.capturedAt||null,formAt:forms?.fetchedAt||null,rankingsAt:ranks?.fetchedAt||null,
     dailySyncAt:sync?.updatedAt||null,oddsType:'prints_manualmente_enviados',
     automaticOdds:false,dailyCitoUpdatesDependOnGitHubActions:true},
   games:out,
@@ -107,13 +144,13 @@ export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quot
 }
 async function run(){
  const load=async f=>JSON.parse(await fs.readFile('public/data/'+f,'utf8'));
- const [snapshot,nov19Context,nov19Predictions,nov19Quotes,prospective,completed,previousQuotes,seriesFrozen,forms,ranks,sync]=await Promise.all(
+ const [snapshot,nov19Context,nov19Predictions,nov19Quotes,prospective,completed,previousQuotes,seriesFrozen,forms,ranks,sync,majorOpening,majorAnalysis,majorLive]=await Promise.all(
   ['tournaments.json','nov19-context.json','nov19-forecasts.json','nov19-br365-all-markets.json',
    'prospective.json','results.json','br365-series-odds.json','series-forecasts.json','team-opponents.json',
-   'team-rankings.json','sync-state.json'].map(load)
+   'team-rankings.json','sync-state.json','major-opening-snapshot.json','major-opening-analysis.json','major-live.json'].map(load)
  );
  const result=buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quotes,prospective,
-   completed,previousQuotes,seriesFrozen,forms,ranks,sync,nowIso:new Date().toISOString()});
+   completed,previousQuotes,seriesFrozen,forms,ranks,sync,majorOpening,majorAnalysis,majorLive,nowIso:new Date().toISOString()});
  await fs.writeFile('public/data/radar-feed.json',JSON.stringify(result,null,2)+'\n');
  console.log(JSON.stringify({radar:result.version,all:result.games.length,upcoming:result.games.filter(g=>Date.parse(g.startTime)>Date.now()).length,withOdds:result.games.filter(g=>Date.parse(g.startTime)>Date.now()&&g.quotes).length}));
 }
