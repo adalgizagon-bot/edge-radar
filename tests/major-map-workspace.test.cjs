@@ -121,7 +121,7 @@ test('asynchronous team profile delivery forwards map projection callback into a
  assert.ok(source.includes('draw(game,container,a,b,onMapProjection)'), 'promise data path must forward projection callback');
  assert.ok(source.includes('draw(game,container,left,right,onMapProjection)'), 'selected map changes must forward projection callback');
  assert.ok(source.includes('onMapProjection(chosen,projection)'), 'selected map must notify winner table');
- assert.doesNotMatch(source,/dataset\\.matchId===game\\.id\\)draw\\(game,container,a,b\\);/,
+ assert.ok(!source.includes('if(container.isConnected&&container.dataset.matchId===game.id)draw(game,container,a,b);'),
   'the callback-less asynchronous path must never return');
  const html=fs.readFileSync(path.join(__dirname,'../public/index.html'),'utf8');
  assert.ok(html.includes('major-map-workspace.js?v=major-map-dynamic-20261123-c'));
