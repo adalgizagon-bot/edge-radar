@@ -40,13 +40,15 @@ test('odds screenshots contain 8 games and each has exactly 10 outcome prices',(
  }
 });
 test('historical Cito model covers 7 games and marks BBL/Envy as unavailable',()=>{
+ // The mutable team snapshot has been refreshed since Nov 18; it must NOT be
+ // used to rebuild past forecasts. The immutable source remains the saved file.
  const result=freezeSeries(null,fixtures,book,'2026-11-18T01:00:00Z');
- assert.equal(result.matches.length,7);
- assert.equal(result.unmodeled.length,1);
- assert.equal(result.unmodeled[0].matchId,'cs2-match-2400525');
- assert.equal(result.matches.reduce((x,m)=>x+m.markets.length,0),70);
+ assert.equal(result.matches.length,0);
  assert.equal(frozen.matches.length,7);
- assert.ok(result.matches.every(m=>m.modelSnapshotAt<m.startsAt&&m.oddsCapturedApprox<m.startsAt));
+ assert.equal(frozen.unmodeled.length,1);
+ assert.equal(frozen.unmodeled[0].matchId,'cs2-match-2400525');
+ assert.equal(frozen.matches.reduce((x,m)=>x+m.markets.length,0),70);
+ assert.ok(frozen.matches.every(m=>m.modelSnapshotAt<m.startsAt&&m.oddsCapturedApprox<m.startsAt));
 });
 test('market margin removed within distinct markets, not across them',()=>{
  for(const m of frozen.matches){

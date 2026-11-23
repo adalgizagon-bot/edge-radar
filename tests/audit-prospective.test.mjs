@@ -34,30 +34,32 @@ test('post-hoc challenger is not misrepresented as future validation',()=>{
  assert.equal(challenged.prospectivelyValidated,false);
  assert.equal(challenged.createdAfterResults,true);
  assert.equal(challenged.trainedOnToday,false);
- assert.equal(challenged.forecasts.length,7);
- assert.ok(challenged.forecasts.every(x=>x.probabilities.aWin>0&&x.probabilities.aWin<1));
+ // The mutable ranking/form datasets were refreshed on Nov 23: deliberately
+ // reject post-kickoff context instead of manufacturing a better Nov 18 backtest.
+ assert.equal(challenged.forecasts.length,0);
+ assert.equal(challenged.unmodeled.length,7);
  assert.equal(expectedByRank(72,27)<.5,true);
 });
 test('future prospective A/B snapshot is immutable and rejects post-kickoff data',()=>{
- const fixture={...snapshot.matches[0],id:'synthetic-FUTURE-001',startTime:'2026-11-20T15:00:00Z',status:'upcoming'};
- const fake={...snapshot,fetchedAt:'2026-11-18T08:21:48Z',matches:[fixture]};
- const now='2026-11-19T10:00:00Z';
+ const fixture={...snapshot.matches[0],id:'synthetic-FUTURE-001',startTime:'2026-11-25T15:00:00Z',status:'upcoming'};
+ const fake={...snapshot,fetchedAt:'2026-11-23T19:00:00Z',matches:[fixture]};
+ const now='2026-11-24T08:00:00Z';
  const saved=appendProspective({forecasts:[]},fake,form,ranks,now);
  assert.equal(saved.forecasts.length,1);
  assert.equal(saved.forecasts[0].frozenAt,now);
  assert.equal(saved.forecasts[0].matchId,fixture.id);
- const again=appendProspective(saved,fake,form,ranks,'2026-11-19T11:00:00Z');
+ const again=appendProspective(saved,fake,form,ranks,'2026-11-24T09:00:00Z');
  assert.deepEqual(saved.forecasts,again.forecasts);
- const late=appendProspective({forecasts:[]},fake,form,ranks,'2026-11-20T15:01:00Z');
+ const late=appendProspective({forecasts:[]},fake,form,ranks,'2026-11-25T15:01:00Z');
  assert.equal(late.forecasts.length,0);
- const unsafe=appendProspective({forecasts:[]},{...fake,fetchedAt:'2026-11-21T12:00:00Z'},form,ranks,'2026-11-21T12:00:00Z');
+ const unsafe=appendProspective({forecasts:[]},{...fake,fetchedAt:'2026-11-25T16:00:00Z'},form,ranks,'2026-11-25T16:00:00Z');
  assert.equal(unsafe.forecasts.length,0);
 });
 test('only verified completed matches grade future A/B predictions',()=>{
- const fixture={...snapshot.matches[0],id:'synthetic-FUTURE-002',startTime:'2026-11-20T15:00:00Z',status:'upcoming'};
- const input=appendProspective({forecasts:[]},{...snapshot,fetchedAt:'2026-11-18T08:21:48Z',matches:[fixture]},form,ranks,'2026-11-19T10:00:00Z');
- assert.equal(gradeProspective(input,{matches:[{id:fixture.id,status:'live',scoreA:1,scoreB:0}]},'2026-11-20T16:00:00Z').resolved,0);
- const score=gradeProspective(input,{matches:[{id:fixture.id,status:'completed',scoreA:2,scoreB:0}]},'2026-11-20T20:00:00Z');
+ const fixture={...snapshot.matches[0],id:'synthetic-FUTURE-002',startTime:'2026-11-25T15:00:00Z',status:'upcoming'};
+ const input=appendProspective({forecasts:[]},{...snapshot,fetchedAt:'2026-11-23T19:00:00Z',matches:[fixture]},form,ranks,'2026-11-24T08:00:00Z');
+ assert.equal(gradeProspective(input,{matches:[{id:fixture.id,status:'live',scoreA:1,scoreB:0}]},'2026-11-25T16:00:00Z').resolved,0);
+ const score=gradeProspective(input,{matches:[{id:fixture.id,status:'completed',scoreA:2,scoreB:0}]},'2026-11-25T20:00:00Z');
  assert.equal(score.resolved,1);
  assert.ok(score.meanBrierV1>=0&&score.meanBrierV1<=1);
  assert.ok(score.meanBrierV2>=0&&score.meanBrierV2<=1);

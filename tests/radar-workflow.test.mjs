@@ -12,7 +12,9 @@ const feed=load('radar-feed.json');
 const t19=Date.parse('2026-11-19T00:25:00Z');
 const tMajor=Date.parse('2026-11-23T19:00:00Z');
 test('Nov 19 historic screen is preserved in archive and never mistaken for current Major',()=>{
- const prior=C.getUpcoming(feed,t19).filter(g=>g.startTime.startsWith('2026-11-19'));
+ // Historical records are correctly marked completed now; inspect their immutable archive,
+ // not the future-only Radar, even when evaluating their old scheduled date.
+ const prior=feed.games.filter(g=>g.startTime.startsWith('2026-11-19'));
  assert.equal(prior.length,3);
  assert.ok(prior.every(C.hasOdds));
  assert.ok(prior.every(g=>g.markets.length===12));
@@ -27,7 +29,9 @@ test('Nov 18 results stay archived; November Major expires after kickoff',()=>{
 test('study accepts only one quoted selection per match and expires it at kickoff',()=>{
  const ids=feed.games.filter(g=>g.startTime.startsWith('2026-11-19')).map(x=>x.id);
  const picks=[{matchId:ids[0],key:'aWin'},{matchId:ids[0],key:'a20'},{matchId:ids[1],key:'bWin'}];
- const s=C.studySummary(picks,feed,t19);
+ const earlier={...feed,games:feed.games.map(g=>g.startTime.startsWith('2026-11-19')?
+  {...g,status:'scheduled'}:g)};
+ const s=C.studySummary(picks,earlier,t19);
  assert.equal(s.items.length,2);assert.equal(s.removed,1);assert.ok(s.product>1);
  assert.equal(C.studySummary(picks,feed,tMajor).items.length,0);
 });
