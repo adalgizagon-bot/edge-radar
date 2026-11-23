@@ -1,8 +1,9 @@
 {
   "version": "atlas-radar-unificado-v1",
-  "generatedAt": "2026-11-22T15:13:39.579Z",
+  "generatedAt": "2026-11-23T18:58:55.249Z",
   "dataStatus": {
     "citoAt": "2026-11-22T15:13:39.579Z",
+    "majorAt": "2026-11-23T18:54:12.966Z",
     "formAt": "2026-11-22T15:13:39.579Z",
     "rankingsAt": "2026-11-22T15:13:39.579Z",
     "dailySyncAt": "2026-11-22T15:13:39.579Z",
@@ -17,6 +18,9 @@
       "event": "Tipsport RUSH Brno 2026",
       "eventId": "cs2-event-9273",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-7187",
         "name": "Nexus"
@@ -93,6 +97,9 @@
       "event": "Stake Ranked Episode 6",
       "eventId": "cs2-event-9258",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-12916",
         "name": "Betclic"
@@ -169,6 +176,9 @@
       "event": "Tipsport RUSH Brno 2026",
       "eventId": "cs2-event-9273",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-13173",
         "name": "Phantom"
@@ -245,6 +255,9 @@
       "event": "Stake Ranked Episode 6",
       "eventId": "cs2-event-9258",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-12267",
         "name": "UNiTY"
@@ -321,6 +334,9 @@
       "event": "Stake Ranked Episode 6",
       "eventId": "cs2-event-9258",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-13117",
         "name": "Inner Circle"
@@ -397,6 +413,9 @@
       "event": "Tipsport RUSH Brno 2026",
       "eventId": "cs2-event-9273",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-10577",
         "name": "SINNERS"
@@ -473,6 +492,9 @@
       "event": "Stake Ranked Episode 6",
       "eventId": "cs2-event-9258",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-4411",
         "name": "Ninjas in Pyjamas"
@@ -549,6 +571,9 @@
       "event": "Tipsport RUSH Brno 2026",
       "eventId": "cs2-event-9273",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-13996",
         "name": "BBL"
@@ -604,6 +629,9 @@
       "event": "Stake Ranked Episode 6",
       "eventId": "cs2-event-9258",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-9928",
         "name": "GamerLegion"
@@ -913,6 +941,9 @@
       "event": "Stake Ranked Episode 6",
       "eventId": "cs2-event-9258",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-7532",
         "name": "BIG"
@@ -1262,6 +1293,9 @@
       "event": "Stake Ranked Episode 6",
       "eventId": "cs2-event-9258",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-10333",
         "name": "Sangal"
@@ -1611,6 +1645,9 @@
       "event": "Stake Ranked Episode 6",
       "eventId": "cs2-event-9258",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-10333",
         "name": "Sangal"
@@ -1855,6 +1892,9 @@
       "event": "Tipsport RUSH Brno 2026",
       "eventId": "cs2-event-9273",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-10577",
         "name": "SINNERS"
@@ -2099,6 +2139,9 @@
       "event": "Tipsport RUSH Brno 2026",
       "eventId": "cs2-event-9273",
       "status": "completed",
+      "bestOf": null,
+      "stage": null,
+      "major": null,
       "teamA": {
         "id": "cs2-team-13996",
         "name": "BBL"
@@ -2332,6 +2375,848 @@
             "winsVsTop50": 4
           },
           "asOf": "2026-11-18T01:14:09.705Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400494",
+      "startTime": "2026-11-24T04:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss Round 1",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "exploratory",
+        "limitation": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta.",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-7175",
+        "name": "HEROIC"
+      },
+      "teamB": {
+        "id": "cs2-team-9455",
+        "name": "Imperial"
+      },
+      "result": null,
+      "model": {
+        "v1": null,
+        "v2": 0.5335027130384907,
+        "frozenAt": "2026-11-23T18:55:31.751Z",
+        "version": "Major BO1 experimental",
+        "status": "unvalidated",
+        "format": "BO1",
+        "rankPriorA": 0.5820192290267984,
+        "vetoSensitivity": {
+          "minA": 0.49742728654123314,
+          "maxA": 0.575319041466435,
+          "kind": "range across maps, NOT statistical confidence interval"
+        },
+        "mapScenarios": [
+          {
+            "map": "Cache",
+            "playedA": 14,
+            "playedB": 14,
+            "rawWinA": 0.7142857142857143,
+            "rawWinB": 0.7142857142857143,
+            "projectionA": 0.5494975586257879,
+            "projectionB": 0.45050244137421214,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Dust2",
+            "playedA": 19,
+            "playedB": 12,
+            "rawWinA": 0.5263157894736842,
+            "rawWinB": 0.6666666666666666,
+            "projectionA": 0.5224517288701277,
+            "projectionB": 0.4775482711298723,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Inferno",
+            "playedA": 14,
+            "playedB": 17,
+            "rawWinA": 0.7142857142857143,
+            "rawWinB": 0.5882352941176471,
+            "projectionA": 0.575319041466435,
+            "projectionB": 0.424680958533565,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Mirage",
+            "playedA": 11,
+            "playedB": 16,
+            "rawWinA": 0.45454545454545453,
+            "rawWinB": 0.6875,
+            "projectionA": 0.49742728654123314,
+            "projectionB": 0.5025727134587669,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Nuke",
+            "playedA": 9,
+            "playedB": 13,
+            "rawWinA": 0.7777777777777778,
+            "rawWinB": 0.8461538461538461,
+            "projectionA": 0.52281794968887,
+            "projectionB": 0.47718205031113003,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          }
+        ],
+        "mapsEligible": 5
+      },
+      "quotes": null,
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "HEROIC vence o mapa BO1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": null,
+          "v2P": 0.5335027130384907,
+          "status": "unquoted_major_bo1"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "Imperial vence o mapa BO1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": null,
+          "v2P": 0.46649728696150927,
+          "status": "unquoted_major_bo1"
+        }
+      ],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 23,
+          "maps90": 83,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 48,
+          "maps90": 82,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400495",
+      "startTime": "2026-11-24T04:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss Round 1",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "exploratory",
+        "limitation": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta.",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-9996",
+        "name": "9z"
+      },
+      "teamB": {
+        "id": "cs2-team-8840",
+        "name": "Lynn Vision"
+      },
+      "result": null,
+      "model": {
+        "v1": null,
+        "v2": 0.49408153351086925,
+        "frozenAt": "2026-11-23T18:55:31.751Z",
+        "version": "Major BO1 experimental",
+        "status": "unvalidated",
+        "format": "BO1",
+        "rankPriorA": 0.5824527216810454,
+        "vetoSensitivity": {
+          "minA": 0.4818630308393404,
+          "maxA": 0.5057440078077119,
+          "kind": "range across maps, NOT statistical confidence interval"
+        },
+        "mapScenarios": [
+          {
+            "map": "Cache",
+            "playedA": 6,
+            "playedB": 5,
+            "rawWinA": 0.16666666666666666,
+            "rawWinB": 0.6,
+            "projectionA": 0.49295118682648603,
+            "projectionB": 0.507048813173514,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Dust2",
+            "playedA": 7,
+            "playedB": 13,
+            "rawWinA": 0.42857142857142855,
+            "rawWinB": 0.7692307692307693,
+            "projectionA": 0.4818630308393404,
+            "projectionB": 0.5181369691606597,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Inferno",
+            "playedA": 6,
+            "playedB": 7,
+            "rawWinA": 0.3333333333333333,
+            "rawWinB": 0.7142857142857143,
+            "projectionA": 0.49576790856993863,
+            "projectionB": 0.5042320914300613,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Nuke",
+            "playedA": 11,
+            "playedB": 6,
+            "rawWinA": 0.2727272727272727,
+            "rawWinB": 0.5,
+            "projectionA": 0.5057440078077119,
+            "projectionB": 0.4942559921922881,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          }
+        ],
+        "mapsEligible": 4
+      },
+      "quotes": null,
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "9z vence o mapa BO1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": null,
+          "v2P": 0.49408153351086925,
+          "status": "unquoted_major_bo1"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "Lynn Vision vence o mapa BO1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": null,
+          "v2P": 0.5059184664891307,
+          "status": "unquoted_major_bo1"
+        }
+      ],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 21,
+          "maps90": 40,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 44,
+          "maps90": 41,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400496",
+      "startTime": "2026-11-24T05:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss Round 1",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "exploratory",
+        "limitation": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta.",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas"
+      },
+      "teamB": {
+        "id": "cs2-team-12376",
+        "name": "M80"
+      },
+      "result": null,
+      "model": {
+        "v1": null,
+        "v2": 0.5291670928127452,
+        "frozenAt": "2026-11-23T18:55:31.751Z",
+        "version": "Major BO1 experimental",
+        "status": "unvalidated",
+        "format": "BO1",
+        "rankPriorA": 0.532319109161748,
+        "vetoSensitivity": {
+          "minA": 0.49530247242844444,
+          "maxA": 0.5596791981586103,
+          "kind": "range across maps, NOT statistical confidence interval"
+        },
+        "mapScenarios": [
+          {
+            "map": "Ancient",
+            "playedA": 14,
+            "playedB": 6,
+            "rawWinA": 0.6428571428571429,
+            "rawWinB": 0.5,
+            "projectionA": 0.5502636811950805,
+            "projectionB": 0.4497363188049195,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Cache",
+            "playedA": 18,
+            "playedB": 13,
+            "rawWinA": 0.5,
+            "rawWinB": 0.6153846153846154,
+            "projectionA": 0.49530247242844444,
+            "projectionB": 0.5046975275715555,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Dust2",
+            "playedA": 10,
+            "playedB": 8,
+            "rawWinA": 0.4,
+            "rawWinB": 0.5,
+            "projectionA": 0.5011863819846453,
+            "projectionB": 0.49881361801535473,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Inferno",
+            "playedA": 9,
+            "playedB": 7,
+            "rawWinA": 0.5555555555555556,
+            "rawWinB": 0.42857142857142855,
+            "projectionA": 0.5394037302969452,
+            "projectionB": 0.4605962697030548,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Mirage",
+            "playedA": 15,
+            "playedB": 10,
+            "rawWinA": 0.6,
+            "rawWinB": 0.4,
+            "projectionA": 0.5596791981586103,
+            "projectionB": 0.44032080184138966,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          }
+        ],
+        "mapsEligible": 5
+      },
+      "quotes": null,
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "Ninjas in Pyjamas vence o mapa BO1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": null,
+          "v2P": 0.5291670928127452,
+          "status": "unquoted_major_bo1"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "M80 vence o mapa BO1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": null,
+          "v2P": 0.4708329071872548,
+          "status": "unquoted_major_bo1"
+        }
+      ],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 18,
+          "maps90": 77,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 24,
+          "maps90": 50,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400497",
+      "startTime": "2026-11-24T05:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss Round 1",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "insufficient_data",
+        "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-8474",
+        "name": "100 Thieves"
+      },
+      "teamB": {
+        "id": "cs2-team-12646",
+        "name": "Chinggis Warriors"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 29,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 59,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400498",
+      "startTime": "2026-11-24T06:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss Round 1",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "exploratory",
+        "limitation": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta.",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-5973",
+        "name": "Liquid"
+      },
+      "teamB": {
+        "id": "cs2-team-12878",
+        "name": "BC.Game"
+      },
+      "result": null,
+      "model": {
+        "v1": null,
+        "v2": 0.5490119890200449,
+        "frozenAt": "2026-11-23T18:55:31.751Z",
+        "version": "Major BO1 experimental",
+        "status": "unvalidated",
+        "format": "BO1",
+        "rankPriorA": 0.6166193893690705,
+        "vetoSensitivity": {
+          "minA": 0.47221404937443545,
+          "maxA": 0.6199802674146574,
+          "kind": "range across maps, NOT statistical confidence interval"
+        },
+        "mapScenarios": [
+          {
+            "map": "Cache",
+            "playedA": 10,
+            "playedB": 9,
+            "rawWinA": 0.5,
+            "rawWinB": 0.5555555555555556,
+            "projectionA": 0.561440460649032,
+            "projectionB": 0.43855953935096803,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Dust2",
+            "playedA": 6,
+            "playedB": 7,
+            "rawWinA": 0.16666666666666666,
+            "rawWinB": 0.8571428571428571,
+            "projectionA": 0.47221404937443545,
+            "projectionB": 0.5277859506255645,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Mirage",
+            "playedA": 12,
+            "playedB": 6,
+            "rawWinA": 0.75,
+            "rawWinB": 0.5,
+            "projectionA": 0.6199802674146574,
+            "projectionB": 0.3800197325853426,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          },
+          {
+            "map": "Nuke",
+            "playedA": 11,
+            "playedB": 8,
+            "rawWinA": 0.45454545454545453,
+            "rawWinB": 0.625,
+            "projectionA": 0.5424131786420545,
+            "projectionB": 0.4575868213579455,
+            "source": "Cito team 90-day map-stats",
+            "usable": true
+          }
+        ],
+        "mapsEligible": 4
+      },
+      "quotes": null,
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "Liquid vence o mapa BO1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": null,
+          "v2P": 0.5490119890200449,
+          "status": "unquoted_major_bo1"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "BC.Game vence o mapa BO1",
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
+          "v1P": null,
+          "v2P": 0.4509880109799551,
+          "status": "unquoted_major_bo1"
+        }
+      ],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 16,
+          "maps90": 64,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 46,
+          "maps90": 40,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400499",
+      "startTime": "2026-11-24T06:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss Round 1",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "insufficient_data",
+        "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-12467",
+        "name": "PARIVISION"
+      },
+      "teamB": {
+        "id": "cs2-team-13926",
+        "name": "DENDELE"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 13,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 33,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400500",
+      "startTime": "2026-11-24T07:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss Round 1",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "insufficient_data",
+        "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-6667",
+        "name": "FaZe"
+      },
+      "teamB": {
+        "id": "cs2-team-12257",
+        "name": "Wildcard"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 19,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 42,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400501",
+      "startTime": "2026-11-24T07:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss Round 1",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "insufficient_data",
+        "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-11251",
+        "name": "Eternal Fire"
+      },
+      "teamB": {
+        "id": "cs2-team-12774",
+        "name": "FlyQuest"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 22,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 58,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
         }
       },
       "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
