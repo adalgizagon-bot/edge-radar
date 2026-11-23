@@ -1,0 +1,517 @@
+{
+  "version": "major-bo1-pre-veto-v1-experimental",
+  "eventId": "cs2-event-9303",
+  "capturedAt": "2026-11-23T18:54:12.966Z",
+  "frozenAt": "2026-11-23T18:55:31.751Z",
+  "createdBeforeKickoff": true,
+  "status": "pre-veto model research; cannot infer bets without odds and prospective calibration",
+  "modeled": 4,
+  "unmodeled": 4,
+  "forecasts": [
+    {
+      "matchId": "cs2-match-2400494",
+      "startsAt": "2026-11-24T04:00:00.000Z",
+      "bestOf": 1,
+      "teamA": {
+        "id": "cs2-team-7175",
+        "name": "HEROIC"
+      },
+      "teamB": {
+        "id": "cs2-team-9455",
+        "name": "Imperial"
+      },
+      "estimatedWithConfirmedVeto": false,
+      "confirmedMap": null,
+      "vetoStatus": "unconfirmed",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "modelVersion": "major-bo1-pre-veto-v1-experimental",
+      "oddsAvailable": false,
+      "prices": [],
+      "validForBettingRecommendation": false,
+      "limitation": "Ranking e aproveitamento bruto de mapas não ajustam todos os adversários, escalações e vetos; projeções NÃO calibradas.",
+      "status": "exploratory",
+      "modelProbabilityA": 0.5335027130384907,
+      "modelProbabilityB": 0.46649728696150927,
+      "rankPriorA": 0.5820192290267984,
+      "rankA": 23,
+      "rankB": 48,
+      "mapsEligible": 5,
+      "minMapsPerTeamPerScenario": 9,
+      "mapScenarios": [
+        {
+          "map": "Cache",
+          "playedA": 14,
+          "playedB": 14,
+          "rawWinA": 0.7142857142857143,
+          "rawWinB": 0.7142857142857143,
+          "projectionA": 0.5494975586257879,
+          "projectionB": 0.45050244137421214,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Dust2",
+          "playedA": 19,
+          "playedB": 12,
+          "rawWinA": 0.5263157894736842,
+          "rawWinB": 0.6666666666666666,
+          "projectionA": 0.5224517288701277,
+          "projectionB": 0.4775482711298723,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Inferno",
+          "playedA": 14,
+          "playedB": 17,
+          "rawWinA": 0.7142857142857143,
+          "rawWinB": 0.5882352941176471,
+          "projectionA": 0.575319041466435,
+          "projectionB": 0.424680958533565,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Mirage",
+          "playedA": 11,
+          "playedB": 16,
+          "rawWinA": 0.45454545454545453,
+          "rawWinB": 0.6875,
+          "projectionA": 0.49742728654123314,
+          "projectionB": 0.5025727134587669,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Nuke",
+          "playedA": 9,
+          "playedB": 13,
+          "rawWinA": 0.7777777777777778,
+          "rawWinB": 0.8461538461538461,
+          "projectionA": 0.52281794968887,
+          "projectionB": 0.47718205031113003,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        }
+      ],
+      "vetoSensitivity": {
+        "minA": 0.49742728654123314,
+        "maxA": 0.575319041466435,
+        "kind": "range across maps, NOT statistical confidence interval"
+      },
+      "modelInputs": {
+        "mapStatsDays": 90,
+        "smoothingPseudoGames": 12,
+        "rankLogitWeight": 0.6,
+        "mapLogitWeight": 0.4,
+        "scenarioWeight": "uniform across common maps",
+        "opponentAdjusted": false,
+        "rosterVerified": false
+      },
+      "reason": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta."
+    },
+    {
+      "matchId": "cs2-match-2400495",
+      "startsAt": "2026-11-24T04:00:00.000Z",
+      "bestOf": 1,
+      "teamA": {
+        "id": "cs2-team-9996",
+        "name": "9z"
+      },
+      "teamB": {
+        "id": "cs2-team-8840",
+        "name": "Lynn Vision"
+      },
+      "estimatedWithConfirmedVeto": false,
+      "confirmedMap": null,
+      "vetoStatus": "unconfirmed",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "modelVersion": "major-bo1-pre-veto-v1-experimental",
+      "oddsAvailable": false,
+      "prices": [],
+      "validForBettingRecommendation": false,
+      "limitation": "Ranking e aproveitamento bruto de mapas não ajustam todos os adversários, escalações e vetos; projeções NÃO calibradas.",
+      "status": "exploratory",
+      "modelProbabilityA": 0.49408153351086925,
+      "modelProbabilityB": 0.5059184664891307,
+      "rankPriorA": 0.5824527216810454,
+      "rankA": 21,
+      "rankB": 44,
+      "mapsEligible": 4,
+      "minMapsPerTeamPerScenario": 5,
+      "mapScenarios": [
+        {
+          "map": "Cache",
+          "playedA": 6,
+          "playedB": 5,
+          "rawWinA": 0.16666666666666666,
+          "rawWinB": 0.6,
+          "projectionA": 0.49295118682648603,
+          "projectionB": 0.507048813173514,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Dust2",
+          "playedA": 7,
+          "playedB": 13,
+          "rawWinA": 0.42857142857142855,
+          "rawWinB": 0.7692307692307693,
+          "projectionA": 0.4818630308393404,
+          "projectionB": 0.5181369691606597,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Inferno",
+          "playedA": 6,
+          "playedB": 7,
+          "rawWinA": 0.3333333333333333,
+          "rawWinB": 0.7142857142857143,
+          "projectionA": 0.49576790856993863,
+          "projectionB": 0.5042320914300613,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Nuke",
+          "playedA": 11,
+          "playedB": 6,
+          "rawWinA": 0.2727272727272727,
+          "rawWinB": 0.5,
+          "projectionA": 0.5057440078077119,
+          "projectionB": 0.4942559921922881,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        }
+      ],
+      "vetoSensitivity": {
+        "minA": 0.4818630308393404,
+        "maxA": 0.5057440078077119,
+        "kind": "range across maps, NOT statistical confidence interval"
+      },
+      "modelInputs": {
+        "mapStatsDays": 90,
+        "smoothingPseudoGames": 12,
+        "rankLogitWeight": 0.6,
+        "mapLogitWeight": 0.4,
+        "scenarioWeight": "uniform across common maps",
+        "opponentAdjusted": false,
+        "rosterVerified": false
+      },
+      "reason": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta."
+    },
+    {
+      "matchId": "cs2-match-2400496",
+      "startsAt": "2026-11-24T05:00:00.000Z",
+      "bestOf": 1,
+      "teamA": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas"
+      },
+      "teamB": {
+        "id": "cs2-team-12376",
+        "name": "M80"
+      },
+      "estimatedWithConfirmedVeto": false,
+      "confirmedMap": null,
+      "vetoStatus": "unconfirmed",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "modelVersion": "major-bo1-pre-veto-v1-experimental",
+      "oddsAvailable": false,
+      "prices": [],
+      "validForBettingRecommendation": false,
+      "limitation": "Ranking e aproveitamento bruto de mapas não ajustam todos os adversários, escalações e vetos; projeções NÃO calibradas.",
+      "status": "exploratory",
+      "modelProbabilityA": 0.5291670928127452,
+      "modelProbabilityB": 0.4708329071872548,
+      "rankPriorA": 0.532319109161748,
+      "rankA": 18,
+      "rankB": 24,
+      "mapsEligible": 5,
+      "minMapsPerTeamPerScenario": 6,
+      "mapScenarios": [
+        {
+          "map": "Ancient",
+          "playedA": 14,
+          "playedB": 6,
+          "rawWinA": 0.6428571428571429,
+          "rawWinB": 0.5,
+          "projectionA": 0.5502636811950805,
+          "projectionB": 0.4497363188049195,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Cache",
+          "playedA": 18,
+          "playedB": 13,
+          "rawWinA": 0.5,
+          "rawWinB": 0.6153846153846154,
+          "projectionA": 0.49530247242844444,
+          "projectionB": 0.5046975275715555,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Dust2",
+          "playedA": 10,
+          "playedB": 8,
+          "rawWinA": 0.4,
+          "rawWinB": 0.5,
+          "projectionA": 0.5011863819846453,
+          "projectionB": 0.49881361801535473,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Inferno",
+          "playedA": 9,
+          "playedB": 7,
+          "rawWinA": 0.5555555555555556,
+          "rawWinB": 0.42857142857142855,
+          "projectionA": 0.5394037302969452,
+          "projectionB": 0.4605962697030548,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Mirage",
+          "playedA": 15,
+          "playedB": 10,
+          "rawWinA": 0.6,
+          "rawWinB": 0.4,
+          "projectionA": 0.5596791981586103,
+          "projectionB": 0.44032080184138966,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        }
+      ],
+      "vetoSensitivity": {
+        "minA": 0.49530247242844444,
+        "maxA": 0.5596791981586103,
+        "kind": "range across maps, NOT statistical confidence interval"
+      },
+      "modelInputs": {
+        "mapStatsDays": 90,
+        "smoothingPseudoGames": 12,
+        "rankLogitWeight": 0.6,
+        "mapLogitWeight": 0.4,
+        "scenarioWeight": "uniform across common maps",
+        "opponentAdjusted": false,
+        "rosterVerified": false
+      },
+      "reason": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta."
+    },
+    {
+      "matchId": "cs2-match-2400497",
+      "startsAt": "2026-11-24T05:00:00.000Z",
+      "bestOf": 1,
+      "teamA": {
+        "id": "cs2-team-8474",
+        "name": "100 Thieves"
+      },
+      "teamB": {
+        "id": "cs2-team-12646",
+        "name": "Chinggis Warriors"
+      },
+      "estimatedWithConfirmedVeto": false,
+      "confirmedMap": null,
+      "vetoStatus": "unconfirmed",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "modelVersion": "major-bo1-pre-veto-v1-experimental",
+      "oddsAvailable": false,
+      "prices": [],
+      "validForBettingRecommendation": false,
+      "limitation": "Ranking e aproveitamento bruto de mapas não ajustam todos os adversários, escalações e vetos; projeções NÃO calibradas.",
+      "status": "insufficient_data",
+      "rankPriorA": 0.5792288927823652,
+      "modelProbabilityA": null,
+      "modelProbabilityB": null,
+      "mapScenarios": [],
+      "reason": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente."
+    },
+    {
+      "matchId": "cs2-match-2400498",
+      "startsAt": "2026-11-24T06:00:00.000Z",
+      "bestOf": 1,
+      "teamA": {
+        "id": "cs2-team-5973",
+        "name": "Liquid"
+      },
+      "teamB": {
+        "id": "cs2-team-12878",
+        "name": "BC.Game"
+      },
+      "estimatedWithConfirmedVeto": false,
+      "confirmedMap": null,
+      "vetoStatus": "unconfirmed",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "modelVersion": "major-bo1-pre-veto-v1-experimental",
+      "oddsAvailable": false,
+      "prices": [],
+      "validForBettingRecommendation": false,
+      "limitation": "Ranking e aproveitamento bruto de mapas não ajustam todos os adversários, escalações e vetos; projeções NÃO calibradas.",
+      "status": "exploratory",
+      "modelProbabilityA": 0.5490119890200449,
+      "modelProbabilityB": 0.4509880109799551,
+      "rankPriorA": 0.6166193893690705,
+      "rankA": 16,
+      "rankB": 46,
+      "mapsEligible": 4,
+      "minMapsPerTeamPerScenario": 6,
+      "mapScenarios": [
+        {
+          "map": "Cache",
+          "playedA": 10,
+          "playedB": 9,
+          "rawWinA": 0.5,
+          "rawWinB": 0.5555555555555556,
+          "projectionA": 0.561440460649032,
+          "projectionB": 0.43855953935096803,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Dust2",
+          "playedA": 6,
+          "playedB": 7,
+          "rawWinA": 0.16666666666666666,
+          "rawWinB": 0.8571428571428571,
+          "projectionA": 0.47221404937443545,
+          "projectionB": 0.5277859506255645,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Mirage",
+          "playedA": 12,
+          "playedB": 6,
+          "rawWinA": 0.75,
+          "rawWinB": 0.5,
+          "projectionA": 0.6199802674146574,
+          "projectionB": 0.3800197325853426,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        },
+        {
+          "map": "Nuke",
+          "playedA": 11,
+          "playedB": 8,
+          "rawWinA": 0.45454545454545453,
+          "rawWinB": 0.625,
+          "projectionA": 0.5424131786420545,
+          "projectionB": 0.4575868213579455,
+          "source": "Cito team 90-day map-stats",
+          "usable": true
+        }
+      ],
+      "vetoSensitivity": {
+        "minA": 0.47221404937443545,
+        "maxA": 0.6199802674146574,
+        "kind": "range across maps, NOT statistical confidence interval"
+      },
+      "modelInputs": {
+        "mapStatsDays": 90,
+        "smoothingPseudoGames": 12,
+        "rankLogitWeight": 0.6,
+        "mapLogitWeight": 0.4,
+        "scenarioWeight": "uniform across common maps",
+        "opponentAdjusted": false,
+        "rosterVerified": false
+      },
+      "reason": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta."
+    },
+    {
+      "matchId": "cs2-match-2400499",
+      "startsAt": "2026-11-24T06:00:00.000Z",
+      "bestOf": 1,
+      "teamA": {
+        "id": "cs2-team-12467",
+        "name": "PARIVISION"
+      },
+      "teamB": {
+        "id": "cs2-team-13926",
+        "name": "DENDELE"
+      },
+      "estimatedWithConfirmedVeto": false,
+      "confirmedMap": null,
+      "vetoStatus": "unconfirmed",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "modelVersion": "major-bo1-pre-veto-v1-experimental",
+      "oddsAvailable": false,
+      "prices": [],
+      "validForBettingRecommendation": false,
+      "limitation": "Ranking e aproveitamento bruto de mapas não ajustam todos os adversários, escalações e vetos; projeções NÃO calibradas.",
+      "status": "insufficient_data",
+      "rankPriorA": 0.603292086286892,
+      "modelProbabilityA": null,
+      "modelProbabilityB": null,
+      "mapScenarios": [],
+      "reason": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente."
+    },
+    {
+      "matchId": "cs2-match-2400500",
+      "startsAt": "2026-11-24T07:00:00.000Z",
+      "bestOf": 1,
+      "teamA": {
+        "id": "cs2-team-6667",
+        "name": "FaZe"
+      },
+      "teamB": {
+        "id": "cs2-team-12257",
+        "name": "Wildcard"
+      },
+      "estimatedWithConfirmedVeto": false,
+      "confirmedMap": null,
+      "vetoStatus": "unconfirmed",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "modelVersion": "major-bo1-pre-veto-v1-experimental",
+      "oddsAvailable": false,
+      "prices": [],
+      "validForBettingRecommendation": false,
+      "limitation": "Ranking e aproveitamento bruto de mapas não ajustam todos os adversários, escalações e vetos; projeções NÃO calibradas.",
+      "status": "insufficient_data",
+      "rankPriorA": 0.5883028324432987,
+      "modelProbabilityA": null,
+      "modelProbabilityB": null,
+      "mapScenarios": [],
+      "reason": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente."
+    },
+    {
+      "matchId": "cs2-match-2400501",
+      "startsAt": "2026-11-24T07:00:00.000Z",
+      "bestOf": 1,
+      "teamA": {
+        "id": "cs2-team-11251",
+        "name": "Eternal Fire"
+      },
+      "teamB": {
+        "id": "cs2-team-12774",
+        "name": "FlyQuest"
+      },
+      "estimatedWithConfirmedVeto": false,
+      "confirmedMap": null,
+      "vetoStatus": "unconfirmed",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "modelVersion": "major-bo1-pre-veto-v1-experimental",
+      "oddsAvailable": false,
+      "prices": [],
+      "validForBettingRecommendation": false,
+      "limitation": "Ranking e aproveitamento bruto de mapas não ajustam todos os adversários, escalações e vetos; projeções NÃO calibradas.",
+      "status": "insufficient_data",
+      "rankPriorA": 0.6073604092867612,
+      "modelProbabilityA": null,
+      "modelProbabilityB": null,
+      "mapScenarios": [],
+      "reason": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente."
+    }
+  ],
+  "warnings": [
+    "BO1 single map; BO3 exact scores and map handicaps are not applicable.",
+    "No verified veto / chosen map, even if the raw source contains pre-match placeholders.",
+    "Map samples are opponent- and roster-unadjusted. Formula was not trained or calibrated on Major games.",
+    "Do not infer financial edge from these percentages; no bookmaker prices were supplied.",
+    "All forecasts are frozen before kickoff and must never be overwritten."
+  ]
+}
