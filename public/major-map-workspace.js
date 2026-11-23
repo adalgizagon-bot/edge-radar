@@ -121,7 +121,7 @@
     for(const g of games)rows.push([item.player.nickname,item.team.teamName,g.teamId,chosen,g.at,g.kills,g.rounds,(g.kills/g.rounds).toFixed(4),g.matchId]);
    }
    const cell=v=>{const raw=String(v??'');const safe=/^[=+@-]/.test(raw)?"'"+raw:raw;return '"'+safe.replace(/"/g,'""')+'"'};
-   const csv='\\uFEFF'+rows.map(row=>row.map(cell).join(';')).join('\\r\\n');
+   const csv='\uFEFF'+rows.map(row=>row.map(cell).join(';')).join('\r\n');
    const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
    const a=document.createElement('a');a.href=url;a.download='atlas_'+game.id+'_'+chosen+'_'+days+'d.csv';document.body.append(a);a.click();a.remove();
    setTimeout(()=>URL.revokeObjectURL(url),500);
