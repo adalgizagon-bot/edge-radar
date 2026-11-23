@@ -33,11 +33,12 @@
   $('upcoming-total').textContent=String(all.length);
   $('priced-total').textContent=String(all.filter(C.hasOdds).length);
   $('next-kickoff').textContent=all.length?hours(all[0].startTime):'Aguardando';
-  const last=state.feed.dataStatus?.dailySyncAt||state.feed.dataStatus?.citoAt;
+  const sources=[state.feed.dataStatus?.majorAt,state.feed.dataStatus?.dailySyncAt,state.feed.dataStatus?.citoAt].filter(Boolean).sort((a,b)=>Date.parse(b)-Date.parse(a));
+  const last=sources[0]||null;
   const status=$('feed-status'),stale=C.isSourceStale(state.feed);
   status.classList.toggle('stale',stale);
   status.querySelector('span').textContent=last?'Cito: '+hours(last)+(stale?' · desatualizado':''):'Sem sincronização Cito';
-  $('capture-status').textContent='Odds dos prints • não ao vivo';
+  $('capture-status').textContent=all.some(g=>g.major)&&!all.some(C.hasOdds)?'Major: aguardando odds da casa':'Odds dos prints • não ao vivo';
   const warning=$('stale-alert');
   if(stale){
    warning.classList.add('is-visible');
@@ -93,7 +94,8 @@
    if(win){prices.append(el('span','','Vencedor'),el('b','',C.round2(win[0].odd)),el('b','',C.round2(win[1].odd)))}
    else prices.append(el('span','','Odds ainda não cadastradas'));
    const note=el('div','card-note');
-   note.append(el('i','mini-dot'+(C.hasOdds(g)?'':' missing')),el('span','',C.sourceLabel(g)));
+   note.append(el('i','mini-dot'+(C.hasOdds(g)?'':' missing')),
+    el('span','',g.major?(g.model?'Major BO1 · estudo pré-veto · sem odds':'Major BO1 · amostra insuficiente · sem odds'):C.sourceLabel(g)));
    card.append(prices,note);
    card.addEventListener('click',()=>{state.activeId=g.id;state.family='winner';renderList()});
    list.append(card);
@@ -105,7 +107,7 @@
   box.append(el('strong','',team.name));
   box.append(el('span','price',win?.odd?C.round2(win.odd):'—'));
   box.append(el('small','',Number.isFinite(modelProb)?
-    'V2 experimental: '+C.formatPercent(modelProb):
+    'Modelo experimental: '+C.formatPercent(modelProb):
     'Sem projeção V2 disponível'));
   return box;
  }
@@ -122,7 +124,7 @@
  function marketSection(game){
   const fragment=document.createDocumentFragment();
   const head=el('div','subsection-top');
-  const heading=el('div','');heading.append(el('h3','','Mercados da série'),el('p','','Uma análise de cada vez. Odds registradas, nunca ao vivo.'));
+  const heading=el('div','');heading.append(el('h3','',game.bestOf===1?'Vencedor do mapa BO1':'Mercados da série'),el('p','',game.bestOf===1?'Uma partida, um mapa; veto ainda não confirmado.':'Uma análise de cada vez. Odds registradas, nunca ao vivo.'));
   head.append(heading,el('span','snapshot-note',game.quotes?'Print: '+hours(game.quotes.capturedAt):'Aguardando odds'));
   fragment.append(head);
   const families=[...new Set((game.markets||[]).map(x=>x.family))];
@@ -143,7 +145,7 @@
   }
   const outer=el('div','hscroll'),table=el('table','market-table');
   const thead=el('thead',''),tr=el('tr','');
-  for(const label of ['Seleção','Odd','Mercado*','V2','Dif.','Estudo'])tr.append(el('th','',label));
+  for(const label of ['Seleção','Odd','Mercado*','Modelo','Dif.','Estudo'])tr.append(el('th','',label));
   thead.append(tr);table.append(thead);
   const tbody=el('tbody','');
   for(const m of visible){
@@ -162,7 +164,9 @@
    tbody.append(tr);
   }
   table.append(tbody);outer.append(table);fragment.append(outer);
-  fragment.append(el('p','below-table','*Mercado sem margem é uma normalização das odds do print. Dif. = V2 − mercado, em pontos percentuais. Não indica vantagem comprovada: a V2 ainda não foi calibrada.'));
+  fragment.append(el('p','below-table',game.bestOf===1?
+    'BO1: probabilidade pré-veto exploratória baseada em ranking e amostras de mapas. Sem odds da casa, não existe comparação de preço nem oportunidade demonstrada.':
+    '*Mercado sem margem é uma normalização das odds do print. Dif. = V2 − mercado, em pontos percentuais. Não indica vantagem comprovada: a V2 ainda não foi calibrada.'));
   return fragment;
  }
  function contextSection(game){
@@ -173,7 +177,10 @@
    const info=game.form?.[side],team=game[side==='a'?'teamA':'teamB'];
    const box=el('div','context-team');
    box.append(el('b','',team.name));
-   if(info){
+   if(info&&game.major){
+    box.append(el('small','','Ranking registrado no evento: '+(info.rank?'#'+info.rank:'indisponível')),
+     el('small','',info.maps90===null?'Histórico recente por mapa indisponível':info.maps90+' mapas em 90 dias'));
+   }else if(info){
     box.append(el('small','','Ranking na captura: '+(info.rank?'#'+info.rank:'indisponível')),
       el('small','',info.form.wins+' vitórias em '+info.form.n+' séries documentadas'),
       el('small','',info.form.winsVsTop50+' de '+info.form.vsTop50+' jogos vencidos contra top 50'),
@@ -182,6 +189,24 @@
    columns.append(box);
   }
   body.append(columns,el('p','context-warning','Ranking atual não é ranking histórico de cada confronto. A Cito disponibiliza fotografias do histórico; escalações e vetos podem mudar. Modelos V1 e V2 são experimentais.'));
+  if(game.major&&game.model?.mapScenarios?.length){
+   const scenarios=el('div','major-map-scenarios');
+   scenarios.append(el('b','','Cenários por mapa — NÃO são vetos confirmados'));
+   const each=el('div','major-scenarios-list');
+   for(const row of game.model.mapScenarios){
+    const line=el('div','major-scenario');
+    line.append(el('span','',row.map+' · '+row.playedA+' / '+row.playedB+' jogos'),
+      el('b','',C.formatPercent(row.projectionA)+' '+game.teamA.name));
+    each.append(line);
+   }
+   scenarios.append(each);
+   const v=game.model.vetoSensitivity;
+   if(v)scenarios.append(el('small','',
+     'Faixa entre cenários: '+C.formatPercent(v.minA)+' a '+C.formatPercent(v.maxA)+
+     ' para '+game.teamA.name+'. Isto NÃO é um intervalo de confiança estatístico.'));
+   body.append(scenarios);
+  }else if(game.major)body.append(el('p','context-warning',
+    'Sem amostra suficiente nos dois times para uma projeção BO1. Não mostramos probabilidade baseada apenas no ranking.'));
   details.append(body);
   if(game.pricingConsistency?.some(x=>x.relativeDifferencePercent>=5)){
    const note=el('p','context-warning','Há preços distintos para resultados aparentemente equivalentes de 2–0 e handicap −1,5. É necessário conferir as regras da casa, pois isso não comprova arbitragem.');
@@ -206,9 +231,10 @@
   const header=el('div','detail-head'),meta=el('div','detail-super');
   meta.append(el('span','strong',game.event),el('span','',hours(game.startTime)+' · Brasília'));
   header.append(meta,el('h2','detail-title',game.teamA.name+' × '+game.teamB.name));
-  header.append(el('p','detail-caption',C.hasOdds(game)?
-   'Odds dos prints da BR365, sem verificação ao vivo. Modelo V2 congelado antes do jogo.':
-   'Ainda não há odds capturadas para este confronto. As probabilidades, quando disponíveis, não são cotações.'));
+  header.append(el('p','detail-caption',game.major?
+    'PGL Major · BO1 · veto não confirmado · sem odds da casa. Projeções somente quando há histórico suficiente; não são recomendação de aposta.':
+    C.hasOdds(game)?'Odds dos prints da BR365, sem verificação ao vivo. Modelo V2 congelado antes do jogo.':
+    'Ainda não há odds capturadas para este confronto. As probabilidades, quando disponíveis, não são cotações.'));
   const winner=C.winnerMarket(game),left=winner.find(m=>m.key==='aWin'),right=winner.find(m=>m.key==='bWin');
   const compare=el('div','detail-compare');
   compare.append(teamBox(game.teamA,game.model?.v2??null,left),teamBox(game.teamB,Number.isFinite(game.model?.v2)?1-game.model.v2:null,right));
@@ -275,8 +301,9 @@
    const stateBox=el('div','history-col');
    stateBox.append(el('b','',g.result?'Resultado confirmado':'Resultado pendente'),el('small','',g.result?'Cito':'Sem placar verificado'));
    const model=el('div','history-col');
-   model.append(el('b','',Number.isFinite(g.model?.v1)?'V1: '+C.formatPercent(g.model.v1)+' (A)':'Sem previsão congelada'),
-    el('small','',Number.isFinite(g.model?.v2)?'V2: '+C.formatPercent(g.model.v2)+' (A)':'Sem V2'));
+   model.append(el('b','',g.major?(Number.isFinite(g.model?.v2)?'BO1: '+C.formatPercent(g.model.v2)+' (A)':'Sem projeção BO1'):
+    Number.isFinite(g.model?.v1)?'V1: '+C.formatPercent(g.model.v1)+' (A)':'Sem previsão congelada'),
+    el('small','',g.major?'Pré-veto; pesquisa experimental':Number.isFinite(g.model?.v2)?'V2: '+C.formatPercent(g.model.v2)+' (A)':'Sem V2'));
    row.append(name,score,stateBox,model);root.append(row);
   }
  }
