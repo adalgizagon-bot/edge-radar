@@ -1,16 +1,16 @@
 {
   "version": "atlas-radar-unificado-v1",
-  "generatedAt": "2026-11-23T19:11:03.365Z",
+  "generatedAt": "2026-11-24T18:49:50.394Z",
   "dataStatus": {
     "citoAt": "2026-11-22T15:13:39.579Z",
-    "majorAt": "2026-11-23T19:11:03.365Z",
+    "majorAt": "2026-11-24T18:49:50.394Z",
+    "majorOddsAt": null,
     "formAt": "2026-11-22T15:13:39.579Z",
     "rankingsAt": "2026-11-22T15:13:39.579Z",
-    "dailySyncAt": "2026-11-23T19:11:03.365Z",
+    "dailySyncAt": "2026-11-24T18:49:50.394Z",
     "oddsType": "prints_manualmente_enviados",
     "automaticOdds": false,
-    "dailyCitoUpdatesDependOnGitHubActions": true,
-    "majorOddsAt": "2026-11-23T19:07:00.000Z"
+    "dailyCitoUpdatesDependOnGitHubActions": true
   },
   "games": [
     {
@@ -2383,10 +2383,10 @@
     },
     {
       "id": "cs2-match-2400494",
-      "startTime": "2026-11-24T04:00:00.000Z",
+      "startTime": "2026-11-24T04:47:33.000Z",
       "event": "PGL Major Singapore 2026 Stage 1",
       "eventId": "cs2-event-9303",
-      "status": "scheduled",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "major": {
@@ -2395,7 +2395,7 @@
         "vetoConfirmed": false,
         "modelStatus": "exploratory",
         "limitation": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta.",
-        "noOdds": false
+        "noOdds": true
       },
       "teamA": {
         "id": "cs2-team-7175",
@@ -2405,7 +2405,11 @@
         "id": "cs2-team-9455",
         "name": "Imperial"
       },
-      "result": null,
+      "result": {
+        "scoreA": 0,
+        "scoreB": 1,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
       "model": {
         "v1": null,
         "v2": 0.5335027130384907,
@@ -2478,38 +2482,33 @@
         ],
         "mapsEligible": 5
       },
-      "quotes": {
-        "source": "BR365 / print enviado",
-        "capturedAt": "2026-11-23T19:07:00.000Z",
-        "eventId": "cs2-event-9303",
-        "live": false
-      },
+      "quotes": null,
       "markets": [
         {
           "key": "aWin",
           "family": "winner",
           "label": "HEROIC vence o mapa BO1",
-          "odd": 1.43,
-          "impliedNoVig": 0.6578947368421053,
-          "impliedRaw": 0.6993006993006994,
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
           "v1P": null,
           "v2P": 0.5335027130384907,
-          "marketOverround": 1.062937062937063,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted_major_bo1"
         },
         {
           "key": "bWin",
           "family": "winner",
           "label": "Imperial vence o mapa BO1",
-          "odd": 2.75,
-          "impliedNoVig": 0.34210526315789475,
-          "impliedRaw": 0.36363636363636365,
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
           "v1P": null,
           "v2P": 0.46649728696150927,
-          "marketOverround": 1.062937062937063,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted_major_bo1"
         }
       ],
       "unmodeledRoundHandicaps": [],
@@ -2547,10 +2546,10 @@
     },
     {
       "id": "cs2-match-2400495",
-      "startTime": "2026-11-24T04:00:00.000Z",
+      "startTime": "2026-11-24T05:06:19.000Z",
       "event": "PGL Major Singapore 2026 Stage 1",
       "eventId": "cs2-event-9303",
-      "status": "scheduled",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "major": {
@@ -2559,7 +2558,7 @@
         "vetoConfirmed": false,
         "modelStatus": "exploratory",
         "limitation": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta.",
-        "noOdds": false
+        "noOdds": true
       },
       "teamA": {
         "id": "cs2-team-9996",
@@ -2569,7 +2568,11 @@
         "id": "cs2-team-8840",
         "name": "Lynn Vision"
       },
-      "result": null,
+      "result": {
+        "scoreA": 0,
+        "scoreB": 1,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
       "model": {
         "v1": null,
         "v2": 0.49408153351086925,
@@ -2631,38 +2634,33 @@
         ],
         "mapsEligible": 4
       },
-      "quotes": {
-        "source": "BR365 / print enviado",
-        "capturedAt": "2026-11-23T19:07:00.000Z",
-        "eventId": "cs2-event-9303",
-        "live": false
-      },
+      "quotes": null,
       "markets": [
         {
           "key": "aWin",
           "family": "winner",
           "label": "9z vence o mapa BO1",
-          "odd": 1.57,
-          "impliedNoVig": 0.5994897959183673,
-          "impliedRaw": 0.6369426751592356,
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
           "v1P": null,
           "v2P": 0.49408153351086925,
-          "marketOverround": 1.0624745900528527,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted_major_bo1"
         },
         {
           "key": "bWin",
           "family": "winner",
           "label": "Lynn Vision vence o mapa BO1",
-          "odd": 2.35,
-          "impliedNoVig": 0.4005102040816326,
-          "impliedRaw": 0.425531914893617,
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
           "v1P": null,
           "v2P": 0.5059184664891307,
-          "marketOverround": 1.0624745900528527,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted_major_bo1"
         }
       ],
       "unmodeledRoundHandicaps": [],
@@ -2700,10 +2698,10 @@
     },
     {
       "id": "cs2-match-2400496",
-      "startTime": "2026-11-24T05:00:00.000Z",
+      "startTime": "2026-11-24T05:55:07.000Z",
       "event": "PGL Major Singapore 2026 Stage 1",
       "eventId": "cs2-event-9303",
-      "status": "scheduled",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "major": {
@@ -2712,7 +2710,7 @@
         "vetoConfirmed": false,
         "modelStatus": "exploratory",
         "limitation": "Projeção BO1 pré-veto apenas exploratória. Não há odds nem mapa confirmado; sem indicação de aposta.",
-        "noOdds": false
+        "noOdds": true
       },
       "teamA": {
         "id": "cs2-team-4411",
@@ -2722,7 +2720,11 @@
         "id": "cs2-team-12376",
         "name": "M80"
       },
-      "result": null,
+      "result": {
+        "scoreA": 1,
+        "scoreB": 0,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
       "model": {
         "v1": null,
         "v2": 0.5291670928127452,
@@ -2795,38 +2797,33 @@
         ],
         "mapsEligible": 5
       },
-      "quotes": {
-        "source": "BR365 / print enviado",
-        "capturedAt": "2026-11-23T19:07:00.000Z",
-        "eventId": "cs2-event-9303",
-        "live": false
-      },
+      "quotes": null,
       "markets": [
         {
           "key": "aWin",
           "family": "winner",
           "label": "Ninjas in Pyjamas vence o mapa BO1",
-          "odd": 1.6,
-          "impliedNoVig": 0.5844155844155844,
-          "impliedRaw": 0.625,
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
           "v1P": null,
           "v2P": 0.5291670928127452,
-          "marketOverround": 1.0694444444444444,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted_major_bo1"
         },
         {
           "key": "bWin",
           "family": "winner",
           "label": "M80 vence o mapa BO1",
-          "odd": 2.25,
-          "impliedNoVig": 0.41558441558441556,
-          "impliedRaw": 0.4444444444444444,
+          "odd": null,
+          "impliedNoVig": null,
+          "impliedRaw": null,
           "v1P": null,
           "v2P": 0.4708329071872548,
-          "marketOverround": 1.0694444444444444,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
+          "marketOverround": null,
+          "source": "sem_odds",
+          "status": "unquoted_major_bo1"
         }
       ],
       "unmodeledRoundHandicaps": [],
@@ -2864,10 +2861,10 @@
     },
     {
       "id": "cs2-match-2400497",
-      "startTime": "2026-11-24T05:00:00.000Z",
+      "startTime": "2026-11-24T06:09:14.000Z",
       "event": "PGL Major Singapore 2026 Stage 1",
       "eventId": "cs2-event-9303",
-      "status": "scheduled",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "major": {
@@ -2876,7 +2873,7 @@
         "vetoConfirmed": false,
         "modelStatus": "insufficient_data",
         "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
-        "noOdds": false
+        "noOdds": true
       },
       "teamA": {
         "id": "cs2-team-8474",
@@ -2886,42 +2883,14 @@
         "id": "cs2-team-12646",
         "name": "Chinggis Warriors"
       },
-      "result": null,
-      "model": null,
-      "quotes": {
-        "source": "BR365 / print enviado",
-        "capturedAt": "2026-11-23T19:07:00.000Z",
-        "eventId": "cs2-event-9303",
-        "live": false
+      "result": {
+        "scoreA": 1,
+        "scoreB": 0,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
       },
-      "markets": [
-        {
-          "key": "aWin",
-          "family": "winner",
-          "label": "100 Thieves vence o mapa BO1",
-          "odd": 1.12,
-          "impliedNoVig": 0.8308157099697885,
-          "impliedRaw": 0.8928571428571428,
-          "v1P": null,
-          "v2P": null,
-          "marketOverround": 1.0746753246753247,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
-        },
-        {
-          "key": "bWin",
-          "family": "winner",
-          "label": "Chinggis Warriors vence o mapa BO1",
-          "odd": 5.5,
-          "impliedNoVig": 0.1691842900302115,
-          "impliedRaw": 0.18181818181818182,
-          "v1P": null,
-          "v2P": null,
-          "marketOverround": 1.0746753246753247,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
-        }
-      ],
+      "model": null,
+      "quotes": null,
+      "markets": [],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
       "form": {
@@ -2957,10 +2926,10 @@
     },
     {
       "id": "cs2-match-2400498",
-      "startTime": "2026-11-24T06:00:00.000Z",
+      "startTime": "2026-11-24T06:39:44.000Z",
       "event": "PGL Major Singapore 2026 Stage 1",
       "eventId": "cs2-event-9303",
-      "status": "scheduled",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "major": {
@@ -2979,7 +2948,11 @@
         "id": "cs2-team-12878",
         "name": "BC.Game"
       },
-      "result": null,
+      "result": {
+        "scoreA": 1,
+        "scoreB": 0,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
       "model": {
         "v1": null,
         "v2": 0.5490119890200449,
@@ -3052,9 +3025,9 @@
           "impliedRaw": null,
           "v1P": null,
           "v2P": 0.5490119890200449,
-          "status": "unquoted_major_bo1",
           "marketOverround": null,
-          "source": "sem_odds"
+          "source": "sem_odds",
+          "status": "unquoted_major_bo1"
         },
         {
           "key": "bWin",
@@ -3065,9 +3038,9 @@
           "impliedRaw": null,
           "v1P": null,
           "v2P": 0.4509880109799551,
-          "status": "unquoted_major_bo1",
           "marketOverround": null,
-          "source": "sem_odds"
+          "source": "sem_odds",
+          "status": "unquoted_major_bo1"
         }
       ],
       "unmodeledRoundHandicaps": [],
@@ -3105,10 +3078,10 @@
     },
     {
       "id": "cs2-match-2400499",
-      "startTime": "2026-11-24T06:00:00.000Z",
+      "startTime": "2026-11-24T07:05:35.000Z",
       "event": "PGL Major Singapore 2026 Stage 1",
       "eventId": "cs2-event-9303",
-      "status": "scheduled",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "major": {
@@ -3117,7 +3090,7 @@
         "vetoConfirmed": false,
         "modelStatus": "insufficient_data",
         "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
-        "noOdds": false
+        "noOdds": true
       },
       "teamA": {
         "id": "cs2-team-12467",
@@ -3127,42 +3100,14 @@
         "id": "cs2-team-13926",
         "name": "DENDELE"
       },
-      "result": null,
-      "model": null,
-      "quotes": {
-        "source": "BR365 / print enviado",
-        "capturedAt": "2026-11-23T19:07:00.000Z",
-        "eventId": "cs2-event-9303",
-        "live": false
+      "result": {
+        "scoreA": 1,
+        "scoreB": 0,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
       },
-      "markets": [
-        {
-          "key": "aWin",
-          "family": "winner",
-          "label": "PARIVISION vence o mapa BO1",
-          "odd": 1.55,
-          "impliedNoVig": 0.6075949367088608,
-          "impliedRaw": 0.6451612903225806,
-          "v1P": null,
-          "v2P": null,
-          "marketOverround": 1.0618279569892473,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
-        },
-        {
-          "key": "bWin",
-          "family": "winner",
-          "label": "DENDELE vence o mapa BO1",
-          "odd": 2.4,
-          "impliedNoVig": 0.3924050632911393,
-          "impliedRaw": 0.4166666666666667,
-          "v1P": null,
-          "v2P": null,
-          "marketOverround": 1.0618279569892473,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
-        }
-      ],
+      "model": null,
+      "quotes": null,
+      "markets": [],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
       "form": {
@@ -3198,10 +3143,10 @@
     },
     {
       "id": "cs2-match-2400500",
-      "startTime": "2026-11-24T07:00:00.000Z",
+      "startTime": "2026-11-24T07:48:27.000Z",
       "event": "PGL Major Singapore 2026 Stage 1",
       "eventId": "cs2-event-9303",
-      "status": "scheduled",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "major": {
@@ -3210,7 +3155,7 @@
         "vetoConfirmed": false,
         "modelStatus": "insufficient_data",
         "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
-        "noOdds": false
+        "noOdds": true
       },
       "teamA": {
         "id": "cs2-team-6667",
@@ -3220,42 +3165,14 @@
         "id": "cs2-team-12257",
         "name": "Wildcard"
       },
-      "result": null,
-      "model": null,
-      "quotes": {
-        "source": "BR365 / print enviado",
-        "capturedAt": "2026-11-23T19:07:00.000Z",
-        "eventId": "cs2-event-9303",
-        "live": false
+      "result": {
+        "scoreA": 0,
+        "scoreB": 1,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
       },
-      "markets": [
-        {
-          "key": "aWin",
-          "family": "winner",
-          "label": "FaZe vence o mapa BO1",
-          "odd": 1.45,
-          "impliedNoVig": 0.6419753086419754,
-          "impliedRaw": 0.6896551724137931,
-          "v1P": null,
-          "v2P": null,
-          "marketOverround": 1.0742705570291777,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
-        },
-        {
-          "key": "bWin",
-          "family": "winner",
-          "label": "Wildcard vence o mapa BO1",
-          "odd": 2.6,
-          "impliedNoVig": 0.35802469135802467,
-          "impliedRaw": 0.3846153846153846,
-          "v1P": null,
-          "v2P": null,
-          "marketOverround": 1.0742705570291777,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
-        }
-      ],
+      "model": null,
+      "quotes": null,
+      "markets": [],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
       "form": {
@@ -3291,10 +3208,10 @@
     },
     {
       "id": "cs2-match-2400501",
-      "startTime": "2026-11-24T07:00:00.000Z",
+      "startTime": "2026-11-24T08:06:32.000Z",
       "event": "PGL Major Singapore 2026 Stage 1",
       "eventId": "cs2-event-9303",
-      "status": "scheduled",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "major": {
@@ -3303,7 +3220,7 @@
         "vetoConfirmed": false,
         "modelStatus": "insufficient_data",
         "limitation": "Histórico recente por mapa indisponível para uma ou as duas equipes; ranking isolado não é previsão suficiente.",
-        "noOdds": false
+        "noOdds": true
       },
       "teamA": {
         "id": "cs2-team-11251",
@@ -3313,42 +3230,14 @@
         "id": "cs2-team-12774",
         "name": "FlyQuest"
       },
-      "result": null,
-      "model": null,
-      "quotes": {
-        "source": "BR365 / print enviado",
-        "capturedAt": "2026-11-23T19:07:00.000Z",
-        "eventId": "cs2-event-9303",
-        "live": false
+      "result": {
+        "scoreA": 0,
+        "scoreB": 1,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
       },
-      "markets": [
-        {
-          "key": "aWin",
-          "family": "winner",
-          "label": "Eternal Fire vence o mapa BO1",
-          "odd": 1.62,
-          "impliedNoVig": 0.5759162303664922,
-          "impliedRaw": 0.6172839506172839,
-          "v1P": null,
-          "v2P": null,
-          "marketOverround": 1.0718294051627384,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
-        },
-        {
-          "key": "bWin",
-          "family": "winner",
-          "label": "FlyQuest vence o mapa BO1",
-          "odd": 2.2,
-          "impliedNoVig": 0.42408376963350786,
-          "impliedRaw": 0.45454545454545453,
-          "v1P": null,
-          "v2P": null,
-          "marketOverround": 1.0718294051627384,
-          "source": "br365_screenshot",
-          "status": "research_only_unvalidated"
-        }
-      ],
+      "model": null,
+      "quotes": null,
+      "markets": [],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
       "form": {
@@ -3381,6 +3270,978 @@
       },
       "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
       "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400558",
+      "startTime": "2026-11-24T09:20:29.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-7175",
+        "name": "HEROIC"
+      },
+      "teamB": {
+        "id": "cs2-team-12646",
+        "name": "Chinggis Warriors"
+      },
+      "result": {
+        "scoreA": 1,
+        "scoreB": 0,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 23,
+          "maps90": 83,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 59,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400557",
+      "startTime": "2026-11-24T09:35:41.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas"
+      },
+      "teamB": {
+        "id": "cs2-team-8840",
+        "name": "Lynn Vision"
+      },
+      "result": {
+        "scoreA": 1,
+        "scoreB": 0,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 18,
+          "maps90": 77,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 44,
+          "maps90": 41,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400560",
+      "startTime": "2026-11-24T10:30:30.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-9996",
+        "name": "9z"
+      },
+      "teamB": {
+        "id": "cs2-team-12376",
+        "name": "M80"
+      },
+      "result": {
+        "scoreA": 0,
+        "scoreB": 1,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 21,
+          "maps90": 40,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 24,
+          "maps90": 50,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400559",
+      "startTime": "2026-11-24T10:50:12.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-8474",
+        "name": "100 Thieves"
+      },
+      "teamB": {
+        "id": "cs2-team-9455",
+        "name": "Imperial"
+      },
+      "result": {
+        "scoreA": 0,
+        "scoreB": 1,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 29,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 48,
+          "maps90": 82,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400562",
+      "startTime": "2026-11-24T11:36:52.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-11251",
+        "name": "Eternal Fire"
+      },
+      "teamB": {
+        "id": "cs2-team-13926",
+        "name": "DENDELE"
+      },
+      "result": {
+        "scoreA": 1,
+        "scoreB": 0,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 22,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 33,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400563",
+      "startTime": "2026-11-24T11:55:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-5973",
+        "name": "Liquid"
+      },
+      "teamB": {
+        "id": "cs2-team-12257",
+        "name": "Wildcard"
+      },
+      "result": {
+        "scoreA": 1,
+        "scoreB": 0,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 16,
+          "maps90": 64,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 42,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400561",
+      "startTime": "2026-11-24T11:57:55.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-12467",
+        "name": "PARIVISION"
+      },
+      "teamB": {
+        "id": "cs2-team-12774",
+        "name": "FlyQuest"
+      },
+      "result": {
+        "scoreA": 0,
+        "scoreB": 1,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 13,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 58,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400564",
+      "startTime": "2026-11-24T12:10:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-6667",
+        "name": "FaZe"
+      },
+      "teamB": {
+        "id": "cs2-team-12878",
+        "name": "BC.Game"
+      },
+      "result": {
+        "scoreA": 1,
+        "scoreB": 0,
+        "verifiedAt": "2026-11-24T18:49:50.394Z"
+      },
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 19,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 46,
+          "maps90": 40,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400565",
+      "startTime": "2026-11-25T06:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss round 3",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-7175",
+        "name": "HEROIC"
+      },
+      "teamB": {
+        "id": "cs2-team-12376",
+        "name": "M80"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 23,
+          "maps90": 83,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 24,
+          "maps90": 50,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400566",
+      "startTime": "2026-11-25T06:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss round 3",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-11251",
+        "name": "Eternal Fire"
+      },
+      "teamB": {
+        "id": "cs2-team-8474",
+        "name": "100 Thieves"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 22,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 29,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400567",
+      "startTime": "2026-11-25T07:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss round 3",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-12467",
+        "name": "PARIVISION"
+      },
+      "teamB": {
+        "id": "cs2-team-6667",
+        "name": "FaZe"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 13,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 19,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400568",
+      "startTime": "2026-11-25T07:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 1,
+      "stage": "Swiss round 3",
+      "major": {
+        "event": "PGL Major Singapore 2026",
+        "format": "BO1",
+        "vetoConfirmed": false,
+        "modelStatus": "not_modeled",
+        "limitation": "No pregame model",
+        "noOdds": true
+      },
+      "teamA": {
+        "id": "cs2-team-12257",
+        "name": "Wildcard"
+      },
+      "teamB": {
+        "id": "cs2-team-8840",
+        "name": "Lynn Vision"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 42,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": false,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        },
+        "b": {
+          "rank": 44,
+          "maps90": 41,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "available": true,
+          "asOf": "2026-11-23T18:54:12.966Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400569",
+      "startTime": "2026-11-25T08:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 3,
+      "stage": "Swiss round 3",
+      "major": null,
+      "teamA": {
+        "id": "cs2-team-9455",
+        "name": "Imperial"
+      },
+      "teamB": {
+        "id": "cs2-team-12774",
+        "name": "FlyQuest"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 48,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T15:13:39.579Z"
+        },
+        "b": {
+          "rank": 58,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T15:13:39.579Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400570",
+      "startTime": "2026-11-25T08:00:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 3,
+      "stage": "Swiss round 3",
+      "major": null,
+      "teamA": {
+        "id": "cs2-team-9996",
+        "name": "9z"
+      },
+      "teamB": {
+        "id": "cs2-team-13926",
+        "name": "DENDELE"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 21,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T15:13:39.579Z"
+        },
+        "b": {
+          "rank": 33,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T15:13:39.579Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400571",
+      "startTime": "2026-11-25T10:30:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 3,
+      "stage": "Swiss round 3",
+      "major": null,
+      "teamA": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas"
+      },
+      "teamB": {
+        "id": "cs2-team-5973",
+        "name": "Liquid"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 18,
+          "maps90": 72,
+          "form": {
+            "n": 15,
+            "wins": 13,
+            "losses": 2,
+            "vsTop50": 10,
+            "winsVsTop50": 8
+          },
+          "asOf": "2026-11-18T01:14:30.220Z"
+        },
+        "b": {
+          "rank": 16,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T15:13:39.579Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
+    },
+    {
+      "id": "cs2-match-2400572",
+      "startTime": "2026-11-25T10:30:00.000Z",
+      "event": "PGL Major Singapore 2026 Stage 1",
+      "eventId": "cs2-event-9303",
+      "status": "scheduled",
+      "bestOf": 3,
+      "stage": "Swiss round 3",
+      "major": null,
+      "teamA": {
+        "id": "cs2-team-12878",
+        "name": "BC.Game"
+      },
+      "teamB": {
+        "id": "cs2-team-12646",
+        "name": "Chinggis Warriors"
+      },
+      "result": null,
+      "model": null,
+      "quotes": null,
+      "markets": [],
+      "unmodeledRoundHandicaps": [],
+      "pricingConsistency": [],
+      "form": {
+        "a": {
+          "rank": 46,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T15:13:39.579Z"
+        },
+        "b": {
+          "rank": 59,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T15:13:39.579Z"
+        }
+      },
+      "comparisonNote": "Probabilidades experimentais não calibradas; odds de prints não são preços atuais.",
+      "legacyMarketPrices": null
     }
   ],
   "rules": {
@@ -3391,6 +4252,6 @@
     "warnings": "model uncalibrated; price photographed; not an automated bet or recommendation"
   },
   "archive": {
-    "count": 14
+    "count": 30
   }
 }

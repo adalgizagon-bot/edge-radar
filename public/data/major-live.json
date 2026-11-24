@@ -1,37 +1,15 @@
 {
   "version": "major-event-sync-v1",
   "eventId": "cs2-event-9303",
-  "fetchedAt": "2026-11-23T19:11:03.365Z",
+  "fetchedAt": "2026-11-24T18:49:50.394Z",
   "fixtures": [
-    {
-      "id": "cs2-match-2400495",
-      "eventId": "cs2-event-9303",
-      "eventName": "PGL Major Singapore 2026 Stage 1",
-      "startsAt": "2026-11-24T04:00:00.000Z",
-      "snapshotAt": "2026-11-23T19:11:03.365Z",
-      "status": "upcoming",
-      "bestOf": 1,
-      "stage": "Swiss round 1",
-      "teamA": {
-        "id": "cs2-team-9996",
-        "name": "9z"
-      },
-      "teamB": {
-        "id": "cs2-team-8840",
-        "name": "Lynn Vision"
-      },
-      "veto": {
-        "status": "unconfirmed",
-        "confirmedMap": null
-      }
-    },
     {
       "id": "cs2-match-2400494",
       "eventId": "cs2-event-9303",
       "eventName": "PGL Major Singapore 2026 Stage 1",
-      "startsAt": "2026-11-24T04:00:00.000Z",
-      "snapshotAt": "2026-11-23T19:11:03.365Z",
-      "status": "upcoming",
+      "startsAt": "2026-11-24T04:47:33.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "teamA": {
@@ -48,21 +26,21 @@
       }
     },
     {
-      "id": "cs2-match-2400497",
+      "id": "cs2-match-2400495",
       "eventId": "cs2-event-9303",
       "eventName": "PGL Major Singapore 2026 Stage 1",
-      "startsAt": "2026-11-24T05:00:00.000Z",
-      "snapshotAt": "2026-11-23T19:11:03.365Z",
-      "status": "upcoming",
+      "startsAt": "2026-11-24T05:06:19.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "teamA": {
-        "id": "cs2-team-8474",
-        "name": "100 Thieves"
+        "id": "cs2-team-9996",
+        "name": "9z"
       },
       "teamB": {
-        "id": "cs2-team-12646",
-        "name": "Chinggis Warriors"
+        "id": "cs2-team-8840",
+        "name": "Lynn Vision"
       },
       "veto": {
         "status": "unconfirmed",
@@ -73,9 +51,9 @@
       "id": "cs2-match-2400496",
       "eventId": "cs2-event-9303",
       "eventName": "PGL Major Singapore 2026 Stage 1",
-      "startsAt": "2026-11-24T05:00:00.000Z",
-      "snapshotAt": "2026-11-23T19:11:03.365Z",
-      "status": "upcoming",
+      "startsAt": "2026-11-24T05:55:07.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "teamA": {
@@ -92,12 +70,34 @@
       }
     },
     {
+      "id": "cs2-match-2400497",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T06:09:14.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 1",
+      "teamA": {
+        "id": "cs2-team-8474",
+        "name": "100 Thieves"
+      },
+      "teamB": {
+        "id": "cs2-team-12646",
+        "name": "Chinggis Warriors"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
       "id": "cs2-match-2400498",
       "eventId": "cs2-event-9303",
       "eventName": "PGL Major Singapore 2026 Stage 1",
-      "startsAt": "2026-11-24T06:00:00.000Z",
-      "snapshotAt": "2026-11-23T19:11:03.365Z",
-      "status": "upcoming",
+      "startsAt": "2026-11-24T06:39:44.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "teamA": {
@@ -117,9 +117,9 @@
       "id": "cs2-match-2400499",
       "eventId": "cs2-event-9303",
       "eventName": "PGL Major Singapore 2026 Stage 1",
-      "startsAt": "2026-11-24T06:00:00.000Z",
-      "snapshotAt": "2026-11-23T19:11:03.365Z",
-      "status": "upcoming",
+      "startsAt": "2026-11-24T07:05:35.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "teamA": {
@@ -139,9 +139,9 @@
       "id": "cs2-match-2400500",
       "eventId": "cs2-event-9303",
       "eventName": "PGL Major Singapore 2026 Stage 1",
-      "startsAt": "2026-11-24T07:00:00.000Z",
-      "snapshotAt": "2026-11-23T19:11:03.365Z",
-      "status": "upcoming",
+      "startsAt": "2026-11-24T07:48:27.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "teamA": {
@@ -161,9 +161,9 @@
       "id": "cs2-match-2400501",
       "eventId": "cs2-event-9303",
       "eventName": "PGL Major Singapore 2026 Stage 1",
-      "startsAt": "2026-11-24T07:00:00.000Z",
-      "snapshotAt": "2026-11-23T19:11:03.365Z",
-      "status": "upcoming",
+      "startsAt": "2026-11-24T08:06:32.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
       "bestOf": 1,
       "stage": "Swiss round 1",
       "teamA": {
@@ -178,8 +178,681 @@
         "status": "unconfirmed",
         "confirmedMap": null
       }
+    },
+    {
+      "id": "cs2-match-2400558",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T09:20:29.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "teamA": {
+        "id": "cs2-team-7175",
+        "name": "HEROIC"
+      },
+      "teamB": {
+        "id": "cs2-team-12646",
+        "name": "Chinggis Warriors"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400557",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T09:35:41.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "teamA": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas"
+      },
+      "teamB": {
+        "id": "cs2-team-8840",
+        "name": "Lynn Vision"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400560",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T10:30:30.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "teamA": {
+        "id": "cs2-team-9996",
+        "name": "9z"
+      },
+      "teamB": {
+        "id": "cs2-team-12376",
+        "name": "M80"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400559",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T10:50:12.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "teamA": {
+        "id": "cs2-team-8474",
+        "name": "100 Thieves"
+      },
+      "teamB": {
+        "id": "cs2-team-9455",
+        "name": "Imperial"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400562",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T11:36:52.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "teamA": {
+        "id": "cs2-team-11251",
+        "name": "Eternal Fire"
+      },
+      "teamB": {
+        "id": "cs2-team-13926",
+        "name": "DENDELE"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400563",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T11:55:00.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "teamA": {
+        "id": "cs2-team-5973",
+        "name": "Liquid"
+      },
+      "teamB": {
+        "id": "cs2-team-12257",
+        "name": "Wildcard"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400561",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T11:57:55.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "teamA": {
+        "id": "cs2-team-12467",
+        "name": "PARIVISION"
+      },
+      "teamB": {
+        "id": "cs2-team-12774",
+        "name": "FlyQuest"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400564",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-24T12:10:00.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "completed",
+      "bestOf": 1,
+      "stage": "Swiss round 2",
+      "teamA": {
+        "id": "cs2-team-6667",
+        "name": "FaZe"
+      },
+      "teamB": {
+        "id": "cs2-team-12878",
+        "name": "BC.Game"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400566",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-25T06:00:00.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "upcoming",
+      "bestOf": 1,
+      "stage": "Swiss round 3",
+      "teamA": {
+        "id": "cs2-team-11251",
+        "name": "Eternal Fire"
+      },
+      "teamB": {
+        "id": "cs2-team-8474",
+        "name": "100 Thieves"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400565",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-25T06:00:00.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "upcoming",
+      "bestOf": 1,
+      "stage": "Swiss round 3",
+      "teamA": {
+        "id": "cs2-team-7175",
+        "name": "HEROIC"
+      },
+      "teamB": {
+        "id": "cs2-team-12376",
+        "name": "M80"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400567",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-25T07:00:00.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "upcoming",
+      "bestOf": 1,
+      "stage": "Swiss round 3",
+      "teamA": {
+        "id": "cs2-team-12467",
+        "name": "PARIVISION"
+      },
+      "teamB": {
+        "id": "cs2-team-6667",
+        "name": "FaZe"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400568",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-25T07:00:00.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "upcoming",
+      "bestOf": 1,
+      "stage": "Swiss round 3",
+      "teamA": {
+        "id": "cs2-team-12257",
+        "name": "Wildcard"
+      },
+      "teamB": {
+        "id": "cs2-team-8840",
+        "name": "Lynn Vision"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400569",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-25T08:00:00.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "upcoming",
+      "bestOf": 3,
+      "stage": "Swiss round 3",
+      "teamA": {
+        "id": "cs2-team-9455",
+        "name": "Imperial"
+      },
+      "teamB": {
+        "id": "cs2-team-12774",
+        "name": "FlyQuest"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400570",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-25T08:00:00.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "upcoming",
+      "bestOf": 3,
+      "stage": "Swiss round 3",
+      "teamA": {
+        "id": "cs2-team-9996",
+        "name": "9z"
+      },
+      "teamB": {
+        "id": "cs2-team-13926",
+        "name": "DENDELE"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400571",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-25T10:30:00.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "upcoming",
+      "bestOf": 3,
+      "stage": "Swiss round 3",
+      "teamA": {
+        "id": "cs2-team-4411",
+        "name": "Ninjas in Pyjamas"
+      },
+      "teamB": {
+        "id": "cs2-team-5973",
+        "name": "Liquid"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
+    },
+    {
+      "id": "cs2-match-2400572",
+      "eventId": "cs2-event-9303",
+      "eventName": "PGL Major Singapore 2026 Stage 1",
+      "startsAt": "2026-11-25T10:30:00.000Z",
+      "snapshotAt": "2026-11-24T18:49:50.394Z",
+      "status": "upcoming",
+      "bestOf": 3,
+      "stage": "Swiss round 3",
+      "teamA": {
+        "id": "cs2-team-12878",
+        "name": "BC.Game"
+      },
+      "teamB": {
+        "id": "cs2-team-12646",
+        "name": "Chinggis Warriors"
+      },
+      "veto": {
+        "status": "unconfirmed",
+        "confirmedMap": null
+      }
     }
   ],
-  "results": [],
+  "results": [
+    {
+      "id": "cs2-match-2400494",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T04:47:33.000Z",
+      "status": "completed",
+      "teamA": "HEROIC",
+      "teamB": "Imperial",
+      "scoreA": 0,
+      "scoreB": 1,
+      "winnerTeamId": "cs2-team-9455",
+      "maps": [
+        {
+          "name": "Mirage",
+          "scoreA": 6,
+          "scoreB": 13,
+          "rounds": 19
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400495",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T05:06:19.000Z",
+      "status": "completed",
+      "teamA": "9z",
+      "teamB": "Lynn Vision",
+      "scoreA": 0,
+      "scoreB": 1,
+      "winnerTeamId": "cs2-team-8840",
+      "maps": [
+        {
+          "name": "Inferno",
+          "scoreA": 11,
+          "scoreB": 13,
+          "rounds": 24
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400496",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T05:55:07.000Z",
+      "status": "completed",
+      "teamA": "Ninjas in Pyjamas",
+      "teamB": "M80",
+      "scoreA": 1,
+      "scoreB": 0,
+      "winnerTeamId": "cs2-team-4411",
+      "maps": [
+        {
+          "name": "Mirage",
+          "scoreA": 13,
+          "scoreB": 10,
+          "rounds": 23
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400497",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T06:09:14.000Z",
+      "status": "completed",
+      "teamA": "100 Thieves",
+      "teamB": "Chinggis Warriors",
+      "scoreA": 1,
+      "scoreB": 0,
+      "winnerTeamId": "cs2-team-8474",
+      "maps": [
+        {
+          "name": "Dust2",
+          "scoreA": 13,
+          "scoreB": 6,
+          "rounds": 19
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400498",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T06:39:44.000Z",
+      "status": "completed",
+      "teamA": "Liquid",
+      "teamB": "BC.Game",
+      "scoreA": 1,
+      "scoreB": 0,
+      "winnerTeamId": "cs2-team-5973",
+      "maps": [
+        {
+          "name": "Nuke",
+          "scoreA": 13,
+          "scoreB": 1,
+          "rounds": 14
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400499",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T07:05:35.000Z",
+      "status": "completed",
+      "teamA": "PARIVISION",
+      "teamB": "DENDELE",
+      "scoreA": 1,
+      "scoreB": 0,
+      "winnerTeamId": "cs2-team-12467",
+      "maps": [
+        {
+          "name": "Ancient",
+          "scoreA": 13,
+          "scoreB": 3,
+          "rounds": 16
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400500",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T07:48:27.000Z",
+      "status": "completed",
+      "teamA": "FaZe",
+      "teamB": "Wildcard",
+      "scoreA": 0,
+      "scoreB": 1,
+      "winnerTeamId": "cs2-team-12257",
+      "maps": [
+        {
+          "name": "Nuke",
+          "scoreA": 9,
+          "scoreB": 13,
+          "rounds": 22
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400501",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T08:06:32.000Z",
+      "status": "completed",
+      "teamA": "Eternal Fire",
+      "teamB": "FlyQuest",
+      "scoreA": 0,
+      "scoreB": 1,
+      "winnerTeamId": "cs2-team-12774",
+      "maps": [
+        {
+          "name": "Dust2",
+          "scoreA": 7,
+          "scoreB": 13,
+          "rounds": 20
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400558",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T09:20:29.000Z",
+      "status": "completed",
+      "teamA": "HEROIC",
+      "teamB": "Chinggis Warriors",
+      "scoreA": 1,
+      "scoreB": 0,
+      "winnerTeamId": "cs2-team-7175",
+      "maps": [
+        {
+          "name": "Nuke",
+          "scoreA": 13,
+          "scoreB": 3,
+          "rounds": 16
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400557",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T09:35:41.000Z",
+      "status": "completed",
+      "teamA": "Ninjas in Pyjamas",
+      "teamB": "Lynn Vision",
+      "scoreA": 1,
+      "scoreB": 0,
+      "winnerTeamId": "cs2-team-4411",
+      "maps": [
+        {
+          "name": "Ancient",
+          "scoreA": 13,
+          "scoreB": 10,
+          "rounds": 23
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400560",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T10:30:30.000Z",
+      "status": "completed",
+      "teamA": "9z",
+      "teamB": "M80",
+      "scoreA": 0,
+      "scoreB": 1,
+      "winnerTeamId": "cs2-team-12376",
+      "maps": [
+        {
+          "name": "Mirage",
+          "scoreA": 8,
+          "scoreB": 13,
+          "rounds": 21
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400559",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T10:50:12.000Z",
+      "status": "completed",
+      "teamA": "100 Thieves",
+      "teamB": "Imperial",
+      "scoreA": 0,
+      "scoreB": 1,
+      "winnerTeamId": "cs2-team-9455",
+      "maps": [
+        {
+          "name": "Nuke",
+          "scoreA": 11,
+          "scoreB": 13,
+          "rounds": 24
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400562",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T11:36:52.000Z",
+      "status": "completed",
+      "teamA": "Eternal Fire",
+      "teamB": "DENDELE",
+      "scoreA": 1,
+      "scoreB": 0,
+      "winnerTeamId": "cs2-team-11251",
+      "maps": [
+        {
+          "name": "Anubis",
+          "scoreA": 13,
+          "scoreB": 8,
+          "rounds": 21
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400563",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T11:55:00.000Z",
+      "status": "completed",
+      "teamA": "Liquid",
+      "teamB": "Wildcard",
+      "scoreA": 1,
+      "scoreB": 0,
+      "winnerTeamId": "cs2-team-5973",
+      "maps": [
+        {
+          "name": "Mirage",
+          "scoreA": 13,
+          "scoreB": 8,
+          "rounds": 21
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400561",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T11:57:55.000Z",
+      "status": "completed",
+      "teamA": "PARIVISION",
+      "teamB": "FlyQuest",
+      "scoreA": 0,
+      "scoreB": 1,
+      "winnerTeamId": "cs2-team-12774",
+      "maps": [
+        {
+          "name": "Dust2",
+          "scoreA": 9,
+          "scoreB": 13,
+          "rounds": 22
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    },
+    {
+      "id": "cs2-match-2400564",
+      "eventId": "cs2-event-9303",
+      "startsAt": "2026-11-24T12:10:00.000Z",
+      "status": "completed",
+      "teamA": "FaZe",
+      "teamB": "BC.Game",
+      "scoreA": 1,
+      "scoreB": 0,
+      "winnerTeamId": "cs2-team-6667",
+      "maps": [
+        {
+          "name": "Mirage",
+          "scoreA": 13,
+          "scoreB": 3,
+          "rounds": 16
+        }
+      ],
+      "verifiedAt": "2026-11-24T18:49:50.394Z"
+    }
+  ],
   "note": "Cito event-matches; no postgame editing of frozen BO1 forecasts. Veto placeholders are not trusted."
 }

@@ -1,11 +1,64 @@
 {
-  "evaluatedAt": "2026-11-23T19:11:03.365Z",
+  "evaluatedAt": "2026-11-24T18:49:50.394Z",
   "modelVersion": "major-bo1-pre-veto-v1-experimental",
   "registered": 8,
   "modeled": 4,
-  "resolved": 0,
-  "meanBrier": null,
-  "correct": 0,
-  "records": [],
+  "resolved": 4,
+  "meanBrier": 0.23845387977848514,
+  "correct": 3,
+  "records": [
+    {
+      "matchId": "cs2-match-2400494",
+      "teams": [
+        "HEROIC",
+        "Imperial"
+      ],
+      "result": "0–1",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "probabilityA": 0.5335027130384907,
+      "outcomeA": 0,
+      "brier": 0.2846251448194302,
+      "correct": false
+    },
+    {
+      "matchId": "cs2-match-2400495",
+      "teams": [
+        "9z",
+        "Lynn Vision"
+      ],
+      "result": "0–1",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "probabilityA": 0.49408153351086925,
+      "outcomeA": 0,
+      "brier": 0.24411656175645222,
+      "correct": true
+    },
+    {
+      "matchId": "cs2-match-2400496",
+      "teams": [
+        "Ninjas in Pyjamas",
+        "M80"
+      ],
+      "result": "1–0",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "probabilityA": 0.5291670928127452,
+      "outcomeA": 1,
+      "brier": 0.22168362649040207,
+      "correct": true
+    },
+    {
+      "matchId": "cs2-match-2400498",
+      "teams": [
+        "Liquid",
+        "BC.Game"
+      ],
+      "result": "1–0",
+      "frozenAt": "2026-11-23T18:55:31.751Z",
+      "probabilityA": 0.5490119890200449,
+      "outcomeA": 1,
+      "brier": 0.2033901860476561,
+      "correct": true
+    }
+  ],
   "warning": "Prospective accuracy only from predictions frozen before kickoff. This does not measure profit or establish market edge."
 }
