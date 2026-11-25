@@ -9,7 +9,7 @@
  const RADAR_GRACE_MS=5*60*60*1000;
  const isRadarVisible=(g,now=Date.now())=>numeric(toTime(g?.startTime))&&
    toTime(g.startTime)+RADAR_GRACE_MS>now&&
-   ['scheduled','live','in_progress','ongoing','completed','finished'].includes(g.status);
+   ['upcoming','scheduled','live','in_progress','ongoing','completed','finished'].includes(g.status);
  const getRadarGames=(feed,now=Date.now())=>[...(feed?.games||[])].filter(g=>isRadarVisible(g,now))
    .sort((a,b)=>toTime(a.startTime)-toTime(b.startTime)||a.id.localeCompare(b.id));
  const getUpcoming=(feed,now=Date.now())=>[...(feed?.games||[])].filter(g=>isFuture(g,now))
