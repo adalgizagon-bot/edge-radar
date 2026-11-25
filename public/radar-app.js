@@ -116,7 +116,7 @@
     (!selectedMap?'Selecione o mapa para estimar':
      Number.isFinite(modelProb)?'Estimativa em '+selectedMap+' · não calibrada':
      'Amostra insuficiente em '+selectedMap)));
-   box.append(el('small','',Number.isFinite(win?.odd)?'Odd BR365: '+C.round2(win.odd):'Sem odd de vencedor'));
+   box.append(el('small','',Number.isFinite(win?.odd)?'Odd capturada: '+C.round2(win.odd):'Sem odd de vencedor'));
   }else{
    box.append(el('span','price',win?.odd?C.round2(win.odd):'—'));
    box.append(el('small','',Number.isFinite(modelProb)?
@@ -276,9 +276,9 @@
    }else caption.textContent=game.isMajorSeries?
      (C.hasOdds(game)?'Major BO3 · '+(map?'mapa '+map+' · ':'')+
       (seriesGood?'ATLAS prevê '+C.formatPercent(seriesProjection.probabilityA)+' / '+C.formatPercent(seriesProjection.probabilityB)+' na SÉRIE (experimental) · ':'')+
-      'odd BR365 de '+hours(game.quotes.capturedAt)+' para a série, não para o mapa.':
+      'odd capturada em '+hours(game.quotes.capturedAt)+' para a série, não para o mapa.':
       'Major BO3 · '+(map?'mapa '+map+' · ':'')+'sem odd capturada; previsão MD3 experimental.'):
-    C.hasOdds(game)?'Odds do print da BR365, não ao vivo; confira a validade no mercado.':
+    C.hasOdds(game)?'Odds do print, não ao vivo; confira a validade no mercado.':
     'Ainda não há odds capturadas para este confronto. As probabilidades, quando disponíveis, não são cotações.';
    marketHost.replaceChildren(marketSection(visibleGame));
    contextHost.replaceChildren(contextSection(visibleGame));
