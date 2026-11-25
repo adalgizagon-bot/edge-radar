@@ -5,9 +5,12 @@
   "matchCursor": 0,
   "playerCursor": 0,
   "lastRun": {
-    "status": "ok",
+    "status": "partial",
     "requests": 1,
-    "warnings": [],
+    "warnings": [
+      "Cito 429: limit reached; stopping this run.",
+      "Major cs2-event-9303: CITO_RATE_LIMIT"
+    ],
     "majorEvent": "cs2-event-9303"
   },
   "instructions": "A automação será ativada quando o segredo CITO_API_KEY estiver configurado no GitHub Actions.",
