@@ -1,0 +1,237 @@
+{
+  "version": "major-day3-scenario-v1",
+  "createdAt": "2026-11-25T15:36:00Z",
+  "date": "2026-11-26",
+  "competition": "PGL Major Singapore 2026 Stage 1",
+  "status": "pre-veto illustrative simulation only",
+  "sources": [
+    "Cito Felipe team map pool head-to-head 90 days queried 2026-11-25",
+    "User Betaro screenshot 2026-11-25 around 12:34 BRT",
+    "HLTV day 3 schedule"
+  ],
+  "method": "Manual scenario map probabilities with opponent strength qualitative adjustment, simple independence BO3 formula; NOT calibrated machine-learning model or verified map veto probability distribution",
+  "limitations": [
+    "Map order and inclusion are hypothetical and may be ruled out by bans; rerun when veto confirmed.",
+    "Percentages are scenario-dependent subjective estimates not independently calibrated or investment edges.",
+    "The market prices are snapshot odds, not current.",
+    "No automatic change in production model; store for prospective audit."
+  ],
+  "matches": [
+    {
+      "matchId": "cs2-match-2400574",
+      "a": "HEROIC",
+      "b": "FaZe",
+      "time": "03:00",
+      "odds": [
+        1.84,
+        1.97
+      ],
+      "maps": [
+        [
+          "Ancient",
+          0.68
+        ],
+        [
+          "Mirage",
+          0.3
+        ],
+        [
+          "Nuke",
+          0.57
+        ]
+      ],
+      "marketNoVigA": 0.5170603674540682,
+      "scenario": {
+        "aWin": 0.53004,
+        "bWin": 0.46996000000000004,
+        "scores": {
+          "a20": 0.20400000000000001,
+          "a21": 0.32603999999999994,
+          "b20": 0.22399999999999995,
+          "b21": 0.24596
+        }
+      },
+      "mapStatus": "hypothetical_not_confirmed"
+    },
+    {
+      "matchId": "cs2-match-2400573",
+      "a": "M80",
+      "b": "Eternal Fire",
+      "time": "03:00",
+      "odds": [
+        2.02,
+        1.8
+      ],
+      "maps": [
+        [
+          "Cache",
+          0.6
+        ],
+        [
+          "Dust2",
+          0.35
+        ],
+        [
+          "Mirage",
+          0.43
+        ]
+      ],
+      "marketNoVigA": 0.4712041884816754,
+      "scenario": {
+        "aWin": 0.43789999999999996,
+        "bWin": 0.5621,
+        "scores": {
+          "a20": 0.21,
+          "a21": 0.2279,
+          "b20": 0.26,
+          "b21": 0.30210000000000004
+        }
+      },
+      "mapStatus": "hypothetical_not_confirmed"
+    },
+    {
+      "matchId": "cs2-match-2400575",
+      "a": "Lynn Vision",
+      "b": "PARIVISION",
+      "time": "05:30",
+      "odds": [
+        4,
+        1.24
+      ],
+      "maps": [
+        [
+          "Dust2",
+          0.6
+        ],
+        [
+          "Ancient",
+          0.35
+        ],
+        [
+          "Inferno",
+          0.43
+        ]
+      ],
+      "marketNoVigA": 0.23664122137404575,
+      "scenario": {
+        "aWin": 0.43789999999999996,
+        "bWin": 0.5621,
+        "scores": {
+          "a20": 0.21,
+          "a21": 0.2279,
+          "b20": 0.26,
+          "b21": 0.30210000000000004
+        }
+      },
+      "mapStatus": "hypothetical_not_confirmed"
+    },
+    {
+      "matchId": "cs2-match-2400576",
+      "a": "100 Thieves",
+      "b": "9z",
+      "time": "05:30",
+      "odds": [
+        1.66,
+        2.22
+      ],
+      "maps": [
+        [
+          "Dust2",
+          0.7
+        ],
+        [
+          "Nuke",
+          0.53
+        ],
+        [
+          "Mirage",
+          0.56
+        ]
+      ],
+      "marketNoVigA": 0.5721649484536083,
+      "scenario": {
+        "aWin": 0.64428,
+        "bWin": 0.35572000000000004,
+        "scores": {
+          "a20": 0.371,
+          "a21": 0.27328,
+          "b20": 0.14100000000000001,
+          "b21": 0.21471999999999997
+        }
+      },
+      "mapStatus": "hypothetical_not_confirmed"
+    },
+    {
+      "matchId": "cs2-match-2400577",
+      "a": "Imperial",
+      "b": "Liquid",
+      "time": "08:00",
+      "odds": [
+        2.72,
+        1.46
+      ],
+      "maps": [
+        [
+          "Nuke",
+          0.62
+        ],
+        [
+          "Mirage",
+          0.43
+        ],
+        [
+          "Inferno",
+          0.42
+        ]
+      ],
+      "marketNoVigA": 0.3492822966507177,
+      "scenario": {
+        "aWin": 0.483656,
+        "bWin": 0.516344,
+        "scores": {
+          "a20": 0.2666,
+          "a21": 0.217056,
+          "b20": 0.21660000000000001,
+          "b21": 0.29974400000000007
+        }
+      },
+      "mapStatus": "hypothetical_not_confirmed"
+    },
+    {
+      "matchId": "cs2-match-2400578",
+      "a": "Wildcard",
+      "b": "Chinggis Warriors",
+      "time": "08:00",
+      "odds": [
+        1.37,
+        3.1
+      ],
+      "maps": [
+        [
+          "Inferno",
+          0.57
+        ],
+        [
+          "Dust2",
+          0.39
+        ],
+        [
+          "Nuke",
+          0.61
+        ]
+      ],
+      "marketNoVigA": 0.6935123042505593,
+      "scenario": {
+        "aWin": 0.536694,
+        "bWin": 0.463306,
+        "scores": {
+          "a20": 0.2223,
+          "a21": 0.314394,
+          "b20": 0.26230000000000003,
+          "b21": 0.20100599999999996
+        }
+      },
+      "mapStatus": "hypothetical_not_confirmed"
+    }
+  ]
+}
