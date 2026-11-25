@@ -3,7 +3,7 @@
   "capturedAt": "2026-11-25T01:21:45.000Z",
   "capturedAtLocalApprox": "2026-11-24 22:21 BRT",
   "capturePrecision": "approximate; screenshot showed desktop time 22:21; message received 01:22:10Z",
-  "source": "captura BR365 enviada pelo usuário - preços fotografados, não ao vivo",
+  "source": "BR365 / 7 pares da captura + 1 par informado pelo usuário na conversa",
   "eventId": "cs2-event-9303",
   "eventName": "PGL Major Singapore 2026 Stage 1",
   "markets": "BO1 map winner and BO3 series winner, according to verified Cito bestOf",
@@ -78,10 +78,21 @@
       "oddB": 1.74,
       "capturedAt": "2026-11-25T01:21:45.000Z",
       "marketType": "bo3_series_winner"
+    },
+    {
+      "matchId": "cs2-match-2400572",
+      "teamA": "BC.Game",
+      "teamB": "Chinggis Warriors",
+      "bestOf": 3,
+      "oddA": 1.11,
+      "oddB": 5.4,
+      "capturedAt": "2026-11-25T01:26:49.000Z",
+      "marketType": "bo3_series_winner",
+      "captureMethod": "user_text",
+      "source": "BR365 / preços informados pelo usuário por mensagem, não visíveis na captura"
     }
   ],
-  "missingOdds": [
-    "cs2-match-2400572"
-  ],
-  "warning": "Screenshot contains 7 visible pairs; BC.Game vs Chinggis Warriors is not priced. Never assume those are live prices or apply a BO3 series price to an individual map."
+  "missingOdds": [],
+  "warning": "7 pares de odds visíveis na captura de 24/11 22h21 BRT; BC.Game 1.11 e Chinggis Warriors 5.40 foram informadas pelo usuário em mensagem às 22h26 BRT. Não afirmar que esse oitavo preço estava na imagem; não são odds em tempo real. BO3 significa vencedor da série, não do mapa.",
+  "additionalUserTextMatchCount": 1
 }

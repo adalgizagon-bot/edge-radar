@@ -122,7 +122,7 @@ export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quot
     key,family:'winner',label:name+' vence a série BO3',odd,
     impliedNoVig:(1/odd)/overround,impliedRaw:1/odd,
     v1P:null,v2P:null,marketOverround:overround,
-    source:'br365_screenshot',status:'research_only_unvalidated',
+    source:fresh.captureMethod==='user_text'?'br365_user_text':'br365_screenshot',status:'research_only_unvalidated',
     settlementScope:'series_winner_bo3'
    });
    markets=[
@@ -162,8 +162,9 @@ export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quot
     result:resolved?.status==='completed'?{scoreA:resolved.scoreA,scoreB:resolved.scoreB,verifiedAt:resolved.verifiedAt}:null,
     model,quotes:bo1PriceValid?{source:'BR365 / print enviado',capturedAt:bo1Price.capturedAt,eventId:game.eventId,live:false,
       settlementScope:'map_winner_bo1'}:
-      freshValid&&game.bestOf===3?{source:'BR365 / print enviado',capturedAt:fresh.capturedAt,
-       eventId:game.eventId,live:false,settlementScope:'series_winner_bo3'}:
+      freshValid&&game.bestOf===3?{source:fresh.source||'BR365 / print enviado',capturedAt:fresh.capturedAt,
+       eventId:game.eventId,live:false,settlementScope:'series_winner_bo3',
+       ...(fresh.captureMethod?{captureMethod:fresh.captureMethod}:{})}:
       priceValid?{source:'BR365 / prints enviados',capturedAt:odds.screenshotCapturedAtApprox,eventId:odds.br365EventId,live:false}:null,
     markets,unmodeledRoundHandicaps:priceValid?odds.unmodeledRoundHandicaps||[]:[],
     pricingConsistency:priceValid?odds.pricingConsistency||[]:[],

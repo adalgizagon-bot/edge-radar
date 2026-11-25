@@ -1,10 +1,10 @@
 {
   "version": "atlas-radar-unificado-v1",
-  "generatedAt": "2026-11-25T01:24:17.206Z",
+  "generatedAt": "2026-11-25T01:27:28.919Z",
   "dataStatus": {
     "citoAt": "2026-11-22T15:13:39.579Z",
     "majorAt": "2026-11-24T18:49:50.394Z",
-    "majorOddsAt": "2026-11-25T01:21:45.000Z",
+    "majorOddsAt": "2026-11-25T01:26:49.000Z",
     "formAt": "2026-11-22T15:13:39.579Z",
     "rankingsAt": "2026-11-22T15:13:39.579Z",
     "dailySyncAt": "2026-11-24T18:49:50.394Z",
@@ -4484,8 +4484,44 @@
       },
       "result": null,
       "model": null,
-      "quotes": null,
-      "markets": [],
+      "quotes": {
+        "source": "BR365 / preços informados pelo usuário por mensagem, não visíveis no print",
+        "capturedAt": "2026-11-25T01:26:49.000Z",
+        "eventId": "cs2-event-9303",
+        "live": false,
+        "settlementScope": "series_winner_bo3",
+        "captureMethod": "user_text"
+      },
+      "markets": [
+        {
+          "key": "aWin",
+          "family": "winner",
+          "label": "BC.Game vence a série BO3",
+          "odd": 1.11,
+          "impliedNoVig": 0.8294930875576038,
+          "impliedRaw": 0.9009009009009008,
+          "v1P": null,
+          "v2P": null,
+          "marketOverround": 1.086086086086086,
+          "source": "br365_user_text",
+          "status": "research_only_unvalidated",
+          "settlementScope": "series_winner_bo3"
+        },
+        {
+          "key": "bWin",
+          "family": "winner",
+          "label": "Chinggis Warriors vence a série BO3",
+          "odd": 5.4,
+          "impliedNoVig": 0.17050691244239632,
+          "impliedRaw": 0.18518518518518517,
+          "v1P": null,
+          "v2P": null,
+          "marketOverround": 1.086086086086086,
+          "source": "br365_user_text",
+          "status": "research_only_unvalidated",
+          "settlementScope": "series_winner_bo3"
+        }
+      ],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
       "form": {

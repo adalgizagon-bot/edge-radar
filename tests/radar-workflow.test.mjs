@@ -38,10 +38,13 @@ test('Nov 25 matches have a clean upcoming panel and retain BO1/BO3 distinction'
  assert.equal(major.length,8);
  assert.equal(major.filter(g=>g.bestOf===1).length,4);
  assert.equal(major.filter(g=>g.bestOf===3).length,4);
- assert.equal(major.filter(C.hasOdds).length,7);
+ assert.equal(major.filter(C.hasOdds).length,8);
  assert.ok(major.every(g=>g.result===null));
- const missing=major.find(g=>g.id==='cs2-match-2400572');
- assert.ok(missing&&missing.markets.length===0&&!C.hasOdds(missing));
+ const extra=major.find(g=>g.id==='cs2-match-2400572');
+ assert.ok(extra&&C.hasOdds(extra));
+ assert.equal(extra.markets.find(m=>m.key==='aWin').odd,1.11);
+ assert.equal(extra.markets.find(m=>m.key==='bWin').odd,5.4);
+ assert.equal(extra.quotes.captureMethod,'user_text');
  for(const g of major.filter(C.hasOdds)){
   assert.equal(g.markets.length,2);
   assert.ok(g.quotes&&!g.quotes.live);
@@ -98,12 +101,15 @@ test('major outcomes are reconstructed from event-level published data without e
  assert.equal(JSON.stringify(load('major-opening-analysis.json')),oldForecasts);
  assert.equal(JSON.stringify(pre),oldPreflight);
 });
-test('Nov 25 screenshot records 7 prices: 4 BO1 and 3 BO3; the eighth remains unquoted',()=>{
+test('Nov 25 has 7 pictured prices plus 1 text-only quote: 4 BO1 and 4 BO3',()=>{
  const screenshot=load('major-br365-odds-2026-11-25.json');
- assert.equal(screenshot.matches.length,7);
+ assert.equal(screenshot.screenshotMatchCount,7);
+ assert.equal(screenshot.additionalUserTextMatchCount,1);
+ assert.equal(screenshot.matches.length,8);
  assert.equal(screenshot.matches.filter(q=>q.bestOf===1).length,4);
- assert.equal(screenshot.matches.filter(q=>q.bestOf===3).length,3);
- assert.deepEqual(screenshot.missingOdds,['cs2-match-2400572']);
+ assert.equal(screenshot.matches.filter(q=>q.bestOf===3).length,4);
+ assert.deepEqual(screenshot.missingOdds,[]);
+ assert.deepEqual(screenshot.matches.filter(x=>x.captureMethod==='user_text').map(x=>x.matchId),['cs2-match-2400572']);
  for(const q of screenshot.matches){
   const game=feed.games.find(g=>g.id===q.matchId);
   assert.ok(game&&game.eventId===screenshot.eventId);
