@@ -115,7 +115,7 @@ test('browser does not reuse old BO1 JS bundles; update button refreshes HTML + 
  const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'../vercel.json'),'utf8'));
  assert.ok(html.includes('meta name="atlas-build"'));
  for(const name of ['radar-app.js','radar-core.js','major-map-core.js','major-map-workspace.js'])
-  assert.match(html,new RegExp(name.replace(/[.]/g,'\\.')+'\\?v=atlas-day1-audit-20261125-a'));
+  assert.match(html,new RegExp(name.replace(/[.]/g,'\\.')+'\\?v=atlas-25nov-br365-bo1-bo3-v1'));
  assert.ok(js.includes("url.searchParams.set('atlas_refresh'"));
  assert.ok(js.includes('window.location.replace(url.toString())'));
  assert.ok(cfg.headers.some(x=>x.headers.some(h=>h.key==='Cache-Control'&&/must-revalidate/.test(h.value))));
@@ -129,5 +129,5 @@ test('asynchronous team profile delivery forwards map projection callback into a
  assert.ok(!source.includes('if(container.isConnected&&container.dataset.matchId===game.id)draw(game,container,a,b);'),
   'the callback-less asynchronous path must never return');
  const html=fs.readFileSync(path.join(__dirname,'../public/index.html'),'utf8');
- assert.ok(html.includes('major-map-workspace.js?v=atlas-day1-audit-20261125-a'));
+ assert.ok(html.includes('major-map-workspace.js?v=atlas-25nov-br365-bo1-bo3-v1'));
 });

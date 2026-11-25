@@ -91,11 +91,12 @@
    const team=el('div','game-card-title',g.teamA.name+' × '+g.teamB.name);
    card.append(meta,team);
    const prices=el('div','game-prices'),win=winnerOdds(g);
-   if(win){prices.append(el('span','','Vencedor'),el('b','',C.round2(win[0].odd)),el('b','',C.round2(win[1].odd)))}
+   if(win){prices.append(el('span','',g.bestOf===3?'Série BO3':'Mapa BO1'),el('b','',C.round2(win[0].odd)),el('b','',C.round2(win[1].odd)))}
    else prices.append(el('span','','Odds ainda não cadastradas'));
    const note=el('div','card-note');
    note.append(el('i','mini-dot'+(C.hasOdds(g)?'':' missing')),
-    el('span','',g.major?(C.hasOdds(g)?'Major BO1 · mapa e kills · odds do print':'Major BO1 · mapa e kills · sem odds'):C.sourceLabel(g)));
+    el('span','',g.major?(C.hasOdds(g)?'Major BO1 · mapa e kills · odds do print':'Major BO1 · mapa e kills · sem odds'):
+    g.isMajorSeries?(C.hasOdds(g)?'Major BO3 · odds da série, não do mapa':'Major BO3 · odds da série indisponíveis'):C.sourceLabel(g)));
    card.append(prices,note);
    card.addEventListener('click',()=>{state.activeId=g.id;state.family='winner';renderList()});
    list.append(card);
@@ -114,7 +115,7 @@
   }else{
    box.append(el('span','price',win?.odd?C.round2(win.odd):'—'));
    box.append(el('small','',Number.isFinite(modelProb)?
-    'Modelo experimental: '+C.formatPercent(modelProb):'Sem projeção V2 disponível'));
+    'Modelo experimental: '+C.formatPercent(modelProb):'Sem probabilidade validada para a série'));
   }
   return box;
  }
@@ -177,7 +178,9 @@
      game.mapProjection?.status==='estimated'?
       'Estimativa de '+chosenMap+': '+(game.mapProjection?.modelStatus==='opponent_adjusted'?'corrigida pela dificuldade dos últimos adversários e diferença de rounds.':'sem cobertura suficiente de adversários; usando histórico base.')+' Probabilidades ainda NÃO calibradas. Diferenças para o preço não comprovam vantagem.':
       'Sem projeção para '+chosenMap+': '+(game.mapProjection?.reason||'histórico insuficiente')+' Odds fotografadas não são atuais.'):
-    '*Mercado sem margem é uma normalização das odds do print. Dif. = V2 − mercado, em pontos percentuais. Não indica vantagem comprovada: a V2 ainda não foi calibrada.'));
+    game.isMajorSeries?
+     'BO3: a cotação é para vencer a série inteira (melhor de três mapas), não um mapa isolado. O percentual do mercado exclui matematicamente a margem; não existe projeção de série validada neste confronto.':
+     '*Mercado sem margem é uma normalização das odds do print. Dif. = V2 − mercado, em pontos percentuais. Não indica vantagem comprovada: a V2 ainda não foi calibrada.'));
   return fragment;
  }
  function contextSection(game){
@@ -252,10 +255,13 @@
     teamBox(game.teamA,pA,left,!!game.major,map),
     teamBox(game.teamB,pB,right,!!game.major,map));
    if(game.major){
-    caption.textContent=!map?'Major BO1 · escolha o mapa quando sair o veto. Odds do print de 23/11, não ao vivo.':
+    caption.textContent=!map?'Major BO1 · escolha o mapa quando sair o veto. '+(game.quotes?'Odds capturadas em '+hours(game.quotes.capturedAt):'Sem odds capturadas')+'; não ao vivo.':
      projection?.status==='estimated'?'Major BO1 · '+map+' selecionado manualmente · comparação específica do mapa, ainda experimental.':
      'Major BO1 · '+map+' selecionado · dados insuficientes para projetar vencedor. Odds do print não são ao vivo.';
-   }else caption.textContent=C.hasOdds(game)?'Odds dos prints da BR365, sem verificação ao vivo. Modelo V2 congelado antes do jogo.':
+   }else caption.textContent=game.isMajorSeries?
+     (C.hasOdds(game)?'Major BO3 · odds da BR365 de '+hours(game.quotes.capturedAt)+' · vencedor da série, não do mapa · sem projeção de série validada.':
+       'Major BO3 · nenhuma odd da série capturada · sem projeção de série validada.'):
+    C.hasOdds(game)?'Odds do print da BR365, não ao vivo; confira a validade no mercado.':
     'Ainda não há odds capturadas para este confronto. As probabilidades, quando disponíveis, não são cotações.';
    marketHost.replaceChildren(marketSection(visibleGame));
    contextHost.replaceChildren(contextSection(visibleGame));

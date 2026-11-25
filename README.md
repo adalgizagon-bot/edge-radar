@@ -1,5 +1,12 @@
 # ATLAS Esports Lab — CS2
 
+## Captura BR365 — rodada de 25/11/2026, print de 24/11 22h21 (BRT)
+
+Em `public/data/major-br365-odds-2026-11-25.json`, preservamos sete pares de odds do usuário com horário aproximado, fonte e ID de partida Cito. O evento tem **4 BO1 (06:00/07:00 UTC) + 4 BO3 (08:00/10:30 UTC)**. Preços registrados: HEROIC/M80 (1,58/2,30), Eternal Fire/100 Thieves (2,25/1,62), Wildcard/Lynn Vision (1,76/2,00), PARIVISION/FaZe (1,68/2,15), 9z/DENDELE (1,74/2,05), Imperial/FlyQuest (1,90/1,86), NiP/Liquid (2,05/1,74). BC.Game/Chinggis Warriors **sem odd no print**.
+
+Mercados BO1 representam vencedor do único mapa; BO3 representam vencedor da série inteira, **não** de mapa. As três séries BO3 cotadas ficam com preço e probabilidade implícita normalizada sem margem, **sem modelo de probabilidade de série validado**. Os jogos expirados deixam de exibir esses preços como atuais; a fonte arquivada continua preservada. Odds fotografadas e modelos experimentais não comprovam rentabilidade.
+
+
 ## Auditoria pós-jogo — 24/11/2026 (registrada 25/11)
 
 Os oito confrontos da estreia tiveram resultado verificado após o início; as probabilidades de cada mapa foram congeladas em `public/data/major-preflight-v1.json` em **23/11/2026 às 20:18 UTC**, antes dos jogos. A auditoria independente desses resultados está em `public/data/major-day1-audit.json`, com os oito mapas, vencedores, probabilidades originais, rounds previstos/observados, Brier, scores e as projeções de kills *apenas para pesquisa*. A primeira rodada fechou **6 acertos em 8**, Brier **0,2108** e MAE de rounds **3,51**. O modelo anterior pré-veto tinha quatro partidas modeladas (3 acertos, Brier 0,2385); a comparação pareada em quatro jogos é 0,2385 versus 0,2169. O total das 16 partidas de 24/11 inclui oito sem esse pré-registro: elas não devem entrar como acertos retrospectivos.

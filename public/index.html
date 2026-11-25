@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b1727">
-<meta name="atlas-build" content="atlas-day1-audit-20261125-a">
+<meta name="atlas-build" content="atlas-25nov-br365-bo1-bo3-v1">
 <title>ATLAS Esports Lab | Radar CS2</title>
 <meta name="description" content="Radar estatístico de CS2. Próximos jogos, comparação de odds e resultados em um só fluxo.">
-<link rel="stylesheet" href="radar.css?v=atlas-day1-audit-20261125-a">
-<link rel="stylesheet" href="major-map-workspace.css?v=atlas-day1-audit-20261125-a">
-<script defer src="radar-core.js?v=atlas-day1-audit-20261125-a"></script>
-<script defer src="major-map-core.js?v=atlas-day1-audit-20261125-a"></script>
-<script defer src="major-intelligence-core.js?v=atlas-day1-audit-20261125-a"></script>
-<script defer src="major-map-workspace.js?v=atlas-day1-audit-20261125-a"></script>
-<script defer src="major-audit-ui.js?v=atlas-day1-audit-20261125-a"></script>
-<script defer src="radar-app.js?v=atlas-day1-audit-20261125-a"></script>
+<link rel="stylesheet" href="radar.css?v=atlas-25nov-br365-bo1-bo3-v1">
+<link rel="stylesheet" href="major-map-workspace.css?v=atlas-25nov-br365-bo1-bo3-v1">
+<script defer src="radar-core.js?v=atlas-25nov-br365-bo1-bo3-v1"></script>
+<script defer src="major-map-core.js?v=atlas-25nov-br365-bo1-bo3-v1"></script>
+<script defer src="major-intelligence-core.js?v=atlas-25nov-br365-bo1-bo3-v1"></script>
+<script defer src="major-map-workspace.js?v=atlas-25nov-br365-bo1-bo3-v1"></script>
+<script defer src="major-audit-ui.js?v=atlas-25nov-br365-bo1-bo3-v1"></script>
+<script defer src="radar-app.js?v=atlas-25nov-br365-bo1-bo3-v1"></script>
 </head>
 <body>
 <div class="shell">
@@ -31,12 +31,12 @@
  </aside>
  <div class="app-main">
   <header class="topbar">
-   <div class="topbar-left"><span class="product-pill">CS2 / MAJOR • BO1</span><span class="topbar-name">Inteligência estatística e comparação de mercados</span></div>
+   <div class="topbar-left"><span class="product-pill">CS2 / MAJOR • BO1 + BO3</span><span class="topbar-name">Inteligência estatística e comparação de mercados</span></div>
    <div class="topbar-actions"><span class="live-status" id="feed-status"><i class="live-dot"></i><span>Carregando base...</span></span><button id="reload-feed" class="icon-button" title="Atualiza a plataforma completa e recarrega a versão do painel; não consulta Cito ao vivo">↻ Atualizar versão</button></div>
   </header>
   <main class="main-inner">
    <section id="page-radar" class="page is-active" aria-labelledby="radar-title">
-    <div class="page-title"><div><div class="eyebrow">RADAR / PRÓXIMAS PARTIDAS</div><h1 id="radar-title">Major Singapura: radar BO1</h1><p>Oito confrontos da estreia. Abra um jogo, selecione o mapa após o veto e compare estatísticas de equipe, rounds, kills por jogador e odds digitadas para mais/menos kills. Sem apostas automáticas.</p></div>
+    <div class="page-title"><div><div class="eyebrow">RADAR / PRÓXIMAS PARTIDAS</div><h1 id="radar-title">Major Singapura: radar BO1 e BO3</h1><p>Confrontos de 25/11: nos BO1, selecione o mapa após o veto; nas séries BO3, as odds fotografadas são para vencer a série, não cada mapa. Dados de kills em auditoria. Sem apostas automáticas.</p></div>
     <div class="title-meta"><b id="upcoming-total">—</b><span>jogos futuros</span></div></div>
     <div class="info-strip"><span><b id="priced-total">—</b> com odds registradas</span><span class="soft-divider"></span><span><b id="next-kickoff">—</b> próximo início</span><span class="soft-divider"></span><span id="capture-status">Sem odds confirmadas para o Major</span></div>
     <div id="stale-alert" class="feed-alert" role="note"></div>
@@ -60,7 +60,7 @@
      <section class="detail-panel" aria-label="Análise do confronto selecionado" id="detail-panel"><div class="detail-placeholder"><b>Selecione um confronto</b>As probabilidades, odds e mercados aparecerão aqui.</div></section>
     </div>
     <div id="slip-bar" class="slip-bar"><div><b id="slip-title">0 mercados selecionados</b><p>Um por jogo. Apenas estudo de preços, não aposta.</p></div><button class="primary-button" data-view="study">Ver meu estudo →</button></div>
-    <p class="foot-note"><span class="atlas-release">ATLAS 25/11 — auditoria do Major + proteção de qualidade dos dados</span> · Modelos V1 e V2 são experimentais e não calibrados. Uma divergência de probabilidades não comprova valor ou lucro. Odds fornecidas por screenshots e sem atualização automática.</p>
+    <p class="foot-note"><span class="atlas-release">ATLAS 25/11 — odds BR365 do print • BO1/BO3 separados • auditoria de dados</span> · Modelos V1 e V2 são experimentais e não calibrados. Uma divergência de probabilidades não comprova valor ou lucro. Odds fornecidas por screenshots e sem atualização automática.</p>
    </section>
    <section id="page-study" class="page" aria-labelledby="study-title">
     <div class="page-title"><div><div class="eyebrow">MEU ESTUDO / COMPARAÇÃO</div><h1 id="study-title">Mercados selecionados</h1><p>Até um mercado por partida. Compare as odds capturadas e copie sua análise; nenhuma aposta é enviada.</p></div></div>

@@ -1,0 +1,87 @@
+{
+  "version": "major-br365-user-screenshot-2026-11-24-evening",
+  "capturedAt": "2026-11-25T01:21:45.000Z",
+  "capturedAtLocalApprox": "2026-11-24 22:21 BRT",
+  "capturePrecision": "approximate; screenshot showed desktop time 22:21; message received 01:22:10Z",
+  "source": "captura BR365 enviada pelo usuário - preços fotografados, não ao vivo",
+  "eventId": "cs2-event-9303",
+  "eventName": "PGL Major Singapore 2026 Stage 1",
+  "markets": "BO1 map winner and BO3 series winner, according to verified Cito bestOf",
+  "screenshotMatchCount": 7,
+  "matches": [
+    {
+      "matchId": "cs2-match-2400565",
+      "teamA": "HEROIC",
+      "teamB": "M80",
+      "bestOf": 1,
+      "oddA": 1.58,
+      "oddB": 2.3,
+      "capturedAt": "2026-11-25T01:21:45.000Z",
+      "marketType": "bo1_winner"
+    },
+    {
+      "matchId": "cs2-match-2400566",
+      "teamA": "Eternal Fire",
+      "teamB": "100 Thieves",
+      "bestOf": 1,
+      "oddA": 2.25,
+      "oddB": 1.62,
+      "capturedAt": "2026-11-25T01:21:45.000Z",
+      "marketType": "bo1_winner"
+    },
+    {
+      "matchId": "cs2-match-2400568",
+      "teamA": "Wildcard",
+      "teamB": "Lynn Vision",
+      "bestOf": 1,
+      "oddA": 1.76,
+      "oddB": 2,
+      "capturedAt": "2026-11-25T01:21:45.000Z",
+      "marketType": "bo1_winner"
+    },
+    {
+      "matchId": "cs2-match-2400567",
+      "teamA": "PARIVISION",
+      "teamB": "FaZe",
+      "bestOf": 1,
+      "oddA": 1.68,
+      "oddB": 2.15,
+      "capturedAt": "2026-11-25T01:21:45.000Z",
+      "marketType": "bo1_winner"
+    },
+    {
+      "matchId": "cs2-match-2400570",
+      "teamA": "9z",
+      "teamB": "DENDELE",
+      "bestOf": 3,
+      "oddA": 1.74,
+      "oddB": 2.05,
+      "capturedAt": "2026-11-25T01:21:45.000Z",
+      "marketType": "bo3_series_winner"
+    },
+    {
+      "matchId": "cs2-match-2400569",
+      "teamA": "Imperial",
+      "teamB": "FlyQuest",
+      "bestOf": 3,
+      "oddA": 1.9,
+      "oddB": 1.86,
+      "capturedAt": "2026-11-25T01:21:45.000Z",
+      "marketType": "bo3_series_winner"
+    },
+    {
+      "matchId": "cs2-match-2400571",
+      "teamA": "Ninjas in Pyjamas",
+      "teamB": "Liquid",
+      "bestOf": 3,
+      "oddA": 2.05,
+      "oddB": 1.74,
+      "capturedAt": "2026-11-25T01:21:45.000Z",
+      "marketType": "bo3_series_winner"
+    }
+  ],
+  "missingOdds": [
+    "cs2-match-2400572"
+  ],
+  "warning": "Screenshot contains 7 visible pairs; BC.Game vs Chinggis Warriors is not priced. Never assume those are live prices or apply a BO3 series price to an individual map."
+}

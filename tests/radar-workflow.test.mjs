@@ -38,8 +38,25 @@ test('Nov 25 matches have a clean upcoming panel and retain BO1/BO3 distinction'
  assert.equal(major.length,8);
  assert.equal(major.filter(g=>g.bestOf===1).length,4);
  assert.equal(major.filter(g=>g.bestOf===3).length,4);
- assert.ok(major.every(g=>!C.hasOdds(g)));
+ assert.equal(major.filter(C.hasOdds).length,7);
  assert.ok(major.every(g=>g.result===null));
+ const missing=major.find(g=>g.id==='cs2-match-2400572');
+ assert.ok(missing&&missing.markets.length===0&&!C.hasOdds(missing));
+ for(const g of major.filter(C.hasOdds)){
+  assert.equal(g.markets.length,2);
+  assert.ok(g.quotes&&!g.quotes.live);
+  assert.ok(Date.parse(g.quotes.capturedAt)<Date.parse(g.startTime));
+  assert.ok(Math.abs(g.markets.reduce((v,m)=>v+m.impliedNoVig,0)-1)<1e-12);
+  if(g.bestOf===3){
+   assert.equal(g.isMajorSeries,true);
+   assert.equal(g.quotes.settlementScope,'series_winner_bo3');
+   assert.ok(g.markets.every(m=>m.settlementScope==='series_winner_bo3'&&m.v2P===null));
+   assert.ok(g.markets.every(m=>m.label.includes('série BO3')));
+  }else{
+   assert.equal(g.quotes.settlementScope,'map_winner_bo1');
+   assert.ok(g.markets.every(m=>m.label.includes('mapa BO1')));
+  }
+ }
 });
 test('study selections expire after kickoff, even when old screenshots remain archived',()=>{
  const ids=feed.games.filter(g=>g.startTime.startsWith('2026-11-19')).map(x=>x.id);
@@ -68,7 +85,8 @@ test('major outcomes are reconstructed from event-level published data without e
   previousQuotes:load('br365-series-odds.json'),seriesFrozen:load('series-forecasts.json'),
   forms:load('team-opponents.json'),ranks:load('team-rankings.json'),sync:load('sync-state.json'),
   majorOpening:load('major-opening-snapshot.json'),majorAnalysis:load('major-opening-analysis.json'),
-  majorLive:live,majorQuotes:load('major-br365-odds.json'),nowIso:feed.generatedAt};
+  majorLive:live,majorQuotes:load('major-br365-odds.json'),
+  majorNov25Quotes:load('major-br365-odds-2026-11-25.json'),nowIso:feed.generatedAt};
  const generated=buildRadarFeed(params);
  assert.equal(new Set(generated.games.map(g=>g.id)).size,generated.games.length);
  for(const result of live.results){
@@ -79,6 +97,23 @@ test('major outcomes are reconstructed from event-level published data without e
  }
  assert.equal(JSON.stringify(load('major-opening-analysis.json')),oldForecasts);
  assert.equal(JSON.stringify(pre),oldPreflight);
+});
+test('Nov 25 screenshot records 7 prices: 4 BO1 and 3 BO3; the eighth remains unquoted',()=>{
+ const screenshot=load('major-br365-odds-2026-11-25.json');
+ assert.equal(screenshot.matches.length,7);
+ assert.equal(screenshot.matches.filter(q=>q.bestOf===1).length,4);
+ assert.equal(screenshot.matches.filter(q=>q.bestOf===3).length,3);
+ assert.deepEqual(screenshot.missingOdds,['cs2-match-2400572']);
+ for(const q of screenshot.matches){
+  const game=feed.games.find(g=>g.id===q.matchId);
+  assert.ok(game&&game.eventId===screenshot.eventId);
+  assert.equal(game.bestOf,q.bestOf);
+  assert.equal(game.teamA.name,q.teamA);
+  assert.equal(game.teamB.name,q.teamB);
+  assert.equal(game.markets.find(m=>m.key==='aWin')?.odd,q.oddA);
+  assert.equal(game.markets.find(m=>m.key==='bWin')?.odd,q.oddB);
+  assert.ok(Date.parse(q.capturedAt)<Date.parse(game.startTime));
+ }
 });
 test('archive and one unified radar screen stay available',()=>{
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
