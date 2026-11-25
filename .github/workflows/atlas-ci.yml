@@ -49,6 +49,7 @@ jobs:
           node --check public/radar-app.js
           node --check public/major-map-core.js
           node --check public/major-intelligence-core.js
+          node --check public/major-series-model.js
           node --check public/major-audit-ui.js
           node --check public/major-map-workspace.js
           node --check scripts/major-preflight.mjs
@@ -57,4 +58,4 @@ jobs:
           node --check scripts/major-sync.mjs
           node --check scripts/strength-sync.mjs
       - name: Testes probabilísticos e painel de chances
-        run: node --test tests/model.test.mjs tests/opportunities.test.cjs tests/series-model.test.mjs tests/simulator.test.cjs tests/strength.test.cjs tests/strength-sync.test.mjs tests/audit-prospective.test.mjs tests/nextday.test.mjs tests/radar-workflow.test.mjs tests/major-opening.test.mjs tests/major-map-workspace.test.cjs tests/major-intelligence.test.cjs tests/major-day1-audit.test.cjs
+        run: node --test tests/model.test.mjs tests/opportunities.test.cjs tests/series-model.test.mjs tests/simulator.test.cjs tests/strength.test.cjs tests/strength-sync.test.mjs tests/audit-prospective.test.mjs tests/nextday.test.mjs tests/radar-workflow.test.mjs tests/major-opening.test.mjs tests/major-map-workspace.test.cjs tests/major-intelligence.test.cjs tests/major-series-model.test.cjs tests/major-day1-audit.test.cjs

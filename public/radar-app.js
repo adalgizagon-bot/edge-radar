@@ -105,15 +105,18 @@
   }
   renderDetail(items.find(g=>g.id===state.activeId));
  }
- function teamBox(team,modelProb,win,major=false,selectedMap=null){
+ function teamBox(team,modelProb,win,major=false,selectedMap=null,series=false,seriesStatus=null){
   const box=el('div','compare-team');
   box.append(el('strong','',team.name));
-  if(major){
+  if(major||series){
    box.append(el('span','price',C.formatPercent(modelProb)));
-   box.append(el('small','',!selectedMap?'Selecione o mapa para estimar':
-    Number.isFinite(modelProb)?'Estimativa em '+selectedMap+' · não calibrada':
-    'Amostra insuficiente em '+selectedMap));
-   box.append(el('small','',Number.isFinite(win?.odd)?'Odd do print: '+C.round2(win.odd):'Sem odd de vencedor'));
+   box.append(el('small','',series?
+    (Number.isFinite(modelProb)?'Modelo MD3 · '+(seriesStatus==='confirmed_map_scenario'?'3 mapas definidos':'pré-veto provisório'):
+     'Modelo MD3: amostra insuficiente'):
+    (!selectedMap?'Selecione o mapa para estimar':
+     Number.isFinite(modelProb)?'Estimativa em '+selectedMap+' · não calibrada':
+     'Amostra insuficiente em '+selectedMap)));
+   box.append(el('small','',Number.isFinite(win?.odd)?'Odd BR365: '+C.round2(win.odd):'Sem odd de vencedor'));
   }else{
    box.append(el('span','price',win?.odd?C.round2(win.odd):'—'));
    box.append(el('small','',Number.isFinite(modelProb)?
@@ -156,7 +159,7 @@
   }
   const outer=el('div','hscroll'),table=el('table','market-table');
   const thead=el('thead',''),tr=el('tr','');
-  for(const label of ['Seleção','Odd','Mercado*',game.major?'Estimativa':'Modelo','Dif.','Estudo'])tr.append(el('th','',label));
+  for(const label of ['Seleção','Odd','Mercado*',game.major?'Estimativa':game.isMajorSeries?'ATLAS MD3':'Modelo','Dif.','Estudo'])tr.append(el('th','',label));
   thead.append(tr);table.append(thead);
   const tbody=el('tbody','');
   for(const m of visible){
@@ -181,7 +184,10 @@
       'Estimativa de '+chosenMap+': '+(game.mapProjection?.modelStatus==='opponent_adjusted'?'corrigida pela dificuldade dos últimos adversários e diferença de rounds.':'sem cobertura suficiente de adversários; usando histórico base.')+' Probabilidades ainda NÃO calibradas. Diferenças para o preço não comprovam vantagem.':
       'Sem projeção para '+chosenMap+': '+(game.mapProjection?.reason||'histórico insuficiente')+' Odds fotografadas não são atuais.'):
     game.isMajorSeries?
-     'BO3: '+(chosenMap?'Análise separada do mapa '+chosenMap+' disponível acima. ':'Selecione um mapa acima para abrir estatísticas. ')+ 'A cotação abaixo é para vencer a SÉRIE inteira; não representa a chance de ganhar este mapa. Não existe projeção de série validada.':
+     (game.seriesProjection?.status==='estimated'?
+       'Previsão ATLAS MD3 '+(game.seriesProjection.selectedCount===3?'com os três mapas selecionados':'PRÉ-VETO provisória ('+game.seriesProjection.selectedCount+'/3 mapas informados)')+
+       '. Os percentuais são para vencer a SÉRIE; placares 2–0 e 2–1 e cada mapa aparecem acima. A diferença para as odds é exploratória e NÃO prova vantagem.':
+       'Previsão de série indisponível: '+(game.seriesProjection?.reason||'dados insuficientes')+'. As odds abaixo são para a SÉRIE, não para cada mapa.'):
      '*Mercado sem margem é uma normalização das odds do print. Dif. = V2 − mercado, em pontos percentuais. Não indica vantagem comprovada: a V2 ainda não foi calibrada.'));
   return fragment;
  }
@@ -246,24 +252,32 @@
   if(mapArea)panel.append(mapArea);
   const body=el('div','detail-body'),marketHost=el('div',''),contextHost=el('div','');
   body.append(marketHost,contextHost);panel.append(body);
-  const updateMap=(map,projection)=>{
+  const updateMap=(map,projection,seriesProjection=null)=>{
    if(!panel.isConnected)return;
+   const seriesGood=game.isMajorSeries&&seriesProjection?.status==='estimated';
    const visibleGame=game.major&&window.AtlasMajorMaps?
     window.AtlasMajorMaps.withSelectedMap(game,map,projection):
-    game.isMajorSeries?{...game,selectedMap:map||null,mapProjection:projection||null}:game;
+    game.isMajorSeries?{
+     ...game,selectedMap:map||null,mapProjection:projection||null,seriesProjection,
+     markets:(game.markets||[]).map(m=>m.family!=='winner'?m:
+      {...m,v2P:seriesGood?(m.key==='aWin'?seriesProjection.probabilityA:
+       m.key==='bWin'?seriesProjection.probabilityB:null):null})
+    }:game;
    const markets=C.winnerMarket(visibleGame);
    const pA=markets.find(m=>m.key==='aWin')?.v2P??null;
    const pB=markets.find(m=>m.key==='bWin')?.v2P??null;
    compare.replaceChildren(
-    teamBox(game.teamA,pA,left,!!game.major,map),
-    teamBox(game.teamB,pB,right,!!game.major,map));
+    teamBox(game.teamA,pA,left,!!game.major,map,!!game.isMajorSeries,seriesProjection?.scenarioType),
+    teamBox(game.teamB,pB,right,!!game.major,map,!!game.isMajorSeries,seriesProjection?.scenarioType));
    if(game.major){
     caption.textContent=!map?'Major BO1 · escolha o mapa quando sair o veto. '+(game.quotes?'Odds capturadas em '+hours(game.quotes.capturedAt):'Sem odds capturadas')+'; não ao vivo.':
      projection?.status==='estimated'?'Major BO1 · '+map+' selecionado manualmente · comparação específica do mapa, ainda experimental.':
      'Major BO1 · '+map+' selecionado · dados insuficientes para projetar vencedor. Odds do print não são ao vivo.';
    }else caption.textContent=game.isMajorSeries?
-     (C.hasOdds(game)?'Major BO3 · '+(map?'analisando '+map+' individualmente · ':'')+'odd da BR365 de '+hours(game.quotes.capturedAt)+' para a SÉRIE, não para o mapa · sem modelo de série validado.':
-       'Major BO3 · '+(map?'analisando '+map+' individualmente · ':'')+'nenhuma odd da série capturada · sem modelo de série validado.'):
+     (C.hasOdds(game)?'Major BO3 · '+(map?'mapa '+map+' · ':'')+
+      (seriesGood?'ATLAS prevê '+C.formatPercent(seriesProjection.probabilityA)+' / '+C.formatPercent(seriesProjection.probabilityB)+' na SÉRIE (experimental) · ':'')+
+      'odd BR365 de '+hours(game.quotes.capturedAt)+' para a série, não para o mapa.':
+      'Major BO3 · '+(map?'mapa '+map+' · ':'')+'sem odd capturada; previsão MD3 experimental.'):
     C.hasOdds(game)?'Odds do print da BR365, não ao vivo; confira a validade no mercado.':
     'Ainda não há odds capturadas para este confronto. As probabilidades, quando disponíveis, não são cotações.';
    marketHost.replaceChildren(marketSection(visibleGame));

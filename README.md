@@ -1,5 +1,15 @@
 # ATLAS Esports Lab — CS2
 
+## Probabilidades por mapa e de vencedor da série MD3 (25/11/2026)
+
+No **mesmo Radar**, o ATLAS agora calcula:
+- Para **cada mapa** da MD3, probabilidade de vitória de cada equipe com histórico separado por mapa, ranking e ajuste por adversários quando há cobertura suficiente (mínimo de 5 mapas por equipe).
+- **Vencedor da série MD3**, com a probabilidade de 2–0 e 2–1 para cada lado. O cálculo de BO3 combina os três mapas em ordem com a regra de vitória em dois mapas; `p(A vence a série)=p1*p2+(p1*(1-p2)+(1-p1)*p2)*p3`.
+- Antes dos mapas serem conhecidos, combina cenários de três mapas distintos ponderados por `pickPercent` histórico (heurística de veto **não validada**); escolher o mapa 1, 2 ou 3 recalcula a previsão da **série** condicionada às escolhas disponíveis. Todos os mapas elegíveis aparecem com porcentagens de vitória por mapa, mesmo antes de escolher algum. Quando os três mapas são definidos manualmente, a projeção é condicional aos mapas e à ordem selecionados, não uma declaração de veto confirmado pela Cito.
+
+As odds da BR365 são **sempre de vencedor da série** nas MD3 e não alimentam o modelo. A tabela agora mostra uma probabilidade MD3 experimental e divergência para o preço, **sem alegar vantagem comprovada**. O modelo supõe probabilidades de mapas independentes condicionalmente e não modela mudanças de elenco, economia, momento ou correlação entre mapas; não foi calibrado prospectivamente como modelo BO3. Mantenha diferenças para preços como pesquisa, não certeza de retorno.
+
+
 ## Radar: seleção de mapas nas MD3 e permanência de cinco horas (25/11/2026)
 
 Na mesma tela de Radar, BO1 mantém o seletor de um mapa. MD3/BO3 agora oferece **Mapa 1, Mapa 2 e Mapa 3**, selecionáveis separadamente e salvos no navegador por partida; o botão "Analisar mapa N" alterna a análise do mapa já escolhido. Cada mapa abre estatísticas de equipe, força histórica dos adversários e dados exploratórios por jogador. **A probabilidade do mapa não substitui o mercado de vencedor da série BO3**; as odds da BR365 continuam exclusivamente para a série e a coluna de modelo de série permanece vazia até existir modelo próprio validado. Não registrar uma previsão de mapa como se fosse previsão da série; o botão de congelamento de previsão BO3 é desabilitado.

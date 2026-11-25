@@ -65,3 +65,20 @@
 .atlas-series-map-field .atlas-player-button{align-self:flex-start}
 .atlas-started-label{display:inline-flex;align-items:center;font-size:10px;font-weight:750;color:#e2c391;background:#3a3023;border:1px solid #706046;padding:3px 6px;border-radius:6px}
 @media(max-width:700px){.atlas-map-controls:has(.atlas-series-map-field){display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.atlas-series-map-field{min-width:0}.atlas-map-controls:has(.atlas-series-map-field) .atlas-map-status{grid-column:1/-1}}
+
+/* BO3 map-by-map estimates and overall series estimate, in the existing panel. */
+.atlas-series-forecast{display:grid;gap:12px;margin:12px 0 17px;padding:16px;background:#142e3d;border:1px solid #4f827e;border-radius:12px}
+.atlas-series-forecast h3{font-size:16px;font-weight:800;color:#e4fff2}
+.atlas-series-forecast h4{font-size:12px;font-weight:800;color:#bddbdc;margin:4px 0 0}
+.atlas-series-estimates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.atlas-series-estimate{display:flex;flex-direction:column;gap:6px;padding:13px;border:1px solid #4a776d;border-radius:9px;background:#14363e}
+.atlas-series-estimate small{font-size:12px;color:#bdd9d6}
+.atlas-series-estimate strong{font-size:25px;color:#97e7cf;font-weight:850;line-height:1.1}
+.atlas-series-phase{font-size:12px;color:#dfc695;line-height:1.6}
+.atlas-series-scores{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.atlas-series-scores>div{display:flex;flex-direction:column;gap:5px;background:#1a3b4b;border-radius:8px;padding:10px}
+.atlas-series-scores small{font-size:11px;color:#c6d9e3}
+.atlas-series-scores b{color:#f1fbfc;font-size:16px}
+.atlas-series-all-maps{min-width:560px}
+.atlas-series-all-maps tr.atlas-player-active td{background:#1f4147}
+@media(max-width:700px){.atlas-series-estimates{grid-template-columns:repeat(2,minmax(0,1fr))}.atlas-series-estimate strong{font-size:20px}.atlas-series-scores{grid-template-columns:repeat(2,minmax(0,1fr))}}

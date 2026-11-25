@@ -115,7 +115,7 @@ test('browser does not reuse old BO1 JS bundles; update button refreshes HTML + 
  const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'../vercel.json'),'utf8'));
  assert.ok(html.includes('meta name="atlas-build"'));
  for(const name of ['radar-app.js','radar-core.js','major-map-core.js','major-map-workspace.js'])
-  assert.match(html,new RegExp(name.replace(/[.]/g,'\\.')+'\\?v=atlas-25nov-md3-mapas-janela5h-v1'));
+  assert.match(html,new RegExp(name.replace(/[.]/g,'\\.')+'\\?v=atlas-25nov-md3-previsao-serie-v1'));
  assert.ok(js.includes("url.searchParams.set('atlas_refresh'"));
  assert.ok(js.includes('window.location.replace(url.toString())'));
  assert.ok(cfg.headers.some(x=>x.headers.some(h=>h.key==='Cache-Control'&&/must-revalidate/.test(h.value))));
@@ -129,7 +129,7 @@ test('asynchronous team profile delivery forwards map projection callback into a
  assert.ok(!source.includes('if(container.isConnected&&container.dataset.matchId===game.id)draw(game,container,a,b);'),
   'the callback-less asynchronous path must never return');
  const html=fs.readFileSync(path.join(__dirname,'../public/index.html'),'utf8');
- assert.ok(html.includes('major-map-workspace.js?v=atlas-25nov-md3-mapas-janela5h-v1'));
+ assert.ok(html.includes('major-map-workspace.js?v=atlas-25nov-md3-previsao-serie-v1'));
 });
 
 test('BO3 map selection calculates each individual map but preserves SERIES winner odds unchanged',()=>{
@@ -153,7 +153,10 @@ test('BO3 offers three independent editable map slots and still separates series
  const app=fs.readFileSync(path.join(__dirname,'../public/radar-app.js'),'utf8');
  const panel=fs.readFileSync(path.join(__dirname,'../public/major-map-workspace.js'),'utf8');
  assert.ok(app.includes('game.major||game.isMajorSeries'));
- assert.ok(app.includes('game.isMajorSeries?{...game,selectedMap:map||null,mapProjection:projection||null}'));
+ assert.ok(app.includes('game.isMajorSeries?{'));
+ assert.ok(app.includes('seriesProjection.probabilityA'));
+ assert.ok(app.includes('seriesProjection.probabilityB'));
+ assert.ok(app.includes('Vencedor da série BO3'));
  assert.ok(app.includes('Vencedor da série BO3'));
  assert.ok(panel.includes('for(const slot of [1,2,3])'));
  assert.ok(panel.includes("['map'+slot]:newValue"));
