@@ -3,20 +3,18 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b1727">
-<meta name="atlas-build" content="atlas-26nov-major-md3-v1">
+<meta name="atlas-build" content="atlas-26nov-major-md3-list-fix-v2">
 <title>ATLAS Esports Lab | Radar CS2</title>
 <meta name="description" content="Radar estatístico de CS2. Próximos jogos, comparação de odds e resultados em um só fluxo.">
-<link rel="stylesheet" href="radar.css?v=atlas-26nov-major-md3-v1">
-<link rel="stylesheet" href="major-day3-preview.css?v=atlas-26nov-major-md3-v1">
-<link rel="stylesheet" href="major-map-workspace.css?v=atlas-26nov-major-md3-v1">
-<script defer src="radar-core.js?v=atlas-26nov-major-md3-v1"></script>
-<script defer src="major-map-core.js?v=atlas-26nov-major-md3-v1"></script>
-<script defer src="major-intelligence-core.js?v=atlas-26nov-major-md3-v1"></script>
-<script defer src="major-series-model.js?v=atlas-26nov-major-md3-v1"></script>
-<script defer src="major-map-workspace.js?v=atlas-26nov-major-md3-v1"></script>
-<script defer src="major-audit-ui.js?v=atlas-26nov-major-md3-v1"></script>
-<script defer src="major-day3-preview.js?v=atlas-26nov-major-md3-v1"></script>
-<script defer src="radar-app.js?v=atlas-26nov-major-md3-v1"></script>
+<link rel="stylesheet" href="radar.css?v=atlas-26nov-major-md3-list-fix-v2">
+<link rel="stylesheet" href="major-map-workspace.css?v=atlas-26nov-major-md3-list-fix-v2">
+<script defer src="radar-core.js?v=atlas-26nov-major-md3-list-fix-v2"></script>
+<script defer src="major-map-core.js?v=atlas-26nov-major-md3-list-fix-v2"></script>
+<script defer src="major-intelligence-core.js?v=atlas-26nov-major-md3-list-fix-v2"></script>
+<script defer src="major-series-model.js?v=atlas-26nov-major-md3-list-fix-v2"></script>
+<script defer src="major-map-workspace.js?v=atlas-26nov-major-md3-list-fix-v2"></script>
+<script defer src="major-audit-ui.js?v=atlas-26nov-major-md3-list-fix-v2"></script>
+<script defer src="radar-app.js?v=atlas-26nov-major-md3-list-fix-v2"></script>
 </head>
 <body>
 <div class="shell">
@@ -43,7 +41,6 @@
     <div class="title-meta"><b id="upcoming-total">—</b><span>jogos no radar</span></div></div>
     <div class="info-strip"><span><b id="priced-total">—</b> com odds registradas</span><span class="soft-divider"></span><span><b id="next-kickoff">—</b> próximo início</span><span class="soft-divider"></span><span id="capture-status">Sem odds confirmadas para o Major</span></div>
     <div id="stale-alert" class="feed-alert" role="note"></div>
-    <section class="atlas-preview-section" aria-label="Projeções pré-veto do Major 26 de novembro"><h2>Previsões das 6 MD3 • 26/11</h2><div id="major-day3-preview"><p class="atlas-preview-note">Carregando previsões congeladas...</p></div></section>
     <div class="workspace-grid">
      <section class="card-list-panel" aria-label="Lista de partidas">
       <div class="list-head">
@@ -64,7 +61,7 @@
      <section class="detail-panel" aria-label="Análise do confronto selecionado" id="detail-panel"><div class="detail-placeholder"><b>Selecione um confronto</b>As probabilidades, odds e mercados aparecerão aqui.</div></section>
     </div>
     <div id="slip-bar" class="slip-bar"><div><b id="slip-title">0 mercados selecionados</b><p>Um por jogo. Apenas estudo de preços, não aposta.</p></div><button class="primary-button" data-view="study">Ver meu estudo →</button></div>
-    <p class="foot-note"><span class="atlas-release">ATLAS 26/11 — seis MD3 e auditoria da rodada anterior • pré-veto experimental • jogos até +5h</span> · Modelos V1 e V2 são experimentais e não calibrados. Uma divergência de probabilidades não comprova valor ou lucro. Odds fornecidas por screenshots e sem atualização automática.</p>
+    <p class="foot-note"><span class="atlas-release">ATLAS 26/11 — novas MD3 no radar original e seleção de mapas • pré-veto experimental • jogos até +5h</span> · Modelos V1 e V2 são experimentais e não calibrados. Uma divergência de probabilidades não comprova valor ou lucro. Odds fornecidas por screenshots e sem atualização automática.</p>
    </section>
    <section id="page-study" class="page" aria-labelledby="study-title">
     <div class="page-title"><div><div class="eyebrow">MEU ESTUDO / COMPARAÇÃO</div><h1 id="study-title">Mercados selecionados</h1><p>Até um mercado por partida. Compare as odds capturadas e copie sua análise; nenhuma aposta é enviada.</p></div></div>
@@ -72,7 +69,7 @@
    </section>
    <section id="page-history" class="page" aria-labelledby="history-title">
     <div class="page-title"><div><div class="eyebrow">HISTÓRICO / ACOMPANHAMENTO</div><h1 id="history-title">Resultados e aprendizado</h1><p>Partidas anteriores ficam aqui, separadas das próximas oportunidades. Previsões congeladas continuam disponíveis para auditoria.</p></div></div>
-    <div class="history-panel"><div id="major-day2-audit"><p class="atlas-preview-note">Carregando auditoria de 25/11...</p></div><div id="history-body" class="history-rows"><div class="loading">Carregando jogos encerrados...</div></div><p class="foot-note">Resultados provenientes de snapshots da Cito; jogos passados sem verificação oficial são identificados como pendentes, sem inventar placar.</p></div>
+    <div class="history-panel"><div id="history-body" class="history-rows"><div class="loading">Carregando jogos encerrados...</div></div><p class="foot-note">Resultados provenientes de snapshots da Cito; jogos passados sem verificação oficial são identificados como pendentes, sem inventar placar.</p></div>
    </section>
   </main>
  </div>
