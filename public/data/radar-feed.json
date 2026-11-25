@@ -1,6 +1,6 @@
 {
   "version": "atlas-radar-unificado-v1",
-  "generatedAt": "2026-11-25T15:38:30.000Z",
+  "generatedAt": "2026-11-25T15:46:30.000Z",
   "dataStatus": {
     "citoAt": "2026-11-22T15:13:39.579Z",
     "majorAt": "2026-11-25T15:34:13.255Z",
@@ -4611,7 +4611,32 @@
       ],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
-      "form": null,
+      "form": {
+        "a": {
+          "rank": 23,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        },
+        "b": {
+          "rank": 19,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        }
+      },
       "comparisonNote": "Cenários pré-veto salvos separadamente; modelo dinâmico da plataforma exige amostra por mapa. Odds capturadas, não ao vivo.",
       "legacyMarketPrices": null,
       "isMajorSeries": true
@@ -4673,7 +4698,32 @@
       ],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
-      "form": null,
+      "form": {
+        "a": {
+          "rank": 24,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        },
+        "b": {
+          "rank": 22,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        }
+      },
       "comparisonNote": "Cenários pré-veto salvos separadamente; modelo dinâmico da plataforma exige amostra por mapa. Odds capturadas, não ao vivo.",
       "legacyMarketPrices": null,
       "isMajorSeries": true
@@ -4735,7 +4785,32 @@
       ],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
-      "form": null,
+      "form": {
+        "a": {
+          "rank": 44,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        },
+        "b": {
+          "rank": 13,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        }
+      },
       "comparisonNote": "Cenários pré-veto salvos separadamente; modelo dinâmico da plataforma exige amostra por mapa. Odds capturadas, não ao vivo.",
       "legacyMarketPrices": null,
       "isMajorSeries": true
@@ -4797,7 +4872,32 @@
       ],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
-      "form": null,
+      "form": {
+        "a": {
+          "rank": 29,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        },
+        "b": {
+          "rank": 21,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        }
+      },
       "comparisonNote": "Cenários pré-veto salvos separadamente; modelo dinâmico da plataforma exige amostra por mapa. Odds capturadas, não ao vivo.",
       "legacyMarketPrices": null,
       "isMajorSeries": true
@@ -4859,7 +4959,32 @@
       ],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
-      "form": null,
+      "form": {
+        "a": {
+          "rank": 48,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        },
+        "b": {
+          "rank": 16,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        }
+      },
       "comparisonNote": "Cenários pré-veto salvos separadamente; modelo dinâmico da plataforma exige amostra por mapa. Odds capturadas, não ao vivo.",
       "legacyMarketPrices": null,
       "isMajorSeries": true
@@ -4921,7 +5046,32 @@
       ],
       "unmodeledRoundHandicaps": [],
       "pricingConsistency": [],
-      "form": null,
+      "form": {
+        "a": {
+          "rank": 42,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        },
+        "b": {
+          "rank": 59,
+          "maps90": null,
+          "form": {
+            "n": 0,
+            "wins": 0,
+            "losses": 0,
+            "vsTop50": 0,
+            "winsVsTop50": 0
+          },
+          "asOf": "2026-11-22T00:00:00.000Z"
+        }
+      },
       "comparisonNote": "Cenários pré-veto salvos separadamente; modelo dinâmico da plataforma exige amostra por mapa. Odds capturadas, não ao vivo.",
       "legacyMarketPrices": null,
       "isMajorSeries": true
@@ -4932,7 +5082,8 @@
     "history": "completed results and past matches only, separate from the radar",
     "noPrice": "show awaiting odds, never fabricate",
     "oneMarketPerMatch": true,
-    "warnings": "model uncalibrated; price photographed; not an automated bet or recommendation"
+    "warnings": "model uncalibrated; price photographed; not an automated bet or recommendation",
+    "rankSource": "Cito world rankings captured 2026-11-22; for historical pre-match prior; NO odds used to create probabilities"
   },
   "archive": {
     "count": 30
