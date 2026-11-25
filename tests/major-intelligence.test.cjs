@@ -56,7 +56,7 @@ test('kills distribution responds monotonically to lines and to expected rounds'
 });
 test('prospective freeze rejected after kickoff and predictions cannot grade wrong map',()=>{
  const selected=I.winner(game,a,b,'Inferno',rankHistory);
- assert.equal(I.makeFrozen(game,'Inferno',selected,[],'2026-11-24T04:01:00Z'),null);
+ assert.equal(I.makeFrozen(game,'Inferno',selected,[],new Date(Date.parse(game.startTime)+1000).toISOString()),null);
  const f=I.makeFrozen(game,'Inferno',selected,[],'2026-11-23T20:30:00Z',{line:16.5});
  assert.ok(f&&f.createdAt<f.startsAt);
  const checked={id:game.id,status:'completed',maps:[{name:'Inferno',scoreA:13,scoreB:11}]};

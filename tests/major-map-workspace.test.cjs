@@ -76,8 +76,13 @@ test('winner table follows map selection and clears stale pre-veto percentage wi
  const b=filled.markets.find(m=>m.key==='bWin');
  assert.equal(a.v2P,inferno.probabilityA);
  assert.equal(b.v2P,inferno.probabilityB);
- assert.equal(a.odd,1.43);
- assert.equal(b.odd,2.75);
+ assert.equal(a.odd,game.markets.find(m=>m.key==='aWin').odd);
+ assert.equal(b.odd,game.markets.find(m=>m.key==='bWin').odd);
+ assert.equal(a.odd,null); // completed match; photographed odds were retired, not live
+ const photographed=JSON.parse(fs.readFileSync(path.join(__dirname,'../public/data/major-br365-odds.json'),'utf8'));
+ const quote=photographed.matches.find(x=>x.matchId===game.id);
+ assert.equal(quote.oddA,1.43);
+ assert.equal(quote.oddB,2.75);
  assert.equal(a.impliedNoVig,game.markets[0].impliedNoVig);
  const mirage=M.withSelectedMap(game,'Mirage',M.projectMap(game,left,right,'Mirage'));
  assert.notEqual(mirage.markets[0].v2P,a.v2P);
@@ -110,7 +115,7 @@ test('browser does not reuse old BO1 JS bundles; update button refreshes HTML + 
  const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'../vercel.json'),'utf8'));
  assert.ok(html.includes('meta name="atlas-build"'));
  for(const name of ['radar-app.js','radar-core.js','major-map-core.js','major-map-workspace.js'])
-  assert.match(html,new RegExp(name.replace(/[.]/g,'\\.')+'\\?v=major-intelligence-20261123-v1'));
+  assert.match(html,new RegExp(name.replace(/[.]/g,'\\.')+'\\?v=atlas-day1-audit-20261125-a'));
  assert.ok(js.includes("url.searchParams.set('atlas_refresh'"));
  assert.ok(js.includes('window.location.replace(url.toString())'));
  assert.ok(cfg.headers.some(x=>x.headers.some(h=>h.key==='Cache-Control'&&/must-revalidate/.test(h.value))));
@@ -124,5 +129,5 @@ test('asynchronous team profile delivery forwards map projection callback into a
  assert.ok(!source.includes('if(container.isConnected&&container.dataset.matchId===game.id)draw(game,container,a,b);'),
   'the callback-less asynchronous path must never return');
  const html=fs.readFileSync(path.join(__dirname,'../public/index.html'),'utf8');
- assert.ok(html.includes('major-map-workspace.js?v=major-intelligence-20261123-v1'));
+ assert.ok(html.includes('major-map-workspace.js?v=atlas-day1-audit-20261125-a'));
 });

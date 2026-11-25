@@ -49,7 +49,7 @@ test('one event-level Cito result call verifies completed games without editing 
    team1Id:first.teamA.id,team2Id:first.teamB.id,team1Name:first.teamA.name,team2Name:first.teamB.name,
    eventName:'PGL Major Singapore',stageName:'Swiss Round 1',status:'completed',
    winnerTeamId:first.teamA.id,team1Score:1,team2Score:0,maps:[]}];
- const reconciled=reconcileMajorLive(load('major-live.json'),fake,'cs2-event-9303','2026-11-24T08:00:00Z');
+ const reconciled=reconcileMajorLive({fixtures:[],results:[]},fake,'cs2-event-9303','2026-11-24T08:00:00Z');
  assert.equal(reconciled.results.length,1);
  const graded=gradeMajorBO1(research,reconciled,'2026-11-24T08:01:00Z');
  assert.equal(graded.resolved,1);
