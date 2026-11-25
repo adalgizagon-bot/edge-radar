@@ -20,12 +20,44 @@
   exportBtn.type='button';exportBtn.addEventListener('click',()=>download('atlas-previsoes-congeladas.json',{exportedAt:new Date().toISOString(),source:'este navegador',forecasts:getSaved()}));
   outer.append(exportBtn);
   parent.append(outer);
-  const [live,automatic,observed]=await Promise.all([
-   getJson('data/major-live.json'),getJson('data/major-preflight-v1.json'),getJson('data/major-observed-results.json')]);
+  const [live,automatic,observed,day1]=await Promise.all([
+   getJson('data/major-live.json'),getJson('data/major-preflight-v1.json'),getJson('data/major-observed-results.json'),getJson('data/major-day1-audit.json')]);
   if(!outer.isConnected)return;
   const results=live?.results||[],saved=getSaved(),audited=I.audit(saved,results,observed?.matches||[]);
   status.textContent=saved.length+' registro(s) manuais neste navegador · '+audited.graded+' vencedor(es) avaliados · '+audited.pending+' aguardando · '+audited.mismatched+' com mapa divergente.';
   outer.append(mk('p','atlas-map-hint','Modelo dos registros manuais — Brier: '+fmt(audited.winnerBrier)+' · erro médio de kills: '+fmt(audited.killMae)+' (quando houver kills verificadas).'));
+  if(day1?.summary?.games===8&&day1.records?.length===8){
+   const d=day1.summary,section=mk('section','atlas-day1-audit');
+   section.append(mk('h3','','24/11 — onde o modelo acertou e errou'));
+   const metrics=mk('div','atlas-day1-metrics');
+   const tiles=[
+    ['Vencedor por mapa',d.winner.correct+'/'+d.winner.count],
+    ['Brier Score',fmt(d.winner.brier)],
+    ['Erro rounds',fmt(d.rounds.mae)+' rounds'],
+    ['Kills provisórias',fmt(d.kills.mae)+' MAE']
+   ];
+   for(const [title,value] of tiles){const cell=mk('div','atlas-day1-metric');cell.append(mk('small','',title),mk('strong','',value));metrics.append(cell)}
+   section.append(metrics);
+   section.append(mk('p','atlas-map-alert','Qualidade da Cito: '+d.kills.sourceConflicts+'/'+d.kills.actualRosterSideSum+' divergências entre kills totais e CT+TR. A análise de kills usa CT+TR PROVISORIAMENTE; esta métrica não é uma validação independente. Preços e probabilidades de kills permanecem bloqueados.'));
+   section.append(mk('p','atlas-map-hint','A amostra de oito jogos é muito pequena para recalibrar o modelo. O Brier mais baixo é melhor; não indica lucro. As previsões foram congeladas em '+new Date(day1.frozenAt).toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'})+'.'));
+   const wrapper=mk('div','hscroll atlas-day1-scroll'),table=mk('table','atlas-map-table atlas-day1-table'),head=mk('thead'),hrow=mk('tr');
+   for(const label of ['Jogo / mapa','Vencedor','Modelo A','Acertou?','Rounds previstos / reais'])hrow.append(mk('th','',label));
+   head.append(hrow);table.append(head);const tbody=mk('tbody');
+   for(const row of day1.records){
+    const tr=mk('tr');
+    const winning=row.result?.[0]>row.result?.[1]?row.teams?.[0]:row.teams?.[1];
+    const cells=[row.teams.join(' x ')+' · '+row.map,winning,
+     typeof row.probabilityA==='number'?fmt(row.probabilityA*100)+'%':'—',
+     row.winnerHit?'✓':'✕',
+     fmt(row.expectedRounds)+' / '+fmt(row.actualRounds)];
+    for(let i=0;i<cells.length;i++)tr.append(mk('td',i===3?(row.winnerHit?'atlas-day1-hit':'atlas-day1-miss'):'',cells[i]));
+    tbody.append(tr);
+   }
+   table.append(tbody);wrapper.append(table);section.append(wrapper);
+   const exportAudit=mk('button','atlas-player-button','Exportar auditoria 24/11 (JSON)');
+   exportAudit.type='button';exportAudit.addEventListener('click',()=>download('atlas-auditoria-2026-11-24.json',day1));
+   section.append(exportAudit);outer.append(section);
+  }
   if(automatic?.forecasts?.length){
    const scenarios=automatic.forecasts,records=[];
    for(const match of scenarios){

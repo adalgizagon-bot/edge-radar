@@ -57,19 +57,39 @@
    reason:eligible?'Ranking histórico anterior a cada partida, quando disponível.':
      'Cobertura de ranking dos adversários insuficiente; não aplicada correção de dificuldade.'};
  }
- const projectRounds=(a,b,map)=>{
+ const observedRounds=(team,map,before)=>{
+  const end=date(before),start=end-90*86400000,seen=new Set(),rows=[];
+  for(const p of team?.players||[])for(const r of p.history||[]){
+   const t=date(r.at),key=r.matchId+'|'+norm(r.map);
+   if(r.teamId!==team.teamId||norm(r.map)!==norm(map)||!num(r.rounds)||r.rounds<13||
+      !r.matchId||!Number.isFinite(t)||t<start||t>=end||seen.has(key))continue;
+   seen.add(key);rows.push(r.rounds);
+  }
+  return rows;
+ };
+ const quantile=(values,q)=>{
+  if(!values.length)return null;
+  const sorted=[...values].sort((x,y)=>x-y),at=q*(sorted.length-1),lo=Math.floor(at),hi=Math.ceil(at);
+  return sorted[lo]+(sorted[hi]-sorted[lo])*(at-lo);
+ };
+ const projectRounds=(a,b,map,before)=>{
   const ma=M.getTeamMap(a,map),mb=M.getTeamMap(b,map);
   const t=x=>x&&num(x.played)&&x.played>=5&&num(x.roundsFor)&&num(x.roundsAgainst)?
     (x.roundsFor+x.roundsAgainst)/x.played:null;
   const x=t(ma),y=t(mb);
+  const observations=before?[...observedRounds(a,map,before),...observedRounds(b,map,before)]:[];
+  const low=observations.length>=10?round(quantile(observations,.10),1):null;
+  const high=observations.length>=10?round(quantile(observations,.90),1):null;
   return x!==null&&y!==null?{expected:round(clamp((x+y)/2,16,31),1),fromA:round(x,1),fromB:round(y,1),
-    nA:ma.played,nB:mb.played,source:'mean rounds/map, 90d; not a calibrated round distribution'}:
+    nA:ma.played,nB:mb.played,observedRoundMaps:observations.length,rangeLow:low,rangeHigh:high,
+    rangeType:'historical 10th–90th percentile, NOT confidence or predictive interval',
+    source:'mean rounds/map, 90d; not a calibrated round distribution'}:
     {expected:null,source:'insufficient rounds/sample'};
  };
  const winner=(game,a,b,map,history)=>{
   const base=M.projectMap(game,a,b,map);
   if(!base)return null;
-  const rounds=projectRounds(a,b,map);
+  const rounds=projectRounds(a,b,map,game.startTime);
   const A=teamContext(a,map,history,game.startTime),B=teamContext(b,map,history,game.startTime);
   if(base.status!=='estimated')return{...base,modelStatus:'insufficient_data',strengthA:A,strengthB:B,rounds,
     method:'insufficient',calibrated:false};
@@ -104,7 +124,8 @@
   const hits=rows.filter(x=>x.kills>line).length;
   const base={id:player.id,nickname:player.nickname,teamId:profile.teamId,n,
    empiricalOver:n?hits/n:null,empiricalUnder:n?1-hits/n:null,source:'Cito historical player kills by map',
-   calibrated:false,modelStatus:'insufficient',expectedKills:null,overProbability:null,underProbability:null};
+   calibrated:false,sourceQuality:'Cito historical top-level kills not independently reconciled with CT+TR',priceComparisonAllowed:false,
+   modelStatus:'insufficient',expectedKills:null,overProbability:null,underProbability:null};
   if(n<5||!rounds||!num(rounds.expected)||playedRounds<=0)return base;
   const kills=rows.reduce((s,x)=>s+x.kills,0),kpr=kills/playedRounds;
   const oppRanks=rows.map(r=>historicalRank(history,r.opponentId,r.at)?.rank).filter(num);
@@ -123,7 +144,7 @@
    dispersion:round(dispersion,1),opponentAdjustment:round(adjustment),
    rankedOpponentRows:oppRanks.length,averageOpponentRank:round(historicalOpp,1),
    underProbability:under,overProbability:under===null?null:1-under,
-   uncertainty:'Negative-binomial moment model; needs prospective calibration.'};
+   uncertainty:'Exploratory only: Cito player historical kills may be inconsistent with CT+TR. Do not compare model rates to bookmaker odds until historical rows are validated.'};
  };
  const makeFrozen=(game,map,winnerModel,players,createdAt,extra={})=>{
   if(!game?.id||!map||!winnerModel||!Number.isFinite(date(createdAt))||

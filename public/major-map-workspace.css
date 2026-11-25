@@ -44,3 +44,16 @@
 .atlas-audit-summary h3{font-size:16px;color:#dcfff2}
 .atlas-audit-summary .atlas-map-hint{margin:0}
 .atlas-audit-highlight{font-size:13px;font-weight:800;color:#9bdac8}
+
+/* Day-one model audit, kept within the existing Results tab. */
+.atlas-day1-audit{display:grid;gap:12px;margin:18px 0 8px;padding-top:15px;border-top:1px solid #365669;width:100%}
+.atlas-day1-audit h3{font-size:16px;color:#d5f9ee}
+.atlas-day1-metrics{display:grid;grid-template-columns:repeat(4,minmax(110px,1fr));gap:10px;width:100%}
+.atlas-day1-metric{display:grid;gap:3px;padding:11px;border:1px solid #33556b;background:#142e40;border-radius:8px}
+.atlas-day1-metric small{font-size:10px;color:#b9cedb}
+.atlas-day1-metric strong{font-size:18px;color:#e6f9fa}
+.atlas-day1-scroll{width:100%;overflow-x:auto}
+.atlas-day1-table{min-width:600px}
+.atlas-day1-hit{color:#8de6b4!important;font-weight:800}
+.atlas-day1-miss{color:#f4b4aa!important;font-weight:800}
+@media(max-width:720px){.atlas-day1-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
