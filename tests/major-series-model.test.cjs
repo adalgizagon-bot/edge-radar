@@ -88,7 +88,7 @@ test('UI shows all map probabilities and series winner with score distributions'
  assert.ok(html.indexOf('major-series-model.js')<html.indexOf('major-map-workspace.js'));
  assert.ok(workspace.includes('S.projectSeries(game,left,right,rankHistory,seriesState)'));
  assert.ok(workspace.includes('onMapProjection(chosen,projection,seriesPrediction)'));
- assert.ok(workspace.includes('stage.allMapProjections'));
+ assert.ok(workspace.includes('stage?.allMapProjections'));
  assert.ok(workspace.includes('stage.scores.a2_0'));
  assert.ok(app.includes('seriesProjection.probabilityA'));
  assert.ok(app.includes('ATLAS MD3'));

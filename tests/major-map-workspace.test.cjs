@@ -105,7 +105,7 @@ test('frontend refreshes both header and winner market from same map-specific vi
  assert.ok(js.includes('withSelectedMap(game,map,projection)'));
  assert.ok(js.includes('teamBox(game.teamA,pA'));
  assert.ok(js.includes('marketHost.replaceChildren(marketSection(visibleGame))'));
- assert.ok(panel.includes('onMapProjection(chosen,projection)'));
+ assert.ok(panel.includes('onMapProjection(chosen,projection,seriesPrediction)'));
  assert.ok(!panel.includes('game.model?.mapScenarios'));
 });
 
@@ -125,7 +125,7 @@ test('asynchronous team profile delivery forwards map projection callback into a
  const source=fs.readFileSync(path.join(__dirname,'../public/major-map-workspace.js'),'utf8');
  assert.ok(source.includes('draw(game,container,a,b,onMapProjection,ranks)'), 'promise data path must forward projection callback');
  assert.ok(source.includes('draw(game,container,left,right,onMapProjection,rankHistory)'), 'selected map changes must forward projection callback');
- assert.ok(source.includes('onMapProjection(chosen,projection)'), 'selected map must notify winner table');
+ assert.ok(source.includes('onMapProjection(chosen,projection,seriesPrediction)'), 'selected map must notify winner table');
  assert.ok(!source.includes('if(container.isConnected&&container.dataset.matchId===game.id)draw(game,container,a,b);'),
   'the callback-less asynchronous path must never return');
  const html=fs.readFileSync(path.join(__dirname,'../public/index.html'),'utf8');
