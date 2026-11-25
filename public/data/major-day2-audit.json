@@ -1,0 +1,193 @@
+{
+  "version": "major-day2-audit-v1",
+  "event": "PGL Major Singapore 2026 Stage 1",
+  "date": "2026-11-25",
+  "scope": "all eight round-3 matches (4 BO1 and 4 BO3)",
+  "sources": {
+    "results": "https://www.hltv.org/results",
+    "mapScores": "https://cs2majorbetting.com/singapore-major/matches/",
+    "odds": "public/data/major-br365-odds-2026-11-25.json"
+  },
+  "rules": [
+    "Never backfill missing model predictions from market odds or post-match outcomes",
+    "Original model picks for four BO1 not recovered; exclude from model accuracy",
+    "Odds are a frozen screenshot/text from user, not live odds",
+    "Do not train on final results as though they were known pre-match",
+    "Five of eight winners were longer-odds sides at captured BR365 prices"
+  ],
+  "summary": {
+    "matches": 8,
+    "bo1": 4,
+    "bo3": 4,
+    "marketUnderdogsWon": 5,
+    "modelPicksRecovered": 4,
+    "modelWinnersCorrect": 2
+  },
+  "games": [
+    {
+      "matchId": "cs2-match-2400565",
+      "teamA": "HEROIC",
+      "teamB": "M80",
+      "bestOf": 1,
+      "maps": "Inferno",
+      "score": "10-13",
+      "winner": "M80",
+      "oddsSnapshot": {
+        "teamA": 1.58,
+        "teamB": 2.3
+      },
+      "frozenModelPick": null,
+      "modelCorrect": null,
+      "marketFavorite": "HEROIC",
+      "marketFavoriteWon": false
+    },
+    {
+      "matchId": "cs2-match-2400566",
+      "teamA": "Eternal Fire",
+      "teamB": "100 Thieves",
+      "bestOf": 1,
+      "maps": "Mirage",
+      "score": "13-6",
+      "winner": "Eternal Fire",
+      "oddsSnapshot": {
+        "teamA": 2.25,
+        "teamB": 1.62
+      },
+      "frozenModelPick": null,
+      "modelCorrect": null,
+      "marketFavorite": "100 Thieves",
+      "marketFavoriteWon": false
+    },
+    {
+      "matchId": "cs2-match-2400568",
+      "teamA": "Wildcard",
+      "teamB": "Lynn Vision",
+      "bestOf": 1,
+      "maps": "Dust2",
+      "score": "8-13",
+      "winner": "Lynn Vision",
+      "oddsSnapshot": {
+        "teamA": 1.76,
+        "teamB": 2
+      },
+      "frozenModelPick": null,
+      "modelCorrect": null,
+      "marketFavorite": "Wildcard",
+      "marketFavoriteWon": false
+    },
+    {
+      "matchId": "cs2-match-2400567",
+      "teamA": "PARIVISION",
+      "teamB": "FaZe",
+      "bestOf": 1,
+      "maps": "Anubis",
+      "score": "13-10",
+      "winner": "PARIVISION",
+      "oddsSnapshot": {
+        "teamA": 1.68,
+        "teamB": 2.15
+      },
+      "frozenModelPick": null,
+      "modelCorrect": null,
+      "marketFavorite": "PARIVISION",
+      "marketFavoriteWon": true
+    },
+    {
+      "matchId": "cs2-match-2400570",
+      "teamA": "9z",
+      "teamB": "DENDELE",
+      "bestOf": 3,
+      "maps": [
+        "Mirage 13-5",
+        "Cache 13-7"
+      ],
+      "score": "2-0",
+      "winner": "9z",
+      "oddsSnapshot": {
+        "teamA": 1.74,
+        "teamB": 2.05
+      },
+      "frozenModelPick": {
+        "winner": "DENDELE",
+        "probability": 0.57,
+        "source": "prior chat recovered, not verified from repository snapshot"
+      },
+      "modelCorrect": false,
+      "marketFavorite": "9z",
+      "marketFavoriteWon": true
+    },
+    {
+      "matchId": "cs2-match-2400569",
+      "teamA": "Imperial",
+      "teamB": "FlyQuest",
+      "bestOf": 3,
+      "maps": [
+        "Dust2 11-13",
+        "Cache 9-13"
+      ],
+      "score": "0-2",
+      "winner": "FlyQuest",
+      "oddsSnapshot": {
+        "teamA": 1.9,
+        "teamB": 1.86
+      },
+      "frozenModelPick": {
+        "winner": "FlyQuest",
+        "probability": 0.561,
+        "source": "prior chat recovered, not verified from repository snapshot"
+      },
+      "modelCorrect": true,
+      "marketFavorite": "FlyQuest",
+      "marketFavoriteWon": true
+    },
+    {
+      "matchId": "cs2-match-2400571",
+      "teamA": "Ninjas in Pyjamas",
+      "teamB": "Liquid",
+      "bestOf": 3,
+      "maps": [
+        "Inferno 13-3",
+        "Ancient 13-8"
+      ],
+      "score": "2-0",
+      "winner": "Ninjas in Pyjamas",
+      "oddsSnapshot": {
+        "teamA": 2.05,
+        "teamB": 1.74
+      },
+      "frozenModelPick": {
+        "winner": "Liquid",
+        "probability": 0.502,
+        "source": "prior chat recovered, not verified from repository snapshot"
+      },
+      "modelCorrect": false,
+      "marketFavorite": "Liquid",
+      "marketFavoriteWon": false
+    },
+    {
+      "matchId": "cs2-match-2400572",
+      "teamA": "BC.Game",
+      "teamB": "Chinggis Warriors",
+      "bestOf": 3,
+      "maps": [
+        "Ancient 11-13",
+        "Dust2 13-6",
+        "Nuke 10-13"
+      ],
+      "score": "1-2",
+      "winner": "Chinggis Warriors",
+      "oddsSnapshot": {
+        "teamA": 1.11,
+        "teamB": 5.4
+      },
+      "frozenModelPick": {
+        "winner": "Chinggis Warriors",
+        "probability": 0.504,
+        "source": "prior chat recovered, not verified from repository snapshot"
+      },
+      "modelCorrect": true,
+      "marketFavorite": "BC.Game",
+      "marketFavoriteWon": false
+    }
+  ]
+}
