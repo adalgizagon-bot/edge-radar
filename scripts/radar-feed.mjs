@@ -53,6 +53,10 @@ export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quot
   const frozen=pre.get(game.id),legacy=old.get(game.id),odds=quote.get(game.id),nov19=snapshots19.get(game.id);
   const start=Date.parse(game.startTime);
   const isFinished=Boolean(resolved?.status==='completed')||game.status==='completed';
+  // Keep captured pregame odds for read-only review up to five hours after
+  // scheduled kickoff, including completed games. No new betting is enabled.
+  const withinRadarGrace=Date.parse(nowIso)<start+5*60*60*1000;
+  const allowMajorSnapshot=!isFinished||withinRadarGrace;
   const status=isFinished?'completed':game.status;
   const forecastValid=Boolean(frozen&&goodDate(frozen.frozenAt)&&Date.parse(frozen.frozenAt)<start);
   const fore=forecastValid?frozen:null;
@@ -62,7 +66,7 @@ export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quot
     {v1:legacy.model?.probabilities?.aWin??null,v2:null,frozenAt:legacy.frozenAt,version:'V1',status:'experimental',v1Score:legacy.model?.probabilities||null,v2Score:null}:null;
   const isBo1=game.bestOf===1;
   const fresh=majorNextOddsById.get(game.id);
-  const freshValid=Boolean(!isFinished&&fresh&&goodDate(fresh.capturedAt)&&
+  const freshValid=Boolean(allowMajorSnapshot&&fresh&&goodDate(fresh.capturedAt)&&
    Date.parse(fresh.capturedAt)<start&&
    (fresh.bestOf===1||fresh.bestOf===3)&&fresh.bestOf===game.bestOf&&
    fresh.marketType===(fresh.bestOf===1?'bo1_winner':'bo3_series_winner')&&
@@ -71,7 +75,7 @@ export function buildRadarFeed({snapshot,nov19Context,nov19Predictions,nov19Quot
    fresh.teamA===game.teamA.name&&fresh.teamB===game.teamB.name&&
    game.eventId===majorNov25Quotes?.eventId);
   const bo1Price=isBo1?(freshValid?fresh:majorOddsById.get(game.id)):null;
-  const bo1PriceValid=Boolean(!isFinished&&bo1Price&&goodDate(bo1Price.capturedAt)&&
+  const bo1PriceValid=Boolean(allowMajorSnapshot&&bo1Price&&goodDate(bo1Price.capturedAt)&&
    Date.parse(bo1Price.capturedAt)<start&&
    Number.isFinite(bo1Price.oddA)&&bo1Price.oddA>1&&
    Number.isFinite(bo1Price.oddB)&&bo1Price.oddB>1&&

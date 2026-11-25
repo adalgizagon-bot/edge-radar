@@ -16,10 +16,10 @@
  const logistic=x=>1/(1+Math.exp(-x));
  const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
  const logit=x=>Math.log(clamp(x,.000001,.999999)/(1-clamp(x,.000001,.999999)));
- /* Selected-map formula matches the previously frozen Major BO1 map scenarios.
+ /* Selected-map formula is applied independently to each BO1/BO3 map; NEVER equate it to BO3 series odds.
     It is exploratory, not calibrated and never borrows bookmaker odds. */
  const projectMap=(game,teamA,teamB,map)=>{
-  if(!game||game.bestOf!==1||!map)return null;
+  if(!game||![1,3].includes(game.bestOf)||!map)return null;
   const a=getTeamMap(teamA,map),b=getTeamMap(teamB,map);
   const sample={map,playedA:a?.played??0,playedB:b?.played??0,
    rawWinA:a&&good(a.played)&&a.played>0&&good(a.wins)?a.wins/a.played:null,
@@ -38,7 +38,7 @@
   const probabilityA=logistic(.60*logit(rankPrior)+.40*(logit(aSmooth)-logit(bSmooth)));
   return{...sample,status:'estimated',probabilityA,probabilityB:1-probabilityA,
    rankA,rankB,source:'Cito: últimos 90 dias do mapa + ranking do evento',
-   version:'Major BO1 mapa selecionado - heurística experimental v1',
+   version:'Major mapa individual (BO1 ou BO3) - heurística experimental v1',
    opponentAdjusted:false,rosterAdjusted:false,calibrated:false,
    reason:'Estimativa exploratória; não ajusta integralmente força dos adversários nem elenco.'};
  };

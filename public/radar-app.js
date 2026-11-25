@@ -29,10 +29,11 @@
   window.scrollTo({top:0,behavior:'instant'});
  }
  function updateTop(){
-  const all=C.getUpcoming(state.feed);
+  const all=C.getRadarGames(state.feed);
   $('upcoming-total').textContent=String(all.length);
   $('priced-total').textContent=String(all.filter(C.hasOdds).length);
-  $('next-kickoff').textContent=all.length?hours(all[0].startTime):'Aguardando';
+  const next=all.find(g=>C.isFuture(g));
+  $('next-kickoff').textContent=next?hours(next.startTime):(all.length?'Em curso / recente':'Aguardando');
   const sources=[state.feed.dataStatus?.majorAt,state.feed.dataStatus?.dailySyncAt,state.feed.dataStatus?.citoAt].filter(Boolean).sort((a,b)=>Date.parse(b)-Date.parse(a));
   const last=sources[0]||null;
   const status=$('feed-status'),stale=C.isSourceStale(state.feed);
@@ -53,7 +54,7 @@
  }
  function eventFilters(){
   const elSelect=$('event-filter'),chosen=elSelect.value||'all',events=new Map();
-  for(const g of C.getUpcoming(state.feed))if(g.eventId)events.set(g.eventId,g.event);
+  for(const g of C.getRadarGames(state.feed))if(g.eventId)events.set(g.eventId,g.event);
   elSelect.textContent='';const all=el('option','', 'Todos os campeonatos');all.value='all';elSelect.append(all);
   for(const [id,name]of [...events.entries()].sort((a,b)=>a[1].localeCompare(b[1]))){
    const opt=el('option','',name);opt.value=id;elSelect.append(opt);
@@ -67,7 +68,7 @@
  }
  function renderList(){
   const items=C.filterUpcoming(state.feed,{filter:state.filter,query:state.query,event:state.event});
-  const full=C.getUpcoming(state.feed);
+  const full=C.getRadarGames(state.feed);
   const list=$('game-list');list.textContent='';
   $('list-count').textContent=items.length+' de '+full.length;
   document.querySelectorAll('[data-price-filter]').forEach(btn=>{
@@ -75,12 +76,12 @@
   });
   if(!items.length){
    const empty=el('div','empty-list');
-   empty.append(el('b','',full.length?'Nenhum jogo neste filtro':'Nenhuma partida futura na base'));
+   empty.append(el('b','',full.length?'Nenhum jogo neste filtro':'Nenhuma partida na janela de 5h'));
    empty.append(document.createTextNode(full.length?
     'Altere os filtros para encontrar outro confronto.':
-    'O radar não reaproveita jogos encerrados. A sincronização gratuita consulta novos jogos diariamente; quando houver partidas confirmadas, aparecerão aqui.'));
+    'Os jogos continuam consultáveis até 5 horas após o horário previsto, mesmo se começarem atrasados. Depois passam para Resultados.'));
    list.append(empty);$('detail-panel').textContent='';
-   $('detail-panel').append(el('div','detail-placeholder','Não há confronto futuro selecionável. Confira novamente quando houver nova coleta.'));
+   $('detail-panel').append(el('div','detail-placeholder','Nenhuma partida na janela de 5h. Consulte Resultados ou atualize os dados.'));
    return;
   }
   if(!items.some(g=>g.id===state.activeId)){state.activeId=items[0].id;state.family='winner';}
@@ -88,6 +89,7 @@
    const card=el('button','game-card'+(g.id===state.activeId?' is-selected':''));card.type='button';
    const meta=el('div','game-meta');
    meta.append(el('span','game-event',g.event),el('span','',hours(g.startTime)));
+   if(!C.isFuture(g))meta.append(el('span','atlas-started-label',g.status==='completed'?'Encerrado · somente consulta':'Horário previsto passou · disponível até +5h'));
    const team=el('div','game-card-title',g.teamA.name+' × '+g.teamB.name);
    card.append(meta,team);
    const prices=el('div','game-prices'),win=winnerOdds(g);
@@ -131,9 +133,9 @@
  }
  function marketSection(game){
   const fragment=document.createDocumentFragment();
-  const chosenMap=game.major?game.selectedMap:null;
+  const chosenMap=game.major||game.isMajorSeries?game.selectedMap:null;
   const head=el('div','subsection-top');
-  const heading=el('div','');heading.append(el('h3','',game.bestOf===1?'Vencedor do mapa '+(chosenMap||'BO1'):'Mercados da série'),el('p','',game.bestOf===1?(chosenMap?'Estimativa específica de '+chosenMap+'. Confirme que é o mapa realmente escolhido.':'Selecione o mapa acima para calcular a probabilidade de cada equipe.'):'Uma análise de cada vez. Odds registradas, nunca ao vivo.'));
+  const heading=el('div','');heading.append(el('h3','',game.bestOf===1?'Vencedor do mapa '+(chosenMap||'BO1'):'Vencedor da série BO3'),el('p','',game.bestOf===1?(chosenMap?'Estimativa específica de '+chosenMap+'. Confirme que é o mapa realmente escolhido.':'Selecione o mapa acima para calcular a probabilidade de cada equipe.'):(chosenMap?'Analisando '+chosenMap+' separadamente; odds abaixo são da série BO3.':'Escolha os mapas 1, 2 e 3 acima para avaliar cada mapa. Odds abaixo são da série BO3.')));
   head.append(heading,el('span','snapshot-note',game.quotes?'Print: '+hours(game.quotes.capturedAt):'Aguardando odds'));
   fragment.append(head);
   const families=[...new Set((game.markets||[]).map(x=>x.family))];
@@ -179,7 +181,7 @@
       'Estimativa de '+chosenMap+': '+(game.mapProjection?.modelStatus==='opponent_adjusted'?'corrigida pela dificuldade dos últimos adversários e diferença de rounds.':'sem cobertura suficiente de adversários; usando histórico base.')+' Probabilidades ainda NÃO calibradas. Diferenças para o preço não comprovam vantagem.':
       'Sem projeção para '+chosenMap+': '+(game.mapProjection?.reason||'histórico insuficiente')+' Odds fotografadas não são atuais.'):
     game.isMajorSeries?
-     'BO3: a cotação é para vencer a série inteira (melhor de três mapas), não um mapa isolado. O percentual do mercado exclui matematicamente a margem; não existe projeção de série validada neste confronto.':
+     'BO3: '+(chosenMap?'Análise separada do mapa '+chosenMap+' disponível acima. ':'Selecione um mapa acima para abrir estatísticas. ')+ 'A cotação abaixo é para vencer a SÉRIE inteira; não representa a chance de ganhar este mapa. Não existe projeção de série validada.':
      '*Mercado sem margem é uma normalização das odds do print. Dif. = V2 − mercado, em pontos percentuais. Não indica vantagem comprovada: a V2 ainda não foi calibrada.'));
   return fragment;
  }
@@ -240,14 +242,15 @@
   header.append(caption);
   const left=C.winnerMarket(game).find(m=>m.key==='aWin'),right=C.winnerMarket(game).find(m=>m.key==='bWin');
   const compare=el('div','detail-compare');header.append(compare);panel.append(header);
-  const mapArea=game.major?el('div','atlas-map-workspace'):null;
+  const mapArea=(game.major||game.isMajorSeries)?el('div','atlas-map-workspace'):null;
   if(mapArea)panel.append(mapArea);
   const body=el('div','detail-body'),marketHost=el('div',''),contextHost=el('div','');
   body.append(marketHost,contextHost);panel.append(body);
   const updateMap=(map,projection)=>{
    if(!panel.isConnected)return;
    const visibleGame=game.major&&window.AtlasMajorMaps?
-    window.AtlasMajorMaps.withSelectedMap(game,map,projection):game;
+    window.AtlasMajorMaps.withSelectedMap(game,map,projection):
+    game.isMajorSeries?{...game,selectedMap:map||null,mapProjection:projection||null}:game;
    const markets=C.winnerMarket(visibleGame);
    const pA=markets.find(m=>m.key==='aWin')?.v2P??null;
    const pB=markets.find(m=>m.key==='bWin')?.v2P??null;
@@ -259,8 +262,8 @@
      projection?.status==='estimated'?'Major BO1 · '+map+' selecionado manualmente · comparação específica do mapa, ainda experimental.':
      'Major BO1 · '+map+' selecionado · dados insuficientes para projetar vencedor. Odds do print não são ao vivo.';
    }else caption.textContent=game.isMajorSeries?
-     (C.hasOdds(game)?'Major BO3 · odds da BR365 de '+hours(game.quotes.capturedAt)+' · vencedor da série, não do mapa · sem projeção de série validada.':
-       'Major BO3 · nenhuma odd da série capturada · sem projeção de série validada.'):
+     (C.hasOdds(game)?'Major BO3 · '+(map?'analisando '+map+' individualmente · ':'')+'odd da BR365 de '+hours(game.quotes.capturedAt)+' para a SÉRIE, não para o mapa · sem modelo de série validado.':
+       'Major BO3 · '+(map?'analisando '+map+' individualmente · ':'')+'nenhuma odd da série capturada · sem modelo de série validado.'):
     C.hasOdds(game)?'Odds do print da BR365, não ao vivo; confira a validade no mercado.':
     'Ainda não há odds capturadas para este confronto. As probabilidades, quando disponíveis, não são cotações.';
    marketHost.replaceChildren(marketSection(visibleGame));
@@ -365,8 +368,8 @@
    window.location.replace(url.toString());
   });
  // A kickoff that passes while the tab remains open leaves the radar and expires its selections.
- setInterval(()=>{if(!state.feed)return;const n=C.getUpcoming(state.feed).length;
-  if(n!==Number($('upcoming-total').textContent)){updateTop();renderList();renderStudy();renderHistory();}
+ setInterval(()=>{if(!state.feed)return;const n=C.getRadarGames(state.feed).length;
+  if(n!==Number($('upcoming-total').textContent)){updateTop();eventFilters();renderList();renderStudy();renderHistory();}
  },60000);
  loadFeed();
 })();

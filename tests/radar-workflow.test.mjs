@@ -131,3 +131,53 @@ test('archive and one unified radar screen stay available',()=>{
  assert.ok(html.includes('Major Singapura'));
  assert.ok(legacy.includes('id="nextday"'));
 });
+
+test('radar keeps BO1 and BO3 selectable for five hours after their scheduled kickoff',()=>{
+ const g=feed.games.find(g=>g.id==='cs2-match-2400570');
+ const start=Date.parse(g.startTime);
+ for(const delta of [-60000,0,1,60*60*1000,5*60*60*1000-1]){
+  const now=start+delta;
+  assert.ok(C.isRadarVisible(g,now),'missing '+delta);
+  assert.ok(C.getRadarGames({games:[g]},now).some(x=>x.id===g.id));
+  assert.ok(C.filterUpcoming({games:[g]},{filter:'all'},now).some(x=>x.id===g.id));
+ }
+ assert.equal(C.isRadarVisible(g,start+5*60*60*1000),false);
+ assert.equal(C.getRadarGames({games:[g]},start+5*60*60*1000).length,0);
+ assert.equal(C.getHistory({games:[g]},start+5*60*60*1000).length,1);
+});
+test('a completed or late-starting game stays readable in 5h radar, but kickoff blocks new study selections',()=>{
+ const g=feed.games.find(g=>g.id==='cs2-match-2400570'),start=Date.parse(g.startTime);
+ const gLive={...g,status:'live'},gCompleted={...g,status:'completed'};
+ for(const recent of [gLive,gCompleted]){
+  assert.equal(C.getRadarGames({games:[recent]},start+4*60*60*1000+59000).length,1);
+  assert.equal(C.getHistory({games:[recent]},start+4*60*60*1000+59000).length,0);
+  assert.equal(C.getUpcoming({games:[recent]},start+1000).length,0);
+  assert.equal(C.isFuture(recent,start+1000),false);
+  const selections=[{matchId:recent.id,key:'aWin'}];
+  assert.equal(C.cleanSelections(selections,{games:[recent]},start+1000).length,0);
+  assert.equal(C.studySummary(selections,{games:[recent]},start+1000).items.length,0);
+ }
+ const before=C.getUpcoming({games:[g]},start-1000);
+ assert.equal(before.length,1);
+ assert.equal(C.getHistory({games:[g]},start-1000).length,0);
+});
+test('generation keeps dated photographed odds for read-only five-hour review even when Major match completes',()=>{
+ const g=feed.games.find(g=>g.id==='cs2-match-2400570');
+ const start=Date.parse(g.startTime);
+ const params={snapshot:load('tournaments.json'),nov19Context:load('nov19-context.json'),
+  nov19Predictions:load('nov19-forecasts.json'),nov19Quotes:load('nov19-br365-all-markets.json'),
+  prospective:load('prospective.json'),completed:load('results.json'),
+  previousQuotes:load('br365-series-odds.json'),seriesFrozen:load('series-forecasts.json'),
+  forms:load('team-opponents.json'),ranks:load('team-rankings.json'),sync:load('sync-state.json'),
+  majorOpening:load('major-opening-snapshot.json'),majorAnalysis:load('major-opening-analysis.json'),
+  majorLive:{...live,results:[...live.results,{id:g.id,status:'completed',scoreA:2,scoreB:1}]},
+  majorQuotes:load('major-br365-odds.json'),majorNov25Quotes:load('major-br365-odds-2026-11-25.json'),
+  nowIso:new Date(start+2*60*60*1000).toISOString()};
+ const recent=buildRadarFeed(params).games.find(x=>x.id===g.id);
+ assert.equal(recent.status,'completed');
+ assert.equal(recent.markets.find(x=>x.key==='aWin')?.odd,1.74);
+ assert.equal(recent.quotes.live,false);
+ assert.equal(C.isFuture(recent,start+2*60*60*1000),false);
+ const old=buildRadarFeed({...params,nowIso:new Date(start+5*60*60*1000+1).toISOString()}).games.find(x=>x.id===g.id);
+ assert.equal(C.hasOdds(old),false);
+});

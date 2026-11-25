@@ -57,3 +57,11 @@
 .atlas-day1-hit{color:#8de6b4!important;font-weight:800}
 .atlas-day1-miss{color:#f4b4aa!important;font-weight:800}
 @media(max-width:720px){.atlas-day1-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Major BO3: three independently selectable maps; keep series price separate. */
+.atlas-series-map-field{display:flex;flex-direction:column;gap:8px;flex:1 1 145px;min-width:145px;padding:10px;border:1px solid #365466;background:#132739;border-radius:9px}
+.atlas-series-map-field.is-active{border-color:#6fbba8;background:#173942}
+.atlas-series-map-field .atlas-map-field{min-width:0}
+.atlas-series-map-field .atlas-player-button{align-self:flex-start}
+.atlas-started-label{display:inline-flex;align-items:center;font-size:10px;font-weight:750;color:#e2c391;background:#3a3023;border:1px solid #706046;padding:3px 6px;border-radius:6px}
+@media(max-width:700px){.atlas-map-controls:has(.atlas-series-map-field){display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.atlas-series-map-field{min-width:0}.atlas-map-controls:has(.atlas-series-map-field) .atlas-map-status{grid-column:1/-1}}

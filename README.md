@@ -1,5 +1,14 @@
 # ATLAS Esports Lab — CS2
 
+## Radar: seleção de mapas nas MD3 e permanência de cinco horas (25/11/2026)
+
+Na mesma tela de Radar, BO1 mantém o seletor de um mapa. MD3/BO3 agora oferece **Mapa 1, Mapa 2 e Mapa 3**, selecionáveis separadamente e salvos no navegador por partida; o botão "Analisar mapa N" alterna a análise do mapa já escolhido. Cada mapa abre estatísticas de equipe, força histórica dos adversários e dados exploratórios por jogador. **A probabilidade do mapa não substitui o mercado de vencedor da série BO3**; as odds da BR365 continuam exclusivamente para a série e a coluna de modelo de série permanece vazia até existir modelo próprio validado. Não registrar uma previsão de mapa como se fosse previsão da série; o botão de congelamento de previsão BO3 é desabilitado.
+
+O radar não remove jogos imediatamente quando o relógio passa do início programado: `getRadarGames` mantém partidas com status agendado, em curso ou concluído durante **5 horas após o horário programado**. Depois migram para Resultados. Durante essas cinco horas, é possível abrir o jogo, selecionar mapas, alternar entre eles, consultar estatísticas e odds pré-jogo fotografadas; cotações não são atualizadas ao vivo. `isFuture`, `getUpcoming`, `cleanSelections` e o botão **Analisar +** continuam estritos: não aceitam novas seleções para estudo após o horário do kickoff ou depois que uma partida foi concluída, mesmo enquanto permanece consultável. O gerador conserva as odds pré-jogo em resultados recém-concluídos apenas durante essa janela, sem reclassificá-las como atuais.
+
+O período usa o **início programado**, não a hora real de início quando atrasada (esta última não consta necessariamente na base). Portanto, atrasos superiores a 5 horas ainda dependem de uma futura integração de status e horário real.
+
+
 ## Captura BR365 — rodada de 25/11/2026, print de 24/11 22h21 (BRT)
 
 Em `public/data/major-br365-odds-2026-11-25.json`, preservamos sete pares de odds da imagem, mais um oitavo informado posteriormente por mensagem, com horários e origens distintos e ID de partida Cito. O evento tem **4 BO1 (06:00/07:00 UTC) + 4 BO3 (08:00/10:30 UTC)**. Preços registrados: HEROIC/M80 (1,58/2,30), Eternal Fire/100 Thieves (2,25/1,62), Wildcard/Lynn Vision (1,76/2,00), PARIVISION/FaZe (1,68/2,15), 9z/DENDELE (1,74/2,05), Imperial/FlyQuest (1,90/1,86), NiP/Liquid (2,05/1,74). **BC.Game (1,11) / Chinggis Warriors (5,40)** foi informado pelo usuário às 22h26 BRT, após o envio da captura, e **não estava visível na imagem**.

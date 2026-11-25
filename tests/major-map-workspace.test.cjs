@@ -115,7 +115,7 @@ test('browser does not reuse old BO1 JS bundles; update button refreshes HTML + 
  const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'../vercel.json'),'utf8'));
  assert.ok(html.includes('meta name="atlas-build"'));
  for(const name of ['radar-app.js','radar-core.js','major-map-core.js','major-map-workspace.js'])
-  assert.match(html,new RegExp(name.replace(/[.]/g,'\\.')+'\\?v=atlas-25nov-br365-bo1-bo3-v1'));
+  assert.match(html,new RegExp(name.replace(/[.]/g,'\\.')+'\\?v=atlas-25nov-md3-mapas-janela5h-v1'));
  assert.ok(js.includes("url.searchParams.set('atlas_refresh'"));
  assert.ok(js.includes('window.location.replace(url.toString())'));
  assert.ok(cfg.headers.some(x=>x.headers.some(h=>h.key==='Cache-Control'&&/must-revalidate/.test(h.value))));
@@ -129,5 +129,36 @@ test('asynchronous team profile delivery forwards map projection callback into a
  assert.ok(!source.includes('if(container.isConnected&&container.dataset.matchId===game.id)draw(game,container,a,b);'),
   'the callback-less asynchronous path must never return');
  const html=fs.readFileSync(path.join(__dirname,'../public/index.html'),'utf8');
- assert.ok(html.includes('major-map-workspace.js?v=atlas-25nov-br365-bo1-bo3-v1'));
+ assert.ok(html.includes('major-map-workspace.js?v=atlas-25nov-md3-mapas-janela5h-v1'));
+});
+
+test('BO3 map selection calculates each individual map but preserves SERIES winner odds unchanged',()=>{
+ const data=JSON.parse(fs.readFileSync(path.join(__dirname,'../public/data/radar-feed.json'),'utf8'));
+ const game=data.games.find(x=>x.id==='cs2-match-2400570');
+ assert.equal(game.bestOf,3);assert.equal(game.isMajorSeries,true);assert.equal(game.major,null);
+ const left=JSON.parse(fs.readFileSync(path.join(__dirname,'../public/data/major-teams',game.teamA.id+'.json'),'utf8'));
+ const right=JSON.parse(fs.readFileSync(path.join(__dirname,'../public/data/major-teams',game.teamB.id+'.json'),'utf8'));
+ const choices=M.getMaps(left,right);
+ assert.ok(choices.length>=3);
+ const original=JSON.stringify(game);
+ const sample=M.projectMap(game,left,right,choices[0]);
+ assert.ok(sample);assert.equal(sample.map,choices[0]);
+ assert.ok(['estimated','insufficient_data'].includes(sample.status));
+ const unchanged=M.withSelectedMap(game,choices[0],sample);
+ assert.strictEqual(unchanged,game);
+ assert.ok(game.markets.every(m=>m.settlementScope==='series_winner_bo3'&&m.v2P===null));
+ assert.equal(JSON.stringify(game),original);
+});
+test('BO3 offers three independent editable map slots and still separates series betting odds',()=>{
+ const app=fs.readFileSync(path.join(__dirname,'../public/radar-app.js'),'utf8');
+ const panel=fs.readFileSync(path.join(__dirname,'../public/major-map-workspace.js'),'utf8');
+ assert.ok(app.includes('game.major||game.isMajorSeries'));
+ assert.ok(app.includes('game.isMajorSeries?{...game,selectedMap:map||null,mapProjection:projection||null}'));
+ assert.ok(app.includes('Vencedor da série BO3'));
+ assert.ok(panel.includes('for(const slot of [1,2,3])'));
+ assert.ok(panel.includes("['map'+slot]:newValue"));
+ assert.ok(panel.includes("mapStore[game.id]={...seriesState,active:slot}"));
+ assert.ok(panel.includes('game?.isMajorSeries'));
+ assert.ok(panel.includes('game.isMajorSeries||frozenExists'));
+ assert.ok(panel.includes('Isso NÃO é chance de vencer a série MD3'));
 });

@@ -90,17 +90,45 @@
  function draw(game,container,left,right,onMapProjection,rankHistory){
   if(!container.isConnected||container.dataset.matchId!==game.id)return;
   container.textContent='';
-  container.append(textBlock('Mapa e kills dos jogadores','Selecione o mapa real quando o veto sair. A análise abaixo muda para o mapa escolhido, não usa a média genérica de BO1.'));
-  const allMaps=core.getMaps(left,right),chosen=allMaps.includes(mapStore[game.id])?mapStore[game.id]:'';
+  container.append(textBlock(game.isMajorSeries?'Mapas 1, 2 e 3 — série MD3':'Mapa e kills dos jogadores',
+   game.isMajorSeries?'Escolha os mapas individualmente e alterne entre eles para comparar as equipes. As odds BR365 abaixo são da SÉRIE inteira; não usamos essas odds para nenhum mapa isolado.':
+   'Selecione o mapa do BO1 quando o veto sair. A análise abaixo muda conforme o mapa, não usa a média genérica.'));
+  const allMaps=core.getMaps(left,right);
+  const oldChoice=mapStore[game.id];
+  const seriesState=game.isMajorSeries&&oldChoice&&typeof oldChoice==='object'?oldChoice:{map1:'',map2:'',map3:'',active:1};
+  const activeSlot=[1,2,3].includes(Number(seriesState.active))?Number(seriesState.active):1;
+  const seriesChosen=seriesState['map'+activeSlot]||'';
+  const chosen=game.isMajorSeries?(allMaps.includes(seriesChosen)?seriesChosen:''):
+    (allMaps.includes(oldChoice)?oldChoice:'');
   const projection=chosen?(I?I.winner(game,left,right,chosen,rankHistory):core.projectMap(game,left,right,chosen)):null;
   if(typeof onMapProjection==='function')onMapProjection(chosen,projection);
   const controls=mk('div','atlas-map-controls');
-  controls.append(labeledSelect('Mapa disputado',[['','Selecione o mapa'],...allMaps.map(m=>[m,m])],chosen,newValue=>{
-   mapStore[game.id]=newValue;write('atlas_major_maps_v2',mapStore);activePlayer=null;draw(game,container,left,right,onMapProjection,rankHistory);
-  }));
-  controls.append(mk('div','atlas-map-status','Mapa selecionado manualmente. A Cito ainda não confirmou o veto no snapshot.'));
+  if(game.isMajorSeries){
+   for(const slot of [1,2,3]){
+    const field=mk('div','atlas-series-map-field'+(slot===activeSlot?' is-active':''));
+    const selected=allMaps.includes(seriesState['map'+slot])?seriesState['map'+slot]:'';
+    field.append(labeledSelect('Mapa '+slot,[['','A definir'],...allMaps.map(m=>[m,m])],selected,newValue=>{
+     const next={...seriesState,['map'+slot]:newValue,active:slot};
+     mapStore[game.id]=next;write('atlas_major_maps_v2',mapStore);activePlayer=null;
+     draw(game,container,left,right,onMapProjection,rankHistory);
+    }));
+    const view=mk('button','atlas-player-button',slot===activeSlot?'Mapa '+slot+' em análise':'Analisar mapa '+slot);
+    view.type='button';view.disabled=!selected;
+    view.addEventListener('click',()=>{
+     mapStore[game.id]={...seriesState,active:slot};write('atlas_major_maps_v2',mapStore);
+     activePlayer=null;draw(game,container,left,right,onMapProjection,rankHistory);
+    });
+    field.append(view);controls.append(field);
+   }
+   controls.append(mk('div','atlas-map-status','Cada seleção analisa apenas aquele mapa; as odds de BO3 continuam sendo da série inteira. Mapas ainda não confirmados pela Cito.'));
+  }else{
+   controls.append(labeledSelect('Mapa disputado',[['','Selecione o mapa'],...allMaps.map(m=>[m,m])],chosen,newValue=>{
+    mapStore[game.id]=newValue;write('atlas_major_maps_v2',mapStore);activePlayer=null;draw(game,container,left,right,onMapProjection,rankHistory);
+   }));
+   controls.append(mk('div','atlas-map-status','Mapa selecionado manualmente. A Cito ainda não confirmou o veto no snapshot.'));
+  }
   container.append(controls);
-  if(!chosen){container.append(mk('p','atlas-map-placeholder','Escolha o mapa acima para ver o desempenho das duas equipes e dos 10 jogadores. Nenhum mapa é presumido.'));return}
+  if(!chosen){container.append(mk('p','atlas-map-placeholder',game.isMajorSeries?'Defina o mapa 1, 2 ou 3 para analisar estatísticas de cada mapa. Não presumimos o veto.':'Escolha o mapa acima para ver as duas equipes e os jogadores. Nenhum mapa é presumido.'));return}
   const sides=mk('div','atlas-map-teams');
   appendTeamStat(sides,left,chosen);appendTeamStat(sides,right,chosen);
   container.append(sides);
@@ -120,7 +148,7 @@
   if(Number.isFinite(projection?.probabilityA)&&Math.abs(projection.probabilityA-.5)<.05)
    container.append(mk('p','atlas-map-alert','Confronto estatisticamente equilibrado: diferença inferior a 5 pontos percentuais em relação a 50%. Não trate este favoritismo pequeno como vantagem comprovada.'));
   container.append(mk('p',projection?.status==='estimated'?'atlas-map-hint':'atlas-map-alert',projection?.status==='estimated'?
-   'No '+chosen+': '+game.teamA.name+' '+fmt(projection.probabilityA)+' × '+game.teamB.name+' '+fmt(projection.probabilityB)+'. '+(projection.modelStatus==='opponent_adjusted'?'Corrigido pela força histórica dos adversários.':'Modelo base sem ajuste de adversários suficiente.')+' Não calibrado.':
+   'No mapa '+chosen+': '+game.teamA.name+' '+fmt(projection.probabilityA)+' × '+game.teamB.name+' '+fmt(projection.probabilityB)+'. '+(projection.modelStatus==='opponent_adjusted'?'Corrigido pela força histórica dos adversários.':'Modelo base sem ajuste suficiente de adversários.')+' NÃO calibrado. '+(game.isMajorSeries?'Isso NÃO é chance de vencer a série MD3.':''):
    (projection?.reason||'Estimativa por mapa indisponível; veja os históricos das equipes abaixo.')));
   const bar=mk('div','atlas-kills-toolbar');
   bar.append(labeledSelect('Linha de kills',[[12.5,'12,5'],[14.5,'14,5'],[16.5,'16,5'],[18.5,'18,5'],[20.5,'20,5'],[22.5,'22,5'],[24.5,'24,5']],line,x=>{line=Number(x);draw(game,container,left,right,onMapProjection,rankHistory)}));
@@ -167,10 +195,11 @@
   const freezeButton=mk('button','atlas-player-button atlas-freeze-button','Registrar previsão antes do jogo');
   freezeButton.type='button';
   const frozenExists=allFrozen().some(x=>x.matchId===game.id);
-  freezeButton.disabled=frozenExists||Date.now()>=Date.parse(game.startTime)||!I||!projection||projection.status!=='estimated';
-  if(frozenExists)freezeButton.textContent='Previsão já registrada (não editável)';
+  freezeButton.disabled=game.isMajorSeries||frozenExists||Date.now()>=Date.parse(game.startTime)||!I||!projection||projection.status!=='estimated';
+  if(game.isMajorSeries)freezeButton.textContent='Registro de série MD3 indisponível';
+  else if(frozenExists)freezeButton.textContent='Previsão já registrada (não editável)';
   freezeButton.addEventListener('click',()=>{
-   if(Date.now()>=Date.parse(game.startTime)||allFrozen().some(x=>x.matchId===game.id))return;
+   if(game.isMajorSeries||Date.now()>=Date.parse(game.startTime)||allFrozen().some(x=>x.matchId===game.id))return;
    const winOdds=(game.markets||[]).filter(x=>x.family==='winner').map(x=>({key:x.key,odd:x.odd,source:x.source||null}));
    const current=allFrozen(),createdAt=new Date().toISOString();
    const record=I.makeFrozen(game,chosen,projection,players.map(x=>x.prediction).filter(Boolean),createdAt,
@@ -179,12 +208,12 @@
    if(setFrozen([...current,record])){freezeButton.disabled=true;freezeButton.textContent='Previsão registrada no navegador';}
   });
   container.append(freezeButton);
-  container.append(mk('p','atlas-map-hint','O registro é imutável nesta interface e fica salvo apenas neste navegador. Exporte o JSON na aba Resultados para backup. Não é uma previsão validada.')); 
+  container.append(mk('p','atlas-map-hint',game.isMajorSeries?'As análises individuais não constituem previsão da série MD3. O registro de série permanece bloqueado até existir um modelo de melhor de três validado.':'O registro é imutável e fica apenas neste navegador. Exporte o JSON em Resultados. Não é uma previsão validada.')); 
   const details=mk('div');renderSelectedPlayer(details,game,chosen,players);container.append(details);
   container.append(mk('p','atlas-map-hint','* Dados brutos da Cito ainda não reconciliados contra placares individuais. Não usar para recomendação de aposta. Os filtros e a exportação mantêm a origem visível.'));
  }
  function render(game,container,onMapProjection){
-  if(!game?.major||!container||!core)return;
+  if(!(game?.major||game?.isMajorSeries)||!container||!core)return;
   container.dataset.matchId=game.id;
   container.textContent='';container.append(mk('p','atlas-map-placeholder','Carregando mapas e estatísticas individuais da Cito…'));
   Promise.all([getTeam(game.teamA.id),getTeam(game.teamB.id),getRanks()]).then(([a,b,ranks])=>{
