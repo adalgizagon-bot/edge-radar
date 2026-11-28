@@ -9,9 +9,9 @@
     "requests": 1,
     "warnings": [
       "Cito 429: limit reached; stopping this run.",
-      "Major cs2-event-9303: CITO_RATE_LIMIT"
+      "Major cs2-event-9304: CITO_RATE_LIMIT"
     ],
-    "majorEvent": "cs2-event-9303"
+    "majorEvent": "cs2-event-9304"
   },
   "instructions": "A automação será ativada quando o segredo CITO_API_KEY estiver configurado no GitHub Actions.",
   "opponentCursor": 5,
